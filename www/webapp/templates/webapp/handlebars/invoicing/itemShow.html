@@ -1,0 +1,63 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "item/show" %}
+
+  {{#if content.isLoaded}}
+  <section class="desc clearfix">
+    <div class="actions clearfix">
+      <div class="btn-toolbar pull-right">
+        <div class="btn-group"> 
+          {{#linkTo "item.edit" controller.session.tenant content class="btn green"}}
+            {% trans "Edit" %}
+          {{/linkTo}}
+        </div>
+        <div class="btn-group">
+          <a href="#" class="btn rounded grey" {{action 'delete' content}}>
+            {% trans "Delete" %}
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="pull-left">
+      <div class="icon">
+        <i class="picto-tags"></i>
+      </div>
+      <div class="desc">
+        <h4 class="reference">
+          <i class="picto-arrow-right green"></i>
+          {{ref}}
+        </h4>
+        <p>{{nl2br description}}</p>
+      </div>
+    </div>
+    <div class="pull-right text-right">
+      <h4 class="type green">{{displayType}}</h4>
+      <span class="currency">{{currency.symbol}}</span>
+    </div>
+  </section>
+
+  <section class="price clearfix">
+    <div class="sale pull-left">
+      <div class="clearfix">
+        <div class="top clearfix">
+          <label class="pull-left">{% trans "Sale" %}</label>
+          <span class="pull-right price">{{formatMoney unitPrice currency.symbol}}</span>
+        </div>
+        <span class="tax">{{tax.displayTax}}</span>
+      </div>
+    </div>
+    <div class="buy pull-right">
+      <div class="clearfix">
+        <div class="top clearfix">
+          <label class="pull-left">{% trans "Purchase" %}</label>
+          <span class="pull-right price">{{formatMoney unitPrice currency.symbol}}</span>
+        </div>
+        <span class="tax">{{tax.displayTax}}</span>
+      </div>
+    </div>
+  </section>
+  {{else}}
+    {{partial "core/partials/spinner"}}
+  {{/if}}
+
+{% endtplhandlebars %}

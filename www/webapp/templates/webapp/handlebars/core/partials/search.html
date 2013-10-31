@@ -1,0 +1,47 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "search" %}
+  <ul>
+    {{#if controllers.search.insufficientSearchTerms}}
+      <li class="no-result">{{trans "Please, type at least {{minSearchTerms}} chars" minSearchTermsBinding="controllers.search.minSearchTerms"}}</li>
+    {{else}}
+      {{#if controllers.search}}
+          {{#each item in controllers.search}}
+            {{view view.resultDisplayView itemBinding="item"}}
+          {{/each}}
+          <li class="more">{{trans 'See all results for "{{queryString}}"' queryStringBinding="controllers.search.queryString"}}</li>
+      {{else}}
+        <li class="no-result">{{trans 'No results for "{{queryString}}"' queryStringBinding="controllers.search.queryString"}}</li>
+      {{/if}}
+    {{/if}}
+  </ul>
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "desktop-search-result" %}
+  {{#ifEqual item.resource_type "contact"}}
+    <span class="icon contact"></span>
+    <span class="text">{{trans "<a>{{user}}</a>, in application Contacts" userBinding="item.full_name"}}.</span>
+  {{/ifEqual}}
+  {{#ifEqual item.resource_type "organization"}}
+    <span class="icon contact"></span>
+    <span class="text">{{trans "<a>{{organization}}</a>, in application Contacts" organizationBinding="item.corporate_name"}}.</span>
+  {{/ifEqual}}
+  {{#ifEqual item.resource_type "invoice"}}
+    <span class="icon invoicing"></span>
+    <span class="text">{{trans "Invoice <a>{{invoice}}</a>, in application Invoicing" invoiceBinding="item.reference"}}.</span>
+  {{/ifEqual}}
+  {{#ifEqual item.resource_type "quotation"}}
+    <span class="icon invoicing"></span>
+    <span class="text">{{trans "Quotation <a>{{quotation}}</a>, in application Invoicing" quotationBinding="item.reference"}}.</span>
+  {{/ifEqual}}
+  {{#ifEqual item.resource_type "event"}}
+    <span class="icon organizer"></span>
+    <span class="text">{{trans "Event <a>{{event}}</a>, in application Organizer" eventBinding="item.summary"}}.</span>
+  {{/ifEqual}}
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "mobile-search-results" %}
+
+{% endtplhandlebars %}

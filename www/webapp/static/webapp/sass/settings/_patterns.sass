@@ -1,0 +1,171 @@
+// ===================
+// = Outlet Settings =
+// ===================
+
+.outlet-settings
+  color: $grey
+
+  h3
+    margin: 0
+    line-height: 60px
+    font-size: 22px
+    padding-left: 18px
+    background: $settingsFirstBackgroundColor
+    color: $white
+    font-weight: normal
+
+  section
+    padding: 30px
+
+    & > .inner
+      max-width: 700px
+
+    &.permissions > .inner
+      max-width: 1000px
+
+  h4
+    font-size: 18px
+    margin-top: 0
+    margin-bottom: 18px
+    vertical-align: middle
+    font-weight: normal
+    color: $white
+
+  hr
+    height: 12px
+    margin: 0
+    padding: 0
+    background: $settingsFirstBackgroundColor
+    border: 0
+
+  label
+    margin: 0
+    vertical-align: middle
+    font-size: 14px
+    display: inline-block
+
+  table
+    max-width: 700px
+
+    &.half
+      width: 320px
+
+      & + table
+        margin-left: 40px
+
+    td
+      font-size: 14px
+      padding-bottom: 15px
+
+      &.label + td
+        width: 100%
+
+    h4
+      margin-bottom: 3px
+
+  input[type="text"], select
+    width: 100%
+    margin: 0
+
+  input:disabled
+    color: #777
+
+  .table
+    th, td
+      padding: 7px 5px
+    td
+      color: $textColor
+    tr
+      background: #F7F7F7
+
+      td:first-child,
+      th:first-child
+        padding-left: 15px
+
+      td:last-child,
+      th:last-child
+        padding-right: 15px
+
+      &:nth-of-type(even)
+        background: #DDDDDD
+
+  .label
+    white-space: nowrap
+    background: transparent
+    padding: 0 10px 0 0
+    color: #BBB
+
+  .grey
+    color: $settingsSecondTextColor
+
+  .small
+    font-size: 13px
+    font-weight: bold
+
+  .permission
+    display: inline-block
+    width: 300px
+    margin-bottom: 12px
+    vertical-align: top
+    line-height: normal
+
+    .perm-text
+      width: 250px
+      display: inline-block
+
+    .checkbox-container
+      display: inline-block
+      margin-right: 8px
+
+    .pull-left:first-child
+      padding-top: 4px
+
+
+.select2-container
+  &.select2-container-multi
+    min-width: 280px
+    max-width: 280px
+    background: #1e1e1e
+  // .select2-container-multi
+  //   width: 250px
+  //   .select2-choices
+  //     border: 0
+  //     background: #1e1e1e
+  //     padding: 1px 3px
+  //     color: inherit
+  //     margin: 0
+  //     font-size: inherit
+  //     vertical-align: middle
+  //     @include border-radius(4px)
+
+  //     .select2-search-choice
+  //       background: $green
+  //       color: $white
+  //       background-image: none
+  //       border: 1px solid $green
+  //       -webkit-box-shadow: none
+  //       -moz-box-shadow: none
+  //       box-shadow: none
+
+  //     .select2-search-choice-close::before
+  //       content: '*'
+
+
+.table-api-keys
+  th, td
+    &.revoke
+      text-align: right
+
+.table-users
+  th, td
+    &.email
+      text-align: center
+    &.status
+      text-align: right
+
+.table-groups
+  th, td
+    &.created-by
+      text-align: center
+    &.creation-date
+      text-align: center

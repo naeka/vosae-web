@@ -1,0 +1,40 @@
+language: python
+python:
+    - 2.7
+
+virtualenv:
+    system_site_packages: true
+
+env:
+    global:
+        - secure: "lquW337nA3d9NzxUUyzH5lHNOYuhfUSdam9ghIHOAWok+22AZd78e02uBzsEnew9yfmWuoTIt8+TeuLPmxXsXftxf+DzZcc0OCLX4irBOUIhPM+CzwEDVtfxqdLV4PdTQ7/5ffv7stF2rIPCfYUku6XzAMyOm1yyBzhxyhpd5XQ="
+
+before_install:
+    - gem install compass
+    - gem install sass
+    - gem install sass-rails
+    - gem install bootstrap-sass
+    - npm install -g grunt-cli
+    - npm install
+
+install:
+    - pip install -r requirements.txt
+
+before_script:
+    - source travis_before.sh
+    - env
+
+script:
+    - source travis_spec.sh
+    - cd www
+
+branches:
+  only:
+    - master
+    - develop
+
+notifications:
+  email:
+    - maxime@naeka.fr
+    - thomas@naeka.fr
+    - leo@naeka.fr

@@ -1,0 +1,104 @@
+#ct-settings
+  background: $settingsFirstBackgroundColor
+  display: none
+  position: absolute
+  z-index: 9000
+  top: 0
+  left: 0
+  position: fixed
+  overflow: auto
+
+  & > .inner
+    padding-top: 30px
+
+  header.main h1
+    margin: 0
+    z-index: 1000
+    background: $yellow
+    padding: 0 10px
+    position: fixed
+    top: 0
+    width: 100%
+    font-weight: bold
+    font-size: 16px
+    line-height: 28px
+    +box-sizing(border-box)
+
+    i
+      padding-right: 5px
+      font-size: 14px
+
+
+  // MENU LEFT
+  .settings-menu
+    width: 270px
+    min-width: 270px
+    text-align: center
+
+    & > .inner
+      position: fixed
+      top: 50px
+
+    ul
+      width: 270px
+
+    
+    .module
+      padding: 0px 10px 0 20px
+      text-align: left
+      color: inherit
+      display: block
+      background: $yellow
+      width: 100%
+      font-size: 16px
+      line-height: 28px
+      +box-sizing(border-box)
+
+    li.save
+      margin-bottom: 20px
+
+    .btn.save
+      padding: 0 24px
+
+    .links
+      margin-bottom: 5px
+      a
+        display: block
+        width: 100%
+        font-size: 14px
+        color: #CCC
+        +box-sizing(border-box)
+        text-align: left
+        padding: 3px 0px 3px 40px
+
+        &:hover
+          color: $white
+        &.active
+          color: $white
+          font-weight: bold
+    .exit
+      text-align: center
+      margin: 0px 10px 20px 10px
+      font-weight: normal
+      +border-radius(4px)
+      +box-sizing(border-box)
+
+      a
+        display: inline-block
+        color: $white
+        font-weight: bold
+        background: #3b3b3b
+        width: 100%
+        +box-sizing(border-box)
+        &:hover
+          background: lighten(#3b3b3b, 7%)
+
+        i
+          font-size: 14px
+
+  // CONTENT RIGHT
+  .settings-content
+    width: 100%
+    color: $settingsFirstTextColor
+    background: $settingsSecondBackgroundColor
+    border-left: 3px solid $settingsSecondBackgroundColor

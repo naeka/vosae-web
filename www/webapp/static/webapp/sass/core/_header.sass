@@ -1,0 +1,225 @@
+.enable-transformX #header
+  position: static
+  -webkit-transform: none
+
+#header 
+  left: 0
+  margin: 0
+  width: 100%
+  right: 0
+  z-index: 2000
+  position: fixed
+  -webkit-transform: translateZ(0) // Google maps hack
+  top: 0
+  +box-sizing(border-box)
+
+  .d-table 
+    margin: 0
+    table-layout: fixed
+    width: 100%
+    word-wrap: break-word
+    min-width: 1100px
+
+  .d-cell
+    vertical-align: top
+    position: relative
+    padding: $headerPaddingTb $headerPaddingLr
+
+  .desktop 
+    .notif
+      background: #EEEEEE 
+      width: 160px 
+      max-width: 160px 
+      min-width: 160px 
+      padding: $headerPaddingTb 0px
+    .settings
+      background: #FFF
+      border-left: 5px solid #EEEEEE
+      width: 175px 
+      max-width: 175px 
+      min-width: 175px 
+      padding: $headerPaddingTb 10px $headerPaddingTb 0px 
+    .search  
+      background: #FFF
+      text-align: center 
+      width: 100%
+
+      // Search icon for input search
+      .picto-search
+        font-size: 20px
+        line-height: 36px
+        margin-left: -470px
+        position: absolute
+
+
+#desktop-header-notifications 
+  text-shadow: 0 1px 0 white
+  letter-spacing: 1px
+  color: #999
+  display: block
+  font-size: 28px
+  font-weight: bold
+  line-height: 35px
+  padding: 0 12px
+  text-align: center
+  text-decoration: none
+  width: 100%
+  cursor: pointer
+  +box-sizing(border-box)
+  
+  .counter 
+    text-shadow: none
+    color: #FFF
+    background: $orange
+    font-weight: normal
+    font-size: 14px
+    display: inline-block
+    position: relative
+    padding: 0 6px
+    height: 16px
+    line-height: 18px // height + border
+    +border-radius(11px)
+
+  &:hover
+    color: #555
+
+#header input[type="search"] 
+  background-color: #EEE
+  border: 0
+  color: #333
+  font-size: 16px
+  font-weight: bold
+  height: $headerHeight - ($headerPaddingTb * 2) // -2px box shadow
+  margin: 0
+  padding: 0 30px
+  text-align: center
+  width: 480px
+  box-shadow: none
+  -webkit-appearance: textfield
+  +border-radius(7px)
+  +box-sizing(border-box)
+
+  &:hover
+    background-color: darken(#EEE, 3%)
+
+
+#desktop-header-settings
+  background: #EEEEEE
+  color: #333
+  display: inline-block
+  font-size: 14px
+  font-weight: bold
+  padding: 7px 10px 7px 42px
+  position: relative
+  text-decoration: none
+  text-overflow: ellipsis
+  width: 100%
+  cursor: pointer
+  +border-radius-separate(0px, 6px, 6px, 0px)
+  +box-sizing(border-box)
+
+  .avatar
+    left: 7px
+    height: 25px
+    line-height: 25px
+    width: 25px
+
+    &:before
+      font-size: 1em
+      height: 25px
+      line-height: 26px
+      width: 25px
+
+    img
+      height: 25px
+      width: 25px
+    
+  .username 
+    border-left: 2px solid #b0b0b0
+    display: inline-block
+    line-height: 16px
+    padding-left: 10px
+    position: relative
+  
+  &:hover
+    .username
+      text-decoration: underline
+  
+
+#phone-header-notifications 
+  color: #333
+  display: inline-block
+  font-size: 28px
+  font-weight: bold
+  height: 36px  // - 1px for box shadow
+  line-height: 36px // line-height = height
+  position: relative
+  text-decoration: none
+  +box-sizing(border-box)
+
+  .title
+    display: inline-block
+  
+  .counter 
+    background: $orange
+    color: #FFF
+    display: inline-block
+    position: relative
+    height: 16px
+    font-weight: normal
+    font-size: 7px
+    line-height: 18px // height + border
+    padding: 0px 6px
+    +border-radius(8px)
+
+
+#phone-header-menu 
+  background: $orange
+  color: #FFF
+  display: inline-block
+  height: $headerHeight - ($headerPaddingTb * 2)  // - 2px for box shadow
+  line-height: $headerHeight - ($headerPaddingTb * 2) // line-height = height
+  overflow: hidden
+  padding: 0 16px
+  position: relative
+  text-decoration: none
+  text-indent: inherit
+  width: auto
+  +box-sizing(border-box)
+  +border-radius(7px)
+
+  .text
+    display: none
+    padding-left: 8px
+  
+  &:before   
+    content: 'l'
+    float: left
+    font-family: $fontPictos
+    font-size: 22px
+    line-height: 42px
+
+
+#phone-header-settings
+  background: #c8c8c8
+  color: #333
+  display: inline-block
+  height: $headerHeight - ($headerPaddingTb * 2)  // - 2px for box shadow
+  line-height: $headerHeight - ($headerPaddingTb * 2) // line-height = height
+  overflow: hidden
+  padding: 0 16px
+  position: relative
+  text-decoration: none
+  text-indent: inherit
+  width: auto
+  +box-sizing(border-box)
+  +border-radius(7px)
+  
+  .text
+    display: none
+
+  &:before   
+    content: 'y'
+    float: left
+    font-family: $fontPictos
+    font-size: 22px

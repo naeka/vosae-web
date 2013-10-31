@@ -1,0 +1,84 @@
+#ct-tenant
+  background: $settingsFirstBackgroundColor
+  display: none
+  position: absolute
+  z-index: 9000
+  top: 0
+  left: 0
+  position: fixed
+  overflow: auto
+
+  & > .inner
+    padding-top: 30px
+
+  header.main h1
+    margin: 0
+    z-index: 1000
+    background: $yellow
+    padding: 0 10px
+    position: fixed
+    top: 0
+    width: 100%
+    font-weight: bold
+    font-size: 16px
+    line-height: 28px
+    +box-sizing(border-box)
+
+    i
+      padding-right: 10px
+      font-size: 14px
+
+  .outlet-tenants
+    width: 900px
+    margin: 0 auto
+    background: #252525
+
+    h3
+      color: #FFF
+      font-weight: normal
+      background: #2d2d2d
+      margin: 0
+      padding-left: 18px
+      line-height: 60px
+      font-size: 22px
+      border-right: 3px solid #252525
+      border-left: 3px solid #252525
+      +box-sizing(border-box)
+
+    h4
+      font-size: 18px
+      margin-top: 0
+      margin-bottom: 18px
+      font-weight: normal
+      color: #FFF
+
+    hr
+      height: 12px
+      margin: 0
+      padding: 0
+      background: #2D2D2D
+      border: 0
+
+    section
+      padding: 30px
+
+    label
+      color: #BBB
+      font-size: 14px
+
+    form
+      margin: 0
+
+      .control-group:last-child
+        margin-bottom: 0px
+
+    .form-actions
+      font-size: 0
+      text-align: right
+      border: 0
+      margin-top: 0
+      background: #2d2d2d
+      padding: 15px 0px
+
+      .btn
+        margin-left: 10px

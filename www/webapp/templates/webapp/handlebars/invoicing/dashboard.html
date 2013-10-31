@@ -1,0 +1,129 @@
+{% load i18n templatetag_handlebars %}
+
+
+{% tplhandlebars "invoicing/dashboard" %}
+  {# Sections stats #}
+  <section class="summary clearfix">
+    <div class="icon pull-left">
+      <i class="picto-moneybox img-rounded"></i>
+    </div>
+    <div class="pull-left">
+      <h4>{{trans "TOTAL Fiscal year {{fiscalYear}}" fiscalYearBinding="controller.session.tenantSettings.invoicing.currentFyStartYear"}}</h4>
+      <p>{% trans "Billed" %}: {{formatMoney invoicingFyFlowStatistics.fyInvoiced.amount defaultCurrency.displaySign}}</p>
+      <p>{% trans "Purchased" %}: {{formatMoney invoicingFyFlowStatistics.fyPurchased.amount defaultCurrency.displaySign}}</p>
+    </div>
+    <div class="pull-right">
+      <h4>TOTAL {{formatNow format="MMM YYYY"}}</h4>
+      <p>
+        <i class="picto-arrow-right green"></i>
+        {% trans "Billed" %}: {{formatMoney invoicingFyFlowStatistics.currentMonthInvoiced.amount defaultCurrency.displaySign}}
+      </p>
+      <p>
+        <i class="picto-arrow-left orange"></i>
+        {% trans "Purchased" %}: {{formatMoney invoicingFyFlowStatistics.currentMonthPurchased.amount defaultCurrency.displaySign}}
+      </p>
+      <p>
+        <i class="picto-stat green"></i>
+        {% trans "Estimated profits" %}: <span class="orange">{{formatMoney invoicingFyFlowStatistics.currentMonthProfits defaultCurrency.displaySign}}</span>
+      </p>
+    </div>
+  </section>
+
+  {# Section actions #}
+  <section class="sub-actions clearfix">
+    <div class="btn-toolbar pull-left helptour-addbtn">
+      <div class="btn-group">
+        {{#linkTo "quotations.add" controller.session.tenant class="btn orange"}}
+          <i class="picto-add"></i>
+          {% trans "Quotation" %}
+        {{/linkTo}}
+      </div>
+      <div class="btn-group">
+        {{#linkTo "invoices.add" controller.session.tenant class="btn green invoice"}}
+          <i class="picto-add"></i>
+          {% trans "Invoice" %}
+        {{/linkTo}}
+      </div>
+      {# <a class="btn add grey">{% trans "Purchase" %}</a> #}
+      <div class="btn-group">
+        {{#linkTo "items.add" controller.session.tenant class="btn grey"}}
+          <i class="picto-add"></i>
+          {% trans "Item" %}
+        {{/linkTo}}
+      </div>
+    </div>
+  </section>
+
+  {# Section list of invoices #}
+  <section class="invoices with-head">
+    <div class="header clearfix">
+      <h4 class="pull-left">
+        {% trans "Overdue invoices" %}
+      </h4>
+      <div class="btn-toolbar pull-right">
+        <div class="btn-group">
+          {{#linkTo "invoices.add" controller.session.tenant class="btn btn-small green rounded"}}
+            {% trans "Add" %}
+          {{/linkTo}}
+        </div>
+      </div>
+    </div>
+    {{#with invoicesOverdue}}
+      {{partial "invoicing/partials/tableOfInvoices"}}
+    {{/with}}
+    {{#unless invoicesOverdue.length}}
+      <p class="table-no-data green">
+        {% trans "No overdue invoices" %}
+      </p>
+    {{/unless}}
+    {{#if shouldDisplayAllInvoicesButton}}
+    <p class="table-see-more">
+      {{#linkTo "invoices.show" controller.session.tenant class="btn btn-small rounded grey bold"}}
+        {% trans "See all invoices" %}...
+      {{/linkTo}}
+    </p>
+    {{/if}}
+  </section>
+
+  {# Section list of quotations #}
+  <section class="quotations with-head">
+    <div class="header clearfix">
+      <h4 class="pull-left">
+        {% trans "Quotes to bill" %}
+      </h4>
+      <div class="btn-toolbar pull-right">
+        <div class="btn-group">
+          {{#linkTo "quotations.add" controller.session.tenant class="btn btn-small orange rounded"}}
+            {% trans "Add" %}
+          {{/linkTo}}
+        </div>
+      </div>
+    </div>
+    {{#with quotationsDraftAwaitingApproval}}
+      {{partial "invoicing/partials/tableOfQuotations"}}
+    {{/with}}
+    {{#unless quotationsDraftAwaitingApproval.length}}
+      <p class="table-no-data orange">
+        {% trans "No quotations to bill" %}
+      </p>
+    {{/unless}}
+    {{#if shouldDisplayAllQuotationsButton}}
+    <p class="table-see-more">
+      {{#linkTo "quotations.show" controller.session.tenant class="btn btn-small rounded grey bold"}}
+        {% trans "See all quotations" %}...
+      {{/linkTo}}
+    </p>
+    {{/if}}
+  </section>
+{% endtplhandlebars %}
+
+{% tplhandlebars "invoicing/dashboard/settings" %}
+   <ul class="info">
+    <li>
+      <a {{action 'startHelpTour' target="view"}}>
+        <i class="picto-help"></i>
+        {% trans "Infos" %}
+      </a>
+    </li>
+  </ul>
+{% endtplhandlebars %}

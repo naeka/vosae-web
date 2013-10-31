@@ -1,0 +1,267 @@
+// ===============================
+// = Page showing invoices based =
+// ===============================
+
+.page-show-invoice,
+.page-show-quotation
+  span.grey
+    color: #999
+
+  .date 
+    label
+      cursor: default
+
+  .table-invoice-summary
+    margin-top: 35px
+
+  .currency
+    display: inline-block
+    padding: 2px 12px
+    color: $white
+    font-size: 14px
+    +border-radius(4px)
+
+    &.orange
+      background: $orange
+    &.green
+      background: $green
+
+// =======================
+// = Pages invoice based =
+// ======================= 
+
+.page-show-quotation,
+.page-show-invoice,
+.page-edit-quotation,
+.page-edit-invoice
+
+  section
+    &.invoice-head
+      padding-top: 22px
+      padding-bottom: 22px
+      
+      .informations
+        margin-bottom: 30px
+
+        & > .pull-right
+          font-size: 0
+        .btn-group
+          margin-left: 8px
+          &:first-child
+            margin-left: 0
+
+      .date,
+      .validity
+        display: block
+        color: #999
+        span
+          padding-left: 2px
+        label
+          display: inline-block
+        i
+          font-size: 18px
+          padding-right: 2px
+
+      .receiver,
+      .transmitter
+        min-width: 280px
+        +box-sizing(border-box)
+
+        h4
+          margin: 0
+          padding-bottom: 3px
+
+        p
+          clear: both
+          color: inherit
+          font-size: 15px !important
+          line-height: 22px
+          position: relative
+          color: $darkergrey
+          margin: 0
+
+      .transmitter
+        padding-left: 65px
+        position: relative     
+
+      .receiver 
+        h4 
+          font-size: 20px
+          i
+            margin-left: -22px
+      .logo
+        height: 50px
+        margin: 15px 0 0 -65px
+        width: 50px
+        position: absolute
+        +box-sizing(border-box)
+
+        .inner
+          position: relative
+          width: 100%
+          text-align: center
+
+        img
+          max-width: 50px
+
+    &.invoice-content
+      padding-top: 22px
+
+    &.invoice-legal
+      p
+        padding-bottom: 6px
+        i
+          width: 15px
+
+      label
+        margin: 0
+        display: inline-block
+
+      .select2-container
+        width: 200px
+
+      .date
+        span
+          padding-left: 2px
+          display: inline-block
+          margin: 0
+        i
+          color: $green
+          font-size: 18px
+          padding-right: 2px
+
+      p
+        margin: 0
+
+    &.invoice-payment
+      padding-bottom: 22px
+      
+      .header > .pull-right
+        span.text
+          color: #555
+
+        span.orange
+          display: inline-block
+          padding: 2px 12px
+          color: #FFF
+          background: #EB5F3A
+          +border-radius(4px)
+          margin-left: 5px
+
+
+    &.invoice-actions
+      margin-top: 20px
+
+// =================================
+// = Page edit invoice / quotation =
+// =================================
+
+.page-edit-invoice,
+.page-edit-quotation
+
+  .date,
+  .validity
+    &:hover
+      cursor: pointer
+    input
+      display: none
+
+  .receiver,
+  .transmitter
+    input
+      margin-top: -2px
+      color: #555
+      width: 280px
+      +box-sizing(border-box)
+
+      &.half
+        width: 138px
+
+  .transmitter
+    h4
+      padding-left: 3px
+
+  .receiver
+    h4
+      padding-bottom: 1px !important
+
+      input
+        color: $textColor
+        font-size: 20px
+        font-weight: bold
+
+    .select2-container-multi
+      width: 260px
+    
+    .select2-choice
+      max-height: 26px
+      height: 26px
+      min-height: 26px
+      padding: 0 2px
+      color: #333
+      position: relative
+      overflow: visible
+
+      .select2-search-choice-close
+        display: inline-block
+        width: 20px
+        height: 26px
+        position: absolute
+        right: -20px
+        top: 0
+        text-align: right
+
+        &:before
+          content: '*'
+          font-style: normal
+          font-family: $fontPictos
+          font-weight: normal
+          font-size: 14px
+
+      div
+        display: none
+      span
+        margin-right: 0
+
+      &.select2-default
+        color: #888
+
+        .select2-search-choice-close
+          display: none
+
+    .contact
+      .select2-choice
+        max-height: 23px
+        height: 23px
+        min-height: 23px
+
+    .dropdown-address
+      font-size: 15px
+
+  .select2-container.currency
+    width: 100px
+    min-width: 100px
+
+body.draggingOn .page-edit-invoice .table-attachments,
+body.draggingOn .page-edit-quotation .table-attachments
+  td.fileupload
+    padding-top: 8px
+
+    .inner
+      border: 5px dashed #EEE
+      height: 75px
+      position: relative
+      margin-bottom: 5px
+
+    .drag-drop-message
+      display: block
+      position: absolute
+      width: 100%
+      font-size: 34px
+      font-weight: bold
+      color: #DDD
+      text-align: center
+      margin-top: 25px
+
+  td.no-data
+    display: none

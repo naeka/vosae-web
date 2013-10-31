@@ -1,0 +1,179 @@
+.page-show-dashboard 
+  padding: 0px 80px 0px 80px
+  position: relative
+
+  // Vosae-Tour
+  .intro
+    padding-bottom: 20px
+    border-bottom: 1px solid #DDD
+    margin-bottom: 40px
+
+    h1
+      margin-top: 0
+
+    .pull-left
+      &.text
+        width: 70%
+      &.button
+        text-align: right
+        width: 30% 
+        padding-top: 60px
+        a
+          font-size: 24px
+          padding: 8px 22px
+
+  .showCrossBar
+    position: relative
+
+  .cross-bar 
+    background: #EEE
+    height: 0%
+    margin-left: 105px
+    min-height: 0%
+    position: absolute
+    width: 6px
+    z-index: 2
+
+    &.animated
+      height: 100%
+      min-height: 100%
+      +animation(expandDashboardCrossBar 3s)
+
+  .hideCrossBar .cross-bar
+    opacity: 0
+    visibility: hidden
+
+  .timeline 
+    width: 100%
+
+    li 
+      position: relative
+      z-index: 10
+
+      &.date.show 
+        border-bottom: 0
+        min-height: 0
+        padding: 45px 0 45px 0px
+        z-index: 3
+        height: auto
+
+        div 
+          background: #EEE
+          border: 5px solid #EEE
+          display: inline-block
+          +border-radius(7px)
+
+          span
+            border: 5px solid #FFF
+            background: #FFF
+            color: #333
+            display: inline-block
+            height: 18px
+            font-size: 16px
+            font-weight: bold
+            line-height: 18px
+            min-width: 130px
+            padding: 0 10px
+            text-align: center
+            +border-radius(2px)
+
+        &.first 
+          padding: 0px 0 40px 0px
+
+          div 
+            border-color: $green
+            background: $green
+            color: #FFF
+            +border-radius(5px)
+
+            span
+              background: $green
+              border: 0
+              color: #FFF
+      
+      &.hide
+        display: none
+
+      &.show
+        // border-bottom: 1px solid #eeeeee
+        padding: 8px 0 8px 155px
+        min-height: 52px
+        
+        &:not(.date)
+          +animation(showDashboardItem 1s)
+
+        &.no-animation
+          +animation(showDashboardItem 0s)
+        
+        .icon 
+          background: #333
+          color: #FFF
+          display: block
+          height: 42px
+          margin-top: 5px
+          margin-left: -68px
+          width: 42px
+          position: absolute
+          z-index: 3
+          +border-radius(21px)
+          +box-sizing(border-box)
+
+          &:before 
+            content: ' '
+            display: block
+            font-family: $fontPictos
+            font-size: em(29px)
+            font-weight: normal
+            height: 42px
+            line-height: 42px
+            width: 42px
+            text-align: center
+
+        .desc 
+          display: inline-block
+          font-size: 15px
+          padding-top: 14px
+
+          a 
+            font-weight: bold
+            font-size: 18px
+            color: #333
+
+        &.same-module          
+          .icon 
+            height: 16px
+            margin-top: 18px
+            margin-left: -55px
+            width: 16px
+
+            &:before 
+              content: ""
+
+        &.same-issuer
+          .avatar 
+            display: none
+
+        &.no-border, &:last-child 
+          border-bottom: 0
+        
+        &.contacts:not(.same-module) .icon:before
+          content: 'g' 
+          line-height: 36px 
+
+        &.invoicing:not(.same-module) .icon:before
+          content: '%' 
+
+        &.join:not(.same-module) .icon:before
+          content: '^' 
+          font-size: 22px
+
+        &.orange.icon
+          background: $orange
+
+@media (max-width: 1199px) 
+  .page-show-dashboard 
+    padding: 10px 25px 0px 25px
+
+@media (max-width: 480px) 
+  .page-show-dashboard 
+    padding: 0px 10px 0px 10px

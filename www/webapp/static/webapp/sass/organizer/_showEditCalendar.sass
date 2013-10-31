@@ -1,0 +1,65 @@
+// ======================
+// = Page show calendar =
+// ======================
+
+.page-show-calendar,
+.page-edit-calendar
+  padding: 0px 40px
+  position: relative
+
+  section
+
+    &.main-infos
+      padding: 24px 0px
+      position: relative
+
+      .pull-left
+        min-width: 40%
+        padding-right: 20px
+
+        input, textarea
+          width: 100%
+          padding: 0
+
+      .summary
+        font-size: 22px
+        font-weight: bold
+        margin-bottom: 20px
+
+      .description, .description textarea
+        color: #999
+        font-weight: bold
+
+      .color
+        margin-bottom: 30px
+
+      .location, .location input
+        font-weight: bold
+        text-align: right
+
+      .summary,
+      .location
+        +input-placeholder($textColor, $font-weight: bold)
+
+      .description
+        +textarea-placeholder(#999, $font-weight: bold)
+
+    &.acl
+
+      .list
+        margin-top: 20px
+
+.page-show-calendar
+  section
+    &.main-infos
+      .summary h4
+        margin: 0
+        font-size: 22px
+
+      .color span
+        display: inline-block
+        line-height: 26px
+        height: 26px
+        padding: 0px 8px
+        background: $green
+        color: #FFF

@@ -1,0 +1,52 @@
+{
+  "folders":
+    [
+        {
+            "name": "Vosae Django",
+            "path": "www",
+            "folder_exclude_patterns":
+            [
+                ".sass-cache"
+            ]
+        },
+        {
+            "name": "Vosae Ember",
+            "path": "www/webapp/static/webapp/js/app"
+        },
+        {
+            "name": "Vosae Handlebars",
+            "path": "www/webapp/templates/webapp/handlebars"
+        },
+        {
+            "name": "Vosae Sass",
+            "path": "www/webapp/static/webapp/sass"
+        },
+        {
+            "name": "Vosae Vendors",
+            "path": "www/webapp/static/webapp/js/vendor"
+        },
+        {
+            "name": "Vosae Spec",
+            "path": "www/webapp/static/webapp/spec"
+        }
+    ],
+    "settings":
+    {
+        // Indent settings
+        "auto_indent": true,
+        "detect_indentation": true,
+        "indent_to_bracket": false,
+        "smart_indent": true,
+        "tab_size": 4,
+        "translate_tabs_to_spaces": true,
+        "trim_automatic_white_space": true,
+        "use_tab_stops": true,
+
+        // SublimeLinter settings
+        "pep8": true,
+        "pep8_ignore":
+        [
+            "E501"
+        ]
+    }
+}

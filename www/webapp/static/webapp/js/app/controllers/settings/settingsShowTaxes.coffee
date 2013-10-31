@@ -1,0 +1,1 @@
+Vosae.SettingsShowTaxesController = Em.ArrayController.extend()

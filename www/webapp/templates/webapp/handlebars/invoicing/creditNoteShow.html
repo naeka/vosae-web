@@ -1,0 +1,47 @@
+{% load i18n templatetag_handlebars i18n_handlebars %}
+
+{% tplhandlebars "creditNote/show" %}
+
+  {{#if isLoaded}}
+    <section class="invoice-head border-bottom clearfix">
+      <div class="informations clearfix">
+        <div class="pull-left clearfix"> 
+          {# Date #}
+          {{partial "invoiceBase/show/date"}}
+        </div>
+        <div class="pull-right clearfix">
+          {# Actions and States #}
+          {{partial "invoiceBase/show/actions"}}
+        </div>
+      </div>
+      {# Transmitter #}
+      {{partial "invoiceBase/show/transmitter"}}
+      {# Receiver #}
+      {{partial "invoiceBase/show/receiver"}}
+    </section>
+  
+    <section class="invoice-content with-head">      
+      {# Reference & Currency #}
+      {{partial "invoiceBase/show/currency"}}
+      {# Line items #}
+      {{partial "invoiceBase/show/details"}}
+      {# Invoice summary #}
+      {{partial "invoiceBase/show/summary"}}
+
+      <p>
+        <i class="picto-info green"></i> {% verbatimblocktrans %}This credit note is related to the invoice {{#linkTo "invoice.show" controller.session.tenant relatedInvoice}}<span class="grey">{{relatedInvoice.ref}}</span>{{/linkTo}}{% endverbatimblocktrans %}
+      </p>
+    </section>
+    
+    {{#if isPayable}}
+    <section class="invoice-payment with-head">
+      {# Payments #}
+      {{partial "invoiceBase/show/payments"}}
+    </section>
+    {{/if}}
+  {{else}}
+    {# Loading #}
+    {{partial "core/partials/spinner"}}
+  {{/if}}
+
+{% endtplhandlebars %}

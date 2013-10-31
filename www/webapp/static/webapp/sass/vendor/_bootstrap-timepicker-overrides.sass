@@ -1,0 +1,39 @@
+//  =================================
+//  = Boostrap timepicker overrides =
+//  =================================
+
+.bootstrap-timepicker-widget
+  &.dropdown-menu
+    background-color: #f5f5f5
+    min-width: 80px
+    &:before
+      content: ""
+    &:after
+      content: ""
+      border-bottom: 6px solid #f5f5f5
+
+  table
+    td
+      > a
+        min-width: 40px
+        padding: 0
+        font-family: $fontPictos
+        font-size: 0.9em
+
+        .icon-chevron-up,
+        .icon-chevron-down
+          background: none !important
+          font-style: normal
+          font-weight: normal !important
+
+        .icon-chevron-up
+          &::before
+            content: '&'
+
+        .icon-chevron-down
+          &::before
+            content: '_'
+
+      input
+        border: 1px solid rgba(0, 0, 0 , 0.2)
+        font-size: 0.9em

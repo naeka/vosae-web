@@ -1,0 +1,104 @@
+#wrapper  
+  overflow: hidden
+  position: relative
+  width: 100%
+  min-width: 1100px
+
+#ct-middle 
+  background: #FFF
+  position: relative
+  overflow: hidden
+  z-index: 10
+    
+#ct-left, #ct-right 
+  background: $panelBackgroundColor
+  color: #FFF
+  position: absolute
+  overflow: scroll !important
+  +box-sizing(border-box)
+
+#ct-left
+  left: 0px
+  top: 0px
+  z-index: 0
+  width: $panelDesktopLeftWidth
+
+#ct-right
+  right: 0px
+  top: 0px
+  z-index: 0
+  width: $panelDesktopRightWidth
+
+  & > .inner
+    padding: 15px 20px 
+
+    .btn, .dropdown-menu
+      font-size: 14px
+
+    .btn-panel
+      display: inline-block
+      margin-bottom: 15px
+      width: 100%
+
+      &.logout 
+        margin-top: 6px
+
+    .btn-group.tenant
+      margin-bottom: 12px
+      width: 100%
+      .btn:first-child
+        width: 100%
+        text-align: left
+        +border-radius-separate(4px)
+        padding-right: 24px
+
+      .dropdown-toggle
+        right: 0px
+        position: absolute
+        width: 24px
+        max-width: 24px
+        min-width: 24px
+        z-index: 100
+        +border-radius-separate(0px, 4px, 4px, 0px)
+
+      .dropdown-menu
+        width: 100%
+        .divider
+          margin: 3px 1px
+
+    .btn-group.tenant.open
+      .btn:first-child, .dropdown-toggle
+        +border-radius-separate(4px, 4px, 0px, 0px)
+
+    span.current-user
+      display: inline-block
+      text-align: center
+      width: 100%
+
+// Transform 3D
+.enable-transformX #ct-middle,
+  +translateX(0px)
+  +transition-property(transform)
+  +transition-duration(0.25s)
+  +transform-style(flat)
+
+.enable-transformX.ct-left-open 
+  #ct-right
+    display: none
+
+  #ct-middle
+    +translateX($panelDesktopLeftWidth)
+    +transition-property(transform)
+    +transition-duration(0.25s)
+    +transform-style(flat)
+
+.enable-transformX.ct-right-open 
+  #ct-middle
+    +translateX(-$panelDesktopRightWidth)
+    +transition-property(transform)
+    +transition-duration(0.25s)
+    +transform-style(flat)
+  
+  #ct-left
+    display: none 
+

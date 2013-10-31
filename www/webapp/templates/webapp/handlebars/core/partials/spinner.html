@@ -1,0 +1,15 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "core/partials/_spinner" %}
+  <div class="ui-loading">  
+    <div class="ui-spinner">
+      <span class="side side-left">
+        <span class="fill"></span>
+      </span>
+      <span class="side side-right">
+        <span class="fill"></span>
+      </span>
+    </div>
+    <p><h4>{% trans "Loading..." %}</h4></p>
+  </div>
+{% endtplhandlebars %}

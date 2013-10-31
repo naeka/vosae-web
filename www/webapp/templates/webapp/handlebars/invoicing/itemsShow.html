@@ -1,0 +1,52 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "items/show" %}
+  <section class="sub-actions clearfix">
+    <div class="btn-toolbar pull-left">
+      <div class="btn-group">
+        {{view Vosae.ArraySortPropertySelect 
+          contentBinding = "Vosae.itemsSortPropertiesChoices" 
+          sortPropertiesBinding = "controller.sortProperties"
+          placeholder = "{% trans 'Filter by' %}" }}
+      </div>
+      <div class="btn-group">
+        {{view Vosae.ArraySortAscendingSelect 
+          contentBinding = "Vosae.sortAscendingChoices" 
+          sortAscendingBinding = "controller.sortAscending"
+          placeholder = "{% trans 'Order by' %}" }}
+      </div>
+    </div>
+    <div class="btn-toolbar pull-right">
+      <div class="btn-group">
+        {{#linkTo "items.add" controller.session.tenant class="btn orange"}}
+          <i class="picto-add"></i>
+          {% trans "Item" %}
+        {{/linkTo}}
+      </div>
+    </div>
+  </section>
+
+  <section class="items with-head">
+    <div class="header clearfix">
+      <h4 class="pull-left">
+        {% trans "Inventory" %}
+      </h4>
+      <div class="btn-toolbar pull-right"></div>
+    </div>
+    {{#with content}}
+      {{partial "invoicing/partials/tableOfItems"}}
+    {{/with}}
+
+    {{#unless content.length}}
+      <p class="table-no-data orange">
+        {% trans "No items" %}
+      </p>
+    {{/unless}}
+    {# Pagination #}
+    {{#if meta.next}}
+      <p class="table-load-more" {{action getNextPagination}}>
+        {% trans "Load more items" %}
+      </p>
+    {{/if}}
+  </section>
+{% endtplhandlebars %}

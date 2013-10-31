@@ -1,0 +1,101 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "vosaeEvent/show" %}
+
+  {{#if content}} 
+
+    <section class="actions clearfix">
+      <div class="btn-toolbar pull-left">
+        {{#linkTo "calendarLists.show" controller.session.tenant class="btn grey"}}
+          <i class="picto-arrow-left"></i>
+          {% trans "Organizer" %}
+        {{/linkTo}}
+      </div>
+      <div class="btn-toolbar pull-right">
+        <div class="btn-group">
+          {{#linkTo "vosaeEvent.edit" controller.session.tenant content class="btn rounded grey"}}
+            {% trans "Edit" %}
+          {{/linkTo}}
+        </div>
+        <div class="btn-group">
+          <a class="btn rounded grey" {{action 'delete' content}}>
+            {% trans "Delete" %}
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="main-infos clearfix">
+      <div class="infos">
+        <p>{{summary}}</p>
+        <p class="date">{{displayDate}}</p>
+      </div>
+      <div class="calendar">
+        {{#if calendarList.isLoaded}}
+          {{view view.calendarView contentBinding=calendarList}}
+        {{/if}}
+      </div>
+    </section>
+
+    <section class="event-infos clearfix">
+      <div class="pull-left">
+        {{#if location}}
+          {{#view Vosae.ShowEventAddressMapView locationBinding=location}}{{/view}}
+          <div class='event-location'>{{location}}</div>
+        {{/if}}
+        {{#if description}}
+          <div class='event-description'>{{nl2br description}}</div>
+        {{/if}}
+      </div>
+      <div class="pull-right">
+        {{#if attendees.length}}
+          <ul class="attendees">
+          {{#each attendees}}
+            {{view view.attendeeView contentBinding=this}}
+          {{/each}}
+          </ul>
+        {{else}}
+          {% trans "No attendees for this event" %}
+        {{/if}}
+      </div>
+    </section>
+
+  {{/if}}
+
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "vosaeEvent/show/attendee" %}
+  <table>
+    <tbody>
+      <tr>
+        <td class="attendee-avatar">
+          <div class="img-circle">
+            {{#if photoUri}}
+              <img src="{{unbound photoUri}}" />
+            {{else}}
+              <i class="picto-user"></i>
+            {{/if}}
+          </div>
+        </td>
+        <td class="attendee-infos">
+          {{#if displayName}}
+            <p class="display-name">{{displayName}}</p>
+          {{else}}
+            <p class="email">{{email}}</p>
+          {{/if}}
+        </td>
+        <td class="attendee-status">
+          <span {{bindAttr class="responseStatus"}}></span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  {{#if comment}}
+    {{#if view.expanded}}
+      <div class="more comment">{{comment}}</div>
+    {{else}}
+      <span class="more">{% trans "More" context "display more" %}</span>
+    {{/if}}
+  {{/if}}
+{% endtplhandlebars %}

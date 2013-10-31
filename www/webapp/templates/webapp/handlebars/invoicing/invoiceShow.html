@@ -1,0 +1,61 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "invoice/show" %}
+
+  {{#if isLoaded}}
+    <section class="invoice-head border-bottom clearfix">
+      <div class="informations clearfix">
+        <div class="pull-left clearfix"> 
+          {# Date #}
+          {{partial "invoiceBase/show/date"}}
+        </div>
+        <div class="pull-right clearfix">
+          {# Actions and States #}
+          {{partial "invoiceBase/show/actions"}}
+        </div>
+      </div>
+      {# Transmitter #}
+      {{partial "invoiceBase/show/transmitter"}}
+      {# Receiver #}
+      {{partial "invoiceBase/show/receiver"}}
+    </section>
+  
+    <section class="invoice-content with-head">      
+      {# Reference & Currency #}
+      {{partial "invoiceBase/show/currency"}}
+      {# Line items #}
+      {{partial "invoiceBase/show/details"}}
+      {# Invoice summary #}
+      {{partial "invoiceBase/show/summary"}}
+    </section>
+    
+    <section class="invoice-legal with-head">
+      {# Invoice legal notice #}
+      {{partial "invoice/show/legalNotice"}}
+    </section>
+
+    {{#if isCancelled}}
+    <section class="invoice-creditNotes with-head">
+      {# Credit Notes #}
+      {{partial "invoiceBase/show/creditnotes"}}
+    </section>
+    {{/if}}
+
+    {{#if isPayableOrPaid}}
+    <section class="invoice-payment with-head">
+      {# Payments #}
+      {{partial "invoiceBase/show/payments"}}
+    </section>
+    {{/if}}
+
+    <section class="invoice-attachments with-head">
+      {# Attachments #}
+      {{partial "invoiceBase/show/attachments"}}    
+    </section>
+
+  {{else}}
+    {# Loading #}
+    {{partial "core/partials/spinner"}}
+  {{/if}}
+
+{% endtplhandlebars %}

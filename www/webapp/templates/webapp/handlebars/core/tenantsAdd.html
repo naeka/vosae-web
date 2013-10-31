@@ -1,0 +1,15 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "tenants/add" %}
+  {{#if view.inStepIdentity}}
+    {{partial "tenants/add/identity"}}
+  {{/if}}
+  
+  {{#if view.inStepCoords}}
+    {{partial "tenants/add/coords"}}
+  {{/if}}
+  
+  {{#if view.inStepRegistration}}
+    {{partial "tenants/add/registration"}}
+  {{/if}}
+{% endtplhandlebars %}

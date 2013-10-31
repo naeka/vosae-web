@@ -1,0 +1,59 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "quotation/edit" %}
+
+  {{#if isLoaded}}
+    <section class="invoice-head border-bottom clearfix">
+      <div class="informations clearfix">
+        <div class="pull-left clearfix">
+          {# Date #}
+          {{partial "invoiceBase/edit/date"}}
+          {# Validity #}
+          {{partial "quotation/edit/validity"}}
+        </div>
+        <div class="pull-right clearfix">
+          {# Actions and States #}
+          {{partial "invoiceBase/edit/actions"}}
+        </div>
+      </div>
+      {# Transmitter #}
+      {{partial "invoiceBase/edit/transmitter"}}
+      {# Receiver #}
+      {{partial "invoiceBase/edit/receiver"}}
+    </section>
+
+    <section class="invoice-content with-head">
+      {# Reference & Currency #}
+      {{partial "invoiceBase/edit/currency"}}
+      {# Line Items #}
+      {{partial "invoiceBase/edit/details"}}
+      {# Summary #}
+      {{partial "invoiceBase/show/summary"}}
+    </section>
+    
+    <section class="invoice-attachments with-head">
+      {# Attachments #}
+      {{partial "invoiceBase/edit/attachments"}}    
+    </section>
+    
+    <section class="invoice-actions border-top">
+      {# Action bottom #}
+      {{partial "invoiceBase/edit/actionsBottom"}}
+    </section>
+  {{else}}
+    {# Loading #}
+    {{partial "core/partials/spinner"}}
+  {{/if}}
+
+{% endtplhandlebars %}
+
+{% tplhandlebars "quotation/edit/settings" %}
+  <ul class="info">
+    <li>
+      <a {{action 'startHelpTour' target="view"}}>
+        <i class="picto-help"></i>
+        {% trans "Infos" %}
+      </a>
+    </li>
+  </ul>
+{% endtplhandlebars %}

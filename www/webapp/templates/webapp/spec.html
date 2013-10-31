@@ -1,0 +1,65 @@
+{% load i18n static %}
+{% get_current_language as LANGUAGE_CODE %}
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+  <head>
+    {% include "webapp/skeleton-head.html" %}
+    <script>
+      window.cachedSearch = window.location.search;
+      window.testMode = true;
+      minispade.require('vosae');
+      Vosae.testing = true;
+      Ember.run(function(){
+        Vosae.setupForTesting();
+        Vosae.injectTestHelpers()
+        // I18n
+        Vosae.currentLanguage = LANGUAGE;
+        moment.lang(Vosae.currentLanguage);
+        // Vosae.advanceReadiness();
+      });
+    </script>
+    <link rel="stylesheet" href="{% static 'webapp/spec/vendor/jasmine.css' %}">
+    <script src="{% static 'webapp/spec/vendor/sinon.js' %}"></script>
+    <script src="{% static 'webapp/spec/vendor/jasmine.js' %}"></script>
+    <script src="{% static 'webapp/spec/vendor/jasmine-html.js' %}"></script>
+    <script src="{% static 'webapp/spec/test_helper.js' %}"></script>
+    {% if TRAVIS %}
+      <script src="{% static 'webapp/spec/vendor/jasmine-runner.js' %}"></script>
+    {% else %}
+      <script src="{% static 'webapp/spec/vendor/jasmine.console_reporter.js' %}"></script>
+    {% endif %}
+    <script src="{% static 'webapp/spec/specs.js' %}"></script>
+  </head>
+  <body>
+    <div id="wrapper-loader">
+      <i class="picto-cloud"></i>
+      <i class="picto-loading"></i>
+    </div>
+    <script type="text/javascript">
+      (function() {
+        window.consoleReporter = new jasmine.ConsoleReporter();
+
+        if (navigator.userAgent.indexOf('PhantomJS') != -1) {
+          jasmine.getEnv().addReporter(consoleReporter);
+        } 
+        else {
+          jasmine.getEnv().addReporter(new jasmine.HtmlReporter());
+          jasmine.getEnv().addReporter(consoleReporter);
+        }
+
+        var currentWindowOnload = window.onload;
+
+        window.onload = function() {
+          if (currentWindowOnload) {
+            currentWindowOnload();
+          }
+          execJasmine();
+        };
+        function execJasmine() {
+          jasmine.getEnv().execute();
+        };
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,79 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "calendarLists/show/quickAddEvent" %}
+  {{view Ember.TextField 
+    valueBinding = "summary"
+    maxlength = "64" 
+    classNames = "edit" 
+    placeholder = '{% trans "Summary" context "event" %}' }}
+  <p>{{content.displayDate}}</p>
+  <p> 
+  {{view Ember.Select 
+    contentBinding = "calendarLists"
+    valueBinding = "calendar"
+    optionLabelPath = "content.displayName"
+    optionValuePath = "content.calendar" }}
+  </p>
+  <nav>
+    {{#if isSaving}}
+      <a class="btn rounded green">
+        {% trans "Saving" %}…
+      </a>
+    {{else}}
+      <a class="btn rounded grey" {{action 'cancel' content}}>
+        {% trans "Cancel" %}
+      </a>
+      <a class="btn rounded grey" {{action 'edit' content}}>
+        {% trans "Edit" %}
+      </a>
+      <a class="btn rounded green" {{action 'save' content}}>
+        {% trans "Save" %}
+      </a>
+    {{/if}}
+  </nav>
+{% endtplhandlebars %}
+
+{% tplhandlebars "calendarLists/show/settings" %}
+  <ul class="info">
+    <li>
+      <a {{action 'startHelpTour' target="view"}}>
+        <i class="picto-help"></i>
+        {% trans "Infos" %}
+      </a>
+    </li>
+  </ul>
+  <br>
+  <a class="button-sidebar settings no-text"></a>
+  <ul class="mines">
+    <li>{% trans "My calendars" %} {{#linkTo "calendarLists.add" controller.session.tenant}}<i class="picto-add"></i>{{/linkTo}}</li>
+    {{#each calendarList in ownCalendarList}}
+      <li>
+        {{#view view.calendarEntryView contentBinding='calendarList'}}
+          <span {{action "toggleCalendar" this calendarList}}>
+            {{calendarList.displayName}}
+          </span>
+          {{#linkTo "calendarList.show" controller.session.tenant calendarList}}
+            <i class="picto-settings"></i>
+          {{/linkTo}}
+        {{/view}}
+      </li>
+    {{/each}}
+  </ul>
+  {{#if sharedCalendarList}}
+    <ul class="others">
+      <li>{{trans "Shared with me" plural="Shared with me" countBinding="sharedCalendarList.length"}}</li>
+      {{#each calendarList in sharedCalendarList}}
+        <li>
+          {{#view view.calendarEntryView contentBinding='calendarList'}}
+            <span {{action "toggleCalendar" this calendarList}}>
+              {{calendarList.displayName}}
+            </span>
+            {{#linkTo "calendarList.show" controller.session.tenant calendarList}}
+              <i class="picto-settings"></i>
+            {{/linkTo}}
+          {{/view}}
+        </li>
+      {{/each}}
+    </ul>
+  {{/if}}
+{% endtplhandlebars %}

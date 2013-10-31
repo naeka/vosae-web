@@ -1,0 +1,172 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "contact/show" %}
+  {{#if content.isLoaded}}    
+    <section class="actions clearfix">
+      <div class="btn-toolbar pull-left">
+        <div class="btn-group">
+          {{#linkTo "contacts.show" controller.session.tenant class="btn grey"}}
+            <i class="picto-arrow-left"></i>
+            {% trans "My contacts" %}
+          {{/linkTo}}
+        </div>
+      </div>
+      <div class="btn-toolbar pull-right">
+        <div class="btn-group">
+          {{#linkTo "contact.edit" controller.session.tenant content class="btn rounded grey"}}
+            {% trans "Edit" %}
+          {{/linkTo}}
+        </div>
+        <div class="btn-group">
+          <a class="btn rounded grey" {{action 'delete' content}}>
+            {% trans "Delete" %}
+          </a>
+        </div>
+      </div>
+    </section>
+    
+    <section class="main-infos clearfix">
+      <div class="avatar rounded pull-left">
+        {{#if photoUri}}
+          <img {{bindAttr src="photoUri"}}>
+        {{/if}}
+      </div>
+      <div class="infos pull-left">
+        <span class="name">
+          {{#if firstname}}
+            <span class="capitalize">{{firstname}}&nbsp;</span>
+          {{/if}}
+          {{#if name}}
+            <span class="uppercase">{{name}}</span>
+          {{/if}}
+          &nbsp;
+        </span>
+        <span class="role">
+          {{#if role}}
+            {{#if organization}}
+              {{trans "{{role}} at {{corporateName}}" roleBinding="role" corporateNameBinding="organization.corporateName"}}
+            {{else}}
+              {{role}}
+            {{/if}}
+          {{else}}
+            {{#if organization}}
+              {{trans "Works at {{corporateName}}" corporateNameBinding="organization.corporateName"}}
+            {{else}}
+              {% trans "No role assigned" %}
+            {{/if}}
+          {{/if}}
+        </span>
+      </div>
+      <div class="actions pull-right">
+        <div class="btn-toolbar">
+          <div class="btn-group">
+            {{#linkTo "quotations.add" controller.session.tenant class="btn orange"}}
+              <i class="picto-add"></i>
+              {% trans "Quotation" %}
+            {{/linkTo}}
+          </div>
+          <div class="btn-group">
+            {{#linkTo "invoices.add" controller.session.tenant class="btn green"}}
+              <i class="picto-add"></i>
+              {% trans "Invoice" %}
+            {{/linkTo}}
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="contact-infos clearfix">
+      {{partial "contacts/partials/showEntityContactInfos"}}
+    </section>
+    
+    <section class="quotations with-head">
+      <div class="header clearfix">
+        <h4 class="pull-left">
+          {% trans "Recent quotes" %}
+        </h4>
+        <div class="btn-toolbar pull-right">
+          <div class="btn-group">
+            <a class="btn btn-small orange rounded" {{action "addQuotationToThis" target="view"}}>
+              {% trans "Add" %}
+            </a>
+          </div>
+        </div>
+      </div>
+      {{#with quotations}}
+        {{partial "invoicing/partials/tableOfQuotations"}}
+      {{/with}}
+      {{#unless quotations.length}}
+        <p class="table-no-data orange">
+          {% trans "No quotations" %}
+        </p>
+      {{/unless}}
+    </section>
+    
+    <section class="invoices with-head">
+      <div class="header clearfix">
+        <h4 class="pull-left">
+          {% trans "Recent invoices" %}
+        </h4>
+        <div class="btn-toolbar pull-right">
+          <div class="btn-group">
+            <a class="btn btn-small green rounded" {{action "addInvoiceToThis" target="view"}}>
+              {% trans "Add" %}
+            </a>
+          </div>
+        </div>
+      </div>
+      {{#with invoices}}
+        {{partial "invoicing/partials/tableOfInvoices"}}
+      {{/with}}
+      {{#unless invoices.length}}
+        <p class="table-no-data green">
+          {% trans "No invoices" %}
+        </p>
+      {{/unless}}
+    </section>
+  {{else}}
+    {{partial "core/partials/spinner"}}
+  {{/if}}
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "contact/show/settings" %}
+  <ul class="info">
+    <li>
+      <a {{action 'startHelpTour' target="view"}}>
+        <i class="picto-help"></i>
+        {% trans "Infos" %}
+      </a>
+    </li>
+  </ul>
+  <br>
+  <ul class="options">
+    <li>
+      <i class="picto-settings"></i>
+      {% trans "Options" %}
+    </li>
+    <li class="clearfix">
+      <i class="picto-star pull-left"></i>
+      {{view Vosae.FlipSwitchButton
+        checkedBinding=""
+        classNames="pull-left" }}
+    </li>
+    {{#if isOwned}}
+    <li class="clearfix">
+      <i class="picto-lock pull-left"></i>
+      {{view view.privateSwitchButton 
+        checkedBinding="private"
+        classNames="pull-left" }}
+    </li>
+    {{/if}}
+  </ul>
+  <br/>
+  <ul class="export">
+    <li>
+      <i class="picto-export"></i>
+      <a {{action "getExportFile" target="controller"}}>
+        {% trans "Export" %}
+      </a>
+    </li>
+  </ul>
+{% endtplhandlebars %}

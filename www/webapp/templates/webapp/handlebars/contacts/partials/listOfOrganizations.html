@@ -1,0 +1,43 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "contacts/partials/_listOfOrganizations" %}
+  <ul class="clearfix">
+  {{#each organization in this}}
+    <li class="organization-card clearfix">
+      <div class="avatar default-organization rounded pull-left">
+        {{#if organization.photoUri}}
+          <img {{bindAttr src="organization.photoUri"}}>
+        {{/if}}
+      </div>
+      <div class="infos pull-left">
+        {{#linkTo "organization.show" controller.session.tenant organization class="orange"}}
+          {{organization.corporateName}}
+        {{/linkTo}}
+        {{#linkTo "organization.show" controller.session.tenant organization tagName="span" class="counter"}}
+          &nbsp;- <span class="green">{{organization.contacts.length}}</span>
+          {{trans "Contact" plural="Contacts" countBinding="organization.contacts.length"}}
+        {{/linkTo}}
+        <span class="desc">
+          {{#if organization.note}}
+            {{organization.note}}
+          {{else}}
+            {% trans "No description for this organization" %}
+          {{/if}}
+        </span>
+      </div>
+      <div class="options pull-right">
+        <div class="btn-group btn-group-vertical">
+          {{#linkTo "organization.show" controller.session.tenant organization class="detail"}}
+            <i class="picto-search"></i>
+          {{/linkTo}}
+          {{#if organization.private}}
+            <a class="active private">
+              <i class="picto-lock"></i>
+            </a>
+          {{/if}}
+        </div>
+      </div>
+    </li>
+  {{/each}}
+  </ul>
+{% endtplhandlebars %}

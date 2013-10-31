@@ -1,0 +1,139 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "item/edit" %}
+
+  {{#if content.isLoaded}}
+  <section class="desc clearfix">
+    <div class="pull-left">
+      {% comment %}
+      <div class="icon">
+        <i class="picto-tags"></i>
+      </div>
+      <div class="desc">
+        <h4 class="reference">
+          <i class="picto-arrow-right green"></i>
+        </h4>
+        <p></p>
+      </div>
+      {% endcomment %}
+    </div>
+    <div class="pull-right">
+      <h4 class="type">
+        {{view Vosae.Components.Select
+          contentBinding="Vosae.itemsTypeChoices"
+          valueBinding="type"
+          containerCssClass="green helptour-itemtype"
+          optionLabelPath="content.label"
+          optionValuePath="content.value" }}
+      </h4>
+    </div>
+  </section>
+
+  <section class="detail clearfix">
+    <table class="helptour-itemprice">
+      <tr class="product">
+        <td>
+          <label>{% trans "Product name" %}</label>
+        </td>
+        <td>
+          {{view Vosae.TextAreaAutoSize
+            valueBinding="description"
+            maxlength="512"
+            resize="none"
+            classNames="edit"
+            placeholder="{% trans '- Product name, description' %}…" }}
+            <p class="info">{% trans "You are allowed to write on several lines" %}</p>
+        </td>
+      </tr>
+      <tr class="reference">
+        <td><label>{% trans "Reference" %}</label></td>
+        <td>
+          {{view view.referenceField 
+            valueBinding="ref"
+            classNames="edit" 
+            placeholder="{% trans "Reference" %}" }}
+            <p class="info">{% trans "Alphanumeric characters and dashes/underscores only" %}</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label>{% trans "Price" %}</label>
+        </td>
+        <td>
+          {{view view.unitPriceField
+            itemBinding=this
+            classNames="edit"
+            placeholder="0" }}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label>{% trans "Tax" %}</label>
+        </td>
+        <td>
+          {{view Vosae.Components.Select
+            contentBinding="controller.taxes"
+            selectionBinding="tax"
+            containerCssClass="green taxes"
+            optionValuePath="content"
+            optionLabelPath="content.displayTax" }}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label>{% trans "Currency" %}</label>
+        </td>
+        <td>
+          {{view Vosae.Components.Select
+            contentBinding="controller.session.tenantSettings.invoicing.supportedCurrencies"
+            selectionBinding="currency"
+            containerCssClass="green currencies"
+            optionValuePath="content.symbol"
+            optionLabelPath="content.symbol" }}
+        </td>
+      </tr>
+    </table>
+  </section>
+
+  <div class="actions-form">
+    {{#if isSaving}}
+      <div class="btn-group">
+        <a class="btn rounded green">
+          {% trans "Saving" %}…
+        </a>
+      </div>
+    {{else}}
+      <div class="btn-group">
+        <a class="btn rounded grey" {{action cancel content}}>
+          {% trans "Cancel" %}
+        </a>
+      </div>
+      {{#if isDirty}}
+        <div class="btn-group helptour-itemsave">
+          <a class="btn rounded green" {{action save content}}>
+            {{#if id}}
+              {% trans "Save" %}
+            {{else}}
+              {% trans "Create" %}
+            {{/if}}
+          </a>
+        </div>
+      {{/if}}
+    {{/if}}
+  </div>
+  {{else}}
+    {{partial "core/partials/spinner"}}
+  {{/if}}
+
+{% endtplhandlebars %}
+
+{% tplhandlebars "item/edit/settings" %}
+  <ul class="info">
+    <li>
+      <a {{action 'startHelpTour' target="view"}}>
+        <i class="picto-help"></i>
+        {% trans "Infos" %}
+      </a>
+    </li>
+  </ul>
+{% endtplhandlebars %}

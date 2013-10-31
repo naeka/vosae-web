@@ -1,0 +1,91 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "quotations/show" %}
+
+  <section class="sub-actions clearfix">
+    <div class="btn-toolbar pull-left"></div>
+    <div class="btn-toolbar pull-right">
+      <div class="btn-group">
+        {{#linkTo "quotations.add" controller.session.tenant class="btn orange"}}
+          <i class="picto-add"></i>
+          {% trans "Quotation" %}
+        {{/linkTo}}
+      </div>
+    </div>
+  </section>
+
+  {# Draft and Awaiting approval #}
+  <section class="quotations with-head">
+    <div class="header clearfix">
+      <h4 class="pull-left">
+        {% trans "Pending" %}
+      </h4>
+      <div class="btn-toolbar pull-right"></div>
+    </div>
+    {{#with quotationsDraftAwaitingApproval}}
+      {{partial "invoicing/partials/tableOfQuotations"}}
+    {{/with}}
+
+    {{#unless quotationsDraftAwaitingApproval.length}}
+      <p class="table-no-data orange">
+        {% trans "No pending quotations" %}
+      </p>
+    {{/unless}}
+    {# Pagination #}
+    {{#if paginationDraftHasNext}}
+      <p class="table-load-more" {{action getNextQuotationsDraft}}>
+        {% trans "Load more quotations" %}
+      </p>
+    {{/if}}
+  </section>
+
+  {# Expired and Refused #}
+  <section class="quotations with-head">
+    <div class="header clearfix">
+      <h4 class="pull-left">
+        {% trans "Expired" %}
+      </h4>
+      <div class="btn-toolbar pull-right"></div>
+    </div>
+    {{#with quotationsExpiredRefused}}
+      {{partial "invoicing/partials/tableOfQuotations"}}
+    {{/with}}
+    
+    {{#unless quotationsExpiredRefused.length}}
+      <p class="table-no-data orange">
+        {% trans "No expired quotations" %}
+      </p>
+    {{/unless}}
+    {# Pagination #}
+    {{#if paginationExpiredHasNext}}
+      <p class="table-load-more" {{action getNextQuotationsExpired}}>
+        {% trans "Load more quotations" %}
+      </p>
+    {{/if}}
+  </section>
+
+  {# Approved #}
+  <section class="quotations with-head">
+    <div class="header clearfix">
+      <h4 class="pull-left">
+        {% trans "Approved" %}
+      </h4>
+      <div class="btn-toolbar pull-right"></div>
+    </div>
+    {{#with quotationsApprovedInvoiced}}
+      {{partial "invoicing/partials/tableOfQuotations"}}
+    {{/with}}
+
+    {{#unless quotationsApprovedInvoiced.length}}
+      <p class="table-no-data orange">
+        {% trans "No approved quotations" %}
+      </p>
+    {{/unless}}
+    {# Pagination #}
+    {{#if paginationApprovedHasNext}}
+      <p class="table-load-more" {{action getNextQuotationsApproved}}>
+        {% trans "Load more quotations" %}
+      </p>
+    {{/if}}
+  </section>
+{% endtplhandlebars %}

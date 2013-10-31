@@ -1,0 +1,151 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: vosae-web\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-22 12:57+0000\n"
+"PO-Revision-Date: 2013-10-22 18:13+0100\n"
+"Last-Translator: Léo S <leo@naeka.fr>\n"
+"Language-Team: Léo S. <leo@naeka.fr>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.4\n"
+"Language: en_GB\n"
+
+#: base.py:49
+msgid "English"
+msgstr ""
+
+#: base.py:50
+msgid "British English"
+msgstr ""
+
+#: base.py:51
+msgid "French"
+msgstr ""
+
+#: base.py:601
+msgid "Core"
+msgstr ""
+
+#: base.py:602
+msgid "Contacts"
+msgstr ""
+
+#: base.py:603
+msgid "Organizer"
+msgstr ""
+
+#: base.py:604
+msgid "Invoicing"
+msgstr ""
+
+#: base.py:610
+msgid "Australian dollar"
+msgstr ""
+
+#: base.py:611
+msgid "Brazilian real"
+msgstr ""
+
+#: base.py:612
+msgid "Canadian dollar"
+msgstr ""
+
+#: base.py:613
+msgid "Swiss franc"
+msgstr ""
+
+#: base.py:614
+msgid "Chinese yuan"
+msgstr ""
+
+#: base.py:615
+msgid "Danish krone"
+msgstr ""
+
+#: base.py:616
+msgid "Egyptian pound"
+msgstr ""
+
+#: base.py:617
+msgid "Euro"
+msgstr ""
+
+#: base.py:618
+msgid "Pound sterling"
+msgstr ""
+
+#: base.py:619
+msgid "Hong Kong dollar"
+msgstr ""
+
+#: base.py:620
+msgid "Indian rupee"
+msgstr ""
+
+#: base.py:621
+msgid "Japanese yen"
+msgstr ""
+
+#: base.py:622
+msgid "Moroccan dirham"
+msgstr ""
+
+#: base.py:623
+msgid "Mexican peso"
+msgstr ""
+
+#: base.py:624
+msgid "Norwegian krone"
+msgstr ""
+
+#: base.py:625
+msgid "New Zealand dollar"
+msgstr ""
+
+#: base.py:626
+msgid "Russian rouble"
+msgstr ""
+
+#: base.py:627
+msgid "Swedish krona"
+msgstr ""
+
+#: base.py:628
+msgid "Turkish lira"
+msgstr ""
+
+#: base.py:629
+msgid "United States dollar"
+msgstr ""
+
+#: base.py:633
+msgid "France"
+msgstr ""
+
+#: base.py:634
+msgid "United States"
+msgstr ""
+
+#: base.py:635
+msgid "Great Britain"
+msgstr ""
+
+#: base.py:636
+msgid "Belgium"
+msgstr ""
+
+#: base.py:637
+msgid "Luxembourg"
+msgstr ""
+
+#: base.py:638
+msgid "Switzerland"
+msgstr ""

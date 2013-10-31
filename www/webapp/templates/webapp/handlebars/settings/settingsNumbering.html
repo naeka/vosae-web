@@ -1,0 +1,81 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "settings/numbering" %}
+  <header>
+    <h3>{% trans "Invoicing settings" %} &nbsp;>&nbsp; {% trans "Numbering" %}</h3>
+  </header>
+  <section class="clearfix">
+    <div class="inner">
+      <table class="half pull-left">
+        <tbody>
+          <tr>
+            <td class="label">
+              <label>{% trans "Scheme" %}</label>
+            </td>
+            <td>
+              {{view Vosae.Components.Select
+                contentBinding="Vosae.invoicingSchemes"
+                valueBinding="invoicing.numbering.scheme"
+                optionValuePath="content.value"
+                optionLabelPath="content.label"
+                containerCssClass="green" }}
+            </td>
+          </tr>
+          {{#unless invoicing.numbering.schemeIsNumber}}
+          <tr>
+            <td class="label">
+              <label>{% trans "Dates format" %}</label>
+            </td>
+            <td>
+              {{view Vosae.Components.Select
+                contentBinding="Vosae.invoicingDateFormats"
+                valueBinding="invoicing.numbering.dateFormat"
+                optionValuePath="content.value"
+                optionLabelPath="content.label"
+                containerCssClass="green" }}
+            </td>
+          </tr>
+          <tr>
+            <td class="label">
+              <label>{% trans "Separator" %}</label>
+            </td>
+            <td>
+              {{view Vosae.Components.Select
+                contentBinding="Vosae.invoicingSeparators"
+                valueBinding="invoicing.numbering.separator"
+                optionValuePath="content.value"
+                optionLabelPath="content.label"
+                containerCssClass="green" }}
+            </td>
+          </tr>
+          <tr>
+            <td class="label">
+              <label>{% trans "Reset at end of period" %}</label>
+            </td>
+            <td>
+              {{view Vosae.FlipSwitchButton
+                checkedBinding="invoicing.numbering.fyReset" }}
+            </td>
+          </tr>
+          {{/unless}}
+        </tbody>
+      </table>
+      <table class="half pull-left">
+        <tbody>
+          <tr>
+            <td>
+              <div class="preview">
+                <h4>{% trans "Reference preview" %}</h5>
+                <p>{{invoicing.numbering.preview}}</p>
+              </div>
+            </td>
+          </tr>
+      </table>
+    </div>
+  </section>
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "settings/numbering/actions" %}
+  {{partial "settings/partials/saveSettings"}}
+{% endtplhandlebars %}

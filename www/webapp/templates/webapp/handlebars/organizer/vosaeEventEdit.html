@@ -1,0 +1,269 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "vosaeEvent/edit" %}
+
+  {{#if content}} 
+
+    <section class="actions clearfix">
+      <div class="btn-toolbar pull-left">
+        {{#if id}}            
+          {{#linkTo "vosaeEvent.show" controller.session.tenant content class="btn grey"}}
+            <i class="picto-arrow-left"></i>
+            {{#if summary}}
+              {{summary}}
+            {{else}}
+              {% trans "Back" context "go back" %}
+            {{/if}}
+          {{/linkTo}}
+        {{else}}
+          {{#linkTo "calendarLists.show" controller.session.tenant class="btn grey"}}
+            {% trans "Organizer" %}
+          {{/linkTo}}
+        {{/if}}
+      </div>
+      <div class="btn-toolbar pull-right">
+        {{#if isSaving}}
+          <div class="btn-group">
+            <a class="btn rounded green">
+              {% trans "Saving..." %}
+            </a>
+          </div>
+        {{else}}
+          <div class="btn-group">
+            <a class="btn rounded grey" {{action 'cancel' content}}>
+              {% trans  "Cancel" %}
+            </a>
+          </div>
+          {{#if isDirty}}
+            <div class="btn-group">        
+              <a class="btn rounded green" {{action 'save' content}}>
+                {{#if id}}
+                  {% trans "Save" %}
+                {{else}}
+                  {% trans "Add" %}
+                {{/if}}
+              </a>
+            </div>
+          {{/if}}
+          {{#if id}}
+            <div class="btn-group">
+              <a class="btn rounded grey" {{action 'delete' content}}>
+                {% trans "Delete" %}
+              </a>
+            </div>
+          {{/if}}
+        {{/if}}
+      </div>  
+    </section>
+
+    <section class="main-infos clearfix">
+      <div class="infos">
+        <div class="summary">
+          {{view Vosae.AutoGrowTextField
+            valueBinding="summary"
+            classNames="edit"
+            maxlength="64"
+            placeholder='{% trans "Summary" context "event" %}' }}
+        </div>
+        <div class="calendar">
+          {{#if calendar.isLoaded}}
+            {{#if calendarLists.isLoaded}}
+              {{view view.calendarsField
+                contentBinding="calendarLists"
+                dataColorBinding="content.color"
+                valueBinding="calendar"
+                containerCssClass="green"
+                optionLabelPath="content.displayName"
+                optionValuePath="content.calendar"  }}
+            {{/if}}
+          {{/if}}
+        </div>
+      </div>
+      <div class="date">
+        <span class="dt-start">
+          {% trans "From" context "date" %}
+          {{#isTouchEnabled}}
+            {{#if allDay}}
+              {{view Vosae.DateField
+                valueBinding=start.date }}
+            {{else}}
+              {{view Vosae.DateTimeField
+                valueBinding=start.datetime }}
+            {{/if}}
+          {{else}}
+            {{view view.startDateField
+              contentBinding="start"
+              classNames="edit date" }}
+            {{#unless allDay}}
+              {{view view.startTimeField
+                contentBinding="start"
+                classNames="edit" }}
+            {{/unless}}
+          {{/isTouchEnabled}}
+        </span>
+        <span class="dt-end">
+          {% trans "to" context "date" %}
+          {{#isTouchEnabled}}
+            {{#if allDay}}
+              {{view Vosae.DateField
+                valueBinding=end.date }}
+            {{else}}
+              {{view Vosae.DateTimeField
+                valueBinding=end.datetime }}
+            {{/if}}
+          {{else}}
+            {{view view.endDateField
+              contentBinding="end"
+              classNames="edit date" }}
+            {{#unless allDay}}
+              {{view view.endTimeField
+                contentBinding="end"
+                classNames="edit" }}
+            {{/unless}}
+          {{/isTouchEnabled}}
+        </span>
+        <span class="date-ad">
+          <label>
+            {{view Em.Checkbox checkedBinding="allDay"}}
+            {% trans 'All day' %}
+          </label>
+        </span>
+      </div>
+    </section>
+
+    <section class="event-infos clearfix">
+      <div class="pull-left helptour-eventinfos">
+        <p class="location">
+          {{view Vosae.AutoGrowTextField
+            valueBinding="location"
+            classNames="edit"
+            maxlength="512"
+            placeholder='{% trans "Location" context "event" %}' }}
+        </p>
+        <p class="description">
+          {{view Vosae.TextAreaAutoSize
+            valueBinding="description"
+            classNames="edit"
+            maxlength="1024"
+            placeholder='{% trans "Description" %}' }}
+        </p>
+        <div class="colorAndReminder d-table">
+          <div class="d-row">
+            <div class="d-cell">
+              {% trans "Color" %}
+            </div>
+            <div class="colors d-cell">
+              {{view Vosae.SimpleColorPickerField
+                valueBinding="color" }}
+            </div>
+          </div>
+          <div class="d-row">
+            <div class="d-cell">
+              {% trans "Reminders" %}
+            </div>
+            <div class="reminders d-cell">
+              <ul>
+                {{#if reminders.useDefault}}
+                  {{#each calendarList.reminders}}
+                    {{view view.reminderView contentBinding=this}}
+                  {{/each}}
+                {{/if}}
+                {{#each reminders.overrides}}
+                  {{view view.reminderView contentBinding=this}}
+                {{/each}}
+              </ul>
+              <a class="addReminder btn rounded green" {{action "addReminder"}}>{% trans "Add a reminder" %}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pull-right">
+        <a class="addAttendee btn green" {{action "addAttendee"}}>{% trans "Add an attendee" %}</a>
+        {{#if attendees.length}}
+          <ul class="attendees">
+          {{#each attendees}}
+            {{view view.attendeeView contentBinding=this}}
+          {{/each}}
+          </ul>
+        {{/if}}
+      </div>
+    </section>
+    
+  {{/if}}
+
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "vosaeEvent/edit/attendee" %}
+  <table>
+    <tbody>
+      <tr>
+        <td class="attendee-avatar">
+          <div class="img-circle">
+            {{#if photoUri}}
+              <img src="{{unbound photoUri}}" />
+            {{else}}
+              <i class="picto-user"></i>
+            {{/if}}
+          </div>
+        </td>
+        <td class="attendee-infos">
+          <div class="email">
+            {{view view.emailField
+              valueBinding="email"
+              classNames="edit email"
+              placeholder='{% trans "E-mail" %}' }}
+          </div>
+          <div class="display-name">
+            {{view view.displayNameField
+              valueBinding="displayName"
+              classNames="edit name"
+              placeholder='{% trans "Name" %}' }}
+          </div>
+        </td>
+        <td class="attendee-status">
+          {{view view.responseStatutesSelect
+            contentBinding="Vosae.attendeeResponseStatutes"
+            valueBinding="responseStatus"
+            optionLabelPath="content.displayName"
+            optionValuePath="content.value" }}
+          <a class="btn attendee-delete darkgrey" {{ action "removeAttendee" this}}>
+            <i class="picto-trash"></i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "vosaeEvent/edit/reminder" %}
+  <div>
+    {{view Em.Select
+      contentBinding="Vosae.reminderEntries"
+      valueBinding="method"
+      optionLabelPath="content.displayName"
+      optionValuePath="content.value" }}
+
+    {{view Vosae.AutoGrowTextField
+      valueBinding="minutes"
+      maxlength="5"
+      classNames="edit" }}
+
+    {% trans "minutes before" %}
+  </div>
+  <a class="btn rounded grey reminder-delete img-circle" {{ action "removeReminder" this}}>
+    <i class="picto-trash"></i>
+  </a>
+{% endtplhandlebars %}
+
+{% tplhandlebars "vosaeEvent/edit/settings" %}
+  <ul class="info">
+    <li>
+      <a {{action 'startHelpTour' target="view"}}>
+        <i class="picto-help"></i>
+        {% trans "Infos" %}
+      </a>
+    </li>
+  </ul>
+{% endtplhandlebars %}

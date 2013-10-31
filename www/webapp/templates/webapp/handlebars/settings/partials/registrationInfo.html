@@ -1,0 +1,102 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "settings/partials/registrationInfo/_base" %}
+  <tr>
+    <td class="label">
+      <label>{% trans "Business entity" %}</label>
+    </td>
+    <td>
+      {{view Ember.TextField 
+        valueBinding = "registrationInfo.businessEntity"
+        maxlength = "64" 
+        classNames = "edit-settings" }}
+    </td>
+  </tr>
+  <tr>
+    <td class="label">
+      <label>{% trans "Share capital" %}</label>
+    </td>
+    <td>
+      {{view Ember.TextField 
+        valueBinding = "registrationInfo.shareCapital"
+        maxlength = "64" 
+        classNames = "edit-settings" }}
+    </td>
+  </tr>
+{% endtplhandlebars %}
+
+{% tplhandlebars "settings/partials/registrationInfo/mixins/_EU" %}
+  <tr>
+    <td class="label">
+      <label>{% trans "VAT number" %}</label>
+    </td>
+    <td>
+      {{view Ember.TextField 
+        valueBinding = "registrationInfo.vatNumber"
+        maxlength = "64" 
+        classNames = "edit-settings" }}
+    </td>
+  </tr>
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "settings/partials/registrationInfo/BE" %}
+  {{partial "settings/partials/registrationInfo/base"}}
+  {{partial "settings/partials/registrationInfo/mixins/EU"}}
+{% endtplhandlebars %}
+
+{% tplhandlebars "settings/partials/registrationInfo/CH" %}
+  {{partial "settings/partials/registrationInfo/base"}}
+  <tr>
+    <td class="label">
+      <label>{% trans "VAT number" %}</label>
+    </td>
+    <td>
+      {{view Ember.TextField 
+        valueBinding = "registrationInfo.vatNumber"
+        maxlength = "64" 
+        classNames = "edit-settings" }}
+    </td>
+  </tr>
+{% endtplhandlebars %}
+
+{% tplhandlebars "settings/partials/registrationInfo/FR" %}
+  {{partial "settings/partials/registrationInfo/base"}}
+  {{partial "settings/partials/registrationInfo/mixins/EU"}}
+  <tr>
+    <td class="label">
+      <label>{% trans "Siret" %}</label>
+    </td>
+    <td>
+      {{view Ember.TextField 
+        valueBinding = "registrationInfo.siret"
+        maxlength = "64" 
+        classNames = "edit-settings" }}
+    </td>
+  </tr>
+  <tr>
+    <td class="label">
+      <label>{% trans "RCS number" %}</label>
+    </td>
+    <td>
+      {{view Ember.TextField 
+        valueBinding = "registrationInfo.rcsNumber"
+        maxlength = "64" 
+        classNames = "edit-settings" }}
+    </td>
+  </tr>
+{% endtplhandlebars %}
+
+{% tplhandlebars "settings/partials/registrationInfo/GB" %}
+  {{partial "settings/partials/registrationInfo/base"}}
+  {{partial "settings/partials/registrationInfo/mixins/EU"}}
+{% endtplhandlebars %}
+
+{% tplhandlebars "settings/partials/registrationInfo/LU" %}
+  {{partial "settings/partials/registrationInfo/base"}}
+  {{partial "settings/partials/registrationInfo/mixins/EU"}}
+{% endtplhandlebars %}
+
+{% tplhandlebars "settings/partials/registrationInfo/US" %}
+  {{partial "settings/partials/registrationInfo/base"}}
+{% endtplhandlebars %}

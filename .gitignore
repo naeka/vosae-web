@@ -1,0 +1,43 @@
+# Cache files #
+###############
+*.pyc
+*.pyo
+*.idea/
+www/media/CACHE/
+# Virtualenv files #
+####################
+bin/*
+lib/*
+include/*
+doc/*
+src/*
+build/*
+man/*
+local
+# OS generated files #
+######################
+.DS_Store?
+.DS_Store
+ehthumbs.db
+Icon?
+Thumbs.db
+.Python
+*.*~
+# Project specific files #
+##########################
+www/settings/local.py
+
+# Static
+www/static/
+www/webapp/static/webapp/tmp/
+www/webapp/static/webapp/build/
+www/webapp/static/webapp/handlebars/
+www/webapp/static/webapp/css/backend.css
+
+# Sass cache
+.sass-cache/
+www/webapp/.sass-cache/
+
+#Various
+node_modules/
+vosae-web.sublime-workspace

@@ -1,0 +1,40 @@
+{% load i18n statici18n templatetag_handlebars %}
+{% load static from staticfiles %}
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="description" content='{% block meta_description %}{% trans "Don’t ignore the changement. Vosae is a powerful application for your daily company management. Enjoy an enterly new experience to manage your invoicing, your calendars and your contacts." %}{% endblock %}'>
+<title>{% block title %}Vosae{% endblock %}</title>
+<link rel="apple-touch-icon-precomposed" sizes="57x57" href="{% static 'webapp/img/apple-touch-icon-57x57-precomposed.png' %}">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'webapp/img/apple-touch-icon-114x114-precomposed.png' %}">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static 'webapp/img/apple-touch-icon-72x72-precomposed.png' %}">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'webapp/img/apple-touch-icon-114x114-precomposed.png' %}"> 
+<link rel="shortcut icon" href="{% static 'webapp/img/favicon.ico' %}" />
+<link rel="icon" type="image/ico" href="{% static 'webapp/img/favicon.ico' %}" />
+<script type="text/javascript" src="https://d3dy5gmtp8yhk7.cloudfront.net/2.1/pusher.min.js"></script>
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
+
+{% if DEBUG %}
+    <script type="text/javascript" src="{% static 'webapp/build/vendor.js' %}"></script>
+    <script type="text/javascript" src="{% static 'webapp/build/webapp.js' %}"></script>
+    <script type="text/javascript" src="{% static 'webapp/build/locales/locale-'|add:LANGUAGE_CODE|add:'.js' %}"></script>
+    <link href="{% static 'webapp/build/webapp.css' %}" rel="stylesheet" type="text/css">
+    {% include "webapp/handlebars-imports.html" %}
+{% else %}
+    {% include "webapp/raven-config.html" %}
+    <script type="text/javascript" src="{% static 'webapp/build/vendor.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'webapp/build/webapp.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'webapp/build/locales/locale-'|add:LANGUAGE_CODE|add:'.min.js' %}"></script>
+    <script type="text/javascript" src="{% static handlebars_path %}"></script>
+    <link type="text/css" rel="stylesheet" href="{% static 'webapp/build/webapp.min.css' %}">
+{% endif %}
+
+<script type="text/javascript">
+    var AUTH_USER = '{{ request.user.email }}';
+    var LANGUAGE = '{{ LANGUAGE_CODE }}';
+    var APP_ENDPOINT = '{{ APP_ENDPOINT }}';
+    var PUSHER_KEY = '{{ PUSHER_KEY }}';
+    var PUSHER_USER_CHANNEL = '';
+    var PUSHER_CLUSTER = '{{ PUSHER_CLUSTER }}';
+    var PUSHER_AUTH_ENDPOINT = '{{ APP_ENDPOINT }}/rt/auth/';
+</script>

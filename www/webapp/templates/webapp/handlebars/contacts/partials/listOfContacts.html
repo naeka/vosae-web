@@ -1,0 +1,62 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "contacts/partials/_listOfContacts" %}
+  <ul class="clearfix">
+  {{#each contact in this}}
+    <li class="contact-card clearfix">
+      <div class="inner">
+        <div class="avatar rounded pull-left">
+          {{#if contact.photoUri}}
+            <img {{bindAttr src="contact.photoUri"}}>
+          {{/if}}
+        </div>
+        <div class="infos pull-left">
+          {{#linkTo "contact.show" controller.session.tenant contact}}
+            <span class="capitalize">{{contact.firstname}}</span><br>
+            <span class="uppercase">{{contact.name}}</span>&nbsp;
+          {{/linkTo}}
+          <span class="role">
+            {{#if contact.role}}
+              {{trans "{{role}} at {{corporateName}}" roleBinding="contact.role" corporateNameBinding="contact.organization.corporateName"}}
+            {{else}}
+              {{#if contact.organization}}
+                {{trans "Works at {{corporateName}}" corporateNameBinding="contact.organization.corporateName"}}
+              {{else}}
+                {% trans "No role assigned" %}
+              {{/if}}
+            {{/if}}
+          </span>
+        </div>
+        <div class="options pull-right">
+          <div class="btn-group btn-group-vertical">
+            {{#linkTo "contact.show" controller.session.tenant contact class="detail"}}
+              <i class="picto-search"></i>
+            {{/linkTo}}
+            {{#if contact.private}}
+              <a class="active private">
+                <i class="picto-lock"></i>
+              </a>
+            {{/if}}
+          </div> 
+        </div>
+        <div class="number text-right">
+          <span class="number orange">
+            {{#if contact.phones.firstObject}}
+              {{contact.phones.firstObject.displayPhone}}
+            {{else}}
+              &nbsp;
+            {{/if}}
+          </span>
+          <span class="email">
+            {{#if contact.emails.firstObject}}
+              {{contact.emails.firstObject.email}}
+            {{else}}
+              &nbsp;
+            {{/if}}
+          </span>
+        </div>
+      </div>
+    </li>
+  {{/each}}
+  </ul>
+{% endtplhandlebars %}

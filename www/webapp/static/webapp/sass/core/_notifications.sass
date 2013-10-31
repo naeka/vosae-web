@@ -1,0 +1,67 @@
+.notifications
+  width: 100%
+
+  a 
+    color: $orange
+
+  .icon
+    i
+      display: block
+      border: 1px solid #DDD
+      color: #DDD
+      font-size: 22px
+      font-style: normal
+      +square(30px)
+      +border-radius(16px)
+
+      &::before
+        font-family: $fontPictos
+        content: ' '        
+
+      &.contact::before
+        content: 'g'
+        line-height: 25px
+
+      &.invoicing::before
+        content: '%'
+        line-height: 31px
+
+      &.organizer::before
+        content: '\\'
+        line-height: 30px
+
+  .d-row
+    font-size: 14px
+    +opacity(0.45)
+
+    &.unread
+      background: #262626
+      +opacity(1)
+
+    &:hover
+      background: $orange
+      +opacity(1)
+      a
+        color: #111
+
+  .d-cell
+    vertical-align: middle
+    padding: 10px 0px 10px 10px
+    position: relative
+
+    &.icon
+      white-space: nowrap
+
+    &.text
+      padding-left: 10px
+      width: 100%
+
+    &.date
+      padding: 0 6px
+      white-space: nowrap
+      color: #888
+      
+    img
+      height: 34px 
+      vertical-align: middle
+      width: 34px

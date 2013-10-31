@@ -1,0 +1,1 @@
+Vosae.OrganizationEditController = Vosae.EntityController.extend()

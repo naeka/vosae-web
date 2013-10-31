@@ -1,0 +1,151 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: vosae-web\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-22 12:56+0000\n"
+"PO-Revision-Date: 2013-10-22 18:14+0100\n"
+"Last-Translator: Léo S <leo@naeka.fr>\n"
+"Language-Team: Maxime Gaillard <maxime@naeka.fr>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.5.4\n"
+"Language: fr\n"
+
+#: base.py:49
+msgid "English"
+msgstr "Anglais"
+
+#: base.py:50
+msgid "British English"
+msgstr "Anglais britannique"
+
+#: base.py:51
+msgid "French"
+msgstr "Français"
+
+#: base.py:601
+msgid "Core"
+msgstr ""
+
+#: base.py:602
+msgid "Contacts"
+msgstr "Contacts"
+
+#: base.py:603
+msgid "Organizer"
+msgstr "Agenda"
+
+#: base.py:604
+msgid "Invoicing"
+msgstr "Facturation"
+
+#: base.py:610
+msgid "Australian dollar"
+msgstr "Dollar australien"
+
+#: base.py:611
+msgid "Brazilian real"
+msgstr "Real brésilien"
+
+#: base.py:612
+msgid "Canadian dollar"
+msgstr "Dollar canadien"
+
+#: base.py:613
+msgid "Swiss franc"
+msgstr "Franc suisse"
+
+#: base.py:614
+msgid "Chinese yuan"
+msgstr "Yuan chinois"
+
+#: base.py:615
+msgid "Danish krone"
+msgstr "Couronne danoise"
+
+#: base.py:616
+msgid "Egyptian pound"
+msgstr "Livre égyptienne"
+
+#: base.py:617
+msgid "Euro"
+msgstr "Euro"
+
+#: base.py:618
+msgid "Pound sterling"
+msgstr "Livre sterling"
+
+#: base.py:619
+msgid "Hong Kong dollar"
+msgstr "Dollar de Hong Kong"
+
+#: base.py:620
+msgid "Indian rupee"
+msgstr "Roupie indienne"
+
+#: base.py:621
+msgid "Japanese yen"
+msgstr "Yen japonais"
+
+#: base.py:622
+msgid "Moroccan dirham"
+msgstr "Dirham marocain"
+
+#: base.py:623
+msgid "Mexican peso"
+msgstr "Peso mexicain"
+
+#: base.py:624
+msgid "Norwegian krone"
+msgstr "Couronne norvégienne"
+
+#: base.py:625
+msgid "New Zealand dollar"
+msgstr "Dollar néo-zélandais"
+
+#: base.py:626
+msgid "Russian rouble"
+msgstr "Rouble russe"
+
+#: base.py:627
+msgid "Swedish krona"
+msgstr "Couronne suédoise"
+
+#: base.py:628
+msgid "Turkish lira"
+msgstr "Lire turque"
+
+#: base.py:629
+msgid "United States dollar"
+msgstr "Dollar américain"
+
+#: base.py:633
+msgid "France"
+msgstr "France"
+
+#: base.py:634
+msgid "United States"
+msgstr "Etats-Unis"
+
+#: base.py:635
+msgid "Great Britain"
+msgstr "Grande Bretagne"
+
+#: base.py:636
+msgid "Belgium"
+msgstr "Belgique"
+
+#: base.py:637
+msgid "Luxembourg"
+msgstr "Luxembourg"
+
+#: base.py:638
+msgid "Switzerland"
+msgstr "Suisse"

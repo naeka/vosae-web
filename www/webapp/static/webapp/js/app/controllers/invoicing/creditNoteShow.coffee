@@ -1,0 +1,1 @@
+Vosae.CreditNoteShowController = Vosae.InvoiceBaseController.extend()

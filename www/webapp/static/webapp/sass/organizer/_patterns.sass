@@ -1,0 +1,360 @@
+.app-organizer section
+  border-bottom: 5px solid $grey
+
+  &.with-head
+    border-bottom: 0
+
+    .header
+      border-bottom: 5px solid #EEE
+      padding-top: 30px
+      padding-bottom: 5px
+      margin-bottom: 15px
+      
+      h4
+        margin: 0
+        padding-left: 15px
+        font-size: 140%
+
+  &.actions
+    border-bottom: 5px solid $lightgrey
+    padding-bottom: 20px
+
+    h1
+      color: #414141
+      float: left
+      font-size: 23px
+      padding-top: 2px
+
+    nav
+      float: right
+
+      a
+        margin-right: 5px
+
+        &:last-child
+          margin-right: 0px
+  
+  &.event-infos
+    padding-top: 30px
+    padding-bottom: 30px
+
+    .pull-left 
+      width: 48%
+      position: relative
+      padding-right: 2%
+
+      .address-map
+        height: 200px
+        width: 100%
+
+      .event-location, .event-description
+        margin-top: 5px
+        padding: 5px
+        font-size: 120%
+        font-weight: bold
+
+      .event-description
+        font-size: 120%
+        color: $darkergrey
+
+    .pull-right 
+      width: 48%
+      position: relative
+      padding-left: 2%
+
+  &:last-child
+    border-bottom: 0
+
+
+// Reminder entry card
+.reminders-list
+  tr
+    td
+      padding-top: 8px
+  
+    &:first-child td
+      padding-top: 0
+  
+  .icon
+    width: 26px
+    min-width: 26px
+    text-align: center
+
+  .method
+    padding-right: 5px
+
+    & > span
+      display: inline-block
+      line-height: 26px
+      height: 26px
+      padding: 0 8px
+      color: #FFF
+      background: $green
+
+  .minutes
+    padding-right: 15px
+
+// Reminder entry card edition
+.reminders-list.edit
+  .method
+    .select2-container
+      min-width: 0
+      width: 100%
+
+  .minutes
+    input
+      min-width: 0 !important
+
+
+// ACL entry card
+.acl-entry-card
+  float: left
+  margin-bottom: 10px
+  width: 50%
+  +box-sizing(border-box)
+
+  .inner
+    background: #EEEEEE
+    padding: 10px 10px
+    position: relative
+    +border-radius(4px)
+
+  table
+    width: 100%
+
+  .picture
+    width: 38px
+    height: 38px
+    min-width: 38px
+    padding-right: 5px
+
+    .avatar
+      position: relative
+      width: 38px
+      height: 38px
+      line-height: 38px
+      background-color: #F5F5F5
+      &:before
+        width: 38px
+        height: 38px
+        line-height: 38px
+        font-size: 1.6em
+
+  .entity
+    span.role
+      display: inline-block
+      margin-left: 10px
+      line-height: 26px
+      height: 26px
+      padding: 0 8px
+      color: #FFF
+      background: #CCC
+
+  &:nth-child(odd)
+    padding-right: 5px
+    clear: both
+
+// ACL entry card edition
+.acl-entry-card.edit
+  .entity
+    width: 100%
+    .select2-choice
+      height: 26px
+      line-height: 26px
+
+    .calendarList-acl-entity
+      max-width: 190px
+      min-width: none
+      .select2-choice div
+        display: none
+  
+    .calendarList-acl-role
+      max-width: 130px
+      margin-left: 8px
+      .select2-choice
+        color: #FFF
+        background: #CCC
+
+  .delete
+    min-width: 22px
+    padding-left: 4px
+
+
+//  =======================
+//  = Fullcalendar header =
+//  =======================
+
+.fc-header 
+  margin-bottom: 30px
+  border-bottom: 5px solid $lightgrey
+
+.fc-header-left .fc-button
+  margin-right: 5px
+  margin-bottom: 19px
+
+.fc-header-right .fc-button
+  margin-left: 5px
+
+.fc-widget-header
+  text-align: center
+
+.fc-header .fc-button-today.fc-state-hover
+  .fc-button-inner:hover
+    background: $orange
+
+.fc-header .fc-button-today .fc-button-content
+  min-width: 80px
+  text-align: center
+
+//  ========================
+//  = Fullcalendar buttons =
+//  ========================
+
+.fc-state-default, .fc-state-default .fc-button-inner 
+  background: $grey
+  border: 0
+  @include border-radius(4px)
+
+.fc-state-default .fc-button-effect 
+  display: none
+
+.fc-button-prev .fc-button-content, .fc-button-next .fc-button-content
+  font-size: 16px
+  &:before
+    content: ''
+    color: #333
+    font-family: $fontPictos
+    font-size: 15px
+    font-weight: normal
+  
+.fc-button-prev .fc-button-content:before
+  content: '['
+
+.fc-button-next .fc-button-content:before
+  content: ']'
+
+.fc-button-today > .fc-button-inner 
+  color: $white
+  background: $green
+  font-size: 16px
+
+  .fc-button-content
+    padding: 0 .9em
+    text-transform: capitalize
+
+.fc-button-agendaDay, .fc-button-agendaWeek, .fc-button-month 
+
+  .fc-button-inner 
+    color: #bbbbbb
+    background: #eeeeee
+    font-size: 16px
+
+    .fc-button-content
+      padding: 0 1.5em
+      text-transform: capitalize
+    
+  &.fc-state-active
+    .fc-button-inner 
+      background: $orange
+      color: $white
+    
+
+
+//  ========================
+//  = Fullcalendar content =
+//  ========================
+
+.fc-content
+  td, th
+    border: 0
+  thead
+    th
+      color: #C3C3C3
+      font-size: 16px
+      text-transform: capitalize
+  tbody
+    td, th
+      background: $grey
+      border-top: 0
+      border-left: 0
+      border-bottom: 3px solid $darkgrey
+      border-right: 3px solid $darkgrey
+    td
+      padding: 0 3px
+
+  .fc-agenda-divider
+    display: none
+
+  .fc-widget-header.fc-agenda-axis
+    background: transparent
+    color: $darkergrey
+
+.fc-view-month .fc-widget-header
+  text-align: left
+
+.fc-view-agendaWeek .fc-widget-header
+  text-align: center
+
+.fc-grid .fc-day-number
+  float: left
+  padding: 2px 4px
+
+.fc-grid .fc-other-month
+  background: #f9f9f9
+
+  .fc-day-number
+    color: #C3C3C3
+    opacity: 1
+    filter: alpha(opacity=100)
+
+.fc-state-highlight 
+  background: $orange !important
+  color: $white
+
+.fc-agenda-slots td div
+  height: 26px
+
+
+
+//  =======================
+//  = Fullcalendar events =
+//  =======================
+
+.fc-event-hori
+  border-width: 0
+
+.fc-event
+  &.fc-corner-left,
+  &.fc-corner-right,
+  &.fc-corner-top,
+  &.fc-corner-bottom
+    margin: 0px
+    border-width: 1px
+    +box-sizing(border-box)
+
+    &.fc-button-inner,
+    &.fc-event-inner
+      margin: 0px
+
+  .fc-view-month &
+    margin-bottom: 1px
+
+
+  .fc-event-head
+    position: absolute
+    bottom: 0px
+
+    .fc-event-time
+      height: 20px
+      line-height: 20px
+      font-weight: bold
+      padding: 0 3px
+
+  .fc-event-content
+    .fc-event-title
+      font-weight: bold
+      font-size: 120%
+      padding: 0 3px
+
+  .ui-resizable-handle
+    +opacity(0)

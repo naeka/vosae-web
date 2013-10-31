@@ -1,0 +1,257 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "flipswitch" %}
+  <div class="onoffswitch">
+    {{view view.checkbox checkedBinding="view.checked"}}
+    <label class="onoffswitch-label" for="">
+      <div class="onoffswitch-inner"></div>
+      <div class="onoffswitch-switch"></div>
+    </label>
+  </div>
+{% endtplhandlebars %}
+
+{% tplhandlebars "array-sort-property-select" %}
+  <div class="btn-group">
+    <button class="btn dropdown-toggle grey">
+      {{#if view.selectedSortProperty}}
+        {{view.selectedSortProperty}}
+      {{else}}
+        {{unbound view.placeholder}}
+      {{/if}}
+    </button>
+    <button class="btn dropdown-toggle grey" data-toggle="dropdown">
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      {{#if view.selectedSortProperty}}
+      <li class="disabled">
+        <a {{action 'clearSortProperty' target="view"}}>
+          {{unbound view.placeholder}}
+        </a>
+      </li>
+      {{/if}}
+      {{#each sortProperty in view.content}}
+      <li>
+        <a {{action 'changeSortProperty' sortProperty target="view"}} {{bindAttr value="sortProperty.value"}}>
+          {{sortProperty.label}}
+        </a>
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+{% endtplhandlebars %}
+
+{% tplhandlebars "array-sort-ascending-select" %}
+  <div class="btn-group">
+    <button class="btn dropdown-toggle grey">
+      {{#if view.selectedSortAscending}}
+        {{view.selectedSortAscending}}
+      {{else}}
+        {{unbound view.placeholder}}
+      {{/if}}
+    </button>
+    <button class="btn dropdown-toggle grey" data-toggle="dropdown">
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" >
+      {{#if view.selectedSortAscending}}
+      <li class="disabled">
+        <a {{action 'clearSortAscending' target="view"}}>
+          {{unbound view.placeholder}}
+        </a>
+      </li>
+      {{/if}}
+      {{#each sortAscending in view.content}}
+      <li>
+        <a {{action 'changeSortAscending' sortAscending target="view"}} {{bindAttr value="sortAscending.value"}}>
+          {{sortAscending.label}}
+        </a>
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+{% endtplhandlebars %}
+
+{% tplhandlebars "invoicebase-edit-billing-address-block" %}
+  <div class="inner">
+    <p>
+      <div class="dropdown-address">
+      {{view view.textField
+        valueBinding = "view.content.streetAddress"
+        maxlength = "128"
+        classNames = "edit address dropdown-toggle"
+        data-toggle = "dropdown"
+        data-target = "dropdown-address"
+        placeholder = "N°, {% trans 'Address' %}" }}
+        
+        {{#view view.addressListItemsView 
+          viewName="addressListItemsView" 
+          parentViewBinding="view"}}
+          {{#each address in view.content}}
+            <li><a {{action changeAddress address target="view"}}>{{address.string}}</a></li>
+          {{/each}}
+        {{/view}}
+      </div>
+    </p>
+    <p>
+      {{view Em.TextField
+        valueBinding = "view.content.extendedAddress"
+        maxlength = "128"
+        classNames = "edit extended-address half"
+        placeholder = "{% trans 'Extended address' %}" }}
+      {{view Em.TextField
+        valueBinding = "view.content.postofficeBox"
+        maxlength = "64"
+        classNames = "edit postoffice-box half"
+        placeholder = "{% trans 'Postoffice box' %}" }}
+    </p>
+    <p>
+      {{view Em.TextField
+        valueBinding = "view.content.postalCode"
+        maxlength = "64"
+        classNames = "edit postal-code half"
+        placeholder = "{% trans 'Postal code' %}" }}
+      {{view Em.TextField
+        valueBinding = "view.content.city"
+        maxlength = "64"
+        classNames = "edit city half"
+        placeholder = "{% trans 'City' %}" }}
+    </p>
+    <p>
+      {{view Em.TextField
+        valueBinding = "view.content.state"
+        maxlength = "64"
+        classNames = "edit state half"
+        placeholder = "{% trans 'State' %}" }}
+      {{view Em.TextField
+        valueBinding = "view.content.country"
+        maxlength = "64"
+        classNames = "edit country half"
+        placeholder = "{% trans 'Country' %}" }} 
+    </p>
+  </div>
+{% endtplhandlebars %}
+
+{% tplhandlebars "invoicebase-show-address-block" %}
+  <div class="inner">
+    <p>{{view.content.streetAddress}}</p>
+    <p>{{view.content.extendedAddress}} {{view.content.postofficeBox}}</p>
+    <p>{{view.content.postalCode}} {{view.content.city}}</p>
+    <p>{{view.content.state}} {{view.content.country}}</p>
+  </div>
+{% endtplhandlebars %}
+
+{% tplhandlebars "invoicebase-edit-sender-address-block" %}
+  <div class="inner">
+    <p>
+      {{view Em.TextField
+        valueBinding = "view.content.streetAddress"
+        maxlength = "128"
+        classNames = "edit address"
+        placeholder = "{% trans 'Address' %}" }}
+    </p>
+    <p>
+      {{view Em.TextField
+        valueBinding = "view.content.extendedAddress"
+        maxlength = "128"
+        classNames = "edit extended-address half"
+        placeholder = "{% trans 'Extended address' %}" }}
+      {{view Em.TextField
+        valueBinding = "view.content.postofficeBox"
+        maxlength = "64"
+        classNames = "edit postoffice-box half"
+        placeholder = "{% trans 'Postoffice box' %}" }}
+    </p>
+    <p>
+      {{view Em.TextField
+        valueBinding = "view.content.postalCode"
+        maxlength = "64"
+        classNames = "edit postal-code half"
+        placeholder = "{% trans 'Postal code' %}" }}
+      {{view Em.TextField
+        valueBinding = "view.content.city"
+        maxlength = "64"
+        classNames = "edit city half"
+        placeholder = "{% trans 'City' %}" }}
+    </p>
+    <p>
+      {{view Em.TextField
+        valueBinding = "view.content.state"
+        maxlength = "64"
+        classNames = "edit state half"
+        placeholder = "{% trans 'State' %}" }}
+      {{view Em.TextField
+        valueBinding = "view.content.country"
+        maxlength = "64"
+        classNames = "edit country half"
+        placeholder = "{% trans 'Country' %}" }} 
+    </p>
+  </div>
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "edit-permissions-block" %}
+
+  {{#each module in view.allPermissions}}
+  <hr>
+  <section class="clearfix permissions">
+    <div class="inner">  
+      <h4>{{module.displayName}}</h4>
+      {{view view.permissionsModuleView groupBinding="view.group" modulePermissionsBinding="module.perms"}}
+    </div>
+  </section>
+  {{/each}}
+
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "edit-permissions-module-block" %}
+
+  <div class="permissions">
+    {{#each permission in view.modulePermissions}}
+      <div class="permission clearfix">
+        <div class="pull-left">
+          {{view view.permSwitchButton classNames="checkbox-container" permBinding="permission.perm" groupBinding="view.group" }}
+        </div>
+        <div class="pull-left">
+          <label class="perm-text">{{permission.name}}</label>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+
+{% endtplhandlebars %}
+
+{% tplhandlebars "edit-specific-permissions-block" %}
+
+  {{#each module in view.allPermissions}}
+  <hr>
+  <section class="clearfix permissions">
+    <div class="inner">
+      <h4>{{module.displayName}}</h4>
+      {{view view.specificPermissionsModuleView specificPermissionsBinding="view.specificPermissions" modulePermissionsBinding="module.perms"}}
+    </div>
+  </section>
+  {{/each}}
+
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "edit-specific-permissions-module-block" %}
+
+  <div class="permissions">
+    {{#each permission in view.modulePermissions}}
+      <div class="permission clearfix">
+        <div class="pull-left">
+          {{view view.permSwitchButton classNames="checkbox-container" permBinding="permission.perm" specificPermissionsBinding="view.specificPermissions" }}
+        </div>
+        <div class="pull-left">
+          <label class="perm-text">{{permission.name}}</label>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+
+{% endtplhandlebars %}
+
+

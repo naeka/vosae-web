@@ -1,0 +1,214 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "calendarList/edit" %}
+  
+  <section class="actions clearfix">
+    <div class="btn-toolbar pull-left">
+      {{#if id}}            
+        {{#linkTo "calendarList.show" controller.session.tenant content class="btn grey"}}
+          <i class="picto-arrow-left"></i>
+          {{#if summary}}
+            {{summary}}
+          {{else}}
+            {% trans "Back" context "go back" %}
+          {{/if}}
+        {{/linkTo}}
+      {{else}}
+        {{#linkTo "calendarLists.show" controller.session.tenant class="btn grey"}}
+          <i class="picto-arrow-left"></i>
+          {% trans "Organizer" %}
+        {{/linkTo}}
+      {{/if}}
+    </div>
+    <div class="btn-toolbar pull-right">
+      {{#if controller.isSaving}}
+        <div class="btn-group">
+          <a class="btn rounded green">
+            {% trans "Saving..." %}
+          </a>
+        </div>
+      {{else}}
+        <div class="btn-group">
+          <a class="btn rounded grey" {{action 'cancel' content}}>
+            {% trans  "Cancel" %}
+          </a>
+        </div>
+        {{#if controller.areDirty}}
+          <div class="btn-group">        
+            <a class="btn rounded green" {{action 'save' content}}>
+              {{#if id}}
+                {% trans "Save" %}
+              {{else}}
+                {% trans "Add" %}
+              {{/if}}
+            </a>
+          </div>
+        {{/if}}
+        {{#if id}}
+          <div class="btn-group">
+            <a class="btn rounded grey" {{action 'delete' content}}>
+              {% trans "Delete" %}
+            </a>
+          </div>
+        {{/if}}
+      {{/if}}
+    </div>
+  </section>
+
+  <section class="main-infos clearfix with-head">
+    <div class="infos">
+      <div class="pull-left">
+        <div class="summary">
+          {{#if isOwn}}
+            {{view Vosae.AutoGrowTextField
+              valueBinding="calendar.summary"
+              maxlength="64"
+              classNames="edit bold"
+              placeholder="{% trans "Name of the calendar" %}"}}
+          {{else}}
+            {{view Vosae.AutoGrowTextField
+              valueBinding="summaryOverride"
+              maxlength="64"
+              classNames="edit bold"
+              placeholder="{% trans "Name of the calendar" %}"}}
+          {{/if}}
+        </div>
+        <div class="description">
+          {{#if isOwn}}
+            {{view Vosae.TextAreaAutoSize
+              valueBinding="calendar.description"
+              maxlength="1024"
+              classNames="edit"
+              placeholder="{% trans "Description of the calendar" %}" }}
+          {{/if}}
+        </div>
+      </div>
+      <div class="pull-right">
+        <div class="color pull-right clearfix">
+          {{view Vosae.Components.CalendarListColorField
+            valueBinding="color"}}
+        </div>
+        <div class="timezone">
+          {{#if isOwn}}
+            {{view Vosae.Components.TimezonesField
+              containerCssClass="darkgrey"
+              valueBinding="calendar.timezone"}}
+          {{/if}}
+        </div>
+        {% comment %}
+        <div class="location">
+          {{view Vosae.AutoGrowTextField
+            valueBinding="calendar.location"
+            maxlength="256"
+            classNames="edit"
+            placeholder='{% trans "Location of the calendar" context "calendar" %}...' }}
+        </div>
+        {% endcomment %}
+    </div>
+  </section>
+  
+  <section class="reminders clearfix with-head">
+    <div class="header clearfix">
+      <div class="pull-left helptour-calendar-reminders">
+        <h4>{% trans "Events default reminders" %}</h4>
+      </div>
+      <div class="pull-right">
+        <a {{action 'addReminder'}} class="btn btn-small rounded green">
+          {% trans "Add" %}
+        </a>
+      </div>
+    </div>
+    <table class="reminders-list edit">
+      {{#each reminder in reminders}}
+        <tr>
+          <td class="icon">
+            {{#if reminder.isPopup}}
+              <i class="picto-alarm"></i>
+            {{else}}
+              {{#if reminder.isEmail}}
+                <i class="picto-mail"></i>
+              {{/if}}
+            {{/if}}
+          </td>
+          <td class="method">
+            {{view view.reminderMethodField 
+              placeholder="{% trans 'Click to choose a user or a group' %}"
+              valueBinding="reminder.method"}}
+          </td>
+          <td class="minutes">
+            {{view Vosae.AutoGrowTextField
+              valueBinding="reminder.minutes"
+              maxlength="5"
+              placeholder="0"
+              classNames="no-border no-shadow no-padding no-margin" }}
+            {% trans "minutes before" %}
+          </td>
+          <td class="delete">
+            <a {{action "deleteReminder" reminder}} class="btn btn-icon orange" title="{% trans 'Delete' %}">
+              <i class="picto-delete"></i>
+            </a>
+          </td>
+        </tr>
+      {{else}}
+        <tr>
+          <td>{% trans "No reminders" %}</td>
+        <tr>
+      {{/each}}
+    </table>
+  </section>
+
+  <section class="acl clearfix with-head">
+    <div class="header clearfix">
+      <div class="pull-left helptour-calendar-sharing">
+        <h4>{% trans "Shared with" %}</h4>
+      </div>
+      <div class="pull-right">
+        <a {{action 'addAclRule'}} class="btn btn-small rounded green">
+          {% trans "Add" %}
+        </a>
+      </div>
+    </div>
+    <div class="list">
+      <ul>
+        {{#each rule in calendar.acl.rules}}
+          <li class="acl-entry-card edit">
+            <div class="inner clearfix">
+              <table>
+                <tr>
+                  <td class="picture">
+                    <div class="avatar rounded"></div>
+                  </td>
+                  <td class="entity">
+                    {{view view.aclEntitySearchField 
+                      placeholder="{% trans 'A user or a group' %}"
+                      ruleBinding="rule"}}
+                    {{view view.aclRuleRolesField
+                      valueBinding="rule.role"}}
+                  </td>
+                  <td class="delete">
+                    <a {{action "deleteAclRule" rule}} class="btn btn-icon orange" title="{% trans 'Delete' %}">
+                      <i class="picto-delete"></i>
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </li>
+        {{else}}
+          <li>{% trans "No permissions" %}</li>
+        {{/each}}
+      </ul>
+    </div>
+  </section>
+{% endtplhandlebars %}
+
+{% tplhandlebars "calendarList/edit/settings" %}
+  <ul class="info">
+    <li>
+      <a {{action 'startHelpTour' target="view"}}>
+        <i class="picto-help"></i>
+        {% trans "Infos" %}
+      </a>
+    </li>
+  </ul>
+{% endtplhandlebars %}

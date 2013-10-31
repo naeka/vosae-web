@@ -1,0 +1,74 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "settings/editTax" %}
+  {{#if content.isLoaded}}
+  <header>
+  {{#if id}}
+    <h3>
+      {% trans "Invoicing settings" %} &nbsp;>&nbsp; {% trans "Taxes" %} &nbsp;>&nbsp; {% trans "Edit" %} &nbsp;>&nbsp; {{name}}
+    </h3>
+  {{else}}
+    <h3>
+      {% trans "Invoicing settings" %} &nbsp;>&nbsp; {% trans "Taxes" %} &nbsp;>&nbsp; {% trans "Add" %} &nbsp;>&nbsp; {{name}}
+    </h3>
+  {{/if}}
+  </header>
+  <section class="clearfix">
+    <div class="inner">
+      <div class="clearfix">
+        <div class="pull-left">
+          <h4>{% trans "Informations" %}</h4> 
+        </div>
+        <div class="btn-toolbar pull-right">
+          {{#if id}}
+            <a {{action delete content}} class="btn btn-small rounded orange">
+              {% trans "Delete" %}
+            </a>
+          {{/if}}
+        </div>
+      </div>
+      <table class="half">
+        <tbody>
+          <tr>
+            <td class="label">
+              <label>{% trans "Name" %}</label>
+            </td>
+            <td>
+              {{view Ember.TextField 
+                valueBinding="name"
+                maxlength="64" 
+                classNames="edit-settings" 
+                placeholder="{% trans 'Name here' %}" }}
+            </td>
+          </tr>          
+          <tr>
+            <td class="label">
+              <label>{% trans "Rate" %}</label>
+            </td>
+            <td>
+              {{#if id}}
+                {{view view.rateField
+                  rateBinding="content.rate"
+                  valueBinding="displayRate"
+                  classNames="edit-settings" 
+                  disabled="disabled" }}
+              {{else}}
+                {{view view.rateField
+                  rateBinding="content.rate"
+                  valueBinding="displayRate"
+                  classNames="edit-settings" 
+                  placeholder="{% trans 'Rate here' %}" }}
+              {{/if}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  {{/if}}
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "settings/editTax/actions" %}
+  {{partial "settings/partials/saveSettings"}}
+{% endtplhandlebars %}

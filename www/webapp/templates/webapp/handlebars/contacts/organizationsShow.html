@@ -1,0 +1,83 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "organizations/show" %}
+  <section class="actions clearfix">
+    <h1 class="pull-left helptour-organizations">
+      {% trans "My organizations" %}
+    </h1>
+    <div class="btn-toolbar pull-right">
+      <div class="btn-group">
+      {{#linkTo "organizations.add" controller.session.tenant class="btn orange"}}
+        <i class="picto-add"></i>
+        {% trans "Organization" %}
+      {{/linkTo}}
+      </div>
+      <div class="btn-group">
+      {{#linkTo "contacts.add" controller.session.tenant class="btn green"}}
+        <i class="picto-add"></i>
+        {% trans "Contact" context "contacts" %}
+      {{/linkTo}}
+      </div>
+    </div>
+  </section>
+
+  <section class="resume clearfix">
+    <div class="media">
+      <div class="pull-left">
+        <span class="circle img-circle">
+          <i class="picto-users"></i>
+        </span>
+      </div>
+      <div class="pull-left">
+        {{#linkTo "contacts.show" controller.session.tenant class="all orange helptour-allcontacts"}}{% trans "See all contacts" %}{{/linkTo}}
+        
+        {{#linkTo "contacts.show" controller.session.tenant tagName="span" class="contacts-counter"}}
+          {{trans "<span class='green'>{{count}}</span> Contact" plural="<span class='green'>{{count}}</span> Contacts" countBinding="Vosae.metaForContact.totalCount" }}
+        {{/linkTo}}
+      </div>
+      <div class="media-body text-right organizations-counter">
+        {{trans "In <span class='orange'>{{count}}</span> company"
+          plural="In <span class='orange'>{{count}}</span> companies"
+          countBinding="Vosae.metaForOrganization.totalCount" }}
+      </div>
+    </div>
+  </section>
+
+  <section class="list clearfix">
+    {{#if content.isLoaded}}
+      {{#with arrangedContent}}
+        {{partial "contacts/partials/listOfOrganizations"}}
+      {{/with}}
+      {{#if meta.next}}
+        <p class="pagination text-center">
+          <a class="btn grey" {{action 'getNextPagination'}}>
+            {% trans "More" context "display more" %}
+          </a>
+        </p>
+      {{/if}}
+    {{else}}
+      {{partial "core/partials/spinner"}}
+    {{/if}}
+  </section>
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "organizations/show/settings" %}
+  <ul class="info">
+    <li>
+      <a {{action 'startHelpTour' target="view"}}>
+        <i class="picto-help"></i>
+        {% trans "Infos" %}
+      </a>
+    </li>
+  </ul>
+  <br>
+  <ul class="export">
+    <li>
+      <i class="picto-export"></i>
+      <a {{action "getExportFile" target="controller"}}>
+        {% trans "Export" %}
+      </a>
+    </li>
+  </ul>
+{% endtplhandlebars %}

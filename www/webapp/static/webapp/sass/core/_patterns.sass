@@ -1,0 +1,165 @@
+// Paterns for tables
+.table
+  width: 100%
+  margin: 0
+
+  & > tbody > tr
+    &:nth-of-type(even)
+      background: #F7F7F7
+
+  th, td
+    vertical-align: middle
+    border: 0
+    padding: 10px 5px
+
+    &:first-child
+      padding-left: 15px
+    
+    &:last-child
+      padding-right: 15px
+
+  td
+    font-size: 15px
+    font-weight: bold
+
+    &.no-data
+      text-align: center
+      background: $white
+
+  a
+    color: inherit
+
+  thead
+    &.green th
+      background: $green
+      color: $white
+    
+    &.orange th
+      background: $orange
+      color: $white
+
+
+.page-settings
+  width: 175px
+  
+  ul.options, ul.export, ul.info
+    background: $grey
+    padding: 0 8px
+    display: inline-block
+    margin-bottom: 3px
+    min-width: 85px
+
+    +box-sizing(border-box)
+    +border-radius-separate(0px, 5px, 5px, 0px)
+
+    li
+      background: $grey
+      margin-bottom: 3px
+
+      &:first-child
+        font-weight: bold
+        border-bottom: 1px solid #c6c6c6
+        padding-top: 4px
+        padding-bottom: 4px
+        margin-bottom: 15px
+        font-size: 14px
+        line-height: 20px
+
+        .picto-settings
+          padding-right: 3px
+
+      [class^="picto-"], 
+      [class*=" picto-"]
+        padding-right: 8px
+        margin-top: -2px
+
+      .picto-users::before
+        font-size: 100%
+
+    .onoffswitch-switch
+      border: 1px solid #BBB
+
+    .onoffswitch-checkbox
+      &:checked + .onoffswitch-label .onoffswitch-switch
+        right: -1px
+
+  ul.export li:first-child
+    border-bottom: 0
+    margin-bottom: 0
+
+    .picto-export
+      padding-right: 3px
+
+  ul.info li:first-child
+    border-bottom: 0
+    margin-bottom: 0
+
+    .picto-help
+      padding-right: 3px
+
+//
+// Keyframes for CSS3 animations
+//
++keyframes(showDashboardItem)
+  0%
+    opacity: 0
+    background: #e9ddad
+  100%
+    opacity: 1
+    background: transparent
+
++keyframes(expandDashboardCrossBar)
+  0%
+    height: 0%
+    min-height: 0%
+  100%
+    height: 100%
+    min-height: 100%
+
+// Pattern for avatar
+.avatar
+  position: absolute
+  display: inline-block
+  height: 52px
+  width: 52px
+  left: 0
+  overflow: hidden
+  background: $grey
+  +box-sizing(border-box)
+  +border-radius(4px)
+
+  &:before
+    content: "U"
+    font-family: fontPictos
+    font-size: 2em
+    font-weight: 400
+    height: 52px
+    line-height: 54px
+    width: 52px
+    display: block
+    text-align: center
+
+  &.pull-left
+    position: inherit
+
+  &.rounded
+    +border-radius(26px)
+
+  &.uploading
+    img
+      display: none
+
+    &:before
+      content: "" !important
+
+  &.default-organization:before
+    content: "O"
+    font-size: 1.9em
+
+  img
+    display: block
+    position: absolute
+    top: 0px
+    height: inherit
+    width: inherit
+    +border-radius(inherit)

@@ -1,0 +1,69 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "settings/editGroup" %}
+  {{#if content.isLoaded}}
+  <header>
+  {{#if id}}
+    <h3>
+      {% trans "Global settings" %} &nbsp;>&nbsp; {% trans "Groups" %} &nbsp;>&nbsp; {% trans "Edit" %} &nbsp;>&nbsp; {{name}}
+    </h3>
+  {{else}}
+    <h3>
+      {% trans "Global settings" %} &nbsp;>&nbsp; {% trans "Groups" %} &nbsp;>&nbsp; {% trans "Add" %} &nbsp;>&nbsp; {{name}}
+    </h3>
+  {{/if}}
+  </header>
+  <section class="clearfix global-informations">
+    <div class="inner">
+      <div class="clearfix">
+        <div class="pull-left">
+          <h4>{% trans "Preferences" %}</h4> 
+        </div>
+        <div class="btn-toolbar pull-right">
+          {{#if id}}
+            <a {{action delete content}} class="btn btn-small rounded orange">
+              {% trans "Delete" %}
+            </a>
+          {{/if}}
+        </div>
+      </div>
+      <table class="half">
+        <tbody>
+          <tr>
+            <td class="label">
+              <label>{% trans "Name" %}</label>
+            </td>
+            <td>
+              {{view Ember.TextField 
+                valueBinding="name"
+                maxlength="64" 
+                classNames="edit-settings" 
+                placeholder="{% trans 'Name here' %}" }}
+            </td>
+          </tr>
+          <tr>
+            <td class="label">
+              <label>{% trans "Load permissions from" %}</label>
+            </td>
+            <td>
+              {{view view.loadPermissions
+                groupBinding="content"
+                contentBinding="groupsList" 
+                optionValuePath="content"
+                optionLabelPath="content.name"
+                containerCssClass="green"
+                prompt="{% trans 'Choose' %}..." }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  {{view view.groupPermissionsView groupBinding="content"}}
+  {{/if}}
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "settings/editGroup/actions" %}
+  {{partial "settings/partials/saveSettings"}}
+{% endtplhandlebars %}

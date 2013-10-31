@@ -1,0 +1,88 @@
+body.ct-search-open
+  overflow: hidden
+  
+  #content > .table .cell
+    padding-top: 30px
+
+  #desktop-search-results
+    height:auto
+    min-height: 100px
+    max-height: 700px
+    +transition-property(min-height, max-height)
+    +transition-duration(700ms)
+    +transition-timing-function(ease-in-out)
+
+#desktop-search-results 
+  position: fixed
+  width: 100%
+  margin-top: 54px
+  z-index: 2000
+  min-height: 0px
+  max-height: 0px
+  overflow: hidden
+
+  li
+    color: #FFF
+    font-size: em(16px)
+    padding: 8px 4px 8px 220px
+    position: relative
+    cursor: pointer
+
+    a 
+      color: $orange
+      font-weight: bold
+
+    .icon
+      height: 40px 
+      vertical-align: middle
+      width: 40px
+      +border-radius(20px)
+      display: inline-block
+      background: #FFF
+      text-align: center
+
+      &:before
+        content: "["
+        font-family: $fontPictos
+        color: #333
+        line-height: 41px
+        font-size: 27px
+
+      &.contact:before
+        content: "g"
+        line-height: 35px
+        font-size: 30px
+
+      &.invoicing:before
+        content: "%"
+
+      &.organizer:before
+        content: "\\"
+    
+    .text
+      display: inline-block
+      padding-left: 10px
+
+    &:nth-child(even)
+      background: #2D2D2D 
+
+    &:nth-child(odd)
+      background: #262626 
+
+    &:first-child
+      background: $orange
+      color: #333 
+    
+    &.more, &.no-result
+      padding: 8px 4px 8px 0
+      text-align: center
+
+    &.no-result
+      cursor: default
+      
+    &.active
+      background: $orange
+      a
+        color: #333
+      .text
+        color: $white

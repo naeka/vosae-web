@@ -1,0 +1,91 @@
+.page-show-item 
+  section.desc
+    padding-top: 25px
+    padding-bottom: 8px
+
+    .actions
+      margin-bottom: 30px
+        
+    .icon, .desc
+      display: inline-block
+      vertical-align: top
+
+    .icon 
+      padding-right: 10px
+
+      i
+        background: $grey
+        width: 52px
+        height: 52px
+        display: inline-block
+        line-height: 52px
+        color: #4A4A4A
+        font-size: 28px
+        +border-radius(26px)
+        +box-sizing(border-box)
+
+    .desc p
+      width: 300px
+      font-weight: bold
+      color: $darkergrey
+      font-size: 16px
+
+    h4
+      margin: 0
+      &.reference
+        padding-bottom: 3px
+        i
+          font-size: 17px
+          padding-right: 4px
+
+      &.type
+        padding-bottom: 10px
+
+    .currency
+      background: $green
+      display: inline-block
+      padding: 2px 12px
+      font-size: 12px
+      color: #FFF
+      +border-radius(5px)
+
+  section.price
+    padding-top: 20px
+    padding-bottom: 20px
+    border-bottom: 0
+
+    label
+      font-weight: bold
+      margin: 0
+
+    .sale, .buy
+      width: 49.5%
+      padding: 10px 15px
+      +box-sizing(border-box)
+
+      .price
+        padding: 0px 10px
+        +border-radius(12px)
+        font-weight: bold
+
+      .tax
+        font-size: 16px
+
+    .sale
+      background: $green
+      color: #FFF
+
+      .price
+        background: #2EA3A0
+
+      .tax
+        color: #ADF0EE
+
+    .buy
+      background: $lightgrey
+
+      .price
+        background: $grey
+
+      .tax
+        color: #999

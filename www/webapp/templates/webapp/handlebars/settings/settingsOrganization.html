@@ -1,0 +1,337 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "settings/organization" %}
+  <header>
+    <h3>{% trans "Global settings" %} &nbsp;>&nbsp; {% trans "Organization" %}</h3>
+  </header>
+  <section class="clearfix global-informations">
+    <div class="clearfix inner">
+      <table>
+        <tbody>
+          <tr>
+            <td colspan="2">
+              <h4>{% trans "Company information" %}</h4>
+            </td>
+          </tr>
+          <tr>
+            <td class="label">
+              <label>{% trans "Organization's name" %}</label>
+            </td>
+            <td>
+              {{view Ember.TextField 
+                valueBinding = "content.name"
+                maxlength = "64" 
+                classNames = "edit-settings" 
+                placeholder = "{% trans 'Name here' %}" }}
+            </td>
+          </tr>
+          <tr>
+            <td class="label">
+              <label>{% trans "Email" %}</label>
+            </td>
+            <td>
+              {{view Ember.TextField 
+                valueBinding = "content.email"
+                maxlength = "64" 
+                classNames = "edit-settings" 
+                placeholder = "{% trans 'Email here' %}" }}
+            </td>
+          </tr>
+          <tr>
+            <td class="label">
+              <label>{% trans "Phone" %}</label>
+            </td>
+            <td>
+              {{view Ember.TextField 
+                valueBinding = "content.phone"
+                maxlength = "64" 
+                classNames = "edit-settings" 
+                placeholder = "{% trans 'Phone here' %}" }}
+            </td>
+          </tr>
+          <tr>
+            <td class="label">
+              <label>{% trans "Fax" %}</label>
+            </td>
+            <td>
+              {{view Ember.TextField 
+                valueBinding = "content.fax"
+                maxlength = "64" 
+                classNames = "edit-settings" 
+                placeholder = "{% trans 'Fax here' %}" }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="half pull-left">
+        <tbody>
+          <tr>
+            <td colspan="2">
+              <h4>{% trans "Logo" %}</h4>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" class="logo">
+              <div {{bindAttr class=":dropzone logoUri::empty"}}>
+                {{#unless isUploadingLogo}}
+                  {{#if logoUri}}
+                    <img {{bindAttr src="logoUri"}}>
+                  {{/if}}
+                  <div class="drag-drop-message">{% trans "Drop a logo here" %}</div>
+                {{else}}
+                  <div class="progress">
+                    <div class="bar" style="width: 0%;"></div>
+                  </div>
+                  <div class="progress-text">0%</div>
+                {{/unless}}
+                <input class="fileupload fill" type="file" multiple/>
+              </div>
+              <a class="btn save green" {{action "openLogoUploadBrowser" target="view"}}>
+                {{#if logoUri}}
+                  {% trans "Change" context "change logo" %}
+                {{else}}
+                  {% trans "Set" context "set logo" %}
+                {{/if}}
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="half pull-left">
+        <tbody>
+          <tr>
+            <td colspan="2">
+              <h4>{% trans "Terms" %}</h4>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" class="terms">
+              <div {{bindAttr class=":dropzone terms::empty"}}>
+                {{#unless isUploadingTerms}}
+                  {{#if terms}}
+                    <span class="filename" {{action downloadTerms terms}}>{{terms.name}} <span>({{formatDate terms.modifiedAt}})</span></span>
+                  {{/if}}
+                  <div class="drag-drop-message">{% trans "Drop terms here" %}</div>
+                {{else}}
+                  <div class="progress">
+                    <div class="bar" style="width: 0%;"></div>
+                  </div>
+                  <div class="progress-text">0%</div>
+                {{/unless}}
+                <input class="fileupload fill" type="file" multiple/>
+              </div>
+              <a class="btn save green" {{action "openTermsUploadBrowser" target="view"}}>
+                {{#if terms}}
+                  {% trans "Change" context "change terms" %}
+                {{else}}
+                  {% trans "Set" context "set terms" %}
+                {{/if}}
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <hr>
+  <section class="clearfix registration-informations">
+    <div class="clearfix inner">
+      <table>
+        <tbody>
+          <tr>
+            <td colspan="2">
+              <h4>{% trans "Registration informations" %}</h4>
+            </td>
+          </tr>
+        </tbody>
+        {{#view view.registrationInfoView}}{{/view}}
+      </table>
+    </div>
+  </section>
+  <hr>
+  <section class="clearfix">
+    <div class="clearfix inner">
+      <table class="half pull-left">
+        <tbody>
+          <tr>
+            <td colspan="2">
+              <h4>{% trans "Postal address" %}</h4>
+            </td>
+          </tr>
+          <tr>
+            <td class="label">
+              <label>{% trans "Postoffice box" %}</label>
+            </td>
+            <td>
+              {{view Ember.TextField 
+                valueBinding = "content.postalAddress.postofficeBox"
+                maxlength = "64" 
+                classNames = "edit-settings" 
+                placeholder = "{% trans 'Postoffice box here' %}" }}
+            </td>
+          </tr>
+          <tr>
+            <td class="label">
+              <label>{% trans "Address" %}</label>
+            </td>
+            <td>
+              {{view Ember.TextField 
+                valueBinding = "content.postalAddress.streetAddress"
+                maxlength = "64" 
+                classNames = "edit-settings" 
+                placeholder = "{% trans 'Address here' %}" }}
+            </td>
+          </tr>
+          <tr>
+            <td class="label">
+              <label>{% trans "Postal code" %}</label>
+            </td>
+            <td>
+              {{view Ember.TextField 
+                valueBinding = "content.postalAddress.postalCode"
+                maxlength = "64" 
+                classNames = "edit-settings" 
+                placeholder = "{% trans 'Postal code here' %}" }}
+            </td>
+          </tr>
+          <tr>
+            <td class="label">
+              <label>{% trans "City" %}</label>
+            </td>
+            <td>
+              {{view Ember.TextField 
+                valueBinding = "content.postalAddress.city"
+                maxlength = "64" 
+                classNames = "edit-settings" 
+                placeholder = "{% trans 'City here' %}" }}
+            </td>
+          </tr>
+          <tr>
+            <td class="label">
+              <label>{% trans "State" %}</label>
+            </td>
+            <td>
+              {{view Ember.TextField 
+                valueBinding = "content.postalAddress.state"
+                maxlength = "64" 
+                classNames = "edit-settings" 
+                placeholder = "{% trans 'State here' %}" }}
+            </td>
+          </tr>
+          <tr>
+            <td class="label">
+              <label>{% trans "Country" %}</label>
+            </td>
+            <td>
+              {{view Ember.TextField 
+                valueBinding = "content.postalAddress.country"
+                maxlength = "64" 
+                classNames = "edit-settings" 
+                placeholder = "{% trans 'Country here' %}" }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="half pull-left">
+        <tbody>
+          <tr>
+            <td colspan="2">
+              <h4>{% trans "Billing address" %}</h4>
+            </td>
+          </tr>
+          <tr>
+            <td class="label">
+              <label>{% trans "Postoffice box" %}</label>
+            </td>
+            <td>
+              {{view Ember.TextField 
+                valueBinding = "content.billingAddress.postofficeBox"
+                maxlength = "64" 
+                classNames = "edit-settings" 
+                placeholder = "{% trans 'Postoffice box here' %}" }}
+            </td>
+          </tr>
+          <tr>
+            <td class="label">
+              <label>{% trans "Address" %}</label>
+            </td>
+            <td>
+              {{view Ember.TextField 
+                valueBinding = "content.billingAddress.streetAddress"
+                maxlength = "64" 
+                classNames = "edit-settings" 
+                placeholder = "{% trans 'Address here' %}" }}
+            </td>
+          </tr>
+          <tr>
+            <td class="label">
+              <label>{% trans "Postal code" %}</label>
+            </td>
+            <td>
+              {{view Ember.TextField 
+                valueBinding = "content.billingAddress.postalCode"
+                maxlength = "64" 
+                classNames = "edit-settings" 
+                placeholder = "{% trans 'Postal code here' %}" }}
+            </td>
+          </tr>
+          <tr>
+            <td class="label">
+              <label>{% trans "City" %}</label>
+            </td>
+            <td>
+              {{view Ember.TextField 
+                valueBinding = "content.billingAddress.city"
+                maxlength = "64" 
+                classNames = "edit-settings" 
+                placeholder = "{% trans 'City here' %}" }}
+            </td>
+          </tr>
+          <tr>
+            <td class="label">
+              <label>{% trans "State" %}</label>
+            </td>
+            <td>
+              {{view Ember.TextField 
+                valueBinding = "content.billingAddress.state"
+                maxlength = "64" 
+                classNames = "edit-settings" 
+                placeholder = "{% trans 'State here' %}" }}
+            </td>
+          </tr>
+          <tr>
+            <td class="label">
+              <label>{% trans "Country" %}</label>
+            </td>
+            <td>
+              {{view Ember.TextField 
+                valueBinding = "content.billingAddress.country"
+                maxlength = "64" 
+                classNames = "edit-settings" 
+                placeholder = "{% trans 'Country here' %}" }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "settings/organization/actions" %}
+  {{partial "settings/partials/saveSettings"}}
+{% endtplhandlebars %}
+
+{% tplhandlebars "settings/organization/registrationCountryType" %}
+  <td class="label">
+    <label>{% trans "Registration country" %}</label>
+  </td>
+  <td>
+    {{view view.select
+      contentBinding="Vosae.supportedCountries"
+      tenantBinding="this"
+      containerCssClass="green"
+      optionValuePath="content.countryCode"
+      optionLabelPath="content.countryName" }}
+  </td>
+{% endtplhandlebars %}

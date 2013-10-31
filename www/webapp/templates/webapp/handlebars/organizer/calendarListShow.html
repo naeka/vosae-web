@@ -1,0 +1,128 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "calendarList/show" %}
+
+  <section class="actions clearfix">
+    <div class="btn-toolbar pull-left">
+      {{#linkTo "calendarLists.show" controller.session.tenant class="btn grey"}}
+        <i class="picto-arrow-left"></i>
+        {% trans "Organizer" %}
+      {{/linkTo}}
+    </div>
+    <div class="btn-toolbar pull-right">
+      <div class="btn-group">
+        {{#linkTo "calendarList.edit" controller.session.tenant content class="btn rounded grey"}}
+          {% trans "Edit" %}
+        {{/linkTo}}
+      </div>
+      <div class="btn-group">
+        <a class="btn rounded grey" {{action 'delete' content}}>
+          {% trans "Delete" %}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="main-infos with-head clearfix">
+    <div class="infos">
+      <div class="pull-left">
+        <div class="summary">
+          <h4>{{unbound displayName}}</h4>
+        </div>
+        <div class="description">
+          <p>{{nl2br description}}<p>
+        </div>
+      </div>
+
+      <div class="pull-right">
+        <div class="color pull-right">
+          <span style="background: {{unbound color}}; color: {{unbound textColor}};">
+            {{displayColor}}
+          </span>
+        </div>
+        <div class="timezone">
+          <span>{{unbound displayTimezone}}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reminders clearfix with-head">
+    <div class="header clearfix">
+      <div class="pull-left helptour-calendar-reminders">
+        <h4>{% trans "Events default reminders" %}</h4>
+      </div>
+      <div class="pull-right"></div>
+    </div>
+    <table class="reminders-list">
+      {{#each reminder in reminders}}
+        <tr>
+          <td class="icon">
+            {{#if reminder.isPopup}}
+              <i class="picto-alarm"></i>
+            {{else}}
+              {{#if reminder.isEmail}}
+                <i class="picto-mail"></i>
+              {{/if}}
+            {{/if}}
+          </td>
+          <td class="method">
+            <span>{{unbound reminder.displayMethod}}</span>
+          </td>
+          <td class="minutes">
+            <span>{{unbound reminder.minutes}}</span>
+            {% trans "minutes before" %}
+          </td>
+        </tr>
+      {{else}}
+        <tr>
+          <td>{% trans "No reminders" %}</td>
+        <tr>
+      {{/each}}
+    </table>
+  </section>
+
+  <section class="acl clearfix with-head">
+    <div class="header clearfix">
+      <div class="pull-left helptour-calendar-sharing">
+        <h4>{% trans "Shared with" %}</h4>
+      </div>
+      <div class="pull-right"></div>
+    </div>
+    <div class="list">
+      <ul>
+        {{#each rule in calendar.acl.rules}}
+          <li class="acl-entry-card">
+            <div class="inner clearfix">
+              <table>
+                <tr>
+                  <td class="picture">
+                    <div class="avatar rounded"></div>
+                  </td>
+                  <td class="entity">
+                    <span class="principal">{{unbound rule.principal.fullName}}</span>
+                    <span class="role">{{unbound rule.displayRole}}</span>     
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </li>
+        {{else}}
+          <li>{% trans "No permissions" %}</li>
+        {{/each}}
+      </ul>
+    </div>
+  </section>
+
+{% endtplhandlebars %}
+
+{% tplhandlebars "calendarList/show/settings" %}
+  <ul class="info">
+    <li>
+      <a {{action 'startHelpTour' target="view"}}>
+        <i class="picto-help"></i>
+        {% trans "Infos" %}
+      </a>
+    </li>
+  </ul>
+{% endtplhandlebars %}

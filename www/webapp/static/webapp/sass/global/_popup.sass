@@ -1,0 +1,72 @@
+html.cssfilters .modal-backdrop
+  background: transparent
+  opacity: 1
+
+html.cssfilters #wrapper.disabled
+  +filter(saturate(40%) brightness(80%))
+  +transition-property(all)
+  +transition-duration(0.25s)
+  +transform-style(ease)
+
+.modal-backdrop
+  opacity: 0.4
+
+.component-popup
+  & > .inner
+    position: fixed
+    width: 100%
+    height: 100px
+    background: $orange
+    z-index: 200000
+    bottom: -100px
+    padding: 10px 185px 10px 160px
+    +translateY(0px)
+    +transition-property(transform)
+    +transition-duration(0.20s)
+    +transform-style(flat)
+    +box-sizing(border-box)
+
+    .btn
+      background: #FFF
+      color: $orange
+      &[rel='secondary']
+        margin-right: 10px
+      &:focus
+        outline: none
+
+    &.in
+      +translateY(-100px)
+      +transition-property(transform)
+      +transition-duration(0.25s)
+      +transform-style(flat)
+
+  &.success > .inner
+    background: $green
+    .btn
+      color: $green
+  
+  &.confirm > .inner
+    background: $orange
+    .btn
+      color: $orange
+  
+  &.error > .inner
+    background: $red
+    .btn
+      color: $red
+
+.component-popup-message,
+.component-popup-buttons
+  height: 80px
+
+.component-popup-message
+  width: 100%
+  color: #FFF
+  font-size: 19px
+  font-weight: bold
+  p
+    margin: 0
+
+.component-popup-buttons
+  white-space: nowrap
+  padding-left: 20px

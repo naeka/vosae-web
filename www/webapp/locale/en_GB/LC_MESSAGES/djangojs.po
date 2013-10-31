@@ -1,0 +1,1841 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: vosae-web\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-10-23 10:02+0000\n"
+"PO-Revision-Date: 2013-10-23 12:04+0100\n"
+"Last-Translator: Léo S <leo@naeka.fr>\n"
+"Language-Team: Léo S. <leo@naeka.fr>\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: static/webapp/tmp/app/application.js:46
+msgid "File type not allowed"
+msgstr ""
+
+#: static/webapp/tmp/app/application.js:47
+msgid "This file is too large"
+msgstr ""
+
+#: static/webapp/tmp/app/application.js:48
+msgid "The maximum number of files exceeded"
+msgstr ""
+
+#: static/webapp/tmp/app/application.js:49
+msgid "This file is too small"
+msgstr ""
+
+#: static/webapp/tmp/app/application.js:50
+msgid "Uploaded datas exceed file size"
+msgstr ""
+
+#: static/webapp/tmp/app/components/calendarListColorField.js:8
+msgid "Color"
+msgstr ""
+
+#: static/webapp/tmp/app/components/forms.js:239
+msgctxt "calendar color"
+msgid "None"
+msgstr ""
+
+#: static/webapp/tmp/app/components/popup.js:137
+#: static/webapp/tmp/app/components/popup.js:150
+msgid "Ok"
+msgstr ""
+
+#: static/webapp/tmp/app/components/popup.js:143
+msgid "Yes"
+msgstr ""
+
+#: static/webapp/tmp/app/components/popup.js:144
+msgid "No"
+msgstr ""
+
+#: static/webapp/tmp/app/components/resourceSearchField.js:21
+msgid "No results for \"{{term}}\""
+msgstr ""
+
+#: static/webapp/tmp/app/components/resourceSearchField.js:84
+msgid "Please enter 1 more character"
+msgid_plural "Please enter {{remainingChars}} more characters"
+msgstr[0] ""
+msgstr[1] ""
+
+#: static/webapp/tmp/app/components/resourceSearchField.js:132
+msgid "Only one organization can be selected"
+msgstr ""
+
+#: static/webapp/tmp/app/components/resourceSearchField.js:145
+msgid "Only one contact can be selected"
+msgstr ""
+
+#: static/webapp/tmp/app/components/resourceSearchField.js:160
+msgid "Only one item can be selected"
+msgstr ""
+
+#: static/webapp/tmp/app/components/resourceSearchField.js:174
+msgid "Only one user or group can be selected"
+msgstr ""
+
+#: static/webapp/tmp/app/components/resourceSearchField.js:177
+msgid "No results for '"
+msgstr ""
+
+#: static/webapp/tmp/app/components/resourceSearchField.js:215
+msgid "Only one tax can be selected"
+msgstr ""
+
+#: static/webapp/tmp/app/components/timezonesField.js:18
+#: static/webapp/tmp/app/views/organizer/calendarListEdit.js:73
+#: static/webapp/tmp/app/views/organizer/calendarListShow.js:25
+msgid "Timezone"
+msgstr ""
+
+#: static/webapp/tmp/app/controllers/contacts/entity.js:40
+msgid "Do you really want to delete this phone?"
+msgstr ""
+
+#: static/webapp/tmp/app/controllers/contacts/entity.js:51
+msgid "Do you really want to delete this email?"
+msgstr ""
+
+#: static/webapp/tmp/app/controllers/contacts/entity.js:62
+msgid "Do you really want to delete this address?"
+msgstr ""
+
+#: static/webapp/tmp/app/controllers/contacts/entity.js:125
+msgid "Do you really want to delete this contact?"
+msgstr ""
+
+#: static/webapp/tmp/app/controllers/contacts/entity.js:127
+msgid "Do you really want to delete this organization?"
+msgstr ""
+
+#: static/webapp/tmp/app/controllers/core/tenantsAdd.js:100
+msgid "Do you realy want to leave this page ?"
+msgstr ""
+
+#: static/webapp/tmp/app/controllers/invoicing/invoiceBase.js:11
+msgid "Do you really want to delete this line?"
+msgstr ""
+
+#: static/webapp/tmp/app/controllers/invoicing/invoiceBase.js:22
+msgid "Do you really want to delete this attachment?"
+msgstr ""
+
+#: static/webapp/tmp/app/controllers/invoicing/invoiceBase.js:108
+msgid "Do you really want to delete this quotation?"
+msgstr ""
+
+#: static/webapp/tmp/app/controllers/invoicing/invoiceBase.js:110
+msgid "Do you really want to delete this invoice?"
+msgstr ""
+
+#: static/webapp/tmp/app/controllers/invoicing/itemEdit.js:28
+#: static/webapp/tmp/app/controllers/invoicing/itemShow.js:6
+msgid "Do you really want to delete this item?"
+msgstr ""
+
+#: static/webapp/tmp/app/controllers/organizer/calendarListEdit.js:16
+msgid "Do you really want to delete this permission?"
+msgstr ""
+
+#: static/webapp/tmp/app/controllers/organizer/calendarListEdit.js:30
+#: static/webapp/tmp/app/controllers/organizer/vosaeEventEdit.js:71
+msgid "Do you really want to delete this reminder?"
+msgstr ""
+
+#: static/webapp/tmp/app/controllers/organizer/calendarListEdit.js:81
+msgid "Your calendar has been successfully created"
+msgstr ""
+
+#: static/webapp/tmp/app/controllers/organizer/calendarListEdit.js:98
+#: static/webapp/tmp/app/controllers/organizer/calendarListEdit.js:106
+#: static/webapp/tmp/app/controllers/organizer/calendarListEdit.js:118
+#: static/webapp/tmp/app/controllers/organizer/calendarListEdit.js:131
+msgid "Your calendar has been successfully updated"
+msgstr ""
+
+#: static/webapp/tmp/app/controllers/organizer/calendarListEdit.js:142
+#: static/webapp/tmp/app/controllers/organizer/calendarListShow.js:6
+msgid "Do you really want to delete this calendar?"
+msgstr ""
+
+#: static/webapp/tmp/app/controllers/organizer/calendarListEdit.js:148
+#: static/webapp/tmp/app/controllers/organizer/calendarListShow.js:12
+msgid "Your calendar has been successfully deleted"
+msgstr ""
+
+#: static/webapp/tmp/app/controllers/organizer/calendarListsShow.js:28
+#: static/webapp/tmp/app/controllers/organizer/vosaeEventEdit.js:17
+msgid "Your event has been successfully created"
+msgstr ""
+
+#: static/webapp/tmp/app/controllers/organizer/calendarListsShow.js:30
+#: static/webapp/tmp/app/controllers/organizer/vosaeEventEdit.js:19
+msgid "Your event has been successfully updated"
+msgstr ""
+
+#: static/webapp/tmp/app/controllers/organizer/vosaeEventEdit.js:32
+#: static/webapp/tmp/app/controllers/organizer/vosaeEventShow.js:6
+msgid "Do you really want to delete this event?"
+msgstr ""
+
+#: static/webapp/tmp/app/controllers/organizer/vosaeEventEdit.js:38
+#: static/webapp/tmp/app/controllers/organizer/vosaeEventShow.js:12
+msgid "Your event has been successfully deleted"
+msgstr ""
+
+#: static/webapp/tmp/app/controllers/organizer/vosaeEventEdit.js:55
+msgid "Do you really want to delete this attendee?"
+msgstr ""
+
+#: static/webapp/tmp/app/controllers/settings/settingsApiKeys.js:21
+msgid "Do you really want to revoke this API key?"
+msgstr ""
+
+#: static/webapp/tmp/app/controllers/settings/settingsEditGroup.js:16
+msgid "Do you really want to delete this group?"
+msgstr ""
+
+#: static/webapp/tmp/app/controllers/settings/settingsEditTax.js:18
+msgid "Do you really want to delete this tax?"
+msgstr ""
+
+#: static/webapp/tmp/app/controllers/settings/settingsEditUser.js:21
+msgid "Do you really want to delete this user?"
+msgstr ""
+
+#: static/webapp/tmp/app/mixins/helpTour.js:7
+msgid "Next."
+msgstr ""
+
+#: static/webapp/tmp/app/mixins/helpTour.js:8
+msgid "Prev."
+msgstr ""
+
+#: static/webapp/tmp/app/mixins/helpTour.js:9
+msgid "End tour"
+msgstr ""
+
+#: static/webapp/tmp/app/models/contacts/address.js:63
+msgid "Street address field must not be blank"
+msgstr ""
+
+#: static/webapp/tmp/app/models/contacts/contact.js:29
+msgid "Name field must not be blank"
+msgstr ""
+
+#: static/webapp/tmp/app/models/contacts/contact.js:32
+msgid "Firstname field must not be blank"
+msgstr ""
+
+#: static/webapp/tmp/app/models/contacts/email.js:19
+msgid "Email field must not be blank"
+msgstr ""
+
+#: static/webapp/tmp/app/models/contacts/entity.js:28
+msgid "Your contact has been successfully created"
+msgstr ""
+
+#: static/webapp/tmp/app/models/contacts/entity.js:30
+msgid "Your organization has been successfully created"
+msgstr ""
+
+#: static/webapp/tmp/app/models/contacts/entity.js:42
+msgid "Your contact has been successfully updated"
+msgstr ""
+
+#: static/webapp/tmp/app/models/contacts/entity.js:44
+msgid "Your organization has been successfully updated"
+msgstr ""
+
+#: static/webapp/tmp/app/models/contacts/entity.js:56
+msgid "Your contact has been successfully deleted"
+msgstr ""
+
+#: static/webapp/tmp/app/models/contacts/entity.js:58
+msgid "Your organization has been successfully deleted"
+msgstr ""
+
+#: static/webapp/tmp/app/models/contacts/organization.js:9
+msgid "Corporate name field must not be blank"
+msgstr ""
+
+#: static/webapp/tmp/app/models/contacts/phone.js:62
+msgid "Phone field must not be blank"
+msgstr ""
+
+#: static/webapp/tmp/app/models/core/file.js:16
+#: static/webapp/tmp/app/models/core/file.js:22
+#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:97
+#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:103
+#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:115
+#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:121
+#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:127
+#: static/webapp/tmp/app/models/invoicing/payment.js:15
+msgctxt "date"
+msgid "undefined"
+msgstr ""
+
+#: static/webapp/tmp/app/models/core/group.js:17
+msgid "The group has been successfully created"
+msgstr ""
+
+#: static/webapp/tmp/app/models/core/group.js:24
+msgid "The group has been successfully updated"
+msgstr ""
+
+#: static/webapp/tmp/app/models/core/group.js:31
+msgid "The group has been successfully deleted"
+msgstr ""
+
+#: static/webapp/tmp/app/models/core/tenant.js:67
+msgid "Organization's settings has been successfully updated"
+msgstr ""
+
+#: static/webapp/tmp/app/models/core/user.js:20
+msgid "Unknown"
+msgstr ""
+
+#: static/webapp/tmp/app/models/core/user.js:28
+msgid "To define"
+msgstr ""
+
+#: static/webapp/tmp/app/models/core/user.js:69
+msgid "The user has been successfully created"
+msgstr ""
+
+#: static/webapp/tmp/app/models/core/user.js:76
+msgid "The user has been successfully updated"
+msgstr ""
+
+#: static/webapp/tmp/app/models/core/user.js:83
+msgid "The user has been successfully deleted"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/invoice.js:153
+msgid "Your invoice has been cancelled"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:107
+msgid "Your quotation has been successfully created"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:109
+msgid "Your invoice has been successfully created"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:111
+msgid "Your credit note has been successfully created"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:113
+msgid "Your down payment invoice has been successfully created"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:125
+msgid "Your quotation has been successfully updated"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:127
+msgid "Your invoice has been successfully updated"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:129
+msgid "Your credit note has been successfully updated"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:131
+msgid "Your down payment invoice has been successfully updated"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:143
+msgid "Your quotation has been successfully deleted"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:145
+msgid "Your invoice has been successfully deleted"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:147
+msgid "Your credit note has been successfully deleted"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:149
+msgid "Your down payment invoice has been successfully deleted"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:108
+#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:110
+msgctxt "date"
+msgid "variable"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:181
+msgid "Invoice must be linked to an organization or a contact"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:183
+msgid "Quotation must be linked to an organization or a contact"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:188
+msgid "Field street address of sender address must not be blank"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:193
+msgid "Field street address of receiver address must not be blank"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:200
+msgid "Items reference must not be blank"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:203
+msgid "Items description must not be blank"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:210
+msgid "Invoice must have a currency"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:212
+msgid "Quotation must have a currency"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/item.js:19
+#: static/webapp/tmp/app/objects/invoicing.js:102
+msgid "Product"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/item.js:21
+#: static/webapp/tmp/app/objects/invoicing.js:105
+msgid "Service"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/item.js:48
+msgid "Item reference must not be blank"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/item.js:51
+msgid "Item description must not be blank"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/item.js:54
+msgid "Item unit price must not be blank"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/item.js:57
+msgid "Item tax must not be blank"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/item.js:60
+msgid "Item currency must not be blank"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/item.js:66
+msgid "Your item has been successfully created"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/item.js:73
+msgid "Your item has been successfully updated"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/item.js:80
+msgid "Your item has been successfully deleted"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/payment.js:29
+msgctxt "payment type"
+msgid "undefined"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/payment.js:57
+msgid "Your payment has been successfully added"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/quotation.js:86
+msgid "Your quotation has been transformed into an invoice"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/tax.js:36
+msgid "The tax has been successfully created"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/tax.js:43
+msgid "The tax has been successfully updated"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/tax.js:50
+msgid "The tax has been successfully deleted"
+msgstr ""
+
+#: static/webapp/tmp/app/models/settings/apiKey.js:8
+msgid "Your API key has been successfully created"
+msgstr ""
+
+#: static/webapp/tmp/app/models/settings/apiKey.js:15
+msgid "Your API key has been successfully updated"
+msgstr ""
+
+#: static/webapp/tmp/app/models/settings/apiKey.js:22
+msgid "Your API key has been successfully deleted"
+msgstr ""
+
+#: static/webapp/tmp/app/models/settings/invoicingSettings.js:23
+msgid "undefined"
+msgstr ""
+
+#: static/webapp/tmp/app/models/settings/tenantSettings.js:7
+msgid "Invoicing's settings has been successfully updated"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/contacts.js:4
+#: static/webapp/tmp/app/objects/contacts.js:14
+#: static/webapp/tmp/app/objects/contacts.js:48
+msgid "Work"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/contacts.js:7
+#: static/webapp/tmp/app/objects/contacts.js:19
+#: static/webapp/tmp/app/objects/contacts.js:51
+msgid "Home"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/contacts.js:24
+msgid "Work cell"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/contacts.js:29
+msgid "Home cell"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/contacts.js:34
+msgid "Work fax"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/contacts.js:39
+msgid "Home fax"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/contacts.js:54
+msgid "Delivery"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/contacts.js:57
+msgid "Billing"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/contacts.js:60
+msgid "Other"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/contacts.js:67
+msgid "Mr"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/contacts.js:70
+msgid "Mrs"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/contacts.js:73
+msgid "Miss"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:30
+msgid "Active"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:33
+msgid "Disabled"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:36
+msgid "Deleted"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:43
+msgid "English"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:46
+msgid "British English"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:49
+msgid "French"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:56
+msgid "Belgium"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:59
+msgid "Switzerland"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:62
+msgid "France"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:65
+msgid "Great Britain"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:68
+msgid "Luxembourg"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:71
+msgid "United States"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:77
+msgid "Core permissions"
+msgstr "Global permissions"
+
+#: static/webapp/tmp/app/objects/core.js:82
+msgid "Access to the application"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:86
+msgid "Can configure application"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:90
+msgid "Can see users"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:94
+msgid "Can add users"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:98
+msgid "Can edit users"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:102
+msgid "Can delete users"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:106
+msgid "Can see groups"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:110
+msgid "Can add groups"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:114
+msgid "Can edit groups"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:118
+msgid "Can delete groups"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:122
+msgid "Can download files"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:126
+msgid "Can upload files"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:130
+msgid "Can delete files"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:134
+msgid "Contacts permissions"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:139
+msgid "Access to the contacts module"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:143
+msgid "Can see contacts"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:147
+msgid "Can add contacts"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:151
+msgid "Can edit contacts"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:155
+msgid "Can delete contacts"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:159
+msgid "Invoicing permissions"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:164
+msgid "Access to the invoicing module"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:168
+msgid "Can edit invoicing settings"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:172
+msgid "Can see invoices"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:176
+msgid "Can add invoices"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:180
+msgid "Can edit invoices"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:184
+msgid "Can delete/cancel invoices"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:188
+msgid "Can transmit invoices"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:192
+msgid "Can post invoices"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:196
+msgid "Can see items"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:200
+msgid "Can add items"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:204
+msgid "Can edit items"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:208
+msgid "Can delete items"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:212
+msgid "Organizer permissions"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/core.js:217
+msgid "Access to the calendar module"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:4
+msgctxt "payment method"
+msgid "Cash"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:7
+msgctxt "payment method"
+msgid "Check"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:10
+msgctxt "payment method"
+msgid "Credit card"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:13
+msgctxt "payment method"
+msgid "Bank transfer"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:16
+msgctxt "payment method"
+msgid "Other"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:23
+msgctxt "payment conditions"
+msgid "Cash"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:29
+msgctxt "payment conditions"
+msgid "30 days"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:35
+msgctxt "payment conditions"
+msgid "30 days end of month"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:41
+msgctxt "payment conditions"
+msgid "30 days end of month, the 10th"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:47
+msgctxt "payment conditions"
+msgid "45 days"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:53
+msgctxt "payment conditions"
+msgid "45 days end of month"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:59
+msgctxt "payment conditions"
+msgid "45 days end of month, the 10th"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:65
+msgctxt "payment conditions"
+msgid "60 days"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:71
+msgctxt "payment conditions"
+msgid "60 days end of month"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:77
+msgctxt "payment conditions"
+msgid "60 days end of month, the 10th"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:83
+msgctxt "payment conditions"
+msgid "Custom"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:112
+msgid "Products & Services"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:115
+msgid "Products"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:118
+msgid "Services"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:125
+#: static/webapp/tmp/app/objects/invoicing.js:144
+#: static/webapp/tmp/app/objects/invoicing.js:182
+msgid "Reference"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:128
+msgid "Description"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:131
+msgid "Unit price"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:134
+msgid "Default tax"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:141
+msgid "Validity date"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:147
+#: static/webapp/tmp/app/objects/invoicing.js:185
+msgid "Total tax included"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:154
+msgctxt "quotation state"
+msgid "Draft"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:157
+msgctxt "quotation state"
+msgid "Expired"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:160
+msgctxt "quotation state"
+msgid "Awaiting approval"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:161
+msgctxt "quotation"
+msgid "Mark as awaiting approval"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:164
+msgctxt "quotation state"
+msgid "Refused"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:165
+msgctxt "quotation"
+msgid "Mark as refused"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:168
+msgctxt "quotation state"
+msgid "Approved"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:169
+msgctxt "quotation"
+msgid "Mark as approved"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:172
+msgctxt "quotation state"
+msgid "Invoiced"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:179
+msgid "Due date"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:192
+msgctxt "invoice state"
+msgid "Draft"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:195
+msgctxt "invoice state"
+msgid "Registered"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:196
+msgctxt "invoice"
+msgid "Mark as registered"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:199
+msgctxt "invoice state"
+msgid "Part paid"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:202
+msgctxt "invoice state"
+msgid "Overdue"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:205
+msgctxt "invoice state"
+msgid "Paid"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:208
+msgctxt "invoice state"
+msgid "Cancelled"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:216
+msgid "Australian dollar"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:219
+msgid "Brazilian real"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:222
+msgid "Canadian dollar"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:225
+msgid "Swiss franc"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:228
+msgid "Chinese yuan"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:231
+msgid "Danish krone"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:234
+msgid "Egyptian pound"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:237
+msgid "Euro"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:240
+msgid "Pound sterling"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:243
+msgid "Hong Kong dollar"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:246
+msgid "Indian rupee"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:249
+msgid "Japanese yen"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:252
+msgid "Moroccan dirham"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:255
+msgid "Mexican peso"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:258
+msgid "Norwegian krone"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:261
+msgid "New Zealand dollar"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:264
+msgid "Russian rouble"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:267
+msgid "Swedish krona"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:270
+msgid "Turkish lira"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:273
+msgid "United States dollar"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:343
+msgid "Ascending"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/invoicing.js:346
+msgid "Descending"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/organizer.js:4
+msgctxt "attendee response status"
+msgid "Unknown"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/organizer.js:5
+msgctxt "attendee response status"
+msgid "Participation unknown"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/organizer.js:8
+msgctxt "attendee response status"
+msgid "Declined"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/organizer.js:9
+msgctxt "attendee response status"
+msgid "Participation declined"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/organizer.js:12
+msgctxt "attendee response status"
+msgid "Maybe"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/organizer.js:13
+msgctxt "attendee response status"
+msgid "Participation uncertain"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/organizer.js:16
+msgctxt "attendee response status"
+msgid "Confirmed"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/organizer.js:17
+msgctxt "attendee response status"
+msgid "Participation confirmed"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/organizer.js:24
+msgctxt "reminder entry"
+msgid "Notification"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/organizer.js:27
+msgctxt "reminder entry"
+msgid "E-mail"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/organizer.js:34
+msgctxt "calendar acl rule role"
+msgid "has no access"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/organizer.js:37
+msgctxt "calendar acl rule role"
+msgid "can see events"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/organizer.js:40
+msgctxt "calendar acl rule role"
+msgid "can edit events"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/organizer.js:43
+msgctxt "calendar acl rule role"
+msgid "is owner"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/organizer.js:50
+msgctxt "calendar list color"
+msgid "Green"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/organizer.js:53
+msgctxt "calendar list color"
+msgid "Fluorescent green"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/organizer.js:56
+msgctxt "calendar list color"
+msgid "Blue"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/organizer.js:59
+msgctxt "calendar list color"
+msgid "Orange"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/organizer.js:62
+msgctxt "calendar list color"
+msgid "Red"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/organizer.js:65
+msgctxt "calendar list color"
+msgid "Dark green"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/organizer.js:68
+msgctxt "calendar list color"
+msgid "Dark blue"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/organizer.js:71
+msgctxt "calendar list color"
+msgid "Purple"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/organizer.js:74
+msgctxt "calendar list color"
+msgid "Dark purple"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/settings.js:4
+msgid "Date, Number"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/settings.js:7
+msgid "Number"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/settings.js:83
+msgid "No separator"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/settings.js:86
+msgid "- (dash)"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/settings.js:89
+msgid "_ (underscore)"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/settings.js:92
+msgid ". (dot)"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/settings.js:95
+msgid ": (colon)"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/settings.js:98
+msgid ":: (bi-colon)"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/settings.js:101
+msgid "/ (slash)"
+msgstr ""
+
+#: static/webapp/tmp/app/objects/settings.js:104
+msgid "# (sharp)"
+msgstr ""
+
+#: static/webapp/tmp/app/store/adapter.js:202
+#: static/webapp/tmp/app/views/contacts/entityEdit.js:61
+msgid "An error occurred, please try again or contact the support"
+msgstr ""
+
+#: static/webapp/tmp/app/views/contacts/contactEdit.js:13
+#: static/webapp/tmp/app/views/contacts/contactShow.js:55
+msgid "Contact informations (required field)"
+msgstr ""
+
+#: static/webapp/tmp/app/views/contacts/contactEdit.js:14
+#: static/webapp/tmp/app/views/contacts/contactShow.js:56
+msgid ""
+"This is the <strong>Contact's</strong> information. Add his <i>First name</"
+"i> and <i>Last name</i> as well as his <i>Role</i> (e.g. CEO, Product "
+"Manager, etc.)."
+msgstr ""
+
+#: static/webapp/tmp/app/views/contacts/contactEdit.js:19
+msgid "Organization"
+msgstr ""
+
+#: static/webapp/tmp/app/views/contacts/contactEdit.js:20
+msgid ""
+"If you have created at least one <strong>Organization</strong>, you can add "
+"the contact to it. It's the perfect way to easily organise and find your "
+"contacts."
+msgstr ""
+
+#: static/webapp/tmp/app/views/contacts/contactEdit.js:25
+#: static/webapp/tmp/app/views/contacts/organizationEdit.js:19
+msgid "Addresses"
+msgstr ""
+
+#: static/webapp/tmp/app/views/contacts/contactEdit.js:26
+msgid ""
+"Add the address of the <strong>Contact</strong> and <i>Vosae</i> will show "
+"you a detailed map of the location. The address is particularly useful for "
+"invoicing, <i>Vosae</i> will fill everything in for you!"
+msgstr ""
+
+#: static/webapp/tmp/app/views/contacts/organizationEdit.js:13
+msgid "Organization's information (required field)"
+msgstr ""
+
+#: static/webapp/tmp/app/views/contacts/organizationEdit.js:14
+msgid ""
+"This is the name of the <strong>Organization</strong>. It's used in "
+"<strong>Quotations</strong> or <strong>Invoices</strong>."
+msgstr ""
+
+#: static/webapp/tmp/app/views/contacts/organizationEdit.js:20
+msgid ""
+"Add the address of the <strong>Organization</strong> and <i>Vosae</i> will "
+"show you a detailed map of the location. The address is particularly useful "
+"for invoicing, <i>Vosae</i> will fill everything in for you!"
+msgstr ""
+
+#: static/webapp/tmp/app/views/contacts/organizationsShow.js:13
+msgid "Organizations page"
+msgstr ""
+
+#: static/webapp/tmp/app/views/contacts/organizationsShow.js:14
+msgid ""
+"This is the <strong>Organization's</strong> page. On this page <i>Vosae</i> "
+"lists all of your organizations. It's a useful way of sorting your contacts. "
+"You can view them by company or by group."
+msgstr ""
+
+#: static/webapp/tmp/app/views/contacts/organizationsShow.js:19
+msgid "See all contacts"
+msgstr ""
+
+#: static/webapp/tmp/app/views/contacts/organizationsShow.js:20
+msgid "To <i>see all your contacts</i> just click on this link."
+msgstr ""
+
+#: static/webapp/tmp/app/views/core/application.js:155
+msgid "Type your search here"
+msgstr ""
+
+#: static/webapp/tmp/app/views/core/dashboardShow.js:59
+msgid "Applications"
+msgstr ""
+
+#: static/webapp/tmp/app/views/core/dashboardShow.js:60
+msgid ""
+"You can easily navigate through your <strong>Applications</strong> by "
+"clicking on the icons."
+msgstr ""
+
+#: static/webapp/tmp/app/views/core/dashboardShow.js:65
+msgid "Notifications"
+msgstr ""
+
+#: static/webapp/tmp/app/views/core/dashboardShow.js:66
+msgid ""
+"By clicking on the <i>Vosae</i>, you will have an overview of your recent "
+"notifications. For example if a colleague edits a contact or quotation you "
+"created, you'll know it in realtime!"
+msgstr ""
+
+#: static/webapp/tmp/app/views/core/dashboardShow.js:71
+msgid "Search bar"
+msgstr ""
+
+#: static/webapp/tmp/app/views/core/dashboardShow.js:72
+msgid ""
+"Looking for a <strong>Contact</strong>, an <strong>Invoice</strong> or "
+"<strong>Events</strong>? Start by typing any keyword and we'll do the rest "
+"for you."
+msgstr ""
+
+#: static/webapp/tmp/app/views/core/dashboardShow.js:77
+msgid "Timeline"
+msgstr ""
+
+#: static/webapp/tmp/app/views/core/dashboardShow.js:78
+msgid ""
+"Everything that happens in <i>Vosae</i> will appear here in realtime, "
+"allowing you an easy overview of your company."
+msgstr ""
+
+#: static/webapp/tmp/app/views/core/dashboardShow.js:83
+msgid "Timeline options"
+msgstr ""
+
+#: static/webapp/tmp/app/views/core/dashboardShow.js:84
+msgid ""
+"You can hide or reveal any app in the <i>Timeline</i>. It's very useful if "
+"you have a lot of informations displayed."
+msgstr ""
+
+#: static/webapp/tmp/app/views/core/dashboardShow.js:89
+msgid "Settings and Logout"
+msgstr ""
+
+#: static/webapp/tmp/app/views/core/dashboardShow.js:90
+msgid ""
+"Want to change your settings, add a new organization, contact the "
+"<strong>Support</strong> or logout from <i>Vosae</i> ? This is the right "
+"place to click !"
+msgstr ""
+
+#: static/webapp/tmp/app/views/core/dashboardShow.js:95
+msgid "More informations"
+msgstr ""
+
+#: static/webapp/tmp/app/views/core/dashboardShow.js:96
+msgid ""
+"On almost every page, you can get more information and some tips by clicking "
+"on <strong>Info</strong>!"
+msgstr ""
+
+#: static/webapp/tmp/app/views/core/tenantsAdd.js:186
+msgid "This field is required."
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/invoiceEdit.js:22
+msgid "Also update payment due date?"
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/invoiceEdit.js:94
+#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:45
+msgid "The transmitter (required field)"
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/invoiceEdit.js:95
+msgid ""
+"This is the <strong>Invoice</strong> transmitter, <i>Vosae</i> automatically "
+"makes it easier by filling it with your information."
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/invoiceEdit.js:100
+#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:51
+msgid "The receiver (required field)"
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/invoiceEdit.js:101
+msgid ""
+"And on the right, the <strong>Invoice</strong> receiver. This is the "
+"<strong>Organization</strong> you want to bill. For greater efficiency, "
+"after you have added the organization and the contact in the "
+"<strong>Contact</strong> application, all you have to do is start typing, "
+"press Enter and <i>Vosae</i> will do the rest for you."
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/invoiceEdit.js:106
+msgid "Invoicing date (required field)"
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/invoiceEdit.js:107
+msgid ""
+"The date on which the <strong>Invoice</strong> was created. <i>Vosae</i> "
+"will insert the current date by default but you can edit it by clicking."
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/invoiceEdit.js:112
+msgid "Due date (required field)"
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/invoiceEdit.js:113
+msgid ""
+"The <i>due date</i> is extremely useful, both for your customers and also "
+"for you. <i>Vosae</i> will notify you when an invoice becomes outdated."
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/invoiceEdit.js:118
+msgid "Invoicing reference (auto-generated)"
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/invoiceEdit.js:119
+msgid ""
+"The invoice reference is based on your <strong>Settings</strong> (see "
+"<strong>Numbering</strong> part) and is automatically added to your invoice "
+"once you have saved it."
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/invoiceEdit.js:124
+msgid "Invoice items (at least one is required)"
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/invoiceEdit.js:125
+msgid ""
+"This is the most important part of an invoice. You can insert any item "
+"previously added in your <strong>Items</strong> page."
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/invoiceEdit.js:130
+#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:81
+msgid "Currency (required)"
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/invoiceEdit.js:131
+msgid ""
+"With <i>Vosae</i> you can invoice in a range of currencies. You just have to "
+"select the desired currency and <i>Vosae</i> will convert it."
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/invoiceEdit.js:136
+#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:87
+msgid "Create"
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/invoiceEdit.js:137
+msgid ""
+"Once your invoice is completed, click on the <strong>Create</strong> button. "
+"<i>Vosae</i> will save it as a draft."
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/invoicingDashboard.js:13
+msgid "Invoicing Dashboard"
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/invoicingDashboard.js:14
+msgid ""
+"This is your <strong>Invoicing</strong> dashboard. It is the main view for "
+"the <strong>Invoicing</strong> application."
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/invoicingDashboard.js:19
+msgid "Others Dashboard"
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/invoicingDashboard.js:20
+msgid ""
+"From these tabs you can quickly navigate to your <strong>Invoices</strong>, "
+"<strong>Quotations</strong> and <strong>Items</strong>."
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/invoicingDashboard.js:25
+msgid "Summary (not yet implemented)"
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/invoicingDashboard.js:26
+msgid ""
+"This provides an overview of your invoicing, accompanied by informative "
+"statistics."
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/invoicingDashboard.js:31
+msgid "Add buttons"
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/invoicingDashboard.js:32
+msgid ""
+"It's the right place to quickly add an <strong>Invoice</strong>, "
+"<strong>Quotation</strong> or <strong>Item</strong>!"
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/invoicingDashboard.js:37
+msgid "Last entries"
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/invoicingDashboard.js:38
+msgid ""
+"From here, you can see and access the last <strong>Overdue invoices</strong> "
+"and <strong>Quotes to bill</strong>."
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/itemEdit.js:35
+msgid "Item type (required field)"
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/itemEdit.js:36
+msgid ""
+"This button lets you specify whether your item is a product or a service."
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/itemEdit.js:41
+msgid "Product or service name (required field)"
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/itemEdit.js:42
+msgid ""
+"The name of your item. Can be on multiple lines.<br>Usually, the first line "
+"is a simple name, for example: <i>Black chair</i> or <i>Website</i> while "
+"next lines are description, like: <i>A beautiful handmade chair</i>."
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/itemEdit.js:47
+msgid "Item reference (required field)"
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/itemEdit.js:48
+msgid ""
+"The reference is an internal unique identifier (for accounting purpose). It "
+"won't be visible for your customers on generated documents. Usually in "
+"capitals, like: <i>CHAIR-BLK-04</i>."
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/itemEdit.js:53
+msgid "Item price (required field)"
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/itemEdit.js:54
+msgid ""
+"Here you can define the price of your item and indicate any applicable tax "
+"as well as the currency. You can add or remove taxes and supported "
+"currencies in your <strong>Settings</strong>."
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/itemEdit.js:59
+msgid "Create the item"
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/itemEdit.js:60
+msgid ""
+"Finally, <strong>Save</strong> (or <strong>Cancel</strong>) your item to add "
+"it to <i>Vosae</i>."
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:46
+msgid ""
+"This is the quotation transmitter, <i>Vosae</i> makes it quicker by "
+"automatically filling it with the relevant info."
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:52
+msgid ""
+"And on the right, the quotation receiver. This is the <strong>Organization</"
+"strong> you want to quote. For greater efficiency, after you have added the "
+"organization and the contact in the <strong>Contact</strong> application, "
+"all you have to do is start typing, press Enter and <i>Vosae</i> will do the "
+"rest for you."
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:57
+msgid "Quotation date (required field)"
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:58
+msgid ""
+"The date on which the quotation was created. <i>Vosae</i> will insert the "
+"current date by default but you can edit it by clicking here."
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:63
+msgid "Valid until (required field)"
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:64
+msgid ""
+"The <i>valid until</i> date is extremely useful, both for your customers and "
+"also for you. <i>Vosae</i> will notify you when a quotation becomes outdated."
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:69
+msgid "Quotation reference (auto-generated)"
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:70
+msgid ""
+"The quotation reference is based on your <strong>Settings</strong> (see "
+"<strong>Numbering</strong> part) and is automatically added to your "
+"quotation once you have saved it."
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:75
+msgid "Quotation items (at least one is required)"
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:76
+msgid ""
+"This is the most important part of a quotation. You can insert any item "
+"previously added in your <strong>Items</strong> page."
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:82
+msgid ""
+"With <i>Vosae</i> you can make a quotation in a range of currencies. You "
+"just have to select the desired currency and <i>Vosae</i> will convert it."
+msgstr ""
+
+#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:88
+msgid ""
+"Once your quotation is complete, click on the <strong>Create</strong> "
+"button. <i>Vosae</i> will save it as a draft."
+msgstr ""
+
+#: static/webapp/tmp/app/views/organizer/calendarListEdit.js:61
+#: static/webapp/tmp/app/views/organizer/calendarListShow.js:13
+msgid "Calendar name (required field)"
+msgstr ""
+
+#: static/webapp/tmp/app/views/organizer/calendarListEdit.js:62
+#: static/webapp/tmp/app/views/organizer/calendarListShow.js:14
+msgid ""
+"This is <i>the name of the calendar</i>. Add the name and the description of "
+"your calendar. For example <strong>Work</strong>, <strong>Private</strong>, "
+"<strong>My Amazing Project</strong> etc."
+msgstr ""
+
+#: static/webapp/tmp/app/views/organizer/calendarListEdit.js:67
+#: static/webapp/tmp/app/views/organizer/calendarListShow.js:19
+msgid "Calendar color"
+msgstr ""
+
+#: static/webapp/tmp/app/views/organizer/calendarListEdit.js:68
+#: static/webapp/tmp/app/views/organizer/calendarListShow.js:20
+msgid ""
+"You can select a color for your calendar. This allows you to see it and find "
+"it faster."
+msgstr ""
+
+#: static/webapp/tmp/app/views/organizer/calendarListEdit.js:74
+#: static/webapp/tmp/app/views/organizer/calendarListShow.js:26
+msgid "You can select a timezone for your calendar."
+msgstr ""
+
+#: static/webapp/tmp/app/views/organizer/calendarListEdit.js:79
+#: static/webapp/tmp/app/views/organizer/calendarListShow.js:31
+msgid "Event reminders"
+msgstr ""
+
+#: static/webapp/tmp/app/views/organizer/calendarListEdit.js:80
+#: static/webapp/tmp/app/views/organizer/calendarListShow.js:32
+msgid ""
+"From here you can define the default reminders of your calendar. Then, when "
+"you will create an event in this calendar, these reminders will be used. By "
+"default there are no reminders."
+msgstr ""
+
+#: static/webapp/tmp/app/views/organizer/calendarListEdit.js:85
+#: static/webapp/tmp/app/views/organizer/calendarListShow.js:37
+msgid "Sharing (required field)"
+msgstr ""
+
+#: static/webapp/tmp/app/views/organizer/calendarListEdit.js:86
+#: static/webapp/tmp/app/views/organizer/calendarListShow.js:38
+msgid ""
+"You can choose to share your calendar with <strong><i>Vosae</i> users</"
+"strong>. It's for example very useful to work with your colleagues. You can "
+"set right to <strong>Read</strong>, <strong>Write</strong>, <strong>Own</"
+"strong> or <strong>None</strong>"
+msgstr ""
+
+#: static/webapp/tmp/app/views/organizer/calendarListsShow.js:20
+#: static/webapp/tmp/app/views/organizer/calendarListsShow.js:55
+msgid "Today"
+msgstr ""
+
+#: static/webapp/tmp/app/views/organizer/calendarListsShow.js:43
+msgctxt "time format"
+msgid "h(:mm)t"
+msgstr ""
+
+#: static/webapp/tmp/app/views/organizer/calendarListsShow.js:44
+msgctxt "time format"
+msgid "h:mm{ - h:mm}"
+msgstr ""
+
+#: static/webapp/tmp/app/views/organizer/calendarListsShow.js:46
+msgctxt "time format"
+msgid "h(:mm)tt"
+msgstr ""
+
+#: static/webapp/tmp/app/views/organizer/calendarListsShow.js:56
+msgid "month"
+msgstr ""
+
+#: static/webapp/tmp/app/views/organizer/calendarListsShow.js:57
+msgid "week"
+msgstr ""
+
+#: static/webapp/tmp/app/views/organizer/calendarListsShow.js:58
+msgid "day"
+msgstr ""
+
+#: static/webapp/tmp/app/views/organizer/calendarListsShow.js:60
+msgid "all-day"
+msgstr ""
+
+#: static/webapp/tmp/app/views/organizer/calendarListsShow.js:73
+msgid "dddd, MMMM D YYYY"
+msgstr ""
+
+#: static/webapp/tmp/app/views/organizer/calendarListsShow.js:174
+msgid "Organizer"
+msgstr ""
+
+#: static/webapp/tmp/app/views/organizer/calendarListsShow.js:175
+msgid ""
+"This is the main view of your <strong>Organizer</strong>. <i>Vosae</i> "
+"displays all your upcoming events for the current month. You can easily add "
+"a new event by clicking on the day or time-slot of your choice. Once "
+"created, you can move it to a different slot by dragging and dropping. "
+"Simply click on any event to see all the details."
+msgstr ""
+
+#: static/webapp/tmp/app/views/organizer/calendarListsShow.js:180
+#: static/webapp/tmp/app/views/organizer/vosaeEventEdit.js:162
+msgid "Date"
+msgstr ""
+
+#: static/webapp/tmp/app/views/organizer/calendarListsShow.js:181
+msgid ""
+"You can indicate a period or specific day for your <strong>Organizer</"
+"strong> to display by clicking on the arrows. If you want to go to today "
+"simply click on the middle button."
+msgstr ""
+
+#: static/webapp/tmp/app/views/organizer/calendarListsShow.js:186
+msgid "Zoom"
+msgstr ""
+
+#: static/webapp/tmp/app/views/organizer/calendarListsShow.js:187
+msgid ""
+"You can choose the magnification of the display. The more you zoom, the more "
+"details you'll see."
+msgstr ""
+
+#: static/webapp/tmp/app/views/organizer/vosaeEventEdit.js:163
+msgid "The date of an <strong>Event</strong> can be edited very precisely."
+msgstr ""
+
+#: static/webapp/tmp/app/views/organizer/vosaeEventEdit.js:168
+#: static/webapp/tmp/app/views/organizer/vosaeEventEdit.js:174
+#: static/webapp/tmp/app/views/organizer/vosaeEventEdit.js:180
+msgid "Calendar"
+msgstr ""
+
+#: static/webapp/tmp/app/views/organizer/vosaeEventEdit.js:169
+msgid ""
+"You can change which calendar the <strong>Event</strong> belongs to. If you "
+"have a lot of calendars just start typing the name and <i>Vosae</i> will "
+"pull it up for you."
+msgstr ""
+
+#: static/webapp/tmp/app/views/organizer/vosaeEventEdit.js:175
+msgid ""
+"Add one or more attendees to the <strong>Event</strong>. If he or she is "
+"already in your <strong>Contacts</strong>, <i>Vosae</i> will find him/her "
+"instantly."
+msgstr ""
+
+#: static/webapp/tmp/app/views/organizer/vosaeEventEdit.js:181
+msgid ""
+"If you want to add more information to the <strong>Event</strong>, you can "
+"specify a <i>Location</i>, write a <i>Description</i>, change the <i>Color</"
+"i> or add a <i>Reminder</i>."
+msgstr ""
+
+#: templates/webapp/handlebars/contacts/contactShow.html:1
+#: templates/webapp/handlebars/contacts/partials/listOfContacts.html:1
+msgid "{{role}} at {{corporateName}}"
+msgstr ""
+
+#: templates/webapp/handlebars/contacts/contactShow.html:2
+#: templates/webapp/handlebars/contacts/partials/listOfContacts.html:2
+msgid "Works at {{corporateName}}"
+msgstr ""
+
+#: templates/webapp/handlebars/contacts/organizationShow.html:1
+#: templates/webapp/handlebars/contacts/partials/listOfOrganizations.html:1
+msgid "Contact"
+msgid_plural "Contacts"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/webapp/handlebars/contacts/organizationsShow.html:1
+msgid "<span class='green'>{{count}}</span> Contact"
+msgid_plural "<span class='green'>{{count}}</span> Contacts"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/webapp/handlebars/contacts/organizationsShow.html:2
+msgid "In <span class='orange'>{{count}}</span> company"
+msgid_plural "In <span class='orange'>{{count}}</span> companies"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/webapp/handlebars/core/partials/search.html:1
+msgid "Please, type at least {{minSearchTerms}} chars"
+msgstr ""
+
+#: templates/webapp/handlebars/core/partials/search.html:2
+msgid "See all results for \"{{queryString}}\""
+msgstr ""
+
+#: templates/webapp/handlebars/core/partials/search.html:3
+msgid "No results for \"{{queryString}}\""
+msgstr ""
+
+#: templates/webapp/handlebars/core/partials/search.html:4
+msgid "<a>{{user}}</a>, in application Contacts"
+msgstr ""
+
+#: templates/webapp/handlebars/core/partials/search.html:5
+msgid "<a>{{organization}}</a>, in application Contacts"
+msgstr ""
+
+#: templates/webapp/handlebars/core/partials/search.html:6
+msgid "Invoice <a>{{invoice}}</a>, in application Invoicing"
+msgstr ""
+
+#: templates/webapp/handlebars/core/partials/search.html:7
+msgid "Quotation <a>{{quotation}}</a>, in application Invoicing"
+msgstr ""
+
+#: templates/webapp/handlebars/core/partials/search.html:8
+msgid "Event <a>{{event}}</a>, in application Organizer"
+msgstr ""
+
+#: templates/webapp/handlebars/invoicing/dashboard.html:1
+msgid "TOTAL Fiscal year {{fiscalYear}}"
+msgstr ""
+
+#: templates/webapp/handlebars/organizer/calendarListsShow.html:1
+msgid "Shared with me"
+msgid_plural "Shared with me"
+msgstr[0] ""
+msgstr[1] ""

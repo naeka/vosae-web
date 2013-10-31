@@ -1,0 +1,51 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "contacts/show" %}
+  <section class="actions clearfix">
+    <div class="btn-toolbar pull-left">
+      <div class="btn-group">
+        {{#linkTo "organizations.show" controller.session.tenant class="btn grey"}}
+          <i class="picto-arrow-left"></i>
+          {% trans "My organizations" %}
+        {{/linkTo}}
+      </div>
+    </div>
+    <div class="btn-toolbar pull-right">
+      <div class="btn-group">
+        {{#linkTo "contacts.add" controller.session.tenant class="btn green"}}
+          <i class="picto-add"></i>
+          {% trans "Contact" context "contacts" %}
+        {{/linkTo}}
+      </div>
+    </div>
+  </section>
+
+  <section class="list">
+    {{#if content.isLoaded}}
+      {{#with arrangedContent}}
+        {{partial "contacts/partials/listOfContacts"}}
+      {{/with}}
+      {{#if meta.next}}
+        <p class="pagination text-center">
+          <a class="btn grey" {{action 'getNextPagination'}}>
+            {% trans "More" context "display more" %}
+          </a>
+        </p>
+      {{/if}}
+    {{else}}
+      {{partial "core/partials/spinner"}}
+    {{/if}}
+  </section>
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "contacts/show/settings" %}
+  <ul class="export">
+    <li>
+      <i class="picto-export"></i>
+      <a {{action "getExportFile" target="controller"}}>
+        {% trans "Export" %}
+      </a>
+    </li>
+  </ul>
+{% endtplhandlebars %}

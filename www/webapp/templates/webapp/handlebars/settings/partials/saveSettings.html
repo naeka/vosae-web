@@ -1,0 +1,23 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "settings/partials/_saveSettings" %}
+  <ul class="actions clearfix">
+    {{#if isSaving}}
+    <li class="save">
+      <a class="btn save green">
+        <i class="picto-check"></i>
+        {% trans "Saving..." %}
+      </a>
+    </li>
+    {{else}}
+      {{#if isDirty}}
+      <li class="save">
+        <a {{action save content}} class="btn save green">
+          <i class="picto-check"></i>
+          {% trans "Save" %}
+        </a>
+      </li>
+      {{/if}}
+    {{/if}}
+  </ul>
+{% endtplhandlebars %}

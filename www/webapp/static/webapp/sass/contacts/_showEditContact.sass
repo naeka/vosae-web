@@ -1,0 +1,266 @@
+.page-show-contact,
+.page-edit-contact
+
+  .main-infos
+    padding: 24px 12px 24px 12px
+    position: relative
+ 
+    .avatar
+      img
+        background: #FFF
+
+    .infos 
+      display: inline-block
+      vertical-align: middle
+      font-size: 15px
+      padding-left: 12px
+
+      .role 
+        color: #888888
+        display: block
+        margin-top: -3px
+        font-size: 16px
+      
+      .name
+        display: inline-block
+        font-size: 20px
+        font-weight: bold
+        line-height: 30px
+
+    .actions
+      padding-top: 10px
+
+      .btn-group + .btn-group
+        margin-left: 10px
+
+
+  .contact-infos
+    padding-top: 30px
+    padding-bottom: 30px
+
+    & > .pull-right
+      width: 50%
+    
+    & > .pull-left 
+      width: 50%
+
+    address
+      margin-bottom: 0
+
+    .phones,
+    .emails,
+    .addresses
+      .select2-container
+        min-width: 100px
+
+      tr.add
+        strong
+          color: #999
+        &:hover
+          cursor: pointer
+          strong
+            text-decoration: underline
+        td
+          background: transparent !important
+          padding-top: 5px
+
+    .phones,
+    .emails
+      margin-bottom: 25px
+      td
+        padding-bottom: 3px
+        padding-right: 6px
+        &:last-child
+          padding-right: 0
+          width: 100%
+      label
+        margin-right: 8px
+
+    .emails
+      margin-bottom: 0
+
+    .phones 
+      address
+        font-size: 120%
+      input
+        color: $orange
+
+    .addresses
+      width: 100%
+      td
+        background: $grey
+        position: relative
+        padding: 6px
+        padding-right: 40px
+        border-bottom: 5px solid $white
+
+      input.address,
+      input.extended-address,
+      input.postoffice-box
+        width: 100%
+
+      input.postal-code,
+      input.state
+        width: 30%
+
+      input.city,
+      input.country
+        width: 60%
+
+      .btn-delete
+        position: absolute
+        top: 5px
+        right: 5px
+
+      .type
+        float: right
+        margin-right: -35px
+      
+      tr.add td
+        padding-left: 0px
+
+    //
+    // DIRTY
+    // 
+    .addresses 
+      .map
+        height: 200px
+        width: 100%
+
+        &.no-address
+          +opacity(0.75)
+          +blur(1px)
+        
+      .address
+        margin-top: 0px
+      
+      .accordion-group
+        border: 0
+        margin-top: 0px
+        +border-radius(0px)
+
+        &.active
+          margin-top: 10px
+
+          &.first
+            margin-top: 0px
+          
+          .accordion-toggle
+            background: none
+            color: inherit
+            font-size: 18px
+            line-height: 24px
+            +opacity(1)
+
+      .accordion-inner
+        padding: 0
+        border-top: 0
+      
+      .accordion-toggle
+        background: #EEE
+        font-weight: bold
+        color: #6a6a6a
+        display: block
+        line-height: 21px
+        margin-top: 6px
+        padding: 5px 10px
+        text-decoration: none
+        +box-sizing(border-box)
+        +opacity(0.7)
+
+        &:hover
+          +opacity(1)
+        
+        span
+          display: block
+          
+          &.city
+            float: left
+          
+          &.lab
+            float: right
+            font-size: 16px
+    // 
+    // END DIRTY
+    //
+
+  .quotations,
+  .invoices
+    padding-top: 20px
+
+
+.page-edit-contact
+  .main-infos
+    padding: 24px 42px 24px 12px
+
+    .btn.upload
+      position: absolute
+      width: 52px
+      top: 82px
+      left: 0px
+
+    .infos
+      padding-left: 24px
+
+    input
+      display: block
+      clear: both
+
+  .drag-drop-message
+    display: none
+
+  .role input
+    margin-top: 8px
+    font-size: 14px
+
+  .organization
+    margin-top: 25px
+
+    .select2-container
+      min-width: 150px
+
+    .select2-choice span
+      margin-right: 20px
+
+    .select2-search-choice-close
+      width: 10px
+      height: 100%
+      top: 0
+      position: absolute
+      right: 8px
+
+      &:before
+        content: '*'
+        font-family: $fontPictos
+        font-size: 12px
+        color: #FFF
+        text-align: center
+
+
+  section.contact-infos,
+    padding: 30px 0
+
+
+// On drag & drop
+body.draggingOn .page-edit-contact
+  section.actions
+    border: 0
+
+  section.main-infos
+    border: 5px dashed #EEE
+
+    > .avatar,
+    > .infos,
+    > .organization,
+    > .btn.upload
+      visibility: hidden
+
+    .drag-drop-message
+      display: block
+      position: absolute
+      width: 100%
+      font-size: 34px
+      font-weight: bold
+      color: #DDD
+      text-align: center
+      margin-top: 25px

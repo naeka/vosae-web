@@ -1,0 +1,213 @@
+.app-contacts
+  &[class^="page-"]:not(.page-settings),
+  &[class*=" page-"]:not(.page-settings)
+    position: relative
+    padding: 0 40px
+
+.app-contacts section
+  border-bottom: 5px solid $grey
+
+  &.with-head
+    border-bottom: 0
+    
+    & > .header
+      border-bottom: 5px solid $grey
+      padding-top: 30px 
+      padding-bottom: 5px
+      margin-bottom: 15px 
+
+      h4
+        margin: 0
+        padding-left: 15px
+        font-size: 140%
+
+  &.actions
+    border-bottom: 5px solid $lightgrey
+    padding-bottom: 20px
+
+    h1
+      color: #414141
+      float: left
+      font-size: 23px
+      margin: 0
+      line-height: 28px
+
+  &:last-child
+    border-bottom: 0
+
+
+.app-contacts label.type
+  height: 22px
+  line-height: 22px
+  display: block
+  font-size: inherit
+  background: $green
+  color: #FFF
+  padding: 0px 8px
+  margin: 0
+  +border-radius(4px)
+
+.app-contacts .actions-form
+  margin-top: 10px
+  text-align: right
+
+.app-contacts .btn-delete,
+.app-contacts .btn-add
+  width: 20px
+  height: 20px
+  line-height: 20px
+  display: inline-block
+  text-align: center
+  color: #FFF
+  font-size: 13px
+  cursor: pointer
+
+  +border-radius(10px)
+  +unselectable()
+
+  &.orange
+    background: $orange
+  &.green
+    background: $green
+
+.app-contacts .btn-add
+  font-size: 14px
+
+
+// Contact card
+.contact-card
+  float: left
+  margin-bottom: 10px
+  width: 50%
+  +box-sizing(border-box)
+
+  &:nth-child(odd)
+    padding-right: 5px
+    clear: both
+  
+  &:nth-child(even)
+    padding-left: 5px
+
+  & > .inner 
+    background: $lightgrey
+    padding: 14px 12px 10px 12px
+    position: relative
+    +border-radius(4px)
+    +box-sizing(border-box)
+
+    &:hover
+      background: darken($lightgrey, 5)
+  
+  .infos 
+    font-size: 15px
+    padding-left: 12px
+
+    .role
+      display: block
+      margin-top: -3px
+      font-size: 14px
+    a 
+      color: #333
+      display: block
+      font-size: 17px
+      font-weight: bold
+      line-height: 19px
+    
+  .options 
+    a 
+      background: $darkgrey
+      color: #333
+      display: block
+      height: 24px
+      margin-bottom: 6px
+      position: relative
+      width: 24px
+      line-height: 24px
+      font-size: 16px
+      text-align: center
+      +border-radius(12px)
+    
+      &.private
+        cursor: default
+        line-height: 22px
+
+      &.active 
+        background: $orange
+        color: $white
+      
+  .number 
+    clear: both
+    padding-top: 15px
+    font-weight: bold
+    
+    span  
+      display: block
+    
+    .number 
+      font-size: 18px
+
+
+// Organization card
+.organization-card 
+  background: $lightgrey
+  margin-bottom: 10px
+  padding: 14px 12px 10px 12px
+  position: relative
+  +border-radius(4px)
+
+  &:hover
+    background: darken($lightgrey, 5)
+      
+  .infos
+    font-weight: bold
+    font-size: 15px
+    padding-left: 12px
+    padding-top: 4px
+    vertical-align: top
+
+    .desc
+      display: block
+      margin-top: -1px
+      font-weight: normal
+
+    a 
+      font-size: 18px
+      font-weight: bold
+    
+    span.counter
+      cursor: pointer
+
+  .options
+    a 
+      background: $darkgrey
+      color: #333
+      display: block
+      height: 24px
+      margin-bottom: 6px
+      position: relative
+      width: 24px
+      line-height: 24px
+      font-size: 16px
+      text-align: center
+      +border-radius(12px)
+    
+      &.private
+        cursor: default
+        line-height: 22px
+
+      &.active 
+        background: $orange
+        color: $white
+
+
+// Media Queries
+@media (max-width: 700px) 
+  .contact-preview 
+    float: none
+    width: 100%
+    
+    &:nth-child(odd)
+      padding-right: 0
+      clear: none
+    &:nth-child(even)
+      padding-left: 0

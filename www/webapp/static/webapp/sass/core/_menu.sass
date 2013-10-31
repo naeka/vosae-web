@@ -1,0 +1,77 @@
+.enable-transformX #desktop-app-menu
+  position: static
+  -webkit-transform: none
+  
+#desktop-app-menu 
+  text-align: center
+  width: inherit
+  position: fixed
+  -webkit-transform: translateZ(0) // Google maps hack
+  
+  li 
+    margin-top: 15px
+    position: relative
+ 
+    a 
+      color: #333
+      cursor: pointer
+      display: inline-block
+      font-size: 14px
+      font-weight: bold
+      opacity: .6
+      text-align: center
+      text-decoration: none
+ 
+      .circle
+        background-repeat: no-repeat
+        background-position: center center
+        border: 2px solid #333
+        display: block
+        height: 43px
+        margin: 0 auto
+        width: 43px
+        +border-radius(43px)
+        +box-sizing(border-box)
+ 
+      [class^="picto-"],
+      [class*="picto-"]
+        font-weight: normal
+
+      &:hover
+        opacity: 1
+      
+    &:first-child 
+      margin-top: 0px
+
+    &.active 
+      a
+        color: $orange
+        opacity: 1
+
+      .circle
+        background: $orange
+        border-color: $orange
+
+      [class^="picto-"],
+      [class*="picto-"]
+        color: #FFF
+
+      &:before 
+        background: #FFF
+        border-bottom: 1px solid #FFF
+        border-left: 1px solid #FFF
+        content: ' '
+        height: 14px
+        position: absolute
+        right: -7px
+        top: (43px - 14px) / 2
+        width: 14px
+        +box-sizing(border-box)
+        +rotate(45)
+
+  [class^="picto-"]
+    display: block
+    font-size: 26px
+    height: 40px
+    line-height: 40px
+    width: 40px

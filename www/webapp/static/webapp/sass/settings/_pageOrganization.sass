@@ -1,0 +1,76 @@
+.outlet-settings
+  .global-informations
+    table:first-child
+      margin-bottom: 30px
+
+    .dropzone
+      position: relative
+      height: 55px
+      line-height: 55px
+      text-align: center
+      border: 0
+      background: #1e1e1e
+      padding: 6px 8px
+      color: #AAA
+      border: 4px dashed #1e1e1e
+      overflow: hidden
+
+      .drag-drop-message
+        display: none
+        visibility: hidden
+
+      &.empty
+        .drag-drop-message
+          display: block
+          visibility: visible
+
+      .progress
+        border-radius: 0px
+        height: 14px
+        overflow: hidden
+        width: 200px
+        margin: 14px auto 0
+        .bar
+          background: $green
+
+      .progress-text
+        color: #EEE
+        width: 100%
+        text-align: center
+        line-height: 22px    
+
+    .logo, .terms
+      a.btn
+        margin-top: 10px
+
+    .logo
+      .dropzone img
+        max-width: 100%
+        width: auto
+        max-height: 100%
+        vertical-align: middle
+
+    .terms
+      .btn
+        position: relative
+
+      .filename
+        margin-left: 8px
+        cursor: pointer
+
+        > span
+          margin-left: 5px
+          color: #AAA
+
+body.draggingOn .outlet-settings .global-informations
+  .dropzone
+    border-color: #666
+
+    .drag-drop-message
+      display: block
+      visibility: visible
+      font-size: 24px
+      font-weight: bold
+
+    img, span
+      display: none

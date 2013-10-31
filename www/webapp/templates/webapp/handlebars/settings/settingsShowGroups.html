@@ -1,0 +1,43 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "settings/showGroups" %}
+  <header>
+    <h3>{% trans "Global settings" %} &nbsp;>&nbsp; {% trans "Groups" %}</h3>
+  </header>
+  <section class="clearfix">
+    <div class="inner">
+      <table class="table table-groups">
+        <thead class="green">
+          <th class="name">{% trans "Name" %}</th>
+          <th class="created-by">{% trans "Created by" %}</th>
+          <th class="creation-date">{% trans "Creation date" %}</th>
+        </thead>
+        <tbody>
+          {{#each group in controller}}
+          <tr>
+            <td class="name">
+              {{#linkTo 'settings.editGroup' controller.session.tenant group}}
+                {{group.name}}
+              {{/linkTo}}
+            </td>
+            <td class="created-by">
+              {{#if group.createdBy}}
+                {{group.createdBy.fullName}}
+              {{else}}
+                {% trans "System" context "user" %}
+              {{/if}}
+            </td>
+            <td class="creation-date">
+              {{formatDate group.createdAt}}
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      <br/>
+      {{#linkTo 'settings.addGroup' controller.session.tenant class="pull-right btn btn-small green rounded"}}
+        {% trans "Add" %}
+      {{/linkTo}}
+    </div>
+  </section>
+{% endtplhandlebars %}

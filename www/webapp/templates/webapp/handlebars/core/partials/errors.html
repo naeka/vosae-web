@@ -1,0 +1,31 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "forbidden" %}
+  <div class="http-error forbidden">
+    <h1>403 - {% trans "You're not allowed to access this page!" %} - 403</h1>
+    <p>
+      {% trans "You can still use the application. If the problem persists, contact us." %}<br>
+      <a href="mailto:support@vosae.com" class="button green no-icon">{% trans "Contact support" %}</a>
+    </p>
+  </div>
+{% endtplhandlebars %}
+
+{% tplhandlebars "notFound" %}
+  <div class="http-error not-found">
+    <h1>404 - {% trans "The page you're looking for doesn't exist!" %} - 404</h1>
+    <p>
+      {% trans "You can still use the application. If the problem persists, contact us." %}<br>
+      <a href="mailto:support@vosae.com" class="button green no-icon">{% trans "Contact support" %}</a>
+    </p>
+  </div>
+{% endtplhandlebars %}
+
+{% tplhandlebars "internalServerError" %}
+  <div class="http-error internal-server-error">
+    <h1>500 - {% trans "Something went wrong on the server!" %} - 500</h1>
+    <p>
+      {% trans "You can still use the application. If the problem persists, contact us." %}<br>
+      <a href="mailto:support@vosae.com" class="button green no-icon">{% trans "Contact support" %}</a>
+    </p>
+  </div>
+{% endtplhandlebars %}

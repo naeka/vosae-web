@@ -1,0 +1,279 @@
+// ===================
+// = Page show event =
+// ===================
+
+.page-show-event,
+.page-edit-event
+  padding: 0px 40px
+  position: relative
+
+  section
+
+    &.main-infos
+      padding: 24px 0px
+      position: relative
+        
+      .infos
+        display: inline-block
+        vertical-align: middle
+        
+        p 
+          display: inline-block
+          font-size: 1.5em
+          font-weight: bold
+          line-height: 30px
+          input
+            display: block
+            clear: both
+
+        .date 
+          display: block
+          margin-top: 5px
+          font-size: 18px
+          text-transform: capitalize
+          
+      .calendar
+        float: right
+
+        label
+          background-color: attr(data-color color)
+          font-weight: bold
+          height: 22px
+          line-height: 22px
+          display: inline-block
+          padding: 2px 8px
+          +border-radius(4px)
+
+    &.event-infos
+      .attendee-card
+        padding: 10px
+        background-color: $grey
+        margin-bottom: 10px
+        +border-radius(4px)
+
+        &:last-child
+          margin-bottom: 0px
+
+        table, tr
+          width: 100%
+          max-width: 100%
+
+        .attendee-avatar, .attendee-infos, .attendee-status
+          vertical-align: middle
+
+        .attendee-avatar
+          width: 52px
+          min-width: 52px
+          max-width: 52px
+          padding-right: 10px
+
+          > div
+            width: 52px
+            height: 52px
+            overflow: hidden
+            background-color: $lightgrey
+            vertical-align: middle
+            text-align: center
+
+            > i
+              font-size: 180%
+              line-height: 52px
+
+            > img
+              width: 52px
+              height: 52px
+
+        .attendee-infos
+          width: 100%
+          max-width: 100%
+          padding-right: 10px
+
+          input
+            width: 100%
+            max-width: 100%
+            min-width: 100px
+            &.email
+              font-size: 17px
+              padding: 0 4px
+
+            &.name
+              font-weight: bold
+              font-size: 22px
+          p
+            margin: 0
+            font-weight: bold
+
+        .attendee-status
+          width: 22px
+          min-width: 22px
+          max-width: 22px
+          padding-left: 10px
+
+          > span, .select2-choice
+            height: 20px
+            width: 20px
+            +border-radius(4px)
+
+            &.NEEDS-ACTION
+              background-color: $darkergrey
+
+            &.TENTATIVE
+              background-color: $green
+              +opacity(0.5)
+
+            &.ACCEPTED
+              background-color: $green
+
+            &.DECLINED
+              background-color: $orange
+
+          > span
+            display: inline-block
+
+          .select2-choice
+            padding: 0px
+            border: none
+
+            div
+              width: 22px
+              height: 22px
+              line-height: 18px
+              text-align: center
+
+          .attendee-delete
+            width: 20px
+            height: 20px
+            line-height: 20px
+            text-align: center
+            padding: 0px
+            font-weight: normal
+            i
+              margin: 0
+
+          .more
+            color: #999
+            margin: 10px 20px
+            display: inline-block
+            
+            &.comment
+              font-size: 1.2em
+              font-weight: bold
+              text-align: justify
+
+
+.page-edit-event
+  section
+    &.main-infos
+      .infos
+        width: 100%
+
+        .summary
+          float: left
+
+          input
+            font-weight: bold
+            font-size: 24px
+            min-width: 120px
+            max-width: 600px
+
+      div.date
+        margin-top: 20px
+        padding-left: 4px
+
+        input.date
+          color: #888
+          font-size: 16px
+          margin: 0
+          min-width: 90px
+          max-width: 100px
+
+          &.date
+            max-width: 140px
+
+        .bootstrap-timepicker
+          input
+            color: #888
+            width: 40px
+            max-width: 40px
+
+        .dt-start > div, .dt-end > div
+          display: inline-block
+
+        .date-ad
+          padding-left: 10px
+          display: inline-block
+          font-size: 16px
+          label, input
+            margin: 0
+
+    &.event-infos
+      input, textarea
+        padding: 4px
+
+      .location
+        input
+          max-width: 100%
+
+      .description
+        margin-top: 10px
+
+        textarea
+          width: 100%
+          max-height: 300px
+          resize: none
+
+      .addAttendee
+        margin-bottom: 10px
+        padding: 12px
+        text-align: center
+        font-size: 22px
+        height: auto
+        width: 100%
+        +border-radius(4px)
+        +box-sizing(border-box)
+
+      .colorAndReminder
+        width: 100%
+        padding: 4px
+
+        .d-cell
+          vertical-align: top
+          line-height: normal
+          padding-bottom: 6px
+
+        .d-row > .d-cell:first-child
+          white-space: nowrap
+          font-size: 18px
+          padding-right: 20px
+
+        .colors
+          padding-top: 2px
+        .reminders
+          font-size: 18px
+
+          select
+            margin: 0
+
+          > ul
+            > li:last-child
+              margin-bottom: 10px
+
+          .reminder-entry
+            margin-bottom: 10px
+            > div
+              display: inline-block
+
+            input
+              font-size: 16px
+              padding: 0 4px
+              min-width: 5px
+
+            .reminder-delete
+              padding: 0
+              line-height: 24px
+              text-align: center
+              width: 24px
+              height: 24px
+              margin-left: 10px
+              i
+                margin: 0

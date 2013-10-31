@@ -1,0 +1,1 @@
+Vosae.QuotationEditController = Vosae.InvoiceBaseController.extend()

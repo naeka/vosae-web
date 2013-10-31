@@ -1,0 +1,43 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "settings/showUsers" %}
+  <header>
+    <h3>{% trans "Global settings" %} &nbsp;>&nbsp; {% trans "Users" %}</h3>
+  </header>
+  <section class="clearfix">
+    <div class="inner">  
+      <table class="table table-users">
+        <thead class="green">
+          <th class="name">{% trans "Name" %}</th>
+          <th class="email">{% trans "E-mail address" %}</th>
+          <th class="creation-date">{% trans "Creation date" %}</th>
+          <th class="last-login">{% trans "Last login" %}</th>
+          <th class="status">{% trans "Status" %}</th>
+        </thead>
+        <tbody>
+          {{#each user in controller}}
+          <tr>
+            <td class="name">
+              {{#linkTo 'settings.editUser' controller.session.tenant user}}
+                {{user.getFullName}}
+              {{/linkTo}}
+            </td>
+            <td class="email">
+              {{user.email}}
+            </td>
+            <td class="creation-date">-</td>
+            <td class="last-login">-</td>
+            <td class="status">
+              {{user.getStatus}}
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      <br/>
+      {{#linkTo 'settings.addUser' controller.session.tenant class="pull-right btn btn-small rounded green"}}
+        {% trans "Add" %}
+      {{/linkTo}}
+    </div>
+  </section>
+{% endtplhandlebars %}

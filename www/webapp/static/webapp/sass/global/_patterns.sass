@@ -1,0 +1,124 @@
+//  ====================================
+//  = Partials stylesheet for patterns =
+//  ====================================
+
+*  
+  outline: 0
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+
+a
+  color: $textColor
+  cursor: pointer
+  &:hover
+    color: inherit
+ul
+  margin: 0
+  
+li
+  list-style-type: none
+
+table
+  td
+    border: 0
+
+.table
+  td
+    border: 0
+    padding: 0
+  th
+    font-weight: normal
+
+.d-table
+  display: table 
+
+.d-row
+  display: table-row 
+
+.d-cell
+  display: table-cell 
+
+.nowrap
+  white-space: nowrap
+
+.align-top
+  vertical-align: top
+
+.align-midlle
+  vertical-align: middle
+
+.align-baseline
+  vertical-align: baseline
+
+.uppercase
+  text-transform: uppercase
+
+.capitalize
+  text-transform: capitalize
+
+.ui-loading
+  padding-top: 100px
+  text-align: center
+  @include ui-spinner(#FFF, 46px, $darkgrey, $green, .8, 3s)
+
+
+.btn-group.open
+  .btn:first-child
+    +border-radius-separate(4px, 4px, 0px, 0px)
+.dropdown-menu
+  +border-radius(0px)
+  padding: 0
+  margin: -1px 0 0 0
+  +disable-box-shadow()
+  border: 0
+  background: #F8F8F8
+  li a
+    line-height: 28px
+
+  li:hover
+    a
+      color: $textColor
+      background: #DDD
+
+
+@-webkit-keyframes fadein
+  from
+    opacity: 0
+  to
+    opacity: 1
+
+@-moz-keyframes fadein
+  from
+    opacity: 0
+  to
+    opacity: 1
+
+@-webkit-keyframes fadeout
+  from
+    opacity: 1
+  to
+    opacity: 0
+
+@-moz-keyframes fadeout
+  from
+    opacity: 1
+  to
+    opacity: 0
+
+
+.fade.out
+  opacity: 0
+  -moz-animation: fadeout 200ms 
+  -webkit-animation: fadeout 200ms
+  -o-animation: fadeout 200ms
+  -ms-animation: fadeout 200ms
+  -khtml-animation: fadeout 200ms
+  animation: fadeout 200ms
+
+.fade.in
+  opacity: 1
+  -moz-animation: fadein 200ms 
+  -webkit-animation: fadein 200ms
+  -o-animation: fadein 200ms
+  -ms-animation: fadein 200ms
+  -khtml-animation: fadein 200ms
+  animation: fadein 200ms

@@ -1,0 +1,62 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "invoicing/partials/_tableOfInvoices" %}
+  <table class="table table-invoices">
+    <thead class="green">
+      <tr>
+        <th class="reference">
+          {% trans "Reference" context "table-headers" %}
+        </th>
+        <th class="customer">
+          {% trans "Customer" context "table-headers" %}
+        </th>
+        <th class="total">
+          {% trans "Total (incl. tax.)" context "table-headers" %}
+        </th>
+        <th class="due-date">
+          {% trans "Due date" context "table-headers" %}
+        </th>
+        <th class="status">
+          {% trans "Status" context "table-headers" %}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each invoice in this}}
+      <tr>
+        <td class="reference">
+          {{#linkTo "invoice.show" controller.session.tenant invoice}}
+            {{#if invoice.hasTemporaryReference}}
+              {% trans "Undefined" context "reference" %}
+            {{else}}
+              {{invoice.ref}}
+            {{/if}}
+          {{/linkTo}}
+        </td>
+        <td class="customer">
+          {{#if invoice.organization}}
+            {{#linkTo "organization.show" controller.session.tenant invoice.organization}}
+              {{invoice.organization.corporateName}}
+            {{/linkTo}}
+          {{else}}
+            {{#if invoice.contanct}}
+              {{#linkTo "contact.show" controller.session.tenant invoice.contact}}
+                {{invoice.contact.fullName}}
+              {{/linkTo}}
+            {{/if}}
+          {{/if}}
+        </td>
+        <td class="total">
+          {{#formatMoneyHack invoice.total invoice.currentRevision.currency.displaySign}}{{/formatMoneyHack}}
+        </td>
+        <td class="due-date">
+          {{formatDate invoice.currentRevision.dueDate}}
+        </td>
+        <td class="status">
+          {{invoice.displayState}}
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{% endtplhandlebars %}

@@ -1,0 +1,1 @@
+Vosae.ContactShowController = Vosae.EntityController.extend()

@@ -1,0 +1,104 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "settings/invoicingGeneral" %}
+  <header>
+    <h3>{% trans "Invoicing settings" %} &nbsp;>&nbsp; {% trans "General" %}</h3>
+  </header>
+  <section class="clearfix">
+    <div class="inner">
+      <table>
+        <tbody>
+          <tr>
+            <td colspan="2">
+              <h4>{% trans "Currencies" %}</h4>
+            </td>
+          </tr>
+          <tr>
+            <td class="label">
+              <label>{% trans "Supported currencies" %}</label>
+            </td>
+            <td>
+              {{#if sortedCurrencies}}
+                {{view view.supportedCurrencies
+                  contentBinding="sortedCurrencies"
+                  selectionBinding="invoicing.supportedCurrencies"
+                  multiple="true"
+                  containerCssClass="green"
+                  optionValuePath="content"
+                  optionLabelPath="content.description" }}
+              {{/if}}
+            </td>
+          </tr>
+          <tr>
+            <td class="label">
+              <label>{% trans "Default currency" %}</label>
+            </td>
+            <td>
+              {{#if invoicing.supportedCurrencies}}
+                {{view view.defaultCurrency
+                  contentBinding="supportedCurrencies"
+                  selectionBinding="invoicing.defaultCurrency"
+                  containerCssClass="green"
+                  optionValuePath="content"
+                  optionLabelPath="content.description" }}
+              {{/if}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  {% comment %}
+    Yes this line is fucking useless, but it fix a shitty bug on stateManager.
+    Without doing this, when selecting a different `defaultCurrency` in the 
+    Em.Select above, the stateManager of `tenantSettings.invoicing.numbering`
+    trigger the following error :
+    Attempted to handle event `becomeDirty` while in state 'rootState.loaded.materializing.firstTime
+  {% endcomment %}
+  {{#if invoicing.numbering}}{{/if}}
+  <hr>
+  <section class="clearfix">
+    <div class="inner">
+      <table>
+        <tbody>
+          <tr>
+            <td colspan="2">
+              <h4>{% trans "Legal notices" %}</h4>
+            </td>
+          </tr>
+          <tr>
+            <td class="label">
+              <label>{% trans "Accepted payment types" %}</label>
+            </td>
+            <td>
+              {{view view.paymentTypes
+                contentBinding="paymentTypes"
+                selectionBinding="invoicing.acceptedPaymentTypes"
+                multiple="true"
+                containerCssClass="green"
+                optionValuePath="content.value"
+                optionLabelPath="content.label" }}
+            </td>
+          </tr>
+          <tr>
+            <td class="label">
+              <label>{% trans "Late fee rate" %}</label>
+            </td>
+            <td>
+              {{view view.lateFeeRate
+                valueBinding="invoicing.lateFeeRateFormated"
+                invoicingBinding="invoicing"
+                classNames="edit-settings"
+                placeholder="{% trans 'Statutory rate' %}" }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "settings/invoicingGeneral/actions" %}
+  {{partial "settings/partials/saveSettings"}}
+{% endtplhandlebars %}

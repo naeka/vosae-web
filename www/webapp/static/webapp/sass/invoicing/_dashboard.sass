@@ -1,0 +1,53 @@
+.page-invoicing-dashboard
+
+  section
+    &:not(.actions)
+      padding: 22px 0
+
+    &.summary
+
+      h4
+        margin: 0
+        padding-bottom: 4px
+
+      p
+        clear: both
+        font-size: 15px
+        font-weight: bold
+        margin: 0
+        padding-bottom: 2px
+
+      .icon i
+        border: 2px solid #333
+        display: block
+        height: 50px
+        width: 50px
+        font-size: 32px
+        line-height: 48px
+        margin: 15px 15px 0 0
+        +border-radius(25px)
+        +box-sizing(border-box)
+
+      .pull-left
+        position: relative
+
+        p
+          color: #999     
+
+      .pull-right
+        p
+          color: $gray
+
+        i
+          margin-right: 3px
+
+
+    &.sub-actions
+      border-bottom: 0
+      a
+        margin-right: 4px
+      .invoice
+        margin-right: 25px
+
+    &.invoices
+      padding-top: 0

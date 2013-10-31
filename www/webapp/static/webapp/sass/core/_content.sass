@@ -1,0 +1,43 @@
+.enable-transformX #content > .d-table > .d-row > .d-cell
+  padding-top: 54px
+
+.enable-transformX #content > .d-table .d-cell.page-actions > .inner
+  position: static
+  -webkit-transform: none
+
+#content 
+  background: #FFF
+
+  & > .inner 
+    position: relative
+  
+  & > .d-table
+    table-layout: fixed
+    width: 100%
+    word-wrap: break-word
+    margin: 0
+
+    & > .d-row > .d-cell 
+      padding-top: 50px + 54px // padding + header height
+      vertical-align: top
+
+      &.menu 
+        background: #EEEEEE
+        max-width: 160px 
+        min-width: 160px 
+        width: 160px 
+    
+      &.content  
+        border-right: 5px solid #EEEEEE
+        padding-bottom: 10px
+        width: 100%
+      
+      &.page-actions 
+        max-width: 175px 
+        min-width: 175px 
+        width: 175px
+        padding-right: 10px
+
+        & > .inner
+          position: fixed
+          -webkit-transform: translateZ(0) // Google maps hack

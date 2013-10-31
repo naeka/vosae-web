@@ -1,0 +1,236 @@
+{% load i18n templatetag_handlebars i18n_handlebars %}
+
+{% tplhandlebars "dashboard/show" %}
+  {{#if content.length}}
+    <div {{bindAttr class="content.length:showCrossBar:hideCrossBar"}}>
+      <div class="cross-bar"></div>
+      {{view view.timelineItems arrangedContentBinding="arrangedContent"}}
+      {{#if content.meta.loading}}
+        {{partial "core/partials/spinner"}}
+      {{/if}}
+    </div>
+  {{else}}
+    {{#if content.meta.loading}}
+      {{partial "core/partials/spinner"}}
+    {{else}}
+      <div class="intro clearfix">
+        <div class="pull-left text">
+          <h1>
+            {% trans 'Welcome!' %}
+          </h1>
+          <p>
+            {% verbatimblocktrans %}
+              <strong>Thank you for using Vosae.</strong> It's now time to take your first steps on the application. Want to know more about the application? Click on the <a class="orange" {{action 'startHelpTour' target="view"}}>Get Started</a> button to understand how works the interface.
+            {% endverbatimblocktrans %}
+          </p>
+        </div>
+        <div class="pull-left button">
+          <a class="btn orange" {{action 'startHelpTour' target="view"}}>
+            {% trans "Get Started!" %}
+          </a>
+        </div>
+      </div>
+      <div class="showCrossBar">
+        <div class="cross-bar animated"></div>
+        <ul class="timeline">
+          <li class="first date show">
+            <div><span>{% trans "Today" %}</span></div>
+          </li>
+          <li class="item show no-animation join">
+            <div class="avatar">
+              {{#if controller.session.user.photoUri}}
+                <img {{bindAttr src="controller.session.user.photoUri"}}>
+              {{/if}}
+            </div>
+            <span class="icon"></span>
+            <span class="desc">{% trans "You joined Vosae" %}</span>
+          </li>
+        </ul>
+      </div>
+    {{/if}}
+  {{/if}}
+{% endtplhandlebars %}
+
+{% tplhandlebars "dashboard/show/settings" %}
+   <ul class="info helptour-info">
+    <li>
+      <a {{action 'startHelpTour' target="view"}}>
+        <i class="picto-help"></i>
+        {% trans "Infos" %}
+      </a>
+    </li>
+  </ul>
+  <br>
+  <ul class="options">
+    <li>
+      <i class="picto-settings"></i>
+      {% trans "Options" %}
+    </li>
+    <li class="clearfix">
+      <i class="picto-users pull-left"></i>
+      {{view Vosae.FlipSwitchButton
+        checkedBinding="view.filter.showAppContact"
+        classNames="pull-left" }}
+    </li>
+    <li class="clearfix">
+      <i class="picto-agenda pull-left helptour-timelineoptions"></i>
+      {{view Vosae.FlipSwitchButton
+        checkedBinding="view.filter.showAppOrganizer"
+        classNames="pull-left" }}
+    </li>
+    <li class="clearfix">
+      <i class="picto-moneybox pull-left"></i>
+      {{view Vosae.FlipSwitchButton
+        checkedBinding="view.filter.showAppInvoicing"
+        classNames="pull-left" }}
+    </li>
+  </ul>
+{% endtplhandlebars %}
+
+{% tplhandlebars "timelineItems" %}
+  {{#each item in arrangedContent}}
+    {# Display date #}
+    {{#if item.dateChanged}}
+      <li {{bindAttr class="item.isFirst:first :date :show"}}><div><span>{{unbound item.dateFormated}}</span></div></li>
+    {{else}}
+      {{#if item.isFirst}}
+        <li class="date show first"><div><span>{% trans "Today" %}</span></div></li>
+      {{/if}}
+    {{/if}}
+    {{view view.timelineEntryView contentBinding="item"}}
+  {{/each}}
+{% endtplhandlebars %}
+
+{% tplhandlebars "timelineEntry" %}
+  <div class="avatar">
+    {{#if item.issuer.photoUri}}
+      <img {{bindAttr src="item.issuer.photoUri"}}>
+    {{/if}}
+  </div>
+  <span class="icon"></span>
+  <span class="desc">
+    {{#if item.issuer.isLoaded}}
+      {# {{unbound item.display_text}} #}
+      {{view item.displayView contentBinding="item"}}
+    {{else}}
+      {% trans "Loading..." %}
+    {{/if}}
+  </span>
+{% endtplhandlebars %}
+
+{% tplhandlebars "timelineEntry/base" %}
+  {{#with view.content}}
+    {% verbatimblocktrans %}{{issuerName}} has {{#if created}}created{{else}}updated{{/if}} resource {{resource_name}}{% endverbatimblocktrans %}
+  {{/with}}
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "timelineEntry/contactSaved" %}
+  {{#with view.content}}
+    {% verbatimblocktrans %}{{issuerName}} has {{#if created}}created{{else}}updated{{/if}} contact {{#if resource}}<a {{action transitionToResource resource target="controller"}}>{{contactName}}</a>{{else}}{{contactName}}{{/if}}{% endverbatimblocktrans %}
+  {{/with}}
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "timelineEntry/organizationSaved" %}
+  {{#with view.content}}
+    {% verbatimblocktrans %}{{issuerName}} has {{#if created}}created{{else}}updated{{/if}} organization {{#if resource}}<a {{action transitionToResource resource target="controller"}}>{{organizationName}}</a>{{else}}{{organizationName}}{{/if}}{% endverbatimblocktrans %}
+  {{/with}}
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "timelineEntry/quotationSaved" %}
+  {{#with view.content}}
+    {% verbatimblocktrans %}{{issuerName}} has {{#if created}}created{{else}}updated{{/if}} the quotation {{#if quotationResource}}<a {{action transitionToResource quotationResource target="controller"}}>{{quotationReference}}</a>{{else}}{{quotationReference}}{{/if}} for {{customerDisplay}}{% endverbatimblocktrans %}
+  {{/with}}
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "timelineEntry/invoiceSaved" %}
+  {{#with view.content}}
+    {% verbatimblocktrans %}{{issuerName}} has {{#if created}}created{{else}}updated{{/if}}
+    {{#if invoiceHasTemporaryReference}}
+      {{#if invoiceResource}}<a {{action transitionToResource invoiceResource target="controller"}}>an invoice</a>{{else}}an invoice{{/if}}
+    {{else}}
+      the invoice {{#if invoiceResource}}<a {{action transitionToResource invoiceResource target="controller"}}>{{invoiceReference}}</a>{{else}}{{invoiceReference}}{{/if}}
+    {{/if}} for {{customerDisplay}}{% endverbatimblocktrans %}
+  {{/with}}
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "timelineEntry/downPaymentInvoiceSaved" %}
+  {{#with view.content}}
+    {% verbatimblocktrans %}{{issuerName}} has {{#if created}}created{{else}}updated{{/if}} the down-payment invoice {{#if resource}}<a {{action transitionToResource resource target="controller"}}>{{downPaymentInvoiceReference}}</a>{{else}}{{downPaymentInvoiceReference}}{{/if}} for {{customerDisplay}}{% endverbatimblocktrans %}
+  {{/with}}
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "timelineEntry/creditNoteSaved" %}
+  {{#with view.content}}
+    {% verbatimblocktrans %}{{issuerName}} has {{#if created}}created{{else}}updated{{/if}} the credit note {{#if resource}}<a {{action transitionToResource resource target="controller"}}>{{creditNoteReference}}</a>{{else}}{{creditNoteReference}}{{/if}} for {{customerDisplay}}{% endverbatimblocktrans %}
+  {{/with}}
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "timelineEntry/quotationChangedState" %}
+  {{#with view.content}}
+    {% verbatimblocktrans %}{{issuerName}} has changed quotation {{#if quotationResource}}<a {{action transitionToResource quotationResource target="controller"}}>{{quotationReference}}</a>{{else}}{{quotationReference}}{{/if}} state from <i>{{stateLabel Vosae.quotationStatesChoices previousState}}</i> to <i>{{stateLabel Vosae.quotationStatesChoices newState}}</i>{% endverbatimblocktrans %}
+  {{/with}}
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "timelineEntry/invoiceChangedState" %}
+  {{#with view.content}}
+    {% verbatimblocktrans %}{{issuerName}} has changed
+    {{#if invoiceHasTemporaryReference}}
+      {{#if invoiceResource}}<a {{action transitionToResource invoiceResource target="controller"}}>this invoice</a>{{else}}an invoice{{/if}}
+    {{else}}
+      invoice {{#if invoiceResource}}<a {{action transitionToResource invoiceResource target="controller"}}>{{invoiceReference}}</a>{{else}}{{invoiceReference}}{{/if}}
+    {{/if}} state from <i>{{stateLabel Vosae.invoiceStatesChoices previousState}}</i> to <i>{{stateLabel Vosae.invoiceStatesChoices newState}}</i>{% endverbatimblocktrans %}
+  {{/with}}
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "timelineEntry/downPaymentInvoiceChangedState" %}
+  {{#with view.content}}
+    {% verbatimblocktrans %}{{issuerName}} has changed down-payment invoice {{#if resource}}<a {{action transitionToResource resource target="controller"}}>{{downPaymentInvoiceReference}}</a>{{else}}{{downPaymentInvoiceReference}}{{/if}} state from <i>{{stateLabel Vosae.invoiceStatesChoices previousState}}</i> to <i>{{stateLabel Vosae.invoiceStatesChoices newState}}</i>{% endverbatimblocktrans %}
+  {{/with}}
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "timelineEntry/creditNoteChangedState" %}
+  {{#with view.content}}
+    {% verbatimblocktrans %}{{issuerName}} has changed credit note {{#if resource}}<a {{action transitionToResource resource target="controller"}}>{{creditNoteReference}}</a>{{else}}{{creditNoteReference}}{{/if}} state from <i>{{previousState}}</i> to <i>{{newState}}</i>{% endverbatimblocktrans %}
+  {{/with}}
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "timelineEntry/quotationMakeInvoice" %}
+  {{#with view.content}}
+    {% verbatimblocktrans %}{{issuerName}} has made
+    {{#if invoiceHasTemporaryReference}}
+      {{#if invoiceResource}}<a {{action transitionToResource invoiceResource target="controller"}}>an invoice</a>{{else}}an invoice{{/if}}
+    {{else}}
+      the invoice {{#if invoiceResource}}<a {{action transitionToResource invoiceResource target="controller"}}>{{invoiceReference}}</a>{{else}}{{invoiceReference}}{{/if}}
+    {{/if}} for {{customerDisplay}} from the quotation {{#if quotationResource}}<a {{action transitionToResource quotationResource target="controller"}}>{{quotationReference}}</a>{{else}}{{quotationReference}}{{/if}}{% endverbatimblocktrans %}
+  {{/with}}
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "timelineEntry/quotationMakeDownPaymentInvoice" %}
+  
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "timelineEntry/invoiceCancelled" %}
+   {{#with view.content}}
+    {% verbatimblocktrans %}{{issuerName}} has cancelled the invoice {{#if invoiceResource}}<a {{action transitionToResource invoiceResource target="controller"}}>{{invoiceReference}}</a>{{else}}{{invoiceReference}}{{/if}}{% endverbatimblocktrans %}
+  {{/with}}
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "timelineEntry/downPaymentInvoiceCancelled" %}
+   {{#with view.content}}
+    {% verbatimblocktrans %}{{issuerName}} has cancelled the down-payment invoice {{#if resource}}<a {{action transitionToResource resource target="controller"}}>{{downPaymentInvoiceReference}}</a>{{else}}{{downPaymentInvoiceReference}}{{/if}} for {{customerDisplay}}{% endverbatimblocktrans %}
+  {{/with}}
+{% endtplhandlebars %}

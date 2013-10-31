@@ -1,0 +1,22 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "settings/application" %}
+  <header>
+    <h3>{% trans "Global settings" %} &nbsp;>&nbsp; {% trans "Application" %}</h3>
+  </header>
+  <section class="clearfix global-informations">
+    <div class="inner">
+      <h4>{% trans "General information" %}</h4>
+      <div class="progress">
+        <div class="bar" style="width: {{unbound controller.session.tenantSettings.core.quotas.usedSpacePercent}}%;"></div>
+      </div>
+      <div class="clearfix">
+        <span class="grey pull-left">{{humanFileSize controller.session.tenantSettings.core.quotas.usedSpace}}</span>
+        <span class="pull-right">
+          {% trans "Total available" %}
+          <span class="grey">{{humanFileSize controller.session.tenantSettings.core.quotas.allocatedSpace}}</span>
+        </span>
+      </div>
+    </div>
+  </section>
+{% endtplhandlebars %}

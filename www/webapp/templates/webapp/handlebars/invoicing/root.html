@@ -1,0 +1,202 @@
+{% load i18n templatetag_handlebars %}
+
+
+{% tplhandlebars "invoicing" %}
+  <div class="app-invoicing">
+    <section class="actions clearfix">
+      <nav class="pull-left helptour-dashboardtab">
+        {{#linkTo "invoicing.dashboard" controller.session.tenant class="active"}}
+          {% trans "Dashboard" context "invoicing" %}
+        {{/linkTo}}
+      </nav>
+      <nav class="pull-right helptour-righttab">
+        {{#linkTo "quotations.show" controller.session.tenant}}
+          {% trans "Quotations" %}
+        {{/linkTo}}
+        {{#linkTo "invoices.show" controller.session.tenant}}
+          {% trans "Invoices" %}
+        {{/linkTo}}
+        {# <a>Achat</a> #}
+        {{#linkTo "items.show" controller.session.tenant}}
+          {% trans "Items" %}
+        {{/linkTo}}
+      </nav>
+    </section>
+    {{outlet}}
+  </div>
+{% endtplhandlebars %}
+
+{% tplhandlebars "quotation" %}
+  <div class="app-invoicing">
+    <section class="actions clearfix">
+      <nav class="pull-left helptour-dashboardtab">
+        {{#linkTo "invoicing.dashboard" controller.session.tenant}}
+          {% trans "Dashboard" context "invoicing" %}
+        {{/linkTo}}
+      </nav>
+      <nav class="pull-right helptour-righttab">
+        {{#linkTo "quotations.show" controller.session.tenant class="active"}}
+          {% trans "Quotations" %}
+        {{/linkTo}}
+        {{#linkTo "invoices.show" controller.session.tenant}}
+          {% trans "Invoices" %}
+        {{/linkTo}}
+        {# <a>Achat</a> #}
+        {{#linkTo "items.show" controller.session.tenant}}
+          {% trans "Items" %}
+        {{/linkTo}}
+      </nav>
+    </section>
+    {{outlet}}
+  </div>
+{% endtplhandlebars %}
+
+{% tplhandlebars "quotations" %}
+  <div class="app-invoicing">
+    <section class="actions clearfix">
+      <nav class="pull-left">
+        {{#linkTo "invoicing.dashboard" controller.session.tenant}}
+          {% trans "Dashboard" context "invoicing" %}
+        {{/linkTo}}
+      </nav>
+      <nav class="pull-right">
+        {{#linkTo "quotations.show" controller.session.tenant class="active"}}
+          {% trans "Quotations" %}
+        {{/linkTo}}
+        {{#linkTo "invoices.show" controller.session.tenant}}
+          {% trans "Invoices" %}
+        {{/linkTo}}
+        {# <a>Achat</a> #}
+        {{#linkTo "items.show" controller.session.tenant}}
+          {% trans "Items" %}
+        {{/linkTo}}
+      </nav>
+    </section>
+    {{outlet}}
+  </div>
+{% endtplhandlebars %}
+
+{% tplhandlebars "invoices" %}
+  <div class="app-invoicing">
+    <section class="actions clearfix">
+      <nav class="pull-left">
+        {{#linkTo "invoicing.dashboard" controller.session.tenant}}
+          {% trans "Dashboard" context "invoicing" %}
+        {{/linkTo}}
+      </nav>
+      <nav class="pull-right">
+        {{#linkTo "quotations.show" controller.session.tenant}}
+          {% trans "Quotations" %}
+        {{/linkTo}}
+        {{#linkTo "invoices.show" controller.session.tenant class="active"}}
+          {% trans "Invoices" %}
+        {{/linkTo}}
+        {# <a>Achat</a> #}
+        {{#linkTo "items.show" controller.session.tenant}}
+          {% trans "Items" %}
+        {{/linkTo}}
+      </nav>
+    </section>
+    {{outlet}}
+  </div>
+{% endtplhandlebars %}
+
+{% tplhandlebars "invoice" %}
+  <div class="app-invoicing">
+    <section class="actions clearfix">
+      <nav class="pull-left">
+        {{#linkTo "invoicing.dashboard" controller.session.tenant}}
+          {% trans "Dashboard" context "invoicing" %}
+        {{/linkTo}}
+      </nav>
+      <nav class="pull-right">
+        {{#linkTo "quotations.show" controller.session.tenant}}
+          {% trans "Quotations" %}
+        {{/linkTo}}
+        {{#linkTo "invoices.show" controller.session.tenant class="active"}}
+          {% trans "Invoices" %}
+        {{/linkTo}}
+        {# <a>Achat</a> #}
+        {{#linkTo "items.show" controller.session.tenant}}
+          {% trans "Items" %}
+        {{/linkTo}}
+      </nav>
+    </section>
+    {{outlet}}
+  </div>
+{% endtplhandlebars %}
+
+{% tplhandlebars "items" %}
+  <div class="app-invoicing">
+    <section class="actions clearfix">
+      <nav class="pull-left">
+        {{#linkTo "invoicing.dashboard" controller.session.tenant}}
+          {% trans "Dashboard" context "invoicing" %}
+        {{/linkTo}}
+      </nav>
+      <nav class="pull-right">
+        {{#linkTo "quotations.show" controller.session.tenant}}
+          {% trans "Quotations" %}
+        {{/linkTo}}
+        {{#linkTo "invoices.show" controller.session.tenant}}
+          {% trans "Invoices" %}
+        {{/linkTo}}
+        {# <a>Achat</a> #}
+        {{#linkTo "items.show" controller.session.tenant class="active"}}
+          {% trans "Items" %}
+        {{/linkTo}}
+      </nav>
+    </section>
+    {{outlet}}
+  </div>
+{% endtplhandlebars %}
+
+{% tplhandlebars "item" %}
+  <div class="app-invoicing">
+    <section class="actions clearfix">
+      <nav class="pull-left">
+        {{#linkTo "invoicing.dashboard" controller.session.tenant}}
+          {% trans "Dashboard" context "invoicing" %}
+        {{/linkTo}}
+      </nav>
+      <nav class="pull-right">
+        {{#linkTo "quotations.show" controller.session.tenant}}
+          {% trans "Quotations" %}
+        {{/linkTo}}
+        {{#linkTo "invoices.show" controller.session.tenant}}
+          {% trans "Invoices" %}
+        {{/linkTo}}
+        {# <a>Achat</a> #}
+        {{#linkTo "items.show" controller.session.tenant class="active"}}
+          {% trans "Items" %}
+        {{/linkTo}}
+      </nav>
+    </section>
+    {{outlet}}
+  </div>
+{% endtplhandlebars %}
+
+{% tplhandlebars "creditNote" %}
+  <div class="app-invoicing">
+    <section class="actions clearfix">
+      <nav class="pull-left">
+        {{#linkTo "invoicing.dashboard" controller.session.tenant}}
+          {% trans "Dashboard" context "invoicing" %}
+        {{/linkTo}}
+      </nav>
+      <nav class="pull-right">
+        {{#linkTo "quotations.show" controller.session.tenant}}
+          {% trans "Quotations" %}
+        {{/linkTo}}
+        {{#linkTo "invoices.show" controller.session.tenant}}
+          {% trans "Invoices" %}
+        {{/linkTo}}
+        {# <a>Achat</a> #}
+        {{#linkTo "items.show" controller.session.tenant}}
+          {% trans "Items" %}
+        {{/linkTo}}
+      </nav>
+    </section>
+    {{outlet}}
+  </div>
+{% endtplhandlebars %}

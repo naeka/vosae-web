@@ -7,7 +7,7 @@ virtualenv:
 
 env:
     global:
-        - secure: "lquW337nA3d9NzxUUyzH5lHNOYuhfUSdam9ghIHOAWok+22AZd78e02uBzsEnew9yfmWuoTIt8+TeuLPmxXsXftxf+DzZcc0OCLX4irBOUIhPM+CzwEDVtfxqdLV4PdTQ7/5ffv7stF2rIPCfYUku6XzAMyOm1yyBzhxyhpd5XQ="
+        - secure: "CPt377sadrE3Wp70beQs8rnlzHkldtN1EOFfr+1CEkuHQJng4bdMmdaEohfe0+6hXMkXWOc6fYdjdrv9JuY06NWmWcTfKryV4CB9GCrbAPibsxiLDzgcXjQjd2jCn3DAAMXOG5ANqmr98IWOHiK7Z6DrNhFTGzoVBIoiXeRKOrA="
 
 before_install:
     - gem install compass
@@ -22,7 +22,6 @@ install:
 
 before_script:
     - source travis_before.sh
-    - env
 
 script:
     - source travis_spec.sh

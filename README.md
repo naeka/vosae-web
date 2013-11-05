@@ -7,8 +7,8 @@
 
 | Branch | Travis-CI build status |
 | :--- | --- |
-| master (ready for production) | [![Build Status](https://magnum.travis-ci.com/Naeka/vosae-web.png?token=zEdftv98cb3UVS7Y5Arg&branch=master)](https://magnum.travis-ci.com/Naeka/vosae-web) |
-| develop | [![Build Status](https://magnum.travis-ci.com/Naeka/vosae-web.png?token=zEdftv98cb3UVS7Y5Arg)](https://magnum.travis-ci.com/Naeka/vosae-web) |
+| master (ready for production) | [![Build Status](https://travis-ci.org/Naeka/vosae-web.png?branch=master)](https://travis-ci.org/Naeka/vosae-web) |
+| develop | [![Build Status](https://travis-ci.org/Naeka/vosae-web.png?branch=develop)](https://travis-ci.org/Naeka/vosae-web) |
 
 ---
 

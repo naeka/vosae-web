@@ -16,7 +16,7 @@ Vosae.EntityEditView = Em.View.extend
     dropZone = @.$('section.main-infos')
 
     @.$('.fileupload').fileupload
-      url: '/api/v1/file/'
+      url: "#{APP_ENDPOINT}/api/v1/file/"
       dataType: 'json'
       formData:
         ttl: 60*24  # 1 day

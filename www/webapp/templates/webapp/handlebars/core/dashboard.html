@@ -39,7 +39,7 @@
           <li class="item show no-animation join">
             <div class="avatar">
               {{#if controller.session.user.photoUri}}
-                <img {{bindAttr src="controller.session.user.photoUri"}}>
+                <img {{bindAttr src="controller.session.user.absolutePhotoUri"}}>
               {{/if}}
             </div>
             <span class="icon"></span>
@@ -104,7 +104,7 @@
 {% tplhandlebars "timelineEntry" %}
   <div class="avatar">
     {{#if item.issuer.photoUri}}
-      <img {{bindAttr src="item.issuer.photoUri"}}>
+      <img {{bindAttr src="item.issuer.absolutePhotoUri"}}>
     {{/if}}
   </div>
   <span class="icon"></span>

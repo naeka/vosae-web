@@ -13,12 +13,6 @@ Vosae.Entity = DS.Model.extend
 
   isUploading: false
 
-  absolutePhotoUri: (->
-    if @get('photoUri')
-      return APP_ENDPOINT + @get('photoUri')
-    @get('photoUri')
-  ).property 'photoUri'
-
   isOwned: (->
     # Return true if entity has been created by current Vosae.User
     if @get('creator') is Vosae.lookup("session:current").get('user')

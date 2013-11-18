@@ -6,7 +6,7 @@
     <li class="organization-card clearfix">
       <div class="avatar default-organization rounded pull-left">
         {{#if organization.photoUri}}
-          <img {{bindAttr src="organization.photoUri"}}>
+          <img {{bindAttr src="organization.absolutePhotoUri"}}>
         {{/if}}
       </div>
       <div class="infos pull-left">

@@ -7,3 +7,9 @@ Vosae.Attendee = DS.Model.extend
   optional: DS.attr('boolean')
   responseStatus: DS.attr('string')
   comment: DS.attr('string')
+
+  absolutePhotoUri: (->
+    if @get('photoUri')
+      return APP_ENDPOINT + @get('photoUri')
+    @get('photoUri')
+  ).property 'photoUri'

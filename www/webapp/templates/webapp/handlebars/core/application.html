@@ -37,7 +37,7 @@
             <a id="desktop-header-settings" {{action openPanelRight target="view"}}>
               <div class="avatar" title="{% trans 'My settings' %}">
                 {{#if controller.session.user.photoUri}}
-                  <img {{bindAttr src="controller.session.user.photoUri"}}>
+                  <img {{bindAttr src="controller.session.user.absolutePhotoUri"}}>
                 {{/if}}
               </div>
               <span class="username">{{controller.session.user.fullName}}</span>

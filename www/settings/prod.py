@@ -127,7 +127,3 @@ PUSHER_CLUSTER = 'eu'
 #     from .heroku import *
 # except:
 #     pass
-
-
-# App endpoint must be defined
-assert APP_ENDPOINT, u'VOSAE_APP_ENDPOINT is missing in environment'

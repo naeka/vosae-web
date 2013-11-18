@@ -21,6 +21,3 @@ try:
     from settings.local import *
 except ImportError:
     pass
-
-# App endpoint must be defined
-assert APP_ENDPOINT, u'VOSAE_APP_ENDPOINT is missing in environment'

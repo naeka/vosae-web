@@ -23,6 +23,12 @@ Vosae.User = DS.Model.extend
     return gettext 'To define'
   ).property 'fullName'
 
+  absolutePhotoUri: (->
+    if @get('photoUri')
+      return APP_ENDPOINT + @get('photoUri')
+    @get('photoUri')
+  ).property 'photoUri'
+
   # This method returns true if `permissions`
   # array contains the permission `@perm` 
   permissionsContains: (perm) ->

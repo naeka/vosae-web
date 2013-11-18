@@ -53,7 +53,7 @@
         {{view view.uploadProgressBar isUploadingBinding="content.isUploading"}}
         {{#if photoUri}}
           {{#unless isUploading}}
-            <img {{bindAttr src="absolutePhotoUri"}}>
+            <img {{bindAttr src="photoUri"}}>
           {{/unless}}
         {{/if}}
         <input class="fileupload fill" type="file" multiple/>

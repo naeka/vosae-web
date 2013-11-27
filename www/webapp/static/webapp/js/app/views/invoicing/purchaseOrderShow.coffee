@@ -1,0 +1,1 @@
+Vosae.PurchaseOrderShowView = Vosae.QuotationShowView.extend()

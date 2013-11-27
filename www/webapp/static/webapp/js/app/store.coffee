@@ -122,6 +122,7 @@ Vosae.Store.registerAdapter 'Vosae.Invoice', Vosae.Adapter.extend
   serializer: Vosae.InvoiceBaseSerializer.create()
 
   findQuery: (store, type, query, recordArray) ->
+    console.log(type)
     json = {}
     root = @rootForType(type)
     plural = @pluralize(root)

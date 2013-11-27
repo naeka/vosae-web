@@ -1,7 +1,5 @@
 Vosae.Quotation = Vosae.InvoiceBase.extend
   state: DS.attr('string')
-  downPayments: DS.hasMany('Vosae.DownPaymentInvoice')
-  relatedInvoice: DS.belongsTo('Vosae.Invoice')
 
   isMakingInvoice: false
 
@@ -34,25 +32,25 @@ Vosae.Quotation = Vosae.InvoiceBase.extend
   
   isInvoiceable: (->
     # `Quotation` is invoiceable unless it has been invoiced.
-    if @get('relatedInvoice')
+    if @get('group.relatedInvoice')
       return false
     return true
-  ).property('relatedInvoice')
+  ).property('group.relatedInvoice')
 
   isModifiable: (->
     # `Quotation` is modifiable unless it has been invoiced.
-    if @get('relatedInvoice')
+    if @get('group.relatedInvoice')
       return false
     return true
-  ).property('relatedInvoice')
+  ).property('group.relatedInvoice')
 
   isDeletable: (->
     # `Quotation` is is deletable if not linked to any
     # `Invoice` or `DownPaymentInvoice`.
-    if @get('relatedInvoice') or !Em.isEmpty(@get('downPayments')) or !@get('id')
+    if @get('group.relatedInvoice') or !Em.isEmpty(@get('group.downPaymentInvoices')) or !@get('id')
       return false
     return true
-  ).property('relatedInvoice', 'downPayments.length', 'id')
+  ).property('group.relatedInvoice', 'group.downPaymentInvoices.length', 'id')
 
   isIssuable: (->
     # Determine if the `Quotation` could be sent.

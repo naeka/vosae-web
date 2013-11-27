@@ -5,7 +5,8 @@ Vosae.Invoice = Vosae.InvoiceBase.extend
   hasTemporaryReference: DS.attr('boolean', defaultValue: true)
   payments: DS.hasMany('Vosae.Payment')
   relatedQuotation: DS.belongsTo('Vosae.Quotation')
-  relatedCreditNote: DS.belongsTo('Vosae.CreditNote')
+  relatedPurchaseOrder: DS.belongsTo('Vosae.PurchaseOrder')
+  # relatedDeliveryOrder: DS.belongsTo('Vosae.DeliveryOrder')
 
   displayState: (->
     # Returns the current state readable and translated.

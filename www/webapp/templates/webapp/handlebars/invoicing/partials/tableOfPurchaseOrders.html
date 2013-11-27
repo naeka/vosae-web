@@ -1,0 +1,58 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "invoicing/partials/_tableOfPurchaseOrders" %}
+  <table class="table table-quotations">
+    <thead class="orange">
+      <tr>
+        <th class="reference">
+          {% trans "Reference" context "table-headers" %}
+        </th>
+        <th class="customer">
+          {% trans "Customer" context "table-headers" %}
+        </th>
+        <th class="total">
+          {% trans "Total (incl. tax.)" context "table-headers" %}
+        </th>
+        <th class="expiration">
+          {% trans "Expiration" context "table-headers" %}
+        </th>
+        <th class="status">
+          {% trans "Status" context "table-headers" %}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each purchaseOrder in this}}
+      <tr>
+        <td class="reference">
+          {{#linkTo "purchaseOrder.show" controller.session.tenant purchaseOrder}}
+            {{purchaseOrder.ref}}
+          {{/linkTo}}
+        </td>
+        <td class="customer">
+          {{#if purchaseOrder.organization}}
+            {{#linkTo "organization.show" controller.session.tenant purchaseOrder.organization}}
+              {{purchaseOrder.organization.corporateName}}
+            {{/linkTo}}
+          {{else}}
+            {{#if purchaseOrder.contanct}}
+              {{#linkTo "contact.show" controller.session.tenant purchaseOrder.contact}}
+                {{purchaseOrder.contact.fullName}}
+              {{/linkTo}}
+            {{/if}}
+          {{/if}}
+        </td>
+        <td class="total">
+          {{#formatMoneyHack purchaseOrder.total purchaseOrder.currentRevision.currency.displaySign}}{{/formatMoneyHack}}
+        </td>
+        <td class="expiration">
+          {{formatDate purchaseOrder.currentRevision.purchaseOrderValidity}}
+        </td>
+        <td class="status">
+          {{purchaseOrder.displayState}}
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{% endtplhandlebars %}

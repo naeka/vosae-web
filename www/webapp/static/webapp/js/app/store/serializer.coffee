@@ -105,25 +105,37 @@ Vosae.Serializer = DS.RESTSerializer.extend
   keyForEmbeddedType: ->
     return 'resource_type'
 
-  extractRecordRepresentation: (loader, type, json, shouldSideload) ->
+  extractRecordRepresentation: (loader, type, data, shouldSideload) ->
     keyForEmbeddedType = @keyForEmbeddedType()
-    if keyForEmbeddedType of json
-      foundType = @typeFromAlias(json[keyForEmbeddedType])
+    if keyForEmbeddedType of data
+      foundType = @typeFromAlias(data[keyForEmbeddedType])
       if foundType
         type = foundType
-      delete json[keyForEmbeddedType]
-    @_super(loader, type, json, shouldSideload)
+      delete data[keyForEmbeddedType]
+    @_super(loader, type, data, shouldSideload)
 
 
 # This serializer is used to transform `ReferencedDictField`
 # An empty embedded `ReferencedDictField` returns {} ember-data
 # expect null
 Vosae.InvoiceBaseSerializer = Vosae.Serializer.extend
-  extractRecordRepresentation: (loader, type, json, shouldSideload) ->
+  transformRelatedToRelationship: (data) ->
+    resourceUri = data['related_to']
+    if resourceUri? and typeof resourceUri is 'string'
+      key = resourceUri.split("/").reverse()[2]
+      data["related_#{key}"] = resourceUri
+      delete data['related_to']
+    return data
+
+  extractRecordRepresentation: (loader, type, data, shouldSideload) ->
+    # Field PDF
     if type is Vosae.InvoiceRevision
-      if json['pdf'] and jQuery.isEmptyObject json['pdf']
-        json['pdf'] = null
-    @_super(loader, type, json, shouldSideload)
+      if data['pdf'] and jQuery.isEmptyObject data['pdf']
+        data['pdf'] = null
+    # Field RelatedTo
+    if data.hasOwnProperty 'related_to'
+      data = @transformRelatedToRelationship(data)
+    @_super(loader, type, data, shouldSideload)
 
 
 # This is custom serializer for model <Vosae.User>
@@ -136,14 +148,14 @@ Vosae.UserSerializer = Vosae.Serializer.extend
   # `specific_permissions` & `permissions` strings array
   # to make it useable for Emberjs
 
-  extractRecordRepresentation: (loader, type, json, shouldSideload) ->
-    if json['specific_permissions']
+  extractRecordRepresentation: (loader, type, data, shouldSideload) ->
+    if data['specific_permissions']
       array = []
-      $.map json['specific_permissions'], (value, key) ->
+      $.map data['specific_permissions'], (value, key) ->
         array.addObject(name: key, value: value)
-      json['specific_permissions'] = array
+      data['specific_permissions'] = array
 
-    @_super(loader, type, json, shouldSideload)
+    @_super(loader, type, data, shouldSideload)
 
   # This custom hooks from adapter help us to transforms
   # `specificPermissions` & `permissions` objects array

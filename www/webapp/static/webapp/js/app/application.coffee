@@ -42,6 +42,7 @@ unless window.VosaeApplication
       @set 'metaForNotification' , Em.Object.createWithMixins Vosae.MetaController      
       @set 'metaForCurrency' , Em.Object.createWithMixins Vosae.MetaController      
       @set 'metaForTenant' , Em.Object.createWithMixins Vosae.MetaController
+      @set 'metaForPurchaseOrder', Em.Object.createWithMixins Vosae.MetaController
 
     configPlugins: ->
       # jQuery file upload

@@ -2666,7 +2666,15 @@ describe('Vosae.CreditNote', function() {
     creditNote = store.find(Vosae.CreditNote, 1);
     return expect(creditNote.get('isCreditNote')).toBeTruthy;
   });
-  return it('relatedInvoice belongsTo relationship', function() {
+  it('isPurchaseOrder property should return true', function() {
+    var creditNote;
+    store.adapterForType(Vosae.CreditNote).load(store, Vosae.CreditNote, {
+      id: 1
+    });
+    creditNote = store.find(Vosae.CreditNote, 1);
+    return expect(creditNote.get('isPurchaseOrder')).toBeTruthy;
+  });
+  it('group belongsTo relationship', function() {
     var creditNote, invoice;
     store.adapterForType(Vosae.Invoice).load(store, Vosae.Invoice, {
       id: 1
@@ -2678,6 +2686,32 @@ describe('Vosae.CreditNote', function() {
     });
     creditNote = store.find(Vosae.CreditNote, 1);
     return expect(creditNote.get('relatedInvoice')).toEqual(invoice);
+  });
+  it('relatedInvoice belongsTo relationship', function() {
+    var creditNote, invoice;
+    store.adapterForType(Vosae.Invoice).load(store, Vosae.Invoice, {
+      id: 1
+    });
+    invoice = store.find(Vosae.Invoice, 1);
+    store.adapterForType(Vosae.CreditNote).load(store, Vosae.CreditNote, {
+      id: 1,
+      related_invoice: "/api/v1/invoice/1/"
+    });
+    creditNote = store.find(Vosae.CreditNote, 1);
+    return expect(creditNote.get('relatedInvoice')).toEqual(invoice);
+  });
+  return it('relatedDownPaymentInvoice belongsTo relationship', function() {
+    var creditNote, downPaymentInvoice;
+    store.adapterForType(Vosae.DownPaymentInvoice).load(store, Vosae.DownPaymentInvoice, {
+      id: 1
+    });
+    downPaymentInvoice = store.find(Vosae.DownPaymentInvoice, 1);
+    store.adapterForType(Vosae.CreditNote).load(store, Vosae.CreditNote, {
+      id: 1,
+      related_down_payment_invoice: "/api/v1/down_payment_invoice/1/"
+    });
+    creditNote = store.find(Vosae.CreditNote, 1);
+    return expect(creditNote.get('relatedDownPaymentInvoice')).toEqual(downPaymentInvoice);
   });
 });
 
@@ -3389,18 +3423,18 @@ describe('Vosae.Invoice', function() {
     invoice = store.find(Vosae.Invoice, 1);
     return expect(invoice.get('relatedQuotation')).toEqual(quotation);
   });
-  it('relatedCreditNote belongsTo relationship', function() {
-    var creditNote, invoice;
-    store.adapterForType(Vosae.CreditNote).load(store, Vosae.CreditNote, {
+  it('relatedPurchaseOrder belongsTo relationship', function() {
+    var invoice, purchaseOrder;
+    store.adapterForType(Vosae.PurchaseOrder).load(store, Vosae.PurchaseOrder, {
       id: 1
     });
-    creditNote = store.find(Vosae.CreditNote, 1);
+    purchaseOrder = store.find(Vosae.PurchaseOrder, 1);
     store.adapterForType(Vosae.Invoice).load(store, Vosae.Invoice, {
       id: 1,
-      related_credit_note: "/api/v1/credit_note/1/"
+      related_purchase_order: "/api/v1/purchaseOrder/1/"
     });
     invoice = store.find(Vosae.Invoice, 1);
-    return expect(invoice.get('relatedCreditNote')).toEqual(creditNote);
+    return expect(invoice.get('relatedPurchaseOrder')).toEqual(purchaseOrder);
   });
   it('isUpdatingState property should be false by default', function() {
     var invoice;
@@ -3443,6 +3477,14 @@ describe('Vosae.Invoice', function() {
     });
     invoice = store.find(Vosae.Invoice, 1);
     return expect(invoice.get('isCreditNote')).toBeFalsy();
+  });
+  it('isPurchaseOrder property should return true', function() {
+    var invoice;
+    store.adapterForType(Vosae.Invoice).load(store, Vosae.Invoice, {
+      id: 1
+    });
+    invoice = store.find(Vosae.Invoice, 1);
+    return expect(invoice.get('isPurchaseOrder')).toBeFalsy();
   });
   it('displayState property should return the acutal state formated', function() {
     var invoice;
@@ -3697,6 +3739,172 @@ describe('Vosae.Invoice', function() {
       state: "CANCELLED"
     });
     return expect(invoice.get('isCancelling')).toEqual(false);
+  });
+});
+
+var store;
+
+store = null;
+
+describe('Vosae.InvoiceBaseGroup', function() {
+  beforeEach(function() {
+    return store = Vosae.Store.create();
+  });
+  afterEach(function() {
+    return store.destroy();
+  });
+  it('quotation belongsTo relationship', function() {
+    var invoiceBaseGroup, quotation;
+    store.adapterForType(Vosae.Quotation).load(store, Vosae.Quotation, {
+      id: 1
+    });
+    store.adapterForType(Vosae.InvoiceBaseGroup).load(store, Vosae.InvoiceBaseGroup, {
+      id: 1,
+      quotation: "/api/v1/quotation/1/"
+    });
+    quotation = store.find(Vosae.Quotation, 1);
+    invoiceBaseGroup = store.find(Vosae.InvoiceBaseGroup, 1);
+    return expect(invoiceBaseGroup.get('quotation')).toEqual(quotation);
+  });
+  it('purchaseOrder belongsTo relationship', function() {
+    var invoiceBaseGroup, purchaseOrder;
+    store.adapterForType(Vosae.PurchaseOrder).load(store, Vosae.PurchaseOrder, {
+      id: 1
+    });
+    store.adapterForType(Vosae.InvoiceBaseGroup).load(store, Vosae.InvoiceBaseGroup, {
+      id: 1,
+      purchase_order: "/api/v1/purcharse_order/1/"
+    });
+    purchaseOrder = store.find(Vosae.PurchaseOrder, 1);
+    invoiceBaseGroup = store.find(Vosae.InvoiceBaseGroup, 1);
+    return expect(invoiceBaseGroup.get('purchaseOrder')).toEqual(purchaseOrder);
+  });
+  it('downPaymentInvoices hasMany relationship', function() {
+    var downPaymentInvoice, invoiceBaseGroup;
+    store.adapterForType(Vosae.DownPaymentInvoice).load(store, Vosae.DownPaymentInvoice, {
+      id: 1
+    });
+    store.adapterForType(Vosae.InvoiceBaseGroup).load(store, Vosae.InvoiceBaseGroup, {
+      id: 1,
+      down_payment_invoices: ["/api/v1/down_payment_invoice/1/"]
+    });
+    invoiceBaseGroup = store.find(Vosae.InvoiceBaseGroup, 1);
+    downPaymentInvoice = store.find(Vosae.DownPaymentInvoice, 1);
+    return expect(invoiceBaseGroup.get('downPaymentInvoices.firstObject')).toEqual(downPaymentInvoice);
+  });
+  it('can add downPaymentInvoices', function() {
+    var downPayment, downPayment2, invoiceBaseGroup;
+    store.adapterForType(Vosae.InvoiceBaseGroup).load(store, Vosae.InvoiceBaseGroup, {
+      id: 1
+    });
+    invoiceBaseGroup = store.find(Vosae.InvoiceBaseGroup, 1);
+    downPayment = invoiceBaseGroup.get('downPaymentInvoices').createRecord();
+    downPayment2 = invoiceBaseGroup.get('downPaymentInvoices').createRecord();
+    expect(invoiceBaseGroup.get('downPaymentInvoices.length')).toEqual(2);
+    expect(invoiceBaseGroup.get('downPaymentInvoices').objectAt(0)).toEqual(downPayment);
+    return expect(invoiceBaseGroup.get('downPaymentInvoices').objectAt(1)).toEqual(downPayment2);
+  });
+  it('can delete downPaymentInvoices', function() {
+    var downPayment, downPayment2, invoiceBaseGroup;
+    store.adapterForType(Vosae.InvoiceBaseGroup).load(store, Vosae.InvoiceBaseGroup, {
+      id: 1
+    });
+    invoiceBaseGroup = store.find(Vosae.InvoiceBaseGroup, 1);
+    downPayment = invoiceBaseGroup.get('downPaymentInvoices').createRecord();
+    downPayment2 = invoiceBaseGroup.get('downPaymentInvoices').createRecord();
+    expect(invoiceBaseGroup.get('downPaymentInvoices.length')).toEqual(2);
+    invoiceBaseGroup.get('downPaymentInvoices').removeObject(downPayment);
+    invoiceBaseGroup.get('downPaymentInvoices').removeObject(downPayment2);
+    return expect(invoiceBaseGroup.get('downPaymentInvoices.length')).toEqual(0);
+  });
+  it('invoice belongsTo relationship', function() {
+    var invoice, invoiceBaseGroup;
+    store.adapterForType(Vosae.Invoice).load(store, Vosae.Invoice, {
+      id: 1
+    });
+    store.adapterForType(Vosae.InvoiceBaseGroup).load(store, Vosae.InvoiceBaseGroup, {
+      id: 1,
+      invoice: "/api/v1/invoice/1/"
+    });
+    invoice = store.find(Vosae.Invoice, 1);
+    invoiceBaseGroup = store.find(Vosae.InvoiceBaseGroup, 1);
+    return expect(invoiceBaseGroup.get('invoice')).toEqual(invoice);
+  });
+  it('invoicesCancelled hasMany relationship', function() {
+    var invoiceBaseGroup, invoiceCancelled;
+    store.adapterForType(Vosae.Invoice).load(store, Vosae.Invoice, {
+      id: 1
+    });
+    store.adapterForType(Vosae.InvoiceBaseGroup).load(store, Vosae.InvoiceBaseGroup, {
+      id: 1,
+      invoices_cancelled: ["/api/v1/invoice/1/"]
+    });
+    invoiceBaseGroup = store.find(Vosae.InvoiceBaseGroup, 1);
+    invoiceCancelled = store.find(Vosae.Invoice, 1);
+    return expect(invoiceBaseGroup.get('invoicesCancelled.firstObject')).toEqual(invoiceCancelled);
+  });
+  it('can add invoicesCancelled', function() {
+    var invoiceBaseGroup, invoiceCancelled, invoiceCancelled2;
+    store.adapterForType(Vosae.InvoiceBaseGroup).load(store, Vosae.InvoiceBaseGroup, {
+      id: 1
+    });
+    invoiceBaseGroup = store.find(Vosae.InvoiceBaseGroup, 1);
+    invoiceCancelled = invoiceBaseGroup.get('invoicesCancelled').createRecord();
+    invoiceCancelled2 = invoiceBaseGroup.get('invoicesCancelled').createRecord();
+    expect(invoiceBaseGroup.get('invoicesCancelled.length')).toEqual(2);
+    expect(invoiceBaseGroup.get('invoicesCancelled').objectAt(0)).toEqual(invoiceCancelled);
+    return expect(invoiceBaseGroup.get('invoicesCancelled').objectAt(1)).toEqual(invoiceCancelled2);
+  });
+  it('can delete invoicesCancelled', function() {
+    var invoiceBaseGroup, invoiceCancelled, invoiceCancelled2;
+    store.adapterForType(Vosae.InvoiceBaseGroup).load(store, Vosae.InvoiceBaseGroup, {
+      id: 1
+    });
+    invoiceBaseGroup = store.find(Vosae.InvoiceBaseGroup, 1);
+    invoiceCancelled = invoiceBaseGroup.get('invoicesCancelled').createRecord();
+    invoiceCancelled2 = invoiceBaseGroup.get('invoicesCancelled').createRecord();
+    expect(invoiceBaseGroup.get('invoicesCancelled.length')).toEqual(2);
+    invoiceBaseGroup.get('invoicesCancelled').removeObject(invoiceCancelled);
+    invoiceBaseGroup.get('invoicesCancelled').removeObject(invoiceCancelled2);
+    return expect(invoiceBaseGroup.get('invoicesCancelled.length')).toEqual(0);
+  });
+  it('creditNotes hasMany relationship', function() {
+    var creditNote, invoiceBaseGroup;
+    store.adapterForType(Vosae.CreditNote).load(store, Vosae.CreditNote, {
+      id: 1
+    });
+    store.adapterForType(Vosae.InvoiceBaseGroup).load(store, Vosae.InvoiceBaseGroup, {
+      id: 1,
+      credit_notes: ["/api/v1/credit_note/1/"]
+    });
+    invoiceBaseGroup = store.find(Vosae.InvoiceBaseGroup, 1);
+    creditNote = store.find(Vosae.CreditNote, 1);
+    return expect(invoiceBaseGroup.get('creditNotes.firstObject')).toEqual(creditNote);
+  });
+  it('can add creditNotes', function() {
+    var creditNote, creditNote2, invoiceBaseGroup;
+    store.adapterForType(Vosae.InvoiceBaseGroup).load(store, Vosae.InvoiceBaseGroup, {
+      id: 1
+    });
+    invoiceBaseGroup = store.find(Vosae.InvoiceBaseGroup, 1);
+    creditNote = invoiceBaseGroup.get('creditNotes').createRecord();
+    creditNote2 = invoiceBaseGroup.get('creditNotes').createRecord();
+    expect(invoiceBaseGroup.get('creditNotes.length')).toEqual(2);
+    expect(invoiceBaseGroup.get('creditNotes').objectAt(0)).toEqual(creditNote);
+    return expect(invoiceBaseGroup.get('creditNotes').objectAt(1)).toEqual(creditNote2);
+  });
+  return it('can delete creditNotes', function() {
+    var creditNote, creditNote2, invoiceBaseGroup;
+    store.adapterForType(Vosae.InvoiceBaseGroup).load(store, Vosae.InvoiceBaseGroup, {
+      id: 1
+    });
+    invoiceBaseGroup = store.find(Vosae.InvoiceBaseGroup, 1);
+    creditNote = invoiceBaseGroup.get('creditNotes').createRecord();
+    creditNote2 = invoiceBaseGroup.get('creditNotes').createRecord();
+    expect(invoiceBaseGroup.get('creditNotes.length')).toEqual(2);
+    invoiceBaseGroup.get('creditNotes').removeObject(creditNote);
+    invoiceBaseGroup.get('creditNotes').removeObject(creditNote2);
+    return expect(invoiceBaseGroup.get('creditNotes.length')).toEqual(0);
   });
 });
 
@@ -4899,7 +5107,6 @@ describe('Vosae.Quotation', function() {
     amount: null,
     attachments: [],
     current_revision: null,
-    down_payments: [],
     notes: [],
     reference: null,
     state: null,
@@ -4911,7 +5118,6 @@ describe('Vosae.Quotation', function() {
     "account_type": "RECEIVABLE",
     "total": null,
     "amount": null,
-    "down_payments": [],
     "notes": [],
     "attachments": [],
     "current_revision": {
@@ -5300,43 +5506,6 @@ describe('Vosae.Quotation', function() {
     quotation.get('attachments').removeObject(attachment2);
     return expect(quotation.get('attachments.length')).toEqual(0);
   });
-  it('downPayments hasMany relationship', function() {
-    var downPaymentInvoice, invoice;
-    store.adapterForType(Vosae.DownPaymentInvoice).load(store, Vosae.DownPaymentInvoice, {
-      id: 1
-    });
-    downPaymentInvoice = store.find(Vosae.DownPaymentInvoice, 1);
-    store.adapterForType(Vosae.Quotation).load(store, Vosae.Quotation, {
-      id: 1,
-      down_payments: ["/api/v1/down_payment_invoice/1/"]
-    });
-    invoice = store.find(Vosae.Quotation, 1);
-    return expect(invoice.get('downPayments.firstObject')).toEqual(downPaymentInvoice);
-  });
-  it('can add downPayments', function() {
-    var downPayment, downPayment2, invoice;
-    store.adapterForType(Vosae.Quotation).load(store, Vosae.Quotation, {
-      id: 1
-    });
-    invoice = store.find(Vosae.Quotation, 1);
-    downPayment = invoice.get('downPayments').createRecord();
-    downPayment2 = invoice.get('downPayments').createRecord();
-    expect(invoice.get('downPayments.length')).toEqual(2);
-    expect(invoice.get('downPayments').objectAt(0)).toEqual(downPayment);
-    return expect(invoice.get('downPayments').objectAt(1)).toEqual(downPayment2);
-  });
-  it('can delete downPayments', function() {
-    var downPayment, downPayment2, invoice;
-    store.adapterForType(Vosae.Quotation).load(store, Vosae.Quotation, {
-      id: 1
-    });
-    invoice = store.find(Vosae.Quotation, 1);
-    downPayment = invoice.get('downPayments').createRecord();
-    downPayment2 = invoice.get('downPayments').createRecord();
-    expect(invoice.get('downPayments.length')).toEqual(2);
-    invoice.get('downPayments').removeObject(downPayment);
-    return invoice.get('downPayments').removeObject(downPayment2);
-  });
   it('issuer belongsTo relationship', function() {
     var issuer, quotation;
     store.adapterForType(Vosae.User).load(store, Vosae.User, {
@@ -5429,6 +5598,14 @@ describe('Vosae.Quotation', function() {
     quotation = store.find(Vosae.Quotation, 1);
     return expect(quotation.get('isCreditNote')).toBeFalsy();
   });
+  it('isPurchaseOrder property should return true', function() {
+    var quotation;
+    store.adapterForType(Vosae.Quotation).load(store, Vosae.Quotation, {
+      id: 1
+    });
+    quotation = store.find(Vosae.Quotation, 1);
+    return expect(quotation.get('isPurchaseOrder')).toBeFalsy();
+  });
   it('displayState property should return the acutal state formated', function() {
     var quotation;
     store.adapterForType(Vosae.Quotation).load(store, Vosae.Quotation, {
@@ -5479,9 +5656,13 @@ describe('Vosae.Quotation', function() {
     store.adapterForType(Vosae.Quotation).load(store, Vosae.Quotation, {
       id: 1
     });
+    store.adapterForType(Vosae.InvoiceBaseGroup).load(store, Vosae.InvoiceBaseGroup, {
+      id: 1
+    });
     quotation = store.find(Vosae.Quotation, 1);
+    quotation.set("group", store.find(Vosae.InvoiceBaseGroup, 1));
     expect(quotation.get('isInvoiceable')).toEqual(true);
-    quotation.set("relatedInvoice", store.find(Vosae.Invoice, 1));
+    quotation.set("group.relatedInvoice", store.find(Vosae.Invoice, 1));
     return expect(quotation.get('isInvoiceable')).toEqual(false);
   });
   it('isModifiable property return true if quotation can be edited', function() {
@@ -5492,13 +5673,17 @@ describe('Vosae.Quotation', function() {
     store.adapterForType(Vosae.Quotation).load(store, Vosae.Quotation, {
       id: 1
     });
+    store.adapterForType(Vosae.InvoiceBaseGroup).load(store, Vosae.InvoiceBaseGroup, {
+      id: 1
+    });
     quotation = store.find(Vosae.Quotation, 1);
+    quotation.set("group", store.find(Vosae.InvoiceBaseGroup, 1));
     expect(quotation.get('isModifiable')).toEqual(true);
-    quotation.set("relatedInvoice", store.find(Vosae.Invoice, 1));
+    quotation.set("group.relatedInvoice", store.find(Vosae.Invoice, 1));
     return expect(quotation.get('isModifiable')).toEqual(false);
   });
   it('isDeletable property return true if quotation can be deleted', function() {
-    var quotation, relatedInvoice;
+    var quotation;
     store.adapterForType(Vosae.Invoice).load(store, Vosae.Invoice, {
       id: 1
     });
@@ -5506,15 +5691,15 @@ describe('Vosae.Quotation', function() {
       id: 1
     });
     quotation = store.find(Vosae.Quotation, 1);
-    relatedInvoice = store.find(Vosae.Invoice, 1);
+    quotation.set("group", store.find(Vosae.InvoiceBaseGroup, 1));
     expect(quotation.get('isDeletable')).toEqual(true);
-    quotation.set("relatedInvoice", relatedInvoice);
+    quotation.set("group.relatedInvoice", store.find(Vosae.Invoice, 1));
     expect(quotation.get('isDeletable')).toEqual(false);
-    quotation.set("relatedInvoice", null);
-    quotation.get("downPayments").createRecord();
+    quotation.set("group.relatedInvoice", null);
+    quotation.get("group.downPaymentInvoices").createRecord();
     expect(quotation.get('isDeletable')).toEqual(false);
     quotation.setProperties({
-      "downPayments.content": [],
+      "group.downPaymentInvoices.content": [],
       "id": null
     });
     return expect(quotation.get('isDeletable')).toEqual(false);
@@ -7182,6 +7367,28 @@ describe('Vosae.InvoicingSettings', function() {
     });
     invoicingSettings = store.find(Vosae.InvoicingSettings, 1);
     return expect(invoicingSettings.get('numbering.separator')).toEqual(";");
+  });
+});
+
+var serializer;
+
+serializer = null;
+
+describe('Vosae.InvoiceBaseSerializer', function() {
+  beforeEach(function() {
+    return serializer = Vosae.InvoiceBaseSerializer.create();
+  });
+  afterEach(function() {
+    return serializer.destroy();
+  });
+  return it('transformRelatedToRelationship method should update the json', function() {
+    var data, json;
+    data = {
+      related_to: '/api/v1/down_payment_invoice/1'
+    };
+    json = serializer.transformRelatedToRelationship(data);
+    expect(json['related_down_payment_invoice']).toEqual(data['related_to']);
+    return expect(json.hasOwnProperty('related_to')).toEqual(false);
   });
 });
 

@@ -13,10 +13,12 @@
         {{#linkTo "quotations.show" controller.session.tenant}}
           {% trans "Quotations" %}
         {{/linkTo}}
+        {{#linkTo "purchaseOrders.show" controller.session.tenant}}
+          {% trans "Purchase orders" %}
+        {{/linkTo}}
         {{#linkTo "invoices.show" controller.session.tenant}}
           {% trans "Invoices" %}
         {{/linkTo}}
-        {# <a>Achat</a> #}
         {{#linkTo "items.show" controller.session.tenant}}
           {% trans "Items" %}
         {{/linkTo}}
@@ -38,10 +40,12 @@
         {{#linkTo "quotations.show" controller.session.tenant class="active"}}
           {% trans "Quotations" %}
         {{/linkTo}}
+        {{#linkTo "purchaseOrders.show" controller.session.tenant}}
+          {% trans "Purchase orders" %}
+        {{/linkTo}}
         {{#linkTo "invoices.show" controller.session.tenant}}
           {% trans "Invoices" %}
         {{/linkTo}}
-        {# <a>Achat</a> #}
         {{#linkTo "items.show" controller.session.tenant}}
           {% trans "Items" %}
         {{/linkTo}}
@@ -63,10 +67,12 @@
         {{#linkTo "quotations.show" controller.session.tenant class="active"}}
           {% trans "Quotations" %}
         {{/linkTo}}
+        {{#linkTo "purchaseOrders.show" controller.session.tenant}}
+          {% trans "Purchase orders" %}
+        {{/linkTo}}
         {{#linkTo "invoices.show" controller.session.tenant}}
           {% trans "Invoices" %}
         {{/linkTo}}
-        {# <a>Achat</a> #}
         {{#linkTo "items.show" controller.session.tenant}}
           {% trans "Items" %}
         {{/linkTo}}
@@ -88,10 +94,12 @@
         {{#linkTo "quotations.show" controller.session.tenant}}
           {% trans "Quotations" %}
         {{/linkTo}}
+        {{#linkTo "purchaseOrders.show" controller.session.tenant}}
+          {% trans "Purchase orders" %}
+        {{/linkTo}}
         {{#linkTo "invoices.show" controller.session.tenant class="active"}}
           {% trans "Invoices" %}
         {{/linkTo}}
-        {# <a>Achat</a> #}
         {{#linkTo "items.show" controller.session.tenant}}
           {% trans "Items" %}
         {{/linkTo}}
@@ -113,10 +121,12 @@
         {{#linkTo "quotations.show" controller.session.tenant}}
           {% trans "Quotations" %}
         {{/linkTo}}
+        {{#linkTo "purchaseOrders.show" controller.session.tenant}}
+          {% trans "Purchase orders" %}
+        {{/linkTo}}
         {{#linkTo "invoices.show" controller.session.tenant class="active"}}
           {% trans "Invoices" %}
         {{/linkTo}}
-        {# <a>Achat</a> #}
         {{#linkTo "items.show" controller.session.tenant}}
           {% trans "Items" %}
         {{/linkTo}}
@@ -138,10 +148,12 @@
         {{#linkTo "quotations.show" controller.session.tenant}}
           {% trans "Quotations" %}
         {{/linkTo}}
+        {{#linkTo "purchaseOrders.show" controller.session.tenant}}
+          {% trans "Purchase orders" %}
+        {{/linkTo}}
         {{#linkTo "invoices.show" controller.session.tenant}}
           {% trans "Invoices" %}
         {{/linkTo}}
-        {# <a>Achat</a> #}
         {{#linkTo "items.show" controller.session.tenant class="active"}}
           {% trans "Items" %}
         {{/linkTo}}
@@ -163,10 +175,12 @@
         {{#linkTo "quotations.show" controller.session.tenant}}
           {% trans "Quotations" %}
         {{/linkTo}}
+        {{#linkTo "purchaseOrders.show" controller.session.tenant}}
+          {% trans "Purchase orders" %}
+        {{/linkTo}}
         {{#linkTo "invoices.show" controller.session.tenant}}
           {% trans "Invoices" %}
         {{/linkTo}}
-        {# <a>Achat</a> #}
         {{#linkTo "items.show" controller.session.tenant class="active"}}
           {% trans "Items" %}
         {{/linkTo}}
@@ -188,10 +202,66 @@
         {{#linkTo "quotations.show" controller.session.tenant}}
           {% trans "Quotations" %}
         {{/linkTo}}
+        {{#linkTo "purchaseOrders.show" controller.session.tenant}}
+          {% trans "Purchase orders" %}
+        {{/linkTo}}
         {{#linkTo "invoices.show" controller.session.tenant}}
           {% trans "Invoices" %}
         {{/linkTo}}
-        {# <a>Achat</a> #}
+        {{#linkTo "items.show" controller.session.tenant}}
+          {% trans "Items" %}
+        {{/linkTo}}
+      </nav>
+    </section>
+    {{outlet}}
+  </div>
+{% endtplhandlebars %}
+
+{% tplhandlebars "purchaseOrders" %}
+  <div class="app-invoicing">
+    <section class="actions clearfix">
+      <nav class="pull-left">
+        {{#linkTo "invoicing.dashboard" controller.session.tenant}}
+          {% trans "Dashboard" context "invoicing" %}
+        {{/linkTo}}
+      </nav>
+      <nav class="pull-right">
+        {{#linkTo "quotations.show" controller.session.tenant}}
+          {% trans "Quotations" %}
+        {{/linkTo}}
+        {{#linkTo "purchaseOrders.show" controller.session.tenant class="active"}}
+          {% trans "Purchase orders" %}
+        {{/linkTo}}
+        {{#linkTo "invoices.show" controller.session.tenant}}
+          {% trans "Invoices" %}
+        {{/linkTo}}
+        {{#linkTo "items.show" controller.session.tenant}}
+          {% trans "Items" %}
+        {{/linkTo}}
+      </nav>
+    </section>
+    {{outlet}}
+  </div>
+{% endtplhandlebars %}
+
+{% tplhandlebars "purchaseOrder" %}
+  <div class="app-invoicing">
+    <section class="actions clearfix">
+      <nav class="pull-left">
+        {{#linkTo "invoicing.dashboard" controller.session.tenant}}
+          {% trans "Dashboard" context "invoicing" %}
+        {{/linkTo}}
+      </nav>
+      <nav class="pull-right">
+        {{#linkTo "quotations.show" controller.session.tenant}}
+          {% trans "Quotations" %}
+        {{/linkTo}}
+        {{#linkTo "purchaseOrders.show" controller.session.tenant class="active"}}
+          {% trans "Purchase orders" %}
+        {{/linkTo}}
+        {{#linkTo "invoices.show" controller.session.tenant}}
+          {% trans "Invoices" %}
+        {{/linkTo}}
         {{#linkTo "items.show" controller.session.tenant}}
           {% trans "Items" %}
         {{/linkTo}}

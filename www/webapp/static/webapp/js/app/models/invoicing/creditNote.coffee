@@ -1,5 +1,6 @@
 Vosae.CreditNote = Vosae.InvoiceBase.extend
   state: DS.attr('string')
+  relatedDownPaymentInvoice: DS.belongsTo('Vosae.DownPaymentInvoice')
   relatedInvoice: DS.belongsTo('Vosae.Invoice')
 
 Vosae.Adapter.map "Vosae.CreditNote",
@@ -12,4 +13,6 @@ Vosae.Adapter.map "Vosae.CreditNote",
   attachments:
     embedded: "always"
   currentRevision:
+    embedded: "always"
+  group:
     embedded: "always"

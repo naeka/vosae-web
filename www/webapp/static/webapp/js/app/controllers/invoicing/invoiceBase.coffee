@@ -48,6 +48,11 @@ Vosae.InvoiceBaseController = Em.ObjectController.extend
           return @transitionToRoute 'invoice.show', invoiceBase
         else
           return @transitionToRoute 'invoices.show'
+      when Vosae.PurchaseOrder
+        if invoiceBase.get('id')
+          return @transitionToRoute 'purchaseOrder.show', invoiceBase
+        else
+          return @transitionToRoute 'purchaseOrders.show'
     return
 
   save: (invoiceBase) ->
@@ -83,6 +88,8 @@ Vosae.InvoiceBaseController = Em.ObjectController.extend
               @transitionToRoute 'quotation.show', @get('session.tenant'), invoiceBase
             when Vosae.Invoice
               @transitionToRoute 'invoice.show', @get('session.tenant'), invoiceBase
+            when Vosae.PurchaseOrder
+              @transitionToRoute 'purchaseOrder.show', @get('session.tenant'), invoiceBase
       invoiceBase.get('transaction').commit()
 
   delete: (invoiceBase) ->
@@ -91,7 +98,9 @@ Vosae.InvoiceBaseController = Em.ObjectController.extend
         gettext("Do you really want to delete this quotation?")
       when Vosae.Invoice
         gettext("Do you really want to delete this invoice?")
-    
+      when Vosae.PurchaseOrder
+        gettext("Do you really want to delete this purchase order?")
+
     Vosae.ConfirmPopupComponent.open
       message: message
       callback: (opts, event) =>
@@ -103,5 +112,7 @@ Vosae.InvoiceBaseController = Em.ObjectController.extend
                   @transitionToRoute 'quotations.show', @get('session.tenant')
                 when Vosae.Invoice
                   @transitionToRoute 'invoices.show', @get('session.tenant')
+                when Vosae.PurchaseOrder
+                  @transitionToRoute 'purchaseOrders.show', @get('session.tenant')
           invoiceBase.deleteRecord()
           invoiceBase.get('transaction').commit()

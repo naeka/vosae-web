@@ -41,6 +41,8 @@ Vosae.Adapter = DS.RESTAdapter.extend
         Vosae.metaForTenant
       when Vosae.Currency
         Vosae.metaForCurrency
+      when Vosae.PurchaseOrder
+        Vosae.metaForPurchaseOrder
       else
         `undefined`
 

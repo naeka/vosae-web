@@ -37,3 +37,13 @@ Vosae.CreditNoteRoute = Vosae.AppInvoicingRoute.extend
   renderTemplate: ->
     @render
      into: 'application'
+
+Vosae.PurchaseOrdersRoute = Vosae.AppInvoicingRoute.extend
+  renderTemplate: ->
+    @render
+     into: 'application'
+
+Vosae.PurchaseOrderRoute = Vosae.AppInvoicingRoute.extend
+  renderTemplate: ->
+    @render
+     into: 'application'

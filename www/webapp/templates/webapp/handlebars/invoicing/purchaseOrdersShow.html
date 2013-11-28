@@ -1,0 +1,66 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "purchaseOrders/show" %}
+
+  <section class="sub-actions clearfix">
+    <div class="btn-toolbar pull-left"></div>
+    <div class="btn-toolbar pull-right">
+      <div class="btn-group">
+        {{#linkTo "purchaseOrders.add" controller.session.tenant class="btn orange"}}
+          <i class="picto-add"></i>
+          {% trans "Purchase order" %}
+        {{/linkTo}}
+      </div>
+    </div>
+  </section>
+
+  {# Pending #}
+  <section class="quotations with-head">
+    <div class="header clearfix">
+      <h4 class="pull-left">
+        {% trans "Pending" %}
+      </h4>
+      <div class="btn-toolbar pull-right"></div>
+    </div>
+    {{#with purchaseOrdersPending}}
+      {{partial "invoicing/partials/tableOfPurchaseOrders"}}
+    {{/with}}
+
+    {{#unless purchaseOrdersPending.length}}
+      <p class="table-no-data orange">
+        {% trans "No pending purchase orders" %}
+      </p>
+    {{/unless}}
+    {# Pagination #}
+    {{#if paginationPendingHasNext}}
+      <p class="table-load-more" {{action getNextPurchaseOrdersPending}}>
+        {% trans "Load more purchase orders" %}
+      </p>
+    {{/if}}
+  </section>
+
+  {# Approved #}
+  <section class="quotations with-head">
+    <div class="header clearfix">
+      <h4 class="pull-left">
+        {% trans "Approved" %}
+      </h4>
+      <div class="btn-toolbar pull-right"></div>
+    </div>
+    {{#with purchaseOrdersApproved}}
+      {{partial "invoicing/partials/tableOfPurchaseOrders"}}
+    {{/with}}
+
+    {{#unless purchaseOrdersApproved.length}}
+      <p class="table-no-data orange">
+        {% trans "No approved purcahse orders" %}
+      </p>
+    {{/unless}}
+    {# Pagination #}
+    {{#if paginationApprovedHasNext}}
+      <p class="table-load-more" {{action getNextPurchaseOrdersApproved}}>
+        {% trans "Load more purcahse orders" %}
+      </p>
+    {{/if}}
+  </section>
+{% endtplhandlebars %}

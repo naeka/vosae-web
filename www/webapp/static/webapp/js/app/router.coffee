@@ -61,7 +61,13 @@ Vosae.Router.map ->
       @route 'show', path: '/'
       @route 'edit'
     @resource 'creditNote', path: '/invoicing/credit-note/:credit_note_id', ->
-      @route 'show', path: '/'  
+      @route 'show', path: '/'
+    @resource 'purchaseOrders', path: '/invoicing/purchase-orders', ->
+      @route 'show', path: '/'
+      @route 'add'
+    @resource 'purchaseOrder', path: '/invoicing/purchase-order/:purchase_order_id', ->
+      @route 'show', path: '/'
+      @route 'edit'
 
     @resource 'settings', path: '/settings', ->
       @route 'application'
@@ -179,6 +185,10 @@ require 'routes/invoicing/itemsAdd'
 require 'routes/invoicing/itemShow'
 require 'routes/invoicing/itemEdit'
 require 'routes/invoicing/creditNoteShow'
+require 'routes/invoicing/purchaseOrderShow'
+require 'routes/invoicing/purchaseOrderEdit'
+require 'routes/invoicing/purchaseOrdersShow'
+require 'routes/invoicing/purchaseOrdersAdd'
 
 require 'routes/settings/root'
 require 'routes/settings/settingsAddGroup'

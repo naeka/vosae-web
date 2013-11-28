@@ -29,6 +29,7 @@ require 'views/settings/settingsEditTax'
 require 'views/settings/settingsInvoicingGeneral'
 require 'views/settings/settingsNumbering'
 require 'views/settings/settingsApiKeys'
+require 'views/settings/settingsReport'
 
 require 'views/contacts/organizationsShow'
 require 'views/contacts/contactsShow'

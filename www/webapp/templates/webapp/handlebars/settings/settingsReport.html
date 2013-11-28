@@ -1,0 +1,76 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "settings/report" %}
+  <header>
+    <h3>{% trans "Global settings" %} &nbsp;>&nbsp; {% trans "Report" %}</h3>
+  </header>
+  <section class="clearfix">
+    <div class="inner">
+      <table>
+        <tbody>
+          <tr>
+            <td class="label">
+              <label>{% trans "Language" %}</label>
+            </td>
+            <td>
+              {{view Vosae.Components.Select
+                contentBinding="Vosae.languages"
+                valueBinding="language"
+                optionValuePath="content.code"
+                optionLabelPath="content.name"
+                containerCssClass="green" }}
+            </td>
+          </tr>
+          <tr>
+            <td class="label">
+              <label>{% trans "Font name" %}</label>
+            </td>
+            <td>
+              {{view Vosae.Components.Select
+                contentBinding="Vosae.reportFontFamilies"
+                valueBinding="fontName"
+                optionValuePath="content.value"
+                optionLabelPath="content.name"
+                containerCssClass="green" }}
+            </td>
+          </tr>
+          <tr>
+            <td class="label">
+              <label>{% trans "Font size" %}</label>
+            </td>
+            <td>
+              {{view Vosae.Components.Select
+                contentBinding="Vosae.reportFontSizes"
+                valueBinding="fontSize"
+                optionValuePath="content.value"
+                optionLabelPath="content.name"
+                containerCssClass="green" }}
+            </td>
+          </tr>
+          {% comment %}
+          <tr>
+            <td class="label">
+              <label>{% trans "Base color" %}</label>
+            </td>
+            <td></td>
+          </tr>
+          {% endcomment %}
+          <tr>
+            <td class="label">
+              <label>{% trans "Force black and white" %}</label>
+            </td>
+            <td>
+              {{view Vosae.FlipSwitchButton
+                checkedBinding="forceBw" }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "settings/report/actions" %}
+  {{partial "settings/partials/saveSettings"}}
+{% endtplhandlebars %}

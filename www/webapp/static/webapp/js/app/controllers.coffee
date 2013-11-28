@@ -66,6 +66,7 @@ require 'controllers/settings/settingsEditTax'
 require 'controllers/settings/settingsInvoicingGeneral'
 require 'controllers/settings/settingsNumbering'
 require 'controllers/settings/settingsApiKeys'
+require 'controllers/settings/settingsReport'
 
 require 'controllers/realtime/realtime'
 

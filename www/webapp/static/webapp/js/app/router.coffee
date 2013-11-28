@@ -78,6 +78,7 @@ Vosae.Router.map ->
       @route 'editTax', path: '/taxes/:tax_id'
       @route 'invoicingGeneral', path: '/invoicing/general'
       @route 'numbering', path: '/numbering'
+      @route 'report', path: '/report'
   
   @route 'notFound', path: '*:' 
 
@@ -195,3 +196,4 @@ require 'routes/settings/settingsOrganization'
 require 'routes/settings/settingsShowGroups'
 require 'routes/settings/settingsShowTaxes'
 require 'routes/settings/settingsShowUsers'
+require 'routes/settings/settingsReport'

@@ -45,6 +45,39 @@ Vosae.languages = Em.makeArray([
     name: gettext("French")
 ])
 
+Vosae.reportFontFamilies = [
+  Em.Object.create
+    value: "bariol"
+    name: "Bariol"
+  Em.Object.create
+    value: "arial"
+    name: "Arial"
+]
+
+Vosae.reportFontSizes = [
+  Em.Object.create
+    value: 10
+    name: "10px"
+  Em.Object.create
+    value: 12
+    name: "12px"
+  Em.Object.create
+    value: 14
+    name: "14px"
+  Em.Object.create
+    value: 16
+    name: "16px"
+  Em.Object.create
+    value: 18
+    name: "18px"
+  Em.Object.create
+    value: 20
+    name: "20px"
+  Em.Object.create
+    value: 22
+    name: "22px"
+]
+
 Vosae.supportedCountries = Em.makeArray([
   Em.Object.create
     countryCode: "BE"

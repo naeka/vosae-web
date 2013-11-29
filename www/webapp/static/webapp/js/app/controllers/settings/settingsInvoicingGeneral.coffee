@@ -1,5 +1,4 @@
 Vosae.SettingsInvoicingGeneralController = Em.ObjectController.extend
-
   # Sort currencies by description
   sortedCurrencies: (->
     Ember.ArrayProxy.createWithMixins Ember.SortableMixin,
@@ -15,5 +14,7 @@ Vosae.SettingsInvoicingGeneralController = Em.ObjectController.extend
         return cur
   ).property('invoicing.supportedCurrencies.@each.id', 'invoicing.supportedCurrencies.length')
 
-  save: (tenantSettings) ->
-    tenantSettings.get('transaction').commit()
+  # Actions handlers
+  actions:
+    save: (tenantSettings) ->
+      tenantSettings.get('transaction').commit()

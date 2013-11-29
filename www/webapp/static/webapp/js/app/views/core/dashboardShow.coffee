@@ -1,11 +1,12 @@
 Vosae.DashboardShowView = Vosae.PaginatedView.extend
   classNames: ["page-show-dashboard"]
 
-  startHelpTour: ->
-    $(".page-show-dashboard-settings .info a").click()
+  actions:
+    startHelpTour: ->
+      $(".page-show-dashboard-settings .info a").click()
 
   paginationAction: ->
-    @get('controller').getNextPagination()
+    @get('controller').send "getNextPagination"
 
   timelineItems: Em.View.extend
     templateName : "timelineItems"

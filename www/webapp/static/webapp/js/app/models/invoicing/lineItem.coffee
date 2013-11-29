@@ -36,7 +36,7 @@ Vosae.LineItem = DS.Model.extend
     if @get('totalVAT') 
       return accounting.formatMoney @get('totalVAT')
     accounting.formatMoney 0
-  ).property("total")
+  ).property("totalVAT")
 
   displayUnitPrice: (->
     if @get("unitPrice")

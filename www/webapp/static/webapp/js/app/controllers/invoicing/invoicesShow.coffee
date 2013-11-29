@@ -2,6 +2,31 @@ Vosae.InvoicesShowController = Vosae.InvoicesBaseController.extend
   sortProperties: ['currentRevision.dueDate']
   sortAscending: false
 
+  actions:
+    getNextInvoicesPending: ->
+      lastQueryPending = @get('meta.queries').get(@get('paginationPending.metaQueryName'))
+      if lastQueryPending 
+        newQueryPending =
+          name: @get('paginationPending.metaQueryName')
+          string: @get('paginationPending.query') + '&offset=' + (lastQueryPending.get('limit') + lastQueryPending.get('offset'))
+        @getModel().find(newQueryPending)
+    
+    getNextInvoicesOverdue: ->
+      lastQueryOverdue = @get('meta.queries').get(@get('paginationOverdue.metaQueryName'))
+      if lastQueryOverdue
+        newQueryOverdue =
+          name: @get('paginationOverdue.metaQueryName')
+          string: @get('paginationOverdue.query') + '&offset=' + (lastQueryOverdue.get('limit') + lastQueryOverdue.get('offset'))
+        @getModel().find(newQueryOverdue)
+
+    getNextInvoicesPaid: ->
+      lastQueryPaid = @get('meta.queries').get(@get('paginationPaid.metaQueryName'))
+      if lastQueryPaid
+        newQueryPaid =
+          name: @get('paginationPaid.metaQueryName')
+          string: @get('paginationPaid.query') + '&offset=' + (lastQueryPaid.get('limit') + lastQueryPaid.get('offset'))
+        @getModel().find(newQueryPaid)
+  
   totalOfSelection: (->
     total = 0
     @get('content').forEach (x, idx, i) ->
@@ -71,33 +96,6 @@ Vosae.InvoicesShowController = Vosae.InvoicesBaseController.extend
       return true
     false
   ).property('meta.queries.stateIsPaid')
-
-  ##
-  # Pagination
-  # 
-  getNextInvoicesPending: ->
-    lastQueryPending = @get('meta.queries').get(@get('paginationPending.metaQueryName'))
-    if lastQueryPending 
-      newQueryPending =
-        name: @get('paginationPending.metaQueryName')
-        string: @get('paginationPending.query') + '&offset=' + (lastQueryPending.get('limit') + lastQueryPending.get('offset'))
-      @getModel().find(newQueryPending)
-  
-  getNextInvoicesOverdue: ->
-    lastQueryOverdue = @get('meta.queries').get(@get('paginationOverdue.metaQueryName'))
-    if lastQueryOverdue
-      newQueryOverdue =
-        name: @get('paginationOverdue.metaQueryName')
-        string: @get('paginationOverdue.query') + '&offset=' + (lastQueryOverdue.get('limit') + lastQueryOverdue.get('offset'))
-      @getModel().find(newQueryOverdue)
-
-  getNextInvoicesPaid: ->
-    lastQueryPaid = @get('meta.queries').get(@get('paginationPaid.metaQueryName'))
-    if lastQueryPaid
-      newQueryPaid =
-        name: @get('paginationPaid.metaQueryName')
-        string: @get('paginationPaid.query') + '&offset=' + (lastQueryPaid.get('limit') + lastQueryPaid.get('offset'))
-      @getModel().find(newQueryPaid)
 
   getNextPagination: ->
     if @get('meta') && @getModel()

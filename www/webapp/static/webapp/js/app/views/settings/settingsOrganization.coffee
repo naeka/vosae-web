@@ -6,6 +6,14 @@ Vosae.SettingsOrganizationView = Vosae.PageSettingsView.extend
     @initLogoUpload()
     @initTermsUpload()
 
+  # Actions handlers
+  actions:
+    openLogoUploadBrowser: ->
+      @.$(".logo .fileupload").click()
+
+    openTermsUploadBrowser: ->
+      @.$(".terms .fileupload").click()
+
   initLogoUpload: ->
     @.$('.logo .fileupload').fileupload
       url: "#{APP_ENDPOINT}/api/v1/file/"
@@ -66,12 +74,6 @@ Vosae.SettingsOrganizationView = Vosae.PageSettingsView.extend
         progress = parseInt(data.loaded / data.total * 100, 10)
         @.$('.terms .progress .bar').css "width", "#{progress}%"
         @.$('.terms .progress-text').html "#{progress}%"
-
-  openLogoUploadBrowser: ->
-    @.$(".logo .fileupload").click()
-
-  openTermsUploadBrowser: ->
-    @.$(".terms .fileupload").click()
 
   registrationInfoView: Ember.ContainerView.extend
     childViews: ['registrationCountryType']

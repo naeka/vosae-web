@@ -34,7 +34,7 @@ Vosae.Components.ResourceSearchField = Em.TextField.extend
 
   ajax: ->
     dict = 
-      url: @get('controller.store.adapter').buildURL('search')
+      url: Vosae.lookup('store:main').get('adapter').buildURL('search')
       type: 'GET',
       quietMillis: 100,
       data: (term, page) =>
@@ -178,7 +178,7 @@ Vosae.Components.TaxSearchField = Vosae.Components.ResourceSearchField.extend
 
   ajax: ->
     object = 
-      url: @get('controller.store.adapter').buildURL('search')
+      url: Vosae.lookup('store:main').get('adapter').buildURL('search')
       type: 'GET',
       quietMillis: 100,
       data: (term, page) =>
@@ -190,7 +190,6 @@ Vosae.Components.TaxSearchField = Vosae.Components.ResourceSearchField.extend
         results: objects
 
   formatResult: (tax) ->
-    console.log tax
     "<div title='#{tax.display_tax}'>#{tax.display_tax}</div>"
 
   formatSelection: (tax) ->

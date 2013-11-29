@@ -1,3 +1,4 @@
 Vosae.QuotationShowController = Vosae.InvoiceBaseController.extend
-  makeInvoice: ->
-    @get('content').makeInvoice @
+  actions:
+    makeInvoice: ->
+      @get('content').makeInvoice @

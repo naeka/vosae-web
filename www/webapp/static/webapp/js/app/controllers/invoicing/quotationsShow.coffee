@@ -2,6 +2,31 @@ Vosae.QuotationsShowController = Vosae.InvoicesBaseController.extend
   sortProperties: ['currentRevision.dueDate']
   sortAscending: false
 
+  actions:
+    getNextQuotationsDraft: ->
+      lastQueryDraft = @get('meta.queries').get(@get('paginationDraft.metaQueryName'))
+      if lastQueryDraft 
+        newQueryDraft =
+          name: @get('paginationDraft.metaQueryName')
+          string: @get('paginationDraft.query') + '&offset=' + (lastQueryDraft.get('limit') + lastQueryDraft.get('offset'))
+        @getModel().find(newQueryDraft)
+    
+    getNextQuotationsExpired: ->
+      lastQueryExpired = @get('meta.queries').get(@get('paginationExpired.metaQueryName'))
+      if lastQueryExpired
+        newQueryExpired =
+          name: @get('paginationExpired.metaQueryName')
+          string: @get('paginationExpired.query') + '&offset=' + (lastQueryExpired.get('limit') + lastQueryExpired.get('offset'))
+        @getModel().find(newQueryExpired)
+
+    getNextQuotationsApproved: ->
+      lastQueryApproved = @get('meta.queries').get(@get('paginationApproved.metaQueryName'))
+      if lastQueryApproved
+        newQueryApproved =
+          name: @get('paginationApproved.metaQueryName')
+          string: @get('paginationApproved.query') + '&offset=' + (lastQueryApproved.get('limit') + lastQueryApproved.get('offset'))
+        @getModel().find(newQueryApproved)
+
   totalOfSelection: (->
     total = 0
     @get('content').forEach (x, idx, i) ->
@@ -71,33 +96,6 @@ Vosae.QuotationsShowController = Vosae.InvoicesBaseController.extend
       return true
     false
   ).property('meta.queries.stateIsApprovedOrInvoiced')
-
-  ##
-  # Pagination
-  # 
-  getNextQuotationsDraft: ->
-    lastQueryDraft = @get('meta.queries').get(@get('paginationDraft.metaQueryName'))
-    if lastQueryDraft 
-      newQueryDraft =
-        name: @get('paginationDraft.metaQueryName')
-        string: @get('paginationDraft.query') + '&offset=' + (lastQueryDraft.get('limit') + lastQueryDraft.get('offset'))
-      @getModel().find(newQueryDraft)
-  
-  getNextQuotationsExpired: ->
-    lastQueryExpired = @get('meta.queries').get(@get('paginationExpired.metaQueryName'))
-    if lastQueryExpired
-      newQueryExpired =
-        name: @get('paginationExpired.metaQueryName')
-        string: @get('paginationExpired.query') + '&offset=' + (lastQueryExpired.get('limit') + lastQueryExpired.get('offset'))
-      @getModel().find(newQueryExpired)
-
-  getNextQuotationsApproved: ->
-    lastQueryApproved = @get('meta.queries').get(@get('paginationApproved.metaQueryName'))
-    if lastQueryApproved
-      newQueryApproved =
-        name: @get('paginationApproved.metaQueryName')
-        string: @get('paginationApproved.query') + '&offset=' + (lastQueryApproved.get('limit') + lastQueryApproved.get('offset'))
-      @getModel().find(newQueryApproved)
 
   getNextPagination: ->
     if @get('meta') && @getModel()

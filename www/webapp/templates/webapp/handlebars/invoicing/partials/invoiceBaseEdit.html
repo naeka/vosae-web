@@ -9,18 +9,24 @@
       {{#if isQuotation}}
         {% trans "Quotation date" %}:
       {{else}}
-        {% trans "Invoicing date" %}:
+        {{#if isPurchaseOrder}}
+          {% trans "Purchase order date" %}:        
+        {{else}}
+          {{#if isInvoice}}
+            {% trans "Invoicing date" %}:
+          {{/if}}       
+        {{/if}}
       {{/if}}
     </label>
     <span class="helptour-datecreated">
-      {{#if isQuotation}}
-        {{currentRevision.displayQuotationDate}}
-        {{view view.quotationDateField
+      {{#if isInvoice}}
+        {{currentRevision.displayInvoicingDate}}
+        {{view view.invoicingDateField
           currentRevisionBinding="currentRevision"
           classNames="edit" }}
       {{else}}
-        {{currentRevision.displayInvoicingDate}}
-        {{view view.invoicingDateField
+        {{currentRevision.displayQuotationDate}}
+        {{view view.quotationDateField
           currentRevisionBinding="currentRevision"
           classNames="edit" }}
       {{/if}}

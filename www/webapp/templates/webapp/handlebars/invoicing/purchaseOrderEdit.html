@@ -1,6 +1,6 @@
 {% load i18n templatetag_handlebars %}
 
-{% tplhandlebars "quotation/edit" %}
+{% tplhandlebars "purchaseOrder/edit" %}
 
   {{#if isLoaded}}
     <section class="invoice-head border-bottom clearfix">
@@ -8,8 +8,6 @@
         <div class="pull-left clearfix">
           {# Date #}
           {{partial "invoiceBase/edit/date"}}
-          {# Validity #}
-          {{partial "quotation/edit/validity"}}
         </div>
         <div class="pull-right clearfix">
           {# Actions and States #}
@@ -47,7 +45,7 @@
 
 {% endtplhandlebars %}
 
-{% tplhandlebars "quotation/edit/settings" %}
+{% tplhandlebars "purchaseOrder/edit/settings" %}
   <ul class="info">
     <li>
       <a {{action 'startHelpTour' target="view"}}>

@@ -9,17 +9,21 @@
       {{#if isQuotation}}
         {% trans "Quotation date" %}:
       {{else}}
-        {{#if isInvoice}}
-          {% trans "Invoicing date" %}:
+        {{#if isPurchaseOrder}}
+          {% trans "Purchase order" %}:
         {{else}}
-         {{#if isCreditNote}}
-            {% trans "Emission date" %}:
-         {{/if}}
+          {{#if isInvoice}}
+            {% trans "Invoicing date" %}:
+          {{else}}
+            {{#if isCreditNote}}
+              {% trans "Emission date" %}:
+           {{/if}}
+          {{/if}}
         {{/if}}
       {{/if}}
     </label>
     <span>
-      {{#if isQuotation}}
+      {{#ifCond isQuotation 'or' isPurchaseOrder}}
         {{unbound currentRevision.displayQuotationDate}}
       {{else}}
         {{#if isInvoice}}
@@ -29,7 +33,7 @@
             {{unbound currentRevision.displayCreditNoteEmissionDate}}          
           {{/if}}
         {{/if}}
-      {{/if}}
+      {{/ifCond}}
     </span>
   </div>
 {% endtplhandlebars %}
@@ -93,8 +97,8 @@
     {% endcomment %}
   {{/if}}
 
-  {# InvoiceBase is Quotation #}
-  {{#if isQuotation}}
+  {# InvoiceBase is Quotation or PurchaseOrder #}
+  {{#ifCond isQuotation 'or' isPurchaseOrder}}
     {{#unless isInvoiced}}
       <div class="btn-group">
         <a class="btn grey">
@@ -123,11 +127,21 @@
       {{/if}}
 
       {{#if isModifiable}}
-        <div class="btn-group">
-          {{#linkTo "quotation.edit" controller.session.tenant content class="btn orange"}}
-            {% trans "Edit" %}
-          {{/linkTo}}
-        </div>
+        {{#if isQuotation}}
+          <div class="btn-group">
+            {{#linkTo "quotation.edit" controller.session.tenant content class="btn orange"}}
+              {% trans "Edit" %}
+            {{/linkTo}}
+          </div>
+        {{else}}
+          {{#if isPurchaseOrder}}
+            <div class="btn-group">
+              {{#linkTo "purchaseOrder.edit" controller.session.tenant content class="btn orange"}}
+                {% trans "Edit" %}
+              {{/linkTo}}
+            </div>
+          {{/if}}
+        {{/if}}
       {{/if}}
 
       {% comment %}
@@ -146,7 +160,7 @@
         </a>
       </div>
     {{/unless}}
-  {{/if}}
+  {{/ifCond}}
 {% endtplhandlebars %}
 
 
@@ -191,8 +205,9 @@
 {# InvoiceBase Title #}
 {% tplhandlebars "invoiceBase/show/_title" %}
   <h4 class="invoice-base-title">
-    {{#if isQuotation}}
-      <span class="invoice-base-type">{% trans "Quotation" %}</span>
+    {{#ifCond isQuotation 'or' isPurchaseOrder}}
+      <span class="invoice-base-type">
+        {{#if isQuotation}}{% trans "Quotation" %}{{else}}{% trans "Purchase order" %}{{/if}}</span>
       {{#if ref}}
         <span class="invoice-base-ref">{{ref}}</span>
       {{else}}
@@ -212,7 +227,7 @@
           <span class="invoice-base-ref">{{ref}}</span>
         {{/if}}
       {{/if}}
-    {{/if}}
+    {{/ifCond}}
   </h4>
 {% endtplhandlebars %}
 

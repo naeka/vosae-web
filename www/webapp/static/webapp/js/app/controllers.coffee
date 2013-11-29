@@ -16,6 +16,7 @@ Vosae.ArrayController = Em.ArrayController.extend
       when Vosae.InvoicesShowController then Vosae.Invoice
       when Vosae.QuotationsShowController then Vosae.Quotation
       when Vosae.ItemsShowController then Vosae.Item
+      when Vosae.PurchaseOrdersShowController then Vosae.PurchaseOrder
 
   init: ->
     @_super()
@@ -27,6 +28,7 @@ Vosae.ArrayController = Em.ArrayController.extend
       when Vosae.InvoicesShowController then @set 'meta', Vosae.metaForInvoice
       when Vosae.QuotationsShowController then @set 'meta', Vosae.metaForQuotation
       when Vosae.ItemsShowController then @set 'meta', Vosae.metaForItem
+      when Vosae.PurchaseOrdersShowController then @set 'meta', Vosae.metaForPurchaseOrder
 
     # Check if model hasn't be fetched yet
     if @get('meta') and !@get('meta.modelHasBeenFetched')
@@ -93,6 +95,9 @@ require 'controllers/invoicing/itemsShow'
 require 'controllers/invoicing/itemShow'
 require 'controllers/invoicing/itemEdit'
 require 'controllers/invoicing/creditNoteShow'
+require 'controllers/invoicing/purchaseOrderShow'
+require 'controllers/invoicing/purchaseOrdersShow'
+require 'controllers/invoicing/purchaseOrderEdit'
 
 require 'controllers/organizer/calendarListsShow'
 require 'controllers/organizer/calendarListShow'

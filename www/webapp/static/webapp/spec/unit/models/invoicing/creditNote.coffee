@@ -133,6 +133,24 @@ describe 'Vosae.CreditNote', ->
     # Test
     expect(creditNote.get('isCreditNote')).toBeTruthy
 
+  it 'isPurchaseOrder property should return true', ->
+    # Setup
+    store.adapterForType(Vosae.CreditNote).load store, Vosae.CreditNote, {id: 1}
+    creditNote = store.find Vosae.CreditNote, 1
+
+    # Test
+    expect(creditNote.get('isPurchaseOrder')).toBeTruthy
+
+  it 'group belongsTo relationship', ->
+    # Setup
+    store.adapterForType(Vosae.Invoice).load store, Vosae.Invoice, {id: 1}
+    invoice = store.find Vosae.Invoice, 1
+    store.adapterForType(Vosae.CreditNote).load store, Vosae.CreditNote, {id: 1, related_invoice: "/api/v1/invoice/1/"}
+    creditNote = store.find Vosae.CreditNote, 1
+
+    # Test
+    expect(creditNote.get('relatedInvoice')).toEqual invoice
+
   it 'relatedInvoice belongsTo relationship', ->
     # Setup
     store.adapterForType(Vosae.Invoice).load store, Vosae.Invoice, {id: 1}
@@ -142,3 +160,13 @@ describe 'Vosae.CreditNote', ->
 
     # Test
     expect(creditNote.get('relatedInvoice')).toEqual invoice
+
+  it 'relatedDownPaymentInvoice belongsTo relationship', ->
+    # Setup
+    store.adapterForType(Vosae.DownPaymentInvoice).load store, Vosae.DownPaymentInvoice, {id: 1}
+    downPaymentInvoice = store.find Vosae.DownPaymentInvoice, 1
+    store.adapterForType(Vosae.CreditNote).load store, Vosae.CreditNote, {id: 1, related_down_payment_invoice: "/api/v1/down_payment_invoice/1/"}
+    creditNote = store.find Vosae.CreditNote, 1
+
+    # Test
+    expect(creditNote.get('relatedDownPaymentInvoice')).toEqual downPaymentInvoice

@@ -43,6 +43,33 @@ Vosae.InvoiceBaseController = Em.ObjectController.extend
             return @transitionToRoute 'invoices.show'
       return
 
+    preventStateError: ->
+      invoiceBase = @get 'content'
+      invoiceBase.get 'currentRevision.senderAddress'
+      invoiceBase.get 'currentRevision.billingAddress'
+      invoiceBase.get 'currentRevision.deliveryAddress'
+      invoiceBase.get 'currentRevision.currency'
+      invoiceBase.get('currentRevision.currency.rates').getEach 'rate'
+
+    cancel: (invoiceBase) ->
+      switch invoiceBase.constructor
+        when Vosae.Quotation
+          if invoiceBase.get('id')
+            return @transitionToRoute 'quotation.show', invoiceBase
+          else
+            return @transitionToRoute 'quotations.show'
+        when Vosae.Invoice
+          if invoiceBase.get('id')
+            return @transitionToRoute 'invoice.show', invoiceBase
+          else
+            return @transitionToRoute 'invoices.show'
+        when Vosae.PurchaseOrder
+          if invoiceBase.get('id')
+            return @transitionToRoute 'purchaseOrder.show', invoiceBase
+          else
+            return @transitionToRoute 'purchaseOrders.show'
+      return
+
     save: (invoiceBase) ->
       # Trigger errors
       errors = invoiceBase.getErrors()
@@ -68,15 +95,17 @@ Vosae.InvoiceBaseController = Em.ObjectController.extend
             if item.isEmpty()
               invoiceBase.get('currentRevision.lineItems').removeObject item
 
-        event = if invoiceBase.get('id') then 'didUpdate' else 'didCreate'
-        invoiceBase.one event, @, ->
-          Ember.run.next @, ->
-            switch invoiceBase.constructor
-              when Vosae.Quotation
-                @transitionToRoute 'quotation.show', @get('session.tenant'), invoiceBase
-              when Vosae.Invoice
-                @transitionToRoute 'invoice.show', @get('session.tenant'), invoiceBase
-        invoiceBase.get('transaction').commit()
+      event = if invoiceBase.get('id') then 'didUpdate' else 'didCreate'
+      invoiceBase.one event, @, ->
+        Ember.run.next @, ->
+          switch invoiceBase.constructor
+            when Vosae.Quotation
+              @transitionToRoute 'quotation.show', @get('session.tenant'), invoiceBase
+            when Vosae.Invoice
+              @transitionToRoute 'invoice.show', @get('session.tenant'), invoiceBase
+            when Vosae.PurchaseOrder
+              @transitionToRoute 'purchaseOrder.show', @get('session.tenant'), invoiceBase
+      invoiceBase.get('transaction').commit()
 
     delete: (invoiceBase) ->
       message = switch invoiceBase.constructor
@@ -84,7 +113,9 @@ Vosae.InvoiceBaseController = Em.ObjectController.extend
           gettext("Do you really want to delete this quotation?")
         when Vosae.Invoice
           gettext("Do you really want to delete this invoice?")
-      
+        when Vosae.PurchaseOrder
+          gettext("Do you really want to delete this purchase order?")
+
       Vosae.ConfirmPopupComponent.open
         message: message
         callback: (opts, event) =>
@@ -96,13 +127,7 @@ Vosae.InvoiceBaseController = Em.ObjectController.extend
                     @transitionToRoute 'quotations.show', @get('session.tenant')
                   when Vosae.Invoice
                     @transitionToRoute 'invoices.show', @get('session.tenant')
+                  when Vosae.PurchaseOrder
+                    @transitionToRoute 'purchaseOrders.show', @get('session.tenant')
             invoiceBase.deleteRecord()
             invoiceBase.get('transaction').commit()
-
-  preventStateError: ->
-    invoiceBase = @get 'content'
-    invoiceBase.get 'currentRevision.senderAddress'
-    invoiceBase.get 'currentRevision.billingAddress'
-    invoiceBase.get 'currentRevision.deliveryAddress'
-    invoiceBase.get 'currentRevision.currency'
-    invoiceBase.get('currentRevision.currency.rates').getEach 'rate'

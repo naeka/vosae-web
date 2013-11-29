@@ -149,3 +149,39 @@ Em.Handlebars.registerBoundHelper 'humanFileSize', (bytes, options) ->
     bytes.toFixed(1) + " " + units[u]
 
   humanFileSize(bytes)
+
+
+Em.Handlebars.registerHelper "ifCond", (v1, operator, v2, options) ->
+  ###
+  Returns true or false according to the logical operator
+
+  @v1: Object, String or Number
+  @v2: Object, String or Number
+  @operator: String
+  
+  Usage:  {{#ifCond v1 '&&' v2}} {{else}} {{/ifCond}}
+  ###
+
+  switch operator
+    when "=="
+      (if (v1 is v2) then options.fn(this) else options.inverse(this))
+    when "!="
+      (if (v1 isnt v2) then options.fn(this) else options.inverse(this))
+    when "==="
+      (if (v1 is v2) then options.fn(this) else options.inverse(this))
+    when "!=="
+      (if (v1 isnt v2) then options.fn(this) else options.inverse(this))
+    when "and"
+      (if (v1 and v2) then options.fn(this) else options.inverse(this))
+    when "or"
+      (if (v1 or v2) then options.fn(this) else options.inverse(this))
+    when "<"
+      (if (v1 < v2) then options.fn(this) else options.inverse(this))
+    when "<="
+      (if (v1 <= v2) then options.fn(this) else options.inverse(this))
+    when ">"
+      (if (v1 > v2) then options.fn(this) else options.inverse(this))
+    when ">="
+      (if (v1 >= v2) then options.fn(this) else options.inverse(this))
+    else
+      (if eval_("" + v1 + operator + v2) then options.fn(this) else options.inverse(this))

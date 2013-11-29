@@ -1,21 +1,22 @@
 Vosae.ContactShowView = Em.View.extend
   classNames: ["app-contacts", "page-show-contact"]
 
-  addQuotationToThis: ->
-    controller = @get('controller')
-    route = controller.get('target.router').getHandler('quotations.add')
-    route.get('preFillQuotationWith').contact = controller.get('content')
-    if controller.get('content.organization')
-      route.get('preFillQuotationWith').organization = controller.get('content.organization')
-    controller.transitionToRoute 'quotations.add', @get('session.tenant')
-  
-  addInvoiceToThis: ->
-    controller = @get('controller')
-    route = controller.get('target.router').getHandler('invoices.add')
-    route.get('preFillInvoiceWith').contact = controller.get('content')
-    if controller.get('content.organization')
-      route.get('preFillInvoiceWith').organization = controller.get('content.organization')
-    controller.transitionToRoute 'invoices.add', @get('session.tenant')
+  actions:
+    addQuotationToThis: ->
+      controller = @get('controller')
+      route = controller.get('target.router').getHandler('quotations.add')
+      route.get('preFillQuotationWith').contact = controller.get('content')
+      if controller.get('content.organization')
+        route.get('preFillQuotationWith').organization = controller.get('content.organization')
+      controller.transitionToRoute 'quotations.add', @get('session.tenant')
+    
+    addInvoiceToThis: ->
+      controller = @get('controller')
+      route = controller.get('target.router').getHandler('invoices.add')
+      route.get('preFillInvoiceWith').contact = controller.get('content')
+      if controller.get('content.organization')
+        route.get('preFillInvoiceWith').organization = controller.get('content.organization')
+      controller.transitionToRoute 'invoices.add', @get('session.tenant')
 
   showMap: (event) ->
     accordion_body = $($(event.target).closest("a.accordion-toggle").attr("href"))

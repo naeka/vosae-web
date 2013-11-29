@@ -26,9 +26,7 @@ Vosae.SearchController = Vosae.ArrayController.extend
   # Generate a get method for each object
   generateGetters: (objects) ->
     i = 0
-    len = objects.length
-
-    while i < len
+    while i < objects.length
       objects[i].get = (property) ->
         this[property]
       i++

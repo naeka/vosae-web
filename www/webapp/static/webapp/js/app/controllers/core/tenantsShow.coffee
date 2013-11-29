@@ -6,6 +6,21 @@ Vosae.TenantsShowController = Em.ArrayController.extend
   usersAreLoaded: false  
   groupsAreLoaded: false
 
+  actions:
+    # Redirection to the tenant root with a complete reload of the application
+    redirectToTenantRoot: (tenant) ->
+      url = window.location.origin + '/' + tenant.get('slug')
+      $(location).attr 'href', url
+
+    # Set the tenant as the current app tenant
+    setAsCurrentTenant: (tenant) ->
+      if tenant
+        @get('namespace').showLoader()
+        @get('session').set 'tenant', tenant
+        @get('namespace').setPageTitle tenant.get('name')
+        @putTenantInAjaxHeaders tenant
+        @getTenantDependencies()
+
   # Returns an array with all tenants excluded the current one
   otherTenants: (->
     array = []
@@ -15,20 +30,6 @@ Vosae.TenantsShowController = Em.ArrayController.extend
           array.pushObject tenant
     array
   ).property('content', 'content.length')
-
-  # Redirection to the tenant root with a complete reload of the application
-  redirectToTenantRoot: (tenant) ->
-    url = window.location.origin + '/' + tenant.get('slug')
-    $(location).attr 'href', url
-
-  # Set the tenant as the current app tenant
-  setAsCurrentTenant: (tenant) ->
-    if tenant
-      @get('namespace').showLoader()
-      @get('session').set 'tenant', tenant
-      @get('namespace').setPageTitle tenant.get('name')
-      @putTenantInAjaxHeaders tenant
-      @getTenantDependencies()
 
   # Update the ajax headers with the tenant slug
   putTenantInAjaxHeaders: (tenant) ->

@@ -1,18 +1,18 @@
 store = null
 
 describe 'Vosae.ReportSettings', ->
-  hashReportSettings =
-    fontName: null
-    fontSize: null
-    baseColor: null
-    forceBw: null
-    language: null
-
   beforeEach ->
     store = Vosae.Store.create()
 
   afterEach ->
     store.destroy()
+
+  it 'fontName property default value should exist in the supported font families list', ->
+    # Setup
+    reportSettings = store.createRecord Vosae.ReportSettings, {}
+
+    # Test
+    expect(Vosae.reportFontFamilies.findProperty('value', reportSettings.get('fontName'))).not.toBeUndefined()
 
   it 'defaultLanguage computed property should return the language object according to the country code', ->
     # Setup

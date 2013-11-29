@@ -61,7 +61,7 @@ Vosae.Tenant = DS.Model.extend
     return true if Ember.isEmpty(errors)
 
   didUpdate: ->
-    message = gettext "Organization's settings has been successfully updated"
+    message = gettext "Tenant's settings has been successfully updated"
     Vosae.SuccessPopupComponent.open
       message: message
 

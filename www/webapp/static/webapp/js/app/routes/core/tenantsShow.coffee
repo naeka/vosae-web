@@ -13,11 +13,11 @@ Vosae.TenantsShowRoute = Ember.Route.extend
     nbrTenants = model.get 'length'
     if nbrTenants == 1
       tenant = model.get 'firstObject'
-      controller.setAsCurrentTenant tenant
+      controller.send "setAsCurrentTenant", tenant
     else
       if @get 'session.preselectedTenant'
         tenant = model.findProperty 'slug', @get('session.preselectedTenant')
-        controller.setAsCurrentTenant(tenant) if tenant
+        controller.send("setAsCurrentTenant", tenant) if tenant
     controller.set 'content', model
 
   renderTemplate: ->

@@ -15,6 +15,52 @@ Vosae.TenantsAddView = Vosae.PageTenantView.extend
     @.$().find('.ember-text-field').first().focus()
     Vosae.hideLoader()
 
+  # Action handlers
+  actions:
+    # Go to form previous step
+    previousStep: (tenant) ->
+      currentStep = @getCurrentStep()
+      switch currentStep
+        when 'stepCoords'
+          @setProperties
+            inStepIdentity: true
+            inStepCoords: false
+            inStepRegistration: false
+        when 'stepRegistration'
+          @setProperties
+            inStepIdentity: false
+            inStepCoords: true
+            inStepRegistration: false
+      @set 'formIsValid', true
+      $("#ct-tenant").scrollTop(0)
+
+    # Go to form next step
+    nextStep: (tenant) ->
+      @resetFormFieldsErrors()
+      currentStep = @getCurrentStep()
+      switch currentStep
+        when 'stepIdentity'
+          if @stepIdentityIsValid tenant
+            @setProperties
+              inStepIdentity: false
+              inStepCoords: true
+              inStepRegistration: false
+          $("#ct-tenant").scrollTop(0)
+        when 'stepCoords'
+          if @stepCoordsIsValid tenant
+            @setProperties
+              inStepIdentity: false
+              inStepCoords: false
+              inStepRegistration: true
+          $("#ct-tenant").scrollTop(0)
+        when 'stepRegistration'
+          if @stepRegistrationIsValid tenant
+            @get('controller').send "save", tenant
+          else
+            $("#ct-tenant").scrollTop(0)
+      # Focus on first input text
+      @.$().find('.ember-text-field').first().focus()
+
   # Returns form's current step
   getCurrentStep: ->
     if @inStepIdentity
@@ -24,51 +70,6 @@ Vosae.TenantsAddView = Vosae.PageTenantView.extend
     if @inStepRegistration
       return 'stepRegistration'
     return undefined
-
-  # Go to form previous step
-  previousStep: (tenant) ->
-    currentStep = @getCurrentStep()
-    switch currentStep
-      when 'stepCoords'
-        @setProperties
-          inStepIdentity: true
-          inStepCoords: false
-          inStepRegistration: false
-      when 'stepRegistration'
-        @setProperties
-          inStepIdentity: false
-          inStepCoords: true
-          inStepRegistration: false
-    @set 'formIsValid', true
-    $("#ct-tenant").scrollTop(0)
-
-  # Go to form next step
-  nextStep: (tenant) ->
-    @resetFormFieldsErrors()
-
-    currentStep = @getCurrentStep()
-    switch currentStep
-      when 'stepIdentity'
-        if @stepIdentityIsValid tenant
-          @setProperties
-            inStepIdentity: false
-            inStepCoords: true
-            inStepRegistration: false
-        $("#ct-tenant").scrollTop(0)
-      when 'stepCoords'
-        if @stepCoordsIsValid tenant
-          @setProperties
-            inStepIdentity: false
-            inStepCoords: false
-            inStepRegistration: true
-        $("#ct-tenant").scrollTop(0)
-      when 'stepRegistration'
-        if @stepRegistrationIsValid tenant
-          @get('controller').save(tenant)
-        else
-          $("#ct-tenant").scrollTop(0)
-    # Focus on first input text
-    @.$().find('.ember-text-field').first().focus()
 
   # Check if form step identity is valid
   stepIdentityIsValid: (tenant) ->

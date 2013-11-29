@@ -5,21 +5,23 @@ Vosae.SettingsApiKeysController = Em.ObjectController.extend
     return apiKeys
   ).property('apiKeys.@each', 'apiKeys.length', 'apiKeys.@each.id')
 
-  save: (apiKey) ->
-    apiKey.one "didCreate", @, ->
-      @notifyPropertyChange('apiKeys.length')
-    apiKey.get('transaction').commit()
+  # Actions handlers
+  actions:
+    save: (apiKey) ->
+      apiKey.one "didCreate", @, ->
+        @notifyPropertyChange('apiKeys.length')
+      apiKey.get('transaction').commit()
 
-  delete: (apiKey) ->
-    Vosae.ConfirmPopupComponent.open
-      message: gettext 'Do you really want to revoke this API key?'
-      callback: (opts, event) =>
-        if opts.primary
-          apiKey.deleteRecord()
-          apiKey.get('transaction').commit()
+    delete: (apiKey) ->
+      Vosae.ConfirmPopupComponent.open
+        message: gettext 'Do you really want to revoke this API key?'
+        callback: (opts, event) =>
+          if opts.primary
+            apiKey.deleteRecord()
+            apiKey.get('transaction').commit()
 
-  add: ->
-    transaction = @get('store').transaction()
-    @setProperties
-      content: transaction.createRecord(Vosae.ApiKey)
-      apiKeys: Vosae.ApiKey.all()
+    add: ->
+      transaction = @get('store').transaction()
+      @setProperties
+        content: transaction.createRecord(Vosae.ApiKey)
+        apiKeys: Vosae.ApiKey.all()

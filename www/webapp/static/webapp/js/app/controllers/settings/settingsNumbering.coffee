@@ -1,3 +1,5 @@
 Vosae.SettingsNumberingController = Em.ObjectController.extend
-  save: (tenantSettings) ->
-    tenantSettings.get('transaction').commit()
+  # Actions handlers
+  actions:
+    save: (tenantSettings) ->
+      tenantSettings.get('transaction').commit()

@@ -3,17 +3,64 @@ Vosae.ApplicationView = Em.View.extend
   
   init: ->
     @_super()
-
     @zoneFocusEvents()
     @onResizeWindow()
     @transitionEndCallback()
 
+  actions:
+    # Expend the left panel
+    openPanelLeft: ->
+      if not @panelLeftIsOpen()
+        $("body").addClass('enable-transformX').addClass("ct-left-open")
+
+        $("#ct-middle").one "click", (e) ->
+          e.stopPropagation()
+          $("#ct-middle").trigger("zoneFocus")
+          return false
+
+        windHeight = $(window).height()
+
+        $("#ct-middle, #ct-left").css
+          "min-height": windHeight
+          "max-height": windHeight
+
+    # Expend the right panel
+    openPanelRight: ->
+      if not @panelRightIsOpen()
+        $("body").addClass('enable-transformX').addClass("ct-right-open")
+
+        $("#ct-middle").one "click", (e) ->
+          e.stopPropagation()
+          $("#ct-middle").trigger("zoneFocus")
+          return false
+
+        windHeight = $(window).height()
+
+        $("#ct-middle, #ct-right").css
+          "min-height": windHeight
+          "max-height": windHeight
+
   didInsertElement: ->
     @get('controller').propertyDidChange('currentRoute')
-    
     $(window).trigger "resize"
 
-  # Drag & Drop events
+  # Return true if left panel is opened
+  panelLeftIsOpen: ->
+    if $("body").hasClass("ct-left-open")
+      return true
+    false
+
+  # Return true if right panel is opened
+  panelRightIsOpen: ->
+    if $("body").hasClass("ct-right-open")
+      return true
+    false
+
+  # Return true in case toucheable device
+  isTouchDevice: ->
+    (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0))
+
+  # HTML events handlers
   drop: (e) ->
     e.preventDefault()
     $("body").removeClass "draggingOn"
@@ -28,7 +75,6 @@ Vosae.ApplicationView = Em.View.extend
     if e.originalEvent.clientX <= 0 or e.originalEvent.clientY <= 0
       $("body").removeClass "draggingOn"
 
-  # Window is resized
   onResizeWindow: ->
     $(window).resize ->
       menuHeight = $("#desktop-app-menu").outerHeight()
@@ -38,48 +84,6 @@ Vosae.ApplicationView = Em.View.extend
         $('.content-min-height').css "min-height", menuHeight
       else
         $('.content-min-height').css "min-height", minContentHeight
-
-  # Expend the left panel
-  openPanelLeft: ->
-    if not $("body").hasClass("ct-left-open")
-      $("body").addClass('enable-transformX').addClass("ct-left-open")
-
-      $("#ct-middle").one "click", (e) ->
-        e.stopPropagation()
-        $("#ct-middle").trigger("zoneFocus")
-        return false
-
-      windHeight = $(window).height()
-
-      $("#ct-middle, #ct-left").css
-        "min-height": windHeight
-        "max-height": windHeight
-
-  # Expend the right panel
-  openPanelRight: ->
-    if not $("body").hasClass("ct-right-open")
-      $("body").addClass('enable-transformX').addClass("ct-right-open")
-
-      $("#ct-middle").one "click", (e) ->
-        e.stopPropagation()
-        $("#ct-middle").trigger("zoneFocus")
-        return false
-
-      windHeight = $(window).height()
-
-      $("#ct-middle, #ct-right").css
-        "min-height": windHeight
-        "max-height": windHeight
-
-  # Return true if left panel is opened
-  panelLeftIsOpen: ->
-    return true if $("body").hasClass("ct-left-open")
-    false
-
-  # Return true if right panel is opened
-  panelRightIsOpen: ->
-    return true if $("body").hasClass("ct-right-open")
-    false
 
   zoneFocusEvents: ->
     self = @
@@ -112,10 +116,6 @@ Vosae.ApplicationView = Em.View.extend
           "max-height": "none"
         if $("body").hasClass("enable-transformX")
           $("body").removeClass("enable-transformX")
-
-  # Return true in case toucheable device
-  isTouchDevice: ->
-    (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0))
 
   # orientationChange: ->
   #   $(window).on "orientationchange", ->
@@ -262,9 +262,9 @@ Vosae.ApplicationView = Em.View.extend
 
       if @get("value").length is 0
         $("#ct-middle").trigger "zoneFocus"
-        self.get("controller.controllers.search").resetSearchQuery()
+        self.get("parentView.controller.controllers.search").resetSearchQuery()
       else
         window.clearTimeout @get("timer")
         @set "timer", setTimeout ->
-          self.get("controller.controllers.search").createSearchQuery(self.get("value"), self.get("keyPressDelay"))
+          self.get("parentView.controller.controllers.search").createSearchQuery(self.get("value"), self.get("keyPressDelay"))
     ).observes("value")

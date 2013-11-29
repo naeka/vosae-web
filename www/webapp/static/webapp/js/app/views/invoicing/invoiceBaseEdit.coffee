@@ -1,17 +1,17 @@
 Vosae.InvoiceBaseEditView = Em.View.extend
-
   attachmentUpload: Em.Object.extend
     progress: 0
     displayProgress: (->
       "width: #{@get('progress')}%"
     ).property('progress')
 
+  actions:
+    openFileUploadBrowser: ->
+      @.$('input.fileupload').trigger('click')
+
   didInsertElement: ->
     @_super()
     @initAttachmentsUpload()
-
-  openFileUploadBrowser: ->
-    @.$('input.fileupload').trigger('click')
 
   initAttachmentsUpload: ->
     # Initialize file upload zones
@@ -89,7 +89,7 @@ Vosae.InvoiceBaseEditView = Em.View.extend
 
     ajax: ->
       dict = 
-        url: @get('controller.store.adapter').buildURL('search')
+        url: @get('parentView.controller.store.adapter').buildURL('search')
         type: 'GET',
         quietMillis: 100,
         data: (term, page) =>
@@ -178,7 +178,7 @@ Vosae.InvoiceBaseEditView = Em.View.extend
     
     ajax: ->
       dict = 
-        url: @get('controller.store.adapter').buildURL('search')
+        url: @get('parentView.controller.store.adapter').buildURL('search')
         type: 'GET',
         quietMillis: 100,
         data: (term, page) =>
@@ -192,7 +192,7 @@ Vosae.InvoiceBaseEditView = Em.View.extend
           query
 
         results: (data, page) =>
-          organization = @get('controller.currentRevision.organization')
+          organization = @get('parentView.controller.currentRevision.organization')
           filteredData = []
           data["objects"].forEach (result) ->
             if !organization or result.organization is organization.get('corporateNname')
@@ -334,24 +334,24 @@ Vosae.InvoiceBaseEditView = Em.View.extend
   # = InvoiceBase Currency =
   # ========================
   currencyField: Vosae.Components.Select.extend
-    currentRevisionBinding: Em.Binding.oneWay 'controller.content.currentRevision'
-    contentBinding: Em.Binding.oneWay 'controller.session.tenantSettings.invoicing.supportedCurrencies'
-    valueBinding: Em.Binding.oneWay 'controller.content.currentRevision.currency.symbol'
-    colorBinding: Em.Binding.oneWay 'controller.content.relatedColor'
+    currentRevisionBinding: Em.Binding.oneWay 'parentView.controller.content.currentRevision'
+    contentBinding: Em.Binding.oneWay 'parentView.controller.session.tenantSettings.invoicing.supportedCurrencies'
+    valueBinding: Em.Binding.oneWay 'parentView.controller.content.currentRevision.currency.symbol'
+    colorBinding: Em.Binding.oneWay 'parentView.controller.content.relatedColor'
     optionLabelPath: 'content.displaySignWithSymbol'
     optionValuePath: 'content.symbol'
     containerCssClass: 'currency'
 
     init: ->
       @_super()
-      @classNames.addObject @get('controller.content.relatedColor')
+      @classNames.addObject @get('parentView.controller.content.relatedColor')
 
     didInsertElement: ->
       @_super()
 
       # We are in a new invoiceBase record, currency is empty
-      unless @get('controller.content.id')
-        defaultCurrency = @get 'controller.session.tenantSettings.invoicing.defaultCurrency'
+      unless @get('parentView.controller.content.id')
+        defaultCurrency = @get 'parentView.controller.session.tenantSettings.invoicing.defaultCurrency'
 
         # Currency may has been updated (especially rates) so
         # we fetch the currency on the server by security
@@ -474,7 +474,7 @@ Vosae.InvoiceBaseEditView = Em.View.extend
     addLineWithItem: (item) ->
       if Em.typeOf(@get("currentItem")) is "instance"
 
-        currentCurrency = @get("controller.currentRevision.currency")
+        currentCurrency = @get("parentView.controller.currentRevision.currency")
 
         # If the currency is different we convert the unit price
         if currentCurrency.get("symbol") isnt item.get("currency.symbol")

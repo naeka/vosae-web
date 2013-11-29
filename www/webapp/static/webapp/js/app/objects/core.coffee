@@ -47,11 +47,14 @@ Vosae.languages = Em.makeArray([
 
 Vosae.reportFontFamilies = [
   Em.Object.create
-    value: "bariol"
+    value: "Bariol"
     name: "Bariol"
   Em.Object.create
-    value: "arial"
-    name: "Arial"
+    value: "Courier"
+    name: "Courier"
+  Em.Object.create
+    value: "Helvetica"
+    name: "Helvetica"
 ]
 
 Vosae.reportFontSizes = [

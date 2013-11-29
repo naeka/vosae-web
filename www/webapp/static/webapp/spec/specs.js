@@ -1813,19 +1813,16 @@ var store;
 store = null;
 
 describe('Vosae.ReportSettings', function() {
-  var hashReportSettings;
-  hashReportSettings = {
-    fontName: null,
-    fontSize: null,
-    baseColor: null,
-    forceBw: null,
-    language: null
-  };
   beforeEach(function() {
     return store = Vosae.Store.create();
   });
   afterEach(function() {
     return store.destroy();
+  });
+  it('fontName property default value should exist in the supported font families list', function() {
+    var reportSettings;
+    reportSettings = store.createRecord(Vosae.ReportSettings, {});
+    return expect(Vosae.reportFontFamilies.findProperty('value', reportSettings.get('fontName'))).not.toBeUndefined();
   });
   it('defaultLanguage computed property should return the language object according to the country code', function() {
     var reportSettings;

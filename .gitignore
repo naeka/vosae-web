@@ -41,3 +41,5 @@ www/webapp/.sass-cache/
 #Various
 node_modules/
 vosae-web.sublime-workspace
+
+/www/webapp/static/webapp/spec/specs.js

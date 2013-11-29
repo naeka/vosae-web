@@ -206,6 +206,13 @@ describe 'Vosae.Tax', ->
     stateEquals tax, 'deleted.saved'
     enabledFlags tax, ['isLoaded', 'isDeleted', 'isValid']
 
+  it 'rate property should be equal 0.00 by default', ->
+    # Setup
+    tax = store.createRecord Vosae.Tax, {}
+
+    # Test
+    expect(tax.get('rate')).toEqual 0.00
+
   it 'displayTax property should contact tax name and rate', ->
     # Setup
     store.adapterForType(Vosae.Tax).load store, Vosae.Tax, {id: 1, name: "TVA", rate: 0.196}

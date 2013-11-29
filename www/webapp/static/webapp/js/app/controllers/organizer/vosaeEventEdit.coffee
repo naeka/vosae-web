@@ -50,4 +50,4 @@ Vosae.VosaeEventEditController = Em.ObjectController.extend
         message: gettext 'Do you really want to delete this reminder?'
         callback: (opts, event) =>
           if opts.primary
-          @get('reminders.overrides').removeObject(reminder)
+            @get('reminders.overrides').removeObject(reminder)

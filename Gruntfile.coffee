@@ -229,6 +229,7 @@ module.exports = (grunt) ->
     emberTemplates:
       compile:
         options:
+          handlebarsPath: WEBAPP_JS_VENDOR_DIR + "handlebars.js"
           templateName: (sourceFile) ->
             to_replace = RegExp("#{WEBAPP_ROOT}/handlebars/#{TEMPLATE_LANG}/")
             sourceFile.replace(to_replace, '')

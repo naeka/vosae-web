@@ -53,13 +53,13 @@
 
     {{#unless purchaseOrdersApproved.length}}
       <p class="table-no-data orange">
-        {% trans "No approved purcahse orders" %}
+        {% trans "No approved purchase orders" %}
       </p>
     {{/unless}}
     {# Pagination #}
     {{#if paginationApprovedHasNext}}
       <p class="table-load-more" {{action getNextPurchaseOrdersApproved}}>
-        {% trans "Load more purcahse orders" %}
+        {% trans "Load more purchase orders" %}
       </p>
     {{/if}}
   </section>

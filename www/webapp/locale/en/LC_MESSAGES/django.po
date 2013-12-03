@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vosae-web\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-23 09:29+0000\n"
+"POT-Creation-Date: 2013-12-03 18:06+0000\n"
 "PO-Revision-Date: 2013-10-22 18:27+0100\n"
 "Last-Translator: Léo S <leo@naeka.fr>\n"
 "Language-Team: Léo S. <leo@naeka.fr>\n"
@@ -37,7 +37,7 @@ msgstr ""
 #: templates/webapp/handlebars/core/partials/tenantsAddIdentity.html:68
 #: templates/webapp/handlebars/core/partials/tenantsAddRegistration.html:69
 #: templates/webapp/handlebars/invoicing/itemEdit.html:109
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:284
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:290
 #: templates/webapp/handlebars/organizer/calendarListEdit.html:33
 #: templates/webapp/handlebars/organizer/calendarListsShow.html:24
 #: templates/webapp/handlebars/organizer/vosaeEventEdit.html:34
@@ -49,7 +49,7 @@ msgstr ""
 #: templates/webapp/handlebars/contacts/organizationEdit.html:34
 #: templates/webapp/handlebars/contacts/organizationEdit.html:101
 #: templates/webapp/handlebars/invoicing/itemEdit.html:103
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:278
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:284
 #: templates/webapp/handlebars/organizer/calendarListsShow.html:20
 msgid "Saving"
 msgstr ""
@@ -59,8 +59,8 @@ msgstr ""
 #: templates/webapp/handlebars/contacts/organizationEdit.html:40
 #: templates/webapp/handlebars/contacts/organizationEdit.html:107
 #: templates/webapp/handlebars/invoicing/itemEdit.html:116
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:291
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:385
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:297
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:400
 #: templates/webapp/handlebars/organizer/calendarListEdit.html:40
 #: templates/webapp/handlebars/organizer/calendarListsShow.html:30
 #: templates/webapp/handlebars/organizer/vosaeEventEdit.html:41
@@ -96,8 +96,9 @@ msgstr ""
 #: templates/webapp/handlebars/contacts/organizationEdit.html:62
 #: templates/webapp/handlebars/contacts/organizationShow.html:17
 #: templates/webapp/handlebars/invoicing/itemShow.html:11
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:81
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:129
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:85
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:134
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:141
 #: templates/webapp/handlebars/organizer/calendarListShow.html:15
 #: templates/webapp/handlebars/organizer/calendarListsShow.html:27
 #: templates/webapp/handlebars/organizer/vosaeEventShow.html:17
@@ -135,7 +136,8 @@ msgstr ""
 #: templates/webapp/handlebars/invoicing/dashboard.html:125
 #: templates/webapp/handlebars/invoicing/invoiceEdit.html:58
 #: templates/webapp/handlebars/invoicing/itemEdit.html:136
-#: templates/webapp/handlebars/invoicing/quotationEdit.html:55
+#: templates/webapp/handlebars/invoicing/purchaseOrderEdit.html:52
+#: templates/webapp/handlebars/invoicing/quotationEdit.html:54
 #: templates/webapp/handlebars/organizer/calendarListEdit.html:211
 #: templates/webapp/handlebars/organizer/calendarListShow.html:124
 #: templates/webapp/handlebars/organizer/calendarListsShow.html:41
@@ -146,8 +148,8 @@ msgstr ""
 #: templates/webapp/handlebars/contacts/contactShow.html:22
 #: templates/webapp/handlebars/contacts/organizationShow.html:22
 #: templates/webapp/handlebars/invoicing/itemShow.html:16
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:37
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:245
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:43
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:251
 #: templates/webapp/handlebars/organizer/calendarListEdit.html:50
 #: templates/webapp/handlebars/organizer/calendarListEdit.html:148
 #: templates/webapp/handlebars/organizer/calendarListEdit.html:190
@@ -168,14 +170,14 @@ msgstr ""
 #: templates/webapp/handlebars/contacts/contactShow.html:65
 #: templates/webapp/handlebars/invoicing/dashboard.html:38
 #: templates/webapp/handlebars/invoicing/quotationsShow.html:11
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:197
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:212
 msgid "Quotation"
 msgstr ""
 
 #: templates/webapp/handlebars/contacts/contactShow.html:71
 #: templates/webapp/handlebars/invoicing/dashboard.html:44
 #: templates/webapp/handlebars/invoicing/invoicesShow.html:10
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:205
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:220
 msgid "Invoice"
 msgstr ""
 
@@ -237,8 +239,8 @@ msgid "Corporate name"
 msgstr ""
 
 #: templates/webapp/handlebars/contacts/organizationEdit.html:78
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:144
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:380
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:150
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:395
 #: templates/webapp/handlebars/organizer/vosaeEventEdit.html:148
 msgid "Description"
 msgstr ""
@@ -878,13 +880,11 @@ msgstr ""
 #: templates/webapp/handlebars/invoicing/invoicesShow.html:36
 #: templates/webapp/handlebars/invoicing/invoicesShow.html:61
 #: templates/webapp/handlebars/invoicing/invoicesShow.html:86
-#: templates/webapp/handlebars/invoicing/quotationsShow.html:37
-#: templates/webapp/handlebars/invoicing/quotationsShow.html:62
-#: templates/webapp/handlebars/invoicing/quotationsShow.html:87
-msgid "Load more quotations"
+msgid "Load more invoices"
 msgstr ""
 
 #: templates/webapp/handlebars/invoicing/invoicesShow.html:45
+#: templates/webapp/handlebars/invoicing/purchaseOrdersShow.html:21
 #: templates/webapp/handlebars/invoicing/quotationsShow.html:21
 msgid "Pending"
 msgstr ""
@@ -916,7 +916,7 @@ msgstr ""
 
 #: templates/webapp/handlebars/invoicing/itemEdit.html:50
 #: templates/webapp/handlebars/invoicing/itemEdit.html:55
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:135
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:141
 msgid "Reference"
 msgstr ""
 
@@ -937,7 +937,7 @@ msgid "Currency"
 msgstr ""
 
 #: templates/webapp/handlebars/invoicing/itemEdit.html:118
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:293
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:299
 msgid "Create"
 msgstr ""
 
@@ -969,8 +969,38 @@ msgstr ""
 msgid "Load more items"
 msgstr ""
 
+#: templates/webapp/handlebars/invoicing/purchaseOrdersShow.html:11
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:13
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:212
+msgid "Purchase order"
+msgstr ""
+
+#: templates/webapp/handlebars/invoicing/purchaseOrdersShow.html:31
+msgid "No pending purchase orders"
+msgstr ""
+
+#: templates/webapp/handlebars/invoicing/purchaseOrdersShow.html:37
+#: templates/webapp/handlebars/invoicing/purchaseOrdersShow.html:62
+msgid "Load more purchase orders"
+msgstr ""
+
+#: templates/webapp/handlebars/invoicing/purchaseOrdersShow.html:46
+#: templates/webapp/handlebars/invoicing/quotationsShow.html:71
+msgid "Approved"
+msgstr ""
+
+#: templates/webapp/handlebars/invoicing/purchaseOrdersShow.html:56
+msgid "No approved purchase orders"
+msgstr ""
+
 #: templates/webapp/handlebars/invoicing/quotationsShow.html:31
 msgid "No pending quotations"
+msgstr ""
+
+#: templates/webapp/handlebars/invoicing/quotationsShow.html:37
+#: templates/webapp/handlebars/invoicing/quotationsShow.html:62
+#: templates/webapp/handlebars/invoicing/quotationsShow.html:87
+msgid "Load more quotations"
 msgstr ""
 
 #: templates/webapp/handlebars/invoicing/quotationsShow.html:46
@@ -981,56 +1011,73 @@ msgstr ""
 msgid "No expired quotations"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/quotationsShow.html:71
-msgid "Approved"
-msgstr ""
-
 #: templates/webapp/handlebars/invoicing/quotationsShow.html:81
 msgid "No approved quotations"
 msgstr ""
 
 #: templates/webapp/handlebars/invoicing/root.html:9
-#: templates/webapp/handlebars/invoicing/root.html:34
-#: templates/webapp/handlebars/invoicing/root.html:59
-#: templates/webapp/handlebars/invoicing/root.html:84
-#: templates/webapp/handlebars/invoicing/root.html:109
-#: templates/webapp/handlebars/invoicing/root.html:134
-#: templates/webapp/handlebars/invoicing/root.html:159
-#: templates/webapp/handlebars/invoicing/root.html:184
+#: templates/webapp/handlebars/invoicing/root.html:36
+#: templates/webapp/handlebars/invoicing/root.html:63
+#: templates/webapp/handlebars/invoicing/root.html:90
+#: templates/webapp/handlebars/invoicing/root.html:117
+#: templates/webapp/handlebars/invoicing/root.html:144
+#: templates/webapp/handlebars/invoicing/root.html:171
+#: templates/webapp/handlebars/invoicing/root.html:198
+#: templates/webapp/handlebars/invoicing/root.html:225
+#: templates/webapp/handlebars/invoicing/root.html:252
 msgctxt "invoicing"
 msgid "Dashboard"
 msgstr ""
 
 #: templates/webapp/handlebars/invoicing/root.html:14
-#: templates/webapp/handlebars/invoicing/root.html:39
-#: templates/webapp/handlebars/invoicing/root.html:64
-#: templates/webapp/handlebars/invoicing/root.html:89
-#: templates/webapp/handlebars/invoicing/root.html:114
-#: templates/webapp/handlebars/invoicing/root.html:139
-#: templates/webapp/handlebars/invoicing/root.html:164
-#: templates/webapp/handlebars/invoicing/root.html:189
+#: templates/webapp/handlebars/invoicing/root.html:41
+#: templates/webapp/handlebars/invoicing/root.html:68
+#: templates/webapp/handlebars/invoicing/root.html:95
+#: templates/webapp/handlebars/invoicing/root.html:122
+#: templates/webapp/handlebars/invoicing/root.html:149
+#: templates/webapp/handlebars/invoicing/root.html:176
+#: templates/webapp/handlebars/invoicing/root.html:203
+#: templates/webapp/handlebars/invoicing/root.html:230
+#: templates/webapp/handlebars/invoicing/root.html:257
 msgid "Quotations"
 msgstr ""
 
 #: templates/webapp/handlebars/invoicing/root.html:17
-#: templates/webapp/handlebars/invoicing/root.html:42
-#: templates/webapp/handlebars/invoicing/root.html:67
-#: templates/webapp/handlebars/invoicing/root.html:92
-#: templates/webapp/handlebars/invoicing/root.html:117
-#: templates/webapp/handlebars/invoicing/root.html:142
-#: templates/webapp/handlebars/invoicing/root.html:167
-#: templates/webapp/handlebars/invoicing/root.html:192
+#: templates/webapp/handlebars/invoicing/root.html:44
+#: templates/webapp/handlebars/invoicing/root.html:71
+#: templates/webapp/handlebars/invoicing/root.html:98
+#: templates/webapp/handlebars/invoicing/root.html:125
+#: templates/webapp/handlebars/invoicing/root.html:152
+#: templates/webapp/handlebars/invoicing/root.html:179
+#: templates/webapp/handlebars/invoicing/root.html:206
+#: templates/webapp/handlebars/invoicing/root.html:233
+#: templates/webapp/handlebars/invoicing/root.html:260
+msgid "Purchase orders"
+msgstr ""
+
+#: templates/webapp/handlebars/invoicing/root.html:20
+#: templates/webapp/handlebars/invoicing/root.html:47
+#: templates/webapp/handlebars/invoicing/root.html:74
+#: templates/webapp/handlebars/invoicing/root.html:101
+#: templates/webapp/handlebars/invoicing/root.html:128
+#: templates/webapp/handlebars/invoicing/root.html:155
+#: templates/webapp/handlebars/invoicing/root.html:182
+#: templates/webapp/handlebars/invoicing/root.html:209
+#: templates/webapp/handlebars/invoicing/root.html:236
+#: templates/webapp/handlebars/invoicing/root.html:263
 msgid "Invoices"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/root.html:21
-#: templates/webapp/handlebars/invoicing/root.html:46
-#: templates/webapp/handlebars/invoicing/root.html:71
-#: templates/webapp/handlebars/invoicing/root.html:96
-#: templates/webapp/handlebars/invoicing/root.html:121
-#: templates/webapp/handlebars/invoicing/root.html:146
-#: templates/webapp/handlebars/invoicing/root.html:171
-#: templates/webapp/handlebars/invoicing/root.html:196
+#: templates/webapp/handlebars/invoicing/root.html:23
+#: templates/webapp/handlebars/invoicing/root.html:50
+#: templates/webapp/handlebars/invoicing/root.html:77
+#: templates/webapp/handlebars/invoicing/root.html:104
+#: templates/webapp/handlebars/invoicing/root.html:131
+#: templates/webapp/handlebars/invoicing/root.html:158
+#: templates/webapp/handlebars/invoicing/root.html:185
+#: templates/webapp/handlebars/invoicing/root.html:212
+#: templates/webapp/handlebars/invoicing/root.html:239
+#: templates/webapp/handlebars/invoicing/root.html:266
 msgid "Items"
 msgstr ""
 
@@ -1039,47 +1086,52 @@ msgstr ""
 msgid "Quotation date"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:12
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:13
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:13
+msgid "Purchase order date"
+msgstr ""
+
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:16
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:16
 msgid "Invoicing date"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:63
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:69
 msgid "Seller"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:79
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:85
 msgid "Choose an organization"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:84
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:90
 msgid "Choose a contact"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:114
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:240
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:120
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:255
 #: templates/webapp/handlebars/invoicing/partials/tableOfInvoices.html:8
 #: templates/webapp/handlebars/invoicing/partials/tableOfItems.html:8
+#: templates/webapp/handlebars/invoicing/partials/tableOfPurchaseOrders.html:8
 #: templates/webapp/handlebars/invoicing/partials/tableOfQuotations.html:8
 msgctxt "table-headers"
 msgid "Reference"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:115
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:241
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:121
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:256
 #: templates/webapp/handlebars/invoicing/partials/tableOfItems.html:11
 msgctxt "table-headers"
 msgid "Description"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:116
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:242
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:122
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:257
 msgctxt "table-headers"
 msgid "Qty"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:117
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:243
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:123
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:258
 #: templates/webapp/handlebars/invoicing/partials/tableOfItems.html:14
 msgctxt "table-headers"
 msgid "Unit price (excl. tax)"
@@ -1087,305 +1139,307 @@ msgstr ""
 "Unit price\n"
 "(excl. tax)"
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:118
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:244
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:124
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:259
 msgctxt "table-headers"
 msgid "Tax"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:119
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:245
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:125
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:260
 msgctxt "table-headers"
 msgid "Total (excl. tax)"
 msgstr ""
 "Total\n"
 "(excl. tax)"
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:175
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:264
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:181
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:279
 msgid "No items in this quotation"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:177
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:266
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:183
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:281
 msgid "No items in this invoice"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:186
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:192
 msgid "Add a line"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:195
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:465
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:201
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:480
 msgid "Attachments"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:201
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:471
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:207
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:486
 msgctxt "table-headers"
 msgid "Name"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:203
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:472
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:209
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:487
 msgctxt "table-headers"
 msgid "Size"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:204
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:473
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:210
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:488
 msgctxt "table-headers"
 msgid "Created"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:205
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:474
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:211
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:489
 msgctxt "table-headers"
 msgid "Last modified"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:206
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:475
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:212
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:490
 msgctxt "table-headers"
 msgid "Author"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:214
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:220
 msgid "Drop attachments here"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:236
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:485
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:242
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:500
 msgid "Download"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:255
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:499
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:261
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:514
 msgid "No attachments related to this quotation"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:257
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:501
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:263
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:516
 msgid "No attachments related to this invoice"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:266
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:272
 msgid "Add an attachment"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:308
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:314
 msgid "Valid until"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:322
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:531
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:328
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:546
 msgid "Payment Terms"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:328
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:542
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:334
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:557
 msgid ""
 "Accepted payment methods: <span class=\"grey\">{{invoicingSettings."
 "acceptedPaymentTypesFormatted}}</span>"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:332
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:546
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:338
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:561
 #, python-format
 msgid ""
 "Late fee rate: <span class=\"grey\">{{invoicingSettings.lateFeeRate}}%%</"
 "span>"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:334
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:548
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:340
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:563
 msgid "Late fee: <span class=\"grey\">at the legal rate</span>"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:343
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:349
 msgid "Payment conditions:"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:349
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:355
 msgctxt "payment condition"
 msgid "Choose one"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:358
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:364
 msgid "Payment due date on:"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:374
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:380
 msgid "Type your conditions here"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:378
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseEdit.html:384
 msgctxt "date"
 msgid "Estimated on"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:16
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:19
 msgid "Emission date"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:41
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:45
 msgid "Generating"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:46
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:50
 msgctxt "something by default"
 msgid "default"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:60
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:64
 msgid "Processing"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:66
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:70
 msgid "Charge"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:74
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:78
 msgid "Cancel invoice"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:121
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:125
 msgid "Make invoice"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:201
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:216
 msgid "Reference will be generated on save"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:207
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:222
 msgid "Reference will be generated when registered"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:213
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:228
 msgid "Credit Note"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:281
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:296
 msgid "TOTAL (excl. tax)"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:299
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:314
 msgid "TOTAL (incl. tax)"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:315
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:330
 msgid "Payments"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:318
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:333
 msgid "Balance"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:324
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:339
 msgctxt "table-headers"
 msgid "Date"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:325
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:340
 msgctxt "table-headers"
 msgid "Type"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:326
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:341
 msgctxt "table-headers"
 msgid "Currency"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:327
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:342
 msgctxt "table-headers"
 msgid "Amount"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:328
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:343
 msgctxt "table-headers"
 msgid "Note"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:329
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:344
 msgctxt "table-headers"
 msgid "Action"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:385
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:400
 #: templates/webapp/handlebars/organizer/calendarListEdit.html:27
 #: templates/webapp/handlebars/organizer/vosaeEventEdit.html:28
 #: templates/webapp/handlebars/settings/partials/saveSettings.html:9
 msgid "Saving..."
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:394
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:409
 msgid "No payments have been received"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:403
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:418
 msgid "Add payment"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:428
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:443
 msgid "Credit notes"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:434
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:449
 msgid "See related credit note"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:445
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:460
 msgid "Date"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:446
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:461
 msgid "Type"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:447
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:462
 msgid "Amount"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:448
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:463
 msgid "Note"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:456
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:471
 msgid "Add down-payment"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:476
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:491
 msgctxt "table-headers"
 msgid "Link"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:515
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:530
 msgid "Quotation valid until"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:521
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:536
 msgid "Undefined"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:536
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:551
 msgid ""
 "Payment conditions: <span class=\"grey\">{{currentRevision."
 "customPaymentConditions}}</span>"
 msgstr ""
 
-#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:539
+#: templates/webapp/handlebars/invoicing/partials/invoiceBaseShow.html:554
 msgid ""
 "Payment due date on: <span class=\"grey\">{{currentRevision.displayDueDate}}"
 "</span>"
 msgstr ""
 
 #: templates/webapp/handlebars/invoicing/partials/tableOfInvoices.html:11
+#: templates/webapp/handlebars/invoicing/partials/tableOfPurchaseOrders.html:11
 #: templates/webapp/handlebars/invoicing/partials/tableOfQuotations.html:11
 msgctxt "table-headers"
 msgid "Customer"
 msgstr ""
 
 #: templates/webapp/handlebars/invoicing/partials/tableOfInvoices.html:14
+#: templates/webapp/handlebars/invoicing/partials/tableOfPurchaseOrders.html:14
 #: templates/webapp/handlebars/invoicing/partials/tableOfQuotations.html:14
 msgctxt "table-headers"
 msgid "Total (incl. tax.)"
@@ -1399,6 +1453,7 @@ msgid "Due date"
 msgstr ""
 
 #: templates/webapp/handlebars/invoicing/partials/tableOfInvoices.html:20
+#: templates/webapp/handlebars/invoicing/partials/tableOfPurchaseOrders.html:20
 #: templates/webapp/handlebars/invoicing/partials/tableOfQuotations.html:20
 msgctxt "table-headers"
 msgid "Status"
@@ -1414,6 +1469,7 @@ msgctxt "table-headers"
 msgid "Default tax"
 msgstr ""
 
+#: templates/webapp/handlebars/invoicing/partials/tableOfPurchaseOrders.html:17
 #: templates/webapp/handlebars/invoicing/partials/tableOfQuotations.html:17
 msgctxt "table-headers"
 msgid "Expiration"
@@ -1541,6 +1597,7 @@ msgstr ""
 #: templates/webapp/handlebars/settings/settingsEditUser.html:7
 #: templates/webapp/handlebars/settings/settingsEditUser.html:9
 #: templates/webapp/handlebars/settings/settingsOrganization.html:5
+#: templates/webapp/handlebars/settings/settingsReport.html:5
 #: templates/webapp/handlebars/settings/settingsShowGroups.html:5
 #: templates/webapp/handlebars/settings/settingsShowUsers.html:5
 msgid "Global settings"
@@ -1570,7 +1627,12 @@ msgstr ""
 msgid "Groups"
 msgstr ""
 
-#: templates/webapp/handlebars/settings/root.html:22
+#: templates/webapp/handlebars/settings/root.html:21
+#: templates/webapp/handlebars/settings/settingsReport.html:5
+msgid "Reports"
+msgstr ""
+
+#: templates/webapp/handlebars/settings/root.html:23
 #: templates/webapp/handlebars/settings/settingsEditTax.html:8
 #: templates/webapp/handlebars/settings/settingsEditTax.html:12
 #: templates/webapp/handlebars/settings/settingsInvoicingGeneral.html:5
@@ -1579,19 +1641,19 @@ msgstr ""
 msgid "Invoicing settings"
 msgstr ""
 
-#: templates/webapp/handlebars/settings/root.html:24
+#: templates/webapp/handlebars/settings/root.html:25
 #: templates/webapp/handlebars/settings/settingsInvoicingGeneral.html:5
 msgid "General"
 msgstr ""
 
-#: templates/webapp/handlebars/settings/root.html:25
+#: templates/webapp/handlebars/settings/root.html:26
 #: templates/webapp/handlebars/settings/settingsEditTax.html:8
 #: templates/webapp/handlebars/settings/settingsEditTax.html:12
 #: templates/webapp/handlebars/settings/settingsShowTaxes.html:5
 msgid "Taxes"
 msgstr ""
 
-#: templates/webapp/handlebars/settings/root.html:26
+#: templates/webapp/handlebars/settings/root.html:27
 #: templates/webapp/handlebars/settings/settingsNumbering.html:5
 msgid "Numbering"
 msgstr ""
@@ -1804,6 +1866,22 @@ msgstr ""
 #: templates/webapp/handlebars/settings/settingsOrganization.html:230
 #: templates/webapp/handlebars/settings/settingsOrganization.html:311
 msgid "Country here"
+msgstr ""
+
+#: templates/webapp/handlebars/settings/settingsReport.html:13
+msgid "Language"
+msgstr ""
+
+#: templates/webapp/handlebars/settings/settingsReport.html:26
+msgid "Font name"
+msgstr ""
+
+#: templates/webapp/handlebars/settings/settingsReport.html:39
+msgid "Font size"
+msgstr ""
+
+#: templates/webapp/handlebars/settings/settingsReport.html:61
+msgid "Force black and white"
 msgstr ""
 
 #: templates/webapp/handlebars/settings/settingsShowGroups.html:12

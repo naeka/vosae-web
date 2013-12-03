@@ -29,35 +29,35 @@ Vosae.InvoiceBase = DS.Model.extend
     # Return the url to add attachment
     if @get("id")?
       adapter = @get('store.adapter')
-      root = adapter.rootForType(@constructor)
+      root = adapter.rootForType(@constructor.toString())
       return adapter.buildURL(root, @get('id')) + "add_attachment/"
     return
   ).property("id")
 
   isInvoice: (->
     # True if `InvoiceBase` is an `Invoice`.
-    if @constructor is Vosae.Invoice
+    if @constructor.toString() is Vosae.Invoice.toString()
       return true
     return false
   ).property()
 
   isQuotation: (->
     # True if `InvoiceBase` is an `Quotation`.
-    if @constructor is Vosae.Quotation
+    if @constructor.toString() is Vosae.Quotation.toString()
       return true
     return false
   ).property()
 
   isCreditNote: (->
     # True if `InvoiceBase` is a `CreditNote`.
-    if @constructor is Vosae.CreditNote
+    if @constructor.toString() is Vosae.CreditNote.toString()
       return true
     return false
   ).property()
 
   isPurchaseOrder: (->
     # True if `InvoiceBase` is a `PurchaseOrder`.
-    if @constructor is Vosae.PurchaseOrder
+    if @constructor.toString() is Vosae.PurchaseOrder.toString()
       return true
     return false
   ).property()
@@ -77,7 +77,7 @@ Vosae.InvoiceBase = DS.Model.extend
       invoiceBase.set 'isUpdatingState', true
      
       adapter = @get 'store.adapter'
-      root = adapter.rootForType(invoiceBase.constructor)
+      root = adapter.rootForType(invoiceBase.constructor.toString())
       
       # URL to update invoiceBase state
       url = adapter.buildURL root, @get('id')
@@ -102,7 +102,7 @@ Vosae.InvoiceBase = DS.Model.extend
       invoiceBase = @
       invoiceBase.set 'isGeneratingPdfState', true
       adapter = @get 'store.adapter'
-      root = adapter.rootForType(invoiceBase.constructor)
+      root = adapter.rootForType(invoiceBase.constructor.toString())
       
       # URL to update invoiceBase state
       url = adapter.buildURL root, @get('id')
@@ -123,46 +123,46 @@ Vosae.InvoiceBase = DS.Model.extend
       delete $.ajaxSetup()['headers']['X-Report-Language']
 
   didCreate: ->
-    message = switch @constructor
-      when Vosae.Quotation
+    message = switch @constructor.toString()
+      when Vosae.Quotation.toString()
         gettext 'Your quotation has been successfully created'
-      when Vosae.Invoice
+      when Vosae.Invoice.toString()
         gettext 'Your invoice has been successfully created'
-      when Vosae.CreditNote
+      when Vosae.CreditNote.toString()
         gettext 'Your credit note has been successfully created'
-      when Vosae.DownPaymentInvoice
+      when Vosae.DownPaymentInvoice.toString()
         gettext 'Your down payment invoice has been successfully created'
-      when Vosae.PurchaseOrder
+      when Vosae.PurchaseOrder.toString()
         gettext 'Your purchase order has been successfully created' 
     Vosae.SuccessPopupComponent.open
       message: message
 
   didUpdate: ->
-    message = switch @constructor
-      when Vosae.Quotation
+    message = switch @constructor.toString()
+      when Vosae.Quotation.toString()
         gettext 'Your quotation has been successfully updated'
-      when Vosae.Invoice
+      when Vosae.Invoice.toString()
         gettext 'Your invoice has been successfully updated'
-      when Vosae.CreditNote
+      when Vosae.CreditNote.toString()
         gettext 'Your credit note has been successfully updated'
-      when Vosae.DownPaymentInvoice
+      when Vosae.DownPaymentInvoice.toString()
         gettext 'Your down payment invoice has been successfully updated'
-      when Vosae.PurchaseOrder
+      when Vosae.PurchaseOrder.toString()
         gettext 'Your purchase order has been successfully updated'
     Vosae.SuccessPopupComponent.open
       message: message
 
   didDelete: ->
-    message = switch @constructor
-      when Vosae.Quotation
+    message = switch @constructor.toString()
+      when Vosae.Quotation.toString()
         gettext 'Your quotation has been successfully deleted'
-      when Vosae.Invoice
+      when Vosae.Invoice.toString()
         gettext 'Your invoice has been successfully deleted'
-      when Vosae.CreditNote
+      when Vosae.CreditNote.toString()
         gettext 'Your credit note has been successfully deleted'
-      when Vosae.DownPaymentInvoice
+      when Vosae.DownPaymentInvoice.toString()
         gettext 'Your down payment invoice has been successfully deleted'
-      when Vosae.PurchaseOrder
+      when Vosae.PurchaseOrder.toString()
         gettext 'Your purchase order has been successfully deleted'
     Vosae.SuccessPopupComponent.open
       message: message

@@ -6,10 +6,10 @@ Vosae.EntitiesController = Vosae.ArrayController.extend
       tenantSlug = @get('session.tenant.slug')
       exportURL = "#{APP_ENDPOINT}#{@get('store').adapter.namespace}/"
     
-      switch @constructor
-        when Vosae.ContactsShowController
+      switch @constructor.toString()
+        when Vosae.ContactsShowController.toString()
           exportURL += "contact/"
-        when Vosae.OrganizationsShowController
+        when Vosae.OrganizationsShowController.toString()
           exportURL += "organization/"
       
       exportURL += "export/#{format}/?x_vc=#{tenantSlug}"

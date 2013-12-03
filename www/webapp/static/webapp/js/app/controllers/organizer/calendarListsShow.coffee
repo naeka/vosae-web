@@ -9,24 +9,25 @@ Vosae.CalendarListsShowController = Em.ArrayController.extend
 
 
 Vosae.QuickAddEventController = Em.ObjectController.extend
-  cancel: (vosaeEvent) ->
-    if vosaeEvent
-      vosaeEvent.get('transaction').rollback()
+  actions:
+    cancel: (vosaeEvent) ->
+      if vosaeEvent
+        vosaeEvent.get('transaction').rollback()
 
-  edit: (vosaeEvent) ->
-    @transitionToRoute 'vosaeEvent.edit', @get('session.tenant'), vosaeEvent
+    edit: (vosaeEvent) ->
+      @transitionToRoute 'vosaeEvent.edit', @get('session.tenant'), vosaeEvent
 
-  save: (vosaeEvent) ->
-    event = if vosaeEvent.get('id') then 'didUpdate' else 'didCreate'
-    vosaeEvent.one event, @, ->
-      Ember.run.next @, ->
-        if event is 'didCreate'
-          message = gettext 'Your event has been successfully created'
-        else
-          message = gettext 'Your event has been successfully updated'
-        Vosae.SuccessPopupComponent.open
-          message: message
-    vosaeEvent.get('transaction').commit()
+    save: (vosaeEvent) ->
+      event = if vosaeEvent.get('id') then 'didUpdate' else 'didCreate'
+      vosaeEvent.one event, @, ->
+        Ember.run.next @, ->
+          if event is 'didCreate'
+            message = gettext 'Your event has been successfully created'
+          else
+            message = gettext 'Your event has been successfully updated'
+          Vosae.SuccessPopupComponent.open
+            message: message
+      vosaeEvent.get('transaction').commit()
 
 
 Vosae.CalendarListsShowSettingsController = Em.ArrayController.extend
@@ -35,6 +36,17 @@ Vosae.CalendarListsShowSettingsController = Em.ArrayController.extend
   init: ->
     @_super()
     @get('needs').addObject('calendarListsShow')
+
+  actions:
+    toggleCalendar: (elem, calendarList)->
+      isSelected = !calendarList.get 'selected'
+      calendarList.set 'selected', isSelected
+      @get('store').commit()
+
+      if isSelected
+        @get('controllers.calendarListsShow').get('fc').fullCalendar 'addEventSource', calendarList.get('source')
+      else
+        @get('controllers.calendarListsShow').get('fc').fullCalendar 'removeEventSource', calendarList.get('source')
 
   initEventSources: (->
     if Em.isEmpty(@get('content').filterProperty('isLoaded', false)) and @get('fcRendered')
@@ -50,13 +62,3 @@ Vosae.CalendarListsShowSettingsController = Em.ArrayController.extend
   sharedCalendarList: (->
     @get('content').filterProperty('isOwn', false)
   ).property('content.length', 'content.@each.isOwn')
-
-  toggleCalendar: (elem, calendarList)->
-    isSelected = !calendarList.get 'selected'
-    calendarList.set 'selected', isSelected
-    @get('store').commit()
-
-    if isSelected
-      @get('controllers.calendarListsShow').get('fc').fullCalendar 'addEventSource', calendarList.get('source')
-    else
-      @get('controllers.calendarListsShow').get('fc').fullCalendar 'removeEventSource', calendarList.get('source')

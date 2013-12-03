@@ -9,14 +9,10 @@
       window.cachedSearch = window.location.search;
       window.testMode = true;
       minispade.require('vosae');
-      Vosae.testing = true;
-      Ember.run(function(){
-        Vosae.setupForTesting();
-        Vosae.injectTestHelpers()
+      Em.run(function(){
         // I18n
         Vosae.currentLanguage = LANGUAGE;
         moment.lang(Vosae.currentLanguage);
-        // Vosae.advanceReadiness();
       });
     </script>
     <link rel="stylesheet" href="{% static 'webapp/spec/vendor/jasmine.css' %}">

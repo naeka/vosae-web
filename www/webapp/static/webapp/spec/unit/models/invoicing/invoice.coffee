@@ -533,15 +533,15 @@ describe 'Vosae.Invoice', ->
     # Test
     expect(invoice.get('relatedQuotation')).toEqual quotation
 
-  it 'relatedCreditNote belongsTo relationship', ->
+  it 'relatedPurchaseOrder belongsTo relationship', ->
     # Setup
-    store.adapterForType(Vosae.CreditNote).load store, Vosae.CreditNote, {id: 1}
-    creditNote = store.find Vosae.CreditNote, 1
-    store.adapterForType(Vosae.Invoice).load store, Vosae.Invoice, {id: 1, related_credit_note: "/api/v1/credit_note/1/"}
+    store.adapterForType(Vosae.PurchaseOrder).load store, Vosae.PurchaseOrder, {id: 1}
+    purchaseOrder = store.find Vosae.PurchaseOrder, 1
+    store.adapterForType(Vosae.Invoice).load store, Vosae.Invoice, {id: 1, related_purchase_order: "/api/v1/purchaseOrder/1/"}
     invoice = store.find Vosae.Invoice, 1
 
     # Test
-    expect(invoice.get('relatedCreditNote')).toEqual creditNote
+    expect(invoice.get('relatedPurchaseOrder')).toEqual purchaseOrder
 
   it 'isUpdatingState property should be false by default', ->
     # Setup
@@ -588,6 +588,14 @@ describe 'Vosae.Invoice', ->
 
     # Test
     expect(invoice.get('isCreditNote')).toBeFalsy()
+
+  it 'isPurchaseOrder property should return true', ->
+    # Setup
+    store.adapterForType(Vosae.Invoice).load store, Vosae.Invoice, {id: 1}
+    invoice = store.find Vosae.Invoice, 1
+
+    # Test
+    expect(invoice.get('isPurchaseOrder')).toBeFalsy()
 
   it 'displayState property should return the acutal state formated', ->
     # Setup

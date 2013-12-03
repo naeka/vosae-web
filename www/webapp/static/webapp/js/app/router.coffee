@@ -61,7 +61,13 @@ Vosae.Router.map ->
       @route 'show', path: '/'
       @route 'edit'
     @resource 'creditNote', path: '/invoicing/credit-note/:credit_note_id', ->
-      @route 'show', path: '/'  
+      @route 'show', path: '/'
+    @resource 'purchaseOrders', path: '/invoicing/purchase-orders', ->
+      @route 'show', path: '/'
+      @route 'add'
+    @resource 'purchaseOrder', path: '/invoicing/purchase-order/:purchase_order_id', ->
+      @route 'show', path: '/'
+      @route 'edit'
 
     @resource 'settings', path: '/settings', ->
       @route 'application'
@@ -78,6 +84,7 @@ Vosae.Router.map ->
       @route 'editTax', path: '/taxes/:tax_id'
       @route 'invoicingGeneral', path: '/invoicing/general'
       @route 'numbering', path: '/numbering'
+      @route 'report', path: '/report'
   
   @route 'notFound', path: '*:' 
 
@@ -179,6 +186,10 @@ require 'routes/invoicing/itemsAdd'
 require 'routes/invoicing/itemShow'
 require 'routes/invoicing/itemEdit'
 require 'routes/invoicing/creditNoteShow'
+require 'routes/invoicing/purchaseOrderShow'
+require 'routes/invoicing/purchaseOrderEdit'
+require 'routes/invoicing/purchaseOrdersShow'
+require 'routes/invoicing/purchaseOrdersAdd'
 
 require 'routes/settings/root'
 require 'routes/settings/settingsAddGroup'
@@ -195,3 +206,4 @@ require 'routes/settings/settingsOrganization'
 require 'routes/settings/settingsShowGroups'
 require 'routes/settings/settingsShowTaxes'
 require 'routes/settings/settingsShowUsers'
+require 'routes/settings/settingsReport'

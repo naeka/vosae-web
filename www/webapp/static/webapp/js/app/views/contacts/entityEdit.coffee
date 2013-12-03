@@ -1,7 +1,7 @@
 Vosae.EntityEditView = Em.View.extend
-  
-  openFileUploadBrowser: ->
-    @.$().find('.fileupload').trigger('click')
+  actions:
+    openFileUploadBrowser: ->
+      @.$().find('.fileupload').trigger('click')
 
   didInsertElement: ->
     @_super()

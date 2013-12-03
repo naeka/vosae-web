@@ -1,6 +1,6 @@
 Vosae.Tax = DS.Model.extend
   name: DS.attr('string')
-  rate: DS.attr('number')
+  rate: DS.attr('number', defaultValue: 0.00)
   
   displayTax: (->
     name = @get("name")

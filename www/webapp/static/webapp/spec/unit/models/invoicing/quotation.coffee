@@ -6,7 +6,6 @@ describe 'Vosae.Quotation', ->
     amount: null
     attachments: []
     current_revision: null
-    down_payments: []
     notes: []
     reference: null
     state: null
@@ -18,7 +17,6 @@ describe 'Vosae.Quotation', ->
     "account_type":"RECEIVABLE"
     "total":null
     "amount":null
-    "down_payments":[]
     "notes":[]
     "attachments":[]
     "current_revision":
@@ -440,44 +438,6 @@ describe 'Vosae.Quotation', ->
     # Test
     expect(quotation.get('attachments.length')).toEqual 0
 
-  it 'downPayments hasMany relationship', ->
-    # Setup
-    store.adapterForType(Vosae.DownPaymentInvoice).load store, Vosae.DownPaymentInvoice, {id: 1}
-    downPaymentInvoice = store.find Vosae.DownPaymentInvoice, 1
-    store.adapterForType(Vosae.Quotation).load store, Vosae.Quotation,
-      id: 1
-      down_payments: ["/api/v1/down_payment_invoice/1/"]
-    invoice = store.find Vosae.Quotation, 1
-
-    # Test
-    expect(invoice.get('downPayments.firstObject')).toEqual downPaymentInvoice
-
-  it 'can add downPayments', ->
-    # Setup
-    store.adapterForType(Vosae.Quotation).load store, Vosae.Quotation, {id: 1}
-    invoice = store.find Vosae.Quotation, 1
-    downPayment = invoice.get('downPayments').createRecord()
-    downPayment2 = invoice.get('downPayments').createRecord()   
-
-    # Test
-    expect(invoice.get('downPayments.length')).toEqual 2
-    expect(invoice.get('downPayments').objectAt(0)).toEqual downPayment
-    expect(invoice.get('downPayments').objectAt(1)).toEqual downPayment2
-
-  it 'can delete downPayments', ->
-    # Setup
-    store.adapterForType(Vosae.Quotation).load store, Vosae.Quotation, {id: 1}
-    invoice = store.find Vosae.Quotation, 1
-    downPayment = invoice.get('downPayments').createRecord()
-    downPayment2 = invoice.get('downPayments').createRecord()
-
-    # Test
-    expect(invoice.get('downPayments.length')).toEqual 2
-
-    # Setup
-    invoice.get('downPayments').removeObject downPayment
-    invoice.get('downPayments').removeObject downPayment2
-
   it 'issuer belongsTo relationship', ->
     # Setup
     store.adapterForType(Vosae.User).load store, Vosae.User, {id: 1}
@@ -562,6 +522,14 @@ describe 'Vosae.Quotation', ->
     # Test
     expect(quotation.get('isCreditNote')).toBeFalsy()
 
+  it 'isPurchaseOrder property should return true', ->
+    # Setup
+    store.adapterForType(Vosae.Quotation).load store, Vosae.Quotation, {id: 1}
+    quotation = store.find Vosae.Quotation, 1
+
+    # Test
+    expect(quotation.get('isPurchaseOrder')).toBeFalsy()  
+
   it 'displayState property should return the acutal state formated', ->
     # Setup
     store.adapterForType(Vosae.Quotation).load store, Vosae.Quotation, {id: 1}
@@ -623,13 +591,15 @@ describe 'Vosae.Quotation', ->
     # Setup
     store.adapterForType(Vosae.Invoice).load store, Vosae.Invoice, {id: 1}
     store.adapterForType(Vosae.Quotation).load store, Vosae.Quotation, {id: 1}
+    store.adapterForType(Vosae.InvoiceBaseGroup).load store, Vosae.InvoiceBaseGroup, {id: 1}
     quotation = store.find Vosae.Quotation, 1
+    quotation.set "group", store.find(Vosae.InvoiceBaseGroup, 1)
 
     # Test
     expect(quotation.get('isInvoiceable')).toEqual true
 
     # Setup
-    quotation.set "relatedInvoice", store.find(Vosae.Invoice, 1)
+    quotation.set "group.relatedInvoice", store.find(Vosae.Invoice, 1)
 
     # Test
     expect(quotation.get('isInvoiceable')).toEqual false
@@ -638,13 +608,15 @@ describe 'Vosae.Quotation', ->
     # Setup
     store.adapterForType(Vosae.Invoice).load store, Vosae.Invoice, {id: 1}
     store.adapterForType(Vosae.Quotation).load store, Vosae.Quotation, {id: 1}
+    store.adapterForType(Vosae.InvoiceBaseGroup).load store, Vosae.InvoiceBaseGroup, {id: 1}
     quotation = store.find Vosae.Quotation, 1
+    quotation.set "group", store.find(Vosae.InvoiceBaseGroup, 1)
 
     # Test
     expect(quotation.get('isModifiable')).toEqual true
 
     # Setup
-    quotation.set "relatedInvoice", store.find(Vosae.Invoice, 1)
+    quotation.set "group.relatedInvoice", store.find(Vosae.Invoice, 1)
 
     # Test
     expect(quotation.get('isModifiable')).toEqual false
@@ -654,27 +626,27 @@ describe 'Vosae.Quotation', ->
     store.adapterForType(Vosae.Invoice).load store, Vosae.Invoice, {id: 1}
     store.adapterForType(Vosae.Quotation).load store, Vosae.Quotation, {id: 1}
     quotation = store.find Vosae.Quotation, 1
-    relatedInvoice = store.find Vosae.Invoice, 1
+    quotation.set "group", store.find(Vosae.InvoiceBaseGroup, 1)
 
     # Test
     expect(quotation.get('isDeletable')).toEqual true
 
     # Setup
-    quotation.set "relatedInvoice", relatedInvoice
+    quotation.set "group.relatedInvoice", store.find(Vosae.Invoice, 1)
 
     # Test
     expect(quotation.get('isDeletable')).toEqual false
 
     # Setup
-    quotation.set "relatedInvoice", null
-    quotation.get("downPayments").createRecord()
+    quotation.set "group.relatedInvoice", null
+    quotation.get("group.downPaymentInvoices").createRecord()
 
     # Test
     expect(quotation.get('isDeletable')).toEqual false
 
     # Setup
     quotation.setProperties
-      "downPayments.content": []
+      "group.downPaymentInvoices.content": []
       "id": null
 
     # Test

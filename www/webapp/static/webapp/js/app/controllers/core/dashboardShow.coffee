@@ -9,7 +9,67 @@ Vosae.DashboardShowController = Em.ArrayController.extend
     @set 'meta', Vosae.metaForTimeline
 
     if @get('meta') and !@get('meta.modelHasBeenFetched')
-      @getNextPagination()
+      @send("getNextPagination")
+
+  # Action handlers
+  actions:
+    # Pagination retrieve older items
+    getNextPagination: ->
+      pagination = null
+
+      if @get('meta') and !@get('meta.loading')
+        if @get('meta.next') or !@get('meta.modelHasBeenFetched')
+          offset = if @get('meta.offset')? then @get('meta.offset') + @get('meta.limit') else 0
+          pagination =
+            data: Vosae.Timeline.find(offset: offset)
+            offset: @get('meta.offset')
+            limit: @get('meta.limit')
+            lastLength: Vosae.Timeline.all().get('length')
+          
+          @set 'meta.loading', true
+
+          if pagination and pagination.data  
+            pagination.data.one 'didLoad', @, ->
+              Ember.run @, ->
+                @set 'content', Vosae.Timeline.all() # Workaround
+                if pagination.lastLength > 0
+                  startIndex = pagination.lastLength - 1
+                  @updateContentFrom(startIndex)
+                else
+                  @updateContent()
+  
+    # This is for lazy load on timeline links
+    transitionToResource: (resource) ->
+      switch resource.type
+        # Contact
+        when "Vosae.Contact"
+          contact = Vosae.Contact.find(resource.id)
+          @transitionToRoute "contact.show", @get('session.tenant'), contact
+        
+        # Organization
+        when "Vosae.Organization"
+          organization = Vosae.Organization.find(resource.id)
+          @transitionToRoute "organization.show", @get('session.tenant'), organization
+        
+        # Quotation
+        when "Vosae.Quotation"
+          quotation = Vosae.Quotation.find(resource.id)
+          @transitionToRoute "quotation.show", @get('session.tenant'), quotation
+       
+        # Invoice
+        when "Vosae.Invoice"
+          invoice = Vosae.Invoice.find(resource.id)
+          @transitionToRoute "invoice.show", @get('session.tenant'), invoice
+       
+        # DownPaymentInvoice
+        when "Vosae.DownPaymentInvoice"
+          downPaymentInvoice = Vosae.DownPaymentInvoice.find(resource.id)
+          @transitionToRoute "downPaymentInvoice.show", @get('session.tenant'), downPaymentInvoice
+
+        # CreditNote
+        when "Vosae.CreditNote"
+          creditNote = Vosae.CreditNote.find(resource.id)
+          @transitionToRoute "creditNote.show", @get('session.tenant'), creditNote
 
   # Traverse timeline items
   updateContent: ->
@@ -91,62 +151,3 @@ Vosae.DashboardShowController = Em.ArrayController.extend
       @get("arrangedContent.firstObject").set "isFirst", true
 
     return
-
-  # Pagination retrieve older items
-  getNextPagination: ->
-    pagination = null
-
-    if @get('meta') and !@get('meta.loading')
-      if @get('meta.next') or !@get('meta.modelHasBeenFetched')
-        offset = if @get('meta.offset')? then @get('meta.offset') + @get('meta.limit') else 0
-        pagination =
-          data: Vosae.Timeline.find(offset: offset)
-          offset: @get('meta.offset')
-          limit: @get('meta.limit')
-          lastLength: Vosae.Timeline.all().get('length')
-        
-        @set 'meta.loading', true
-
-        if pagination and pagination.data  
-          pagination.data.one 'didLoad', @, ->
-            Ember.run @, ->
-              @set 'content', Vosae.Timeline.all() # Workaround
-              if pagination.lastLength > 0
-                startIndex = pagination.lastLength - 1
-                @updateContentFrom(startIndex)
-              else
-                @updateContent()
-
-
-  # This is for lazy load on timeline links
-  transitionToResource: (resource) ->
-    switch resource.type
-      # Contact
-      when "Vosae.Contact"
-        contact = Vosae.Contact.find(resource.id)
-        @transitionToRoute "contact.show", @get('session.tenant'), contact
-      
-      # Organization
-      when "Vosae.Organization"
-        organization = Vosae.Organization.find(resource.id)
-        @transitionToRoute "organization.show", @get('session.tenant'), organization
-      
-      # Quotation
-      when "Vosae.Quotation"
-        quotation = Vosae.Quotation.find(resource.id)
-        @transitionToRoute "quotation.show", @get('session.tenant'), quotation
-     
-      # Invoice
-      when "Vosae.Invoice"
-        invoice = Vosae.Invoice.find(resource.id)
-        @transitionToRoute "invoice.show", @get('session.tenant'), invoice
-     
-      # DownPaymentInvoice
-      when "Vosae.DownPaymentInvoice"
-        downPaymentInvoice = Vosae.DownPaymentInvoice.find(resource.id)
-        @transitionToRoute "downPaymentInvoice.show", @get('session.tenant'), downPaymentInvoice
-
-      # CreditNote
-      when "Vosae.CreditNote"
-        creditNote = Vosae.CreditNote.find(resource.id)
-        @transitionToRoute "creditNote.show", @get('session.tenant'), creditNote

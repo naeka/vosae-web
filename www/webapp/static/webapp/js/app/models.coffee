@@ -50,6 +50,8 @@ require 'models/invoicing/quotation'
 require 'models/invoicing/invoice'
 require 'models/invoicing/downPaymentInvoice'
 require 'models/invoicing/creditNote'
+require 'models/invoicing/invoiceBaseGroup'
+require 'models/invoicing/purchaseOrder'
 
 require 'models/organizer/calendar'
 require 'models/organizer/attendee'

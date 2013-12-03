@@ -3,9 +3,3 @@ Vosae.QuotationShowRoute = Ember.Route.extend
     controller.setProperties
       'content': @modelFor("quotation")
       'invoicingSettings': @get('session.tenantSettings.invoicing')
-
-  renderTemplate: ->
-    @_super()
-    @render 'quotation.show.settings',
-      into: 'application'
-      outlet: 'outletPageSettings'

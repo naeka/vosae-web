@@ -78,25 +78,26 @@ Vosae.TenantsAddController = Em.ObjectController.extend
       return null
     currency.get 'resourceUri'
 
-  # Post the tenant and get tenantSettings
-  save: (tenant) ->
-    tenant.one 'didCreate', @, ->
-      Ember.run.next @, ->
-        if @get('session.tenant')
-          @get('controllers.tenantsShow').redirectToTenantRoot tenant
-        else
-          @get('controllers.tenantsShow').setAsCurrentTenant tenant
-    tenant.one 'becameInvalid', @, ->
-      Vosae.hideLoader()
-    tenant.get('transaction').commit()
-    Vosae.showLoader()
+  actions:
+    # Post the tenant and get tenantSettings
+    save: (tenant) ->
+      tenant.one 'didCreate', @, ->
+        Ember.run.next @, ->
+          if @get('session.tenant')
+            @get('controllers.tenantsShow').send "redirectToTenantRoot", tenant
+          else
+            @get('controllers.tenantsShow').send "setAsCurrentTenant", tenant
+      tenant.one 'becameInvalid', @, ->
+        Vosae.hideLoader()
+      tenant.get('transaction').commit()
+      Vosae.showLoader()
 
-  # Cancel the tenant creation form 
-  cancel: ->
-    if confirm gettext('Do you realy want to leave this page ?')
-      if @get('session.tenant')
-        # @transitionToRoute 'dashboard.show', @get('session.tenant')
-        router = Vosae.lookup('router:main')
-        router.location.history.back()
-      else
-        @transitionToRoute 'tenants.show'
+    # Cancel the tenant creation form 
+    cancel: ->
+      if confirm gettext('Do you realy want to leave this page ?')
+        if @get('session.tenant')
+          # @transitionToRoute 'dashboard.show', @get('session.tenant')
+          router = Vosae.lookup('router:main')
+          router.location.history.back()
+        else
+          @transitionToRoute 'tenants.show'

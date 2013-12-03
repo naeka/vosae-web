@@ -10,6 +10,7 @@ Vosae.InvoiceBase = DS.Model.extend
   organization: DS.belongsTo('Vosae.Organization')
   contact: DS.belongsTo('Vosae.Contact')
   currentRevision: DS.belongsTo('Vosae.InvoiceRevision')
+  group: DS.belongsTo('Vosae.InvoiceBaseGroup', inverse: null)
 
   isUploading: false
   isUpdatingState: false
@@ -54,10 +55,17 @@ Vosae.InvoiceBase = DS.Model.extend
     return false
   ).property()
 
+  isPurchaseOrder: (->
+    # True if `InvoiceBase` is a `PurchaseOrder`.
+    if @constructor is Vosae.PurchaseOrder
+      return true
+    return false
+  ).property()
+
   relatedColor: (->
     # Returns the related color of current instance,
     # green if `Invoice`, orange if `Quotation`. 
-    if @get('isQuotation')
+    if @get('isQuotation') or @get('isPurchaseOrder')
       return 'orange'
     return 'green'
   ).property()
@@ -123,7 +131,9 @@ Vosae.InvoiceBase = DS.Model.extend
       when Vosae.CreditNote
         gettext 'Your credit note has been successfully created'
       when Vosae.DownPaymentInvoice
-        gettext 'Your down payment invoice has been successfully created' 
+        gettext 'Your down payment invoice has been successfully created'
+      when Vosae.PurchaseOrder
+        gettext 'Your purchase order has been successfully created' 
     Vosae.SuccessPopupComponent.open
       message: message
 
@@ -137,6 +147,8 @@ Vosae.InvoiceBase = DS.Model.extend
         gettext 'Your credit note has been successfully updated'
       when Vosae.DownPaymentInvoice
         gettext 'Your down payment invoice has been successfully updated'
+      when Vosae.PurchaseOrder
+        gettext 'Your purchase order has been successfully updated'
     Vosae.SuccessPopupComponent.open
       message: message
 
@@ -150,5 +162,13 @@ Vosae.InvoiceBase = DS.Model.extend
         gettext 'Your credit note has been successfully deleted'
       when Vosae.DownPaymentInvoice
         gettext 'Your down payment invoice has been successfully deleted'
+      when Vosae.PurchaseOrder
+        gettext 'Your purchase order has been successfully deleted'
     Vosae.SuccessPopupComponent.open
       message: message
+
+# Vosae.InvoiceBase.reopenClass
+#   inverseFor: (name) ->
+#     if @metaForProperty(name).options.inverse is null
+#       return null 
+#     this._super.apply this, arguments

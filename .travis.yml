@@ -37,3 +37,9 @@ notifications:
     - maxime@naeka.fr
     - thomas@naeka.fr
     - leo@naeka.fr
+  hipchat:
+    rooms:
+      - secure: "FUTli6PhsUHy/k1g30Yz98ngGwDE152MUXp9I7RwamVFcmeehHO0TVyeTw+r/2JCScsJMg4F2swUAHbvGSufCdUy6o7cNlepnjQzPOgKTba3WxZsLoX40oUdRAl3904yq3MB/b+ZPfAv54qP3EqPVJoO7jDLGv6UTibpFOEwaLo="
+    template:
+      - '%{repository}#%{build_number} (%{branch} - %{commit} : %{author}): %{message} (<a href="%{build_url}">Details</a>)'
+    format: html

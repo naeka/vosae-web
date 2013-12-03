@@ -1,6 +1,17 @@
 Vosae.HelpTour = Ember.Mixin.create
   helpTour: null
 
+  actions:
+    startHelpTour: ->
+      unless @helpTour
+        @initHelpTour()
+      @helpTour.restart()
+
+    stopHelpTour: ->
+      if @helpTour
+        @helpTour.end()
+        $('.popover.tour').remove()
+
   initHelpTour: ->
     @helpTour = new Tour
       labels:
@@ -8,15 +19,5 @@ Vosae.HelpTour = Ember.Mixin.create
         prev: gettext "Prev."
         end: gettext "End tour"
 
-  startHelpTour: ->
-    unless @helpTour
-      @initHelpTour()
-    @helpTour.restart()
-
-  stopHelpTour: ->
-    if @helpTour
-      @helpTour.end()
-      $('.popover.tour').remove()
-
   willDestroyElement: ->
-    @stopHelpTour()
+    @send "stopHelpTour"

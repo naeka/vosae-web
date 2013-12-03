@@ -52,7 +52,7 @@ Vosae.Address = DS.Model.extend
     return errors
 
   dumpDataFrom: (address) ->
-    if address.constructor is @constructor
+    if address.constructor.toString() is @constructor.toString()
       @setProperties
         type: address.get 'type'
         postofficeBox: address.get 'postofficeBox'

@@ -53,7 +53,7 @@ Vosae.PopupComponent = Em.Component.extend Ember.DeferredMixin,
 
   keyPress: (event) ->
     if event.keyCode is 27
-      unless @constructor is Vosae.ErrorPopupComponent
+      unless @constructor.toString() is Vosae.ErrorPopupComponent.toString()
         @_triggerCallbackAndDestroy {close: true}, event
 
   click: (event) ->

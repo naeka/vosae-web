@@ -21,28 +21,28 @@ Vosae.Entity = DS.Model.extend
   ).property 'creator'
 
   didCreate: ->
-    message = switch @constructor
-      when Vosae.Contact
+    message = switch @constructor.toString()
+      when Vosae.Contact.toString()
         gettext 'Your contact has been successfully created'
-      when Vosae.Organization
+      when Vosae.Organization.toString()
         gettext 'Your organization has been successfully created'
     Vosae.SuccessPopupComponent.open
       message: message
 
   didUpdate: ->
-    message = switch @constructor
-      when Vosae.Contact
+    message = switch @constructor.toString()
+      when Vosae.Contact.toString()
         gettext 'Your contact has been successfully updated'
-      when Vosae.Organization
+      when Vosae.Organization.toString()
         gettext 'Your organization has been successfully updated'
     Vosae.SuccessPopupComponent.open
       message: message
 
   didDelete: ->
-    message = switch @constructor
-      when Vosae.Contact
+    message = switch @constructor.toString()
+      when Vosae.Contact.toString()
         gettext 'Your contact has been successfully deleted'
-      when Vosae.Organization
+      when Vosae.Organization.toString()
         gettext 'Your organization has been successfully deleted'
     Vosae.SuccessPopupComponent.open
       message: message

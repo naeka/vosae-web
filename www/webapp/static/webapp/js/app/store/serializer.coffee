@@ -31,7 +31,7 @@ Vosae.Serializer = DS.RESTSerializer.extend
 
   # Can be optimize, should we have to custom this hooks ?
   addHasMany: (hash, record, key, relationship) ->
-    type = record.constructor
+    type = record.constructor.toString()
     name = relationship.key
     serializedHasMany = []
     includeType = (relationship.options and relationship.options.polymorphic)

@@ -30,13 +30,13 @@ Vosae.InvoiceBaseController = Em.ObjectController.extend
       @get('content').downloadPdf language
 
     cancel: (invoiceBase) ->
-      switch invoiceBase.constructor
-        when Vosae.Quotation
+      switch invoiceBase.constructor.toString()
+        when Vosae.Quotation.toString()
           if invoiceBase.get('id')
             return @transitionToRoute 'quotation.show', invoiceBase
           else
             return @transitionToRoute 'quotations.show'
-        when Vosae.Invoice
+        when Vosae.Invoice.toString()
           if invoiceBase.get('id')
             return @transitionToRoute 'invoice.show', invoiceBase
           else
@@ -52,18 +52,18 @@ Vosae.InvoiceBaseController = Em.ObjectController.extend
       invoiceBase.get('currentRevision.currency.rates').getEach 'rate'
 
     cancel: (invoiceBase) ->
-      switch invoiceBase.constructor
-        when Vosae.Quotation
+      switch invoiceBase.constructor.toString()
+        when Vosae.Quotation.toString()
           if invoiceBase.get('id')
             return @transitionToRoute 'quotation.show', invoiceBase
           else
             return @transitionToRoute 'quotations.show'
-        when Vosae.Invoice
+        when Vosae.Invoice.toString()
           if invoiceBase.get('id')
             return @transitionToRoute 'invoice.show', invoiceBase
           else
             return @transitionToRoute 'invoices.show'
-        when Vosae.PurchaseOrder
+        when Vosae.PurchaseOrder.toString()
           if invoiceBase.get('id')
             return @transitionToRoute 'purchaseOrder.show', invoiceBase
           else
@@ -98,22 +98,22 @@ Vosae.InvoiceBaseController = Em.ObjectController.extend
       event = if invoiceBase.get('id') then 'didUpdate' else 'didCreate'
       invoiceBase.one event, @, ->
         Ember.run.next @, ->
-          switch invoiceBase.constructor
-            when Vosae.Quotation
+          switch invoiceBase.constructor.toString()
+            when Vosae.Quotation.toString()
               @transitionToRoute 'quotation.show', @get('session.tenant'), invoiceBase
-            when Vosae.Invoice
+            when Vosae.Invoice.toString()
               @transitionToRoute 'invoice.show', @get('session.tenant'), invoiceBase
-            when Vosae.PurchaseOrder
+            when Vosae.PurchaseOrder.toString()
               @transitionToRoute 'purchaseOrder.show', @get('session.tenant'), invoiceBase
       invoiceBase.get('transaction').commit()
 
     delete: (invoiceBase) ->
-      message = switch invoiceBase.constructor
-        when Vosae.Quotation
+      message = switch invoiceBase.constructor.toString()
+        when Vosae.Quotation.toString()
           gettext("Do you really want to delete this quotation?")
-        when Vosae.Invoice
+        when Vosae.Invoice.toString()
           gettext("Do you really want to delete this invoice?")
-        when Vosae.PurchaseOrder
+        when Vosae.PurchaseOrder.toString()
           gettext("Do you really want to delete this purchase order?")
 
       Vosae.ConfirmPopupComponent.open
@@ -122,12 +122,12 @@ Vosae.InvoiceBaseController = Em.ObjectController.extend
           if opts.primary
             invoiceBase.one 'didDelete', @, ->
               Ember.run.next @, ->
-                switch invoiceBase.constructor
-                  when Vosae.Quotation
+                switch invoiceBase.constructor.toString()
+                  when Vosae.Quotation.toString()
                     @transitionToRoute 'quotations.show', @get('session.tenant')
-                  when Vosae.Invoice
+                  when Vosae.Invoice.toString()
                     @transitionToRoute 'invoices.show', @get('session.tenant')
-                  when Vosae.PurchaseOrder
+                  when Vosae.PurchaseOrder.toString()
                     @transitionToRoute 'purchaseOrders.show', @get('session.tenant')
             invoiceBase.deleteRecord()
             invoiceBase.get('transaction').commit()

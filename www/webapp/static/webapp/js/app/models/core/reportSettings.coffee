@@ -1,5 +1,5 @@
 Vosae.ReportSettings = DS.Model.extend
-  fontName: DS.attr("string", defaultValue: 'Bariol')
+  fontName: DS.attr("string", defaultValue: 'bariol')
   fontSize: DS.attr("number")
   baseColor: DS.attr("string")
   forceBw: DS.attr("boolean")

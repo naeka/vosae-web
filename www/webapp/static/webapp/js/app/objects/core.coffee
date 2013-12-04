@@ -47,38 +47,41 @@ Vosae.languages = Em.makeArray([
 
 Vosae.reportFontFamilies = [
   Em.Object.create
-    value: "Bariol"
-    name: "Bariol"
+    value: "bariol"
+    name: gettext("Bariol (Vosae's font)")
   Em.Object.create
-    value: "Courier"
-    name: "Courier"
-  Em.Object.create
-    value: "Helvetica"
+    value: "helvetica"
     name: "Helvetica"
+  Em.Object.create
+    value: "times"
+    name: "Times New Roman"
+  Em.Object.create
+    value: "courier"
+    name: "Courier New"
 ]
 
 Vosae.reportFontSizes = [
   Em.Object.create
+    value: 8
+    name: "8px"
+  Em.Object.create
+    value: 9
+    name: "9px"
+  Em.Object.create
     value: 10
     name: "10px"
+  Em.Object.create
+    value: 11
+    name: "11px"
   Em.Object.create
     value: 12
     name: "12px"
   Em.Object.create
+    value: 13
+    name: "13px"
+  Em.Object.create
     value: 14
     name: "14px"
-  Em.Object.create
-    value: 16
-    name: "16px"
-  Em.Object.create
-    value: 18
-    name: "18px"
-  Em.Object.create
-    value: 20
-    name: "20px"
-  Em.Object.create
-    value: 22
-    name: "22px"
 ]
 
 Vosae.supportedCountries = Em.makeArray([

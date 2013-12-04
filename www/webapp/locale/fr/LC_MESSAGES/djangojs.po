@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vosae-web\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-23 10:03+0000\n"
-"PO-Revision-Date: 2013-10-23 12:03+0100\n"
+"POT-Creation-Date: 2013-12-04 16:20+0000\n"
+"PO-Revision-Date: 2013-12-04 16:50+0100\n"
 "Last-Translator: Léo S <leo@naeka.fr>\n"
 "Language-Team: Léo S. <leo@naeka.fr>\n"
 "Language: fr\n"
@@ -18,23 +18,23 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 1.5.4\n"
 
-#: static/webapp/tmp/app/application.js:46
+#: static/webapp/tmp/app/application.js:47
 msgid "File type not allowed"
 msgstr "Ce type de fichier n'est pas autorisé"
 
-#: static/webapp/tmp/app/application.js:47
+#: static/webapp/tmp/app/application.js:48
 msgid "This file is too large"
 msgstr "Ce fichier est trop volumineux"
 
-#: static/webapp/tmp/app/application.js:48
+#: static/webapp/tmp/app/application.js:49
 msgid "The maximum number of files exceeded"
 msgstr "Le nombre maximum de fichiers a été dépassé"
 
-#: static/webapp/tmp/app/application.js:49
+#: static/webapp/tmp/app/application.js:50
 msgid "This file is too small"
 msgstr "Ce fichier est trop petit"
 
-#: static/webapp/tmp/app/application.js:50
+#: static/webapp/tmp/app/application.js:51
 msgid "Uploaded datas exceed file size"
 msgstr "Les données téléchargées dépassent la taille du fichier"
 
@@ -90,7 +90,7 @@ msgstr "Un seul utilisateur ou groupe peut être sélectionné"
 msgid "No results for '"
 msgstr "Aucun résultat pour '"
 
-#: static/webapp/tmp/app/components/resourceSearchField.js:215
+#: static/webapp/tmp/app/components/resourceSearchField.js:214
 msgid "Only one tax can be selected"
 msgstr "Une seule taxe peut être sélectionnée"
 
@@ -100,130 +100,134 @@ msgstr "Une seule taxe peut être sélectionnée"
 msgid "Timezone"
 msgstr "Fuseau horaire"
 
-#: static/webapp/tmp/app/controllers/contacts/entity.js:40
+#: static/webapp/tmp/app/controllers/contacts/entity.js:41
 msgid "Do you really want to delete this phone?"
 msgstr "Voulez-vous vraiment supprimer ce téléphone ?"
 
-#: static/webapp/tmp/app/controllers/contacts/entity.js:51
+#: static/webapp/tmp/app/controllers/contacts/entity.js:52
 msgid "Do you really want to delete this email?"
 msgstr "Voulez-vous vraiment supprimer cet email ?"
 
-#: static/webapp/tmp/app/controllers/contacts/entity.js:62
+#: static/webapp/tmp/app/controllers/contacts/entity.js:63
 msgid "Do you really want to delete this address?"
 msgstr "Voulez-vous vraiment supprimer cette adresse ?"
 
-#: static/webapp/tmp/app/controllers/contacts/entity.js:125
+#: static/webapp/tmp/app/controllers/contacts/entity.js:126
 msgid "Do you really want to delete this contact?"
 msgstr "Voulez-vous vraiment supprimer ce contact ?"
 
-#: static/webapp/tmp/app/controllers/contacts/entity.js:127
+#: static/webapp/tmp/app/controllers/contacts/entity.js:128
 msgid "Do you really want to delete this organization?"
 msgstr "Voulez-vous vraiment supprimer cette organisation ?"
 
-#: static/webapp/tmp/app/controllers/core/tenantsAdd.js:100
+#: static/webapp/tmp/app/controllers/core/tenantsAdd.js:101
 msgid "Do you realy want to leave this page ?"
 msgstr "Voulez-vous vraiment quitter cette page ?"
 
-#: static/webapp/tmp/app/controllers/invoicing/invoiceBase.js:11
+#: static/webapp/tmp/app/controllers/invoicing/invoiceBase.js:12
 msgid "Do you really want to delete this line?"
 msgstr "Voulez-vous vraiment supprimer cette ligne ?"
 
-#: static/webapp/tmp/app/controllers/invoicing/invoiceBase.js:22
+#: static/webapp/tmp/app/controllers/invoicing/invoiceBase.js:23
 msgid "Do you really want to delete this attachment?"
 msgstr "Voulez-vous vraiment supprimer cette pièce-jointe ?"
 
-#: static/webapp/tmp/app/controllers/invoicing/invoiceBase.js:108
+#: static/webapp/tmp/app/controllers/invoicing/invoiceBase.js:135
 msgid "Do you really want to delete this quotation?"
 msgstr "Voulez-vous vraiment supprimer ce devis ?"
 
-#: static/webapp/tmp/app/controllers/invoicing/invoiceBase.js:110
+#: static/webapp/tmp/app/controllers/invoicing/invoiceBase.js:137
 msgid "Do you really want to delete this invoice?"
 msgstr "Voulez-vous vraiment supprimer cette facture ?"
 
-#: static/webapp/tmp/app/controllers/invoicing/itemEdit.js:28
-#: static/webapp/tmp/app/controllers/invoicing/itemShow.js:6
+#: static/webapp/tmp/app/controllers/invoicing/invoiceBase.js:139
+msgid "Do you really want to delete this purchase order?"
+msgstr "Voulez-vous vraiment supprimer ce bon de commande ?"
+
+#: static/webapp/tmp/app/controllers/invoicing/itemEdit.js:29
+#: static/webapp/tmp/app/controllers/invoicing/itemShow.js:7
 msgid "Do you really want to delete this item?"
 msgstr "Voulez-vous vraiment supprimer cet article ?"
 
-#: static/webapp/tmp/app/controllers/organizer/calendarListEdit.js:16
+#: static/webapp/tmp/app/controllers/organizer/calendarListEdit.js:17
 msgid "Do you really want to delete this permission?"
 msgstr "Voulez-vous vraiment supprimer cette permission ?"
 
-#: static/webapp/tmp/app/controllers/organizer/calendarListEdit.js:30
-#: static/webapp/tmp/app/controllers/organizer/vosaeEventEdit.js:71
+#: static/webapp/tmp/app/controllers/organizer/calendarListEdit.js:31
+#: static/webapp/tmp/app/controllers/organizer/vosaeEventEdit.js:72
 msgid "Do you really want to delete this reminder?"
 msgstr "Voulez-vous vraiment supprimer ce rappel ?"
 
-#: static/webapp/tmp/app/controllers/organizer/calendarListEdit.js:81
+#: static/webapp/tmp/app/controllers/organizer/calendarListEdit.js:63
 msgid "Your calendar has been successfully created"
 msgstr "Votre agenda a été correctement créé"
 
-#: static/webapp/tmp/app/controllers/organizer/calendarListEdit.js:98
-#: static/webapp/tmp/app/controllers/organizer/calendarListEdit.js:106
-#: static/webapp/tmp/app/controllers/organizer/calendarListEdit.js:118
-#: static/webapp/tmp/app/controllers/organizer/calendarListEdit.js:131
+#: static/webapp/tmp/app/controllers/organizer/calendarListEdit.js:80
+#: static/webapp/tmp/app/controllers/organizer/calendarListEdit.js:88
+#: static/webapp/tmp/app/controllers/organizer/calendarListEdit.js:100
+#: static/webapp/tmp/app/controllers/organizer/calendarListEdit.js:113
 msgid "Your calendar has been successfully updated"
 msgstr "Votre agenda a été correctement mis à jour"
 
-#: static/webapp/tmp/app/controllers/organizer/calendarListEdit.js:142
+#: static/webapp/tmp/app/controllers/organizer/calendarListEdit.js:124
 #: static/webapp/tmp/app/controllers/organizer/calendarListShow.js:6
 msgid "Do you really want to delete this calendar?"
 msgstr "Voulez-vous vraiment supprimer cet agenda ?"
 
-#: static/webapp/tmp/app/controllers/organizer/calendarListEdit.js:148
+#: static/webapp/tmp/app/controllers/organizer/calendarListEdit.js:130
 #: static/webapp/tmp/app/controllers/organizer/calendarListShow.js:12
 msgid "Your calendar has been successfully deleted"
 msgstr "Votre agenda a été correctement supprimé"
 
-#: static/webapp/tmp/app/controllers/organizer/calendarListsShow.js:28
-#: static/webapp/tmp/app/controllers/organizer/vosaeEventEdit.js:17
+#: static/webapp/tmp/app/controllers/organizer/calendarListsShow.js:29
+#: static/webapp/tmp/app/controllers/organizer/vosaeEventEdit.js:18
 msgid "Your event has been successfully created"
 msgstr "Votre événement a été correctement créé"
 
-#: static/webapp/tmp/app/controllers/organizer/calendarListsShow.js:30
-#: static/webapp/tmp/app/controllers/organizer/vosaeEventEdit.js:19
+#: static/webapp/tmp/app/controllers/organizer/calendarListsShow.js:31
+#: static/webapp/tmp/app/controllers/organizer/vosaeEventEdit.js:20
 msgid "Your event has been successfully updated"
 msgstr "Votre événement a été correctement mis à jour"
 
-#: static/webapp/tmp/app/controllers/organizer/vosaeEventEdit.js:32
-#: static/webapp/tmp/app/controllers/organizer/vosaeEventShow.js:6
+#: static/webapp/tmp/app/controllers/organizer/vosaeEventEdit.js:33
+#: static/webapp/tmp/app/controllers/organizer/vosaeEventShow.js:7
 msgid "Do you really want to delete this event?"
 msgstr "Voulez-vous vraiment supprimer cet événement ?"
 
-#: static/webapp/tmp/app/controllers/organizer/vosaeEventEdit.js:38
-#: static/webapp/tmp/app/controllers/organizer/vosaeEventShow.js:12
+#: static/webapp/tmp/app/controllers/organizer/vosaeEventEdit.js:39
+#: static/webapp/tmp/app/controllers/organizer/vosaeEventShow.js:13
 msgid "Your event has been successfully deleted"
 msgstr "Votre événement a été correctement supprimé"
 
-#: static/webapp/tmp/app/controllers/organizer/vosaeEventEdit.js:55
+#: static/webapp/tmp/app/controllers/organizer/vosaeEventEdit.js:56
 msgid "Do you really want to delete this attendee?"
 msgstr "Voulez-vous vraiment supprimer ce participant ?"
 
-#: static/webapp/tmp/app/controllers/settings/settingsApiKeys.js:21
+#: static/webapp/tmp/app/controllers/settings/settingsApiKeys.js:22
 msgid "Do you really want to revoke this API key?"
 msgstr "Voulez-vous vraiment révoquer cette clé d'API ?"
 
-#: static/webapp/tmp/app/controllers/settings/settingsEditGroup.js:16
+#: static/webapp/tmp/app/controllers/settings/settingsEditGroup.js:17
 msgid "Do you really want to delete this group?"
 msgstr "Voulez-vous vraiment supprimer ce groupe ?"
 
-#: static/webapp/tmp/app/controllers/settings/settingsEditTax.js:18
+#: static/webapp/tmp/app/controllers/settings/settingsEditTax.js:19
 msgid "Do you really want to delete this tax?"
 msgstr "Voulez-vous vraiment supprimer cette taxe ?"
 
-#: static/webapp/tmp/app/controllers/settings/settingsEditUser.js:21
+#: static/webapp/tmp/app/controllers/settings/settingsEditUser.js:22
 msgid "Do you really want to delete this user?"
 msgstr "Voulez-vous vraiment supprimer cet utilisateur ?"
 
-#: static/webapp/tmp/app/mixins/helpTour.js:7
+#: static/webapp/tmp/app/mixins/helpTour.js:21
 msgid "Next."
 msgstr "Suiv."
 
-#: static/webapp/tmp/app/mixins/helpTour.js:8
+#: static/webapp/tmp/app/mixins/helpTour.js:22
 msgid "Prev."
 msgstr "Préc."
 
-#: static/webapp/tmp/app/mixins/helpTour.js:9
+#: static/webapp/tmp/app/mixins/helpTour.js:23
 msgid "End tour"
 msgstr "Terminer"
 
@@ -300,8 +304,8 @@ msgid "The group has been successfully deleted"
 msgstr "Le groupe a été correctement supprimé"
 
 #: static/webapp/tmp/app/models/core/tenant.js:67
-msgid "Organization's settings has been successfully updated"
-msgstr "Les paramètres de l'organisation ont été correctement mis à jour"
+msgid "The settings of your organization have been successfully updated"
+msgstr "Les paramètres de votre organisation ont été correctement mis à jour"
 
 #: static/webapp/tmp/app/models/core/user.js:20
 msgid "Unknown"
@@ -327,53 +331,65 @@ msgstr "L'utilisateur a été correctement supprimé"
 msgid "Your invoice has been cancelled"
 msgstr "Votre facture a été annulée"
 
-#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:107
+#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:116
 msgid "Your quotation has been successfully created"
 msgstr "Votre devis a été correctement créé"
 
-#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:109
+#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:118
 msgid "Your invoice has been successfully created"
 msgstr "Votre facture a été correctement créée"
 
-#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:111
+#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:120
 msgid "Your credit note has been successfully created"
 msgstr "Votre avoir a été correctement créé"
 
-#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:113
+#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:122
 msgid "Your down payment invoice has been successfully created"
 msgstr "Votre facture d'acompte a été correctement créé"
 
-#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:125
+#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:124
+msgid "Your purchase order has been successfully created"
+msgstr "Votre bon de commande a été correctement créé"
+
+#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:136
 msgid "Your quotation has been successfully updated"
 msgstr "Votre devis a été correctement mis à jour"
 
-#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:127
+#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:138
 msgid "Your invoice has been successfully updated"
 msgstr "Votre facture a été correctement mise à jour"
 
-#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:129
+#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:140
 msgid "Your credit note has been successfully updated"
 msgstr "Votre avoir a été correctement mis à jour"
 
-#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:131
+#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:142
 msgid "Your down payment invoice has been successfully updated"
 msgstr "Votre facture d'acompte a été correctement mise à jour"
 
-#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:143
+#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:144
+msgid "Your purchase order has been successfully updated"
+msgstr "Votre bon de commande a été correctement mis à jour"
+
+#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:156
 msgid "Your quotation has been successfully deleted"
 msgstr "Votre devis a été correctement supprimé"
 
-#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:145
+#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:158
 msgid "Your invoice has been successfully deleted"
 msgstr "Votre facture a été correctement supprimée"
 
-#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:147
+#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:160
 msgid "Your credit note has been successfully deleted"
 msgstr "Votre avoir a été correctement supprimé"
 
-#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:149
+#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:162
 msgid "Your down payment invoice has been successfully deleted"
 msgstr "Votre facture d'acompte a été correctement supprimée"
+
+#: static/webapp/tmp/app/models/invoicing/invoiceBase.js:164
+msgid "Your purchase order has been successfully deleted"
+msgstr "Votre bon de commande a été correctement supprimé"
 
 #: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:108
 #: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:110
@@ -464,19 +480,19 @@ msgstr "non défini"
 msgid "Your payment has been successfully added"
 msgstr "Votre paiement a été correctement ajouté"
 
-#: static/webapp/tmp/app/models/invoicing/quotation.js:86
+#: static/webapp/tmp/app/models/invoicing/quotation.js:84
 msgid "Your quotation has been transformed into an invoice"
 msgstr "Votre devis a été transformé en facture"
 
-#: static/webapp/tmp/app/models/invoicing/tax.js:36
+#: static/webapp/tmp/app/models/invoicing/tax.js:38
 msgid "The tax has been successfully created"
 msgstr "La taxe a été correctement créée"
 
-#: static/webapp/tmp/app/models/invoicing/tax.js:43
+#: static/webapp/tmp/app/models/invoicing/tax.js:45
 msgid "The tax has been successfully updated"
 msgstr "La taxe a été correctement mise à jour"
 
-#: static/webapp/tmp/app/models/invoicing/tax.js:50
+#: static/webapp/tmp/app/models/invoicing/tax.js:52
 msgid "The tax has been successfully deleted"
 msgstr "La taxe a été correctement supprimée"
 
@@ -497,7 +513,7 @@ msgid "undefined"
 msgstr "non défini"
 
 #: static/webapp/tmp/app/models/settings/tenantSettings.js:7
-msgid "Invoicing's settings has been successfully updated"
+msgid "Invoicing settings have been successfully updated"
 msgstr "Vos paramètres de facturation ont été correctement mis à jour"
 
 #: static/webapp/tmp/app/objects/contacts.js:4
@@ -577,166 +593,170 @@ msgid "French"
 msgstr "Français"
 
 #: static/webapp/tmp/app/objects/core.js:56
+msgid "Bariol (Vosae's font)"
+msgstr "Bariol (police de Vosae)"
+
+#: static/webapp/tmp/app/objects/core.js:97
 msgid "Belgium"
 msgstr "Belgique"
 
-#: static/webapp/tmp/app/objects/core.js:59
+#: static/webapp/tmp/app/objects/core.js:100
 msgid "Switzerland"
 msgstr "Suisse"
 
-#: static/webapp/tmp/app/objects/core.js:62
+#: static/webapp/tmp/app/objects/core.js:103
 msgid "France"
 msgstr "France"
 
-#: static/webapp/tmp/app/objects/core.js:65
+#: static/webapp/tmp/app/objects/core.js:106
 msgid "Great Britain"
 msgstr "Grande-Bretagne"
 
-#: static/webapp/tmp/app/objects/core.js:68
+#: static/webapp/tmp/app/objects/core.js:109
 msgid "Luxembourg"
 msgstr "Luxembourg"
 
-#: static/webapp/tmp/app/objects/core.js:71
+#: static/webapp/tmp/app/objects/core.js:112
 msgid "United States"
 msgstr "États-Unis"
 
-#: static/webapp/tmp/app/objects/core.js:77
+#: static/webapp/tmp/app/objects/core.js:118
 msgid "Core permissions"
 msgstr "Permissions générales"
 
-#: static/webapp/tmp/app/objects/core.js:82
+#: static/webapp/tmp/app/objects/core.js:123
 msgid "Access to the application"
 msgstr "Accès à l'application"
 
-#: static/webapp/tmp/app/objects/core.js:86
+#: static/webapp/tmp/app/objects/core.js:127
 msgid "Can configure application"
 msgstr "Peut configurer l'application"
 
-#: static/webapp/tmp/app/objects/core.js:90
+#: static/webapp/tmp/app/objects/core.js:131
 msgid "Can see users"
 msgstr "Peut visualiser les utilisateurs"
 
-#: static/webapp/tmp/app/objects/core.js:94
+#: static/webapp/tmp/app/objects/core.js:135
 msgid "Can add users"
 msgstr "Peut ajouter des utilisateurs"
 
-#: static/webapp/tmp/app/objects/core.js:98
+#: static/webapp/tmp/app/objects/core.js:139
 msgid "Can edit users"
 msgstr "Peut éditer des utilisateurs"
 
-#: static/webapp/tmp/app/objects/core.js:102
+#: static/webapp/tmp/app/objects/core.js:143
 msgid "Can delete users"
 msgstr "Peut supprimer des utilisateurs"
 
-#: static/webapp/tmp/app/objects/core.js:106
+#: static/webapp/tmp/app/objects/core.js:147
 msgid "Can see groups"
 msgstr "Peut visualiser les groupes"
 
-#: static/webapp/tmp/app/objects/core.js:110
+#: static/webapp/tmp/app/objects/core.js:151
 msgid "Can add groups"
 msgstr "Peut ajouter des groupes"
 
-#: static/webapp/tmp/app/objects/core.js:114
+#: static/webapp/tmp/app/objects/core.js:155
 msgid "Can edit groups"
 msgstr "Peut éditer des groupes"
 
-#: static/webapp/tmp/app/objects/core.js:118
+#: static/webapp/tmp/app/objects/core.js:159
 msgid "Can delete groups"
 msgstr "Peut supprimer des groupes"
 
-#: static/webapp/tmp/app/objects/core.js:122
+#: static/webapp/tmp/app/objects/core.js:163
 msgid "Can download files"
 msgstr "Peut télécharger des fichiers"
 
-#: static/webapp/tmp/app/objects/core.js:126
+#: static/webapp/tmp/app/objects/core.js:167
 msgid "Can upload files"
 msgstr "Peut charger des fichiers"
 
-#: static/webapp/tmp/app/objects/core.js:130
+#: static/webapp/tmp/app/objects/core.js:171
 msgid "Can delete files"
 msgstr "Peut supprimer des fichiers"
 
-#: static/webapp/tmp/app/objects/core.js:134
+#: static/webapp/tmp/app/objects/core.js:175
 msgid "Contacts permissions"
 msgstr "Permissions sur les contacts"
 
-#: static/webapp/tmp/app/objects/core.js:139
+#: static/webapp/tmp/app/objects/core.js:180
 msgid "Access to the contacts module"
 msgstr "Accès au module contacts"
 
-#: static/webapp/tmp/app/objects/core.js:143
+#: static/webapp/tmp/app/objects/core.js:184
 msgid "Can see contacts"
 msgstr "Peut visualiser les contacts"
 
-#: static/webapp/tmp/app/objects/core.js:147
+#: static/webapp/tmp/app/objects/core.js:188
 msgid "Can add contacts"
 msgstr "Peut ajouter des contacts"
 
-#: static/webapp/tmp/app/objects/core.js:151
+#: static/webapp/tmp/app/objects/core.js:192
 msgid "Can edit contacts"
 msgstr "Peut éditer des contacts"
 
-#: static/webapp/tmp/app/objects/core.js:155
+#: static/webapp/tmp/app/objects/core.js:196
 msgid "Can delete contacts"
 msgstr "Peut supprimer des contacts"
 
-#: static/webapp/tmp/app/objects/core.js:159
+#: static/webapp/tmp/app/objects/core.js:200
 msgid "Invoicing permissions"
 msgstr "Permissions sur la facturation"
 
-#: static/webapp/tmp/app/objects/core.js:164
+#: static/webapp/tmp/app/objects/core.js:205
 msgid "Access to the invoicing module"
 msgstr "Accès au module de facturation"
 
-#: static/webapp/tmp/app/objects/core.js:168
+#: static/webapp/tmp/app/objects/core.js:209
 msgid "Can edit invoicing settings"
 msgstr "Peut configurer les paramètres de facturation"
 
-#: static/webapp/tmp/app/objects/core.js:172
+#: static/webapp/tmp/app/objects/core.js:213
 msgid "Can see invoices"
 msgstr "Peut visualiser les factures"
 
-#: static/webapp/tmp/app/objects/core.js:176
+#: static/webapp/tmp/app/objects/core.js:217
 msgid "Can add invoices"
 msgstr "Peut ajouter des factures"
 
-#: static/webapp/tmp/app/objects/core.js:180
+#: static/webapp/tmp/app/objects/core.js:221
 msgid "Can edit invoices"
 msgstr "Peut éditer des factures"
 
-#: static/webapp/tmp/app/objects/core.js:184
+#: static/webapp/tmp/app/objects/core.js:225
 msgid "Can delete/cancel invoices"
 msgstr "Peut supprimer/annuler des factures"
 
-#: static/webapp/tmp/app/objects/core.js:188
+#: static/webapp/tmp/app/objects/core.js:229
 msgid "Can transmit invoices"
 msgstr "Peut transmettre des factures"
 
-#: static/webapp/tmp/app/objects/core.js:192
+#: static/webapp/tmp/app/objects/core.js:233
 msgid "Can post invoices"
 msgstr "Peut poster des factures"
 
-#: static/webapp/tmp/app/objects/core.js:196
+#: static/webapp/tmp/app/objects/core.js:237
 msgid "Can see items"
 msgstr "Peut visualiser les articles"
 
-#: static/webapp/tmp/app/objects/core.js:200
+#: static/webapp/tmp/app/objects/core.js:241
 msgid "Can add items"
 msgstr "Peut ajouter des articles"
 
-#: static/webapp/tmp/app/objects/core.js:204
+#: static/webapp/tmp/app/objects/core.js:245
 msgid "Can edit items"
 msgstr "Peut éditer des articles"
 
-#: static/webapp/tmp/app/objects/core.js:208
+#: static/webapp/tmp/app/objects/core.js:249
 msgid "Can delete items"
 msgstr "Peut supprimer des articles"
 
-#: static/webapp/tmp/app/objects/core.js:212
+#: static/webapp/tmp/app/objects/core.js:253
 msgid "Organizer permissions"
 msgstr "Permissions sur l'agenda"
 
-#: static/webapp/tmp/app/objects/core.js:217
+#: static/webapp/tmp/app/objects/core.js:258
 msgid "Access to the calendar module"
 msgstr "Accès au module agenda"
 
@@ -1186,18 +1206,18 @@ msgstr "/ (slash)"
 msgid "# (sharp)"
 msgstr "# (dièse)"
 
-#: static/webapp/tmp/app/store/adapter.js:202
-#: static/webapp/tmp/app/views/contacts/entityEdit.js:61
+#: static/webapp/tmp/app/store/adapter.js:204
+#: static/webapp/tmp/app/views/contacts/entityEdit.js:63
 msgid "An error occurred, please try again or contact the support"
 msgstr "Une erreur est survenue, veuillez réessayer ou contacter le support"
 
 #: static/webapp/tmp/app/views/contacts/contactEdit.js:13
-#: static/webapp/tmp/app/views/contacts/contactShow.js:55
+#: static/webapp/tmp/app/views/contacts/contactShow.js:57
 msgid "Contact informations (required field)"
 msgstr "Informations du contact (champ obligatoire)"
 
 #: static/webapp/tmp/app/views/contacts/contactEdit.js:14
-#: static/webapp/tmp/app/views/contacts/contactShow.js:56
+#: static/webapp/tmp/app/views/contacts/contactShow.js:58
 msgid ""
 "This is the <strong>Contact's</strong> information. Add his <i>First name</"
 "i> and <i>Last name</i> as well as his <i>Role</i> (e.g. CEO, Product "
@@ -1282,15 +1302,15 @@ msgstr "Tous les contacts"
 msgid "To <i>see all your contacts</i> just click on this link."
 msgstr "Pour voir <i>tous vos contacts</i> il suffit de cliquer sur ce lien."
 
-#: static/webapp/tmp/app/views/core/application.js:155
+#: static/webapp/tmp/app/views/core/application.js:157
 msgid "Type your search here"
 msgstr "Saisissez votre recherche ici"
 
-#: static/webapp/tmp/app/views/core/dashboardShow.js:59
+#: static/webapp/tmp/app/views/core/dashboardShow.js:61
 msgid "Applications"
 msgstr "Applications"
 
-#: static/webapp/tmp/app/views/core/dashboardShow.js:60
+#: static/webapp/tmp/app/views/core/dashboardShow.js:62
 msgid ""
 "You can easily navigate through your <strong>Applications</strong> by "
 "clicking on the icons."
@@ -1298,11 +1318,11 @@ msgstr ""
 "Vous pouvez facilement naviguer dans vos <strong>Applications</strong> en "
 "cliquant sur ​​les icônes."
 
-#: static/webapp/tmp/app/views/core/dashboardShow.js:65
+#: static/webapp/tmp/app/views/core/dashboardShow.js:67
 msgid "Notifications"
 msgstr "Notifications"
 
-#: static/webapp/tmp/app/views/core/dashboardShow.js:66
+#: static/webapp/tmp/app/views/core/dashboardShow.js:68
 msgid ""
 "By clicking on the <i>Vosae</i>, you will have an overview of your recent "
 "notifications. For example if a colleague edits a contact or quotation you "
@@ -1312,11 +1332,11 @@ msgstr ""
 "notifications. Par exemple, si un collègue édite un contact ou un devis que "
 "vous avez créé, vous le saurez !"
 
-#: static/webapp/tmp/app/views/core/dashboardShow.js:71
+#: static/webapp/tmp/app/views/core/dashboardShow.js:73
 msgid "Search bar"
 msgstr "Barre de recherche"
 
-#: static/webapp/tmp/app/views/core/dashboardShow.js:72
+#: static/webapp/tmp/app/views/core/dashboardShow.js:74
 msgid ""
 "Looking for a <strong>Contact</strong>, an <strong>Invoice</strong> or "
 "<strong>Events</strong>? Start by typing any keyword and we'll do the rest "
@@ -1326,11 +1346,11 @@ msgstr ""
 "des <strong>Événements</strong> ? Commencez par taper un mot-clé et nous "
 "faisons le reste."
 
-#: static/webapp/tmp/app/views/core/dashboardShow.js:77
+#: static/webapp/tmp/app/views/core/dashboardShow.js:79
 msgid "Timeline"
 msgstr "Flux d'activités"
 
-#: static/webapp/tmp/app/views/core/dashboardShow.js:78
+#: static/webapp/tmp/app/views/core/dashboardShow.js:80
 msgid ""
 "Everything that happens in <i>Vosae</i> will appear here in realtime, "
 "allowing you an easy overview of your company."
@@ -1338,11 +1358,11 @@ msgstr ""
 "Tout ce qui se passe dans <i>Vosae</i> apparaîtra ici en temps réel, vous "
 "permettant d'avoir très simplement une vue d'ensemble de votre entreprise."
 
-#: static/webapp/tmp/app/views/core/dashboardShow.js:83
+#: static/webapp/tmp/app/views/core/dashboardShow.js:85
 msgid "Timeline options"
 msgstr "Options du flux d'activités"
 
-#: static/webapp/tmp/app/views/core/dashboardShow.js:84
+#: static/webapp/tmp/app/views/core/dashboardShow.js:86
 msgid ""
 "You can hide or reveal any app in the <i>Timeline</i>. It's very useful if "
 "you have a lot of informations displayed."
@@ -1351,11 +1371,11 @@ msgstr ""
 "d'activités</i>. Cela est très utile si vous avez beaucoup d'informations "
 "affichées."
 
-#: static/webapp/tmp/app/views/core/dashboardShow.js:89
+#: static/webapp/tmp/app/views/core/dashboardShow.js:91
 msgid "Settings and Logout"
 msgstr "Paramètres et Déconnexion"
 
-#: static/webapp/tmp/app/views/core/dashboardShow.js:90
+#: static/webapp/tmp/app/views/core/dashboardShow.js:92
 msgid ""
 "Want to change your settings, add a new organization, contact the "
 "<strong>Support</strong> or logout from <i>Vosae</i> ? This is the right "
@@ -1365,11 +1385,11 @@ msgstr ""
 "contacter le <strong>Support</strong> ou vous déconnecter de <i>Vosae</i> ? "
 "C'est le bon endroit !"
 
-#: static/webapp/tmp/app/views/core/dashboardShow.js:95
+#: static/webapp/tmp/app/views/core/dashboardShow.js:97
 msgid "More informations"
 msgstr "Plus d'informations"
 
-#: static/webapp/tmp/app/views/core/dashboardShow.js:96
+#: static/webapp/tmp/app/views/core/dashboardShow.js:98
 msgid ""
 "On almost every page, you can get more information and some tips by clicking "
 "on <strong>Info</strong>!"
@@ -1377,7 +1397,7 @@ msgstr ""
 "Sur presque toutes les pages, vous pouvez obtenir plus d'informations et "
 "quelques conseils en cliquant sur <strong>Infos</strong> !"
 
-#: static/webapp/tmp/app/views/core/tenantsAdd.js:186
+#: static/webapp/tmp/app/views/core/tenantsAdd.js:188
 msgid "This field is required."
 msgstr "Ce champ est requis."
 
@@ -1987,3 +2007,10 @@ msgid "Shared with me"
 msgid_plural "Shared with me"
 msgstr[0] "Partagé avec moi"
 msgstr[1] "Partagés avec moi"
+
+#, fuzzy
+#~ msgid "Tenant's settings has been successfully updated"
+#~ msgstr "Vos paramètres de facturation ont été correctement mis à jour"
+
+#~ msgid "Organization's settings has been successfully updated"
+#~ msgstr "Les paramètres de l'organisation ont été correctement mis à jour"

@@ -3,7 +3,7 @@ Vosae.TenantSettings = DS.Model.extend
   invoicing: DS.belongsTo('Vosae.InvoicingSettings')
 
   didUpdate: ->
-    message = gettext "Invoicing's settings has been successfully updated"
+    message = gettext "Invoicing settings have been successfully updated"
     Vosae.SuccessPopupComponent.open
       message: message
 

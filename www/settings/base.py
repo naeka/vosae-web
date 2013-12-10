@@ -135,7 +135,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 STATICI18N_PACKAGES = ('webapp',)
 STATICI18N_ROOT = 'webapp/static/'
-STATICI18N_OUTPUT_DIR = 'webapp/js/app/i18n'
+STATICI18N_OUTPUT_DIR = 'webapp/js/i18n'
 
 
 # S3 Secret keys. If not is env use the development vars.

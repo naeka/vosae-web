@@ -1,0 +1,27 @@
+{% load i18n templatetag_handlebars i18n_handlebars %}
+
+{% tplhandlebars "invoiceBase/edit/_transmitter" %}
+  <div class="transmitter pull-left">
+    <div class="logo">
+      {{#if controller.session.tenant.logoUri}}
+        <div class="inner">
+          <img src="{{unbound controller.session.tenant.logoUri}}"/>
+        </div>
+      {{/if}}
+    </div>
+    <h4>
+      {{#if controller.session.tenant.isLoaded}}
+        {{controller.session.tenant.name}}
+      {{/if}}
+    </h4>
+    <p>
+      {{view Ember.TextField 
+        valueBinding="currentRevision.sender"
+        classNames="edit contact" 
+        placeholder="{% trans "Seller" %}" }}
+    </p>
+    {{view view.senderAddressBlockView 
+      viewName="senderAddressBlock" 
+      currentRevisionBinding="currentRevision"}}          
+  </div>
+{% endtplhandlebars %}

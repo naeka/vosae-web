@@ -1,0 +1,80 @@
+{% load i18n templatetag_handlebars i18n_handlebars %}
+
+{% tplhandlebars "invoiceBase/edit/_attachments" %}
+  <div class="header clearfix">
+    <div class="pull-left">
+      <h4>{% trans "Attachments" %}</h4>
+    </div>
+  </div>
+  <table class="table table-attachments edit">
+    <thead class="{{unbound relatedColor}}">
+      <tr>
+        <th class="name">{% trans "Name" context "table-headers" %}</th>
+        <th class="download"></th>
+        <th class="size">{% trans "Size" context "table-headers" %}</th>
+        <th class="created-at">{% trans "Created" context "table-headers" %}</th>
+        <th class="modified-at">{% trans "Last modified" context "table-headers" %}</th>
+        <th class="issuer">{% trans "Author" context "table-headers" %}</th>
+        <th class="action"></th>
+      </tr>
+    </thead>
+    <tbody>      
+      <tr>
+        <td colspan="7" class="fileupload">
+          <div class="inner">
+            <div class="drag-drop-message">{% trans "Drop attachments here" %}</div>
+            <input class="fileupload fill" type="file" multiple/>
+          </div>
+        </td>
+      </tr>
+      {{#if attachmentUploads}}
+        {{#each attachmentUploads}}
+          <tr class="upload-process">
+            <td class="name" colspan="5">{{name}}</td>
+            <td class="upload-progress" colspan="2">
+              <div class="progress">
+                <div class="bar" {{bindAttr style="displayProgress"}}></div>
+              </div>
+            </td>
+          </tr>
+        {{/each}}
+      {{/if}}
+      {{#if attachments}}
+        {{#each attachments}}
+          <tr>
+            <td class="name">{{name}}</td>
+            <td class="download">
+              <a {{bindAttr href="downloadLink"}} class="orange" title="{% trans 'Download' %}" target="_blank">
+                <i class="picto-download"></i>
+              </a>
+            </td>
+            <td class="size">{{humanFileSize size}}</td>
+            <td class="created-at">{{displayCreatedAt}}</td>
+            <td class="modified-at">{{displayModifiedAt}}</td>
+            <td class="issuer">{{issuer.getFullName}}</td>
+            <td class="action">
+              <a {{action "deleteAttachment" this}} class="orange" title="{% trans 'Delete' %}" target="_blank">
+                <i class="picto-rounded-delete"></i>
+              </a>
+            </td>
+          </tr>
+        {{/each}}
+      {{else}}
+        <tr>
+          <td colspan="7" class="no-data">
+            {{#if isQuotation}}
+              {% trans "No attachments related to this quotation" %}
+            {{else}}
+              {% trans "No attachments related to this invoice" %}
+            {{/if}}
+          </td>
+        </tr>
+      {{/if}}
+    </tbody>
+  </table>
+  <p class="table-add-line">
+    <a class="btn btn-small rounded {{unbound relatedColor}}" {{action openFileUploadBrowser target="view"}}>
+      {% trans 'Add an attachment' %}
+    </a>
+  </p>
+{% endtplhandlebars %}

@@ -1,0 +1,32 @@
+{% load i18n templatetag_handlebars i18n_handlebars %}
+
+{% tplhandlebars "invoiceBase/edit/_actionsBottom" %}
+  <div class="actions-form">
+    {{#unless isUploading}}
+      {{#if isSaving}}
+        <div class="btn-group">
+          <a class="btn rounded {{unbound relatedColor}}">
+            {% trans "Saving" %}…
+          </a>
+        </div>
+      {{else}}
+        <div class="btn-group">
+          <a class="btn rounded grey" {{action cancel content}}>
+            {% trans "Cancel" %}
+          </a>
+        </div>
+        {{#if isDirty}}
+          <div class="btn-group">
+            <a class="btn rounded {{unbound relatedColor}} helptour-create" {{action save content}}>
+              {{#if id}}
+                {% trans "Save" %}
+              {{else}}
+                {% trans "Create" %}
+              {{/if}}
+            </a>
+          </div>
+        {{/if}}
+      {{/if}}
+    {{/unless}}
+  </div>
+{% endtplhandlebars %}

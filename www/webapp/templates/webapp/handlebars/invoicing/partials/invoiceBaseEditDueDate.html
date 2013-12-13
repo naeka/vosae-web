@@ -1,0 +1,50 @@
+{% load i18n templatetag_handlebars i18n_handlebars %}
+
+{% tplhandlebars "invoice/edit/_dueDateBlock" %}
+  <p>
+    <label>{% trans "Payment conditions:" %}</label>
+    {{view view.paymentConditionsField
+      contentBinding="Vosae.paymentConditions"
+      selectionBinding="view.currentPaymentConditions"
+      currentRevisionBinding="currentRevision"
+      containerCssClass="green"
+      prompt="{% trans 'Choose one' context 'payment condition' %}"
+      optionValuePath="content.value"
+      optionLabelPath="content.label"}}
+  </p>
+  {{#unless view.isCustom}}
+    <p>
+      <span class="date">
+        <label>
+          <i class="picto-agenda"></i>
+          {% trans "Payment due date on:" %}
+        </label>
+        <span class="grey">
+          {{currentRevision.displayDueDate}}
+          {{view view.dueDateField
+            currentRevisionBinding="currentRevision"}}
+        </span>
+      </span>
+    </p>
+  {{else}}
+    <p>
+      <i class="picto-note green"></i>
+      {{view Vosae.AutoGrowTextField
+        valueBinding="currentRevision.customPaymentConditions"
+        classNames="edit"
+        maxlength="256"
+        placeholder="{% trans 'Type your conditions here' %}…" }}
+      <span class="date">
+        <label>
+          <i class="picto-agenda"></i>
+          {% trans "Estimated on" context "date" %}
+        </label>
+        <span class="grey">
+          {{currentRevision.displayDueDate}}
+          {{view view.dueDateField
+            currentRevisionBinding="currentRevision"}}
+        </span>
+      </span>
+    </p>
+  {{/unless}}
+{% endtplhandlebars %}

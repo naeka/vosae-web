@@ -1,0 +1,34 @@
+{% load i18n templatetag_handlebars i18n_handlebars %}
+
+{% tplhandlebars "invoiceBase/show/_summary" %}
+  <table class="table-invoice-summary">
+    <tbody>
+      <tr>
+        <td>{% trans "TOTAL (excl. tax)" %}</td>
+        <td>
+          <div class="inner">
+            {{formatMoney currentRevision.total currentRevision.currency.displaySign}}
+          </div>
+        </td>
+      </tr>
+      {{#each currentRevision.taxes}}
+        <tr>
+          <td>{{this.tax.displayTax}}</td>
+          <td>
+            <div class="inner">
+              {{formatMoney this.total controller.content.currentRevision.currency.displaySign}}
+            </div>
+          </td>
+        </tr>
+      {{/each}}
+      <tr>
+        <td>{% trans "TOTAL (incl. tax)" %}</td>
+        <td>
+          <div class="inner">
+            {{formatMoney currentRevision.totalVAT currentRevision.currency.displaySign}}
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+{% endtplhandlebars %}

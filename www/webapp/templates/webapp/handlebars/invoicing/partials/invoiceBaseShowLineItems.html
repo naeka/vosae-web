@@ -1,0 +1,40 @@
+{% load i18n templatetag_handlebars i18n_handlebars %}
+
+{% tplhandlebars "invoiceBase/show/_details" %}
+  <table class="table table-line-items">
+    <thead class="{{unbound relatedColor}}">
+      <tr>
+        <th class="reference">{% trans "Reference" context "table-headers" %}</th>
+        <th class="description">{% trans "Description" context "table-headers" %}</th>
+        <th class="quantity">{% trans "Qty" context "table-headers" %}</th>
+        <th class="unit-price">{% trans "Unit price (excl. tax)" context "table-headers" %}</th>
+        <th class="tax">{% trans "Tax" context "table-headers" %}</th>
+        <th class="total">{% trans "Total (excl. tax)" context "table-headers" %}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#if currentRevision.lineItems}}
+        {{#each currentRevision.lineItems}}
+          <tr>
+            <td class="reference">{{ref}}</td>
+            <td class="description">{{nl2br description}}</td>
+            <td class="quantity">{{displayQuantity}}</td>
+            <td class="unit-price">{{displayUnitPrice}}</td>
+            <td class="tax">{{tax.displayTax}}</td>
+            <td class="total">{{displayTotal}}</td>
+          </tr>
+        {{/each}}
+      {{else}}
+        <tr>
+          <td colspan="6" class="no-data">
+            {{#if isQuotation}}
+              {% trans "No items in this quotation" %}
+            {{else}}
+              {% trans "No items in this invoice" %}
+            {{/if}}
+          </td>
+        </tr>
+      {{/if}}
+    </tbody>
+  </table>
+{% endtplhandlebars %}

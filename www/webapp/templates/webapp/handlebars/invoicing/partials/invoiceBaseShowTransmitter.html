@@ -1,0 +1,22 @@
+{% load i18n templatetag_handlebars i18n_handlebars %}
+
+{% tplhandlebars "invoiceBase/show/_transmitter" %}
+  <div class="transmitter pull-left">
+    <div class="logo">
+      {{#if controller.session.tenant.logoUri}}
+        <div class="inner">
+          <img src="{{unbound controller.session.tenant.logoUri}}"/>
+        </div>
+      {{/if}}
+    </div>
+    <h4>
+      {{#if controller.session.tenant.isLoaded}}
+        {{unbound controller.session.tenant.name}}
+      {{/if}}
+    </h4>
+    <p>
+      {{unbound currentRevision.sender}}
+    </p>
+    {{view Vosae.InvoiceBaseShowAddressBlock contentBinding="currentRevision.senderAddress" }}
+  </div>
+{% endtplhandlebars %}

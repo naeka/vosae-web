@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vosae-web\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-04 16:14+0000\n"
-"PO-Revision-Date: 2013-12-03 19:07+0100\n"
+"POT-Creation-Date: 2013-12-16 13:18+0000\n"
+"PO-Revision-Date: 2013-12-16 14:19+0100\n"
 "Last-Translator: Léo S <leo@naeka.fr>\n"
 "Language-Team: Léo S. <leo@naeka.fr>\n"
 "Language: fr\n"
@@ -1999,8 +1999,8 @@ msgid "Country here"
 msgstr "Pays ici"
 
 #: templates/webapp/handlebars/settings/settingsReport.html:13
-msgid "Language"
-msgstr "Langue"
+msgid "Default language"
+msgstr "Langue par défaut"
 
 #: templates/webapp/handlebars/settings/settingsReport.html:26
 msgid "Font name"
@@ -2010,9 +2010,21 @@ msgstr "Police"
 msgid "Font size"
 msgstr "Taille de la police"
 
-#: templates/webapp/handlebars/settings/settingsReport.html:61
+#: templates/webapp/handlebars/settings/settingsReport.html:52
+msgid "Font color"
+msgstr "Couleur de police"
+
+#: templates/webapp/handlebars/settings/settingsReport.html:62
+msgid "Base color"
+msgstr "Couleur de base"
+
+#: templates/webapp/handlebars/settings/settingsReport.html:72
 msgid "Force black and white"
 msgstr "Forcer en noir et blanc"
+
+#: templates/webapp/handlebars/settings/settingsReport.html:81
+msgid "Paper size"
+msgstr "Format de papier"
 
 #: templates/webapp/handlebars/settings/settingsShowGroups.html:12
 msgid "Created by"
@@ -2039,6 +2051,9 @@ msgstr "Dernière connexion"
 #: templates/webapp/handlebars/settings/settingsShowUsers.html:15
 msgid "Status"
 msgstr "Statut"
+
+#~ msgid "Language"
+#~ msgstr "Langue"
 
 #, fuzzy
 #~ msgid "Load more purcahse orders"

@@ -63,37 +63,37 @@ Vosae.reportFontFamilies = [
 Vosae.reportFontSizes = [
   Em.Object.create
     value: 8
-    name: "8px"
+    name: '8px'
   Em.Object.create
     value: 9
-    name: "9px"
+    name: '9px'
   Em.Object.create
     value: 10
-    name: "10px"
+    name: '10px'
   Em.Object.create
     value: 11
-    name: "11px"
+    name: '11px'
   Em.Object.create
     value: 12
-    name: "12px"
+    name: '12px'
   Em.Object.create
     value: 13
-    name: "13px"
+    name: '13px'
   Em.Object.create
     value: 14
-    name: "14px"
+    name: '14px'
 ]
 
 Vosae.reportPaperSizes = [
   Em.Object.create
-    value: "a4"
-    name: "A4"
+    value: 'a4'
+    name: gettext 'A4 (8.27" x 11.69")'
   Em.Object.create
-    value: "letter"
-    name: "US letter"
+    value: 'letter'
+    name: gettext 'Letter (8.5" x 11")'
   Em.Object.create
-    value: "legal"
-    name: "US legal"
+    value: 'legal'
+    name: gettext 'Legal (8.5" x 14")'
 ]
 
 Vosae.supportedCountries = Em.makeArray([

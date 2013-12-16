@@ -11,7 +11,10 @@ function pluralidx(n) {
     return v;
   }
 }
+catalog['A4 (8.27" x 11.69")'] = 'A4 (21 x 29.7 cm)';
 catalog['Core permissions'] = 'Global permissions';
+catalog['Legal (8.5" x 14")'] = 'Legal (21.6 x 35.6 cm)';
+catalog['Letter (8.5" x 11")'] = 'Letter (21.6 x 27.9 cm)';
 
 
 function gettext(msgid) {

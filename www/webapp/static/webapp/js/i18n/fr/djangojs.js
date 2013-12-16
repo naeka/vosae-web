@@ -26,6 +26,7 @@ catalog['<a>{{organization}}</a>, in application Contacts'] = '<a>{{organization
 catalog['<a>{{user}}</a>, in application Contacts'] = '<a>{{user}}</a>, dans l\'application Contacts';
 catalog['<span class=\'green\'>{{count}}</span> Contact'][0] = '<span class=\'green\'>{{count}}</span> Contact';
 catalog['<span class=\'green\'>{{count}}</span> Contact'][1] = '<span class=\'green\'>{{count}}</span> Contacts';
+catalog['A4 (8.27" x 11.69")'] = 'A4 (21 x 29,7 cm)';
 catalog['Access to the application'] = 'Acc\u00e8s \u00e0 l\'application';
 catalog['Access to the calendar module'] = 'Acc\u00e8s au module agenda';
 catalog['Access to the contacts module'] = 'Acc\u00e8s au module contacts';
@@ -174,6 +175,8 @@ catalog['Items description must not be blank'] = 'La description des articles es
 catalog['Items reference must not be blank'] = 'La r\u00e9f\u00e9rence des articles est requise';
 catalog['Japanese yen'] = 'Yen japonais';
 catalog['Last entries'] = 'Derniers ajouts';
+catalog['Legal (8.5" x 14")'] = 'L\u00e9gal (21,6 x 35,6 cm)';
+catalog['Letter (8.5" x 11")'] = 'Lettre (21,6 x 27,9 cm)';
 catalog['Looking for a <strong>Contact</strong>, an <strong>Invoice</strong> or <strong>Events</strong>? Start by typing any keyword and we\'ll do the rest for you.'] = 'Vous cherchez un <strong>Contact</strong>, une <strong>Facture</strong> ou des <strong>\u00c9v\u00e9nements</strong> ? Commencez par taper un mot-cl\u00e9 et nous faisons le reste.';
 catalog['Luxembourg'] = 'Luxembourg';
 catalog['Mexican peso'] = 'Peso mexicain';

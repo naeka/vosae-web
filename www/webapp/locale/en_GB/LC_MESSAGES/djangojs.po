@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vosae-web\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-04 16:19+0000\n"
-"PO-Revision-Date: 2013-10-23 12:04+0100\n"
+"POT-Creation-Date: 2013-12-16 13:10+0000\n"
+"PO-Revision-Date: 2013-12-16 14:21+0100\n"
 "Last-Translator: Léo S <leo@naeka.fr>\n"
 "Language-Team: Léo S. <leo@naeka.fr>\n"
 "Language: en_GB\n"
@@ -597,166 +597,178 @@ msgid "Bariol (Vosae's font)"
 msgstr ""
 
 #: static/webapp/tmp/app/objects/core.js:97
+msgid "A4 (8.27\" x 11.69\")"
+msgstr "A4 (21 x 29.7 cm)"
+
+#: static/webapp/tmp/app/objects/core.js:100
+msgid "Letter (8.5\" x 11\")"
+msgstr "Letter (21.6 x 27.9 cm)"
+
+#: static/webapp/tmp/app/objects/core.js:103
+msgid "Legal (8.5\" x 14\")"
+msgstr "Legal (21.6 x 35.6 cm)"
+
+#: static/webapp/tmp/app/objects/core.js:110
 msgid "Belgium"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:100
+#: static/webapp/tmp/app/objects/core.js:113
 msgid "Switzerland"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:103
+#: static/webapp/tmp/app/objects/core.js:116
 msgid "France"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:106
+#: static/webapp/tmp/app/objects/core.js:119
 msgid "Great Britain"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:109
+#: static/webapp/tmp/app/objects/core.js:122
 msgid "Luxembourg"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:112
+#: static/webapp/tmp/app/objects/core.js:125
 msgid "United States"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:118
+#: static/webapp/tmp/app/objects/core.js:131
 msgid "Core permissions"
 msgstr "Global permissions"
 
-#: static/webapp/tmp/app/objects/core.js:123
+#: static/webapp/tmp/app/objects/core.js:136
 msgid "Access to the application"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:127
+#: static/webapp/tmp/app/objects/core.js:140
 msgid "Can configure application"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:131
+#: static/webapp/tmp/app/objects/core.js:144
 msgid "Can see users"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:135
+#: static/webapp/tmp/app/objects/core.js:148
 msgid "Can add users"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:139
+#: static/webapp/tmp/app/objects/core.js:152
 msgid "Can edit users"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:143
+#: static/webapp/tmp/app/objects/core.js:156
 msgid "Can delete users"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:147
+#: static/webapp/tmp/app/objects/core.js:160
 msgid "Can see groups"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:151
+#: static/webapp/tmp/app/objects/core.js:164
 msgid "Can add groups"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:155
+#: static/webapp/tmp/app/objects/core.js:168
 msgid "Can edit groups"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:159
+#: static/webapp/tmp/app/objects/core.js:172
 msgid "Can delete groups"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:163
+#: static/webapp/tmp/app/objects/core.js:176
 msgid "Can download files"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:167
+#: static/webapp/tmp/app/objects/core.js:180
 msgid "Can upload files"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:171
+#: static/webapp/tmp/app/objects/core.js:184
 msgid "Can delete files"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:175
+#: static/webapp/tmp/app/objects/core.js:188
 msgid "Contacts permissions"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:180
+#: static/webapp/tmp/app/objects/core.js:193
 msgid "Access to the contacts module"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:184
+#: static/webapp/tmp/app/objects/core.js:197
 msgid "Can see contacts"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:188
+#: static/webapp/tmp/app/objects/core.js:201
 msgid "Can add contacts"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:192
+#: static/webapp/tmp/app/objects/core.js:205
 msgid "Can edit contacts"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:196
+#: static/webapp/tmp/app/objects/core.js:209
 msgid "Can delete contacts"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:200
+#: static/webapp/tmp/app/objects/core.js:213
 msgid "Invoicing permissions"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:205
+#: static/webapp/tmp/app/objects/core.js:218
 msgid "Access to the invoicing module"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:209
+#: static/webapp/tmp/app/objects/core.js:222
 msgid "Can edit invoicing settings"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:213
+#: static/webapp/tmp/app/objects/core.js:226
 msgid "Can see invoices"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:217
+#: static/webapp/tmp/app/objects/core.js:230
 msgid "Can add invoices"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:221
+#: static/webapp/tmp/app/objects/core.js:234
 msgid "Can edit invoices"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:225
+#: static/webapp/tmp/app/objects/core.js:238
 msgid "Can delete/cancel invoices"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:229
+#: static/webapp/tmp/app/objects/core.js:242
 msgid "Can transmit invoices"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:233
+#: static/webapp/tmp/app/objects/core.js:246
 msgid "Can post invoices"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:237
+#: static/webapp/tmp/app/objects/core.js:250
 msgid "Can see items"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:241
+#: static/webapp/tmp/app/objects/core.js:254
 msgid "Can add items"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:245
+#: static/webapp/tmp/app/objects/core.js:258
 msgid "Can edit items"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:249
+#: static/webapp/tmp/app/objects/core.js:262
 msgid "Can delete items"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:253
+#: static/webapp/tmp/app/objects/core.js:266
 msgid "Organizer permissions"
 msgstr ""
 
-#: static/webapp/tmp/app/objects/core.js:258
+#: static/webapp/tmp/app/objects/core.js:271
 msgid "Access to the calendar module"
 msgstr ""
 

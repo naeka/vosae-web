@@ -84,6 +84,18 @@ Vosae.reportFontSizes = [
     name: "14px"
 ]
 
+Vosae.reportPaperSizes = [
+  Em.Object.create
+    value: "a4"
+    name: "A4"
+  Em.Object.create
+    value: "letter"
+    name: "US letter"
+  Em.Object.create
+    value: "legal"
+    name: "US legal"
+]
+
 Vosae.supportedCountries = Em.makeArray([
   Em.Object.create
     countryCode: "BE"

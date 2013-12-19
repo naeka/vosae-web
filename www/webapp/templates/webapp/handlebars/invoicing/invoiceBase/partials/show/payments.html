@@ -1,0 +1,112 @@
+{% load i18n templatetag_handlebars i18n_handlebars %}
+
+{% tplhandlebars "invoiceBase/show/_payments" %}
+  <div class="header clearfix">
+    <div class="pull-left">
+      <h4>{% trans "Payments" %}</h4>
+    </div>
+    <div class="pull-right">
+      <span class="text">{% trans "Balance" %}</span> <span class="orange">{{formatMoney balance currentRevision.currency.displaySign}}</span>
+    </div>
+  </div>
+  <table class="table table-invoice-payments">
+    <thead class="{{unbound relatedColor}}">
+      <tr>
+        <th class="date">{% trans "Date" context "table-headers" %}</th>
+        <th class="type">{% trans "Type" context "table-headers" %}</th>
+        <th class="cur">{% trans "Currency" context "table-headers" %}</th>
+        <th class="amount">{% trans "Amount" context "table-headers" %}</th>
+        <th class="note">{% trans "Note" context "table-headers" %}</th>
+        <th class="action">{% trans "Action" context "table-headers" %}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#if payments}}
+        {{#each payments}}
+          {{#if id}}
+            <tr>
+              <td class="date">{{displayDate}}</td>
+              <td class="type">{{displayType}}</td>
+              <td class="cur">{{currency.description}}</td>
+              <td class="amount">{{formatMoney displayAmount currency.displaySign}}</td>
+              <td class="note">{{nl2br displayNote}}</td>
+              <td class="action">
+                -
+                {# <a class="btn btn-small rounded orange" {{action 'deletePayment' this}}>{% trans "Delete" %}</a> #}
+              </td>
+            </tr>        
+          {{else}}
+            <tr>
+              <td class="date">
+                {{view view.paymentDateField
+                  paymentBinding="this"
+                  classNames="edit" }}
+              </td>
+              <td class="type">
+                {{view view.paymentTypeField
+                  contentBinding="Vosae.paymentTypes"
+                  valueBinding="type"
+                  optionLabelPath="content.label"
+                  optionValuePath="content.value"
+                  classNames="edit" }}
+              </td>
+              <td class="cur">
+                {{view view.paymentCurrencyField
+                  contentBinding="controller.currencies"
+                  optionLabelPath="content.description"
+                  optionValuePath="content.symbol"
+                  paymentBinding="this"
+                  classNames="edit" }}
+              </td>
+              <td class="amount">
+                {{view view.paymentAmountField
+                  paymentBinding="this"
+                  placeholder="0"
+                  classNames="edit" }}
+              </td>
+              <td class="note">
+                {{view view.paymentNoteField
+                  valueBinding="note"
+                  resize="none"
+                  placeholder="{% trans 'Description' %}…"
+                  classNames="edit" }}
+              </td>
+              <td class="action">
+                <a class="btn btn-small rounded green" {{action 'savePayment' this}}>
+                  {{#if isSaving}}{% trans "Saving..." %}{{else}}{% trans "Save" %}{{/if}}
+                </a>
+              </td>
+            </tr>
+          {{/if}}
+        {{/each}}
+      {{else}}
+        <tr>
+          <td colspan="6" class="no-data">
+            {% trans "No payments have been received" %}
+          </td>
+        </tr>
+      {{/if}}
+    </tbody>
+  </table>
+  <p class="table-add-line">
+    {{#if canAddPayment}}
+      <a class="btn btn-small rounded green" {{action addPayment}}>
+        {% trans 'Add payment' %}
+      </a>
+    {{/if}}
+  </p>
+  {% comment %}
+  <table class="table-invoice-summary">
+    <tbody>
+      <tr>
+        <td>{% trans "Balance" context "payment" %}</td>
+        <td>
+          <div class="inner">
+            {{formatMoney displayBalance currentRevision.currency.displaySign}}
+          </div>
+        </td> 
+      </tr>
+    </tbody>
+  </table>
+  {% endcomment %}
+{% endtplhandlebars %}

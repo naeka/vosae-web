@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vosae-web\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-03 18:06+0000\n"
+"POT-Creation-Date: 2013-12-16 13:18+0000\n"
 "PO-Revision-Date: 2013-10-22 18:27+0100\n"
 "Last-Translator: Léo S <leo@naeka.fr>\n"
 "Language-Team: Léo S. <leo@naeka.fr>\n"
@@ -1870,7 +1870,7 @@ msgid "Country here"
 msgstr ""
 
 #: templates/webapp/handlebars/settings/settingsReport.html:13
-msgid "Language"
+msgid "Default language"
 msgstr ""
 
 #: templates/webapp/handlebars/settings/settingsReport.html:26
@@ -1881,8 +1881,20 @@ msgstr ""
 msgid "Font size"
 msgstr ""
 
-#: templates/webapp/handlebars/settings/settingsReport.html:61
+#: templates/webapp/handlebars/settings/settingsReport.html:52
+msgid "Font color"
+msgstr ""
+
+#: templates/webapp/handlebars/settings/settingsReport.html:62
+msgid "Base color"
+msgstr ""
+
+#: templates/webapp/handlebars/settings/settingsReport.html:72
 msgid "Force black and white"
+msgstr ""
+
+#: templates/webapp/handlebars/settings/settingsReport.html:81
+msgid "Paper size"
 msgstr ""
 
 #: templates/webapp/handlebars/settings/settingsShowGroups.html:12

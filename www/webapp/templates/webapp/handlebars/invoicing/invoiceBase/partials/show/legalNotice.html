@@ -1,0 +1,27 @@
+{% load i18n templatetag_handlebars i18n_handlebars %}
+
+{% tplhandlebars "invoice/show/_legalNotice" %}
+  <div class="header clearfix">
+    <div class="pull-left">
+      <h4>{% trans "Payment Terms" %}</h4>
+    </div>
+  </div>
+  <div>
+    {{#if currentRevision.customPaymentConditions}}
+      <p><i class="picto-note green"></i> {% verbatimblocktrans %}Payment conditions: <span class="grey">{{currentRevision.customPaymentConditions}}</span>{% endverbatimblocktrans %}</p>
+    {{/if}}
+    <p>
+      <i class="picto-agenda green"></i> {% verbatimblocktrans %}Payment due date on: <span class="grey">{{currentRevision.displayDueDate}}</span>{% endverbatimblocktrans %}
+    </p>
+    <p>
+      <i class="picto-rounded-check green"></i> {% verbatimblocktrans %}Accepted payment methods: <span class="grey">{{invoicingSettings.acceptedPaymentTypesFormatted}}</span>{% endverbatimblocktrans %}
+    </p>
+    <p>
+      {{#if invoicingSettings.lateFeeRate}}
+        <i class="picto-flag green"></i> {% verbatimblocktrans %}Late fee rate: <span class="grey">{{invoicingSettings.lateFeeRate}}%</span>{% endverbatimblocktrans %}
+      {{else}}
+        <i class="picto-flag green"></i> {% blocktrans %}Late fee: <span class="grey">at the legal rate</span>{% endblocktrans %}
+      {{/if}}
+    </p>
+  </div>
+{% endtplhandlebars %}

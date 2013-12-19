@@ -1,0 +1,15 @@
+{% load i18n templatetag_handlebars i18n_handlebars %}
+
+{% tplhandlebars "invoiceBase/show/_creditnotes" %}
+  <div class="header clearfix">
+    <div class="pull-left">
+      <h4>{% trans "Credit notes" %}</h4>
+    </div>
+    <div class="pull-right"></div>
+  </div>
+  <div>
+    {{#linkTo "creditNote.show" controller.session.tenant relatedCreditNote}}
+      {% trans "See related credit note" %}
+    {{/linkTo}}
+  </div>
+{% endtplhandlebars %}

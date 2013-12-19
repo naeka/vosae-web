@@ -1,0 +1,17 @@
+{% load i18n templatetag_handlebars i18n_handlebars %}
+
+{% tplhandlebars "quotation/show/_validity" %}
+  <div class="validity">
+    <label class="{{unbound relatedColor}}">
+      <i class="picto-clock"></i>
+      {% trans "Quotation valid until" %}:
+    </label>
+    <span>
+      {{#if currentRevision.displayQuotationValidity}}
+        {{unbound currentRevision.displayQuotationValidity}}
+      {{else}}
+        {% trans "Undefined" %}
+      {{/if}}
+    </span>
+  </div>
+{% endtplhandlebars %}

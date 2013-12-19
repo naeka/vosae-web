@@ -1,0 +1,124 @@
+{% load i18n templatetag_handlebars i18n_handlebars %}
+
+{% tplhandlebars "invoiceBase/show/_actions" %}
+  <div class="btn-group">
+    <button class="btn grey" {{action 'downloadPdf' controller.session.tenant.reportSettings.defaultLanguage.code target="controller"}}>PDF{{#if isGeneratingPdfState}} - {% trans "Generating" %}…{{/if}}</button>
+    <button class="btn dropdown-toggle grey" data-toggle="dropdown">
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li><a {{action 'downloadPdf' controller.session.tenant.reportSettings.defaultLanguage.code target="controller"}}>{{controller.session.tenant.reportSettings.defaultLanguage.name}} ({% trans "default" context "something by default" %})</a></li>
+      <li class="divider"></li>
+      {{#each controller.session.tenant.reportSettings.otherLanguages}}
+        <li><a {{action 'downloadPdf' code target="controller"}}>{{ name }}</a></li>
+      {{/each}}
+    </ul>
+  </div>
+    
+  {# InvoiceBase is Invoice #}
+  {{#if isInvoice}}
+    {{#if isInvoicable}}
+      {{#if isUpdatingState}}
+        <div class="btn-group">
+          <a class="btn grey">
+            {% trans "Processing" %}…
+          </a>
+        </div>
+      {{else}}
+        <div class="btn-group">
+          <a class="btn green" {{action 'markAsState' 'REGISTERED' target="controller"}}>
+            {% trans "Charge" %}
+          </a>
+        </div>
+      {{/if}}
+    {{/if}}
+    {{#if isCancelable}}
+      <div class="btn-group">
+        <a class="btn grey" {{action 'invoiceCancel' target="controller"}}>
+          {% trans "Cancel invoice" %}
+        </a>
+      </div>
+    {{/if}}
+    {{#if isModifiable}}
+      <div class="btn-group">
+        {{#linkTo "invoice.edit" controller.session.tenant content class="btn green"}}
+          {% trans "Edit" %}
+        {{/linkTo}}
+      </div>
+    {{/if}}
+    {% comment %}
+    {{#if isDeletable}}
+      <div class="btn-group">
+        <a class="btn grey" {{action 'delete' content}}>
+          {% trans "Delete" %}
+        </a>
+      </div>
+    {{/if}}
+    {% endcomment %}
+  {{/if}}
+
+  {# InvoiceBase is Quotation or PurchaseOrder #}
+  {{#ifCond isQuotation 'or' isPurchaseOrder}}
+    {{#unless isInvoiced}}
+      <div class="btn-group">
+        <a class="btn grey">
+          {{displayState}}
+        </a>
+        <a class="btn grey split dropdown-toggle" data-toggle="dropdown">
+          <i class="picto-arrow-bottom"></i>
+        </a>
+        <ul class="dropdown-menu">
+          {{#each availableStates}}
+            <li>
+              <a {{action 'markAsState' value target="controller"}}>
+                {{markAsLabel}}
+              </a>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    
+      {{#if isInvoiceable}}
+        <div class="btn-group">
+          <a class="btn orange" {{action 'makeInvoice' target="controller"}}>
+            {% trans "Make invoice" %}
+          </a>
+        </div>
+      {{/if}}
+
+      {{#if isModifiable}}
+        {{#if isQuotation}}
+          <div class="btn-group">
+            {{#linkTo "quotation.edit" controller.session.tenant content class="btn orange"}}
+              {% trans "Edit" %}
+            {{/linkTo}}
+          </div>
+        {{else}}
+          {{#if isPurchaseOrder}}
+            <div class="btn-group">
+              {{#linkTo "purchaseOrder.edit" controller.session.tenant content class="btn orange"}}
+                {% trans "Edit" %}
+              {{/linkTo}}
+            </div>
+          {{/if}}
+        {{/if}}
+      {{/if}}
+
+      {% comment %}
+      {{#if isDeletable}}
+        <div class="btn-group">
+          <a href="#" class="btn grey" {{action 'delete' content}}>
+            {% trans "Delete" %}
+          </a>
+        </div>
+      {{/if}}
+      {% endcomment %}
+    {{else}}
+      <div class="btn-group">
+        <a class="btn orange disabled">
+          {{displayState}}
+        </a>
+      </div>
+    {{/unless}}
+  {{/ifCond}}
+{% endtplhandlebars %}

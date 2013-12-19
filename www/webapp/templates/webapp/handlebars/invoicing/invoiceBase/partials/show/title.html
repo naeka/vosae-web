@@ -1,0 +1,29 @@
+{% load i18n templatetag_handlebars i18n_handlebars %}
+
+{% tplhandlebars "invoiceBase/show/_title" %}
+  <h4 class="invoice-base-title">
+    {{#ifCond isQuotation 'or' isPurchaseOrder}}
+      <span class="invoice-base-type">
+        {{#if isQuotation}}{% trans "Quotation" %}{{else}}{% trans "Purchase order" %}{{/if}}</span>
+      {{#if ref}}
+        <span class="invoice-base-ref">{{ref}}</span>
+      {{else}}
+        <span class="invoice-base-noref">{% trans "Reference will be generated on save" %}</span>
+      {{/if}}
+    {{else}}
+      {{#if isInvoice}}
+        <span class="invoice-base-type">{% trans "Invoice" %}</span>
+        {{#if hasTemporaryReference}}
+          <span class="invoice-base-noref">{% trans "Reference will be generated when registered" %}</span>
+        {{else}}
+          <span class="invoice-base-ref">{{ref}}</span>
+        {{/if}}
+      {{else}}
+        {{#if isCreditNote}}
+          <span class="invoice-base-type">{% trans "Credit Note" %}</span>
+          <span class="invoice-base-ref">{{ref}}</span>
+        {{/if}}
+      {{/if}}
+    {{/ifCond}}
+  </h4>
+{% endtplhandlebars %}

@@ -1,0 +1,11 @@
+{% load i18n templatetag_handlebars i18n_handlebars %}
+
+{% tplhandlebars "invoiceBase/edit/_actions" %}
+  {{#if isDeletable}}
+    <div class="btn-group">
+      <a class="btn grey" {{action 'delete' content}}>
+        {% trans "Delete" %}
+      </a>
+    </div>
+  {{/if}}
+{% endtplhandlebars %}

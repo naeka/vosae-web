@@ -10,7 +10,7 @@
         <tbody>
           <tr>
             <td class="label">
-              <label>{% trans "Language" %}</label>
+              <label>{% trans "Default language" %}</label>
             </td>
             <td>
               {{view Vosae.Components.Select
@@ -47,14 +47,26 @@
                 containerCssClass="green" }}
             </td>
           </tr>
-          {% comment %}
+          <tr>
+            <td class="label">
+              <label>{% trans "Font color" %}</label>
+            </td>
+            <td>
+              {{view Vosae.Components.ColorPicker
+                valueBinding="fontColor"
+                classNames="edit-settings" }}
+            </td>
+          </tr>
           <tr>
             <td class="label">
               <label>{% trans "Base color" %}</label>
             </td>
-            <td></td>
+            <td>
+              {{view Vosae.Components.ColorPicker
+                valueBinding="baseColor"
+                classNames="edit-settings" }}
+            </td>
           </tr>
-          {% endcomment %}
           <tr>
             <td class="label">
               <label>{% trans "Force black and white" %}</label>
@@ -62,6 +74,19 @@
             <td>
               {{view Vosae.FlipSwitchButton
                 checkedBinding="forceBw" }}
+            </td>
+          </tr>
+          <tr>
+            <td class="label">
+              <label>{% trans "Paper size" %}</label>
+            </td>
+            <td>
+              {{view Vosae.Components.Select
+                contentBinding="Vosae.reportPaperSizes"
+                valueBinding="paperSize"
+                optionValuePath="content.value"
+                optionLabelPath="content.name"
+                containerCssClass="green" }}
             </td>
           </tr>
         </tbody>

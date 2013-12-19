@@ -1,0 +1,12 @@
+{% load i18n templatetag_handlebars i18n_handlebars %}
+
+{% tplhandlebars "invoiceBase/show/_currency" %}
+  <div class="header clearfix">
+    <div class="pull-left">
+      {{partial "invoiceBase/show/title"}}
+    </div>
+    <div class="pull-right currency {{unbound relatedColor}}">
+      {{unbound currentRevision.currency.displaySignWithSymbol}}
+    </div>
+  </div>
+{% endtplhandlebars %}

@@ -1,0 +1,37 @@
+{% load i18n templatetag_handlebars i18n_handlebars %}
+
+{% tplhandlebars "invoiceBase/show/_date" %}
+  <div class="date">
+    <label class="{{unbound relatedColor}}">
+      <i class="picto-agenda"></i>
+      {{#if isQuotation}}
+        {% trans "Quotation date" %}:
+      {{else}}
+        {{#if isPurchaseOrder}}
+          {% trans "Purchase order" %}:
+        {{else}}
+          {{#if isInvoice}}
+            {% trans "Invoicing date" %}:
+          {{else}}
+            {{#if isCreditNote}}
+              {% trans "Emission date" %}:
+           {{/if}}
+          {{/if}}
+        {{/if}}
+      {{/if}}
+    </label>
+    <span>
+      {{#ifCond isQuotation 'or' isPurchaseOrder}}
+        {{unbound currentRevision.displayQuotationDate}}
+      {{else}}
+        {{#if isInvoice}}
+          {{unbound currentRevision.displayInvoicingDate}}
+        {{else}}
+          {{#if isCreditNote}}
+            {{unbound currentRevision.displayCreditNoteEmissionDate}}          
+          {{/if}}
+        {{/if}}
+      {{/ifCond}}
+    </span>
+  </div>
+{% endtplhandlebars %}

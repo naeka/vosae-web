@@ -1,0 +1,22 @@
+{% load i18n templatetag_handlebars i18n_handlebars %}
+
+{% tplhandlebars "invoiceBase/show/_downpayments" %}
+  <table class="table-invoice-downpayments {{unbound relatedColor}}">
+    <thead>
+      <tr>
+        <th></th>
+        <th>{% trans "Date" %}</th>
+        <th>{% trans "Type" %}</th>
+        <th>{% trans "Amount" %}</th>
+        <th>{% trans "Note" %}</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+  <p class="table-add-line">
+    <a class="button {{unbound relatedColor}} no-icon rounded small" {{action addDownpayment}}>
+      {% trans "Add down-payment" %}
+    </a>
+  </p>
+{% endtplhandlebars %}

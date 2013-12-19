@@ -1,0 +1,14 @@
+{% load templatetag_handlebars %}
+
+{% tplhandlebars "invoiceBase/edit/_currency" %}
+  <div class="header clearfix">
+    <div class="pull-left">
+      {{partial "invoiceBase/show/title"}}
+    </div>
+    <div class="pull-right"> 
+      {{#if Vosae.currenciesAreLoaded}}
+        {{view view.currencyField}}
+      {{/if}}
+    </div>
+  </div>
+{% endtplhandlebars %}

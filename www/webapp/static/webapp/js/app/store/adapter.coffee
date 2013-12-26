@@ -17,7 +17,9 @@ Vosae.Adapter = DS.RESTAdapter.extend
     Ember.set serializer, "namespace", namespace
 
   rejectionHandler: (reason) ->
-    Ember.Logger.error reason, reason.message
+    if window.Raven?
+      Raven.captureMessage("[#{reason.statusText}] #{reason.responseText}", reason)
+    Ember.Logger.error "[#{reason.statusText}] #{reason.responseText}", reason
     throw reason
 
   # Return Meta controller for the specific model

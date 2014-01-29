@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vosae-web\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-11 11:02+0000\n"
-"PO-Revision-Date: 2014-02-11 12:03+0100\n"
+"POT-Creation-Date: 2014-02-13 14:04+0000\n"
+"PO-Revision-Date: 2014-02-13 15:05+0100\n"
 "Last-Translator: Léo S <leo@naeka.fr>\n"
 "Language-Team: Léo S. <leo@naeka.fr>\n"
 "Language: fr\n"
@@ -39,7 +39,7 @@ msgstr "Mes contacts"
 #: templates/webapp/handlebars/contacts/organizationEdit.html:27
 #: templates/webapp/handlebars/contacts/organizationEdit.html:91
 #: templates/webapp/handlebars/invoicing/invoiceBase/partials/edit/actionsBottom.html:9
-#: templates/webapp/handlebars/invoicing/item/itemEdit.html:103
+#: templates/webapp/handlebars/invoicing/item/itemEdit.html:102
 #: templates/webapp/handlebars/organizer/calendarListsShow.html:20
 msgid "Saving"
 msgstr "Chargement"
@@ -49,7 +49,7 @@ msgstr "Chargement"
 #: templates/webapp/handlebars/contacts/organizationEdit.html:33
 #: templates/webapp/handlebars/contacts/organizationEdit.html:97
 #: templates/webapp/handlebars/invoicing/invoiceBase/partials/edit/actionsBottom.html:15
-#: templates/webapp/handlebars/invoicing/item/itemEdit.html:109
+#: templates/webapp/handlebars/invoicing/item/itemEdit.html:108
 #: templates/webapp/handlebars/organizer/calendarListEdit.html:33
 #: templates/webapp/handlebars/organizer/calendarListsShow.html:24
 #: templates/webapp/handlebars/organizer/vosaeEventEdit.html:34
@@ -65,7 +65,7 @@ msgstr "Annuler"
 #: templates/webapp/handlebars/contacts/organizationEdit.html:103
 #: templates/webapp/handlebars/invoicing/invoiceBase/partials/edit/actionsBottom.html:22
 #: templates/webapp/handlebars/invoicing/invoiceBase/partials/show/payments.html:74
-#: templates/webapp/handlebars/invoicing/item/itemEdit.html:116
+#: templates/webapp/handlebars/invoicing/item/itemEdit.html:115
 #: templates/webapp/handlebars/organizer/calendarListEdit.html:40
 #: templates/webapp/handlebars/organizer/calendarListsShow.html:30
 #: templates/webapp/handlebars/organizer/vosaeEventEdit.html:41
@@ -141,7 +141,7 @@ msgstr "Déposer une image ici"
 #: templates/webapp/handlebars/core/dashboard.html:59
 #: templates/webapp/handlebars/invoicing/dashboard.html:117
 #: templates/webapp/handlebars/invoicing/invoice/invoiceEdit.html:58
-#: templates/webapp/handlebars/invoicing/item/itemEdit.html:136
+#: templates/webapp/handlebars/invoicing/item/itemEdit.html:135
 #: templates/webapp/handlebars/invoicing/purchaseOrder/purchaseOrderEdit.html:52
 #: templates/webapp/handlebars/invoicing/quotation/quotationEdit.html:54
 #: templates/webapp/handlebars/organizer/calendarListEdit.html:205
@@ -155,7 +155,7 @@ msgstr "Infos"
 #: templates/webapp/handlebars/contacts/organizationShow.html:17
 #: templates/webapp/handlebars/invoicing/invoiceBase/partials/edit/actions.html:7
 #: templates/webapp/handlebars/invoicing/invoiceBase/partials/edit/attachments.html:53
-#: templates/webapp/handlebars/invoicing/invoiceBase/partials/edit/lineItems.html:71
+#: templates/webapp/handlebars/invoicing/invoiceBase/partials/edit/lineItems.html:73
 #: templates/webapp/handlebars/invoicing/item/itemShow.html:11
 #: templates/webapp/handlebars/organizer/calendarListEdit.html:142
 #: templates/webapp/handlebars/organizer/calendarListEdit.html:184
@@ -232,7 +232,7 @@ msgid "Corporate name"
 msgstr "Raison sociale"
 
 #: templates/webapp/handlebars/contacts/organizationEdit.html:74
-#: templates/webapp/handlebars/invoicing/invoiceBase/partials/edit/lineItems.html:36
+#: templates/webapp/handlebars/invoicing/invoiceBase/partials/edit/lineItems.html:35
 #: templates/webapp/handlebars/invoicing/invoiceBase/partials/show/payments.html:69
 #: templates/webapp/handlebars/organizer/vosaeEventEdit.html:144
 msgid "Description"
@@ -918,7 +918,7 @@ msgid "No invoices"
 msgstr "Aucune facture"
 
 #: templates/webapp/handlebars/invoicing/invoiceBase/partials/edit/actionsBottom.html:24
-#: templates/webapp/handlebars/invoicing/item/itemEdit.html:118
+#: templates/webapp/handlebars/invoicing/item/itemEdit.html:117
 msgid "Create"
 msgstr "Créer"
 
@@ -1081,34 +1081,37 @@ msgid "Move line"
 msgstr "Déplacer la ligne"
 
 #: templates/webapp/handlebars/invoicing/invoiceBase/partials/edit/lineItems.html:27
-#: templates/webapp/handlebars/invoicing/item/itemEdit.html:50
-#: templates/webapp/handlebars/invoicing/item/itemEdit.html:55
+#: templates/webapp/handlebars/invoicing/item/itemEdit.html:49
+#: templates/webapp/handlebars/invoicing/item/itemEdit.html:54
 msgid "Reference"
 msgstr "Référence"
 
-#: templates/webapp/handlebars/invoicing/invoiceBase/partials/edit/lineItems.html:63
+#: templates/webapp/handlebars/invoicing/invoiceBase/partials/edit/lineItems.html:36
+#: templates/webapp/handlebars/invoicing/invoiceBase/partials/edit/lineItems.html:60
+#: templates/webapp/handlebars/invoicing/invoiceBase/partials/show/lineItems.html:21
+#: templates/webapp/handlebars/invoicing/invoiceBase/partials/show/lineItems.html:28
+msgctxt "line item"
+msgid "Optional"
+msgstr "En option"
+
+#: templates/webapp/handlebars/invoicing/invoiceBase/partials/edit/lineItems.html:64
 msgid "More actions"
 msgstr "Actions supplémentaires"
 
-#: templates/webapp/handlebars/invoicing/invoiceBase/partials/edit/lineItems.html:67
-msgid "Set as optional"
-msgstr "Définir comme optionnel"
-
-#: templates/webapp/handlebars/invoicing/invoiceBase/partials/edit/lineItems.html:68
+#: templates/webapp/handlebars/invoicing/invoiceBase/partials/edit/lineItems.html:70
 msgid "Insert one above"
 msgstr "Insérer au dessus"
 
-#: templates/webapp/handlebars/invoicing/invoiceBase/partials/edit/lineItems.html:69
+#: templates/webapp/handlebars/invoicing/invoiceBase/partials/edit/lineItems.html:71
 msgid "Insert one below"
 msgstr "Insérer en dessous"
 
-#: templates/webapp/handlebars/invoicing/invoiceBase/partials/edit/lineItems.html:79
-#: templates/webapp/handlebars/invoicing/invoiceBase/partials/show/lineItems.html:28
-#: templates/webapp/handlebars/invoicing/item/partials/tableOfItems.html:27
+#: templates/webapp/handlebars/invoicing/invoiceBase/partials/edit/lineItems.html:81
+#: templates/webapp/handlebars/invoicing/invoiceBase/partials/show/lineItems.html:34
 msgid "No items"
 msgstr "Aucun article"
 
-#: templates/webapp/handlebars/invoicing/invoiceBase/partials/edit/lineItems.html:87
+#: templates/webapp/handlebars/invoicing/invoiceBase/partials/edit/lineItems.html:89
 msgid "Add a line"
 msgstr "Ajoutez une ligne"
 
@@ -1304,27 +1307,27 @@ msgstr "Non défini"
 msgid "Product name"
 msgstr "Désignation"
 
-#: templates/webapp/handlebars/invoicing/item/itemEdit.html:45
+#: templates/webapp/handlebars/invoicing/item/itemEdit.html:44
 msgid "- Product name, description"
 msgstr "- Désignation, description"
 
-#: templates/webapp/handlebars/invoicing/item/itemEdit.html:46
+#: templates/webapp/handlebars/invoicing/item/itemEdit.html:45
 msgid "You are allowed to write on several lines"
 msgstr "Vous êtes autorisé à écrire sur plusieurs lignes"
 
-#: templates/webapp/handlebars/invoicing/item/itemEdit.html:56
+#: templates/webapp/handlebars/invoicing/item/itemEdit.html:55
 msgid "Alphanumeric characters and dashes/underscores only"
 msgstr "Caractères alphanumériques et tirets uniquement"
 
-#: templates/webapp/handlebars/invoicing/item/itemEdit.html:61
+#: templates/webapp/handlebars/invoicing/item/itemEdit.html:60
 msgid "Price"
 msgstr "Prix"
 
-#: templates/webapp/handlebars/invoicing/item/itemEdit.html:72
+#: templates/webapp/handlebars/invoicing/item/itemEdit.html:71
 msgid "Tax"
 msgstr "Taxe"
 
-#: templates/webapp/handlebars/invoicing/item/itemEdit.html:85
+#: templates/webapp/handlebars/invoicing/item/itemEdit.html:84
 msgid "Currency"
 msgstr "Devise"
 
@@ -1967,23 +1970,21 @@ msgstr "Étape 3 - Informations d'enregistrement"
 msgid "Finish"
 msgstr "Terminer"
 
-#~ msgctxt "table-headers"
-#~ msgid "Unit price (excl. tax)"
-#~ msgstr "PU HT"
+#~ msgid "No overdue invoices"
+#~ msgstr "Aucune facture en retard"
+
+#~ msgid "No pending invoices"
+#~ msgstr "Aucune facture en attente"
+
+#~ msgid "No paid invoices"
+#~ msgstr "Aucune facture payée"
 
 #~ msgctxt "table-headers"
 #~ msgid "Total (incl. tax.)"
 #~ msgstr "Total TTC"
 
-#~ msgctxt "file name"
-#~ msgid "Name"
-#~ msgstr "Nom"
-
-#~ msgid "No attachments related to this quotation"
-#~ msgstr "Aucune pièce jointe liée à ce devis"
-
-#~ msgid "No attachments related to this invoice"
-#~ msgstr "Aucune pièce jointe liée à cette facture"
+#~ msgid "Set as optional"
+#~ msgstr "Définir comme optionnel"
 
 #~ msgctxt "table-headers"
 #~ msgid "Name"
@@ -1994,29 +1995,72 @@ msgstr "Terminer"
 #~ msgstr "Taille"
 
 #~ msgctxt "table-headers"
+#~ msgid "Created"
+#~ msgstr "Créé le"
+
+#~ msgctxt "table-headers"
+#~ msgid "Last modified"
+#~ msgstr "Dernière modification"
+
+#~ msgctxt "table-headers"
 #~ msgid "Author"
 #~ msgstr "Auteur"
 
-#~ msgid "No contact in this organization"
-#~ msgstr "Aucun contact dans cette organisation"
+#~ msgid "No attachments related to this quotation"
+#~ msgstr "Aucune pièce jointe liée à ce devis"
 
-#~ msgid "Search"
-#~ msgstr "Rechercher"
+#~ msgid "No attachments related to this invoice"
+#~ msgstr "Aucune pièce jointe liée à cette facture"
 
-#~ msgid "My account"
-#~ msgstr "Mon compte"
+#~ msgid ""
+#~ "Accepted payment methods: <span class=\"grey\">{{invoicingSettings."
+#~ "acceptedPaymentTypesFormatted}}</span>"
+#~ msgstr ""
+#~ "Moyens de paiement acceptés : <span class=\"grey\">{{invoicingSettings."
+#~ "acceptedPaymentTypesFormatted}}</span>"
 
-#~ msgid "No overdue invoices"
-#~ msgstr "Aucune facture en retard"
+#~ msgid ""
+#~ "Late fee rate: <span class=\"grey\">{{invoicingSettings.lateFeeRate}}%%</"
+#~ "span>"
+#~ msgstr ""
+#~ "Pénalités de retard : <span class=\"grey\">{{invoicingSettings."
+#~ "acceptedPaymentTypesFormatted}}</span>"
 
-#~ msgid "No quotations to bill"
-#~ msgstr "Aucun devis à facturer"
+#~ msgid "Late fee: <span class=\"grey\">at the legal rate</span>"
+#~ msgstr ""
+#~ "Pénalités de retard : <span class=\"grey\">au taux légal en vigueur</span>"
 
-#~ msgid "No pending invoices"
-#~ msgstr "Aucune facture en attente"
+#~ msgctxt "table-headers"
+#~ msgid "Unit price (excl. tax)"
+#~ msgstr "PU HT"
 
-#~ msgid "No paid invoices"
-#~ msgstr "Aucune facture payée"
+#~ msgctxt "table-headers"
+#~ msgid "Total (excl. tax)"
+#~ msgstr "Total HT"
+
+#~ msgid "No items in this quotation"
+#~ msgstr "Aucun article dans ce devis"
+
+#~ msgid "No items in this invoice"
+#~ msgstr "Aucun article dans cette facture"
+
+#~ msgctxt "table-headers"
+#~ msgid "Link"
+#~ msgstr "Lien"
+
+#~ msgid ""
+#~ "Payment conditions: <span class=\"grey\">{{currentRevision."
+#~ "customPaymentConditions}}</span>"
+#~ msgstr ""
+#~ "Conditions de paiement : <span class=\"grey\">{{currentRevision."
+#~ "customPaymentConditions}}</span>"
+
+#~ msgid ""
+#~ "Payment due date on: <span class=\"grey\">{{currentRevision."
+#~ "displayDueDate}}</span>"
+#~ msgstr ""
+#~ "Échéance de paiement le : <span class=\"grey\">{{currentRevision."
+#~ "displayDueDate}}</span>"
 
 #~ msgid "Filter by"
 #~ msgstr "Filtrer par"
@@ -2039,19 +2083,21 @@ msgstr "Terminer"
 #~ msgid "No approved quotations"
 #~ msgstr "Aucun devis approuvé"
 
-#~ msgid "No items in this quotation"
-#~ msgstr "Aucun article dans ce devis"
+#~ msgctxt "file name"
+#~ msgid "Name"
+#~ msgstr "Nom"
 
-#~ msgid "No items in this invoice"
-#~ msgstr "Aucun article dans cette facture"
+#~ msgid "No contact in this organization"
+#~ msgstr "Aucun contact dans cette organisation"
 
-#~ msgctxt "table-headers"
-#~ msgid "Created"
-#~ msgstr "Créer le"
+#~ msgid "Search"
+#~ msgstr "Rechercher"
 
-#~ msgctxt "table-headers"
-#~ msgid "Last modified"
-#~ msgstr "Dernière modification"
+#~ msgid "My account"
+#~ msgstr "Mon compte"
+
+#~ msgid "No quotations to bill"
+#~ msgstr "Aucun devis à facturer"
 
 #~ msgid "Language"
 #~ msgstr "Langue"

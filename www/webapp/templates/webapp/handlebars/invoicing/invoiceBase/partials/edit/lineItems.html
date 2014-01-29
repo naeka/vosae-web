@@ -16,7 +16,7 @@
     </thead>
     <tbody>
       {{#each currentRevision.lineItems}}
-        <tr guid="{{unbound guid}}">
+        <tr guid="{{unbound guid}}" {{bind-attr class="optional"}}>
           <td class="handle" title="{% trans 'Move line' %}">
             <span class="glyphicon glyphicon-align-justify"></span>
           </td>
@@ -27,13 +27,13 @@
               placeholder="{% trans 'Reference' %}…" }}
           </td>
           <td class="description">
-            {{view view.lineItemTextArea
+            {{view Vosae.Components.SimpleEditor
               currentItemBinding="this"
               valueBinding="description"
-              maxlength="512"
-              resize="none"
+              maxLength=1024
               classNames="form-control form-control-unstyled description"
               placeholder="{% trans 'Description' %}…" }}
+            {{#if optional}}<p class="optional-label">{% trans "Optional" context "line item" %}</p>{{/if}}
           </td>
           <td class="quantity">
             {{view view.lineItemQuantityField
@@ -57,6 +57,7 @@
           </td>
           <td class="total">
             {{this.displayTotal}}
+            {{#if optional}}<p class="optional-label">{% trans "Optional" context "line item" %}</p>{{/if}}
           </td>
           <td class="actions">
             <div class="btn-group pull-right">
@@ -75,7 +76,7 @@
         </tr>
       {{else}}
         <tr>
-          <td colspan="7" class="no-data">
+          <td colspan="8" class="no-data">
             {% trans "No items" %}
           </td>
         </tr>

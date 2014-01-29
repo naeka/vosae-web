@@ -36,13 +36,12 @@
           <label>{% trans "Product name" %}</label>
         </td>
         <td>
-          {{view Vosae.TextAreaAutoSize
+          {{view Vosae.Components.SimpleEditor
             valueBinding="description"
-            maxlength="512"
-            resize="none"
+            maxLength=1024
             classNames="form-control form-control-unstyled"
             placeholder="{% trans '- Product name, description' %}…" }}
-            <p class="info">{% trans "You are allowed to write on several lines" %}</p>
+          <p class="info">{% trans "You are allowed to write on several lines" %}</p>
         </td>
       </tr>
       <tr class="reference">

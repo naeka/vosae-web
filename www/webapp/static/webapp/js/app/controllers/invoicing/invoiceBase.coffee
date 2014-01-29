@@ -37,7 +37,10 @@ Vosae.InvoiceBaseController = Em.ObjectController.extend
             @get('attachments').removeObject attachment
             # Why the hell do we have to do this ?
             @get('content.stateManager').goToState('rootState.loaded.updated')
-            # @get('content').set 'currentState', DS.RootState.loaded.updated 
+            # @get('content').set 'currentState', DS.RootState.loaded.updated
+
+    downloadAttachment: (attachment) ->
+      $.fileDownload(APP_ENDPOINT + attachment.get('downloadLink'))
 
     markAsState: (state) ->
       @get('content').markAsState state

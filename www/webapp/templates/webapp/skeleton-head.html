@@ -37,4 +37,9 @@
     var PUSHER_USER_CHANNEL = '';
     var PUSHER_CLUSTER = '{{ PUSHER_CLUSTER }}';
     var PUSHER_AUTH_ENDPOINT = '{{ APP_ENDPOINT }}/rt/auth/';
+
+    Ember.onerror = function(error) {
+        if(window.Raven)
+          Raven.captureMessage("Ember error", error);
+    };
 </script>

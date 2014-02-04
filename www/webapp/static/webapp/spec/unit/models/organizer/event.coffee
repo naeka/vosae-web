@@ -381,7 +381,7 @@ describe 'Vosae.VosaeEvent', ->
     vosaeEvent.set 'end.date', (new Date(2013, 7, 10))
 
     # Test
-    expect(vosaeEvent.get('displayDate')).toEqual 'August Friday 9 - Saturday 10'
+    expect(vosaeEvent.get('displayDate')).toEqual 'August Friday 9 - Saturday 10, 2013'
 
     # # Setup
     # vosaeEvent.set 'start.date', null

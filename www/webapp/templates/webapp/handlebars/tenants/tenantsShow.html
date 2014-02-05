@@ -7,7 +7,7 @@
   <section>
     <ul class="list-unstyled">
       {{#each tenant in content}}
-        <li {{action "setAsCurrentTenant" tenant}} class="tenant-card">
+        <li {{action "setAsCurrentTenant" tenant}} class="tenant-card" title="{{unbound tenant.name}}">
           <div class="inner">
             <div class="avatar default-organization rounded"></div>
             <div class="infos">{{tenant.name}}</div>

@@ -62,19 +62,14 @@
   margin-bottom: 10px
   margin-left: 10px
 
-  & > .inner 
+  .inner 
     background: $lightgrey
-    padding: 8px
+    padding: 8px 4px
     width: 120px
     height: 120px
     position: relative
     +border-radius(4px)
     +box-sizing(border-box)
-
-  &:hover
-    cursor: pointer
-    & > .inner
-      background: darken($lightgrey, 5)
 
   .avatar
     background: $darkgrey
@@ -84,3 +79,13 @@
   .infos
     margin-top: 70px
     text-align: center
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+
+  &:hover
+    cursor: pointer
+    .inner
+      background: darken($lightgrey, 10)
+    .avatar
+      background: darken($darkgrey, 10)

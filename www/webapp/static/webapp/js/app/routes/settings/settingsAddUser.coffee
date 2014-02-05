@@ -21,11 +21,6 @@ Vosae.SettingsAddUserRoute = Ember.Route.extend
       outlet: 'content'
       controller: @controller
 
-    @render 'settings.editUser.actions',
-      into: 'settings'
-      outlet: 'actions'
-      controller: @controller
-
   deactivate: ->
     user = @controller.get 'content'
     if user.get 'isDirty'

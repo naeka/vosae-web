@@ -9,11 +9,6 @@ Vosae.SettingsNumberingRoute = Ember.Route.extend
     @render 'settings.numbering',
       into: 'settings'
       outlet: 'content'
-
-    @render 'settings.numbering.actions',
-      into: 'settings'
-      outlet: 'actions'
-      controller: @controller
   
   deactivate: ->
     settingsCurrencies = @controller.get 'content'

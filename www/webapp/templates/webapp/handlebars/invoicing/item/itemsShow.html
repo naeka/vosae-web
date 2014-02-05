@@ -3,6 +3,7 @@
 {% tplhandlebars "items/show" %}
   <section class="sub-actions clearfix">
     <div class="btn-toolbar pull-left">
+      {% comment %}
       <div class="btn-group">
         {{view Vosae.ArraySortPropertySelect 
           contentBinding = "Vosae.itemsSortPropertiesChoices" 
@@ -15,10 +16,11 @@
           sortAscendingBinding = "controller.sortAscending"
           placeholder = "{% trans 'Order by' %}" }}
       </div>
+      {% endcomment %}
     </div>
     <div class="btn-toolbar pull-right">
       <div class="btn-group">
-        {{#linkTo "items.add" controller.session.tenant class="btn orange"}}
+        {{#linkTo "items.add" controller.session.tenant class="btn btn-primary"}}
           <i class="picto-add"></i>
           {% trans "Item" %}
         {{/linkTo}}
@@ -37,15 +39,12 @@
       {{partial "invoicing/partials/tableOfItems"}}
     {{/with}}
 
-    {{#unless content.length}}
-      <p class="table-no-data orange">
-        {% trans "No items" %}
-      </p>
-    {{/unless}}
     {# Pagination #}
     {{#if meta.next}}
-      <p class="table-load-more" {{action getNextPagination}}>
-        {% trans "Load more items" %}
+      <p class="text-center">
+        <a class="btn btn-default btn-rounded btn-sm" {{action getNextPagination}}>
+          {% trans "Load more items" %}
+        </a>
       </p>
     {{/if}}
   </section>

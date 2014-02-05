@@ -6,44 +6,36 @@
       <h4>{% trans "Attachments" %}</h4>
     </div>
   </div>
-  <table class="table table-attachments edit">
-    <thead class="{{unbound relatedColor}}">
+  <table class="table table-attachments table-striped table-{{unbound relatedColor}}">
+    <thead>
       <tr>
         <th class="name">{% trans "Name" context "table-headers" %}</th>
-        <th class="size">{% trans "Size" context "table-headers" %}</th>
-        <th class="created-at">{% trans "Created" context "table-headers" %}</th>
-        <th class="modified-at">{% trans "Last modified" context "table-headers" %}</th>
-        <th class="issuer">{% trans "Author" context "table-headers" %}</th>
         <th class="link">{% trans "Link" context "table-headers" %}</th>
+        <th class="size">{% trans "Size" context "table-headers" %}</th>
+        <th class="created-at">{% trans "Added on" context "table-headers" %}</th>
+        <th class="issuer">{% trans "Author" context "table-headers" %}</th>
       </tr>
     </thead>
     <tbody>
-      {{#if attachments}}
-        {{#each attachments}}
-          <tr>
-            <td class="name">{{name}}</td>
-            <td class="download">
-              <a {{bindAttr href="downloadLink"}} class="orange" title="{% trans 'Download' %}" target="_blank">
-                <i class="picto-download"></i>
-              </a>
-            </td>
-            <td class="size">{{humanFileSize size}}</td>
-            <td class="created-at">{{displayCreatedAt}}</td>
-            <td class="modified-at">{{displayModifiedAt}}</td>
-            <td class="issuer">{{issuer.getFullName}}</td>
-          </tr>
-        {{/each}}
+      {{#each attachments}}
+        <tr>
+          <td class="name">{{name}}</td>
+          <td class="download">
+            <a {{bindAttr href="downloadLink"}} title="{% trans 'Download' %}" target="_blank">
+              <i class="picto-download"></i>
+            </a>
+          </td>
+          <td class="size">{{humanFileSize size}}</td>
+          <td class="created-at">{{displayCreatedAt}}</td>
+          <td class="issuer">{{issuer.getFullName}}</td>
+        </tr>
       {{else}}
         <tr>
-          <td colspan="6" class="no-data">
-            {{#if isQuotation}}
-              {% trans "No attachments related to this quotation" %}
-            {{else}}
-              {% trans "No attachments related to this invoice" %}
-            {{/if}}
+          <td colspan="5" class="no-data text-center">
+            {% trans "No attachments" %}
           </td>
         </tr>
-      {{/if}}
+      {{/each}}
     </tbody>
   </table>
 {% endtplhandlebars %}

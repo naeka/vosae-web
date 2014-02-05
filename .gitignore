@@ -43,3 +43,5 @@ node_modules/
 vosae-web.sublime-workspace
 
 /www/webapp/static/webapp/spec/specs.js
+
+/www/webapp/static/webapp/css/webapp.css

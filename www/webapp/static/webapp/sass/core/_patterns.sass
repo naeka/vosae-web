@@ -1,102 +1,3 @@
-// Paterns for tables
-.table
-  width: 100%
-  margin: 0
-
-  & > tbody > tr
-    &:nth-of-type(even)
-      background: #F7F7F7
-
-  th, td
-    vertical-align: middle
-    border: 0
-    padding: 10px 5px
-
-    &:first-child
-      padding-left: 15px
-    
-    &:last-child
-      padding-right: 15px
-
-  td
-    font-size: 15px
-    font-weight: bold
-
-    &.no-data
-      text-align: center
-      background: $white
-
-  a
-    color: inherit
-
-  thead
-    &.green th
-      background: $green
-      color: $white
-    
-    &.orange th
-      background: $orange
-      color: $white
-
-
-.page-settings
-  width: 175px
-  
-  ul.options, ul.export, ul.info
-    background: $grey
-    padding: 0 8px
-    display: inline-block
-    margin-bottom: 3px
-    min-width: 85px
-
-    +box-sizing(border-box)
-    +border-radius-separate(0px, 5px, 5px, 0px)
-
-    li
-      background: $grey
-      margin-bottom: 3px
-
-      &:first-child
-        font-weight: bold
-        border-bottom: 1px solid #c6c6c6
-        padding-top: 4px
-        padding-bottom: 4px
-        margin-bottom: 15px
-        font-size: 14px
-        line-height: 20px
-
-        .picto-settings
-          padding-right: 3px
-
-      [class^="picto-"], 
-      [class*=" picto-"]
-        padding-right: 8px
-        margin-top: -2px
-
-      .picto-users::before
-        font-size: 100%
-
-    .onoffswitch-switch
-      border: 1px solid #BBB
-
-    .onoffswitch-checkbox
-      &:checked + .onoffswitch-label .onoffswitch-switch
-        right: -1px
-
-  ul.export li:first-child
-    border-bottom: 0
-    margin-bottom: 0
-
-    .picto-export
-      padding-right: 3px
-
-  ul.info li:first-child
-    border-bottom: 0
-    margin-bottom: 0
-
-    .picto-help
-      padding-right: 3px
-
 //
 // Keyframes for CSS3 animations
 //
@@ -130,7 +31,7 @@
 
   &:before
     content: "U"
-    font-family: fontPictos
+    font-family: $font-pictos
     font-size: 2em
     font-weight: 400
     height: 52px

@@ -5,7 +5,7 @@
     <section class="actions clearfix">
       <div class="btn-toolbar pull-left">
         <div class="btn-group">
-          {{#linkTo "contacts.show" controller.session.tenant class="btn grey"}}
+          {{#linkTo "contacts.show" controller.session.tenant class="btn btn-default"}}
             <i class="picto-arrow-left"></i>
             {% trans "My contacts" %}
           {{/linkTo}}
@@ -13,14 +13,14 @@
       </div>
       <div class="btn-toolbar pull-right">
         <div class="btn-group">
-          {{#linkTo "contact.edit" controller.session.tenant content class="btn rounded grey"}}
-            {% trans "Edit" %}
-          {{/linkTo}}
-        </div>
-        <div class="btn-group">
-          <a class="btn rounded grey" {{action 'delete' content}}>
+          <a class="btn btn-rounded btn-default" {{action 'delete' content}}>
             {% trans "Delete" %}
           </a>
+        </div>
+        <div class="btn-group">
+          {{#linkTo "contact.edit" controller.session.tenant content class="btn btn-rounded btn-default"}}
+            {% trans "Edit" %}
+          {{/linkTo}}
         </div>
       </div>
     </section>
@@ -60,13 +60,13 @@
       <div class="actions pull-right">
         <div class="btn-toolbar">
           <div class="btn-group">
-            {{#linkTo "quotations.add" controller.session.tenant class="btn orange"}}
+            {{#linkTo "quotations.add" controller.session.tenant class="btn btn-primary"}}
               <i class="picto-add"></i>
               {% trans "Quotation" %}
             {{/linkTo}}
           </div>
           <div class="btn-group">
-            {{#linkTo "invoices.add" controller.session.tenant class="btn green"}}
+            {{#linkTo "invoices.add" controller.session.tenant class="btn btn-success"}}
               <i class="picto-add"></i>
               {% trans "Invoice" %}
             {{/linkTo}}
@@ -86,7 +86,7 @@
         </h4>
         <div class="btn-toolbar pull-right">
           <div class="btn-group">
-            <a class="btn btn-small orange rounded" {{action "addQuotationToThis" target="view"}}>
+            <a class="btn btn-sm btn-primary btn-rounded" {{action "addQuotationToThis" target="view"}}>
               {% trans "Add" %}
             </a>
           </div>
@@ -95,11 +95,6 @@
       {{#with quotations}}
         {{partial "invoicing/partials/tableOfQuotations"}}
       {{/with}}
-      {{#unless quotations.length}}
-        <p class="table-no-data orange">
-          {% trans "No quotations" %}
-        </p>
-      {{/unless}}
     </section>
     
     <section class="invoices with-head">
@@ -109,7 +104,7 @@
         </h4>
         <div class="btn-toolbar pull-right">
           <div class="btn-group">
-            <a class="btn btn-small green rounded" {{action "addInvoiceToThis" target="view"}}>
+            <a class="btn btn-sm btn-success btn-rounded" {{action "addInvoiceToThis" target="view"}}>
               {% trans "Add" %}
             </a>
           </div>
@@ -118,11 +113,6 @@
       {{#with invoices}}
         {{partial "invoicing/partials/tableOfInvoices"}}
       {{/with}}
-      {{#unless invoices.length}}
-        <p class="table-no-data green">
-          {% trans "No invoices" %}
-        </p>
-      {{/unless}}
     </section>
   {{else}}
     {{partial "core/partials/spinner"}}

@@ -1,52 +1,26 @@
-//  ======================================
-//  = Partials stylesheet for typography =
-//  ======================================
-
-@font-face
-  font-family: $fontPictos
-  src: font-url('pictos-web.eot')
-  src: font-url('pictos-web.woff') format("woff"), font-url('pictos-web.svg#webfontIyfZbseF') format("svg"), font-url('pictos-web.ttf') format("truetype")
-  font-weight: normal !important
-  font-style: normal !important
-
-@font-face
-  font-family: 'bariol'
-  src: font-url('bariol_regular-webfont.eot')
-  src: font-url('bariol_regular-webfont.woff') format("woff"), font-url('bariol_regular-webfont.svg#webfontIyfZbseF') format("svg"), font-url('bariol_regular-webfont.ttf') format("truetype")
-  font-weight: normal
-  font-style: normal
-
-@font-face
-  font-family: 'bariol'
-  src: font-url('bariol_bold-webfont.eot')
-  src: font-url('bariol_bold-webfont.woff') format("woff"), font-url('bariol_bold-webfont.svg#webfontIyfZbseF') format("svg"), font-url('bariol_bold-webfont.ttf') format("truetype")
+// Text colors
+.text-bold
   font-weight: bold
-  font-style: normal
+.text-normal
+  font-weight: normal
 
-
-// Color
-.yellow
-  color: $yellow
-  &:hover
-    color: $yellow
-.green
-  color: $green 
-  &:hover
-    color: $green
-.orange
+.text-orange,
+.text-primary
   color: $orange
   &:hover
     color: $orange
-.white
-  color: $white
+
+.text-green,
+.text-success
+  color: $green
   &:hover
-    color: $white
+    color: $green
 
 // Pictos
 [class^="picto-"], 
 [class*=" picto-"]
   font-style: normal
-  font-family: $fontPictos
+  font-family: $font-pictos
   font-weight: normal !important
   display: inline-block
   vertical-align: middle

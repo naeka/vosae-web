@@ -21,7 +21,7 @@ Vosae.Components.CalendarListColorField = Vosae.Components.Select.extend
     
     color = @get 'value'
     if color
-      @$().parent().find('.select2-container').css 'background', color
+      @$().parent().find('.select2-choice').css 'background', color
 
   change: (ev) ->
-    @$().parent().find('.select2-container').css 'background', ev.val
+    @$().parent().find('.select2-choice').css 'background', ev.val

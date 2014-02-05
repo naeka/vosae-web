@@ -5,19 +5,19 @@
     {{#unless isUploading}}
       {{#if isSaving}}
         <div class="btn-group">
-          <a class="btn rounded {{unbound relatedColor}}">
+          <a class="btn btn-rounded btn-{{unbound relatedColor}}">
             {% trans "Saving" %}…
           </a>
         </div>
       {{else}}
         <div class="btn-group">
-          <a class="btn rounded grey" {{action cancel content}}>
+          <a class="btn btn-rounded btn-default" {{action cancel content}}>
             {% trans "Cancel" %}
           </a>
         </div>
         {{#if isDirty}}
           <div class="btn-group">
-            <a class="btn rounded {{unbound relatedColor}} helptour-create" {{action save content}}>
+            <a class="btn btn-rounded btn-{{unbound relatedColor}} helptour-create" {{action save content}}>
               {{#if id}}
                 {% trans "Save" %}
               {{else}}

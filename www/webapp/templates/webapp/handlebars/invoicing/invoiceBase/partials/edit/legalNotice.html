@@ -9,13 +9,13 @@
   {{view view.dueDateBlockView currentRevisionBinding="currentRevision" }}
   <div>
     <p>
-      <i class="picto-rounded-check green"></i> {% verbatimblocktrans %}Accepted payment methods: <span class="grey">{{invoicingSettings.acceptedPaymentTypesFormatted}}</span>{% endverbatimblocktrans %}
+      <i class="picto-rounded-check text-green"></i> {% verbatimblocktrans %}<strong>Accepted payment methods:</strong> <span class="grey">{{invoicingSettings.acceptedPaymentTypesFormatted}}</span>{% endverbatimblocktrans %}
     </p>
-    <p>      
+    <p>
       {{#if invoicingSettings.lateFeeRate}}
-        <i class="picto-flag green"></i> {% verbatimblocktrans %}Late fee rate: <span class="grey">{{invoicingSettings.lateFeeRate}}%</span>{% endverbatimblocktrans %}
+        <i class="picto-flag text-green"></i> {% verbatimblocktrans %}<strong>Late fee rate:</strong> <span class="grey">{{invoicingSettings.lateFeeRate}}%</span>{% endverbatimblocktrans %}
       {{else}}
-        <i class="picto-flag green"></i> {% blocktrans %}Late fee: <span class="grey">at the legal rate</span>{% endblocktrans %}
+        <i class="picto-flag text-green"></i> {% blocktrans %}<strong>Late fee:</strong> <span class="grey">at the legal rate</span>{% endblocktrans %}
       {{/if}}
     </p>
   </div>

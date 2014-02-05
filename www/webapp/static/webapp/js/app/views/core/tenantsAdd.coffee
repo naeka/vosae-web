@@ -36,7 +36,7 @@ Vosae.TenantsAddView = Vosae.PageTenantView.extend
 
     # Go to form next step
     nextStep: (tenant) ->
-      @resetFormFieldsErrors()
+      tenant.resetErrors()
       currentStep = @getCurrentStep()
       switch currentStep
         when 'stepIdentity'
@@ -74,53 +74,35 @@ Vosae.TenantsAddView = Vosae.PageTenantView.extend
   # Check if form step identity is valid
   stepIdentityIsValid: (tenant) ->
     isValid = true
+    fields = [
+      'name', 
+      'email'
+    ]
 
-    # Name
-    if not tenant.get 'name'
-      isValid = false
-      @setFormFieldAsInvalid 'id_tenant_name'
-    
-    # Email
-    if not tenant.get 'email'
-      isValid = false
-      @setFormFieldAsInvalid 'id_tenant_email'
-    
+    for field in fields
+      if !tenant.get(field)
+        @setFieldAsRequired tenant, field
+        isValid = false
+
     @set 'formIsValid', isValid
     return isValid
 
   # Check if form step coords is valid
   stepCoordsIsValid: (tenant) ->
     isValid = true
+    fields = [
+      'postalAddress.streetAddress',
+      'postalAddress.city',
+      'postalAddress.country',
+      'billingAddress.streetAddress',
+      'billingAddress.city',
+      'billingAddress.country'
+    ]
 
-    # Postal address street address
-    if not tenant.get 'postalAddress.streetAddress'
-      isValid = false
-      @setFormFieldAsInvalid 'id_tenant_p_street_address'
-    
-    # Postal address city
-    if not tenant.get 'postalAddress.city'
-      isValid = false
-      @setFormFieldAsInvalid 'id_tenant_p_city'
-    
-    # Postal address country
-    if not tenant.get 'postalAddress.country'
-      isValid = false
-      @setFormFieldAsInvalid 'id_tenant_p_country'
-    
-    # Billing address street address
-    if not tenant.get 'billingAddress.streetAddress'
-      isValid = false
-      @setFormFieldAsInvalid 'id_tenant_b_street_address'
-    
-    # Billing address city
-    if not tenant.get 'billingAddress.city'
-      isValid = false
-      @setFormFieldAsInvalid 'id_tenant_b_city'
-    
-    # Billing address country
-    if not tenant.get 'billingAddress.country'
-      isValid = false
-      @setFormFieldAsInvalid 'id_tenant_b_country'
+    for field in fields
+      if !tenant.get(field)
+        @setFieldAsRequired tenant, field
+        isValid = false
 
     @set 'formIsValid', isValid
     return isValid
@@ -132,17 +114,17 @@ Vosae.TenantsAddView = Vosae.PageTenantView.extend
     # Supported currencies
     if Ember.isEmpty @get('controller.supportedCurrencies')
       isValid = false
-      @setFormFieldAsInvalid 'id_tenant_supported_currencies'
+      @setFieldAsRequired 'id_tenant_supported_currencies'
     
     # Default currencies
     if Ember.isEmpty @get('controller.defaultCurrency')
       isValid = false
-      @setFormFieldAsInvalid 'id_tenant_default_currency'
+      @setFieldAsRequired 'id_tenant_default_currency'
     
     # Registration info share capital
     if not tenant.get 'registrationInfo.shareCapital'
       isValid = false
-      @setFormFieldAsInvalid 'id_tenant_registration_share_capital'    
+      @setFieldAsRequired 'id_tenant_registration_share_capital'    
     
     # Registration info
     switch tenant.get 'registrationInfo.countryCode'
@@ -150,48 +132,41 @@ Vosae.TenantsAddView = Vosae.PageTenantView.extend
       when 'FR'
         if not tenant.get 'registrationInfo.vatNumber'
           isValid = false
-          @setFormFieldAsInvalid 'id_tenant_registration_vat_number'
+          @setFieldAsRequired 'id_tenant_registration_vat_number'
         if not tenant.get 'registrationInfo.siret'
           isValid = false
-          @setFormFieldAsInvalid 'id_tenant_registration_siret'
+          @setFieldAsRequired 'id_tenant_registration_siret'
         if not tenant.get 'registrationInfo.rcsNumber'
           isValid = false
-          @setFormFieldAsInvalid 'id_tenant_registration_rcs_number'
+          @setFieldAsRequired 'id_tenant_registration_rcs_number'
       # Belgium
       when 'BE'
         if not tenant.get 'registrationInfo.vatNumber'
           isValid = false
-          @setFormFieldAsInvalid 'id_tenant_registration_vat_number'
+          @setFieldAsRequired 'id_tenant_registration_vat_number'
       # Switzerland
       when 'CH'
         if not tenant.get 'registrationInfo.vatNumber'
           isValid = false
-          @setFormFieldAsInvalid 'id_tenant_registration_vat_number'
+          @setFieldAsRequired 'id_tenant_registration_vat_number'
       # Great Britain
       when 'GB'
         if not tenant.get 'registrationInfo.vatNumber'
           isValid = false
-          @setFormFieldAsInvalid 'id_tenant_registration_vat_number'
+          @setFieldAsRequired 'id_tenant_registration_vat_number'
       # Luxembourg
       when 'LU'
         if not tenant.get 'registrationInfo.vatNumber'
           isValid = false
-          @setFormFieldAsInvalid 'id_tenant_registration_vat_number'
+          @setFieldAsRequired 'id_tenant_registration_vat_number'
 
     @set 'formIsValid', isValid
     return isValid
 
   # Set a field as required
-  setFormFieldAsInvalid: (fieldID) ->
+  setFieldAsRequired: (record, field) ->
     error = gettext 'This field is required.'
-    $("##{fieldID}")
-      .closest('.control-group').addClass('error')
-      .find('.help-inline').html(error)
-
-  # Reset form fields state
-  resetFormFieldsErrors: ->
-    @$().find('.control-group').removeClass('error')
-    @$().find('.help-inline').html('')
+    record.pushError(field, error)
 
   # Update registration info form depends on country
   registrationInfoView: Ember.ContainerView.extend
@@ -199,7 +174,7 @@ Vosae.TenantsAddView = Vosae.PageTenantView.extend
 
     registrationCountryType: Em.View.extend
       templateName: "tenants/add/registrationCountryType"
-      select: Vosae.Components.Select.extend
+      select: Bootstrap.Forms.Select.extend
         init: ->
           @_super()
           countryCode = @get 'tenant.registrationInfo.countryCode'

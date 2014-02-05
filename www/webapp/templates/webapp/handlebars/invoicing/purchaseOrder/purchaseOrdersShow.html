@@ -6,7 +6,7 @@
     <div class="btn-toolbar pull-left"></div>
     <div class="btn-toolbar pull-right">
       <div class="btn-group">
-        {{#linkTo "purchaseOrders.add" controller.session.tenant class="btn orange"}}
+        {{#linkTo "purchaseOrders.add" controller.session.tenant class="btn btn-primary"}}
           <i class="picto-add"></i>
           {% trans "Purchase order" %}
         {{/linkTo}}
@@ -26,15 +26,12 @@
       {{partial "invoicing/partials/tableOfPurchaseOrders"}}
     {{/with}}
 
-    {{#unless purchaseOrdersPending.length}}
-      <p class="table-no-data orange">
-        {% trans "No pending purchase orders" %}
-      </p>
-    {{/unless}}
     {# Pagination #}
     {{#if paginationPendingHasNext}}
-      <p class="table-load-more" {{action getNextPurchaseOrdersPending}}>
-        {% trans "Load more purchase orders" %}
+      <p class="text-center">
+        <a class="btn btn-default btn-rounded btn-sm" {{action getNextPurchaseOrdersPending}}>
+          {% trans "Load more purchase orders" %}
+        </a>
       </p>
     {{/if}}
   </section>
@@ -51,15 +48,12 @@
       {{partial "invoicing/partials/tableOfPurchaseOrders"}}
     {{/with}}
 
-    {{#unless purchaseOrdersApproved.length}}
-      <p class="table-no-data orange">
-        {% trans "No approved purchase orders" %}
-      </p>
-    {{/unless}}
     {# Pagination #}
     {{#if paginationApprovedHasNext}}
-      <p class="table-load-more" {{action getNextPurchaseOrdersApproved}}>
-        {% trans "Load more purchase orders" %}
+      <p class="text-center">
+        <a class="btn btn-default btn-rounded btn-sm" {{action getNextPurchaseOrdersApproved}}>
+          {% trans "Load more purchase orders" %}
+        </a>
       </p>
     {{/if}}
   </section>

@@ -3,6 +3,7 @@
 {% tplhandlebars "settings/organization" %}
   <header>
     <h3>{% trans "Global settings" %} &nbsp;>&nbsp; {% trans "Organization" %}</h3>
+    <div class="btn-toolbar pull-right">{{partial "settings/partials/saveSettings"}}</div>
   </header>
   <section class="clearfix global-informations">
     <div class="clearfix inner">
@@ -21,7 +22,7 @@
               {{view Ember.TextField 
                 valueBinding = "content.name"
                 maxlength = "64" 
-                classNames = "edit-settings" 
+                classNames = "form-control form-control-settings" 
                 placeholder = "{% trans 'Name here' %}" }}
             </td>
           </tr>
@@ -33,7 +34,7 @@
               {{view Ember.TextField 
                 valueBinding = "content.email"
                 maxlength = "64" 
-                classNames = "edit-settings" 
+                classNames = "form-control form-control-settings" 
                 placeholder = "{% trans 'Email here' %}" }}
             </td>
           </tr>
@@ -45,7 +46,7 @@
               {{view Ember.TextField 
                 valueBinding = "content.phone"
                 maxlength = "64" 
-                classNames = "edit-settings" 
+                classNames = "form-control form-control-settings" 
                 placeholder = "{% trans 'Phone here' %}" }}
             </td>
           </tr>
@@ -57,7 +58,7 @@
               {{view Ember.TextField 
                 valueBinding = "content.fax"
                 maxlength = "64" 
-                classNames = "edit-settings" 
+                classNames = "form-control form-control-settings" 
                 placeholder = "{% trans 'Fax here' %}" }}
             </td>
           </tr>
@@ -77,7 +78,7 @@
                   {{#if logoUri}}
                     <img {{bindAttr src="logoUri"}}>
                   {{/if}}
-                  <div class="drag-drop-message">{% trans "Drop a logo here" %}</div>
+                  <div class="drag-drop-message">{% trans "Drop here" %}</div>
                 {{else}}
                   <div class="progress">
                     <div class="bar" style="width: 0%;"></div>
@@ -86,7 +87,7 @@
                 {{/unless}}
                 <input class="fileupload fill" type="file" multiple/>
               </div>
-              <a class="btn save green" {{action "openLogoUploadBrowser" target="view"}}>
+              <a class="btn save btn-small btn-success" {{action "openLogoUploadBrowser" target="view"}}>
                 {{#if logoUri}}
                   {% trans "Change" context "change logo" %}
                 {{else}}
@@ -111,7 +112,7 @@
                   {{#if terms}}
                     <span class="filename" {{action downloadTerms terms}}>{{terms.name}} <span>({{formatDate terms.modifiedAt}})</span></span>
                   {{/if}}
-                  <div class="drag-drop-message">{% trans "Drop terms here" %}</div>
+                  <div class="drag-drop-message">{% trans "Drop here" %}</div>
                 {{else}}
                   <div class="progress">
                     <div class="bar" style="width: 0%;"></div>
@@ -120,7 +121,7 @@
                 {{/unless}}
                 <input class="fileupload fill" type="file" multiple/>
               </div>
-              <a class="btn save green" {{action "openTermsUploadBrowser" target="view"}}>
+              <a class="btn save btn-small btn-success" {{action "openTermsUploadBrowser" target="view"}}>
                 {{#if terms}}
                   {% trans "Change" context "change terms" %}
                 {{else}}
@@ -166,7 +167,7 @@
               {{view Ember.TextField 
                 valueBinding = "content.postalAddress.postofficeBox"
                 maxlength = "64" 
-                classNames = "edit-settings" 
+                classNames = "form-control form-control-settings" 
                 placeholder = "{% trans 'Postoffice box here' %}" }}
             </td>
           </tr>
@@ -178,7 +179,7 @@
               {{view Ember.TextField 
                 valueBinding = "content.postalAddress.streetAddress"
                 maxlength = "64" 
-                classNames = "edit-settings" 
+                classNames = "form-control form-control-settings" 
                 placeholder = "{% trans 'Address here' %}" }}
             </td>
           </tr>
@@ -190,7 +191,7 @@
               {{view Ember.TextField 
                 valueBinding = "content.postalAddress.postalCode"
                 maxlength = "64" 
-                classNames = "edit-settings" 
+                classNames = "form-control form-control-settings" 
                 placeholder = "{% trans 'Postal code here' %}" }}
             </td>
           </tr>
@@ -202,7 +203,7 @@
               {{view Ember.TextField 
                 valueBinding = "content.postalAddress.city"
                 maxlength = "64" 
-                classNames = "edit-settings" 
+                classNames = "form-control form-control-settings" 
                 placeholder = "{% trans 'City here' %}" }}
             </td>
           </tr>
@@ -214,7 +215,7 @@
               {{view Ember.TextField 
                 valueBinding = "content.postalAddress.state"
                 maxlength = "64" 
-                classNames = "edit-settings" 
+                classNames = "form-control form-control-settings" 
                 placeholder = "{% trans 'State here' %}" }}
             </td>
           </tr>
@@ -226,7 +227,7 @@
               {{view Ember.TextField 
                 valueBinding = "content.postalAddress.country"
                 maxlength = "64" 
-                classNames = "edit-settings" 
+                classNames = "form-control form-control-settings" 
                 placeholder = "{% trans 'Country here' %}" }}
             </td>
           </tr>
@@ -247,7 +248,7 @@
               {{view Ember.TextField 
                 valueBinding = "content.billingAddress.postofficeBox"
                 maxlength = "64" 
-                classNames = "edit-settings" 
+                classNames = "form-control form-control-settings" 
                 placeholder = "{% trans 'Postoffice box here' %}" }}
             </td>
           </tr>
@@ -259,7 +260,7 @@
               {{view Ember.TextField 
                 valueBinding = "content.billingAddress.streetAddress"
                 maxlength = "64" 
-                classNames = "edit-settings" 
+                classNames = "form-control form-control-settings" 
                 placeholder = "{% trans 'Address here' %}" }}
             </td>
           </tr>
@@ -271,7 +272,7 @@
               {{view Ember.TextField 
                 valueBinding = "content.billingAddress.postalCode"
                 maxlength = "64" 
-                classNames = "edit-settings" 
+                classNames = "form-control form-control-settings" 
                 placeholder = "{% trans 'Postal code here' %}" }}
             </td>
           </tr>
@@ -283,7 +284,7 @@
               {{view Ember.TextField 
                 valueBinding = "content.billingAddress.city"
                 maxlength = "64" 
-                classNames = "edit-settings" 
+                classNames = "form-control form-control-settings" 
                 placeholder = "{% trans 'City here' %}" }}
             </td>
           </tr>
@@ -295,7 +296,7 @@
               {{view Ember.TextField 
                 valueBinding = "content.billingAddress.state"
                 maxlength = "64" 
-                classNames = "edit-settings" 
+                classNames = "form-control form-control-settings" 
                 placeholder = "{% trans 'State here' %}" }}
             </td>
           </tr>
@@ -307,7 +308,7 @@
               {{view Ember.TextField 
                 valueBinding = "content.billingAddress.country"
                 maxlength = "64" 
-                classNames = "edit-settings" 
+                classNames = "form-control form-control-settings" 
                 placeholder = "{% trans 'Country here' %}" }}
             </td>
           </tr>
@@ -330,7 +331,7 @@
     {{view view.select
       contentBinding="Vosae.supportedCountries"
       tenantBinding="this"
-      containerCssClass="green"
+      containerCssClass="success"
       optionValuePath="content.countryCode"
       optionLabelPath="content.countryName" }}
   </td>

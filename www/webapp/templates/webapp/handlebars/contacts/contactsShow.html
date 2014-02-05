@@ -4,7 +4,7 @@
   <section class="actions clearfix">
     <div class="btn-toolbar pull-left">
       <div class="btn-group">
-        {{#linkTo "organizations.show" controller.session.tenant class="btn grey"}}
+        {{#linkTo "organizations.show" controller.session.tenant class="btn btn-default"}}
           <i class="picto-arrow-left"></i>
           {% trans "My organizations" %}
         {{/linkTo}}
@@ -12,7 +12,7 @@
     </div>
     <div class="btn-toolbar pull-right">
       <div class="btn-group">
-        {{#linkTo "contacts.add" controller.session.tenant class="btn green"}}
+        {{#linkTo "contacts.add" controller.session.tenant class="btn btn-success"}}
           <i class="picto-add"></i>
           {% trans "Contact" context "contacts" %}
         {{/linkTo}}
@@ -27,7 +27,7 @@
       {{/with}}
       {{#if meta.next}}
         <p class="pagination text-center">
-          <a class="btn grey" {{action 'getNextPagination'}}>
+          <a class="btn btn-default" {{action 'getNextPagination'}}>
             {% trans "More" context "display more" %}
           </a>
         </p>

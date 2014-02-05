@@ -1,8 +1,8 @@
 {% load i18n templatetag_handlebars i18n_handlebars %}
 
 {% tplhandlebars "invoiceBase/edit/_details" %}
-  <table class="table table-line-items edit">
-    <thead class="{{unbound relatedColor}}">
+  <table class="table table-line-items table-striped edit table-{{unbound relatedColor}}">
+    <thead>
       <tr>
         <th></th>
         <th class="reference">{% trans "Reference" context "table-headers" %}</th>
@@ -14,54 +14,52 @@
       </tr>
     </thead>
     <tbody>
-      {{#if currentRevision.lineItems.length}}
-        {{#each currentRevision.lineItems}}
-          <tr>
-            <td class="actions">
-              <a {{action 'deleteLineItem' this}}>
-                <i class="picto-delete"></i>
-              </a>
-            </td>
-            <td class="reference">
-              {{view view.itemsSearchField
-                currentItemBinding="this"
-                dropdownCssClass="item-search-field"
-                placeholder="{% trans 'Reference' %}…" }}
-            </td>
-            <td class="description">
-              {{view view.lineItemTextArea
-                currentItemBinding="this"
-                valueBinding="description"
-                maxlength="512"
-                resize="none"
-                classNames="edit description"
-                placeholder="{% trans 'Description' %}…" }}
-            </td>
-            <td class="quantity">
-              {{view view.lineItemQuantityField
-                currentItemBinding="this"
-                valueBinding="displayQuantity"
-                classNames="edit quantity text-right"
-                placeholder="0" }}
-            </td>
-            <td class="unit-price">
-              {{view view.lineItemUnitPriceField
-                currentItemBinding="this"
-                valueBinding="displayUnitPrice"
-                classNames="edit unitPrice text-right"
-                placeholder="0" }}
-            </td>
-            <td class="tax">
-              {{view view.taxesSearchField
-                currentItemBinding="this"
-                dropDownCssClass="tax-search-field"
-                placeholder="0%" }}
-            </td>
-            <td class="total">
-              {{this.displayTotal}}
-            </td>
-          </tr>
-        {{/each}}
+      {{#each currentRevision.lineItems}}
+        <tr>
+          <td class="actions">
+            <a {{action 'deleteLineItem' this}}>
+              <i class="picto-delete"></i>
+            </a>
+          </td>
+          <td class="reference">
+            {{view view.itemsSearchField
+              currentItemBinding="this"
+              dropdownCssClass="item-search-field"
+              placeholder="{% trans 'Reference' %}…" }}
+          </td>
+          <td class="description">
+            {{view view.lineItemTextArea
+              currentItemBinding="this"
+              valueBinding="description"
+              maxlength="512"
+              resize="none"
+              classNames="form-control form-control-unstyled description"
+              placeholder="{% trans 'Description' %}…" }}
+          </td>
+          <td class="quantity">
+            {{view view.lineItemQuantityField
+              currentItemBinding="this"
+              valueBinding="displayQuantity"
+              classNames="form-control form-control-unstyled quantity text-right"
+              placeholder="0" }}
+          </td>
+          <td class="unit-price">
+            {{view view.lineItemUnitPriceField
+              currentItemBinding="this"
+              valueBinding="displayUnitPrice"
+              classNames="form-control form-control-unstyled unitPrice text-right"
+              placeholder="0" }}
+          </td>
+          <td class="tax">
+            {{view view.taxesSearchField
+              currentItemBinding="this"
+              dropDownCssClass="tax-search-field"
+              placeholder="0%" }}
+          </td>
+          <td class="total">
+            {{this.displayTotal}}
+          </td>
+        </tr>
       {{else}}
         <tr>
           <td colspan="7" class="no-data">
@@ -72,11 +70,11 @@
             {{/if}}
           </td>
         </tr>
-      {{/if}}
+      {{/each}}
     </tbody>
   </table>
   <p class="table-add-line">
-    <a class="btn btn-small rounded {{unbound relatedColor}}" {{action addLineItem}}>
+    <a class="btn btn-sm btn-rounded btn-{{unbound relatedColor}}" {{action addLineItem}}>
       {% trans 'Add a line' %}
     </a>
   </p>

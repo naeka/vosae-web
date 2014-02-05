@@ -2,36 +2,40 @@
 
 {% tplhandlebars "invoiceBase/show/_date" %}
   <div class="date">
-    <label class="{{unbound relatedColor}}">
+    <label class="text-{{unbound relatedColor}}">
       <i class="picto-agenda"></i>
       {{#if isQuotation}}
         {% trans "Quotation date" %}:
-      {{else}}
-        {{#if isPurchaseOrder}}
-          {% trans "Purchase order" %}:
-        {{else}}
-          {{#if isInvoice}}
-            {% trans "Invoicing date" %}:
-          {{else}}
-            {{#if isCreditNote}}
-              {% trans "Emission date" %}:
-           {{/if}}
-          {{/if}}
-        {{/if}}
+      {{/if}}
+
+      {{#if isPurchaseOrder}}
+        {% trans "Purchase order" %}:
+      {{/if}}
+      
+      {{#if isInvoice}}
+        {% trans "Invoicing date" %}:
+      {{/if}}
+      
+      {{#if isCreditNote}}
+        {% trans "Emission date" %}:         
       {{/if}}
     </label>
     <span>
-      {{#ifCond isQuotation 'or' isPurchaseOrder}}
+      {{#if isQuotation}}
         {{unbound currentRevision.displayQuotationDate}}
-      {{else}}
-        {{#if isInvoice}}
-          {{unbound currentRevision.displayInvoicingDate}}
-        {{else}}
-          {{#if isCreditNote}}
-            {{unbound currentRevision.displayCreditNoteEmissionDate}}          
-          {{/if}}
-        {{/if}}
-      {{/ifCond}}
+      {{/if}}
+
+      {{#if isPurchaseOrder}}
+        {{unbound currentRevision.displayQuotationDate}}
+      {{/if}}
+      
+      {{#if isInvoice}}
+        {{unbound currentRevision.displayInvoicingDate}}
+      {{/if}}
+      
+      {{#if isCreditNote}}
+        {{unbound currentRevision.displayCreditNoteEmissionDate}}          
+      {{/if}}
     </span>
   </div>
 {% endtplhandlebars %}

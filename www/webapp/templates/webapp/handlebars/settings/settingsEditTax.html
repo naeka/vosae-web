@@ -3,28 +3,22 @@
 {% tplhandlebars "settings/editTax" %}
   {{#if content.isLoaded}}
   <header>
-  {{#if id}}
-    <h3>
-      {% trans "Invoicing settings" %} &nbsp;>&nbsp; {% trans "Taxes" %} &nbsp;>&nbsp; {% trans "Edit" %} &nbsp;>&nbsp; {{name}}
-    </h3>
-  {{else}}
-    <h3>
-      {% trans "Invoicing settings" %} &nbsp;>&nbsp; {% trans "Taxes" %} &nbsp;>&nbsp; {% trans "Add" %} &nbsp;>&nbsp; {{name}}
-    </h3>
-  {{/if}}
+    {{#if id}}
+      <h3>
+        {% trans "Invoicing settings" %} &nbsp;>&nbsp; {% trans "Taxes" %} &nbsp;>&nbsp; {% trans "Edit" %} &nbsp;>&nbsp; {{name}}
+      </h3>
+    {{else}}
+      <h3>
+        {% trans "Invoicing settings" %} &nbsp;>&nbsp; {% trans "Taxes" %} &nbsp;>&nbsp; {% trans "Add" %} &nbsp;>&nbsp; {{name}}
+      </h3>
+    {{/if}}
+    <div class="btn-toolbar pull-right">{{partial "settings/partials/saveDeleteSettings"}}</div>
   </header>
   <section class="clearfix">
     <div class="inner">
       <div class="clearfix">
         <div class="pull-left">
           <h4>{% trans "Informations" %}</h4> 
-        </div>
-        <div class="btn-toolbar pull-right">
-          {{#if id}}
-            <a {{action delete content}} class="btn btn-small rounded orange">
-              {% trans "Delete" %}
-            </a>
-          {{/if}}
         </div>
       </div>
       <table class="half">
@@ -37,7 +31,7 @@
               {{view Ember.TextField 
                 valueBinding="name"
                 maxlength="64" 
-                classNames="edit-settings" 
+                classNames="form-control form-control-settings" 
                 placeholder="{% trans 'Name here' %}" }}
             </td>
           </tr>          
@@ -50,13 +44,13 @@
                 {{view view.rateField
                   rateBinding="content.rate"
                   valueBinding="displayRate"
-                  classNames="edit-settings" 
+                  classNames="form-control form-control-settings" 
                   disabled="disabled" }}
               {{else}}
                 {{view view.rateField
                   rateBinding="content.rate"
                   valueBinding="displayRate"
-                  classNames="edit-settings" 
+                  classNames="form-control form-control-settings" 
                   placeholder="{% trans 'Rate here' %}" }}
               {{/if}}
             </td>

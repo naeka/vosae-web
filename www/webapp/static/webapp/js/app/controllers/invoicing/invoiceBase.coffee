@@ -91,9 +91,12 @@ Vosae.InvoiceBaseController = Em.ObjectController.extend
           invoiceBase.get('currentRevision').set 'deliveryAddress', null
 
         if invoiceBase.get('currentRevision.lineItems')
+          notEmptyItems = []
           invoiceBase.get('currentRevision.lineItems').forEach (item) ->
-            if item.isEmpty()
-              invoiceBase.get('currentRevision.lineItems').removeObject item
+            if not item.isEmpty()
+              notEmptyItems.push item
+          invoiceBase.set('currentRevision.lineItems.content', [])
+          invoiceBase.get('currentRevision.lineItems').addObjects notEmptyItems
 
       event = if invoiceBase.get('id') then 'didUpdate' else 'didCreate'
       invoiceBase.one event, @, ->

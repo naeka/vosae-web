@@ -1,13 +1,7 @@
-{# App Core #}
+{# Core #}
 {% include "webapp/handlebars/core/root.html" %}
 {% include "webapp/handlebars/core/application.html" %}
 {% include "webapp/handlebars/core/dashboard.html" %}
-{% include "webapp/handlebars/core/tenantsShow.html" %}
-{% include "webapp/handlebars/core/tenantsAdd.html" %}
-{% include "webapp/handlebars/core/partials/tenantsAddIdentity.html" %}
-{% include "webapp/handlebars/core/partials/tenantsAddCoords.html" %}
-{% include "webapp/handlebars/core/partials/tenantsAddRegistration.html" %}
-{% include "webapp/handlebars/core/partials/registrationInfo.html" %}
 {% include "webapp/handlebars/core/partials/panels.html" %}
 {% include "webapp/handlebars/core/partials/search.html" %}
 {% include "webapp/handlebars/core/partials/notifications.html" %}
@@ -16,7 +10,17 @@
 {% include "webapp/handlebars/core/partials/spinner.html" %}
 
 
-{# App Settings #}
+{# Tenants #}
+{% include "webapp/handlebars/tenants/root.html" %}
+{% include "webapp/handlebars/tenants/tenantsShow.html" %}
+{% include "webapp/handlebars/tenants/tenantsAdd.html" %}
+{% include "webapp/handlebars/tenants/partials/tenantsAddIdentity.html" %}
+{% include "webapp/handlebars/tenants/partials/tenantsAddCoords.html" %}
+{% include "webapp/handlebars/tenants/partials/tenantsAddRegistration.html" %}
+{% include "webapp/handlebars/tenants/partials/registrationInfo.html" %}
+
+
+{# Settings #}
 {% include "webapp/handlebars/settings/root.html" %}
 {% include "webapp/handlebars/settings/settingsApplication.html" %}
 {% include "webapp/handlebars/settings/settingsApiKeys.html" %}
@@ -34,7 +38,7 @@
 {% include "webapp/handlebars/settings/partials/registrationInfo.html" %}
 
 
-{# App Contacts #}
+{# Contacts #}
 {% include "webapp/handlebars/contacts/root.html" %}
 {% include "webapp/handlebars/contacts/contactsShow.html" %}
 {% include "webapp/handlebars/contacts/organizationsShow.html" %}
@@ -48,7 +52,7 @@
 {% include "webapp/handlebars/contacts/partials/editEntityContactInfos.html" %}
 
 
-{# App Organizer #}
+{# Organizer #}
 {% include "webapp/handlebars/organizer/root.html" %}
 {% include "webapp/handlebars/organizer/calendarListsShow.html" %}
 {% include "webapp/handlebars/organizer/calendarListShow.html" %}
@@ -57,22 +61,18 @@
 {% include "webapp/handlebars/organizer/vosaeEventEdit.html" %}
 
 
-{# App Invoicing #}
+{# Invoicing #}
 {% include "webapp/handlebars/invoicing/root.html" %}
 {% include "webapp/handlebars/invoicing/dashboard.html" %}
-
 {% include "webapp/handlebars/invoicing/creditNote/creditNoteShow.html" %}
-
 {% include "webapp/handlebars/invoicing/invoice/invoiceShow.html" %}
 {% include "webapp/handlebars/invoicing/invoice/invoiceEdit.html" %}
 {% include "webapp/handlebars/invoicing/invoice/invoicesShow.html" %}
 {% include "webapp/handlebars/invoicing/invoice/partials/tableOfInvoices.html" %}
-
 {% include "webapp/handlebars/invoicing/quotation/quotationsShow.html" %}
 {% include "webapp/handlebars/invoicing/quotation/quotationShow.html" %}
 {% include "webapp/handlebars/invoicing/quotation/quotationEdit.html" %}
 {% include "webapp/handlebars/invoicing/quotation/partials/tableOfQuotations.html" %}
-
 {% include "webapp/handlebars/invoicing/invoiceBase/partials/show/actions.html" %}
 {% include "webapp/handlebars/invoicing/invoiceBase/partials/show/attachments.html" %}
 {% include "webapp/handlebars/invoicing/invoiceBase/partials/show/creditNotes.html" %}
@@ -98,13 +98,17 @@
 {% include "webapp/handlebars/invoicing/invoiceBase/partials/edit/transmitter.html" %}
 {% include "webapp/handlebars/invoicing/invoiceBase/partials/edit/validity.html" %}
 {% include "webapp/handlebars/invoicing/invoiceBase/partials/edit/receiver.html" %}
-
 {% include "webapp/handlebars/invoicing/item/itemsShow.html" %}
 {% include "webapp/handlebars/invoicing/item/itemShow.html" %}
 {% include "webapp/handlebars/invoicing/item/itemEdit.html" %}
 {% include "webapp/handlebars/invoicing/item/partials/tableOfItems.html" %}
-
 {% include "webapp/handlebars/invoicing/purchaseOrder/purchaseOrderEdit.html" %}
 {% include "webapp/handlebars/invoicing/purchaseOrder/purchaseOrderShow.html" %}
 {% include "webapp/handlebars/invoicing/purchaseOrder/purchaseOrdersShow.html" %}
 {% include "webapp/handlebars/invoicing/purchaseOrder/partials/tableOfPurchaseOrders.html" %}
+
+
+{# Bootstrap #}
+{% include "webapp/handlebars/bootstrap/alert.html" %}
+{% include "webapp/handlebars/bootstrap/button.html" %}
+{% include "webapp/handlebars/bootstrap/forms/field.html" %}

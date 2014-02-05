@@ -1,0 +1,249 @@
+// Default style select2-container
+.select2-container
+  outline: none
+  
+  &:hover
+    .select2-choice
+      background-color: darken($grey, 8%)
+
+  .select2-default
+    color: $text-color !important
+  
+  .select2-choice
+    height: 28px
+    line-height: 28px
+    border: 0
+    color: $text-color
+    background-color: $grey
+    +border-radius(0px)
+    background-image: none
+    padding: 0 0 0 12px
+    font-size: 16px
+
+    // Close icon
+    .select2-search-choice-close
+      right: 6px
+      top: 1px
+      color: $text-color
+
+      &:before
+        content: '*'
+        font-family: $font-pictos
+        font-size: 12px
+        color: inherit
+        text-align: center
+
+    // Arrow icon
+    .select2-arrow
+      border: 0
+      background-image: none
+      background-color: transparent
+      & > b
+        font-weight: normal
+        display: inline-block
+        width: 0
+        height: 0
+        margin-left: 2px
+        vertical-align: middle
+        border-top: 4px solid
+        border-bottom: 0
+        border-right: 4px solid rgba(0, 0, 0, 0)
+        border-left: 4px solid rgba(0, 0, 0, 0)
+
+    > .select2-chosen
+      margin-right: 30px
+
+  // Hide the select2-arrow if an item has been selected 
+  &.select2-allowclear .select2-arrow
+    display: none
+
+// Colors for select2-container
+.select2-container.success
+  .select2-choice
+    background-color: $green
+
+.select2-container.success:hover
+  .select2-choice
+    background-color: darken($green, 8%)
+
+.select2-container.primary
+  .select2-choice
+    background-color: $orange
+
+.select2-container.primary:hover
+  .select2-choice
+    background-color: darken($orange, 8%)
+
+.select2-container.success,
+.select2-container.primary
+  .select2-choice,
+  .select2-search-choice-close,
+  .select2-default
+    color: #FFF !important
+
+
+// Default style select2-dropdown
+.select2-dropdown-open
+  &.select2-drop-above .select2-arrow > b
+    border-top: 0
+    border-bottom: 4px solid
+
+  .select2-choice,
+  .select2-choices,
+    background-color: darken($grey, 8%)  
+    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125)
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125)
+
+// Colors for select2-dropdown 
+.select2-dropdown-open
+  &.success
+    .select2-choice,
+    .select2-choices
+      background-color: darken($green, 8%)
+
+  &.primary
+    .select2-choice,
+    .select2-choices
+      background-color: darken($orange, 8%)
+
+
+// Default style for select2-dropdown-open
+.select2-dropdown-open.select2-drop-above .select2-choice, 
+.select2-dropdown-open.select2-drop-above .select2-choices,
+.select2-container.select2-drop-above .select2-choice
+  border: 0
+  +border-radius(0px)
+  background-color: darken($grey, 8%)
+  background-image: none
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125)
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125)
+
+// Colors for select2-dropdown-open
+.select2-dropdown-open.select2-drop-above.primary .select2-choice, 
+.select2-dropdown-open.select2-drop-above.primary .select2-choices,
+.select2-container.select2-drop-above.primary .select2-choice
+  background-color: darken($orange, 8%)
+
+.select2-dropdown-open.select2-drop-above.success .select2-choice, 
+.select2-dropdown-open.select2-drop-above.success .select2-choices,
+.select2-container.select2-drop-above.success .select2-choice
+  background-color: darken($green, 8%)
+
+.select2-container-active .select2-choice, 
+.select2-container-active .select2-choices
+  border: 0
+
+
+
+// Select multiple
+.select2-container.select2-container-multi
+  width: 260px
+  min-width: 260px
+
+.select2-container-multi .select2-choices
+  background: #1E1E1E
+  min-height: 28px
+  border: 0
+
+.select2-container-multi.select2-container-active .select2-choices
+  border: 0
+  -webkit-box-shadow: none
+  box-shadow: none
+
+.select2-container-multi .select2-choices .select2-search-field input
+  height: 26px
+  font-size: 15px
+  color: #555
+  font-family: inherit
+
+// Content in dropdown
+.select2-drop
+  color: $text-color
+  background: #F8F8F8
+
+  .select2-search,
+  .select2-no-results
+    padding: 4px
+
+.select2-drop,
+.select2-drop.select2-drop-above
+  border: 0
+  +border-radius(0px)
+  -webkit-box-shadow: none
+  box-shadow: none
+
+.select2-drop,
+.select2-drop-active,
+.select2-drop-auto-width,
+.select2-drop.select2-drop-above.select2-drop-active
+  border: 0
+
+.select2-search input
+  background: #FFF
+  min-height: 24px
+  padding: 2px 20px 2px 5px
+  font-size: 15px
+  color: #555
+  font-family: inherit
+
+.select2-results
+  font-size: 14px
+  margin: 0
+  padding: 0
+
+.select2-results .select2-highlighted
+  background-color: #DDD
+  color: $text-color
+
+.select2-container-multi 
+  .select2-choices 
+    background-color: #1E1E1E
+    .select2-search-choice
+      padding: 4px 5px 4px 20px
+      border: 0
+      +border-radius(0px)
+      -webkit-box-shadow: none
+      box-shadow: none
+      background-image: none
+      font-size: 15px
+      background-color: $green
+      color: #FFF
+
+  .select2-search-choice-close
+    display: block
+    width: 12px
+    height: 13px
+    position: absolute
+    top: 5px
+    left: 5px
+    outline: none
+    text-decoration: none
+    color: #FFF
+
+    &:before
+      content: '*'
+      font-family: $font-pictos
+      font-size: 12px
+      color: inherit
+      text-align: center
+
+  .select2-search-choice-focus
+    background: darken($green, 8%)
+
+.select2-drop
+  &.no-search
+    .select2-search
+      display: none
+
+  &.calendarList-color
+    .select2-result.ember-view
+      padding-left: 28px
+      span
+        display: inline-block
+        width: 12px
+        height: 12px
+        border-style: solid
+        border-width: 1px
+        margin-top: 4px
+        position: absolute
+        margin-left: -20px

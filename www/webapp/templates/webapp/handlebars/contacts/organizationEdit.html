@@ -6,14 +6,14 @@
       <div class="btn-toolbar pull-left">
         {{#if id}}
           <div class="btn-group">    
-            {{#linkTo "organization.show" controller.session.tenant content class="btn grey"}}
+            {{#linkTo "organization.show" controller.session.tenant content class="btn btn-default"}}
               <i class="picto-arrow-left"></i>
               {{unbound this.corporateName}}
             {{/linkTo}}
           </div>
         {{else}}
           <div class="btn-group">
-            {{#linkTo "organizations.show" controller.session.tenant class="btn grey"}}
+            {{#linkTo "organizations.show" controller.session.tenant class="btn btn-default"}}
               <i class="picto-arrow-left"></i>
               {% trans "My organizations" %}
             {{/linkTo}}
@@ -21,30 +21,26 @@
         {{/if}}
       </div>
       <div class="btn-toolbar pull-right">
-        <div class="btn-group">
-          {{#unless isSaving}}
-          <a class="btn rounded grey" {{action 'cancel' content}}>
-            {% trans  "Cancel" %}
-          </a>
-          {{/unless}}
-        </div>
-        <div class="btn-group">
-          {{#if isSaving}}
-            <a class="btn rounded green">
+        {{#if isSaving}}
+          <div class="btn-group">
+            <a class="btn btn-rounded btn-success">
               {% trans "Saving" %}…
             </a>
-          {{else}}
-            {{#if isDirty}}
-              <a class="btn rounded green" {{action 'save' content}}>
-                {{#if id}}
-                  {% trans "Save" %}
-                {{else}}
-                  {% trans "Add" %}
-                {{/if}}
+          </div>
+        {{else}}
+          <div class="btn-group">
+            <a class="btn btn-rounded btn-default" {{action 'cancel' content}}>
+              {% trans  "Cancel" %}
+            </a>
+          </div>
+          {{#if isDirty}}
+            <div class="btn-group">
+              <a class="btn btn-rounded btn-success" {{action 'save' content}}>
+                {{#if id}}{% trans "Save" %}{{else}}{% trans "Add" %}{{/if}}
               </a>
-            {{/if}}
+            </div>
           {{/if}}
-        </div>
+        {{/if}}
       </div>
     </section>
 
@@ -58,7 +54,7 @@
         {{/if}}
         <input class="fileupload fill" type="file" multiple/>
       </div>
-      <a class="btn btn-small rounded green upload" {{action "openFileUploadBrowser" target="view"}}>
+      <a class="btn btn-xs btn-success upload" {{action "openFileUploadBrowser" target="view"}}>
         {% trans "Edit" %}
       </a>
 
@@ -67,14 +63,14 @@
           {{view Ember.TextField 
             valueBinding = "corporateName"
             maxlength    = "64" 
-            classNames   = "edit bold"
+            classNames   = "form-control form-control-unstyled"
             placeholder  = "{% trans 'Corporate name' %}" }}
         </span>
         <span class="desc">
           {{view Vosae.AutoGrowTextField
             valueBinding = "note"
             maxlength    = "64"
-            classNames   = "edit input-small"
+            classNames   = "form-control form-control-unstyled imput-sm"
             placeholder  = "{% trans 'Description' %}" }}
         </span>
       </div>
@@ -88,27 +84,25 @@
     </section>
     
     <div class="actions-form">
-      <div class="btn-group">
-        {{#unless isSaving}}
-        <a class="btn rounded grey" {{action 'cancel' content}}>
-          {% trans  "Cancel" %}
-        </a>
-        {{/unless}}
-      </div>
-      <div class="btn-group">
+      <div class="btn-toolbar pull-right">
         {{#if isSaving}}
-          <a class="btn rounded green">
-            {% trans "Saving" %}…
-          </a>
-        {{else}}
-          {{#if isDirty}}
-            <a class="btn rounded green" {{action 'save' content}}>
-              {{#if id}}
-                {% trans "Save" %}
-              {{else}}
-                {% trans "Add" %}
-              {{/if}}
+          <div class="btn-group">
+            <a class="btn btn-rounded btn-success">
+              {% trans "Saving" %}…
             </a>
+          </div>
+        {{else}}
+          <div class="btn-group">
+            <a class="btn btn-rounded btn-default" {{action 'cancel' content}}>
+              {% trans  "Cancel" %}
+            </a>
+          </div>
+          {{#if isDirty}}
+            <div class="btn-group">
+              <a class="btn btn-rounded btn-success" {{action 'save' content}}>
+                {{#if id}}{% trans "Save" %}{{else}}{% trans "Add" %}{{/if}}
+              </a>
+            </div>
           {{/if}}
         {{/if}}
       </div>
@@ -119,7 +113,7 @@
 {% endtplhandlebars %}
 
 {% tplhandlebars "organization/edit/settings" %}
-   <ul class="info">
+  <ul class="info">
     <li>
       <a {{action 'startHelpTour' target="view"}}>
         <i class="picto-help"></i>

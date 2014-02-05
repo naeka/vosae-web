@@ -8,19 +8,19 @@
   </div>
   <div>
     {{#if currentRevision.customPaymentConditions}}
-      <p><i class="picto-note green"></i> {% verbatimblocktrans %}Payment conditions: <span class="grey">{{currentRevision.customPaymentConditions}}</span>{% endverbatimblocktrans %}</p>
+      <p><i class="picto-note text-green"></i> {% verbatimblocktrans %}<strong>Payment conditions:</strong> <span class="grey">{{currentRevision.customPaymentConditions}}</span>{% endverbatimblocktrans %}</p>
     {{/if}}
     <p>
-      <i class="picto-agenda green"></i> {% verbatimblocktrans %}Payment due date on: <span class="grey">{{currentRevision.displayDueDate}}</span>{% endverbatimblocktrans %}
+      <i class="picto-agenda text-green"></i> {% verbatimblocktrans %}<strong>Payment due date on:</strong> <span class="grey">{{currentRevision.displayDueDate}}</span>{% endverbatimblocktrans %}
     </p>
     <p>
-      <i class="picto-rounded-check green"></i> {% verbatimblocktrans %}Accepted payment methods: <span class="grey">{{invoicingSettings.acceptedPaymentTypesFormatted}}</span>{% endverbatimblocktrans %}
+      <i class="picto-rounded-check text-green"></i> {% verbatimblocktrans %}<strong>Accepted payment methods:</strong> <span class="grey">{{invoicingSettings.acceptedPaymentTypesFormatted}}</span>{% endverbatimblocktrans %}
     </p>
     <p>
       {{#if invoicingSettings.lateFeeRate}}
-        <i class="picto-flag green"></i> {% verbatimblocktrans %}Late fee rate: <span class="grey">{{invoicingSettings.lateFeeRate}}%</span>{% endverbatimblocktrans %}
+        <i class="picto-flag text-green"></i> {% verbatimblocktrans %}<strong>Late fee rate:</strong> <span class="grey">{{invoicingSettings.lateFeeRate}}%</span>{% endverbatimblocktrans %}
       {{else}}
-        <i class="picto-flag green"></i> {% blocktrans %}Late fee: <span class="grey">at the legal rate</span>{% endblocktrans %}
+        <i class="picto-flag text-green"></i> {% blocktrans %}<strong>Late fee:</strong> <span class="grey">at the legal rate</span>{% endblocktrans %}
       {{/if}}
     </p>
   </div>

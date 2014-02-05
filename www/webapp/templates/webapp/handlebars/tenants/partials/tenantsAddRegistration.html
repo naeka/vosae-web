@@ -1,0 +1,90 @@
+{% load i18n templatetag_handlebars braces %}
+
+{% tplhandlebars "tenants/add/_registration" %}
+  <h3>{% trans "Step 3 - Registration informations" %}</h3>
+
+  <section class="registration">
+    {{#unless view.formIsValid}}
+      {% braces %}
+        view Bootstrap.AlertMessage 
+        type="danger"
+        title="{% trans "Oh snap!" %}"
+        message="{% trans "The registration failed for the reasons listed bellow. Please fix it." %}"
+      {% endbraces %}
+    {{/unless}}
+
+    <h4>{% trans "Currencies" %}</h4>
+    {# Tenant supported currencies #}
+    <div class="row">
+      <div class="col-xs-4">
+        {% braces %} 
+          view Bootstrap.Forms.Select
+          label="{% trans "Supported currencies" %}"
+          multiple="true"
+          contentBinding="sortedCurrencies"
+          selectionBinding="controller.supportedCurrencies"
+          optionValuePath="content.id"
+          optionLabelPath="content.description"
+          classNames="supported-currencies"
+        {% endbraces %}
+      </div>
+    </div>
+
+    {# Tenant default currency #}
+    {{#if supportedCurrencies}}
+      <div class="row">
+        <div class="col-xs-4">
+          {% braces %} 
+            view Bootstrap.Forms.Select
+            label="{% trans "Default currency" %}"
+            contentBinding="controller.supportedCurrencies"
+            selectionBinding="controller.defaultCurrency"
+            optionValuePath="content"
+            optionLabelPath="content.description"
+            classNames="default-currency"
+          {% endbraces %}
+        </div>
+      </div>
+    {{/if}}
+  </section>
+
+  <hr>
+
+  <section>
+    <h4>{% trans "Registration informations" %}</h4>
+    {{#view view.registrationInfoView}}{{/view}}
+  </section>
+
+  <div class="form-actions">
+    {{#if hasTenant}}
+      <button class="btn btn-darkgrey cancel" {{action 'cancel'}}>
+        {% trans "Cancel" %}
+      </button>
+    {{/if}}
+    <button class="btn btn-default" {{action 'previousStep' this target='view'}}>
+      {% trans "Previous" %}
+    </button>
+    <button class="btn btn-success" {{action 'nextStep' this target='view'}}>
+      {% trans "Finish" %}
+    </button>
+  </div>
+
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "tenants/add/registrationCountryType" %}
+  <div class="row">
+    <div class="col-xs-4">
+      {% braces %} 
+        view view.select
+        label="{% trans "Registration country" %}"
+        contentBinding="Vosae.supportedCountries"
+        tenantBinding="this"
+        valueBinding="view.registrationCountry"
+        optionValuePath="content.countryCode"
+        optionLabelPath="content.countryName"
+        classNames="registration-country"
+      {% endbraces %}
+    </div>
+  </div>
+{% endtplhandlebars %}

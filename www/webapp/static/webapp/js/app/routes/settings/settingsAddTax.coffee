@@ -12,11 +12,6 @@ Vosae.SettingsAddTaxRoute = Ember.Route.extend
       outlet: 'content'
       controller: @controller
 
-    @render 'settings.editTax.actions',
-      into: 'settings'
-      outlet: 'actions'
-      controller: @controller
-
   deactivate: ->
     tax = @controller.get 'content'
     if tax.get 'isDirty'

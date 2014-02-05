@@ -1,0 +1,80 @@
+{% load i18n templatetag_handlebars braces %}
+
+{% tplhandlebars "tenants/add/_identity" %}
+  <h3>{% trans "Step 1 - Organization contact details" %}</h3>
+
+  <section>
+    {{#unless view.formIsValid}}
+      {% braces %}
+        view Bootstrap.AlertMessage 
+        type="danger"
+        title="{% trans "Oh snap!" %}"
+        message="{% trans "The registration failed for the reasons listed bellow. Please fix it." %}"
+      {% endbraces %}
+    {{/unless}}
+
+    {# Tenant name #}
+    <div class="row">
+      <div class="col-xs-4">
+        {% braces %}
+          view Bootstrap.Forms.TextField 
+          valueBinding="name"
+          maxLength="64"
+          label="{% trans "Corporate name (the name of your organization)" %}"
+          inputClassNames="form-control-settings"
+        {% endbraces %}
+      </div>
+    </div>
+
+    {# Tenant email #}
+    <div class="row">
+      <div class="col-xs-4">    
+        {% braces %}
+          view Bootstrap.Forms.TextField 
+          valueBinding="email"
+          maxLength="256"
+          label="{% trans "Organization email" %}"
+          inputClassNames="form-control-settings"
+        {% endbraces %}
+      </div>
+    </div>
+
+    {# Tenant phone #}
+    <div class="row">
+      <div class="col-xs-4"> 
+        {% braces %}
+          view Bootstrap.Forms.TextField 
+          valueBinding="phone"
+          maxLength="16"
+          label="{% trans "Organization phone" %}"
+          inputClassNames="form-control-settings"
+        {% endbraces %}
+      </div>
+    </div>
+
+    {# Tenant fax #}
+    <div class="row">
+      <div class="col-xs-4">
+        {% braces %}
+          view Bootstrap.Forms.TextField 
+          valueBinding="fax"
+          maxLength="16"
+          label="{% trans "Organization fax" %}"
+          inputClassNames="form-control-settings"
+        {% endbraces %}
+      </div>
+    </div>
+  </section>
+
+  <div class="form-actions">
+    {{#if hasTenant}}
+      <button class="btn btn-darkgrey cancel" {{action 'cancel'}}>
+        {% trans "Cancel" %}
+      </button>
+    {{/if}}
+    <button class="btn btn-success" {{action 'nextStep' this target='view'}}>
+      {% trans "Next" %}
+    </button>
+  </div>
+
+{% endtplhandlebars %}

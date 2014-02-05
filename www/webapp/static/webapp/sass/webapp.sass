@@ -1,11 +1,10 @@
 @import "compass"
-
-@import "configuration"
-@import "spinner"
+@import "mixins"
+@import "variables"
 @import "bootstrap"
-
+@import "spinner"
 @import "global"
-@import "vendor"
+@import "vendors"
 @import "core"
 @import "contacts"
 @import "invoicing"
@@ -17,6 +16,8 @@
 //  ========
 //  = Body =
 //  ========
+*
+  -webkit-font-smoothing: antialiased
 
 body 
   -webkit-touch-callout: none
@@ -25,29 +26,27 @@ body
   -moz-user-select: none
   -ms-user-select: none
   user-select: none
-  -webkit-font-smoothing: antialiased
-  +opacity(0.999)
 
-.http-error
-  height: 400px
-  background :
-    image    : image-url("logo_vosae_errors_pages.png")
-    repeat   : no-repeat
-    position : top center
+// .http-error
+//   height: 400px
+//   background :
+//     image    : image-url("logo_vosae_errors_pages.png")
+//     repeat   : no-repeat
+//     position : top center
 
-  h1
-    font-weight: bold
-    font-size: 28px
-    text-align: center
-    padding-top: 100px
-    padding-bottom: 80px
+//   h1
+//     font-weight: bold
+//     font-size: 28px
+//     text-align: center
+//     padding-top: 100px
+//     padding-bottom: 80px
 
-  p
-    font-size: 18px
-    text-align: center
+//   p
+//     font-size: 18px
+//     text-align: center
 
-  a
-    margin-top: 20px
+//   a
+//     margin-top: 20px
 
 
 // //  ========================

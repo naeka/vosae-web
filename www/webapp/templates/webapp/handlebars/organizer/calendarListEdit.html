@@ -5,7 +5,7 @@
   <section class="actions clearfix">
     <div class="btn-toolbar pull-left">
       {{#if id}}            
-        {{#linkTo "calendarList.show" controller.session.tenant content class="btn grey"}}
+        {{#linkTo "calendarList.show" controller.session.tenant content class="btn btn-default"}}
           <i class="picto-arrow-left"></i>
           {{#if summary}}
             {{summary}}
@@ -14,7 +14,7 @@
           {{/if}}
         {{/linkTo}}
       {{else}}
-        {{#linkTo "calendarLists.show" controller.session.tenant class="btn grey"}}
+        {{#linkTo "calendarLists.show" controller.session.tenant class="btn btn-default"}}
           <i class="picto-arrow-left"></i>
           {% trans "Organizer" %}
         {{/linkTo}}
@@ -23,31 +23,24 @@
     <div class="btn-toolbar pull-right">
       {{#if controller.isSaving}}
         <div class="btn-group">
-          <a class="btn rounded green">
+          <a class="btn btn-success btn-rounded">
             {% trans "Saving..." %}
           </a>
         </div>
       {{else}}
         <div class="btn-group">
-          <a class="btn rounded grey" {{action 'cancel' content}}>
+          <a class="btn btn-rounded btn-default" {{action 'cancel' content}}>
             {% trans  "Cancel" %}
           </a>
         </div>
         {{#if controller.areDirty}}
           <div class="btn-group">        
-            <a class="btn rounded green" {{action 'save' content}}>
+            <a class="btn btn-success btn-rounded" {{action 'save' content}}>
               {{#if id}}
                 {% trans "Save" %}
               {{else}}
                 {% trans "Add" %}
               {{/if}}
-            </a>
-          </div>
-        {{/if}}
-        {{#if id}}
-          <div class="btn-group">
-            <a class="btn rounded grey" {{action 'delete' content}}>
-              {% trans "Delete" %}
             </a>
           </div>
         {{/if}}
@@ -63,13 +56,13 @@
             {{view Vosae.AutoGrowTextField
               valueBinding="calendar.summary"
               maxlength="64"
-              classNames="edit bold"
+              classNames="form-control form-control-unstyled text-bold"
               placeholder="{% trans "Name of the calendar" %}"}}
           {{else}}
             {{view Vosae.AutoGrowTextField
               valueBinding="summaryOverride"
               maxlength="64"
-              classNames="edit bold"
+              classNames="form-control form-control-unstyled text-bold"
               placeholder="{% trans "Name of the calendar" %}"}}
           {{/if}}
         </div>
@@ -78,7 +71,7 @@
             {{view Vosae.TextAreaAutoSize
               valueBinding="calendar.description"
               maxlength="1024"
-              classNames="edit"
+              classNames="form-control form-control-unstyled"
               placeholder="{% trans "Description of the calendar" %}" }}
           {{/if}}
         </div>
@@ -86,12 +79,12 @@
       <div class="pull-right">
         <div class="color pull-right clearfix">
           {{view Vosae.Components.CalendarListColorField
+            containerCssClass="success"
             valueBinding="color"}}
         </div>
         <div class="timezone">
           {{#if isOwn}}
             {{view Vosae.Components.TimezonesField
-              containerCssClass="darkgrey"
               valueBinding="calendar.timezone"}}
           {{/if}}
         </div>
@@ -113,7 +106,7 @@
         <h4>{% trans "Events default reminders" %}</h4>
       </div>
       <div class="pull-right">
-        <a {{action 'addReminder'}} class="btn btn-small rounded green">
+        <a {{action 'addReminder'}} class="btn btn-sm btn-success btn-rounded">
           {% trans "Add" %}
         </a>
       </div>
@@ -133,6 +126,7 @@
           <td class="method">
             {{view view.reminderMethodField 
               placeholder="{% trans 'Click to choose a user or a group' %}"
+              containerCssClass="success"
               valueBinding="reminder.method"}}
           </td>
           <td class="minutes">
@@ -140,11 +134,11 @@
               valueBinding="reminder.minutes"
               maxlength="5"
               placeholder="0"
-              classNames="no-border no-shadow no-padding no-margin" }}
+              classNames="form-control form-control-unstyled" }}
             {% trans "minutes before" %}
           </td>
           <td class="delete">
-            <a {{action "deleteReminder" reminder}} class="btn btn-icon orange" title="{% trans 'Delete' %}">
+            <a {{action "deleteReminder" reminder}} class="btn btn-icon btn-primary" title="{% trans 'Delete' %}">
               <i class="picto-delete"></i>
             </a>
           </td>
@@ -163,7 +157,7 @@
         <h4>{% trans "Shared with" %}</h4>
       </div>
       <div class="pull-right">
-        <a {{action 'addAclRule'}} class="btn btn-small rounded green">
+        <a {{action 'addAclRule'}} class="btn btn-sm btn-success btn-rounded">
           {% trans "Add" %}
         </a>
       </div>
@@ -186,7 +180,7 @@
                       valueBinding="rule.role"}}
                   </td>
                   <td class="delete">
-                    <a {{action "deleteAclRule" rule}} class="btn btn-icon orange" title="{% trans 'Delete' %}">
+                    <a {{action "deleteAclRule" rule}} class="btn btn-icon btn-primary" title="{% trans 'Delete' %}">
                       <i class="picto-delete"></i>
                     </a>
                   </td>

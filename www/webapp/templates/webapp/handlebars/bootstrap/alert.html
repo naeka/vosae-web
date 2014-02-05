@@ -1,0 +1,6 @@
+{% load templatetag_handlebars %}
+
+{% tplhandlebars "bootstrap/alert" %}
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <strong>{{{view.title}}}</strong>&nbsp;{{{view.message}}}
+{% endtplhandlebars %}

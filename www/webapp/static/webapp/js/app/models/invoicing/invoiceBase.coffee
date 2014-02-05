@@ -66,8 +66,8 @@ Vosae.InvoiceBase = DS.Model.extend
     # Returns the related color of current instance,
     # green if `Invoice`, orange if `Quotation`. 
     if @get('isQuotation') or @get('isPurchaseOrder')
-      return 'orange'
-    return 'green'
+      return 'primary'
+    return 'success'
   ).property()
 
   markAsState: (state) ->

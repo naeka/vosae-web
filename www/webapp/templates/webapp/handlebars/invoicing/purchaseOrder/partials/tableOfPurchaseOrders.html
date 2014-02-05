@@ -1,8 +1,8 @@
 {% load i18n templatetag_handlebars %}
 
 {% tplhandlebars "invoicing/partials/_tableOfPurchaseOrders" %}
-  <table class="table table-quotations">
-    <thead class="orange">
+  <table class="table table-quotations table-striped table-primary">
+    <thead>
       <tr>
         <th class="reference">
           {% trans "Reference" context "table-headers" %}
@@ -23,35 +23,39 @@
     </thead>
     <tbody>
       {{#each purchaseOrder in this}}
-      <tr>
-        <td class="reference">
-          {{#linkTo "purchaseOrder.show" controller.session.tenant purchaseOrder}}
-            {{purchaseOrder.ref}}
-          {{/linkTo}}
-        </td>
-        <td class="customer">
-          {{#if purchaseOrder.organization}}
-            {{#linkTo "organization.show" controller.session.tenant purchaseOrder.organization}}
-              {{purchaseOrder.organization.corporateName}}
+        <tr>
+          <td class="reference">
+            {{#linkTo "purchaseOrder.show" controller.session.tenant purchaseOrder}}
+              {{purchaseOrder.ref}}
             {{/linkTo}}
-          {{else}}
-            {{#if purchaseOrder.contanct}}
-              {{#linkTo "contact.show" controller.session.tenant purchaseOrder.contact}}
-                {{purchaseOrder.contact.fullName}}
+          </td>
+          <td class="customer">
+            {{#if purchaseOrder.organization}}
+              {{#linkTo "organization.show" controller.session.tenant purchaseOrder.organization}}
+                {{purchaseOrder.organization.corporateName}}
               {{/linkTo}}
+            {{else}}
+              {{#if purchaseOrder.contanct}}
+                {{#linkTo "contact.show" controller.session.tenant purchaseOrder.contact}}
+                  {{purchaseOrder.contact.fullName}}
+                {{/linkTo}}
+              {{/if}}
             {{/if}}
-          {{/if}}
-        </td>
-        <td class="total">
-          {{#formatMoneyHack purchaseOrder.total purchaseOrder.currentRevision.currency.displaySign}}{{/formatMoneyHack}}
-        </td>
-        <td class="expiration">
-          {{formatDate purchaseOrder.currentRevision.purchaseOrderValidity}}
-        </td>
-        <td class="status">
-          {{purchaseOrder.displayState}}
-        </td>
-      </tr>
+          </td>
+          <td class="total">
+            {{#formatMoneyHack purchaseOrder.total purchaseOrder.currentRevision.currency.displaySign}}{{/formatMoneyHack}}
+          </td>
+          <td class="expiration">
+            {{formatDate purchaseOrder.currentRevision.purchaseOrderValidity}}
+          </td>
+          <td class="status">
+            {{purchaseOrder.displayState}}
+          </td>
+        </tr>
+      {{else}}
+        <tr>
+          <td class="no-data text-center" colspan="5">{% trans "No purchase orders" %}</td>
+        </tr>
       {{/each}}
     </tbody>
   </table>

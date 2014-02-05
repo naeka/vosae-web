@@ -1,23 +1,33 @@
 {% load i18n templatetag_handlebars %}
 
 {% tplhandlebars "settings/partials/_saveSettings" %}
-  <ul class="actions clearfix">
-    {{#if isSaving}}
-    <li class="save">
-      <a class="btn save green">
-        <i class="picto-check"></i>
-        {% trans "Saving..." %}
+  {{#if isSaving}}
+    <div class="btn-group">
+      <a class="btn btn-rounded btn-success">
+        <i class="picto-check"></i>&nbsp;{% trans "Saving..." %}
       </a>
-    </li>
-    {{else}}
-      {{#if isDirty}}
-      <li class="save">
-        <a {{action save content}} class="btn save green">
-          <i class="picto-check"></i>
+    </div>
+  {{else}}
+    {{#if isDirty}}
+      <div class="btn-group">
+        <a {{action save content}} class="btn btn-rounded btn-success">
           {% trans "Save" %}
         </a>
-      </li>
-      {{/if}}
+      </div>
     {{/if}}
-  </ul>
+  {{/if}}
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "settings/partials/_saveDeleteSettings" %}
+  {{#if id}} 
+    {{#unless isSaving}}
+      <div class="btn-group">
+        <a {{action save content}} class="btn btn-rounded btn-primary">
+          {% trans "Delete" %}
+        </a>
+      </div>
+    {{/unless}}
+  {{/if}}
+  {{partial "settings/partials/saveSettings"}}
 {% endtplhandlebars %}

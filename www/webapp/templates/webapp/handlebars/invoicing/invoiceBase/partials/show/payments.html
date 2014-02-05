@@ -9,8 +9,8 @@
       <span class="text">{% trans "Balance" %}</span> <span class="orange">{{formatMoney balance currentRevision.currency.displaySign}}</span>
     </div>
   </div>
-  <table class="table table-invoice-payments">
-    <thead class="{{unbound relatedColor}}">
+  <table class="table table-invoice-payments table-striped table-{{unbound relatedColor}}">
+    <thead>
       <tr>
         <th class="date">{% trans "Date" context "table-headers" %}</th>
         <th class="type">{% trans "Type" context "table-headers" %}</th>
@@ -21,76 +21,73 @@
       </tr>
     </thead>
     <tbody>
-      {{#if payments}}
-        {{#each payments}}
-          {{#if id}}
-            <tr>
-              <td class="date">{{displayDate}}</td>
-              <td class="type">{{displayType}}</td>
-              <td class="cur">{{currency.description}}</td>
-              <td class="amount">{{formatMoney displayAmount currency.displaySign}}</td>
-              <td class="note">{{nl2br displayNote}}</td>
-              <td class="action">
-                -
-                {# <a class="btn btn-small rounded orange" {{action 'deletePayment' this}}>{% trans "Delete" %}</a> #}
-              </td>
-            </tr>        
-          {{else}}
-            <tr>
-              <td class="date">
-                {{view view.paymentDateField
-                  paymentBinding="this"
-                  classNames="edit" }}
-              </td>
-              <td class="type">
-                {{view view.paymentTypeField
-                  contentBinding="Vosae.paymentTypes"
-                  valueBinding="type"
-                  optionLabelPath="content.label"
-                  optionValuePath="content.value"
-                  classNames="edit" }}
-              </td>
-              <td class="cur">
-                {{view view.paymentCurrencyField
-                  contentBinding="controller.currencies"
-                  optionLabelPath="content.description"
-                  optionValuePath="content.symbol"
-                  paymentBinding="this"
-                  classNames="edit" }}
-              </td>
-              <td class="amount">
-                {{view view.paymentAmountField
-                  paymentBinding="this"
-                  placeholder="0"
-                  classNames="edit" }}
-              </td>
-              <td class="note">
-                {{view view.paymentNoteField
-                  valueBinding="note"
-                  resize="none"
-                  placeholder="{% trans 'Description' %}…"
-                  classNames="edit" }}
-              </td>
-              <td class="action">
-                <a class="btn btn-small rounded green" {{action 'savePayment' this}}>
-                  {{#if isSaving}}{% trans "Saving..." %}{{else}}{% trans "Save" %}{{/if}}
-                </a>
-              </td>
-            </tr>
-          {{/if}}
-        {{/each}}
+      {{#each payments}}
+        {{#if id}}
+          <tr>
+            <td class="date">{{displayDate}}</td>
+            <td class="type">{{displayType}}</td>
+            <td class="cur">{{currency.description}}</td>
+            <td class="amount">{{formatMoney displayAmount currency.displaySign}}</td>
+            <td class="note">{{nl2br displayNote}}</td>
+            <td class="action">
+              -{# <a class="btn btn-small rounded orange" {{action 'deletePayment' this}}>{% trans "Delete" %}</a> #}
+            </td>
+          </tr>        
+        {{else}}
+          <tr>
+            <td class="date">
+              {{view view.paymentDateField
+                paymentBinding="this"
+                classNames="form-control form-control-unstyled" }}
+            </td>
+            <td class="type">
+              {{view view.paymentTypeField
+                contentBinding="Vosae.paymentTypes"
+                valueBinding="type"
+                optionLabelPath="content.label"
+                optionValuePath="content.value"
+                classNames="edit" }}
+            </td>
+            <td class="cur">
+              {{view view.paymentCurrencyField
+                contentBinding="controller.currencies"
+                optionLabelPath="content.description"
+                optionValuePath="content.symbol"
+                paymentBinding="this"
+                classNames="edit" }}
+            </td>
+            <td class="amount">
+              {{view view.paymentAmountField
+                paymentBinding="this"
+                placeholder="0"
+                classNames="form-control form-control-unstyled" }}
+            </td>
+            <td class="note">
+              {{view view.paymentNoteField
+                valueBinding="note"
+                resize="none"
+                placeholder="{% trans 'Description' %}…"
+                classNames="form-control form-control-unstyled" }}
+            </td>
+            <td class="action">
+              <a class="btn btn-sm btn-rounded btn-success" {{action 'savePayment' this}}>
+                {{#if isSaving}}{% trans "Saving..." %}{{else}}{% trans "Save" %}{{/if}}
+              </a>
+            </td>
+          </tr>
+        {{/if}}
       {{else}}
         <tr>
           <td colspan="6" class="no-data">
             {% trans "No payments have been received" %}
           </td>
         </tr>
-      {{/if}}
+      {{/each}}
     </tbody>
   </table>
   <p class="table-add-line">
     {{#if canAddPayment}}
-      <a class="btn btn-small rounded green" {{action addPayment}}>
+      <a class="btn btn-sm btn-rounded btn-success" {{action addPayment}}>
         {% trans 'Add payment' %}
       </a>
     {{/if}}

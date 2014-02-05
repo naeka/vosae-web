@@ -37,30 +37,30 @@
   border-radius:         $radius
 
 @mixin input-placeholder($color, $font-weight: normal)
-  input::-webkit-input-placeholder
+  &::-webkit-input-placeholder
     color: $color
     font-weight: $font-weight
-  input:-moz-placeholder
+  &:-moz-placeholder
     color: $color
     font-weight: $font-weight
-  input::-moz-placeholder
+  &::-moz-placeholder
     color: $color
     font-weight: $font-weight
-  input:-ms-input-placeholder
+  &:-ms-input-placeholder
     color: $color
     font-weight: $font-weight
 
 @mixin textarea-placeholder($color, $font-weight: normal)
-  textarea::-webkit-input-placeholder
+  &::-webkit-input-placeholder
     color: $color
     font-weight: $font-weight
-  textarea:-moz-placeholder
+  &:-moz-placeholder
     color: $color
     font-weight: $font-weight
-  textarea::-moz-placeholder
+  &::-moz-placeholder
     color: $color
     font-weight: $font-weight
-  textarea:-ms-input-placeholder
+  &:-ms-input-placeholder
     color: $color
     font-weight: $font-weight
 

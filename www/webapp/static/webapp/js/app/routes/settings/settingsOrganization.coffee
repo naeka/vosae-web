@@ -7,11 +7,6 @@ Vosae.SettingsOrganizationRoute = Ember.Route.extend
       into: 'settings'
       outlet: 'content'
 
-    @render 'settings.organization.actions',
-      into: 'settings'
-      outlet: 'actions'
-      controller: @controller
-
   deactivate: ->
     tenant = @controller.get 'content'
     if tenant.get 'isDirty'

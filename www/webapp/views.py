@@ -34,3 +34,6 @@ def spec(request):
     response = render_to_response("webapp/spec.html", context_instance=RequestContext(request))
     settings.STATICFILES_STORAGE = original_settings_staticfiles_storage
     return response
+
+def test_css(request):
+    return render_to_response('webapp/test-css.html', context_instance=RequestContext(request))

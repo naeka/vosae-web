@@ -1,30 +1,5 @@
 {% load i18n templatetag_handlebars %}
 
-{% tplhandlebars "phone-left-panel" %}
-  <header>
-    <div class="inner">
-      <span class="font-pictos arrow-bottom">s</span>
-      <input id="phone-header-search" type="search" placeholder="{% trans "Search" %}..." />
-    </div>
-  </header>
-  <nav id="phone-global-menu">
-    <ul>
-      <li class="dashboard" {{bindAttr class="isDashboard:active"}}>
-        {{#linkTo "dashboard.show"}}<span class="circle"></span>{% trans "Timeline" %}{{/linkTo}}
-      </li>
-      <li class="contacts" {{bindAttr class="isContacts:active"}}>
-        {{#linkTo "organizations.show"}}<span class="circle"></span>{% trans "Contacts" %}{{/linkTo}}
-      </li>
-      <li class="calendar" {{bindAttr class="isOrganizer:active"}}>
-        {{#linkTo "calendarLists.show"}}<span class="circle"></span>{% trans "Organizer" %}{{/linkTo}}
-      </li>
-      <li class="invoicing" {{bindAttr class="isInvoicing:active"}}>
-        {{#linkTo "invoicing.dashboard"}}<span class="circle"></span>{% trans "Invoicing" %}{{/linkTo}}
-      </li>
-    </ul>
-  </nav>
-{% endtplhandlebars %}
-
 
 {% tplhandlebars "desktop-left-panel" %}
   {{#if controllers.notifications.length}}
@@ -33,30 +8,17 @@
 {% endtplhandlebars %}
 
 
-{% tplhandlebars "phone-right-panel" %}
-  <nav>
-    <a class="button-panel settings">{% trans "Settings" %}</a>
-    <a class="button-panel company">{% trans "My organization" %}</a>
-    <a class="button-panel account">{% trans "My account" %}</a>
-    <br>
-    <br>
-    <span>{% trans "Administrator member" %}</span>
-    <a href="{{ APP_ENDPOINT }}{% url 'signout' %}" class="button-panel logout red">{% trans "Logout" %}</a>
-  </nav>  
-{% endtplhandlebars %}
-
-
 {% tplhandlebars "desktop-right-panel" %}
   <nav>
-    {{#linkTo 'settings.application' controller.session.tenant class="btn btn-panel yellow"}}
+    {{#linkTo 'settings.application' controller.session.tenant class="btn btn-panel btn-yellow"}}
       <i class="picto-settings"></i>
       {% trans "Settings" %}
     {{/linkTo}}
     <div class="btn-group tenant">
-      {{#linkTo 'settings.organization' controller.session.tenant class="btn yellow" tagName="button"}}
+      {{#linkTo 'settings.organization' controller.session.tenant class="btn btn-yellow" tagName="button"}}
         <i class="picto-documents"></i> {% trans "My organization" %}
       {{/linkTo}}
-      <button class="btn dropdown-toggle yellow" data-toggle="dropdown">
+      <button class="btn dropdown-toggle btn-yellow" data-toggle="dropdown">
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu">
@@ -77,12 +39,12 @@
     </div>
     <br>
     <br>
-    <a href="mailto:support@vosae.com" target="_blank" class="btn btn-panel yellow">
+    <a href="mailto:support@vosae.com" target="_blank" class="btn btn-panel btn-yellow">
       <i class="picto-mail"></i> {% trans "Support" %}
     </a>
     <br>
     <span class="current-user">{% trans "Administrator member" %}</span>
-    <a href="{{unbound APP_ENDPOINT }}{% url 'signout' %}" class="btn btn-panel orange">
+    <a href="{{unbound APP_ENDPOINT }}{% url 'signout' %}" class="btn btn-panel btn-danger">
       <i class="picto-lock"></i>
       {% trans "Logout" %}
     </a>

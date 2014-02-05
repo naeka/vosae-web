@@ -1,0 +1,8 @@
+{% load templatetag_handlebars %}
+
+{% tplhandlebars "bootstrap/forms/field" %}
+  {{view view.labelView viewName="labelView"}}
+  {{view view.inputField viewName="inputField"}}
+  {{view view.errorsView}}
+  {{view view.helpView}}
+{% endtplhandlebars %}

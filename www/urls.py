@@ -12,7 +12,8 @@ if settings.DEBUG:
     urlpatterns += staticfiles_urlpatterns()
     urlpatterns += patterns(
         'webapp.views',
-        url(r'^spec/$', 'spec', name="spec")
+        url(r'^spec/$', 'spec', name="spec"),
+        url(r'^test-css/$', 'test_css', name="test-css")
     )
 
 urlpatterns += patterns(

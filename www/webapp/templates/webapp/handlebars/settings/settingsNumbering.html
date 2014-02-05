@@ -3,6 +3,7 @@
 {% tplhandlebars "settings/numbering" %}
   <header>
     <h3>{% trans "Invoicing settings" %} &nbsp;>&nbsp; {% trans "Numbering" %}</h3>
+    <div class="btn-toolbar pull-right">{{partial "settings/partials/saveSettings"}}</div>
   </header>
   <section class="clearfix">
     <div class="inner">
@@ -18,7 +19,7 @@
                 valueBinding="invoicing.numbering.scheme"
                 optionValuePath="content.value"
                 optionLabelPath="content.label"
-                containerCssClass="green" }}
+                containerCssClass="success" }}
             </td>
           </tr>
           {{#unless invoicing.numbering.schemeIsNumber}}
@@ -32,7 +33,7 @@
                 valueBinding="invoicing.numbering.dateFormat"
                 optionValuePath="content.value"
                 optionLabelPath="content.label"
-                containerCssClass="green" }}
+                containerCssClass="success" }}
             </td>
           </tr>
           <tr>
@@ -45,7 +46,7 @@
                 valueBinding="invoicing.numbering.separator"
                 optionValuePath="content.value"
                 optionLabelPath="content.label"
-                containerCssClass="green" }}
+                containerCssClass="success" }}
             </td>
           </tr>
           <tr>

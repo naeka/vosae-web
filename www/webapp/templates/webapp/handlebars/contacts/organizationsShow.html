@@ -7,13 +7,13 @@
     </h1>
     <div class="btn-toolbar pull-right">
       <div class="btn-group">
-      {{#linkTo "organizations.add" controller.session.tenant class="btn orange"}}
+      {{#linkTo "organizations.add" controller.session.tenant class="btn btn-primary"}}
         <i class="picto-add"></i>
         {% trans "Organization" %}
       {{/linkTo}}
       </div>
       <div class="btn-group">
-      {{#linkTo "contacts.add" controller.session.tenant class="btn green"}}
+      {{#linkTo "contacts.add" controller.session.tenant class="btn btn-success"}}
         <i class="picto-add"></i>
         {% trans "Contact" context "contacts" %}
       {{/linkTo}}
@@ -29,15 +29,15 @@
         </span>
       </div>
       <div class="pull-left">
-        {{#linkTo "contacts.show" controller.session.tenant class="all orange helptour-allcontacts"}}{% trans "See all contacts" %}{{/linkTo}}
+        {{#linkTo "contacts.show" controller.session.tenant class="all text-orange helptour-allcontacts"}}{% trans "See all contacts" %}{{/linkTo}}
         
         {{#linkTo "contacts.show" controller.session.tenant tagName="span" class="contacts-counter"}}
-          {{trans "<span class='green'>{{count}}</span> Contact" plural="<span class='green'>{{count}}</span> Contacts" countBinding="Vosae.metaForContact.totalCount" }}
+          {{trans "<span class='text-green'>{{count}}</span> Contact" plural="<span class='text-green'>{{count}}</span> Contacts" countBinding="Vosae.metaForContact.totalCount" }}
         {{/linkTo}}
       </div>
       <div class="media-body text-right organizations-counter">
-        {{trans "In <span class='orange'>{{count}}</span> company"
-          plural="In <span class='orange'>{{count}}</span> companies"
+        {{trans "In <span class='text-orange'>{{count}}</span> company"
+          plural="In <span class='text-orange'>{{count}}</span> companies"
           countBinding="Vosae.metaForOrganization.totalCount" }}
       </div>
     </div>
@@ -50,7 +50,7 @@
       {{/with}}
       {{#if meta.next}}
         <p class="pagination text-center">
-          <a class="btn grey" {{action 'getNextPagination'}}>
+          <a class="btn btn-default" {{action 'getNextPagination'}}>
             {% trans "More" context "display more" %}
           </a>
         </p>

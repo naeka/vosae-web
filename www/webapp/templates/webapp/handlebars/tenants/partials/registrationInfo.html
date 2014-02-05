@@ -1,0 +1,110 @@
+{% load i18n templatetag_handlebars braces %}
+
+{% tplhandlebars "tenants/add/registrationInfo/_base" %}
+  <div class="row">
+    <div class="col-xs-4">
+      {% braces %}
+        view Bootstrap.Forms.TextField 
+        label="{% trans "Business entity" %}"
+        valueBinding="registrationInfo.businessEntity"
+        maxLength="64"
+        inputClassNames="form-control-settings"
+      {% endbraces %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      {% braces %}
+        view Bootstrap.Forms.TextField 
+        label="{% trans "Share capital" %}"
+        valueBinding="registrationInfo.shareCapital"
+        maxLength="64"
+        inputClassNames="form-control-settings"
+      {% endbraces %}
+    </div>
+  </div>
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "tenants/add/registrationInfo/mixins/_EU" %}
+  <div class="row">
+    <div class="col-xs-4">
+      {% braces %}
+        view Bootstrap.Forms.TextField 
+        label="{% trans "VAT number" %}"
+        valueBinding="registrationInfo.vatNumber"
+        maxLength="64"
+        inputClassNames="form-control-settings"
+      {% endbraces %}
+    </div>
+  </div>
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "tenants/add/registrationInfo/BE" %}
+  {{partial "tenants/add/registrationInfo/base"}}
+  {{partial "tenants/add/registrationInfo/mixins/EU"}}
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "tenants/add/registrationInfo/CH" %}
+  {{partial "tenants/add/registrationInfo/base"}}
+
+  <div class="row">
+    <div class="col-xs-4">
+      {% braces %}
+        view Bootstrap.Forms.TextField 
+        label="{% trans "VAT number" %}"
+        valueBinding="registrationInfo.vatNumber"
+        maxLength="64"
+        inputClassNames="form-control-settings"
+      {% endbraces %}
+    </div>
+  </div>
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "tenants/add/registrationInfo/FR" %}
+  {{partial "tenants/add/registrationInfo/base"}}
+  {{partial "tenants/add/registrationInfo/mixins/EU"}}
+  
+  <div class="row">
+    <div class="col-xs-4">
+      {% braces %}
+        view Bootstrap.Forms.TextField 
+        label="{% trans "Siret" %}"
+        valueBinding="registrationInfo.siret"
+        maxLength="64"
+        inputClassNames="form-control-settings"
+      {% endbraces %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      {% braces %}
+        view Bootstrap.Forms.TextField 
+        label="{% trans "RCS number" %}"
+        valueBinding="registrationInfo.rcsNumber"
+        maxLength="64"
+        inputClassNames="form-control-settings"
+      {% endbraces %}
+    </div>
+  </div>
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "tenants/add/registrationInfo/GB" %}
+  {{partial "tenants/add/registrationInfo/base"}}
+  {{partial "tenants/add/registrationInfo/mixins/EU"}}
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "tenants/add/registrationInfo/LU" %}
+  {{partial "tenants/add/registrationInfo/base"}}
+  {{partial "tenants/add/registrationInfo/mixins/EU"}}
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "tenants/add/registrationInfo/US" %}
+  {{partial "tenants/add/registrationInfo/base"}}
+{% endtplhandlebars %}

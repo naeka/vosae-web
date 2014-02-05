@@ -18,12 +18,12 @@
                 valueBinding="content.label"
                 maxlength="64"
                 disabledBinding="content.key"
-                classNames="edit-settings" 
+                classNames="form-control form-control-settings inline-block" 
                 placeholder="{% trans 'Name here' %}" }}
 
               {{#if content.label}}
                 {{#unless content.key}}
-                <a {{action save content}} class="btn btn-small addApiKey rounded green">
+                <a {{action save content}} class="btn btn-sm addApiKey btn-rounded btn-success inline-block">
                   {% trans "Generate API key" %}
                 </a>
                 {{/unless}}
@@ -39,9 +39,9 @@
               {{view Vosae.AutoGrowTextField
                 valueBinding="content.key"
                 disabled="true"
-                classNames="edit-settings" }}
+                classNames="form-control form-control-settings" }}
               <p>{% trans "You don't need to memorize this key. You should not have to fill it more than once." %}</p>
-              <p><a {{action add}} class="btn btn-small rounded green">{% trans "Add another API key" %}</a></p>
+              <p><a {{action add}} class="btn btn-sm btn-rounded btn-success inline-block">{% trans "Add another API key" %}</a></p>
             </td>
           </tr>
           {{/if}}
@@ -55,8 +55,8 @@
   <section class="clearfix">
     <div class="inner"> 
       <h4>{% trans "Your applications" %}</h4>
-      <table class="table table-api-keys">
-        <thead class="green">
+      <table class="table table-api-keys table-success">
+        <thead>
           <th>{% trans "Name" %}</th>
           <th>{% trans "Created date" %}</th>
           <th></th>
@@ -67,7 +67,7 @@
             <td>{{apiKey.label}}</td>
             <td>{{formatDate apiKey.createdAt format="LLLL"}}</td>
             <td class="revoke">
-              <a {{action delete apiKey}} class="btn btn-small rounded orange">
+              <a {{action delete apiKey}} class="btn btn-sm btn-rounded btn-primary">
                 {% trans "Revoke" %}
               </a>
             </td>

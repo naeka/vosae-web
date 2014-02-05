@@ -126,7 +126,7 @@ Vosae.VosaeEventEditView = Em.View.extend
 
 
 Vosae.VosaeEventEditSettingsView = Em.View.extend Vosae.HelpTour,
-  classNames: ["app-organizer", "page-edit-event-settings", "page-settings"]
+  classNames: ["page-edit-event-settings", "page-settings"]
 
   initHelpTour: ->
     helpTour = @_super()

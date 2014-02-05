@@ -1,0 +1,440 @@
+{% load i18n statici18n templatetag_handlebars %}
+{% load static from staticfiles %}
+{% get_current_language as LANGUAGE_CODE %}
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+  <head>
+    <link href="{% static 'webapp/build/webapp.css' %}" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="{% static 'webapp/build/vendor.js' %}"></script>
+  </head>
+  <body style="padding: 0 20px;">
+
+    <!-- Typography -->
+    <section>
+      <div class="page-header">
+        <h1>Typography</h1>
+      </div>
+      <h3>Headings</h3>
+      <div class="bs-docs-example">
+        <h1>h1. Heading 1</h1>
+        <h2>h2. Heading 2</h2>
+        <h3>h3. Heading 3</h3>
+        <h4>h4. Heading 4</h4>
+        <h5>h5. Heading 5</h5>
+        <h6>h6. Heading 6</h6>
+      </div>
+    </section>
+
+    <!-- Tables -->
+    <section>
+      <div class="page-header">
+        <h1>Tables</h1>
+      </div>
+      <h3>Default styles</h3>
+      <div class="bs-docs-example">
+        <table class="table orange">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Username</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Larry</td>
+              <td>the Bird</td>
+              <td>@twitter</td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table green">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Username</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Larry</td>
+              <td>the Bird</td>
+              <td>@twitter</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Striped</h3>
+      <div class="bs-docs-example">
+        <table class="table table-striped table-primary">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Username</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Larry</td>
+              <td>the Bird</td>
+              <td>@twitter</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Hover</h3>
+      <div class="bs-docs-example">
+        <table class="table table-striped table-hover table-success">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Username</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Larry</td>
+              <td>the Bird</td>
+              <td>@twitter</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Forms -->
+    <section>
+      <div class="page-header">
+        <h1>Forms</h1>
+      </div>
+      <h3>Input</h3>
+      <form class="bs-docs-example">
+        <div class="form-group">
+          <label>Default</label>
+          <input type="text" class="form-control" placeholder="Text input"><br>
+          <input type="text" class="form-control input-sm" placeholder="Text input small">
+        </div>
+        <div class="form-group">
+          <label>Settings</label>
+          <input type="text" class="form-control form-control-settings" placeholder="Text input"><br>
+          <input type="text" class="form-control form-control-settings input-sm" placeholder="Text input small">
+        </div>
+        <div class="form-group">
+          <label>Unstyled</label>
+          <input type="text" class="form-control form-control-unstyled" placeholder="Text input"><br>
+          <input type="text" class="form-control form-control-unstyled input-sm" placeholder="Text input small">
+        </div>
+      </form>
+    </section>
+
+    <!-- Buttons -->
+    <section>
+      <div class="page-header">
+        <h1>Buttons</h1>
+      </div>
+      <h3>Options</h3>
+      <div class="bs-docs-example">
+        <button type="button" class="btn btn-default">Default</button>
+        <button type="button" class="btn btn-primary">Primary</button>
+        <button type="button" class="btn btn-success">Success</button>
+        <button type="button" class="btn btn-info">Info</button>
+        <button type="button" class="btn btn-warning">Warning</button>
+        <button type="button" class="btn btn-danger">Danger</button>
+        <button type="button" class="btn btn-link">Link</button>
+      </div>
+      <h3>Sizes</h3>
+      <div class="bs-docs-example">
+        <p>
+          <button type="button" class="btn btn-primary btn-lg">Large button</button>
+          <button type="button" class="btn btn-success btn-lg">Large button</button>
+          <button type="button" class="btn btn-default btn-lg">Large button</button>
+        </p>
+        <p>
+          <button type="button" class="btn btn-primary">Default button</button>
+          <button type="button" class="btn btn-success">Default button</button>
+          <button type="button" class="btn btn-default">Default button</button>
+        </p>
+        <p>
+          <button type="button" class="btn btn-primary btn-sm">Small button</button>
+          <button type="button" class="btn btn-success btn-sm">Small button</button>
+          <button type="button" class="btn btn-default btn-sm">Small button</button>
+        </p>
+      </div>
+      <h3>Disabled</h3>
+      <div class="bs-docs-example">
+        <button type="button" class="btn btn-primary" disabled="disabled">Primary button</button>
+        <button type="button" class="btn btn-success" disabled="disabled">Success button</button>
+        <button type="button" class="btn btn-default" disabled="disabled">Button</button>
+      </div>
+      <h3>With glyphicons</h3>
+      <div class="bs-docs-example">
+        <p>
+          <button type="button" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-plus"></span> Large button</button>
+          <button type="button" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-remove"></span> Large button</button>
+          <button type="button" class="btn btn-default btn-lg">Large button <span class="glyphicon glyphicon-chevron-down"></span></button>
+          <button type="button" class="btn btn-default btn-lg">Large button <span class="caret"></span></button>
+        </p>
+        <p>
+          <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>  Default button</button>
+          <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-remove"></span>  Default button</button>
+          <button type="button" class="btn btn-default">Default button <span class="glyphicon glyphicon-chevron-down"></button>
+          <button type="button" class="btn btn-default">Default button <span class="caret"></button>
+        </p>
+        <p>
+          <button type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span> Small button</span></button>
+          <button type="button" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span> Small button</span></button>
+          <button type="button" class="btn btn-default btn-sm">Small button <span class="glyphicon glyphicon-chevron-down"></span></button>
+          <button type="button" class="btn btn-default btn-sm">Small button <span class="caret"></span></button>
+        </p>
+      </div>
+      <h3>Single button dropdowns<h3>
+        <div class="bs-docs-example">
+          <div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Default <span class="caret"></span></button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </div>&nbsp;<!-- /btn-group -->
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Primary <span class="caret"></span></button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </div>&nbsp;<!-- /btn-group -->
+          <div class="btn-group">
+            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">Success <span class="caret"></span></button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </div>&nbsp;<!-- /btn-group -->
+          <div class="btn-group">
+            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">Info <span class="caret"></span></button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </div>&nbsp;<!-- /btn-group -->
+          <div class="btn-group">
+            <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">Warning <span class="caret"></span></button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </div>&nbsp;<!-- /btn-group -->
+          <div class="btn-group">
+            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">Danger <span class="caret"></span></button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </div>&nbsp;<!-- /btn-group -->
+        </div>
+        <h3>Split button dropdowns</h3>
+        <div class="bs-docs-example">
+          <div class="btn-group">
+            <button type="button" class="btn btn-default">Default</button>
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+              <span class="caret"></span>
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </div>&nbsp;<!-- /btn-group -->
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary">Primary</button>
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+              <span class="caret"></span>
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </div>&nbsp;<!-- /btn-group -->
+          <div class="btn-group">
+            <button type="button" class="btn btn-success">Success</button>
+            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+              <span class="caret"></span>
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </div>&nbsp;<!-- /btn-group -->
+          <div class="btn-group">
+            <button type="button" class="btn btn-info">Info</button>
+            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+              <span class="caret"></span>
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </div>&nbsp;<!-- /btn-group -->
+          <div class="btn-group">
+            <button type="button" class="btn btn-warning">Warning</button>
+            <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
+              <span class="caret"></span>
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </div>&nbsp;<!-- /btn-group -->
+          <div class="btn-group">
+            <button type="button" class="btn btn-danger">Danger</button>
+            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+              <span class="caret"></span>
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </div>&nbsp;<!-- /btn-group -->
+        </div>
+    </section>
+
+    <!-- Navs -->
+    <section>
+      <div class="page-header">
+        <h1>Navs</h1>
+      </div>
+      <h3>Tabs</h3>
+      <div class="bs-docs-example">
+        <ul class="nav nav-tabs">
+          <li class="active pull-left"><a href="#">Tableau de bord</a></li>
+          <li class="pull-right"><a href="#">Articles</a></li>
+          <li class="pull-right"><a href="#">Factures</a></li>
+          <li class="pull-right"><a href="#">Bons de commande</a></li>
+          <li class="pull-right"><a href="#">Devis</a></li>
+        </ul>
+      </div>
+      <h3>Tabs with dropdowns</h3>
+      <div class="bs-docs-example">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#">Tableau de bord</a></li>
+          <li class="pull-right dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              Autres <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Bons de commande</a></li>
+              <li><a href="#">Articles</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Another link</a></li>
+            </ul>
+          </li>
+          <li class="pull-right"><a href="#">Devis</a></li>
+          <li class="pull-right"><a href="#">Factures</a></li>
+        </ul>
+      </div>
+    </section>
+  </body>
+</html>

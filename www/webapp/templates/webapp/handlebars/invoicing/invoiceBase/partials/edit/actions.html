@@ -3,7 +3,7 @@
 {% tplhandlebars "invoiceBase/edit/_actions" %}
   {{#if isDeletable}}
     <div class="btn-group">
-      <a class="btn grey" {{action 'delete' content}}>
+      <a class="btn btn-default" {{action 'delete' content}}>
         {% trans "Delete" %}
       </a>
     </div>

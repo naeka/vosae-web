@@ -6,8 +6,8 @@
   </header>
   <section class="clearfix">
     <div class="inner">
-      <table class="table table-taxes">
-        <thead class="green">
+      <table class="table table-taxes table-success">
+        <thead>
           <th>{% trans "Name" %}</th>
           <th>{% trans "Rate" %}</th>
         </thead>
@@ -21,7 +21,7 @@
         </tbody>
       </table>
       <br/>
-      {{#linkTo 'settings.addTax' controller.session.tenant class="pull-right btn btn-small green rounded"}}
+      {{#linkTo 'settings.addTax' controller.session.tenant class="pull-right btn btn-sm btn-success btn-rounded"}}
         {% trans "Add" %}
       {{/linkTo}}
     </div>

@@ -86,6 +86,10 @@ Vosae.InvoiceBaseEditView = Em.View.extend
   # ============================
   organizationSearchField: Vosae.Components.OrganizationSearchField.extend
     currentAddress: null
+    
+    init: ->
+      @_super()
+      @classNames.addObject @get('parentView.controller.content.relatedColor')
 
     ajax: ->
       dict = 

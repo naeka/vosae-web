@@ -1,11 +1,11 @@
-{% load i18n templatetag_handlebars %}
+{% load i18n templatetag_handlebars braces %}
 
 {% tplhandlebars "tenants/show" %}
 
   <h3>{% trans "Organization you want to work with..." %}</h3>
 
   <section>
-    <ul>
+    <ul class="list-unstyled">
       {{#each tenant in content}}
         <li {{action "setAsCurrentTenant" tenant}} class="tenant-card">
           <div class="inner">
@@ -18,9 +18,7 @@
   </section>
 
   <div class="form-actions">
-    {{#linkTo "tenants.add" class="btn green"}}
-      {% trans "Add a new organization" %}
-    {{/linkTo}}
+    {{#linkTo "tenants.add" class="btn btn-success"}}{% trans "Add a new organization" %}{{/linkTo}}
   </div>
 
 {% endtplhandlebars %}

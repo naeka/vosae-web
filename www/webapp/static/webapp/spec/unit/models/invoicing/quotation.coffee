@@ -490,13 +490,13 @@ describe 'Vosae.Quotation', ->
     # Test
     expect(quotation.get('isGeneratingPdfState')).toEqual false
 
-  it 'relatedColor property should return orange', ->
+  it 'relatedColor property should return primary', ->
     # Setup
     store.adapterForType(Vosae.Quotation).load store, Vosae.Quotation, {id: 1}
     quotation = store.find Vosae.Quotation, 1
 
     # Test
-    expect(quotation.get('relatedColor')).toEqual "orange"
+    expect(quotation.get('relatedColor')).toEqual "primary"
 
   it 'isInvoice property should return false', ->
     # Setup

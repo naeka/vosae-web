@@ -557,13 +557,13 @@ describe 'Vosae.Invoice', ->
     # Test
     expect(invoice.get('isGeneratingPdfState')).toEqual false
 
-  it 'relatedColor property should return green', ->
+  it 'relatedColor property should return success', ->
     # Setup
     store.adapterForType(Vosae.Invoice).load store, Vosae.Invoice, {id: 1}
     invoice = store.find Vosae.Invoice, 1
 
     # Test
-    expect(invoice.get('relatedColor')).toEqual "green"
+    expect(invoice.get('relatedColor')).toEqual "success"
 
   it 'isInvoice property should return false', ->
     # Setup

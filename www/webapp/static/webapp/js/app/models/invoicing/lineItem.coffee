@@ -51,12 +51,12 @@ Vosae.LineItem = DS.Model.extend
   ).property("quantity")
 
   didLoad: ->
-    # hack (bug on tax isLoaded)
-    # This should probably be removed
-    if @get('tax') and not @get('tax.isLoaded')
-      @get('tax').one 'isLoaded', @, ->
-        Ember.run.next @, ->
-          @propertyDidChange('tax')
+    # This hack is used to refresh the `taxes` computed property
+    # on model InvoiceRevision once the current tax is loaded
+    tax = @get 'tax'
+    if tax? and not tax.get('isLoaded')
+      tax.one 'didLoad', @, ->
+        @propertyDidChange('tax')
 
   VAT: ->
     if @get("quantity") and @get("unitPrice") and @get("tax.isLoaded")

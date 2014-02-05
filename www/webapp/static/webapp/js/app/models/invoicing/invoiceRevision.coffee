@@ -177,6 +177,7 @@ Vosae.InvoiceRevision = DS.Model.extend
 
   # Returns an array with each tax amount
   taxes: (->
+    # console.log "here"
     groupedTaxes = []
     @get("lineItems").toArray().forEach (lineItem) ->
       lineItemTax = lineItem.VAT()

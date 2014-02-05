@@ -4,6 +4,7 @@ Vosae.InvoiceRevision = DS.Model.extend
   quotationValidity: DS.attr('date')  # date validité du devis
   invoicingDate: DS.attr('date')  # date de création de la facture
   dueDate: DS.attr('date')  # echeance de paiement
+  purchaseOrderDate: DS.attr('date') # date de création du bon de commande
   creditNoteEmissionDate: DS.attr('date')  # date d'emission de l'avoir
   customPaymentConditions: DS.attr('string')  # conditions de réglement, peut remplacer la dueDate, qui fait alors office d'estimation
   revision: DS.attr('string')
@@ -140,6 +141,13 @@ Vosae.InvoiceRevision = DS.Model.extend
       return moment(@get("creditNoteEmissionDate")).format "LL"
     return pgettext("date", "undefined")
   ).property("creditNoteEmissionDate")
+
+  # Returns the purchase order creation date formated
+  displayPurchaseOrderDate: (->
+    if @get("purchaseOrderDate")?
+      return moment(@get("purchaseOrderDate")).format "LL"
+    return pgettext("date", "undefined")
+  ).property("purchaseOrderDate")
 
   # Returns quotation total
   total: (->

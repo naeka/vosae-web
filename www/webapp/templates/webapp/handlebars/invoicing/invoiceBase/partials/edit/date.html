@@ -6,25 +6,34 @@
       <i class="picto-agenda"></i>
       {{#if isQuotation}}
         {% trans "Quotation date" %}:
-      {{else}}
-        {{#if isPurchaseOrder}}
-          {% trans "Purchase order date" %}:        
-        {{else}}
-          {{#if isInvoice}}
-            {% trans "Invoicing date" %}:
-          {{/if}}       
-        {{/if}}
       {{/if}}
+
+      {{#if isPurchaseOrder}}
+        {% trans "Purchase order date" %}:        
+      {{/if}}
+
+      {{#if isInvoice}}
+        {% trans "Invoicing date" %}:
+      {{/if}}       
     </label>
     <span class="helptour-datecreated">
+      {{#if isQuotation}}
+        {{currentRevision.displayQuotationDate}}
+        {{view view.quotationDateField
+          currentRevisionBinding="currentRevision"
+          classNames="edit" }}
+      {{/if}}
+
+      {{#if isPurchaseOrder}}
+        {{currentRevision.displayPurchaseOrderDate}}
+        {{view view.purchaseOrderDateField
+          currentRevisionBinding="currentRevision"
+          classNames="edit" }}
+      {{/if}}
+
       {{#if isInvoice}}
         {{currentRevision.displayInvoicingDate}}
         {{view view.invoicingDateField
-          currentRevisionBinding="currentRevision"
-          classNames="edit" }}
-      {{else}}
-        {{currentRevision.displayQuotationDate}}
-        {{view view.quotationDateField
           currentRevisionBinding="currentRevision"
           classNames="edit" }}
       {{/if}}

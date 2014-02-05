@@ -9,7 +9,7 @@
       {{/if}}
 
       {{#if isPurchaseOrder}}
-        {% trans "Purchase order" %}:
+        {% trans "Purchase order date" %}:
       {{/if}}
       
       {{#if isInvoice}}
@@ -26,7 +26,7 @@
       {{/if}}
 
       {{#if isPurchaseOrder}}
-        {{unbound currentRevision.displayQuotationDate}}
+        {{unbound currentRevision.displayPurchaseOrderDate}}
       {{/if}}
       
       {{#if isInvoice}}

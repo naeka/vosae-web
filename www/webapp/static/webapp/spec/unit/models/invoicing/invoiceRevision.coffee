@@ -181,7 +181,6 @@ describe 'Vosae.InvoiceRevision', ->
     # Setup
     store.adapterForType(Vosae.InvoiceRevision).load store, Vosae.InvoiceRevision, {id: 1, purchase_order_date: "2013-07-17T14:51:37+02:00"}
     invoiceRevision = store.find Vosae.InvoiceRevision, 1
-    alert(invoiceRevision.get('purchaseOrderDate'))
 
     # Test
     expect(invoiceRevision.get('displayPurchaseOrderDate')).toEqual "July 17 2013"

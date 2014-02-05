@@ -144,12 +144,12 @@ describe 'Vosae.CreditNote', ->
   it 'group belongsTo relationship', ->
     # Setup
     store.adapterForType(Vosae.Invoice).load store, Vosae.Invoice, {id: 1}
-    invoice = store.find Vosae.Invoice, 1
-    store.adapterForType(Vosae.CreditNote).load store, Vosae.CreditNote, {id: 1, related_invoice: "/api/v1/invoice/1/"}
+    group = store.find Vosae.InvoiceBaseGroup, 1
+    store.adapterForType(Vosae.CreditNote).load store, Vosae.CreditNote, {id: 1, group: "/api/v1/invoice_base_group/1/"}
     creditNote = store.find Vosae.CreditNote, 1
 
     # Test
-    expect(creditNote.get('relatedInvoice')).toEqual invoice
+    expect(creditNote.get('group')).toEqual group
 
   it 'relatedInvoice belongsTo relationship', ->
     # Setup

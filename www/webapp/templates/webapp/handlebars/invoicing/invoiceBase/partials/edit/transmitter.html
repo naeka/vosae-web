@@ -5,7 +5,7 @@
     <div class="logo">
       {{#if controller.session.tenant.logoUri}}
         <div class="inner">
-          <img src="{{unbound controller.session.tenant.logoUri}}"/>
+          <img {{bindAttr src="controller.session.tenant.logoUri"}}/>
         </div>
       {{/if}}
     </div>

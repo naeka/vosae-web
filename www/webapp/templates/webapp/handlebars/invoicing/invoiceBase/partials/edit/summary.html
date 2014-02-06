@@ -25,7 +25,7 @@
         <td>{% trans "TOTAL (incl. tax)" %}</td>
         <td>
           <div class="inner">
-            {{formatMoney currentRevision.totalVAT currentRevision.currency.displaySign}}
+            {{formatMoney currentRevision.totalPlusTax currentRevision.currency.displaySign}}
           </div>
         </td>
       </tr>

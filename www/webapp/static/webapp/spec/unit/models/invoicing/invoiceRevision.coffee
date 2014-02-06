@@ -230,7 +230,7 @@ describe 'Vosae.InvoiceRevision', ->
     # Test
     expect(invoiceRevision.get('total')).toEqual 73.92
 
-  it 'totalVAT property should add the total with taxes of each lineItems', ->
+  it 'totalPlusTax property should add the total with taxes of each lineItems', ->
     # Setup
     store.adapterForType(Vosae.Tax).load store, Vosae.Tax, {id:1, rate: 0.10}
     store.adapterForType(Vosae.Tax).load store, Vosae.Tax, {id:2, rate: 0.20}
@@ -243,7 +243,7 @@ describe 'Vosae.InvoiceRevision', ->
     invoiceRevision = store.find Vosae.InvoiceRevision, 1
 
     # Test
-    expect(invoiceRevision.get('totalVAT')).toEqual 86.612
+    expect(invoiceRevision.get('totalPlusTax')).toEqual 86.612
 
   it 'displayTotal property should format and round the total', ->
     # Setup
@@ -258,7 +258,7 @@ describe 'Vosae.InvoiceRevision', ->
     # Test
     expect(invoiceRevision.get('displayTotal')).toEqual "73.92"
 
-  it 'dispayTotalVAT property should format and round the totalVAT', ->
+  it 'dispayTotalPlusTax property should format and round the totalPlusTax', ->
     # Setup
     store.adapterForType(Vosae.Tax).load store, Vosae.Tax, {id:1, rate: 0.10}
     store.adapterForType(Vosae.Tax).load store, Vosae.Tax, {id:2, rate: 0.20}
@@ -271,7 +271,7 @@ describe 'Vosae.InvoiceRevision', ->
     invoiceRevision = store.find Vosae.InvoiceRevision, 1
 
     # Test
-    expect(invoiceRevision.get('displayTotalVAT')).toEqual "86.61"
+    expect(invoiceRevision.get('displayTotalPlusTax')).toEqual "86.61"
 
   it 'taxes property should return a dict with total amount for each taxes', ->
     # Setup

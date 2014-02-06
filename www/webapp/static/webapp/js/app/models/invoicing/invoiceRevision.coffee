@@ -158,10 +158,10 @@ Vosae.InvoiceRevision = DS.Model.extend
   ).property("lineItems.@each.quantity", "lineItems.@each.unitPrice")
 
   # Returns quotation total VAT
-  totalVAT: (->
+  totalPlusTax: (->
     total = 0
     @get("lineItems").forEach (item) ->
-      total += item.get("totalVAT")
+      total += item.get("totalPlusTax")
     total
   ).property("lineItems.@each.quantity", "lineItems.@each.unitPrice", "lineItems.@each.tax")
 
@@ -171,9 +171,9 @@ Vosae.InvoiceRevision = DS.Model.extend
   ).property("total")
 
   # Returns the total formated with accounting
-  displayTotalVAT: (->
-    accounting.formatMoney @get('totalVAT')
-  ).property("totalVAT")
+  displayTotalPlusTax: (->
+    accounting.formatMoney @get('totalPlusTax')
+  ).property("totalPlusTax")
 
   # Returns an array with each tax amount
   taxes: (->

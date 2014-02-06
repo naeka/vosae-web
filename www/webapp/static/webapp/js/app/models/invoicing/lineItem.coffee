@@ -19,7 +19,7 @@ Vosae.LineItem = DS.Model.extend
     0
   ).property("quantity", "unitPrice")
 
-  totalVAT: (->
+  totalPlusTax: (->
     if @get("quantity") and @get("unitPrice") and @get("tax.isLoaded")
       total = (@get("quantity") * @get("unitPrice"))
       return total + (total * @get("tax.rate"))
@@ -32,11 +32,11 @@ Vosae.LineItem = DS.Model.extend
     accounting.formatMoney 0
   ).property("total")
 
-  displayTotalVAT: (->
-    if @get('totalVAT') 
-      return accounting.formatMoney @get('totalVAT')
+  displayTotalPlusTax: (->
+    if @get('totalPlusTax') 
+      return accounting.formatMoney @get('totalPlusTax')
     accounting.formatMoney 0
-  ).property("totalVAT")
+  ).property("totalPlusTax")
 
   displayUnitPrice: (->
     if @get("unitPrice")

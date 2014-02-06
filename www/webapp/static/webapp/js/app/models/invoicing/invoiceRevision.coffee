@@ -102,6 +102,13 @@ Vosae.InvoiceRevision = DS.Model.extend
         ids.addObject id
     ids
 
+  # Return lineItem's index in the hasMany `lineItems`
+  getLineItemIndex: (lineItem) ->
+    index = @get('lineItems').indexOf lineItem
+    if index != -1
+      return index
+    undefined
+
   # Returns the quotation date formated
   displayQuotationDate: (->
     if @get("quotationDate")?

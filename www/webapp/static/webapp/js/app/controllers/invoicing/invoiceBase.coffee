@@ -2,11 +2,27 @@ Vosae.InvoiceBaseController = Em.ObjectController.extend
   attachmentUploads: []
 
   actions:
+    setLineItemAsOptional: (lineItem) ->
+      console.log "setLineItemAsOptional"
+
+    addLineItemAbove: (lineItem) ->
+      currentRevision = @get "currentRevision"
+      index = currentRevision.getLineItemIndex lineItem
+      newLineItem = @get('content.transaction').createRecord Vosae.LineItem
+      unless typeof index is `undefined`
+        currentRevision.get('lineItems').insertAt index, newLineItem
+
+    addLineItemBelow: (lineItem) ->
+      currentRevision = @get "currentRevision"
+      index = currentRevision.getLineItemIndex lineItem
+      newLineItem = @get('content.transaction').createRecord Vosae.LineItem
+      unless typeof index is `undefined`
+        currentRevision.get('lineItems').insertAt index+1, newLineItem
+
     addLineItem: ->
       @get("currentRevision.lineItems").createRecord()
 
     deleteLineItem: (lineItem) ->
-      @preventStateError()
       Vosae.ConfirmPopupComponent.open
         message: gettext 'Do you really want to delete this line?'
         callback: (opts, event) =>
@@ -28,28 +44,6 @@ Vosae.InvoiceBaseController = Em.ObjectController.extend
 
     downloadPdf: (language) ->
       @get('content').downloadPdf language
-
-    cancel: (invoiceBase) ->
-      switch invoiceBase.constructor.toString()
-        when Vosae.Quotation.toString()
-          if invoiceBase.get('id')
-            return @transitionToRoute 'quotation.show', invoiceBase
-          else
-            return @transitionToRoute 'quotations.show'
-        when Vosae.Invoice.toString()
-          if invoiceBase.get('id')
-            return @transitionToRoute 'invoice.show', invoiceBase
-          else
-            return @transitionToRoute 'invoices.show'
-      return
-
-    preventStateError: ->
-      invoiceBase = @get 'content'
-      invoiceBase.get 'currentRevision.senderAddress'
-      invoiceBase.get 'currentRevision.billingAddress'
-      invoiceBase.get 'currentRevision.deliveryAddress'
-      invoiceBase.get 'currentRevision.currency'
-      invoiceBase.get('currentRevision.currency.rates').getEach 'rate'
 
     cancel: (invoiceBase) ->
       switch invoiceBase.constructor.toString()

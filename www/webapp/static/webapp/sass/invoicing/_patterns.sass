@@ -124,9 +124,22 @@
 
 // Table line items
 .table-line-items
+
+  &.table-success
+    td.actions .btn
+      &:hover,
+      &:active,
+      &:focus
+        color: $brand-success
+
+  &.table-primary
+    td.actions .btn
+      &:hover,
+      &:active,
+      &:focus
+        color: $brand-primary
+
   th, td
-    &.actions
-      text-align: center
     &.quantity
       text-align: right
       width: 75px
@@ -145,20 +158,17 @@
       white-space: nowrap
 
   &.edit
-    td.actions
-      cursor: ns-resize
-      vertical-align: middle
-      color: #666
-
     td
       padding: 5px 5px
 
       &:last-child
         padding-right: 15px
 
-      &.actions a
-        opacity: 0
-        visibility: hidden
+      &.handle
+        text-align: center
+        cursor: ns-resize
+        vertical-align: middle
+        color: #666
 
       &.taxe
         .select2-container
@@ -172,6 +182,15 @@
           height: 20px
           border: 0px
           width: 100%
+
+      &.actions
+        .btn
+          background: transparent
+          +disable-box-shadow()
+          padding: 0
+          height: auto
+          width: auto
+          line-height: 23px
 
     // Disabled 
     input:disabled,

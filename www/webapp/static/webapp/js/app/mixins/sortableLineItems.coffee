@@ -1,12 +1,14 @@
 Vosae.SortableLineItemsMixin = Ember.Mixin.create
   sortableLineItemsSelector: ".table-line-items tbody"
   sortableLineItemsPlaceholder: "ui-sortable-placeholder"
+  sortableLineItemsHandle: ".handle"
 
   didInsertElement: ->
     @_super()
 
     # Init sortable widget on table
     $(@sortableLineItemsSelector).sortable
+      handle: @sortableLineItemsHandle
       placeholder: @sortableLineItemsPlaceholder
       stop: (event, ui) =>
         index = $("tr").index(ui.item[0]) - 1

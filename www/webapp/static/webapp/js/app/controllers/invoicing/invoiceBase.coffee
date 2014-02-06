@@ -98,17 +98,17 @@ Vosae.InvoiceBaseController = Em.ObjectController.extend
           invoiceBase.set('currentRevision.lineItems.content', [])
           invoiceBase.get('currentRevision.lineItems').addObjects notEmptyItems
 
-      event = if invoiceBase.get('id') then 'didUpdate' else 'didCreate'
-      invoiceBase.one event, @, ->
-        Ember.run.next @, ->
-          switch invoiceBase.constructor.toString()
-            when Vosae.Quotation.toString()
-              @transitionToRoute 'quotation.show', @get('session.tenant'), invoiceBase
-            when Vosae.Invoice.toString()
-              @transitionToRoute 'invoice.show', @get('session.tenant'), invoiceBase
-            when Vosae.PurchaseOrder.toString()
-              @transitionToRoute 'purchaseOrder.show', @get('session.tenant'), invoiceBase
-      invoiceBase.get('transaction').commit()
+        event = if invoiceBase.get('id') then 'didUpdate' else 'didCreate'
+        invoiceBase.one event, @, ->
+          Ember.run.next @, ->
+            switch invoiceBase.constructor.toString()
+              when Vosae.Quotation.toString()
+                @transitionToRoute 'quotation.show', @get('session.tenant'), invoiceBase
+              when Vosae.Invoice.toString()
+                @transitionToRoute 'invoice.show', @get('session.tenant'), invoiceBase
+              when Vosae.PurchaseOrder.toString()
+                @transitionToRoute 'purchaseOrder.show', @get('session.tenant'), invoiceBase
+        invoiceBase.get('transaction').commit()
 
     delete: (invoiceBase) ->
       message = switch invoiceBase.constructor.toString()

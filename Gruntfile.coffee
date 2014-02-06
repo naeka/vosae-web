@@ -153,7 +153,7 @@ module.exports = (grunt) ->
           WEBAPP_JS_VENDOR_DIR + "modernizr.min.js",
           WEBAPP_JS_VENDOR_DIR + "jquery.min.js",
           WEBAPP_JS_VENDOR_DIR + "jquery.browser.js",
-          WEBAPP_JS_VENDOR_DIR + "jquery-ui.js",
+          WEBAPP_JS_VENDOR_DIR + "jquery-ui.min.js",
           WEBAPP_JS_VENDOR_DIR + "jquery.cookie.js",
           WEBAPP_JS_VENDOR_DIR + "jquery.autogrow.js",
           WEBAPP_JS_VENDOR_DIR + "jquery.fileDownload.js",

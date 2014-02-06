@@ -293,6 +293,22 @@ describe 'Vosae.InvoiceRevision', ->
     expect(taxes.objectAt(1).total).toEqual 3
     expect(taxes.objectAt(1).tax).toEqual store.find(Vosae.Tax, 2)
 
+  it 'getLineItemIndex() function should return the position the passing lineItem in the lineItems hasMany', ->
+    # Setup
+    store.adapterForType(Vosae.InvoiceRevision).load store, Vosae.InvoiceRevision,
+      id: 1
+      line_items: [
+        {item_id: "1"},
+        {item_id: "2"},
+        {item_id: "3"},
+        {item_id: "1"}
+      ]
+    invoiceRevision = store.find Vosae.InvoiceRevision, 1
+    lineItem = invoiceRevision.get('lineItems').objectAt 2
+
+    # Test
+    expect(invoiceRevision.getLineItemIndex(lineItem)).toEqual 2
+
   it '_getLineItemsReferences() method should return an array of itemID related to the lineItems', ->
     # Setup
     store.adapterForType(Vosae.InvoiceRevision).load store, Vosae.InvoiceRevision,

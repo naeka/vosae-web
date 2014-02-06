@@ -1,4 +1,11 @@
 DS.Model.reopen
+  becameDirty: ->
+    return if @get('isDirty')
+    if @get('id')
+      @set 'currentState', DS.RootState.loaded.updated.uncommitted
+    else
+      @set 'currentState', DS.RootState.loaded.created.uncommitted
+
   becameError: ->
     message = "An error happened on #{@toString()}"
     Vosae.ErrorPopupComponent.open

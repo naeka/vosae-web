@@ -11,15 +11,14 @@
         <th class="unit-price">{% trans "Unit price (excl. tax)" context "table-headers" %}</th>
         <th class="tax">{% trans "Tax" context "table-headers" %}</th>
         <th class="total">{% trans "Total (excl. tax)" context "table-headers" %}</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       {{#each currentRevision.lineItems}}
-        <tr>
-          <td class="actions">
-            <a {{action 'deleteLineItem' this}}>
-              <i class="picto-delete"></i>
-            </a>
+        <tr guid="{{unbound guid}}">
+          <td class="handle" title="{% trans 'Move line' %}">
+            <span class="glyphicon glyphicon-list"></span>
           </td>
           <td class="reference">
             {{view view.itemsSearchField
@@ -59,15 +58,25 @@
           <td class="total">
             {{this.displayTotal}}
           </td>
+          <td class="actions">
+            <div class="btn-group pull-right">
+              <button class="btn dropdown-toggle" data-toggle="dropdown" title="{% trans 'More actions' %}...">
+                <span class="glyphicon glyphicon-cog"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li {{action setLineItemAsOptional this}}><a>{% trans "Set as optional" %}</a></li>
+                <li {{action addLineItemAbove this}}><a>{% trans "Insert one above" %}</a></li>
+                <li {{action addLineItemBelow this}}><a>{% trans "Insert one below" %}</a></li>
+                <li class="divider"></li>
+                <li {{action deleteLineItem this}}><a>{% trans "Delete" %}</a></li>
+              </ul>
+            </div>
+          </td>
         </tr>
       {{else}}
         <tr>
           <td colspan="7" class="no-data">
-            {{#if isQuotation}}
-              {% trans "No items in this quotation" %}
-            {{else}}
-              {% trans "No items in this invoice" %}
-            {{/if}}
+            {% trans "No items" %}
           </td>
         </tr>
       {{/each}}

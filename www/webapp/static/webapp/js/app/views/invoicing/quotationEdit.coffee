@@ -1,4 +1,4 @@
-Vosae.QuotationEditView = Vosae.InvoiceBaseEditView.extend
+Vosae.QuotationEditView = Vosae.InvoiceBaseEditView.extend Vosae.SortableLineItemsMixin,
   classNames: ["page-edit-quotation"]
 
   quotationDateField: Vosae.DatePickerField.extend

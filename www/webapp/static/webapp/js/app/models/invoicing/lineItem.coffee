@@ -50,6 +50,10 @@ Vosae.LineItem = DS.Model.extend
     accounting.formatMoney 0
   ).property("quantity")
 
+  guid: (->
+    Em.guidFor @
+  ).property()
+
   didLoad: ->
     # This hack is used to refresh the `taxes` computed property
     # on model InvoiceRevision once the current tax is loaded

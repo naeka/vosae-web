@@ -1,4 +1,4 @@
-Vosae.InvoiceEditView = Vosae.InvoiceBaseEditView.extend
+Vosae.InvoiceEditView = Vosae.InvoiceBaseEditView.extend Vosae.SortableLineItemsMixin,
   classNames: ["page-edit-invoice"]
 
   invoicingDateField: Vosae.DatePickerField.extend

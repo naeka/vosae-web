@@ -70,6 +70,7 @@ require 'controllers/settings/settingsInvoicingGeneral'
 require 'controllers/settings/settingsNumbering'
 require 'controllers/settings/settingsApiKeys'
 require 'controllers/settings/settingsReport'
+require 'controllers/settings/settingsDataLiberation'
 
 require 'controllers/realtime/realtime'
 

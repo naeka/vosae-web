@@ -1,0 +1,40 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "settings/dataLiberation" %}
+  <header>
+    <h3>{% trans "Global settings" %} &nbsp;>&nbsp; {% trans "Data liberation" %}</h3>
+    <div class="btn-toolbar pull-right">{{partial "settings/partials/saveSettings"}}</div>
+  </header>
+  <section class="clearfix">
+    <div class="inner">
+      <table>
+        <tbody>
+          <tr>
+            <td colspan="2">
+              <h4></h4>
+            </td>
+          </tr>
+          <tr>
+            <td class="label">
+              <label></label>
+            </td>
+            <td>
+            </td>
+          </tr>
+          <tr>
+            <td class="label">
+              <label></label>
+            </td>
+            <td>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "settings/dataLiberation/actions" %}
+  {{partial "settings/partials/saveSettings"}}
+{% endtplhandlebars %}

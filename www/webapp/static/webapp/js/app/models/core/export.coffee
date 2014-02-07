@@ -1,4 +1,4 @@
-Vosae.DataLiberation = DS.Model.extend
+Vosae.Export = DS.Model.extend
   createdAt: DS.attr("date")
   language: DS.attr("string")
   documentsTypes: DS.attr("string")

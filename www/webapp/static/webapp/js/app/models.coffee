@@ -46,7 +46,7 @@ require 'models/core/reportSettings'
 require 'models/core/timeline'
 require 'models/core/user'
 require 'models/core/userSettings'
-require 'models/core/dataLiberation'
+require 'models/core/export'
 
 require 'models/settings/apiKey'
 require 'models/settings/tenantSettings'

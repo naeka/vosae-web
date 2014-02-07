@@ -85,7 +85,7 @@ Vosae.Router.map ->
       @route 'invoicingGeneral', path: '/invoicing/general'
       @route 'numbering', path: '/numbering'
       @route 'report', path: '/report'
-      @route 'dataLiberation', path: '/data_liberation'
+      @route 'export', path: '/export'
   
   @route 'notFound', path: '*:' 
 
@@ -208,4 +208,4 @@ require 'routes/settings/settingsShowGroups'
 require 'routes/settings/settingsShowTaxes'
 require 'routes/settings/settingsShowUsers'
 require 'routes/settings/settingsReport'
-require 'routes/settings/settingsDataLiberation'
+require 'routes/settings/settingsExport'

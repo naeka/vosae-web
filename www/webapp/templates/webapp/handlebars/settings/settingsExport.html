@@ -1,0 +1,71 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "settings/export" %}
+  <header>
+    <h3>{% trans "Global settings" %} &nbsp;>&nbsp; {% trans "Exports" %}</h3>
+    <div class="btn-toolbar pull-right">{{partial "settings/partials/saveSettings"}}</div>
+  </header>
+  {{#if content}}
+  <section class="clearfix">
+    <div class="inner">
+      <table>
+        <tbody>
+          <tr>
+            <td colspan="2">
+              <h4>{% trans "Pending exports" %}</h4>
+            </td>
+          </tr>
+          <tr>
+            <td class="label">
+              <label></label>
+            </td>
+            <td>
+            </td>
+          </tr>
+          <tr>
+            <td class="label">
+              <label></label>
+            </td>
+            <td>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <hr>
+  {{/if}}
+  <section class="clearfix">
+    <div class="inner">
+      <table>
+        <tbody>
+          <tr>
+            <td colspan="2">
+              <h4>{% trans "Create new export" %}</h4>
+            </td>
+          </tr>
+          <tr>
+            <td class="label">
+              <label>Documents to export</label>
+            </td>
+            <td>
+              {{view view.documentsTypes}}
+            </td>
+          </tr>
+          <tr>
+            <td class="label">
+              <label></label>
+            </td>
+            <td>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "settings/export/actions" %}
+  {{partial "settings/partials/saveSettings"}}
+{% endtplhandlebars %}

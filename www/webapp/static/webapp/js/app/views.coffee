@@ -30,7 +30,7 @@ require 'views/settings/settingsInvoicingGeneral'
 require 'views/settings/settingsNumbering'
 require 'views/settings/settingsApiKeys'
 require 'views/settings/settingsReport'
-require 'views/settings/settingsDataLiberation'
+require 'views/settings/settingsExport'
 
 require 'views/contacts/organizationsShow'
 require 'views/contacts/contactsShow'

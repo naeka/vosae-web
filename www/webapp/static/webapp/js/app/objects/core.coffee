@@ -117,6 +117,24 @@ Vosae.supportedCountries = Em.makeArray([
     countryName: gettext("United States")
 ])
 
+Vosae.exportDocumentsTypes = Em.makeArray([
+  Em.Object.create
+    value: "CONTACT"
+    name: gettext("Contact")
+  Em.Object.create
+    value: "ORGANIZATION"
+    name: gettext("Organization")
+  Em.Object.create
+    value: "QUOTATION"
+    name: gettext("Quotation")
+  Em.Object.create
+    value: "INVOICE"
+    name: gettext("Invoice")
+  Em.Object.create
+    value: "CREDIT_NOTE"
+    name: gettext("Credit note")
+])
+
 Vosae.permissions = Em.makeArray([
   Em.Object.create
     displayName: gettext('Core permissions')

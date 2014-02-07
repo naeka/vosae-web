@@ -4,14 +4,14 @@ Vosae.EntitiesController = Vosae.ArrayController.extend
     getExportFile: ->
       format = "vcard"
       tenantSlug = @get('session.tenant.slug')
-      exportURL = "#{APP_ENDPOINT}#{@get('store').adapter.namespace}/"
+      exportURL = "#{APP_ENDPOINT}/#{@get('store').adapter.namespace}/"
     
       switch @constructor.toString()
         when Vosae.ContactsShowController.toString()
           exportURL += "contact/"
         when Vosae.OrganizationsShowController.toString()
           exportURL += "organization/"
-      
-      exportURL += "export/#{format}/?x_vc=#{tenantSlug}"
-      
+
+      exportURL += "export/#{format}/?x_tenant=#{tenantSlug}"
+
       $.fileDownload(exportURL)

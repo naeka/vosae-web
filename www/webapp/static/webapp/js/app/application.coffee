@@ -43,6 +43,7 @@ unless window.VosaeApplication
       @set 'metaForCurrency' , Em.Object.createWithMixins Vosae.MetaController      
       @set 'metaForTenant' , Em.Object.createWithMixins Vosae.MetaController
       @set 'metaForPurchaseOrder', Em.Object.createWithMixins Vosae.MetaController
+      @set 'metaForApiKey', Em.Object.createWithMixins Vosae.MetaController
 
     configPlugins: ->
       # jQuery file upload

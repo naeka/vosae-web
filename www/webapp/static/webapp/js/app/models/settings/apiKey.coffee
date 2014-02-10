@@ -3,17 +3,8 @@ Vosae.ApiKey = DS.Model.extend
   key: DS.attr('string') 
   createdAt: DS.attr('datetime')
 
-  # becameInvalid: ->
-  #   alert "#{@get('errors')}"
-  #   @send('becameValid')
-
   didCreate: ->
     message = gettext 'Your API key has been successfully created'
-    Vosae.SuccessPopupComponent.open
-      message: message
-
-  didUpdate: ->
-    message = gettext 'Your API key has been successfully updated'
     Vosae.SuccessPopupComponent.open
       message: message
 

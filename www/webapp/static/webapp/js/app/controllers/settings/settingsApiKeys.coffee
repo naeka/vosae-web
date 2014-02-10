@@ -1,27 +1,23 @@
-Vosae.SettingsApiKeysController = Em.ObjectController.extend
+Vosae.SettingsApiKeysController = Vosae.ArrayController.extend
   filteredApiKeys: (->
-    apiKeys = @get('apiKeys').filter (apiKey) ->
-      apiKey if apiKey.get("id") and not apiKey.get("isDeleted")
-    return apiKeys
-  ).property('apiKeys.@each', 'apiKeys.length', 'apiKeys.@each.id')
+    apiKeys = @get('content').filter (apiKey) ->
+      apiKey if apiKey.get("id")
+  ).property('content.@each', 'content.length', 'content.@each.id')
 
   # Actions handlers
   actions:
-    save: (apiKey) ->
-      apiKey.one "didCreate", @, ->
-        @notifyPropertyChange('apiKeys.length')
+    saveNewApiKey: (apiKey) ->
       apiKey.get('transaction').commit()
 
-    delete: (apiKey) ->
+    deleteApiKey: (apiKey) ->
       Vosae.ConfirmPopupComponent.open
         message: gettext 'Do you really want to revoke this API key?'
         callback: (opts, event) =>
           if opts.primary
+            t = @get('store').transaction()
+            t.adoptRecord apiKey
             apiKey.deleteRecord()
             apiKey.get('transaction').commit()
 
-    add: ->
-      transaction = @get('store').transaction()
-      @setProperties
-        content: transaction.createRecord(Vosae.ApiKey)
-        apiKeys: Vosae.ApiKey.all()
+    createNewApiKey: ->
+      @set 'newApiKey', Vosae.ApiKey.createRecord()

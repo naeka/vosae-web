@@ -140,6 +140,8 @@
         color: $brand-primary
 
   th, td
+    &.reference
+      min-width: 120px
     &.quantity
       text-align: right
       width: 75px
@@ -148,8 +150,10 @@
       width: 100px
     &.tax
       text-align: right
+      min-width: 100px
     &.total
       text-align: right
+      min-width: 100px
   td
     &.quantity,
     &.unit-price,
@@ -161,14 +165,13 @@
     td
       padding: 5px 5px
 
-      &:last-child
-        padding-right: 15px
-
       &.handle
         text-align: center
         cursor: ns-resize
         vertical-align: middle
         color: #666
+        .glyphicon
+          font-size: 14px
 
       &.taxe
         .select2-container
@@ -184,6 +187,9 @@
           width: 100%
 
       &.actions
+        vertical-align: middle
+        padding-right: 5px
+        max-width: 10px
         .btn
           background: transparent
           +disable-box-shadow()
@@ -191,6 +197,8 @@
           height: auto
           width: auto
           line-height: 23px
+        .picto-options
+          font-size: 17px
 
     // Disabled 
     input:disabled,
@@ -219,7 +227,6 @@
 
 // Table invoice summary
 .table-invoice-summary
-  font-size: 15px
   width: 100%
   margin-top: 5px
 

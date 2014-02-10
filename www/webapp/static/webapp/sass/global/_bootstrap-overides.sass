@@ -40,16 +40,24 @@ section > .page-header, section > .lead
 // Tables
 .table
   margin-bottom: 0
+  font-size: 15px
+
+  input, textarea, .select2-container
+    font-size: 15px !important
 
   & > thead > tr > th,
   & > tbody > tr > td
     padding: 8px 5px
     border: 0
 
+  & > thead > tr > th
+    vertical-align: middle
+
   th
     font-weight: normal
+    small
+      display: block
   td
-    font-weight: bold
     &.no-data
       padding-top: 15px
       text-align: center
@@ -65,6 +73,7 @@ section > .page-header, section > .lead
   .ui-sortable-placeholder
     border: 4px dashed $gray-light
     padding: 3px
+
 
 .table-primary,
 .table-success
@@ -203,8 +212,11 @@ input.form-control-settings
     .caret
       margin-left: 0
 
-.dropdown-menu .divider
-  margin: 5px 0
+.dropdown-menu
+  +border-radius(0px)
+  +disable-box-shadow()
+  .divider
+    margin: 5px 0
 
 
 // Navs
@@ -241,3 +253,8 @@ input.form-control-settings
 // List
 .list-unstyled
   margin-bottom: 0
+
+// Popover
+.popover
+  +disable-box-shadow()
+  +border-radius(0px)

@@ -8,9 +8,9 @@
         <th class="reference">{% trans "Reference" context "table-headers" %}</th>
         <th class="description">{% trans "Description" context "table-headers" %}</th>
         <th class="quantity">{% trans "Qty" context "table-headers" %}</th>
-        <th class="unit-price">{% trans "Unit price (excl. tax)" context "table-headers" %}</th>
+        <th class="unit-price">{% trans "Unit price <small>(excl. tax)</small>" context "table-headers" %}</th>
         <th class="tax">{% trans "Tax" context "table-headers" %}</th>
-        <th class="total">{% trans "Total (excl. tax)" context "table-headers" %}</th>
+        <th class="total">{% trans "Total <small>(excl. tax)</small>" context "table-headers" %}</th>
         <th></th>
       </tr>
     </thead>
@@ -18,7 +18,7 @@
       {{#each currentRevision.lineItems}}
         <tr guid="{{unbound guid}}">
           <td class="handle" title="{% trans 'Move line' %}">
-            <span class="glyphicon glyphicon-list"></span>
+            <span class="glyphicon glyphicon-align-justify"></span>
           </td>
           <td class="reference">
             {{view view.itemsSearchField
@@ -61,7 +61,7 @@
           <td class="actions">
             <div class="btn-group pull-right">
               <button class="btn dropdown-toggle" data-toggle="dropdown" title="{% trans 'More actions' %}...">
-                <span class="glyphicon glyphicon-cog"></span>
+                <i class="picto-options"></i>
               </button>
               <ul class="dropdown-menu">
                 <li {{action setLineItemAsOptional this}}><a>{% trans "Set as optional" %}</a></li>

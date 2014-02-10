@@ -325,13 +325,13 @@
         var nav;
         nav = [];
         if (step.prev >= 0) {
-          nav.push("<a href='#" + step.prev + "' class='prev pull-left btn green'>" + options.labels.prev + "</a>");
+          nav.push("<a href='#" + step.prev + "' class='prev pull-left btn btn-success'>" + options.labels.prev + "</a>");
         }
         if (step.next >= 0) {
-          nav.push("<a href='#" + step.next + "' class='next pull-right btn orange'>" + options.labels.next + "</a>");
+          nav.push("<a href='#" + step.next + "' class='next pull-right btn btn-primary'>" + options.labels.next + "</a>");
         }
         else {
-          nav.push("<a href='#' class='end pull-right btn orange'>" + options.labels.end + "</a>");
+          nav.push("<a href='#' class='end pull-right btn btn-primary'>" + options.labels.end + "</a>");
         }
         return nav.join(" ");
       };

@@ -108,10 +108,8 @@ Vosae.InvoiceBaseEditView = Em.View.extend
 
         results: (data, page) =>
           contact = @get('controller.currentRevision.contact')
-          filteredData = []
-          data["objects"].forEach (result) ->
-            if !contact or result.id is contact.get('organization.id')
-              filteredData.push result
+          filteredData = data["objects"].filter (result) ->
+            result if (!contact or result.id is contact.get('organization.id'))
           return results: filteredData
     
     onRemove: (event) ->
@@ -197,10 +195,8 @@ Vosae.InvoiceBaseEditView = Em.View.extend
 
         results: (data, page) =>
           organization = @get('parentView.controller.currentRevision.organization')
-          filteredData = []
-          data["objects"].forEach (result) ->
-            if !organization or result.organization is organization.get('corporateNname')
-              filteredData.push result
+          filteredData = data["objects"].filter (result) ->
+            result if (!organization or result.organization is organization.get('corporateName'))
           return results: filteredData
 
     onRemove: (event) ->

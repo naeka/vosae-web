@@ -26,38 +26,11 @@ input
   height: 6px
   margin-left: 3px
   width: 6px
-  -moz-animation-name: bounce_circleG_black
-  -moz-animation-duration: 1.0499999999999998s
-  -moz-animation-iteration-count: infinite
-  -moz-animation-direction: linear
-  -moz-border-radius: 4px
-  -webkit-animation-name: bounce_circleG_black
-  -webkit-animation-duration: 1.0499999999999998s
-  -webkit-animation-iteration-count: infinite
-  -webkit-animation-direction: linear
-  -webkit-border-radius: 4px
-  -o-animation-name: bounce_circleG_black
-  -o-animation-duration: 1.0499999999999998s
-  -o-animation-iteration-count: infinite
-  -o-animation-direction: linear
-  -o-border-radius: 4px
-  -ms-animation-name: bounce_circleG_black
-  -ms-animation-duration: 1.0499999999999998s
-  -ms-animation-iteration-count: infinite
-  -ms-animation-direction: linear
-  -ms-border-radius: 4px
-  animation-name: bounce_circleG_black
-  animation-duration: 1.0499999999999998s
-  animation-iteration-count: infinite
-  animation-direction: linear
-  border-radius: 4px
+  +animation(bounce_circleG_black 1.0499999999999998s linear infinite)
+  +border-radius(4px)
 
   &.orange
-    -moz-animation-name: bounce_circleG_orange
-    -webkit-animation-name: bounce_circleG_orange
-    -o-animation-name: bounce_circleG_orange
-    -ms-animation-name: bounce_circleG_orange
-    animation-name: bounce_circleG_orange
+    +animation(bounce_circleG_orange 1.0499999999999998s linear infinite)
 
 #circleG_1
   -moz-animation-delay: 0.20999999999999996s
@@ -80,47 +53,14 @@ input
   -ms-animation-delay: 0.63s
   animation-delay: 0.63s
 
-@-moz-keyframes bounce_circleG_black
-  50%
-    background-color: #000000
-
-@-webkit-keyframes bounce_circleG_black
-  50%
-    background-color: #000000
-
-@-o-keyframes bounce_circleG_black
-  50%
-    background-color: #000000
-
-@-ms-keyframes bounce_circleG_black
-  50%
-    background-color: #000000
-
-@keyframes bounce_circleG_black
++keyframes(bounce_circleG_black)
   50%
     background-color: #000000
 
 
-@-moz-keyframes bounce_circleG_orange
++keyframes(bounce_circleG_orange)
   50%
     background-color: $orange
-
-@-webkit-keyframes bounce_circleG_orange
-  50%
-    background-color: $orange
-
-@-o-keyframes bounce_circleG_orange
-  50%
-    background-color: $orange
-
-@-ms-keyframes bounce_circleG_orange
-  50%
-    background-color: $orange
-
-@keyframes bounce_circleG_orange
-  50%
-    background-color: $orange
-
 
 
 // Round progress bar
@@ -131,24 +71,17 @@ input
     position: relative
     width: 52px
     height: 52px
-    -webkit-user-select: none
-    -moz-user-select: none
-    -o-user-select: none
-    user-select: none
-    -webkit-box-sizing: border-box
-    -moz-box-sizing: border-box
-    -o-box-sizing: border-box
-    box-sizing: border-box
+    +user-select(none)
+    +box-sizing(border-box)
+
 
   .loader-bg
     width: 100%
     height: 100%
     border-radius: 50%
     border: 4px solid transparent
-    -webkit-box-sizing: border-box
-    -moz-box-sizing: border-box
-    -o-box-sizing: border-box
-    box-sizing: border-box
+    +box-sizing(border-box)
+
 
   .spiner-holder-one
     position: absolute
@@ -158,10 +91,8 @@ input
     width: 50%
     height: 50%
     background: transparent
-    -webkit-box-sizing: border-box
-    -moz-box-sizing: border-box
-    -o-box-sizing: border-box
-    box-sizing: border-box
+    +box-sizing(border-box)
+
 
   .spiner-holder-two
     position: absolute
@@ -171,20 +102,16 @@ input
     width: 100%
     height: 100%
     background: transparent
-    -webkit-box-sizing: border-box
-    -moz-box-sizing: border-box
-    -o-box-sizing: border-box
-    box-sizing: border-box
+    +box-sizing(border-box)
+
 
   .loader-spiner
     width: 200%
     height: 200%
     border-radius: 50%
     border: 4px solid $green
-    -webkit-box-sizing: border-box
-    -moz-box-sizing: border-box
-    -o-box-sizing: border-box
-    box-sizing: border-box
+    +box-sizing(border-box)
+
 
   .animate-0-25-a
     -webkit-transform: rotate(90deg)

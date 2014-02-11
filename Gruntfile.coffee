@@ -182,7 +182,7 @@ module.exports = (grunt) ->
           WEBAPP_JS_VENDOR_DIR + "twix.lang-all.js",
           WEBAPP_JS_VENDOR_DIR + "color.js",
           WEBAPP_JS_VENDOR_DIR + "autosize.min.js",
-          WEBAPP_JS_VENDOR_DIR + "fullcalendar.js",
+          WEBAPP_JS_VENDOR_DIR + "fullcalendar.min.js",
           WEBAPP_JS_VENDOR_DIR + "handlebars.js",
           WEBAPP_JS_VENDOR_DIR + "ember.min.js",
           WEBAPP_JS_VENDOR_DIR + "ember-data.min.js"

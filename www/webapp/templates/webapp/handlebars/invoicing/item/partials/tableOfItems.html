@@ -4,18 +4,10 @@
   <table class="table table-items table-striped table-primary">
     <thead class="orange">
       <tr>
-        <th class="reference">
-          {% trans "Reference" context "table-headers" %}
-        </th>
-        <th class="description">
-          {% trans "Description" context "table-headers" %}
-        </th>
-        <th class="unit-price">
-          {% trans "Unit price (excl. tax)" context "table-headers" %}
-        </th>
-        <th class="tax">
-          {% trans "Default tax" context "table-headers" %}
-        </th>
+        <th class="reference">{% trans "Reference" context "table-headers" %}</th>
+        <th class="description">{% trans "Description" context "table-headers" %}</th>
+        <th class="unit-price">{% trans "Unit price <small>(excl. tax)</small>" context "table-headers" %}</th>
+        <th class="tax">{% trans "Default tax" context "table-headers" %}</th>
       </tr>
     </thead>
     <tbody>
@@ -26,15 +18,9 @@
               {{item.ref}}
             {{/linkTo}}
           </td>
-          <td class="description">
-            {{nl2br item.description}}
-          </td>
-          <td class="unit-price">
-            {{#formatMoneyHack item.unitPrice item.currency.displaySymbol}}{{/formatMoneyHack}}
-          </td>
-          <td class="tax">
-            {{item.tax.displayTax}}
-          </td>
+          <td class="description">{{nl2br item.description}}</td>
+          <td class="unit-price">{{#formatMoneyHack item.unitPrice item.currency.displaySymbol}}{{/formatMoneyHack}}</td>
+          <td class="tax">{{item.tax.displayTax}}</td>
         </tr>
       {{else}}
         <tr>

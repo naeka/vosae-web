@@ -9,11 +9,11 @@
   <table class="table table-attachments table-{{unbound relatedColor}}">
     <thead>
       <tr>
-        <th class="name">{% trans "Name" context "file name" %}</th>
-        <th class="download"></th>
-        <th class="size">{% trans "Size" context "file size" %}</th>
-        <th class="created-at">{% trans "Added on" context "file creation date" %}</th>
-        <th class="issuer">{% trans "By" context "person" %}</th>
+        <th class="name">{% trans "Name" context "attachment name" %}</th>
+        <th class="link">{% trans "Link" context "attachment link" %}</th>
+        <th class="size">{% trans "Size" context "attachment size" %}</th>
+        <th class="created-at">{% trans "Added on" context "attachment creation date" %}</th>
+        <th class="issuer">{% trans "By" context "user" %}</th>
         <th class="action"></th>
       </tr>
     </thead>
@@ -41,9 +41,9 @@
       {{#each attachments}}
         <tr>
           <td class="name">{{name}}</td>
-          <td class="download">
+          <td class="link">
             <a {{bindAttr href="downloadLink"}} class="orange" title="{% trans 'Download' %}" target="_blank">
-              <i class="picto-download"></i>
+              <span class="glyphicon glyphicon-cloud-download"></span>
             </a>
           </td>
           <td class="size">{{humanFileSize size}}</td>
@@ -57,13 +57,7 @@
         </tr>
       {{else}}
         <tr>
-          <td colspan="6" class="no-data text-center">
-            {{#if isQuotation}}
-              {% trans "No attachments related to this quotation" %}
-            {{else}}
-              {% trans "No attachments related to this invoice" %}
-            {{/if}}
-          </td>
+          <td colspan="6" class="no-data text-center">{% trans "No attachments" %}</td>
         </tr>
       {{/each}}
     </tbody>

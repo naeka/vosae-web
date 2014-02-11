@@ -257,21 +257,24 @@
 
 // Table attachments
 .table-attachments
-  td.download
-    a
-      text-decoration: none
-    i
-      font-size: 26px
-      line-height: 26px
-      font-weight: normal !important
-  
-  td.action
-    text-align: right
-    i
-      font-size: 21px
-      line-height: 21px
+  td.link,
+  th.link
+    text-align: center
 
-  td.download,
+  td
+    &.link
+      a
+        text-decoration: none
+      span
+        font-size: 18px
+  
+    &.action
+      text-align: right
+      i
+        font-size: 21px
+        line-height: 21px
+
+  td.link,
   td.size,
   td.created-at,
   td.modified-at,

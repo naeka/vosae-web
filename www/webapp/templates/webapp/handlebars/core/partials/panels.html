@@ -2,8 +2,8 @@
 
 
 {% tplhandlebars "desktop-left-panel" %}
-  {{#if controllers.notifications.length}}
-    {{view view.notificationItems contentBinding="controllers.notifications"}}
+  {{#if controllers.notifications.content}}
+    {{view view.notificationItems contentBinding="controllers.notifications.content"}}
   {{/if}}
 {% endtplhandlebars %}
 

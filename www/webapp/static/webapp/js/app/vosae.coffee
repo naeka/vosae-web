@@ -1,5 +1,6 @@
 require 'defaults'
 require 'namespaces'
+require 'plugins'
 require 'application'
 
 window.preWindowLocation = preWindowLocation =

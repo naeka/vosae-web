@@ -25,15 +25,6 @@ Vosae.ApplicationController = Ember.Controller.extend
     @get('currentRoute') == 'tenants.add'
   ).property 'currentRoute'
 
-  currentPathChanged: (->
-    # Google Analytics   
-    Ember.run.next ->
-      if _gaq? and !Ember.isNone(_gaq)
-        page = if window.location.hash.length > 0 then window.location.hash.substring(1) else window.location.pathname
-        _gaq.push ["_trackPageview", page.split('/').removeAt(1, 1).join('/')]
-        _gaq.push(['_setCustomVar', 1, 'Member Type', 'Registered', 1])
-  ).observes 'currentPath'
-  
   showAddressMap: (selector, address, options) ->
     defaults =
       map:

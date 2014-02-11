@@ -47,5 +47,8 @@ Vosae.NotificationsController = Vosae.ArrayController.extend
 
   # Amount of unread notifications
   unreadCounter: (->
-    @filterProperty('read', false).get('length')
-  ).property('length', 'content.@each.read')
+    length = @get('content').filterProperty('read', false).get('length')
+    if length > 99
+      length = "99+"
+    length
+  ).property('content.length', 'content.@each.read')

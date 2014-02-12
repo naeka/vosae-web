@@ -64,7 +64,7 @@
                 <i class="picto-options"></i>
               </button>
               <ul class="dropdown-menu">
-                <li {{action setLineItemAsOptional this}}><a>{% trans "Set as optional" %}</a></li>
+                {% comment %}<li {{action setLineItemAsOptional this}}><a>{% trans "Set as optional" %}</a></li>{% endcomment %}
                 <li {{action addLineItemAbove this}}><a>{% trans "Insert one above" %}</a></li>
                 <li {{action addLineItemBelow this}}><a>{% trans "Insert one below" %}</a></li>
                 <li class="divider"></li>

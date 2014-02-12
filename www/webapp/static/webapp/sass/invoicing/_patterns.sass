@@ -182,9 +182,12 @@
 
         textarea
           vertical-align: middle
-          height: 20px
+          line-height: 26px
           border: 0px
           width: 100%
+
+      &.total
+        line-height: 26px
 
       &.actions
         vertical-align: middle
@@ -199,6 +202,10 @@
           line-height: 23px
         .picto-options
           font-size: 17px
+
+    &.table-striped > tbody > tr:nth-child(odd) 
+      & > td
+        background-color: white
 
     // Disabled 
     input:disabled,

@@ -21,7 +21,7 @@
           width: 100%
           padding: 0
 
-      .summary
+      .summary, .summary input
         font-size: 22px
         font-weight: bold
         margin-bottom: 20px
@@ -39,7 +39,7 @@
 
       .summary,
       .location
-        +input-placeholder($textColor, $font-weight: bold)
+        +input-placeholder($text-color, $font-weight: bold)
 
       .description
         +textarea-placeholder(#999, $font-weight: bold)

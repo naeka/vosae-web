@@ -7,10 +7,10 @@
     {{#each phones}}
       <tr>
         <td>
-          <label class="type">{{this.displayCombinedType}}</label>
+          <span class="label label-success">{{this.displayCombinedType}}</span>
         </td>
         <td>
-          <address class="phone orange">
+          <address class="phone text-orange">
             <strong>{{this.displayPhone}}</strong>
           </address>
         </td>
@@ -21,13 +21,13 @@
     {{#each emails}}
       <tr>
         <td>
-          <label class="type">{{this.displayType}}</label>
+          <span class="label label-success">{{this.displayType}}</span>
         </td>
         <td>
           <address class="email">
-          <a href="mailto:{{unbound this.email}}">
-            <strong>{{this.email}}</strong>
-          </a>
+            <a href="mailto:{{unbound this.email}}">
+              <strong>{{this.email}}</strong>
+            </a>
           </address>
         </td>
       </tr>

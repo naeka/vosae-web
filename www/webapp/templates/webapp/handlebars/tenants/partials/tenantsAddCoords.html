@@ -1,0 +1,199 @@
+{% load i18n templatetag_handlebars braces %}
+
+{% tplhandlebars "tenants/add/_coords" %}
+  <h3>{% trans "Step 2 - Addresses" %}</h3>
+
+  <section class="coords">
+    {{#unless view.formIsValid}}
+      {% braces %}
+        view Bootstrap.AlertMessage 
+        type="danger"
+        title="{% trans "Oh snap!" %}"
+        message="{% trans "The registration failed for the reasons listed bellow. Please fix it." %}"
+      {% endbraces %}
+    {{/unless}}
+
+    <h4>{% trans "Postal address" %}</h4>
+    
+    {# Postal address - street and extended #}
+    <div class="row">
+      <div class="col-xs-4">
+        {% braces %}
+          view Bootstrap.Forms.TextField 
+          valueBinding="postalAddress.streetAddress"
+          maxLength="128"
+          label="{% trans "Street address" %}"
+          inputClassNames="form-control-settings"
+        {% endbraces %}
+      </div>
+      <div class="col-xs-4">
+        {% braces %}
+          view Bootstrap.Forms.TextField 
+          valueBinding="postalAddress.extendedAddress"
+          maxLength="64"
+          label="{% trans "Extended address" %}"
+          inputClassNames="form-control-settings"
+        {% endbraces %}
+      </div>
+    </div>
+
+    {# Postal address - postal-code and postoffice-box #}
+    <div class="row">
+      <div class="col-xs-4">
+        {% braces %}
+          view Bootstrap.Forms.TextField 
+          valueBinding="postalAddress.postalCode"
+          maxLength="64"
+          label="{% trans "Postal code" %}"
+          inputClassNames="form-control-settings"
+        {% endbraces %}
+      </div>
+      <div class="col-xs-4">
+        {% braces %}
+          view Bootstrap.Forms.TextField 
+          valueBinding="postalAddress.postofficeBox"
+          maxLength="64"
+          label="{% trans "Postoffice box" %}"
+          inputClassNames="form-control-settings"
+        {% endbraces %}
+      </div>
+    </div>
+
+    {# Postal address - city and state #}
+    <div class="row">
+      <div class="col-xs-4">
+        {% braces %}
+          view Bootstrap.Forms.TextField 
+          valueBinding="postalAddress.city"
+          maxLength="64"
+          label="{% trans "City" %}"
+          inputClassNames="form-control-settings"
+        {% endbraces %}
+      </div>
+      <div class="col-xs-4">
+        {% braces %}
+          view Bootstrap.Forms.TextField 
+          valueBinding="postalAddress.state"
+          maxLength="64"
+          label="{% trans "State" %}"
+          inputClassNames="form-control-settings"
+        {% endbraces %}
+      </div>
+    </div>
+
+    {# Postal address - city and state #}
+    <div class="row">
+      <div class="col-xs-4">
+        {% braces %}
+          view Bootstrap.Forms.TextField 
+          valueBinding="postalAddress.country"
+          maxLength="64"
+          label="{% trans "Country" %}"
+          inputClassNames="form-control-settings"
+        {% endbraces %}
+      </div>
+    </div>
+  </section>
+
+  <hr>
+
+  <section {{bindAttr class=":coords useBilingAddressAsPostalAddress:same"}}>
+    <h4 class="billing-address">{% trans "Billing address" %} {{input type="checkbox" id="id_tenant_same_address" checkedBinding="useBilingAddressAsPostalAddress"}} <label for="id_tenant_same_address">{% trans "Use the same address" %}</label></h4>
+    
+    {{#unless useBilingAddressAsPostalAddress}}
+      {# Billing address - street and extended #}
+      <div class="row">
+        <div class="col-xs-4">
+          {% braces %}
+            view Bootstrap.Forms.TextField 
+            valueBinding="billingAddress.streetAddress"
+            maxLength="128"
+            label="{% trans "Street address" %}"
+            inputClassNames="form-control-settings"
+          {% endbraces %}
+        </div>
+        <div class="col-xs-4">
+          {% braces %}
+            view Bootstrap.Forms.TextField 
+            valueBinding="billingAddress.extendedAddress"
+            maxLength="64"
+            label="{% trans "Extended address" %}"
+            inputClassNames="form-control-settings"
+          {% endbraces %}
+        </div>
+      </div>
+
+      {# Billing address - postal-code and postoffice-box #}
+      <div class="row">
+        <div class="col-xs-4">
+          {% braces %}
+            view Bootstrap.Forms.TextField 
+            valueBinding="billingAddress.postalCode"
+            maxLength="64"
+            label="{% trans "Postal code" %}"
+            inputClassNames="form-control-settings"
+          {% endbraces %}
+        </div>
+        <div class="col-xs-4">
+          {% braces %}
+            view Bootstrap.Forms.TextField 
+            valueBinding="billingAddress.postofficeBox"
+            maxLength="64"
+            label="{% trans "Postoffice box" %}"
+            inputClassNames="form-control-settings"
+          {% endbraces %}
+        </div>
+      </div>
+
+      {# Billing address - city and state #}
+      <div class="row">
+        <div class="col-xs-4">
+          {% braces %}
+            view Bootstrap.Forms.TextField 
+            valueBinding="billingAddress.city"
+            maxLength="64"
+            label="{% trans "City" %}"
+            inputClassNames="form-control-settings"
+          {% endbraces %}
+        </div>
+        <div class="col-xs-4">
+          {% braces %}
+            view Bootstrap.Forms.TextField 
+            valueBinding="billingAddress.state"
+            maxLength="64"
+            label="{% trans "State" %}"
+            inputClassNames="form-control-settings"
+          {% endbraces %}
+        </div>
+      </div>
+
+      {# Billing address - city and state #}
+      <div class="row">
+        <div class="col-xs-4">
+          {% braces %}
+            view Bootstrap.Forms.TextField 
+            valueBinding="postalAddress.country"
+            maxLength="64"
+            label="{% trans "Country" %}"
+            inputClassNames="form-control-settings"
+          {% endbraces %}
+        </div>
+      </div>
+    {{/unless}}
+  </section>
+
+  <div class="form-actions">
+    {{#if hasTenant}}
+      <button class="btn btn-darkgrey cancel" {{action 'cancel'}}>
+        {% trans "Cancel" %}
+      </button>  
+    {{/if}}
+    <button class="btn btn-darkgrey" {{action 'previousStep' this target='view'}}>
+      {% trans "Previous" %}
+    </button>
+    <button class="btn btn-success" {{action 'nextStep' this target='view'}}>
+      {% trans "Next" %}
+    </button>
+  </div>
+
+{% endtplhandlebars %}

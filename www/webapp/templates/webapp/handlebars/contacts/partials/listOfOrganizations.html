@@ -10,11 +10,11 @@
         {{/if}}
       </div>
       <div class="infos pull-left">
-        {{#linkTo "organization.show" controller.session.tenant organization class="orange"}}
+        {{#linkTo "organization.show" controller.session.tenant organization class="text-orange"}}
           {{organization.corporateName}}
         {{/linkTo}}
         {{#linkTo "organization.show" controller.session.tenant organization tagName="span" class="counter"}}
-          &nbsp;- <span class="green">{{organization.contacts.length}}</span>
+          &nbsp;- <span class="text-green">{{organization.contacts.length}}</span>
           {{trans "Contact" plural="Contacts" countBinding="organization.contacts.length"}}
         {{/linkTo}}
         <span class="desc">

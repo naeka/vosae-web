@@ -1,25 +1,18 @@
 Vosae.SettingsApiKeysRoute = Ember.Route.extend
-  beforeModel: ->
-    if not Vosae.ApiKey.all().get('length')
-      Vosae.ApiKey.find()
-
   model: ->
-    Vosae.ApiKey.createRecord()
+    Vosae.ApiKey.all()
 
   setupController: (controller, model) ->
-    transaction = @get('store').transaction()
-
     controller.setProperties
-      'content': transaction.createRecord(Vosae.ApiKey)
-      'apiKeys': Vosae.ApiKey.all()
+      'content': model
+      'newApiKey': Vosae.ApiKey.createRecord()
 
   renderTemplate: ->
     @render 'settings.apiKeys',
       into: 'settings'
       outlet: 'content'
-      controller: @controller
 
   deactivate: ->
-    newApiKey = @controller.get 'content'
+    newApiKey = @controller.get 'newApiKey'
     if newApiKey.get 'isDirty'
       newApiKey.get('transaction').rollback()

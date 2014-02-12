@@ -15,16 +15,16 @@
     <div class="pull-right">
       <h4>TOTAL {{formatNow format="MMM YYYY"}}</h4>
       <p>
-        <i class="picto-arrow-right green"></i>
+        <i class="picto-arrow-right text-green"></i>
         {% trans "Billed" %}: {{formatMoney invoicingFyFlowStatistics.currentMonthInvoiced.amount defaultCurrency.displaySign}}
       </p>
       <p>
-        <i class="picto-arrow-left orange"></i>
+        <i class="picto-arrow-left text-orange"></i>
         {% trans "Purchased" %}: {{formatMoney invoicingFyFlowStatistics.currentMonthPurchased.amount defaultCurrency.displaySign}}
       </p>
       <p>
-        <i class="picto-stat green"></i>
-        {% trans "Estimated profits" %}: <span class="orange">{{formatMoney invoicingFyFlowStatistics.currentMonthProfits defaultCurrency.displaySign}}</span>
+        <i class="picto-stat text-green"></i>
+        {% trans "Estimated profits" %}: <span class="text-orange">{{formatMoney invoicingFyFlowStatistics.currentMonthProfits defaultCurrency.displaySign}}</span>
       </p>
     </div>
   </section>
@@ -33,20 +33,20 @@
   <section class="sub-actions clearfix">
     <div class="btn-toolbar pull-left helptour-addbtn">
       <div class="btn-group">
-        {{#linkTo "quotations.add" controller.session.tenant class="btn orange"}}
+        {{#linkTo "quotations.add" controller.session.tenant class="btn btn-primary"}}
           <i class="picto-add"></i>
           {% trans "Quotation" %}
         {{/linkTo}}
       </div>
       <div class="btn-group">
-        {{#linkTo "invoices.add" controller.session.tenant class="btn green invoice"}}
+        {{#linkTo "invoices.add" controller.session.tenant class="btn btn-success invoice"}}
           <i class="picto-add"></i>
           {% trans "Invoice" %}
         {{/linkTo}}
       </div>
       {# <a class="btn add grey">{% trans "Purchase" %}</a> #}
       <div class="btn-group">
-        {{#linkTo "items.add" controller.session.tenant class="btn grey"}}
+        {{#linkTo "items.add" controller.session.tenant class="btn btn-default"}}
           <i class="picto-add"></i>
           {% trans "Item" %}
         {{/linkTo}}
@@ -62,7 +62,7 @@
       </h4>
       <div class="btn-toolbar pull-right">
         <div class="btn-group">
-          {{#linkTo "invoices.add" controller.session.tenant class="btn btn-small green rounded"}}
+          {{#linkTo "invoices.add" controller.session.tenant class="btn btn-sm btn-rounded btn-success"}}
             {% trans "Add" %}
           {{/linkTo}}
         </div>
@@ -71,14 +71,10 @@
     {{#with invoicesOverdue}}
       {{partial "invoicing/partials/tableOfInvoices"}}
     {{/with}}
-    {{#unless invoicesOverdue.length}}
-      <p class="table-no-data green">
-        {% trans "No overdue invoices" %}
-      </p>
-    {{/unless}}
+
     {{#if shouldDisplayAllInvoicesButton}}
     <p class="table-see-more">
-      {{#linkTo "invoices.show" controller.session.tenant class="btn btn-small rounded grey bold"}}
+      {{#linkTo "invoices.show" controller.session.tenant class="btn btn-sm btn-rounded btn-default text-bold"}}
         {% trans "See all invoices" %}...
       {{/linkTo}}
     </p>
@@ -93,7 +89,7 @@
       </h4>
       <div class="btn-toolbar pull-right">
         <div class="btn-group">
-          {{#linkTo "quotations.add" controller.session.tenant class="btn btn-small orange rounded"}}
+          {{#linkTo "quotations.add" controller.session.tenant class="btn btn-sm btn-primary btn-rounded"}}
             {% trans "Add" %}
           {{/linkTo}}
         </div>
@@ -102,14 +98,10 @@
     {{#with quotationsDraftAwaitingApproval}}
       {{partial "invoicing/partials/tableOfQuotations"}}
     {{/with}}
-    {{#unless quotationsDraftAwaitingApproval.length}}
-      <p class="table-no-data orange">
-        {% trans "No quotations to bill" %}
-      </p>
-    {{/unless}}
+
     {{#if shouldDisplayAllQuotationsButton}}
     <p class="table-see-more">
-      {{#linkTo "quotations.show" controller.session.tenant class="btn btn-small rounded grey bold"}}
+      {{#linkTo "quotations.show" controller.session.tenant class="btn btn-sm btn-rounded btn-default text-bold"}}
         {% trans "See all quotations" %}...
       {{/linkTo}}
     </p>

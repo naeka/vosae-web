@@ -10,7 +10,6 @@ Vosae.LazyContactResource = Ember.Mixin.create
 
 Vosae.LazyOrganizationResource = Ember.Mixin.create
   resource: (->
-    Vosae.DEBUG = @
     if @_data.organization
       dict =
         type: "Vosae.Organization"
@@ -20,7 +19,7 @@ Vosae.LazyOrganizationResource = Ember.Mixin.create
   ).property('organization')
 
 Vosae.LazyInvoiceResource = Ember.Mixin.create
-  invoiceResource: (->
+  resource: (->
     if @_data.invoice
       dict =
         type: "Vosae.Invoice"
@@ -30,7 +29,7 @@ Vosae.LazyInvoiceResource = Ember.Mixin.create
   ).property('invoice')
 
 Vosae.LazyQuotationResource = Ember.Mixin.create
-  quotationResource: (->
+  resource: (->
     if @_data.quotation
       dict =
         type: "Vosae.Quotation"

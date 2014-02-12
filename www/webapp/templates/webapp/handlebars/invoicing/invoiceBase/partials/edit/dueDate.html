@@ -2,12 +2,12 @@
 
 {% tplhandlebars "invoice/edit/_dueDateBlock" %}
   <p>
-    <label>{% trans "Payment conditions:" %}</label>
+    <label><strong>{% trans "Payment conditions:" %}</strong></label>
     {{view view.paymentConditionsField
       contentBinding="Vosae.paymentConditions"
       selectionBinding="view.currentPaymentConditions"
       currentRevisionBinding="currentRevision"
-      containerCssClass="green"
+      containerCssClass="success"
       prompt="{% trans 'Choose one' context 'payment condition' %}"
       optionValuePath="content.value"
       optionLabelPath="content.label"}}
@@ -17,7 +17,7 @@
       <span class="date">
         <label>
           <i class="picto-agenda"></i>
-          {% trans "Payment due date on:" %}
+          <strong>{% trans "Payment due date on:" %}</strong>
         </label>
         <span class="grey">
           {{currentRevision.displayDueDate}}
@@ -28,16 +28,16 @@
     </p>
   {{else}}
     <p>
-      <i class="picto-note green"></i>
+      <i class="picto-note text-green"></i>
       {{view Vosae.AutoGrowTextField
         valueBinding="currentRevision.customPaymentConditions"
-        classNames="edit"
+        classNames="form-control form-control-unstyled inline-block custom-payment-conditions"
         maxlength="256"
         placeholder="{% trans 'Type your conditions here' %}…" }}
       <span class="date">
         <label>
           <i class="picto-agenda"></i>
-          {% trans "Estimated on" context "date" %}
+          <strong>{% trans "Estimated on" context "date" %}</strong>
         </label>
         <span class="grey">
           {{currentRevision.displayDueDate}}

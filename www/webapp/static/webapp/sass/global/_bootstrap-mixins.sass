@@ -1,0 +1,43 @@
+// Mixin to create button
+@mixin button-variant($color, $background, $border)
+  color: $color
+  background-color: $background
+  border-color: $border
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active
+    color: $color
+    background-color: darken($background, 8%)
+    border-color: darken($border, 12%)
+
+  .open,
+  .open.dropdown-toggle
+    color: $color
+    background-color: darken($background, 8%)
+    border-color: darken($border, 12%)
+
+  &:active,
+  &.active
+    background-image: none
+
+  .open,
+  .open.dropdown-toggle
+    background-image: none
+  
+  &.disabled,
+  &[disabled],
+  fieldset[disabled]
+    background-color: $background
+    border-color: $border
+    &:hover,
+    &:focus,
+    &:active,
+    &.active
+      background-color: $background
+      border-color: $border
+
+  .badge
+    color: $background
+    background-color: $color

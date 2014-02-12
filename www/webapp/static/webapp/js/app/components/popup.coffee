@@ -37,7 +37,7 @@ Vosae.PopupComponent = Em.Component.extend Ember.DeferredMixin,
   autoCloseAfter: 3500
 
   didInsertElement: ->
-    @_setupFocusOnPrimaryButton()
+    # @_setupFocusOnPrimaryButton()
     @_setupDocumentKeyHandler()
     @_setupAutoCloseTimeout() if @get('autoClose')
 

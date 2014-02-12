@@ -4,7 +4,7 @@
   {{view Ember.TextField 
     valueBinding = "summary"
     maxlength = "64" 
-    classNames = "edit" 
+    classNames = "form-control form-control-unstyled text-bold" 
     placeholder = '{% trans "Summary" context "event" %}' }}
   <p>{{content.displayDate}}</p>
   <p> 
@@ -16,17 +16,17 @@
   </p>
   <nav>
     {{#if isSaving}}
-      <a class="btn rounded green">
+      <a class="btn btn-rounded btn-success">
         {% trans "Saving" %}…
       </a>
     {{else}}
-      <a class="btn rounded grey" {{action 'cancel' content}}>
+      <a class="btn btn-rounded btn-default" {{action 'cancel' content}}>
         {% trans "Cancel" %}
       </a>
-      <a class="btn rounded grey" {{action 'edit' content}}>
+      <a class="btn btn-rounded btn-default" {{action 'edit' content}}>
         {% trans "Edit" %}
       </a>
-      <a class="btn rounded green" {{action 'save' content}}>
+      <a class="btn btn-rounded btn-success" {{action 'save' content}}>
         {% trans "Save" %}
       </a>
     {{/if}}

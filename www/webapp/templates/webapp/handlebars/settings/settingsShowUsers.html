@@ -6,8 +6,8 @@
   </header>
   <section class="clearfix">
     <div class="inner">  
-      <table class="table table-users">
-        <thead class="green">
+      <table class="table table-users table-success">
+        <thead>
           <th class="name">{% trans "Name" %}</th>
           <th class="email">{% trans "E-mail address" %}</th>
           <th class="creation-date">{% trans "Creation date" %}</th>
@@ -16,26 +16,22 @@
         </thead>
         <tbody>
           {{#each user in controller}}
-          <tr>
-            <td class="name">
-              {{#linkTo 'settings.editUser' controller.session.tenant user}}
-                {{user.getFullName}}
-              {{/linkTo}}
-            </td>
-            <td class="email">
-              {{user.email}}
-            </td>
-            <td class="creation-date">-</td>
-            <td class="last-login">-</td>
-            <td class="status">
-              {{user.getStatus}}
-            </td>
-          </tr>
+            <tr>
+              <td class="name">
+                {{#linkTo 'settings.editUser' controller.session.tenant user}}
+                  {{user.getFullName}}
+                {{/linkTo}}
+              </td>
+              <td class="email">{{user.email}}</td>
+              <td class="creation-date">-</td>
+              <td class="last-login">-</td>
+              <td class="status">{{user.getStatus}}</td>
+            </tr>
           {{/each}}
         </tbody>
       </table>
       <br/>
-      {{#linkTo 'settings.addUser' controller.session.tenant class="pull-right btn btn-small rounded green"}}
+      {{#linkTo 'settings.addUser' controller.session.tenant class="pull-right btn btn-sm btn-rounded btn-success"}}
         {% trans "Add" %}
       {{/linkTo}}
     </div>

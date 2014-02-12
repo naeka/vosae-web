@@ -51,26 +51,26 @@ describe 'Vosae.LineItem', ->
     # Test
     expect(lineItem.get('total')).toEqual 50
 
-  it 'totalVAT property should return unit price multiplied by the quantity multiplied by the tax', ->
+  it 'totalPlusTax property should return unit price multiplied by the quantity multiplied by the tax', ->
     # Setup
     store.adapterForType(Vosae.Tax).load store, Vosae.Tax, {id: 1, rate: 0.196}
     store.adapterForType(Vosae.LineItem).load store, Vosae.LineItem, {id: 1, tax: "/api/v1/tax/1/"}
     lineItem = store.find Vosae.LineItem, 1
 
     # Test
-    expect(lineItem.get('totalVAT')).toEqual 0
+    expect(lineItem.get('totalPlusTax')).toEqual 0
 
     # Setup
     lineItem.set 'unitPrice', 10.2
     
     # Test
-    expect(lineItem.get('totalVAT')).toEqual 0
+    expect(lineItem.get('totalPlusTax')).toEqual 0
     
     # Setup
     lineItem.set 'quantity', 5
 
     # Test
-    expect(lineItem.get('totalVAT')).toEqual 60.996
+    expect(lineItem.get('totalPlusTax')).toEqual 60.996
 
   it 'displayTotal property should return the total formated and rounded', ->
     # Setup
@@ -88,14 +88,14 @@ describe 'Vosae.LineItem', ->
     # Test
     expect(lineItem.get('displayTotal')).toEqual "50.17"
 
-  it 'displayTotalVAT property should return the totalVAT formated and rounded', ->
+  it 'displayTotalPlusTax property should return the totalPlusTax formated and rounded', ->
     # Setup
     store.adapterForType(Vosae.Tax).load store, Vosae.Tax, {id: 1, rate: 0.196}
     store.adapterForType(Vosae.LineItem).load store, Vosae.LineItem, {id: 1, tax: "/api/v1/tax/1/"}
     lineItem = store.find Vosae.LineItem, 1
 
     # Test
-    expect(lineItem.get('displayTotalVAT')).toEqual "0.00"
+    expect(lineItem.get('displayTotalPlusTax')).toEqual "0.00"
 
     # Setup
     lineItem.setProperties 
@@ -103,7 +103,7 @@ describe 'Vosae.LineItem', ->
       quantity: 5
     
     # Test
-    expect(lineItem.get('displayTotalVAT')).toEqual "61.00"
+    expect(lineItem.get('displayTotalPlusTax')).toEqual "61.00"
 
   it 'displayUnitPrice property should return the unit price formated and rounded', ->
     # Setup

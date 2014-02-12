@@ -3,6 +3,7 @@
 {% tplhandlebars "settings/invoicingGeneral" %}
   <header>
     <h3>{% trans "Invoicing settings" %} &nbsp;>&nbsp; {% trans "General" %}</h3>
+    <div class="btn-toolbar pull-right">{{partial "settings/partials/saveSettings"}}</div>
   </header>
   <section class="clearfix">
     <div class="inner">
@@ -23,7 +24,7 @@
                   contentBinding="sortedCurrencies"
                   selectionBinding="invoicing.supportedCurrencies"
                   multiple="true"
-                  containerCssClass="green"
+                  containerCssClass="success"
                   optionValuePath="content"
                   optionLabelPath="content.description" }}
               {{/if}}
@@ -38,7 +39,7 @@
                 {{view view.defaultCurrency
                   contentBinding="supportedCurrencies"
                   selectionBinding="invoicing.defaultCurrency"
-                  containerCssClass="green"
+                  containerCssClass="success"
                   optionValuePath="content"
                   optionLabelPath="content.description" }}
               {{/if}}
@@ -88,7 +89,7 @@
               {{view view.lateFeeRate
                 valueBinding="invoicing.lateFeeRateFormated"
                 invoicingBinding="invoicing"
-                classNames="edit-settings"
+                classNames="form-control form-control-settings"
                 placeholder="{% trans 'Statutory rate' %}" }}
             </td>
           </tr>

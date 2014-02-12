@@ -1,41 +1,31 @@
 {% load i18n templatetag_handlebars %}
 
 {% tplhandlebars "invoicing/partials/_tableOfItems" %}    
-  <table class="table table-items">
+  <table class="table table-items table-striped table-primary">
     <thead class="orange">
       <tr>
-        <th class="reference">
-          {% trans "Reference" context "table-headers" %}
-        </th>
-        <th class="description">
-          {% trans "Description" context "table-headers" %}
-        </th>
-        <th class="unit-price">
-          {% trans "Unit price (excl. tax)" context "table-headers" %}
-        </th>
-        <th class="tax">
-          {% trans "Default tax" context "table-headers" %}
-        </th>
+        <th class="reference">{% trans "Reference" context "table-headers" %}</th>
+        <th class="description">{% trans "Description" context "table-headers" %}</th>
+        <th class="unit-price">{% trans "Unit price <small>(excl. tax)</small>" context "table-headers" %}</th>
+        <th class="tax">{% trans "Default tax" context "table-headers" %}</th>
       </tr>
     </thead>
     <tbody>
       {{#each item in this}}
-      <tr>
-        <td class="reference">
-          {{#linkTo "item.show" controller.session.tenant item}}
-            {{item.ref}}
-          {{/linkTo}}
-        </td>
-        <td class="description">
-          {{nl2br item.description}}
-        </td>
-        <td class="unit-price">
-          {{#formatMoneyHack item.unitPrice item.currency.displaySymbol}}{{/formatMoneyHack}}
-        </td>
-        <td class="tax">
-          {{item.tax.displayTax}}
-        </td>
-      </tr>
+        <tr>
+          <td class="reference">
+            {{#linkTo "item.show" controller.session.tenant item}}
+              {{item.ref}}
+            {{/linkTo}}
+          </td>
+          <td class="description">{{nl2br item.description}}</td>
+          <td class="unit-price">{{#formatMoneyHack item.unitPrice item.currency.displaySymbol}}{{/formatMoneyHack}}</td>
+          <td class="tax">{{item.tax.displayTax}}</td>
+        </tr>
+      {{else}}
+        <tr>
+          <td class="no-data text-center" colspan="4">{% trans "No items" %}</td>
+        </tr>
       {{/each}}
     </tbody>
   </table>

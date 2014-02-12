@@ -17,6 +17,7 @@ Vosae.ArrayController = Em.ArrayController.extend
       when Vosae.QuotationsShowController.toString() then Vosae.Quotation
       when Vosae.ItemsShowController.toString() then Vosae.Item
       when Vosae.PurchaseOrdersShowController.toString() then Vosae.PurchaseOrder
+      when Vosae.SettingsApiKeysController.toString() then Vosae.ApiKey
 
   init: ->
     @_super()
@@ -29,6 +30,7 @@ Vosae.ArrayController = Em.ArrayController.extend
       when Vosae.QuotationsShowController.toString() then @set 'meta', Vosae.metaForQuotation
       when Vosae.ItemsShowController.toString() then @set 'meta', Vosae.metaForItem
       when Vosae.PurchaseOrdersShowController.toString() then @set 'meta', Vosae.metaForPurchaseOrder
+      when Vosae.SettingsApiKeysController.toString() then @set 'meta', Vosae.metaForApiKey
 
     # Check if model hasn't be fetched yet
     if @get('meta') and !@get('meta.modelHasBeenFetched')

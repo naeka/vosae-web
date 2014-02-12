@@ -1,12 +1,5 @@
 .page-add-tenant
-  input, select
-    margin-bottom: 0
-
-   
-  .help-inline
-    font-weight: bold
-    display: inline-block
-
+  
   section.coords
     .control-group + .control-group
       margin-left: 10px
@@ -15,6 +8,8 @@
     &.same
       .help-inline
         display: none
+      h4
+        margin-bottom: 0
 
   h4.billing-address
     .ember-checkbox
@@ -24,5 +19,12 @@
       display: inline-block
       font-size: 14px
 
-  button.cancel
-    margin-right: 20px
+  .btn.cancel
+    margin-right: 30px
+
+  .form-group
+    &.default-currency,
+    &.supported-currencies,
+    &.registration-country
+      > label
+        display: block

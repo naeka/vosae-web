@@ -9,11 +9,6 @@ Vosae.SettingsReportRoute = Ember.Route.extend
     @render 'settings.report',
       into: 'settings'
       outlet: 'content'
-
-    @render 'settings.report.actions',
-      into: 'settings'
-      outlet: 'actions'
-      controller: @controller
   
   deactivate: ->
     reportSetting = @controller.get 'content'

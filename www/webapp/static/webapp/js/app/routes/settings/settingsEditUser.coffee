@@ -7,11 +7,6 @@ Vosae.SettingsEditUserRoute = Ember.Route.extend
     @render 'settings.editUser',
       into: 'settings'
       outlet: 'content'
-
-    @render 'settings.editUser.actions',
-      into: 'settings'
-      outlet: 'actions'
-      controller: @controller
   
   deactivate: ->
     user = @controller.get 'content'

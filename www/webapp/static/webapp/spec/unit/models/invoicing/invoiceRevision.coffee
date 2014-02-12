@@ -177,6 +177,20 @@ describe 'Vosae.InvoiceRevision', ->
     # Test
     expect(invoiceRevision.get('displayCreditNoteEmissionDate')).toEqual "undefined"
 
+  it 'displayPurchaseOrderDate property should format the purchaseOrderDate', ->
+    # Setup
+    store.adapterForType(Vosae.InvoiceRevision).load store, Vosae.InvoiceRevision, {id: 1, purchase_order_date: "2013-07-17T14:51:37+02:00"}
+    invoiceRevision = store.find Vosae.InvoiceRevision, 1
+
+    # Test
+    expect(invoiceRevision.get('displayPurchaseOrderDate')).toEqual "July 17 2013"
+
+    # Setup
+    invoiceRevision.set 'purchaseOrderDate', null
+
+    # Test
+    expect(invoiceRevision.get('displayPurchaseOrderDate')).toEqual "undefined"
+
   it 'displayDueDate property should format the dueDate', ->
     # Setup
     store.adapterForType(Vosae.InvoiceRevision).load store, Vosae.InvoiceRevision, {id: 1}
@@ -216,7 +230,7 @@ describe 'Vosae.InvoiceRevision', ->
     # Test
     expect(invoiceRevision.get('total')).toEqual 73.92
 
-  it 'totalVAT property should add the total with taxes of each lineItems', ->
+  it 'totalPlusTax property should add the total with taxes of each lineItems', ->
     # Setup
     store.adapterForType(Vosae.Tax).load store, Vosae.Tax, {id:1, rate: 0.10}
     store.adapterForType(Vosae.Tax).load store, Vosae.Tax, {id:2, rate: 0.20}
@@ -229,7 +243,7 @@ describe 'Vosae.InvoiceRevision', ->
     invoiceRevision = store.find Vosae.InvoiceRevision, 1
 
     # Test
-    expect(invoiceRevision.get('totalVAT')).toEqual 86.612
+    expect(invoiceRevision.get('totalPlusTax')).toEqual 86.612
 
   it 'displayTotal property should format and round the total', ->
     # Setup
@@ -244,7 +258,7 @@ describe 'Vosae.InvoiceRevision', ->
     # Test
     expect(invoiceRevision.get('displayTotal')).toEqual "73.92"
 
-  it 'dispayTotalVAT property should format and round the totalVAT', ->
+  it 'dispayTotalPlusTax property should format and round the totalPlusTax', ->
     # Setup
     store.adapterForType(Vosae.Tax).load store, Vosae.Tax, {id:1, rate: 0.10}
     store.adapterForType(Vosae.Tax).load store, Vosae.Tax, {id:2, rate: 0.20}
@@ -257,7 +271,7 @@ describe 'Vosae.InvoiceRevision', ->
     invoiceRevision = store.find Vosae.InvoiceRevision, 1
 
     # Test
-    expect(invoiceRevision.get('displayTotalVAT')).toEqual "86.61"
+    expect(invoiceRevision.get('displayTotalPlusTax')).toEqual "86.61"
 
   it 'taxes property should return a dict with total amount for each taxes', ->
     # Setup
@@ -278,6 +292,22 @@ describe 'Vosae.InvoiceRevision', ->
     expect(taxes.objectAt(0).tax).toEqual store.find(Vosae.Tax, 1)
     expect(taxes.objectAt(1).total).toEqual 3
     expect(taxes.objectAt(1).tax).toEqual store.find(Vosae.Tax, 2)
+
+  it 'getLineItemIndex() function should return the position the passing lineItem in the lineItems hasMany', ->
+    # Setup
+    store.adapterForType(Vosae.InvoiceRevision).load store, Vosae.InvoiceRevision,
+      id: 1
+      line_items: [
+        {item_id: "1"},
+        {item_id: "2"},
+        {item_id: "3"},
+        {item_id: "1"}
+      ]
+    invoiceRevision = store.find Vosae.InvoiceRevision, 1
+    lineItem = invoiceRevision.get('lineItems').objectAt 2
+
+    # Test
+    expect(invoiceRevision.getLineItemIndex(lineItem)).toEqual 2
 
   it '_getLineItemsReferences() method should return an array of itemID related to the lineItems', ->
     # Setup

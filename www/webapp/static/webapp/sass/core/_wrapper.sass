@@ -11,23 +11,23 @@
   z-index: 10
     
 #ct-left, #ct-right 
-  background: $panelBackgroundColor
+  background: $panel-background-color
   color: #FFF
   position: absolute
-  overflow: scroll !important
+  overflow: auto
   +box-sizing(border-box)
 
 #ct-left
   left: 0px
   top: 0px
   z-index: 0
-  width: $panelDesktopLeftWidth
+  width: $panel-desktop-left-width
 
 #ct-right
   right: 0px
   top: 0px
   z-index: 0
-  width: $panelDesktopRightWidth
+  width: $panel-desktop-right-width
 
   & > .inner
     padding: 15px 20px 
@@ -39,36 +39,24 @@
       display: inline-block
       margin-bottom: 15px
       width: 100%
+      height: 28px
 
       &.logout 
         margin-top: 6px
 
     .btn-group.tenant
       margin-bottom: 12px
-      width: 100%
       .btn:first-child
-        width: 100%
+        height: 28px
         text-align: left
-        +border-radius-separate(4px)
-        padding-right: 24px
+        width: 165px
+        i
+          padding-right: 6px
 
       .dropdown-toggle
-        right: 0px
-        position: absolute
-        width: 24px
-        max-width: 24px
-        min-width: 24px
-        z-index: 100
-        +border-radius-separate(0px, 4px, 4px, 0px)
+        height: 28px
+        border-left: 1px solid darken($yellow, 20%)
 
-      .dropdown-menu
-        width: 100%
-        .divider
-          margin: 3px 1px
-
-    .btn-group.tenant.open
-      .btn:first-child, .dropdown-toggle
-        +border-radius-separate(4px, 4px, 0px, 0px)
 
     span.current-user
       display: inline-block
@@ -87,14 +75,14 @@
     display: none
 
   #ct-middle
-    +translateX($panelDesktopLeftWidth)
+    +translateX($panel-desktop-left-width)
     +transition-property(transform)
     +transition-duration(0.25s)
     +transform-style(flat)
 
 .enable-transformX.ct-right-open 
   #ct-middle
-    +translateX(-$panelDesktopRightWidth)
+    +translateX(-$panel-desktop-right-width)
     +transition-property(transform)
     +transition-duration(0.25s)
     +transform-style(flat)

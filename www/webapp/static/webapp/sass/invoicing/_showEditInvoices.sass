@@ -70,6 +70,7 @@
         h4
           margin: 0
           padding-bottom: 3px
+          text-transform: uppercase
 
         p
           clear: both
@@ -110,8 +111,12 @@
     &.invoice-legal
       p
         padding-bottom: 6px
+        margin: 0
+        color: #666
         i
           width: 15px
+      .grey
+        color: #777
 
       label
         margin: 0
@@ -130,8 +135,8 @@
           font-size: 18px
           padding-right: 2px
 
-      p
-        margin: 0
+      .custom-payment-conditions
+        min-width: 190px
 
     &.invoice-payment
       padding-bottom: 22px
@@ -172,68 +177,29 @@
       margin-top: -2px
       color: #555
       width: 280px
+      display: inline-block
       +box-sizing(border-box)
 
       &.half
         width: 138px
 
-  .transmitter
-    h4
-      padding-left: 3px
+  .transmitter h4
+    height: 35px
+    line-height: 35px
 
   .receiver
-    h4
-      padding-bottom: 1px !important
-
-      input
-        color: $textColor
-        font-size: 20px
-        font-weight: bold
-
     .select2-container-multi
       width: 260px
-    
-    .select2-choice
-      max-height: 26px
-      height: 26px
-      min-height: 26px
-      padding: 0 2px
-      color: #333
-      position: relative
-      overflow: visible
-
-      .select2-search-choice-close
-        display: inline-block
-        width: 20px
-        height: 26px
-        position: absolute
-        right: -20px
-        top: 0
-        text-align: right
-
-        &:before
-          content: '*'
-          font-style: normal
-          font-family: $fontPictos
-          font-weight: normal
-          font-size: 14px
-
-      div
-        display: none
-      span
-        margin-right: 0
-
-      &.select2-default
-        color: #888
-
-        .select2-search-choice-close
-          display: none
 
     .contact
       .select2-choice
         max-height: 23px
         height: 23px
         min-height: 23px
+        line-height: 23px
+        font-size: 14px
+        margin-top: 5px
+        margin-bottom: 2px
 
     .dropdown-address
       font-size: 15px
@@ -241,6 +207,10 @@
   .select2-container.currency
     width: 100px
     min-width: 100px
+
+  .table-invoice-summary
+    td:last-child
+      padding-right: 16px
 
 body.draggingOn .page-edit-invoice .table-attachments,
 body.draggingOn .page-edit-quotation .table-attachments
@@ -261,7 +231,7 @@ body.draggingOn .page-edit-quotation .table-attachments
       font-weight: bold
       color: #DDD
       text-align: center
-      margin-top: 25px
+      margin-top: 5px
 
   td.no-data
     display: none

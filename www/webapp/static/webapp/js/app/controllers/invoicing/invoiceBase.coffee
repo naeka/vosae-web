@@ -2,11 +2,27 @@ Vosae.InvoiceBaseController = Em.ObjectController.extend
   attachmentUploads: []
 
   actions:
+    setLineItemAsOptional: (lineItem) ->
+      console.log "setLineItemAsOptional"
+
+    addLineItemAbove: (lineItem) ->
+      currentRevision = @get "currentRevision"
+      index = currentRevision.getLineItemIndex lineItem
+      newLineItem = @get('content.transaction').createRecord Vosae.LineItem
+      unless typeof index is `undefined`
+        currentRevision.get('lineItems').insertAt index, newLineItem
+
+    addLineItemBelow: (lineItem) ->
+      currentRevision = @get "currentRevision"
+      index = currentRevision.getLineItemIndex lineItem
+      newLineItem = @get('content.transaction').createRecord Vosae.LineItem
+      unless typeof index is `undefined`
+        currentRevision.get('lineItems').insertAt index+1, newLineItem
+
     addLineItem: ->
       @get("currentRevision.lineItems").createRecord()
 
     deleteLineItem: (lineItem) ->
-      @preventStateError()
       Vosae.ConfirmPopupComponent.open
         message: gettext 'Do you really want to delete this line?'
         callback: (opts, event) =>
@@ -28,28 +44,6 @@ Vosae.InvoiceBaseController = Em.ObjectController.extend
 
     downloadPdf: (language) ->
       @get('content').downloadPdf language
-
-    cancel: (invoiceBase) ->
-      switch invoiceBase.constructor.toString()
-        when Vosae.Quotation.toString()
-          if invoiceBase.get('id')
-            return @transitionToRoute 'quotation.show', invoiceBase
-          else
-            return @transitionToRoute 'quotations.show'
-        when Vosae.Invoice.toString()
-          if invoiceBase.get('id')
-            return @transitionToRoute 'invoice.show', invoiceBase
-          else
-            return @transitionToRoute 'invoices.show'
-      return
-
-    preventStateError: ->
-      invoiceBase = @get 'content'
-      invoiceBase.get 'currentRevision.senderAddress'
-      invoiceBase.get 'currentRevision.billingAddress'
-      invoiceBase.get 'currentRevision.deliveryAddress'
-      invoiceBase.get 'currentRevision.currency'
-      invoiceBase.get('currentRevision.currency.rates').getEach 'rate'
 
     cancel: (invoiceBase) ->
       switch invoiceBase.constructor.toString()
@@ -91,21 +85,24 @@ Vosae.InvoiceBaseController = Em.ObjectController.extend
           invoiceBase.get('currentRevision').set 'deliveryAddress', null
 
         if invoiceBase.get('currentRevision.lineItems')
+          notEmptyItems = []
           invoiceBase.get('currentRevision.lineItems').forEach (item) ->
-            if item.isEmpty()
-              invoiceBase.get('currentRevision.lineItems').removeObject item
+            if not item.isEmpty()
+              notEmptyItems.push item
+          invoiceBase.set('currentRevision.lineItems.content', [])
+          invoiceBase.get('currentRevision.lineItems').addObjects notEmptyItems
 
-      event = if invoiceBase.get('id') then 'didUpdate' else 'didCreate'
-      invoiceBase.one event, @, ->
-        Ember.run.next @, ->
-          switch invoiceBase.constructor.toString()
-            when Vosae.Quotation.toString()
-              @transitionToRoute 'quotation.show', @get('session.tenant'), invoiceBase
-            when Vosae.Invoice.toString()
-              @transitionToRoute 'invoice.show', @get('session.tenant'), invoiceBase
-            when Vosae.PurchaseOrder.toString()
-              @transitionToRoute 'purchaseOrder.show', @get('session.tenant'), invoiceBase
-      invoiceBase.get('transaction').commit()
+        event = if invoiceBase.get('id') then 'didUpdate' else 'didCreate'
+        invoiceBase.one event, @, ->
+          Ember.run.next @, ->
+            switch invoiceBase.constructor.toString()
+              when Vosae.Quotation.toString()
+                @transitionToRoute 'quotation.show', @get('session.tenant'), invoiceBase
+              when Vosae.Invoice.toString()
+                @transitionToRoute 'invoice.show', @get('session.tenant'), invoiceBase
+              when Vosae.PurchaseOrder.toString()
+                @transitionToRoute 'purchaseOrder.show', @get('session.tenant'), invoiceBase
+        invoiceBase.get('transaction').commit()
 
     delete: (invoiceBase) ->
       message = switch invoiceBase.constructor.toString()

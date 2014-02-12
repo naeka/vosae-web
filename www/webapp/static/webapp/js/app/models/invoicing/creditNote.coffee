@@ -14,5 +14,3 @@ Vosae.Adapter.map "Vosae.CreditNote",
     embedded: "always"
   currentRevision:
     embedded: "always"
-  group:
-    embedded: "always"

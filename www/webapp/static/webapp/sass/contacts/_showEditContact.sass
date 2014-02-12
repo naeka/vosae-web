@@ -20,7 +20,7 @@
         display: block
         margin-top: -3px
         font-size: 16px
-      
+
       .name
         display: inline-block
         font-size: 20px
@@ -87,12 +87,15 @@
 
     .addresses
       width: 100%
-      td
+      tr:not(.add)
         background: $grey
-        position: relative
-        padding: 6px
-        padding-right: 40px
+      td
         border-bottom: 5px solid $white
+        padding: 6px
+
+      .inner
+        position: relative
+        padding-right: 34px
 
       input.address,
       input.extended-address,
@@ -107,7 +110,7 @@
       input.country
         width: 60%
 
-      .btn-delete
+      .btn-primary
         position: absolute
         top: 5px
         right: 5px
@@ -197,7 +200,8 @@
       position: absolute
       width: 52px
       top: 82px
-      left: 0px
+      left: 12px
+      padding: 0
 
     .infos
       padding-left: 24px
@@ -210,8 +214,13 @@
     display: none
 
   .role input
-    margin-top: 8px
+    margin-top: 5px
     font-size: 14px
+    color: #888
+
+  .name input
+    font-weight: bold
+    font-size: 20px
 
   .organization
     margin-top: 25px
@@ -219,26 +228,15 @@
     .select2-container
       min-width: 150px
 
-    .select2-choice span
-      margin-right: 20px
-
-    .select2-search-choice-close
-      width: 10px
-      height: 100%
-      top: 0
-      position: absolute
-      right: 8px
-
-      &:before
-        content: '*'
-        font-family: $fontPictos
-        font-size: 12px
-        color: #FFF
-        text-align: center
-
-
   section.contact-infos,
     padding: 30px 0
+
+
+.page-edit-contact,
+.page-edit-organization
+  table.addresses
+    input[type="text"]
+      display: inline-block
 
 
 // On drag & drop
@@ -264,3 +262,4 @@ body.draggingOn .page-edit-contact
       color: #DDD
       text-align: center
       margin-top: 25px
+

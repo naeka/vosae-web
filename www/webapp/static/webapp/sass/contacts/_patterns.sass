@@ -2,7 +2,7 @@
   &[class^="page-"]:not(.page-settings),
   &[class*=" page-"]:not(.page-settings)
     position: relative
-    padding: 0 40px
+    padding: 0 40px 20px 40px
 
 .app-contacts section
   border-bottom: 5px solid $grey
@@ -35,43 +35,9 @@
   &:last-child
     border-bottom: 0
 
-
-.app-contacts label.type
-  height: 22px
-  line-height: 22px
-  display: block
-  font-size: inherit
-  background: $green
-  color: #FFF
-  padding: 0px 8px
-  margin: 0
-  +border-radius(4px)
-
 .app-contacts .actions-form
   margin-top: 10px
   text-align: right
-
-.app-contacts .btn-delete,
-.app-contacts .btn-add
-  width: 20px
-  height: 20px
-  line-height: 20px
-  display: inline-block
-  text-align: center
-  color: #FFF
-  font-size: 13px
-  cursor: pointer
-
-  +border-radius(10px)
-  +unselectable()
-
-  &.orange
-    background: $orange
-  &.green
-    background: $green
-
-.app-contacts .btn-add
-  font-size: 14px
 
 
 // Contact card

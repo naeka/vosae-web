@@ -4,7 +4,7 @@ Vosae.EntityController = Em.ObjectController.extend
       format = "vcard"
       tenantSlug = @get('session.tenant.slug')
       entity_id = @get('content.id')
-      exportURL = "#{APP_ENDPOINT}#{@get('store').adapter.namespace}/"
+      exportURL = "#{APP_ENDPOINT}/#{@get('store').adapter.namespace}/"
       
       switch @constructor.toString()
         when Vosae.ContactShowController.toString()
@@ -12,7 +12,7 @@ Vosae.EntityController = Em.ObjectController.extend
         when Vosae.OrganizationShowController.toString()
           exportURL += "organization/"
       
-      exportURL += "#{entity_id}/export/#{format}/?x_vc=#{tenantSlug}"
+      exportURL += "#{entity_id}/export/#{format}/?x_tenant=#{tenantSlug}"
 
       $.fileDownload(exportURL)
 

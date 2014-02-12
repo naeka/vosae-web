@@ -6,8 +6,8 @@
   </header>
   <section class="clearfix">
     <div class="inner">
-      <table class="table table-groups">
-        <thead class="green">
+      <table class="table table-groups table-success">
+        <thead>
           <th class="name">{% trans "Name" %}</th>
           <th class="created-by">{% trans "Created by" %}</th>
           <th class="creation-date">{% trans "Creation date" %}</th>
@@ -27,15 +27,13 @@
                 {% trans "System" context "user" %}
               {{/if}}
             </td>
-            <td class="creation-date">
-              {{formatDate group.createdAt}}
-            </td>
+            <td class="creation-date">{{formatDate group.createdAt}}</td>
           </tr>
           {{/each}}
         </tbody>
       </table>
       <br/>
-      {{#linkTo 'settings.addGroup' controller.session.tenant class="pull-right btn btn-small green rounded"}}
+      {{#linkTo 'settings.addGroup' controller.session.tenant class="pull-right btn btn-sm btn-success btn-rounded"}}
         {% trans "Add" %}
       {{/linkTo}}
     </div>

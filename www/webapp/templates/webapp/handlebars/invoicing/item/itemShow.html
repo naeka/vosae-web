@@ -6,15 +6,15 @@
   <section class="desc clearfix">
     <div class="actions clearfix">
       <div class="btn-toolbar pull-right">
-        <div class="btn-group"> 
-          {{#linkTo "item.edit" controller.session.tenant content class="btn green"}}
-            {% trans "Edit" %}
-          {{/linkTo}}
-        </div>
-        <div class="btn-group">
-          <a href="#" class="btn rounded grey" {{action 'delete' content}}>
+         <div class="btn-group">
+          <a href="#" class="btn btn-rounded btn-default" {{action 'delete' content}}>
             {% trans "Delete" %}
           </a>
+        </div>
+        <div class="btn-group"> 
+          {{#linkTo "item.edit" controller.session.tenant content class="btn btn-success btn-rounded"}}
+            {% trans "Edit" %}
+          {{/linkTo}}
         </div>
       </div>
     </div>
@@ -24,14 +24,14 @@
       </div>
       <div class="desc">
         <h4 class="reference">
-          <i class="picto-arrow-right green"></i>
+          <i class="picto-arrow-right text-green"></i>
           {{ref}}
         </h4>
         <p>{{nl2br description}}</p>
       </div>
     </div>
     <div class="pull-right text-right">
-      <h4 class="type green">{{displayType}}</h4>
+      <h4 class="type">{{displayType}}</h4>
       <span class="currency">{{currency.symbol}}</span>
     </div>
   </section>

@@ -1,4 +1,6 @@
 require 'defaults'
+require 'namespaces'
+require 'plugins'
 require 'application'
 
 window.preWindowLocation = preWindowLocation =
@@ -25,4 +27,5 @@ unless window.testMode
 require 'components'
 require 'router'
 require 'controllers'
+require 'forms'
 require 'views'

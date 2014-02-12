@@ -1,17 +1,15 @@
 {% load i18n static templatetag_handlebars %}
 
 {% tplhandlebars "settings" %}
-  <div class="settings-menu d-d-cell">    
+  <div class="settings-menu d-cell">    
     <div class="inner">
-      {{outlet actions}}
       <ul class="clearfix">
         <li class="exit">
           {{#linkTo "dashboard.show" controller.session.tenant class="btn"}}
-            <i class="picto-arrow-left"></i>
-            {% trans "Return to application" %}
+            <i class="picto-arrow-left"></i>&nbsp;{% trans "Return to application" %}
           {{/linkTo}}
         </li>
-        <li class="module">{% trans "Global settings" %}</li>
+        <li class="module"><strong>{% trans "Global settings" %}</strong></li>
         <li class="links">
           {{#linkTo 'settings.application' controller.session.tenant}}{% trans "Application" %}{{/linkTo}}
           {{#linkTo 'settings.apiKeys' controller.session.tenant}}{% trans "API keys" %}{{/linkTo}}
@@ -20,7 +18,7 @@
           {{#linkTo 'settings.showGroups' controller.session.tenant}}{% trans "Groups" %}{{/linkTo}}
           {{#linkTo 'settings.report' controller.session.tenant}}{% trans "Reports" %}{{/linkTo}}
         </li>
-        <li class="module">{% trans "Invoicing settings" %}</li>
+        <li class="module"><strong>{% trans "Invoicing settings" %}</strong></li>
         <li class="links">
           {{#linkTo 'settings.invoicingGeneral' controller.session.tenant}}{% trans "General" %}{{/linkTo}}
           {{#linkTo 'settings.showTaxes' controller.session.tenant}}{% trans "Taxes" %}{{/linkTo}}

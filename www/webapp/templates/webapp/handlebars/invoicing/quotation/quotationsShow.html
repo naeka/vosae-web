@@ -6,7 +6,7 @@
     <div class="btn-toolbar pull-left"></div>
     <div class="btn-toolbar pull-right">
       <div class="btn-group">
-        {{#linkTo "quotations.add" controller.session.tenant class="btn orange"}}
+        {{#linkTo "quotations.add" controller.session.tenant class="btn btn-primary"}}
           <i class="picto-add"></i>
           {% trans "Quotation" %}
         {{/linkTo}}
@@ -26,15 +26,12 @@
       {{partial "invoicing/partials/tableOfQuotations"}}
     {{/with}}
 
-    {{#unless quotationsDraftAwaitingApproval.length}}
-      <p class="table-no-data orange">
-        {% trans "No pending quotations" %}
-      </p>
-    {{/unless}}
     {# Pagination #}
     {{#if paginationDraftHasNext}}
-      <p class="table-load-more" {{action getNextQuotationsDraft}}>
-        {% trans "Load more quotations" %}
+      <p class="text-center">
+        <a class="btn btn-default btn-rounded btn-sm" {{action getNextQuotationsDraft}}>
+          {% trans "Load more quotations" %}
+        </a>
       </p>
     {{/if}}
   </section>
@@ -51,15 +48,12 @@
       {{partial "invoicing/partials/tableOfQuotations"}}
     {{/with}}
     
-    {{#unless quotationsExpiredRefused.length}}
-      <p class="table-no-data orange">
-        {% trans "No expired quotations" %}
-      </p>
-    {{/unless}}
     {# Pagination #}
     {{#if paginationExpiredHasNext}}
-      <p class="table-load-more" {{action getNextQuotationsExpired}}>
-        {% trans "Load more quotations" %}
+      <p class="text-center">
+        <a class="btn btn-default btn-rounded btn-sm" {{action getNextQuotationsExpired}}>
+          {% trans "Load more quotations" %}
+        </a>
       </p>
     {{/if}}
   </section>
@@ -76,15 +70,12 @@
       {{partial "invoicing/partials/tableOfQuotations"}}
     {{/with}}
 
-    {{#unless quotationsApprovedInvoiced.length}}
-      <p class="table-no-data orange">
-        {% trans "No approved quotations" %}
-      </p>
-    {{/unless}}
     {# Pagination #}
     {{#if paginationApprovedHasNext}}
-      <p class="table-load-more" {{action getNextQuotationsApproved}}>
-        {% trans "Load more quotations" %}
+      <p class="text-center">
+        <a class="btn btn-default btn-rounded btn-sm" {{action getNextQuotationsApproved}}>
+          {% trans "Load more quotations" %}
+        </a>
       </p>
     {{/if}}
   </section>

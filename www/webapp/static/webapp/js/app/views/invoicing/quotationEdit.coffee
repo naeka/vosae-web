@@ -1,4 +1,4 @@
-Vosae.QuotationEditView = Vosae.InvoiceBaseEditView.extend
+Vosae.QuotationEditView = Vosae.InvoiceBaseEditView.extend Vosae.SortableLineItemsMixin,
   classNames: ["page-edit-quotation"]
 
   quotationDateField: Vosae.DatePickerField.extend
@@ -20,10 +20,16 @@ Vosae.QuotationEditView = Vosae.InvoiceBaseEditView.extend
     didInsertElement: ->
       @_super()
       element = @$().closest('.invoice-head .validity')
+      defaultValidityDays = @get('parentView.controller.session.tenantSettings.invoicing.quotationValidity')
 
       date = @get('currentRevision.quotationValidity')
-      if date?
+      if date instanceof Date
         element.attr 'data-date', moment(date).format("L")
+      else if defaultValidityDays?
+        # Current date + defaultValidity days (30 by default)
+        date = moment().add("days", defaultValidityDays)
+        @get("currentRevision").set "quotationValidity", date._d
+        element.attr 'data-date', date.format("L")
 
       element
         .datepicker(@datepicker_settings)

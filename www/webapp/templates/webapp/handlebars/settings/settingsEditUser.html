@@ -3,24 +3,18 @@
 {% tplhandlebars "settings/editUser" %}
   {{#if content.isLoaded}}
   <header>
-  {{#if id}}
-    <h3>{% trans "Global settings" %} &nbsp;>&nbsp; {% trans "Users" %} &nbsp;>&nbsp; {% trans "Edit" %} &nbsp;>&nbsp; {{fullName}}</h3>
-  {{else}}
-    <h3>{% trans "Global settings" %} &nbsp;>&nbsp; {% trans "Users" %} &nbsp;>&nbsp; {% trans "Add" %}</h3>
-  {{/if}}
+    {{#if id}}
+      <h3>{% trans "Global settings" %} &nbsp;>&nbsp; {% trans "Users" %} &nbsp;>&nbsp; {% trans "Edit" %} &nbsp;>&nbsp; {{fullName}}</h3>
+    {{else}}
+      <h3>{% trans "Global settings" %} &nbsp;>&nbsp; {% trans "Users" %} &nbsp;>&nbsp; {% trans "Add" %}</h3>
+    {{/if}}
+    <div class="btn-toolbar pull-right">{{partial "settings/partials/saveDeleteSettings"}}</div>
   </header>
   <section class="clearfix global-informations">
     <div class="inner">
       <div class="clearfix">
         <div class="pull-left">
           <h4>{% trans "Preferences" %}</h4>
-        </div>
-        <div class="btn-toolbar pull-right">
-          {{#if id}}
-            <a {{action delete content}} class="btn btn-small rounded orange">
-              {% trans "Delete" %}
-            </a>
-          {{/if}}
         </div>
       </div>
       <table class="half">
@@ -34,7 +28,7 @@
               {{view Ember.TextField 
                 valueBinding="fullName"
                 maxlength="64" 
-                classNames="edit-settings" 
+                classNames="form-control form-control-settings" 
                 disabled="disabled" }}
             </td>
           </tr>
@@ -48,13 +42,13 @@
                 {{view Ember.TextField 
                   valueBinding="email"
                   maxlength="64" 
-                  classNames="edit-settings"
+                  classNames="form-control form-control-settings"
                   disabled="disabled" }}
               {{else}}
                 {{view Ember.TextField 
                   valueBinding="email"
                   maxlength="64" 
-                  classNames="edit-settings" }}
+                  classNames="form-control form-control-settings" }}
               {{/if}}
             </td>
           </tr>

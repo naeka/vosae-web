@@ -10,39 +10,34 @@
       border: 1px solid #DDD
       color: #DDD
       font-size: 22px
+      line-height: 26px
       font-style: normal
-      +square(30px)
+      +square(31px)
       +border-radius(16px)
 
       &::before
-        font-family: $fontPictos
+        font-family: $font-pictos
         content: ' '        
 
       &.contact::before
         content: 'g'
-        line-height: 25px
 
       &.invoicing::before
         content: '%'
-        line-height: 31px
 
       &.organizer::before
         content: '\\'
-        line-height: 30px
 
   .d-row
     font-size: 14px
-    +opacity(0.45)
+    +opacity(0.75)
 
     &.unread
       background: #262626
       +opacity(1)
 
-    &:hover
-      background: $orange
-      +opacity(1)
-      a
-        color: #111
+      .d-cell.icon
+        border-left: 4px solid $orange
 
   .d-cell
     vertical-align: middle

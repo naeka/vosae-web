@@ -12,11 +12,6 @@ Vosae.SettingsInvoicingGeneralRoute = Ember.Route.extend
     @render 'settings.invoicingGeneral',
       into: 'settings'
       outlet: 'content'
-
-    @render 'settings.invoicingGeneral.actions',
-      into: 'settings'
-      outlet: 'actions'
-      controller: @controller
   
   deactivate: ->
     settingsInvoicingGeneral = @controller.get 'content'

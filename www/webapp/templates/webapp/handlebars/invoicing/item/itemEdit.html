@@ -22,7 +22,7 @@
         {{view Vosae.Components.Select
           contentBinding="Vosae.itemsTypeChoices"
           valueBinding="type"
-          containerCssClass="green helptour-itemtype"
+          containerCssClass="helptour-itemtype"
           optionLabelPath="content.label"
           optionValuePath="content.value" }}
       </h4>
@@ -40,7 +40,7 @@
             valueBinding="description"
             maxlength="512"
             resize="none"
-            classNames="edit"
+            classNames="form-control form-control-unstyled"
             placeholder="{% trans '- Product name, description' %}…" }}
             <p class="info">{% trans "You are allowed to write on several lines" %}</p>
         </td>
@@ -50,7 +50,7 @@
         <td>
           {{view view.referenceField 
             valueBinding="ref"
-            classNames="edit" 
+            classNames="form-control form-control-unstyled" 
             placeholder="{% trans "Reference" %}" }}
             <p class="info">{% trans "Alphanumeric characters and dashes/underscores only" %}</p>
         </td>
@@ -62,7 +62,7 @@
         <td>
           {{view view.unitPriceField
             itemBinding=this
-            classNames="edit"
+            classNames="form-control form-control-unstyled"
             placeholder="0" }}
         </td>
       </tr>
@@ -74,7 +74,7 @@
           {{view Vosae.Components.Select
             contentBinding="controller.taxes"
             selectionBinding="tax"
-            containerCssClass="green taxes"
+            containerCssClass="taxes"
             optionValuePath="content"
             optionLabelPath="content.displayTax" }}
         </td>
@@ -87,7 +87,7 @@
           {{view Vosae.Components.Select
             contentBinding="controller.session.tenantSettings.invoicing.supportedCurrencies"
             selectionBinding="currency"
-            containerCssClass="green currencies"
+            containerCssClass="currencies"
             optionValuePath="content.symbol"
             optionLabelPath="content.symbol" }}
         </td>
@@ -98,19 +98,19 @@
   <div class="actions-form">
     {{#if isSaving}}
       <div class="btn-group">
-        <a class="btn rounded green">
+        <a class="btn btn-rounded btn-success">
           {% trans "Saving" %}…
         </a>
       </div>
     {{else}}
       <div class="btn-group">
-        <a class="btn rounded grey" {{action cancel content}}>
+        <a class="btn btn-rounded btn-default" {{action cancel content}}>
           {% trans "Cancel" %}
         </a>
       </div>
       {{#if isDirty}}
         <div class="btn-group helptour-itemsave">
-          <a class="btn rounded green" {{action save content}}>
+          <a class="btn btn-rounded btn-success" {{action save content}}>
             {{#if id}}
               {% trans "Save" %}
             {{else}}

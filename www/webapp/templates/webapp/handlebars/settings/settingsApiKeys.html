@@ -4,59 +4,12 @@
   <header>
     <h3>{% trans "Global settings" %} &nbsp;>&nbsp; {% trans "Api keys" %}</h3>
   </header>
-  <section class="clearfix">
-    <div class="inner">
-      <h4>{% trans "Create a new application" %}</h4>
-      <table>
-        <tbody>
-          <tr>
-            <td class="label">
-              <label>{% trans "Name" %}</label>
-            </td>
-            <td>
-              {{view Vosae.AutoGrowTextField 
-                valueBinding="content.label"
-                maxlength="64"
-                disabledBinding="content.key"
-                classNames="edit-settings" 
-                placeholder="{% trans 'Name here' %}" }}
-
-              {{#if content.label}}
-                {{#unless content.key}}
-                <a {{action save content}} class="btn btn-small addApiKey rounded green">
-                  {% trans "Generate API key" %}
-                </a>
-                {{/unless}}
-              {{/if}}
-            </td>
-          </tr>
-          {{#if content.key}}
-          <tr>
-            <td class="label">
-              <label>{% trans "Key" %}</label>
-            </td>
-            <td>
-              {{view Vosae.AutoGrowTextField
-                valueBinding="content.key"
-                disabled="true"
-                classNames="edit-settings" }}
-              <p>{% trans "You don't need to memorize this key. You should not have to fill it more than once." %}</p>
-              <p><a {{action add}} class="btn btn-small rounded green">{% trans "Add another API key" %}</a></p>
-            </td>
-          </tr>
-          {{/if}}
-        </tbody>
-      </table>
-    </div>
-  </section>
- 
   {{#if filteredApiKeys}}
-  <hr>
   <section class="clearfix">
     <div class="inner"> 
       <h4>{% trans "Your applications" %}</h4>
-      <table class="table table-api-keys">
-        <thead class="green">
+      <table class="table table-api-keys table-success">
+        <thead>
           <th>{% trans "Name" %}</th>
           <th>{% trans "Created date" %}</th>
           <th></th>
@@ -67,7 +20,7 @@
             <td>{{apiKey.label}}</td>
             <td>{{formatDate apiKey.createdAt format="LLLL"}}</td>
             <td class="revoke">
-              <a {{action delete apiKey}} class="btn btn-small rounded orange">
+              <a {{action deleteApiKey apiKey}} class="btn btn-sm btn-rounded btn-primary">
                 {% trans "Revoke" %}
               </a>
             </td>
@@ -77,5 +30,39 @@
       </table>
     </div>
   </section>
+  <hr>
   {{/if}}
+  <section class="clearfix">
+    <div class="inner">
+      <h4>{% trans "Create a new application" %}</h4>
+      <table>
+        <tbody>
+          <tr>
+            <td class="label"><label>{% trans "Name" %}</label></td>
+            <td>
+              {{view view.apiKeyName}}
+
+              {{#if newApiKey.label}}
+                {{#unless newApiKey.key}}
+                <a {{action saveNewApiKey newApiKey}} class="btn btn-sm addApiKey btn-rounded btn-success inline-block">
+                  {% trans "Generate API key" %}
+                </a>
+                {{/unless}}
+              {{/if}}
+            </td>
+          </tr>
+          {{#if newApiKey.key}}
+          <tr>
+            <td class="label"><label>{% trans "Key" %}</label></td>
+            <td>
+              {{view view.apiKeyKey}}
+              <p>{% trans "You don't need to memorize this key. You should not have to fill it more than once." %}</p>
+              <p><a {{action createNewApiKey}} class="btn btn-sm btn-rounded btn-success pull-right">{% trans "Add another API key" %}</a></p>
+            </td>
+          </tr>
+          {{/if}}
+        </tbody>
+      </table>
+    </div>
+  </section>
 {% endtplhandlebars %}

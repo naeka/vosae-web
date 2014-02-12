@@ -163,7 +163,7 @@ Vosae.CalendarListsShowView = Em.ContainerView.extend
       @set('parentView.hasQuickAddEvent', false)
 
 Vosae.CalendarListsShowSettingsView = Em.View.extend Vosae.HelpTour,
-  classNames: ["app-organizer", "page-settings", "page-show-organizer-settings"]
+  classNames: ["page-settings", "page-show-organizer-settings"]
 
   initHelpTour: ->
     helpTour = @_super()

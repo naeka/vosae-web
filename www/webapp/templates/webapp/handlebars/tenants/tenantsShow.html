@@ -1,0 +1,24 @@
+{% load i18n templatetag_handlebars braces %}
+
+{% tplhandlebars "tenants/show" %}
+
+  <h3>{% trans "Organization you want to work with..." %}</h3>
+
+  <section>
+    <ul class="list-unstyled">
+      {{#each tenant in content}}
+        <li {{action "setAsCurrentTenant" tenant}} class="tenant-card" title="{{unbound tenant.name}}">
+          <div class="inner">
+            <div class="avatar default-organization rounded"></div>
+            <div class="infos">{{tenant.name}}</div>
+          </div>
+        </li>
+      {{/each}}
+    </ul>
+  </section>
+
+  <div class="form-actions">
+    {{#linkTo "tenants.add" class="btn btn-success"}}{% trans "Add a new organization" %}{{/linkTo}}
+  </div>
+
+{% endtplhandlebars %}

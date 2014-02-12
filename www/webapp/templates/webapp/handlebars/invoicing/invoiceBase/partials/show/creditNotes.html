@@ -8,8 +8,10 @@
     <div class="pull-right"></div>
   </div>
   <div>
-    {{#linkTo "creditNote.show" controller.session.tenant relatedCreditNote}}
-      {% trans "See related credit note" %}
-    {{/linkTo}}
+    {{#each group.creditNotes}}
+      {{#linkTo "creditNote.show" controller.session.tenant this}}
+        {% trans "See related credit note" %}
+      {{/linkTo}}
+    {{/each}}
   </div>
 {% endtplhandlebars %}

@@ -17,11 +17,6 @@ Vosae.SettingsAddGroupRoute = Ember.Route.extend
       outlet: 'content'
       controller: @controller
 
-    @render 'settings.editGroup.actions',
-      into: 'settings'
-      outlet: 'actions'
-      controller: @controller
-
   deactivate: ->
     group = @controller.get 'content'
     if group.get 'isDirty'

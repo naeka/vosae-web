@@ -7,7 +7,7 @@
     <section class="actions clearfix">
       <div class="btn-toolbar pull-left">
         {{#if id}}            
-          {{#linkTo "vosaeEvent.show" controller.session.tenant content class="btn grey"}}
+          {{#linkTo "vosaeEvent.show" controller.session.tenant content class="btn btn-default"}}
             <i class="picto-arrow-left"></i>
             {{#if summary}}
               {{summary}}
@@ -16,7 +16,7 @@
             {{/if}}
           {{/linkTo}}
         {{else}}
-          {{#linkTo "calendarLists.show" controller.session.tenant class="btn grey"}}
+          {{#linkTo "calendarLists.show" controller.session.tenant class="btn btn-default"}}
             {% trans "Organizer" %}
           {{/linkTo}}
         {{/if}}
@@ -24,31 +24,24 @@
       <div class="btn-toolbar pull-right">
         {{#if isSaving}}
           <div class="btn-group">
-            <a class="btn rounded green">
+            <a class="btn btn-rounded btn-success">
               {% trans "Saving..." %}
             </a>
           </div>
         {{else}}
           <div class="btn-group">
-            <a class="btn rounded grey" {{action 'cancel' content}}>
+            <a class="btn btn-rounded btn-default" {{action 'cancel' content}}>
               {% trans  "Cancel" %}
             </a>
           </div>
           {{#if isDirty}}
             <div class="btn-group">        
-              <a class="btn rounded green" {{action 'save' content}}>
+              <a class="btn btn-rounded btn-success" {{action 'save' content}}>
                 {{#if id}}
                   {% trans "Save" %}
                 {{else}}
                   {% trans "Add" %}
                 {{/if}}
-              </a>
-            </div>
-          {{/if}}
-          {{#if id}}
-            <div class="btn-group">
-              <a class="btn rounded grey" {{action 'delete' content}}>
-                {% trans "Delete" %}
               </a>
             </div>
           {{/if}}
@@ -61,7 +54,7 @@
         <div class="summary">
           {{view Vosae.AutoGrowTextField
             valueBinding="summary"
-            classNames="edit"
+            classNames="form-control form-control-unstyled text-bold"
             maxlength="64"
             placeholder='{% trans "Summary" context "event" %}' }}
         </div>
@@ -72,7 +65,6 @@
                 contentBinding="calendarLists"
                 dataColorBinding="content.color"
                 valueBinding="calendar"
-                containerCssClass="green"
                 optionLabelPath="content.displayName"
                 optionValuePath="content.calendar"  }}
             {{/if}}
@@ -85,19 +77,21 @@
           {{#isTouchEnabled}}
             {{#if allDay}}
               {{view Vosae.DateField
-                valueBinding=start.date }}
+                valueBinding=start.date
+                classNames="form-control form-control-unstyled" }}
             {{else}}
               {{view Vosae.DateTimeField
-                valueBinding=start.datetime }}
+                valueBinding=start.datetime
+                classNames="form-control form-control-unstyled" }}
             {{/if}}
           {{else}}
             {{view view.startDateField
               contentBinding="start"
-              classNames="edit date" }}
+              classNames="form-control form-control-unstyled date" }}
             {{#unless allDay}}
               {{view view.startTimeField
                 contentBinding="start"
-                classNames="edit" }}
+                classNames="form-control form-control-unstyled" }}
             {{/unless}}
           {{/isTouchEnabled}}
         </span>
@@ -106,19 +100,21 @@
           {{#isTouchEnabled}}
             {{#if allDay}}
               {{view Vosae.DateField
-                valueBinding=end.date }}
+                valueBinding=end.date
+                classNames="form-control form-control-unstyled" }}
             {{else}}
               {{view Vosae.DateTimeField
-                valueBinding=end.datetime }}
+                valueBinding=end.datetime
+                classNames="form-control form-control-unstyled" }}
             {{/if}}
           {{else}}
             {{view view.endDateField
               contentBinding="end"
-              classNames="edit date" }}
+              classNames="form-control form-control-unstyled date" }}
             {{#unless allDay}}
               {{view view.endTimeField
                 contentBinding="end"
-                classNames="edit" }}
+                classNames="form-control form-control-unstyled" }}
             {{/unless}}
           {{/isTouchEnabled}}
         </span>
@@ -136,14 +132,14 @@
         <p class="location">
           {{view Vosae.AutoGrowTextField
             valueBinding="location"
-            classNames="edit"
+            classNames="form-control form-control-unstyled"
             maxlength="512"
             placeholder='{% trans "Location" context "event" %}' }}
         </p>
         <p class="description">
           {{view Vosae.TextAreaAutoSize
             valueBinding="description"
-            classNames="edit"
+            classNames="form-control form-control-unstyled"
             maxlength="1024"
             placeholder='{% trans "Description" %}' }}
         </p>
@@ -172,13 +168,13 @@
                   {{view view.reminderView contentBinding=this}}
                 {{/each}}
               </ul>
-              <a class="addReminder btn rounded green" {{action "addReminder"}}>{% trans "Add a reminder" %}</a>
+              <a class="addReminder btn btn-rounded btn-success" {{action "addReminder"}}>{% trans "Add a reminder" %}</a>
             </div>
           </div>
         </div>
       </div>
       <div class="pull-right">
-        <a class="addAttendee btn green" {{action "addAttendee"}}>{% trans "Add an attendee" %}</a>
+        <a class="addAttendee btn btn-success" {{action "addAttendee"}}>{% trans "Add an attendee" %}</a>
         {{#if attendees.length}}
           <ul class="attendees">
           {{#each attendees}}
@@ -188,7 +184,6 @@
         {{/if}}
       </div>
     </section>
-    
   {{/if}}
 
 {% endtplhandlebars %}
@@ -211,13 +206,13 @@
           <div class="email">
             {{view view.emailField
               valueBinding="email"
-              classNames="edit email"
+              classNames="form-control form-control-unstyled email"
               placeholder='{% trans "E-mail" %}' }}
           </div>
           <div class="display-name">
             {{view view.displayNameField
               valueBinding="displayName"
-              classNames="edit name"
+              classNames="form-control form-control-unstyled name"
               placeholder='{% trans "Name" %}' }}
           </div>
         </td>

@@ -3,6 +3,7 @@
 {% tplhandlebars "settings/report" %}
   <header>
     <h3>{% trans "Global settings" %} &nbsp;>&nbsp; {% trans "Reports" %}</h3>
+    <div class="btn-toolbar pull-right">{{partial "settings/partials/saveSettings"}}</div>
   </header>
   <section class="clearfix">
     <div class="inner">
@@ -18,7 +19,7 @@
                 valueBinding="language"
                 optionValuePath="content.code"
                 optionLabelPath="content.name"
-                containerCssClass="green" }}
+                containerCssClass="success" }}
             </td>
           </tr>
           <tr>
@@ -31,7 +32,7 @@
                 valueBinding="fontName"
                 optionValuePath="content.value"
                 optionLabelPath="content.name"
-                containerCssClass="green" }}
+                containerCssClass="success" }}
             </td>
           </tr>
           <tr>
@@ -44,7 +45,7 @@
                 valueBinding="fontSize"
                 optionValuePath="content.value"
                 optionLabelPath="content.name"
-                containerCssClass="green" }}
+                containerCssClass="success" }}
             </td>
           </tr>
           <tr>
@@ -54,7 +55,7 @@
             <td>
               {{view Vosae.Components.ColorPicker
                 valueBinding="fontColor"
-                classNames="edit-settings" }}
+                classNames="form-control form-control-settings" }}
             </td>
           </tr>
           <tr>
@@ -64,7 +65,7 @@
             <td>
               {{view Vosae.Components.ColorPicker
                 valueBinding="baseColor"
-                classNames="edit-settings" }}
+                classNames="form-control form-control-settings" }}
             </td>
           </tr>
           <tr>
@@ -86,7 +87,7 @@
                 valueBinding="paperSize"
                 optionValuePath="content.value"
                 optionLabelPath="content.name"
-                containerCssClass="green" }}
+                containerCssClass="success" }}
             </td>
           </tr>
         </tbody>

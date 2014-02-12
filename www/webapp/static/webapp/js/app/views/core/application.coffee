@@ -92,7 +92,7 @@ Vosae.ApplicationView = Em.View.extend
     $(document).on "zoneFocus", "#ct-middle", ->   
       # Flag notifications as read
       if self.panelLeftIsOpen()
-        self.get('controller.controllers.notifications').markAllAsRead() 
+        self.get('controller.controllers.notifications').send('markAllAsRead')
       $("body").removeClass("ct-left-open ct-right-open ct-search-open")
 
     # Search

@@ -4,15 +4,30 @@
 
 .outlet-settings
   color: $grey
+  padding-top: 90px
+
+  & > header
+    position: fixed
+    top: 30px
+    left: 0
+    z-index: 1000
+    width: 100%
+    background: $settings-first-background-color
+    padding-left: 270px
+
+    .btn-toolbar
+      margin-top: 16px
+      margin-right: 21px
 
   h3
     margin: 0
     line-height: 60px
     font-size: 22px
     padding-left: 18px
-    background: $settingsFirstBackgroundColor
     color: $white
     font-weight: normal
+    border-left: 3px solid $settings-second-background-color
+    float: left
 
   section
     padding: 30px
@@ -35,7 +50,7 @@
     height: 12px
     margin: 0
     padding: 0
-    background: $settingsFirstBackgroundColor
+    background: $settings-first-background-color
     border: 0
 
   label
@@ -43,6 +58,7 @@
     vertical-align: middle
     font-size: 14px
     display: inline-block
+    font-weight: normal
 
   table
     max-width: 700px
@@ -68,13 +84,13 @@
     margin: 0
 
   input:disabled
-    color: #777
+    color: #666
 
   .table
     th, td
       padding: 7px 5px
     td
-      color: $textColor
+      color: $text-color
     tr
       background: #F7F7F7
 
@@ -96,7 +112,7 @@
     color: #BBB
 
   .grey
-    color: $settingsSecondTextColor
+    color: $settings-second-text-color
 
   .small
     font-size: 13px
@@ -112,6 +128,7 @@
     .perm-text
       width: 250px
       display: inline-block
+      color: #BBB
 
     .checkbox-container
       display: inline-block
@@ -126,30 +143,6 @@
     min-width: 280px
     max-width: 280px
     background: #1e1e1e
-  // .select2-container-multi
-  //   width: 250px
-  //   .select2-choices
-  //     border: 0
-  //     background: #1e1e1e
-  //     padding: 1px 3px
-  //     color: inherit
-  //     margin: 0
-  //     font-size: inherit
-  //     vertical-align: middle
-  //     @include border-radius(4px)
-
-  //     .select2-search-choice
-  //       background: $green
-  //       color: $white
-  //       background-image: none
-  //       border: 1px solid $green
-  //       -webkit-box-shadow: none
-  //       -moz-box-shadow: none
-  //       box-shadow: none
-
-  //     .select2-search-choice-close::before
-  //       content: '*'
-
 
 .table-api-keys
   th, td

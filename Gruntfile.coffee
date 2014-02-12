@@ -127,6 +127,7 @@ module.exports = (grunt) ->
           WEBAPP_JS_VENDOR_DIR + "bootstrap-datepicker.lang-all.js",
           WEBAPP_JS_VENDOR_DIR + "bootstrap-timepicker.js",
           WEBAPP_JS_VENDOR_DIR + "bootstrap-tour.js",
+          WEBAPP_JS_VENDOR_DIR + "typeahead.js",
           WEBAPP_JS_VENDOR_DIR + "select2.js",
           WEBAPP_JS_VENDOR_DIR + "sugar.js",
           WEBAPP_JS_VENDOR_DIR + "gmap3.js",
@@ -152,7 +153,7 @@ module.exports = (grunt) ->
           WEBAPP_JS_VENDOR_DIR + "modernizr.min.js",
           WEBAPP_JS_VENDOR_DIR + "jquery.min.js",
           WEBAPP_JS_VENDOR_DIR + "jquery.browser.js",
-          WEBAPP_JS_VENDOR_DIR + "jquery-ui.js",
+          WEBAPP_JS_VENDOR_DIR + "jquery-ui.min.js",
           WEBAPP_JS_VENDOR_DIR + "jquery.cookie.js",
           WEBAPP_JS_VENDOR_DIR + "jquery.autogrow.js",
           WEBAPP_JS_VENDOR_DIR + "jquery.fileDownload.js",
@@ -168,6 +169,7 @@ module.exports = (grunt) ->
           WEBAPP_JS_VENDOR_DIR + "bootstrap-datepicker.lang-all.js",
           WEBAPP_JS_VENDOR_DIR + "bootstrap-timepicker.js",
           WEBAPP_JS_VENDOR_DIR + "bootstrap-tour.js",
+          WEBAPP_JS_VENDOR_DIR + "typeahead.js",
           WEBAPP_JS_VENDOR_DIR + "select2.min.js",
           WEBAPP_JS_VENDOR_DIR + "sugar.min.js",
           WEBAPP_JS_VENDOR_DIR + "gmap3.js",
@@ -180,7 +182,7 @@ module.exports = (grunt) ->
           WEBAPP_JS_VENDOR_DIR + "twix.lang-all.js",
           WEBAPP_JS_VENDOR_DIR + "color.js",
           WEBAPP_JS_VENDOR_DIR + "autosize.min.js",
-          WEBAPP_JS_VENDOR_DIR + "fullcalendar.js",
+          WEBAPP_JS_VENDOR_DIR + "fullcalendar.min.js",
           WEBAPP_JS_VENDOR_DIR + "handlebars.js",
           WEBAPP_JS_VENDOR_DIR + "ember.min.js",
           WEBAPP_JS_VENDOR_DIR + "ember-data.min.js"
@@ -196,10 +198,7 @@ module.exports = (grunt) ->
         dest: WEBAPP_BUILD_DIR + "locales/locale-<%= grunt.option(\"i18n_lang\") %>.js"
       webapp_css:
         src: [
-          WEBAPP_CSS_DIR + "fullcalendar.css",
-          WEBAPP_CSS_DIR + "select2.css",
-          WEBAPP_CSS_DIR + "bootstrap.css",
-          WEBAPP_CSS_DIR + "backend.css"
+          WEBAPP_CSS_DIR + "webapp.css"
         ]
         dest: WEBAPP_BUILD_DIR + "webapp.css"
 

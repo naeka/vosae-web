@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vosae-web\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-16 13:09+0000\n"
+"POT-Creation-Date: 2014-02-11 10:53+0000\n"
 "PO-Revision-Date: 2013-10-23 12:04+0100\n"
 "Last-Translator: Léo S <leo@naeka.fr>\n"
 "Language-Team: Léo S. <leo@naeka.fr>\n"
@@ -47,16 +47,16 @@ msgctxt "calendar color"
 msgid "None"
 msgstr ""
 
-#: static/webapp/tmp/app/components/popup.js:137
-#: static/webapp/tmp/app/components/popup.js:150
+#: static/webapp/tmp/app/components/popup.js:136
+#: static/webapp/tmp/app/components/popup.js:149
 msgid "Ok"
 msgstr ""
 
-#: static/webapp/tmp/app/components/popup.js:143
+#: static/webapp/tmp/app/components/popup.js:142
 msgid "Yes"
 msgstr ""
 
-#: static/webapp/tmp/app/components/popup.js:144
+#: static/webapp/tmp/app/components/popup.js:143
 msgid "No"
 msgstr ""
 
@@ -124,23 +124,23 @@ msgstr ""
 msgid "Do you realy want to leave this page ?"
 msgstr ""
 
-#: static/webapp/tmp/app/controllers/invoicing/invoiceBase.js:12
+#: static/webapp/tmp/app/controllers/invoicing/invoiceBase.js:32
 msgid "Do you really want to delete this line?"
 msgstr ""
 
-#: static/webapp/tmp/app/controllers/invoicing/invoiceBase.js:23
+#: static/webapp/tmp/app/controllers/invoicing/invoiceBase.js:43
 msgid "Do you really want to delete this attachment?"
 msgstr ""
 
-#: static/webapp/tmp/app/controllers/invoicing/invoiceBase.js:135
+#: static/webapp/tmp/app/controllers/invoicing/invoiceBase.js:132
 msgid "Do you really want to delete this quotation?"
 msgstr ""
 
-#: static/webapp/tmp/app/controllers/invoicing/invoiceBase.js:137
+#: static/webapp/tmp/app/controllers/invoicing/invoiceBase.js:134
 msgid "Do you really want to delete this invoice?"
 msgstr ""
 
-#: static/webapp/tmp/app/controllers/invoicing/invoiceBase.js:139
+#: static/webapp/tmp/app/controllers/invoicing/invoiceBase.js:136
 msgid "Do you really want to delete this purchase order?"
 msgstr ""
 
@@ -281,11 +281,12 @@ msgstr ""
 
 #: static/webapp/tmp/app/models/core/file.js:16
 #: static/webapp/tmp/app/models/core/file.js:22
-#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:97
-#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:103
-#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:115
-#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:121
-#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:127
+#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:106
+#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:112
+#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:124
+#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:130
+#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:136
+#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:142
 #: static/webapp/tmp/app/models/invoicing/payment.js:15
 msgctxt "date"
 msgid "undefined"
@@ -391,41 +392,41 @@ msgstr ""
 msgid "Your purchase order has been successfully deleted"
 msgstr ""
 
-#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:108
-#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:110
+#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:117
+#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:119
 msgctxt "date"
 msgid "variable"
 msgstr ""
 
-#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:181
+#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:196
 msgid "Invoice must be linked to an organization or a contact"
 msgstr ""
 
-#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:183
+#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:198
 msgid "Quotation must be linked to an organization or a contact"
 msgstr ""
 
-#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:188
+#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:203
 msgid "Field street address of sender address must not be blank"
 msgstr ""
 
-#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:193
+#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:208
 msgid "Field street address of receiver address must not be blank"
 msgstr ""
 
-#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:200
+#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:215
 msgid "Items reference must not be blank"
 msgstr ""
 
-#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:203
+#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:218
 msgid "Items description must not be blank"
 msgstr ""
 
-#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:210
+#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:225
 msgid "Invoice must have a currency"
 msgstr ""
 
-#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:212
+#: static/webapp/tmp/app/models/invoicing/invoiceRevision.js:227
 msgid "Quotation must have a currency"
 msgstr ""
 
@@ -478,6 +479,10 @@ msgstr ""
 
 #: static/webapp/tmp/app/models/invoicing/payment.js:57
 msgid "Your payment has been successfully added"
+msgstr ""
+
+#: static/webapp/tmp/app/models/invoicing/purchaseOrder.js:20
+msgid "Your purchase order has been transformed into an invoice"
 msgstr ""
 
 #: static/webapp/tmp/app/models/invoicing/quotation.js:84
@@ -1218,9 +1223,13 @@ msgstr ""
 msgid "# (sharp)"
 msgstr ""
 
-#: static/webapp/tmp/app/store/adapter.js:204
+#: static/webapp/tmp/app/store/adapter.js:207
 #: static/webapp/tmp/app/views/contacts/entityEdit.js:63
 msgid "An error occurred, please try again or contact the support"
+msgstr ""
+
+#: static/webapp/tmp/app/views/bootstrap/alert.js:5
+msgid "Oh snap!"
 msgstr ""
 
 #: static/webapp/tmp/app/views/contacts/contactEdit.js:13
@@ -1372,7 +1381,7 @@ msgid ""
 "on <strong>Info</strong>!"
 msgstr ""
 
-#: static/webapp/tmp/app/views/core/tenantsAdd.js:188
+#: static/webapp/tmp/app/views/core/tenantsAdd.js:172
 msgid "This field is required."
 msgstr ""
 
@@ -1381,7 +1390,7 @@ msgid "Also update payment due date?"
 msgstr ""
 
 #: static/webapp/tmp/app/views/invoicing/invoiceEdit.js:94
-#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:45
+#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:50
 msgid "The transmitter (required field)"
 msgstr ""
 
@@ -1392,7 +1401,7 @@ msgid ""
 msgstr ""
 
 #: static/webapp/tmp/app/views/invoicing/invoiceEdit.js:100
-#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:51
+#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:56
 msgid "The receiver (required field)"
 msgstr ""
 
@@ -1447,7 +1456,7 @@ msgid ""
 msgstr ""
 
 #: static/webapp/tmp/app/views/invoicing/invoiceEdit.js:130
-#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:81
+#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:86
 msgid "Currency (required)"
 msgstr ""
 
@@ -1458,7 +1467,7 @@ msgid ""
 msgstr ""
 
 #: static/webapp/tmp/app/views/invoicing/invoiceEdit.js:136
-#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:87
+#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:92
 msgid "Create"
 msgstr ""
 
@@ -1570,13 +1579,13 @@ msgid ""
 "it to <i>Vosae</i>."
 msgstr ""
 
-#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:46
+#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:51
 msgid ""
 "This is the quotation transmitter, <i>Vosae</i> makes it quicker by "
 "automatically filling it with the relevant info."
 msgstr ""
 
-#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:52
+#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:57
 msgid ""
 "And on the right, the quotation receiver. This is the <strong>Organization</"
 "strong> you want to quote. For greater efficiency, after you have added the "
@@ -1585,54 +1594,54 @@ msgid ""
 "rest for you."
 msgstr ""
 
-#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:57
+#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:62
 msgid "Quotation date (required field)"
 msgstr ""
 
-#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:58
+#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:63
 msgid ""
 "The date on which the quotation was created. <i>Vosae</i> will insert the "
 "current date by default but you can edit it by clicking here."
 msgstr ""
 
-#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:63
+#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:68
 msgid "Valid until (required field)"
 msgstr ""
 
-#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:64
+#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:69
 msgid ""
 "The <i>valid until</i> date is extremely useful, both for your customers and "
 "also for you. <i>Vosae</i> will notify you when a quotation becomes outdated."
 msgstr ""
 
-#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:69
+#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:74
 msgid "Quotation reference (auto-generated)"
 msgstr ""
 
-#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:70
+#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:75
 msgid ""
 "The quotation reference is based on your <strong>Settings</strong> (see "
 "<strong>Numbering</strong> part) and is automatically added to your "
 "quotation once you have saved it."
 msgstr ""
 
-#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:75
+#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:80
 msgid "Quotation items (at least one is required)"
 msgstr ""
 
-#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:76
+#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:81
 msgid ""
 "This is the most important part of a quotation. You can insert any item "
 "previously added in your <strong>Items</strong> page."
 msgstr ""
 
-#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:82
+#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:87
 msgid ""
 "With <i>Vosae</i> you can make a quotation in a range of currencies. You "
 "just have to select the desired currency and <i>Vosae</i> will convert it."
 msgstr ""
 
-#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:88
+#: static/webapp/tmp/app/views/invoicing/quotationEdit.js:93
 msgid ""
 "Once your quotation is complete, click on the <strong>Create</strong> "
 "button. <i>Vosae</i> will save it as a draft."
@@ -1819,14 +1828,14 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: templates/webapp/handlebars/contacts/organizationsShow.html:1
-msgid "<span class='green'>{{count}}</span> Contact"
-msgid_plural "<span class='green'>{{count}}</span> Contacts"
+msgid "<span class='text-green'>{{count}}</span> Contact"
+msgid_plural "<span class='text-green'>{{count}}</span> Contacts"
 msgstr[0] ""
 msgstr[1] ""
 
 #: templates/webapp/handlebars/contacts/organizationsShow.html:2
-msgid "In <span class='orange'>{{count}}</span> company"
-msgid_plural "In <span class='orange'>{{count}}</span> companies"
+msgid "In <span class='text-orange'>{{count}}</span> company"
+msgid_plural "In <span class='text-orange'>{{count}}</span> companies"
 msgstr[0] ""
 msgstr[1] ""
 

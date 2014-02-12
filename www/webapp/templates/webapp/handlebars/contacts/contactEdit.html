@@ -6,14 +6,14 @@
       <div class="btn-toolbar pull-left">
         {{#if id}}
           <div class="btn-group">    
-            {{#linkTo "contact.show" controller.session.tenant content class="btn grey"}}
+            {{#linkTo "contact.show" controller.session.tenant content class="btn btn-default"}}
               <i class="picto-arrow-left"></i>
               {{unbound this.fullName}}
             {{/linkTo}}
           </div>
         {{else}}
           <div class="btn-group">
-            {{#linkTo "contacts.show" controller.session.tenant class="btn grey"}}
+            {{#linkTo "contacts.show" controller.session.tenant class="btn btn-default"}}
               <i class="picto-arrow-left"></i>
               {% trans "My contacts" %}
             {{/linkTo}}
@@ -21,30 +21,26 @@
         {{/if}}
       </div>
       <div class="btn-toolbar pull-right">
-        <div class="btn-group">
-          {{#unless isSaving}}
-          <a class="btn rounded grey" {{action 'cancel' content}}>
-            {% trans  "Cancel" %}
-          </a>
-          {{/unless}}
-        </div>
-        <div class="btn-group">
-          {{#if isSaving}}
-            <a class="btn rounded green">
-              {% trans "Saving" %}…
-            </a>
-          {{else}}
-            {{#if isDirty}}
-              <a class="btn rounded green" {{action 'save' content}}>
-                {{#if id}}
-                  {% trans "Save" %}
-                {{else}}
-                  {% trans "Add" %}
-                {{/if}}
+        {{#if isSaving}}
+          <div class="btn-group">
+              <a class="btn btn-success btn-rounded">
+                {% trans "Saving" %}…
               </a>
-            {{/if}}
+          </div>
+        {{else}}
+          <div class="btn-group">
+            <a class="btn btn-rounded btn-default" {{action 'cancel' content}}>
+              {% trans  "Cancel" %}
+            </a>
+          </div>
+          {{#if isDirty}}
+            <div class="btn-group">
+                <a class="btn btn-success btn-rounded" {{action 'save' content}}>
+                  {{#if id}}{% trans "Save" %}{{else}}{% trans "Add" %}{{/if}}
+                </a>
+            </div>
           {{/if}}
-        </div>
+        {{/if}}
       </div>
     </section>
     
@@ -58,7 +54,7 @@
         {{/if}}
         <input class="fileupload fill" type="file" multiple/>
       </div>
-      <a class="btn btn-small rounded green upload" {{action "openFileUploadBrowser" target="view"}}>
+      <a class="btn btn-xs btn-success upload" {{action "openFileUploadBrowser" target="view"}}>
         {% trans "Edit" %}
       </a>
 
@@ -67,19 +63,19 @@
           {{view Vosae.AutoGrowTextField 
             valueBinding = "firstname"
             maxlength    = "64" 
-            classNames   = "edit bold input-small"
+            classNames   = "form-control form-control-unstyled"
             placeholder  = "{% trans 'First name' %}" }}
           {{view Vosae.AutoGrowTextField 
             valueBinding = "name" 
             maxlength    = "64"
-            classNames   = "edit bold input-small"
+            classNames   = "form-control form-control-unstyled"
             placeholder  = "{% trans 'Last name' %}" }}
         </span>
         <span class="role">
           {{view Vosae.AutoGrowTextField
             valueBinding = "role"
             maxlength    = "64"
-            classNames   = "edit input-small"
+            classNames   = "form-control form-control-unstyled imput-sm"
             placeholder  = "{% trans 'Role' %}" }}
         </span>
       </div>
@@ -89,9 +85,10 @@
           <strong>{% trans "Organization" %} :</strong>
         </label>          
         {% endcomment %}
+
         {{view view.organizationSearchField 
           contactBinding="this"
-          containerCssClass="green"
+          containerCssClass="success"
           placeholder="{% trans 'Works at' %}…" }}
       </div>
       <div class="drag-drop-message">
@@ -103,31 +100,27 @@
       {{partial "contacts/partials/editEntityContactInfos"}}
     </section>
     
-    <div class="actions-form">
-      <div class="btn-group">
-        {{#unless isSaving}}
-        <a class="btn rounded grey" {{action 'cancel' content}}>
-          {% trans  "Cancel" %}
-        </a>
-        {{/unless}}
-      </div>
-      <div class="btn-group">
-        {{#if isSaving}}
-          <a class="btn rounded green">
-            {% trans "Saving" %}…
-          </a>
-        {{else}}
-          {{#if isDirty}}
-            <a class="btn rounded green" {{action 'save' content}}>
-              {{#if id}}
-                {% trans "Save" %}
-              {{else}}
-                {% trans "Add" %}
-              {{/if}}
+    <div class="actions-form btn-toolbar pull-right">
+      {{#if isSaving}}
+        <div class="btn-group">
+            <a class="btn btn-success btn-rounded">
+              {% trans "Saving" %}…
             </a>
-          {{/if}}
+        </div>
+      {{else}}
+        <div class="btn-group">
+          <a class="btn btn-rounded btn-default" {{action 'cancel' content}}>
+            {% trans  "Cancel" %}
+          </a>
+        </div>
+        {{#if isDirty}}
+          <div class="btn-group">
+              <a class="btn btn-success btn-rounded" {{action 'save' content}}>
+                {{#if id}}{% trans "Save" %}{{else}}{% trans "Add" %}{{/if}}
+              </a>
+          </div>
         {{/if}}
-      </div>
+      {{/if}}
     </div>
   {{else}}
     {{partial "core/partials/spinner"}}

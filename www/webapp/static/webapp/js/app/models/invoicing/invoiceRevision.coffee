@@ -4,6 +4,7 @@ Vosae.InvoiceRevision = DS.Model.extend
   quotationValidity: DS.attr('date')  # date validité du devis
   invoicingDate: DS.attr('date')  # date de création de la facture
   dueDate: DS.attr('date')  # echeance de paiement
+  purchaseOrderDate: DS.attr('date') # date de création du bon de commande
   creditNoteEmissionDate: DS.attr('date')  # date d'emission de l'avoir
   customPaymentConditions: DS.attr('string')  # conditions de réglement, peut remplacer la dueDate, qui fait alors office d'estimation
   revision: DS.attr('string')
@@ -101,6 +102,13 @@ Vosae.InvoiceRevision = DS.Model.extend
         ids.addObject id
     ids
 
+  # Return lineItem's index in the hasMany `lineItems`
+  getLineItemIndex: (lineItem) ->
+    index = @get('lineItems').indexOf lineItem
+    if index != -1
+      return index
+    undefined
+
   # Returns the quotation date formated
   displayQuotationDate: (->
     if @get("quotationDate")?
@@ -141,6 +149,13 @@ Vosae.InvoiceRevision = DS.Model.extend
     return pgettext("date", "undefined")
   ).property("creditNoteEmissionDate")
 
+  # Returns the purchase order creation date formated
+  displayPurchaseOrderDate: (->
+    if @get("purchaseOrderDate")?
+      return moment(@get("purchaseOrderDate")).format "LL"
+    return pgettext("date", "undefined")
+  ).property("purchaseOrderDate")
+
   # Returns quotation total
   total: (->
     total = 0
@@ -150,10 +165,10 @@ Vosae.InvoiceRevision = DS.Model.extend
   ).property("lineItems.@each.quantity", "lineItems.@each.unitPrice")
 
   # Returns quotation total VAT
-  totalVAT: (->
+  totalPlusTax: (->
     total = 0
     @get("lineItems").forEach (item) ->
-      total += item.get("totalVAT")
+      total += item.get("totalPlusTax")
     total
   ).property("lineItems.@each.quantity", "lineItems.@each.unitPrice", "lineItems.@each.tax")
 
@@ -163,12 +178,13 @@ Vosae.InvoiceRevision = DS.Model.extend
   ).property("total")
 
   # Returns the total formated with accounting
-  displayTotalVAT: (->
-    accounting.formatMoney @get('totalVAT')
-  ).property("totalVAT")
+  displayTotalPlusTax: (->
+    accounting.formatMoney @get('totalPlusTax')
+  ).property("totalPlusTax")
 
   # Returns an array with each tax amount
   taxes: (->
+    # console.log "here"
     groupedTaxes = []
     @get("lineItems").toArray().forEach (lineItem) ->
       lineItemTax = lineItem.VAT()

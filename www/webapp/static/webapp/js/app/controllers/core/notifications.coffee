@@ -40,12 +40,15 @@ Vosae.NotificationsController = Vosae.ArrayController.extend
           creditNote = Vosae.CreditNote.find(resource.id)
           @transitionToRoute "creditNote.show", @get('session.tenant'), creditNote
 
-  # Flag all notifications as read
-  markAllAsRead: ->
-    @filterProperty('read', false).forEach (notification) ->
-      notification.markAsRead()
+    # Flag all notifications as read
+    markAllAsRead: ->
+      @get('content').filterProperty('read', false).forEach (notification) ->
+        notification.markAsRead()
 
   # Amount of unread notifications
   unreadCounter: (->
-    @filterProperty('read', false).get('length')
-  ).property('length', 'content.@each.read')
+    length = @get('content').filterProperty('read', false).get('length')
+    if length > 99
+      length = "99+"
+    length
+  ).property('content.length', 'content.@each.read')

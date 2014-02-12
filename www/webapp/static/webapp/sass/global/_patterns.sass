@@ -7,26 +7,22 @@
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
 
 a
-  color: $textColor
   cursor: pointer
+  outline: none
   &:hover
     color: inherit
+  &:focus
+    outline: none
+
 ul
   margin: 0
+  padding: 0
   
 li
   list-style-type: none
 
-table
-  td
-    border: 0
-
-.table
-  td
-    border: 0
-    padding: 0
-  th
-    font-weight: normal
+.inline-block
+  display: inline-block
 
 .d-table
   display: table 
@@ -55,70 +51,62 @@ table
 .capitalize
   text-transform: capitalize
 
-.ui-loading
-  padding-top: 100px
-  text-align: center
-  @include ui-spinner(#FFF, 46px, $darkgrey, $green, .8, 3s)
 
+// Main class for each setting's column (left of screen) in each page
+.page-settings
+  width: 175px
+  
+  ul.options, ul.export, ul.info
+    background: $grey
+    padding: 0 8px
+    display: inline-block
+    margin-bottom: 3px
+    min-width: 85px
 
-.btn-group.open
-  .btn:first-child
-    +border-radius-separate(4px, 4px, 0px, 0px)
-.dropdown-menu
-  +border-radius(0px)
-  padding: 0
-  margin: -1px 0 0 0
-  +disable-box-shadow()
-  border: 0
-  background: #F8F8F8
-  li a
-    line-height: 28px
+    +box-sizing(border-box)
+    +border-radius-separate(0px, 5px, 5px, 0px)
 
-  li:hover
-    a
-      color: $textColor
-      background: #DDD
+    li
+      background: $grey
+      margin-bottom: 3px
 
+      &:first-child
+        font-weight: bold
+        border-bottom: 1px solid #c6c6c6
+        padding-top: 4px
+        padding-bottom: 4px
+        margin-bottom: 15px
+        font-size: 14px
+        line-height: 20px
 
-@-webkit-keyframes fadein
-  from
-    opacity: 0
-  to
-    opacity: 1
+        .picto-settings
+          padding-right: 3px
 
-@-moz-keyframes fadein
-  from
-    opacity: 0
-  to
-    opacity: 1
+      [class^="picto-"], 
+      [class*=" picto-"]
+        padding-right: 8px
+        margin-top: -2px
 
-@-webkit-keyframes fadeout
-  from
-    opacity: 1
-  to
-    opacity: 0
+      .picto-users::before
+        font-size: 100%
 
-@-moz-keyframes fadeout
-  from
-    opacity: 1
-  to
-    opacity: 0
+    .onoffswitch-switch
+      border: 1px solid #BBB
 
+    .onoffswitch-checkbox
+      &:checked + .onoffswitch-label .onoffswitch-switch
+        right: -1px
 
-.fade.out
-  opacity: 0
-  -moz-animation: fadeout 200ms 
-  -webkit-animation: fadeout 200ms
-  -o-animation: fadeout 200ms
-  -ms-animation: fadeout 200ms
-  -khtml-animation: fadeout 200ms
-  animation: fadeout 200ms
+  ul.export li:first-child
+    border-bottom: 0
+    margin-bottom: 0
 
-.fade.in
-  opacity: 1
-  -moz-animation: fadein 200ms 
-  -webkit-animation: fadein 200ms
-  -o-animation: fadein 200ms
-  -ms-animation: fadein 200ms
-  -khtml-animation: fadein 200ms
-  animation: fadein 200ms
+    .picto-export
+      padding-right: 3px
+
+  ul.info li:first-child
+    border-bottom: 0
+    margin-bottom: 0
+
+    .picto-help
+      padding-right: 3px

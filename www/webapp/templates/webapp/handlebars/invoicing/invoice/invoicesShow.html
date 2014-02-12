@@ -5,13 +5,12 @@
     <div class="btn-toolbar pull-left"></div>
     <div class="btn-toolbar pull-right">
       <div class="btn-group">
-        {{#linkTo "invoices.add" controller.session.tenant class="btn green"}}
-          <i class="picto-add"></i>
-          {% trans "Invoice" %}
+        {{#linkTo "invoices.add" controller.session.tenant class="btn btn-success"}}
+          <i class="picto-add"></i>&nbsp;{% trans "Invoice" %}
         {{/linkTo}}
       </div>
     </div>
-  </section>
+  </section> 
   
   {# Overdue #}
   <section class="invoices with-head">
@@ -25,15 +24,12 @@
       {{partial "invoicing/partials/tableOfInvoices"}}
     {{/with}}
 
-    {{#unless invoicesOverdue.length}}
-      <p class="table-no-data green">
-        {% trans "No overdue invoices" %}
-      </p>
-    {{/unless}}
     {# Pagination #}
     {{#if paginationOverdueHasNext}}
-      <p class="table-load-more" {{action getNextInvoicesOverdue}}>
-        {% trans "Load more invoices" %}
+      <p class="text-center">
+        <a class="btn btn-default btn-rounded btn-sm" {{action getNextInvoicesOverdue}}>
+          {% trans "Load more invoices" %}
+        </a>
       </p>
     {{/if}}
   </section>
@@ -50,15 +46,12 @@
       {{partial "invoicing/partials/tableOfInvoices"}}
     {{/with}}
 
-    {{#unless invoicesPending.length}}
-      <p class="table-no-data green">
-        {% trans "No pending invoices" %}
-      </p>
-    {{/unless}}
     {# Pagination #}
     {{#if paginationPendingHasNext}}
-      <p class="table-load-more" {{action getNextInvoicesPending}}>
-        {% trans "Load more invoices" %}
+      <p class="text-center">
+        <a class="btn btn-default btn-rounded btn-sm" {{action getNextInvoicesPending}}>
+          {% trans "Load more invoices" %}
+        </a>
       </p>
     {{/if}}
   </section>
@@ -75,15 +68,12 @@
       {{partial "invoicing/partials/tableOfInvoices"}}
     {{/with}}
 
-    {{#unless invoicesPaid.length}}
-      <p class="table-no-data green">
-        {% trans "No paid invoices" %}
-      </p>
-    {{/unless}}
     {# Pagination #}
     {{#if paginationPaidHasNext}}
-      <p class="table-load-more" {{action getNextInvoicesPaid}}>
-        {% trans "Load more invoices" %}
+      <p class="text-center">
+        <a class="btn btn-default btn-rounded btn-sm" {{action getNextInvoicesPaid}}>
+          {% trans "Load more invoices" %}
+        </a>
       </p>
     {{/if}}
   </section>

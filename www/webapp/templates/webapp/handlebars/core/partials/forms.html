@@ -72,65 +72,6 @@
   </div>
 {% endtplhandlebars %}
 
-{% tplhandlebars "invoicebase-edit-billing-address-block" %}
-  <div class="inner">
-    <p>
-      <div class="dropdown-address">
-      {{view view.textField
-        valueBinding = "view.content.streetAddress"
-        maxlength = "128"
-        classNames = "edit address dropdown-toggle"
-        data-toggle = "dropdown"
-        data-target = "dropdown-address"
-        placeholder = "N°, {% trans 'Address' %}" }}
-        
-        {{#view view.addressListItemsView 
-          viewName="addressListItemsView" 
-          parentViewBinding="view"}}
-          {{#each address in view.content}}
-            <li><a {{action changeAddress address target="view"}}>{{address.string}}</a></li>
-          {{/each}}
-        {{/view}}
-      </div>
-    </p>
-    <p>
-      {{view Em.TextField
-        valueBinding = "view.content.extendedAddress"
-        maxlength = "128"
-        classNames = "edit extended-address half"
-        placeholder = "{% trans 'Extended address' %}" }}
-      {{view Em.TextField
-        valueBinding = "view.content.postofficeBox"
-        maxlength = "64"
-        classNames = "edit postoffice-box half"
-        placeholder = "{% trans 'Postoffice box' %}" }}
-    </p>
-    <p>
-      {{view Em.TextField
-        valueBinding = "view.content.postalCode"
-        maxlength = "64"
-        classNames = "edit postal-code half"
-        placeholder = "{% trans 'Postal code' %}" }}
-      {{view Em.TextField
-        valueBinding = "view.content.city"
-        maxlength = "64"
-        classNames = "edit city half"
-        placeholder = "{% trans 'City' %}" }}
-    </p>
-    <p>
-      {{view Em.TextField
-        valueBinding = "view.content.state"
-        maxlength = "64"
-        classNames = "edit state half"
-        placeholder = "{% trans 'State' %}" }}
-      {{view Em.TextField
-        valueBinding = "view.content.country"
-        maxlength = "64"
-        classNames = "edit country half"
-        placeholder = "{% trans 'Country' %}" }} 
-    </p>
-  </div>
-{% endtplhandlebars %}
 
 {% tplhandlebars "invoicebase-show-address-block" %}
   <div class="inner">
@@ -138,54 +79,6 @@
     <p>{{view.content.extendedAddress}} {{view.content.postofficeBox}}</p>
     <p>{{view.content.postalCode}} {{view.content.city}}</p>
     <p>{{view.content.state}} {{view.content.country}}</p>
-  </div>
-{% endtplhandlebars %}
-
-{% tplhandlebars "invoicebase-edit-sender-address-block" %}
-  <div class="inner">
-    <p>
-      {{view Em.TextField
-        valueBinding = "view.content.streetAddress"
-        maxlength = "128"
-        classNames = "edit address"
-        placeholder = "{% trans 'Address' %}" }}
-    </p>
-    <p>
-      {{view Em.TextField
-        valueBinding = "view.content.extendedAddress"
-        maxlength = "128"
-        classNames = "edit extended-address half"
-        placeholder = "{% trans 'Extended address' %}" }}
-      {{view Em.TextField
-        valueBinding = "view.content.postofficeBox"
-        maxlength = "64"
-        classNames = "edit postoffice-box half"
-        placeholder = "{% trans 'Postoffice box' %}" }}
-    </p>
-    <p>
-      {{view Em.TextField
-        valueBinding = "view.content.postalCode"
-        maxlength = "64"
-        classNames = "edit postal-code half"
-        placeholder = "{% trans 'Postal code' %}" }}
-      {{view Em.TextField
-        valueBinding = "view.content.city"
-        maxlength = "64"
-        classNames = "edit city half"
-        placeholder = "{% trans 'City' %}" }}
-    </p>
-    <p>
-      {{view Em.TextField
-        valueBinding = "view.content.state"
-        maxlength = "64"
-        classNames = "edit state half"
-        placeholder = "{% trans 'State' %}" }}
-      {{view Em.TextField
-        valueBinding = "view.content.country"
-        maxlength = "64"
-        classNames = "edit country half"
-        placeholder = "{% trans 'Country' %}" }} 
-    </p>
   </div>
 {% endtplhandlebars %}
 

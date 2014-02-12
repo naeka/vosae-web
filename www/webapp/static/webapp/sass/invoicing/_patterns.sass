@@ -1,231 +1,10 @@
-.table-no-data
-  width: 100%
-  text-align: center
-  font-weight: bold
-  padding: 15px 0 0 0
-  margin: 0
-
-.table-see-more
-  margin-top: 15px
-
-.table-add-line
-  margin-top: 6px
-
-// Invoices Payments
-.table-invoice-payments
-  width: 100%
-
-  td.date,
-  td.type,
-  td.cur,
-  td.amount,
-  td.action
-    white-space: nowrap
-
-  input, textarea
-    border: 0
-    margin: 0
-    padding: 0
-
-  td.date
-    input
-      width: 80px
-      padding: 0
-
-  td.type, td.cur
-    .select2-choice
-      font-weight: normal
-      padding: 0
-      & > div
-        display: none
-
-  td.amount
-    input
-      padding: 0
-
-  td.note
-    textarea
-      height: 20px
-      padding: 0
-
-  td.action, th.action
-    text-align: center
-
-// Table invoices
-.table-invoices
-  th, td
-    &.total
-      text-align: right
-    &.due-date
-      text-align: center
-    &.status
-      text-align: right
-
-
-// Table quotations
-.table-quotations
-  th, td
-    &.total
-      text-align: right
-    &.expiration
-      text-align: center
-    &.status
-      text-align: right
-
-// Table items
-.table-items
-  th, td
-    &.unit-price
-      text-align: right
-    &.tax
-      text-align: right
-
-
-// Table line items
-.table-line-items
-  th, td
-    &.actions
-      text-align: center
-    &.quantity
-      text-align: right
-      width: 75px
-    &.unit-price
-      text-align: right
-      width: 100px
-    &.tax
-      text-align: right
-    &.total
-      text-align: right
-  td
-    &.quantity,
-    &.unit-price,
-    &.tax,
-    &.total
-      white-space: nowrap
-
-  &.edit
-    tr:hover td.actions a
-      cursor: pointer
-      opacity: 1
-      visibility: visible      
-
-    td
-      padding: 5px 5px
-
-      &:last-child
-        padding-right: 15px
-
-      &.reference,
-      &.tax
-        .select2-choice
-          max-height: 26px
-          height: 26px
-          min-height: 26px
-          font-weight: normal
-          padding: 0
-          abbr, div
-            display: none
-          span
-            margin-right: 0
-
-      &.actions a
-        opacity: 0
-        visibility: hidden
-
-      &.taxe
-        .select2-container
-          min-width: initial
-
-      &.description
-        padding: auto 0
-
-        textarea
-          vertical-align: middle
-          height: 20px
-          border: 0px
-          width: 100%
-
-    input:not(.select2-input), textarea
-      width: 100%
-
-      &:hover
-        border: 1px solid transparent
-
-// Table invoice summary
-.table-invoice-summary
-  font-size: 15px
-  width: 100%
-  margin-top: 5px
-
-  tr
-    td
-      text-align: right
-      padding-bottom: 6px
-
-      &:first-child
-        padding-right: 10px
-        color: #999
-        width: 100%
-
-      &:last-child
-        white-space: nowrap
-
-        .inner
-          background: $grey
-          font-weight: bold
-          padding: 0px 8px 0px 50px
-          line-height: 24px
-          +border-radius(12px)
-
-    &:last-child
-      td:first-child
-        color: #333
-        font-weight: bold
-
-// Table attachments
-.table-attachments
-  td.download
-    a
-      text-decoration: none
-    i
-      font-size: 26px
-      font-weight: normal !important
-  
-  td.action
-    text-align: right
-    i
-      font-size: 21px
-
-  td.download,
-  td.size,
-  td.created-at,
-  td.modified-at,
-  td.action
-    white-space: nowrap
-
-  tr.upload-process
-    min-width: 200px
-    .progress
-      height: 18px
-      margin-bottom: 0
-      .bar
-        background: $green
-
-  td.fileupload
-    padding: 0
-    height: 0
-
-  .drag-drop-message
-    display: none
-
-  input.fileupload.fill
-    width: 0
-    height: 0
-
-
+// Main class for each page in app invoicing
 .app-invoicing
   position: relative
-  padding: 0 40px
+  padding: 0 40px 20px 40px
+
+  .nav-tabs > li:not(:first-child)
+    margin-left: 15px
 
   section
     &.border-top
@@ -233,29 +12,6 @@
       
     &.border-bottom
       border-bottom: 5px solid $grey
-
-    &.actions
-      border-bottom: 5px solid $lightgrey !important
-
-      a
-        display: inline-block
-        font-weight: bold
-        background: $lightgrey
-        margin-right: 5px
-        padding: 0 26px
-        height: 28px
-        line-height: 28px
-        color: #939393
-        +border-radius-separate(4px, 4px, 0px, 0px)
-
-        &.active
-          color: #333 !important
-        &:first-child
-          padding: 0px 14px
-        &:last-child
-          margin-right: 0px
-        &:hover
-          color: #333 !important
 
     &.with-head
       border-bottom: 0
@@ -291,3 +47,255 @@
 .invoicebase-edit-billing-address-block
   .dropdown-address
     position: relative
+
+.table-see-more
+  margin-top: 15px
+
+.table-add-line
+  margin-top: 6px
+
+// Invoices Payments
+.table-invoice-payments
+  width: 100%
+
+  td.date,
+  td.type,
+  td.cur,
+  td.amount,
+  td.action
+    white-space: nowrap
+
+  input, textarea
+    border: 0
+    margin: 0
+    padding: 0
+
+  td.date input
+    width: 90px
+    padding: 0
+
+  td.amount input
+    padding: 0
+
+  td.note textarea
+    height: 20px
+    padding: 0
+
+  td.action, 
+  th.action
+    text-align: center
+
+  .select2-choice,
+  .select2-arrow
+    background-color: transparent !important
+
+  .select2-choice
+    padding-left: 0
+    border: 0
+    +disable-box-shadow()
+
+// Table invoices
+.table-invoices
+  th, td
+    &.total
+      text-align: right
+    &.due-date
+      text-align: center
+    &.status
+      text-align: right
+
+// Table quotations
+.table-quotations
+  th, td
+    &.total
+      text-align: right
+    &.expiration
+      text-align: center
+    &.status
+      text-align: right
+
+// Table items
+.table-items
+  th, td
+    &.unit-price
+      text-align: right
+    &.tax
+      text-align: right
+
+// Table line items
+.table-line-items
+
+  &.table-success
+    td.actions .btn
+      &:hover,
+      &:active,
+      &:focus
+        color: $brand-success
+
+  &.table-primary
+    td.actions .btn
+      &:hover,
+      &:active,
+      &:focus
+        color: $brand-primary
+
+  th, td
+    &.reference
+      min-width: 120px
+    &.quantity
+      text-align: right
+      width: 75px
+    &.unit-price
+      text-align: right
+      width: 100px
+    &.tax
+      text-align: right
+      min-width: 100px
+    &.total
+      text-align: right
+      min-width: 100px
+  td
+    &.quantity,
+    &.unit-price,
+    &.tax,
+    &.total
+      white-space: nowrap
+
+  &.edit
+    td
+      padding: 5px 5px
+
+      &.handle
+        text-align: center
+        cursor: ns-resize
+        vertical-align: middle
+        color: #666
+        .glyphicon
+          font-size: 14px
+
+      &.taxe
+        .select2-container
+          min-width: initial
+
+      &.description
+        padding: auto 0
+
+        textarea
+          vertical-align: middle
+          height: 20px
+          border: 0px
+          width: 100%
+
+      &.actions
+        vertical-align: middle
+        padding-right: 5px
+        max-width: 10px
+        .btn
+          background: transparent
+          +disable-box-shadow()
+          padding: 0
+          height: auto
+          width: auto
+          line-height: 23px
+        .picto-options
+          font-size: 17px
+
+    // Disabled 
+    input:disabled,
+    textarea:disabled,
+      background: transparent
+      color: #666
+
+    .select2-choice,
+    .select2-arrow
+      background-color: transparent !important
+
+    .select2-choice
+      padding-left: 0
+      border: 0
+      +disable-box-shadow()
+
+    .select2-container-disabled
+      .select2-choice
+        font-weight: normal
+        cursor: not-allowed
+        color: #666 !important
+      .select2-chosen
+        margin-right: 0px
+      .select2-arrow
+        display: none
+
+// Table invoice summary
+.table-invoice-summary
+  width: 100%
+  margin-top: 5px
+
+  tr
+    td
+      text-align: right
+      padding-bottom: 6px
+
+      &:first-child
+        padding-right: 10px
+        color: #999
+        width: 100%
+
+      &:last-child
+        white-space: nowrap
+
+        .inner
+          background: $grey
+          font-weight: bold
+          padding: 0px 8px 0px 50px
+          line-height: 24px
+          +border-radius(12px)
+
+    &:last-child
+      td:first-child
+        color: #333
+        font-weight: bold
+
+// Table attachments
+.table-attachments
+  td.link,
+  th.link
+    text-align: center
+
+  td
+    &.link
+      a
+        text-decoration: none
+      span
+        font-size: 18px
+  
+    &.action
+      text-align: right
+      i
+        font-size: 21px
+        line-height: 21px
+
+  td.link,
+  td.size,
+  td.created-at,
+  td.modified-at,
+  td.action
+    white-space: nowrap
+
+  tr.upload-process
+    min-width: 200px
+    .progress
+      height: 18px
+      margin-bottom: 0
+      .bar
+        background: $green
+
+  td.fileupload
+    padding: 0
+    height: 0
+
+  .drag-drop-message
+    display: none
+
+  input.fileupload.fill
+    width: 0
+    height: 0

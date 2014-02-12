@@ -6,21 +6,20 @@
       <h4>{% trans "Attachments" %}</h4>
     </div>
   </div>
-  <table class="table table-attachments edit">
-    <thead class="{{unbound relatedColor}}">
+  <table class="table table-attachments table-{{unbound relatedColor}}">
+    <thead>
       <tr>
-        <th class="name">{% trans "Name" context "table-headers" %}</th>
-        <th class="download"></th>
-        <th class="size">{% trans "Size" context "table-headers" %}</th>
-        <th class="created-at">{% trans "Created" context "table-headers" %}</th>
-        <th class="modified-at">{% trans "Last modified" context "table-headers" %}</th>
-        <th class="issuer">{% trans "Author" context "table-headers" %}</th>
+        <th class="name">{% trans "Name" context "attachment name" %}</th>
+        <th class="link">{% trans "Link" context "attachment link" %}</th>
+        <th class="size">{% trans "Size" context "attachment size" %}</th>
+        <th class="created-at">{% trans "Added on" context "attachment creation date" %}</th>
+        <th class="issuer">{% trans "By" context "user" %}</th>
         <th class="action"></th>
       </tr>
     </thead>
     <tbody>      
       <tr>
-        <td colspan="7" class="fileupload">
+        <td colspan="6" class="fileupload">
           <div class="inner">
             <div class="drag-drop-message">{% trans "Drop attachments here" %}</div>
             <input class="fileupload fill" type="file" multiple/>
@@ -30,7 +29,7 @@
       {{#if attachmentUploads}}
         {{#each attachmentUploads}}
           <tr class="upload-process">
-            <td class="name" colspan="5">{{name}}</td>
+            <td class="name" colspan="4">{{name}}</td>
             <td class="upload-progress" colspan="2">
               <div class="progress">
                 <div class="bar" {{bindAttr style="displayProgress"}}></div>
@@ -39,41 +38,32 @@
           </tr>
         {{/each}}
       {{/if}}
-      {{#if attachments}}
-        {{#each attachments}}
-          <tr>
-            <td class="name">{{name}}</td>
-            <td class="download">
-              <a {{bindAttr href="downloadLink"}} class="orange" title="{% trans 'Download' %}" target="_blank">
-                <i class="picto-download"></i>
-              </a>
-            </td>
-            <td class="size">{{humanFileSize size}}</td>
-            <td class="created-at">{{displayCreatedAt}}</td>
-            <td class="modified-at">{{displayModifiedAt}}</td>
-            <td class="issuer">{{issuer.getFullName}}</td>
-            <td class="action">
-              <a {{action "deleteAttachment" this}} class="orange" title="{% trans 'Delete' %}" target="_blank">
-                <i class="picto-rounded-delete"></i>
-              </a>
-            </td>
-          </tr>
-        {{/each}}
-      {{else}}
+      {{#each attachments}}
         <tr>
-          <td colspan="7" class="no-data">
-            {{#if isQuotation}}
-              {% trans "No attachments related to this quotation" %}
-            {{else}}
-              {% trans "No attachments related to this invoice" %}
-            {{/if}}
+          <td class="name">{{name}}</td>
+          <td class="link">
+            <a {{bindAttr href="downloadLink"}} class="orange" title="{% trans 'Download' %}" target="_blank">
+              <span class="glyphicon glyphicon-cloud-download"></span>
+            </a>
+          </td>
+          <td class="size">{{humanFileSize size}}</td>
+          <td class="created-at">{{displayCreatedAt}}</td>
+          <td class="issuer">{{issuer.getFullName}}</td>
+          <td class="action">
+            <a {{action "deleteAttachment" this}} class="orange" title="{% trans 'Delete' %}" target="_blank">
+              <i class="picto-rounded-delete"></i>
+            </a>
           </td>
         </tr>
-      {{/if}}
+      {{else}}
+        <tr>
+          <td colspan="6" class="no-data text-center">{% trans "No attachments" %}</td>
+        </tr>
+      {{/each}}
     </tbody>
   </table>
   <p class="table-add-line">
-    <a class="btn btn-small rounded {{unbound relatedColor}}" {{action openFileUploadBrowser target="view"}}>
+    <a class="btn btn-sm btn-rounded btn-{{unbound relatedColor}}" {{action openFileUploadBrowser target="view"}}>
       {% trans 'Add an attachment' %}
     </a>
   </p>

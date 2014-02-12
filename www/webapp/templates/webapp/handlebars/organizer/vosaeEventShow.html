@@ -6,19 +6,19 @@
 
     <section class="actions clearfix">
       <div class="btn-toolbar pull-left">
-        {{#linkTo "calendarLists.show" controller.session.tenant class="btn grey"}}
+        {{#linkTo "calendarLists.show" controller.session.tenant class="btn btn-default"}}
           <i class="picto-arrow-left"></i>
           {% trans "Organizer" %}
         {{/linkTo}}
       </div>
       <div class="btn-toolbar pull-right">
         <div class="btn-group">
-          {{#linkTo "vosaeEvent.edit" controller.session.tenant content class="btn rounded grey"}}
+          {{#linkTo "vosaeEvent.edit" controller.session.tenant content class="btn btn-default btn-rounded"}}
             {% trans "Edit" %}
           {{/linkTo}}
         </div>
         <div class="btn-group">
-          <a class="btn rounded grey" {{action 'delete' content}}>
+          <a class="btn btn-rounded btn-default" {{action 'delete' content}}>
             {% trans "Delete" %}
           </a>
         </div>

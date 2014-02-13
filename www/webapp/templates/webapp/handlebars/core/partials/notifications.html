@@ -1,7 +1,10 @@
 {% load i18n templatetag_handlebars i18n_handlebars %}
 
 {% tplhandlebars "notificationItems" %}
-  {{#each item in view.content}}
+  {{#each item in controller.controllers.notifications.unreadNotifications}}
+    {{view view.notificationEntryView contentBinding="item"}}
+  {{/each}}
+  {{#each item in controller.controllers.notifications.readNotifications}}
     {{view view.notificationEntryView contentBinding="item"}}
   {{/each}}
 {% endtplhandlebars %}

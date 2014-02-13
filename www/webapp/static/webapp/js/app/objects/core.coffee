@@ -63,25 +63,25 @@ Vosae.reportFontFamilies = [
 Vosae.reportFontSizes = [
   Em.Object.create
     value: 8
-    name: '8px'
+    name: '8pt'
   Em.Object.create
     value: 9
-    name: '9px'
+    name: '9pt'
   Em.Object.create
     value: 10
-    name: '10px'
+    name: '10pt'
   Em.Object.create
     value: 11
-    name: '11px'
+    name: '11pt'
   Em.Object.create
     value: 12
-    name: '12px'
+    name: '12pt'
   Em.Object.create
     value: 13
-    name: '13px'
+    name: '13pt'
   Em.Object.create
     value: 14
-    name: '14px'
+    name: '14pt'
 ]
 
 Vosae.reportPaperSizes = [

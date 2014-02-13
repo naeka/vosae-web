@@ -139,6 +139,7 @@
 {% endtplhandlebars %}
 
 
+{# WARNING : FOR THIS NOTIFICATION REMEMBER TO USE quotationResource RATHER THAN resource #}
 {% tplhandlebars "timelineEntry/quotationSaved" %}
   {{#with view.content}}
     {% verbatimblocktrans %}{{issuerName}} has {{#if created}}created{{else}}updated{{/if}} the quotation {{#if quotationResource}}<a {{action transitionToResource quotationResource target="controller"}}>{{quotationReference}}</a>{{else}}{{quotationReference}}{{/if}} for {{customerDisplay}}{% endverbatimblocktrans %}
@@ -146,6 +147,7 @@
 {% endtplhandlebars %}
 
 
+{# WARNING : FOR THIS NOTIFICATION REMEMBER TO USE invoiceResource RATHER THAN resource #}
 {% tplhandlebars "timelineEntry/invoiceSaved" %}
   {{#with view.content}}
     {% verbatimblocktrans %}{{issuerName}} has {{#if created}}created{{else}}updated{{/if}}

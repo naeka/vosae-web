@@ -9,18 +9,21 @@
       display: block
       border: 1px solid #DDD
       color: #DDD
-      font-size: 22px
-      line-height: 26px
       font-style: normal
       +square(31px)
       +border-radius(16px)
 
       &::before
         font-family: $font-pictos
-        content: ' '        
+        content: '^'        
+        font-size: 18px
+        line-height: 30px
+        display: block
 
       &.contact::before
         content: 'g'
+        font-size: 22px
+        line-height: 27px
 
       &.invoicing::before
         content: '%'
@@ -31,13 +34,15 @@
   .d-row
     font-size: 14px
     +opacity(0.75)
+    .d-cell.icon
+      border-left: 4px solid $panel-background-color
 
     &.unread
       background: #262626
       +opacity(1)
 
       .d-cell.icon
-        border-left: 4px solid $orange
+        border-left-color: $orange
 
   .d-cell
     vertical-align: middle

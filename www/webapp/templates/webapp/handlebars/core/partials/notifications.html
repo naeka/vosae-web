@@ -1,7 +1,10 @@
 {% load i18n templatetag_handlebars i18n_handlebars %}
 
 {% tplhandlebars "notificationItems" %}
-  {{#each item in view.content}}
+  {{#each item in controller.controllers.notifications.unreadNotifications}}
+    {{view view.notificationEntryView contentBinding="item"}}
+  {{/each}}
+  {{#each item in controller.controllers.notifications.readNotifications}}
     {{view view.notificationEntryView contentBinding="item"}}
   {{/each}}
 {% endtplhandlebars %}
@@ -41,19 +44,21 @@
 {% endtplhandlebars %}
 
 
+{# WARNING : FOR THIS NOTIFICATION REMEMBER TO USE quotationResource RATHER THAN resource #}
 {% tplhandlebars "notificationEntry/quotationSaved" %}
   {{#with view.content}}
-    {% verbatimblocktrans %}The quotation {{#if resource}}<a {{action transitionToResource resource target="controller.controllers.notifications"}}>{{quotationReference}}</a>{{else}}{{quotationReference}}{{/if}} for {{customerDisplay}} has been updated{% endverbatimblocktrans %}
+    {% verbatimblocktrans %}The quotation {{#if quotationResource}}<a {{action transitionToResource quotationResource target="controller.controllers.notifications"}}>{{quotationReference}}</a>{{else}}{{quotationReference}}{{/if}} for {{customerDisplay}} has been updated{% endverbatimblocktrans %}
   {{/with}}
 {% endtplhandlebars %}
 
 
+{# WARNING : FOR THIS NOTIFICATION REMEMBER TO USE invoiceResource RATHER THAN resource #}
 {% tplhandlebars "notificationEntry/invoiceSaved" %}
   {{#with view.content}}
     {% verbatimblocktrans %}{{#if invoiceHasTemporaryReference}}
-      {{#if resource}}<a {{action transitionToResource resource target="controller.controllers.notifications"}}>An invoice</a>{{else}}An invoice{{/if}}
+      {{#if invoiceResource}}<a {{action transitionToResource invoiceResource target="controller.controllers.notifications"}}>An invoice</a>{{else}}An invoice{{/if}}
     {{else}}
-      The invoice {{#if resource}}<a {{action transitionToResource resource target="controller.controllers.notifications"}}>{{invoiceReference}}</a>{{else}}{{invoiceReference}}{{/if}}
+      The invoice {{#if invoiceResource}}<a {{action transitionToResource invoiceResource target="controller.controllers.notifications"}}>{{invoiceReference}}</a>{{else}}{{invoiceReference}}{{/if}}
     {{/if}} for {{customerDisplay}} has been updated{% endverbatimblocktrans %}
   {{/with}}
 {% endtplhandlebars %}

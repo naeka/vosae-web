@@ -210,18 +210,14 @@ Vosae.InvoiceRevision = DS.Model.extend
         errors.addObject gettext("Invoice must be linked to an organization or a contact")
       else if type is "Quotation"
         errors.addObject gettext("Quotation must be linked to an organization or a contact")
-   
-    # Receiver address 
 
     # Sender address
-    if @get("senderAddress")
-      unless @get("senderAddress.streetAddress")
-        errors.addObject gettext("Field street address of sender address must not be blank")
+    if not @get("senderAddress") or @get("senderAddress") and not @get("senderAddress.streetAddress")
+      errors.addObject gettext("Field street address of sender address must not be blank")
    
     # Receiver address 
-    if @get("billingAddress")
-      unless @get("senderAddress.streetAddress")
-        errors.addObject gettext("Field street address of receiver address must not be blank")
+    if not @get("billingAddress") or @get("billingAddress") and not @get("billingAddress.streetAddress")
+      errors.addObject gettext("Field street address of receiver address must not be blank")
 
     # Line items
     if @get("lineItems.length") > 0

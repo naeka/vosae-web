@@ -1,10 +1,21 @@
 Vosae.NotificationsController = Vosae.ArrayController.extend
-  sortProperties: ['sentAt']
-  sortAscending: false
-
   init: ->
     @_super()
     @set('content', Vosae.Notification.all())
+
+  unreadNotifications: (->
+    # All unread notifications
+    @get("content").filter((notification) ->
+      notification unless notification.get("read")
+    ).sortBy("sentAt").reverse()
+  ).property 'content', 'content.length', 'content.@each.read'
+
+  readNotifications: (->
+    # All notifications flaged as read
+    @get("content").filter((notification) ->
+      notification if notification.get("read")
+    ).sortBy("sentAt").reverse()
+  ).property 'content', 'content.length', 'content.@each.read'
 
   actions:
     # This is for lazy load on timeline links

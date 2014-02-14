@@ -10,7 +10,7 @@
 Vosae.ColorPicker = Ember.TextField.extend
   initMiniColors: (->
     @$().minicolors()
-  ).on "init"
+  ).on "didInsertElement"
   
   destroyMiniColors: (->
     @$().minicolors('destroy')

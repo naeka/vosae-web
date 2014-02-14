@@ -14,7 +14,7 @@
               <label>{% trans "Scheme" %}</label>
             </td>
             <td>
-              {{view Vosae.Select
+              {{select
                 contentBinding="Vosae.invoicingSchemes"
                 valueBinding="invoicing.numbering.scheme"
                 optionValuePath="content.value"
@@ -28,7 +28,7 @@
               <label>{% trans "Dates format" %}</label>
             </td>
             <td>
-              {{view Vosae.Select
+              {{select
                 contentBinding="Vosae.invoicingDateFormats"
                 valueBinding="invoicing.numbering.dateFormat"
                 optionValuePath="content.value"
@@ -41,7 +41,7 @@
               <label>{% trans "Separator" %}</label>
             </td>
             <td>
-              {{view Vosae.Select
+              {{select
                 contentBinding="Vosae.invoicingSeparators"
                 valueBinding="invoicing.numbering.separator"
                 optionValuePath="content.value"

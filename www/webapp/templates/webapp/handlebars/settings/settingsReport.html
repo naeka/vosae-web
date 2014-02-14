@@ -14,7 +14,7 @@
               <label>{% trans "Default language" %}</label>
             </td>
             <td>
-              {{view Vosae.Select
+              {{select
                 contentBinding="Vosae.languages"
                 valueBinding="language"
                 optionValuePath="content.code"
@@ -27,7 +27,7 @@
               <label>{% trans "Font name" %}</label>
             </td>
             <td>
-              {{view Vosae.Select
+              {{select
                 contentBinding="Vosae.reportFontFamilies"
                 valueBinding="fontName"
                 optionValuePath="content.value"
@@ -40,7 +40,7 @@
               <label>{% trans "Font size" %}</label>
             </td>
             <td>
-              {{view Vosae.Select
+              {{select
                 contentBinding="Vosae.reportFontSizes"
                 valueBinding="fontSize"
                 optionValuePath="content.value"
@@ -82,7 +82,7 @@
               <label>{% trans "Paper size" %}</label>
             </td>
             <td>
-              {{view Vosae.Select
+              {{select
                 contentBinding="Vosae.reportPaperSizes"
                 valueBinding="paperSize"
                 optionValuePath="content.value"

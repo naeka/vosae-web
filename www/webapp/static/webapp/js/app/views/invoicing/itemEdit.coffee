@@ -4,7 +4,7 @@ Vosae.ItemEditView = Vosae.ItemsAddView.extend
 
   didInsertElement: ->
     
-  unitPriceField: Vosae.AutoNumericField.extend(
+  unitPriceField: Vosae.TextFieldAutoNumeric.extend(
     didInsertElement: ->
       @_super()
       if @get('item.unitPrice')

@@ -4,7 +4,7 @@ Vosae.InvoiceShowView = Em.View.extend
   # ============
   # = Payments =
   # ============
-  paymentDateField: Vosae.DatePickerField.extend
+  paymentDateField: Vosae.DatePicker.extend
     didInsertElement: ->
       @_super()
       payment = @get 'payment'
@@ -15,7 +15,7 @@ Vosae.InvoiceShowView = Em.View.extend
         .on "changeDate", (ev) =>
           payment.set "date", ev.date
 
-  paymentCurrencyField: Vosae.Components.Select.extend(
+  paymentCurrencyField: Vosae.Select.extend(
     didInsertElement: ->      
       payment = @get('payment')
       
@@ -29,7 +29,7 @@ Vosae.InvoiceShowView = Em.View.extend
       @get('payment').updateWithCurrency currency
   )
 
-  paymentAmountField: Vosae.AutoNumericField.extend(
+  paymentAmountField: Vosae.TextFieldAutoNumeric.extend(
     didInsertElement: ->
       @_super()
       amount = @get 'payment.relatedTo.balance'
@@ -60,10 +60,10 @@ Vosae.InvoiceShowView = Em.View.extend
         @get('payment').set "amount", amount
   )
 
-  paymentNoteField: Vosae.TextAreaAutoSize.extend(
+  paymentNoteField: Vosae.TextAreaAutoGrow.extend(
 
   )
 
-  paymentTypeField: Vosae.Components.Select.extend(
+  paymentTypeField: Vosae.Select.extend(
 
   )

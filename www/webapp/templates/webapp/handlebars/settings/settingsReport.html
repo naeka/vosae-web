@@ -14,7 +14,7 @@
               <label>{% trans "Default language" %}</label>
             </td>
             <td>
-              {{view Vosae.Components.Select
+              {{view Vosae.Select
                 contentBinding="Vosae.languages"
                 valueBinding="language"
                 optionValuePath="content.code"
@@ -27,7 +27,7 @@
               <label>{% trans "Font name" %}</label>
             </td>
             <td>
-              {{view Vosae.Components.Select
+              {{view Vosae.Select
                 contentBinding="Vosae.reportFontFamilies"
                 valueBinding="fontName"
                 optionValuePath="content.value"
@@ -40,7 +40,7 @@
               <label>{% trans "Font size" %}</label>
             </td>
             <td>
-              {{view Vosae.Components.Select
+              {{view Vosae.Select
                 contentBinding="Vosae.reportFontSizes"
                 valueBinding="fontSize"
                 optionValuePath="content.value"
@@ -53,7 +53,7 @@
               <label>{% trans "Font color" %}</label>
             </td>
             <td>
-              {{view Vosae.Components.ColorPicker
+              {{color-picker
                 valueBinding="fontColor"
                 classNames="form-control form-control-settings" }}
             </td>
@@ -63,7 +63,7 @@
               <label>{% trans "Base color" %}</label>
             </td>
             <td>
-              {{view Vosae.Components.ColorPicker
+              {{color-picker
                 valueBinding="baseColor"
                 classNames="form-control form-control-settings" }}
             </td>
@@ -73,7 +73,7 @@
               <label>{% trans "Force black and white" %}</label>
             </td>
             <td>
-              {{switch-button
+              {{switch
                 checkedBinding="forceBw" }}
             </td>
           </tr>
@@ -82,7 +82,7 @@
               <label>{% trans "Paper size" %}</label>
             </td>
             <td>
-              {{view Vosae.Components.Select
+              {{view Vosae.Select
                 contentBinding="Vosae.reportPaperSizes"
                 valueBinding="paperSize"
                 optionValuePath="content.value"

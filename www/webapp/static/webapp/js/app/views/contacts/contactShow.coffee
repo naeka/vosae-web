@@ -49,7 +49,7 @@ Vosae.ContactShowSettingsView = Em.View.extend Vosae.HelpTour,
       content: gettext "This is the <strong>Contact's</strong> information. Add his <i>First name</i> and <i>Last name</i> as well as his <i>Role</i> (e.g. CEO, Product Manager, etc.)."
       placement: "right"
 
-  privateSwitchButton: Vosae.SwitchButtonComponent.extend
+  privateSwitchView: Vosae.SwitchView.extend
     change: ->
       contact = @get('controller.content')
       contact.get('transaction').commit()

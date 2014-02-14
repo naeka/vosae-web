@@ -2,18 +2,28 @@
   This component used moment.js to show 'createdAt' times
   in 'time ago' format.
 
-  @class FromNowView
+  @class FromNowComponent
+  @extends Ember.Component
   @namespace Vosae
-  @module Components
+  @module Vosae
 ###
 
-Vosae.Components.FromNowView = Ember.View.extend
+Vosae.FromNowComponent = Ember.Component.extend
   tagName: "time"
   template: Ember.Handlebars.compile("{{view.output}}")
+
+  initTick: (->
+    @tick()
+  ).on "init"
 
   output: (->
     moment(@get("value")).fromNow()
   ).property("value")
+
+  cancelTick: (->
+    nextTick = @get "nextTick"
+    Ember.run.cancel nextTick
+  ).on "willDestroyElement"
 
   tickInterval: ->
     diff = Math.abs(moment() - moment(@get("value")))
@@ -23,18 +33,9 @@ Vosae.Components.FromNowView = Ember.View.extend
       when diff < 79200e3 then 3600e3  # Update every hour
       else 86400e3  # Update every day
 
-  didInsertElement: ->
-    @tick()
-
   tick: ->
     nextTick = Ember.run.later this, ->
       @notifyPropertyChange "value"
       @tick()
     , @tickInterval()
     @set "nextTick", nextTick
-
-  willDestroyElement: ->
-    nextTick = @get "nextTick"
-    Ember.run.cancel nextTick
-
-Ember.Handlebars.helper "fromNow", Vosae.Components.FromNowView

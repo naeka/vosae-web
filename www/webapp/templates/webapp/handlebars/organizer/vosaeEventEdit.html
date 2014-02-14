@@ -52,7 +52,7 @@
     <section class="main-infos clearfix">
       <div class="infos">
         <div class="summary">
-          {{view Vosae.AutoGrowTextField
+          {{view Vosae.TextFieldAutoGrow
             valueBinding="summary"
             classNames="form-control form-control-unstyled text-bold"
             maxlength="64"
@@ -130,14 +130,14 @@
     <section class="event-infos clearfix">
       <div class="pull-left helptour-eventinfos">
         <p class="location">
-          {{view Vosae.AutoGrowTextField
+          {{view Vosae.TextFieldAutoGrow
             valueBinding="location"
             classNames="form-control form-control-unstyled"
             maxlength="512"
             placeholder='{% trans "Location" context "event" %}' }}
         </p>
         <p class="description">
-          {{view Vosae.TextAreaAutoSize
+          {{view Vosae.TextAreaAutoGrow
             valueBinding="description"
             classNames="form-control form-control-unstyled"
             maxlength="1024"
@@ -240,7 +240,7 @@
       optionLabelPath="content.displayName"
       optionValuePath="content.value" }}
 
-    {{view Vosae.AutoGrowTextField
+    {{view Vosae.TextFieldAutoGrow
       valueBinding="minutes"
       maxlength="5"
       classNames="edit" }}

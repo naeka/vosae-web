@@ -1,8 +1,35 @@
 Vosae.CalendarListEditView = Em.View.extend
   classNames: ["app-organizer", "page-edit-calendar"]
 
-  aclEntitySearchField: Vosae.Components.AclEntitySearchField.extend
+  calendarListColorField: Vosae.Select.extend
+    dropdownCssClass: 'calendarList-color'
+    content: Vosae.calendarListColors
+    optionLabelPath: 'content.displayName'
+    optionValuePath: 'content.value'
+    prompt: gettext 'Color'
 
+    # Format each colors entry
+    formatResult: (result, container, query, escapeMarkup, select2) ->
+      colorBack = result.id
+      colorBord = Color(colorBack).darken(0.3).hexString()
+      markup = "<span style='background-color: #{colorBack}; border-color: #{colorBord};'></span> #{result.text}"  
+
+    # Format selected color
+    formatSelection: (data, container) ->
+      data.text
+
+    didInsertElement: ->
+      @_super()
+      
+      color = @get 'value'
+      if color
+        @$().parent().find('.select2-choice').css 'background', color
+
+    change: (ev) ->
+      @$().parent().find('.select2-choice').css 'background', ev.val
+
+
+  aclEntitySearchField: Vosae.UserSearchSelect.extend
     onSelect: (event) ->
       rule = @get 'rule'
       user = Vosae.User.find(event.object.id)
@@ -32,17 +59,44 @@ Vosae.CalendarListEditView = Em.View.extend
               full_name: principal.get 'fullName'
             @.$().select2 'val', principal.get('id')
 
-  aclRuleRolesField: Vosae.Components.CalendarListAclRuleRolesField.extend
+
+  aclRuleRolesField: Vosae.Select.extend
+    containerCssClass: 'calendarList-acl-role'
+    content: Vosae.calendarAclRuleRoles
+    optionLabelPath: 'content.displayName'
+    optionValuePath: 'content.value'
+
+    # Format each colors entry
+    formatResult: (result) ->
+      result.text
+
+    # Format selected color
+    formatSelection: (data) ->
+      data.text
+
     onSelect: (event) ->
 
     didInsertElement: ->
       @_super()
 
-  reminderMethodField: Vosae.Components.ReminderMethodField.extend
+
+  reminderMethodField: Vosae.Select.extend
+    containerCssClass: 'green reminder-method'
+    content: Vosae.reminderEntries
+    optionLabelPath: 'content.displayName'
+    optionValuePath: 'content.value'
+
+    formatResult: (result) ->
+      result.text
+
+    formatSelection: (data) ->
+      data.text
+
     onSelect: (event) ->
 
     didInsertElement: ->
       @_super()
+
 
 Vosae.CalendarListEditSettingsView = Em.View.extend Vosae.HelpTour,
   classNames: ["page-settings", "page-edit-calendar-settings"]

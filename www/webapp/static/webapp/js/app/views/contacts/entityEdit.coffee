@@ -65,20 +65,20 @@ Vosae.EntityEditView = Em.View.extend
         progress = parseInt(data.loaded / data.total * 100, 10)
         @get("uploadProgressInstance").set "progress", progress
 
-  uploadProgressBar: Vosae.Components.RoundProgressBar.extend
+  uploadProgressBar: Vosae.RoundProgressBarComponent.extend
     init: ->
       @_super()
       @get('parentView').set "uploadProgressInstance", @
 
-  emailTypesField: Vosae.Components.Select.extend()
+  emailTypesField: Vosae.Select.extend()
 
-  addressTypesField: Vosae.Components.Select.extend()
+  addressTypesField: Vosae.Select.extend()
 
-  combinedPhoneTypesField: Vosae.Components.Select.extend
+  combinedPhoneTypesField: Vosae.Select.extend
     change: ->
       @get("phone").combinedTypeChanged @get("value")
 
-  organizationSearchField: Vosae.Components.OrganizationSearchField.extend
+  organizationSearchField: Vosae.OrganizationSearchSelect.extend
     allowClear: true
 
     onSelect: (event) ->

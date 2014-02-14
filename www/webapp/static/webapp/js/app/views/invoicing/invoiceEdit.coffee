@@ -1,7 +1,7 @@
 Vosae.InvoiceEditView = Vosae.InvoiceBaseEditView.extend Vosae.SortableLineItemsMixin,
   classNames: ["page-edit-invoice"]
 
-  invoicingDateField: Vosae.DatePickerField.extend
+  invoicingDateField: Vosae.DatePicker.extend
     didInsertElement: ->
       @_super()
       element = @$().closest('.invoice-head .date')
@@ -46,7 +46,7 @@ Vosae.InvoiceEditView = Vosae.InvoiceBaseEditView.extend Vosae.SortableLineItems
       return false
     ).property('currentPaymentConditions')
 
-    dueDateField: Vosae.DatePickerField.extend
+    dueDateField: Vosae.DatePicker.extend
       didInsertElement: ->
         @_super()
         element = @$().closest('.invoice-legal .date')
@@ -60,7 +60,7 @@ Vosae.InvoiceEditView = Vosae.InvoiceBaseEditView.extend Vosae.SortableLineItems
           .on "changeDate", (ev) =>
             @get("currentRevision").set "dueDate", ev.date
 
-    paymentConditionsField: Vosae.Components.Select.extend
+    paymentConditionsField: Vosae.Select.extend
       change: (ev)->
         conditions = @get('selection')
         invoicingDate = @get 'currentRevision.invoicingDate'

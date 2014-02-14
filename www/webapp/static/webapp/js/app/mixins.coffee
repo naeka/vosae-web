@@ -1,4 +1,5 @@
 # Import mixins
+require 'mixins/autoGrow'
 require 'mixins/helpTour'
 require 'mixins/timelineEntries'
 require 'mixins/meta'

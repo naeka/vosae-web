@@ -1,7 +1,7 @@
 Vosae.QuotationEditView = Vosae.InvoiceBaseEditView.extend Vosae.SortableLineItemsMixin,
   classNames: ["page-edit-quotation"]
 
-  quotationDateField: Vosae.DatePickerField.extend
+  quotationDateField: Vosae.DatePicker.extend
     didInsertElement: ->
       @_super()
       element = @$().closest('.invoice-head .date')
@@ -16,7 +16,7 @@ Vosae.QuotationEditView = Vosae.InvoiceBaseEditView.extend Vosae.SortableLineIte
           @get("currentRevision").set "quotationDate", ev.date
           element.datepicker 'hide'
 
-  quotationValidityField: Vosae.DatePickerField.extend
+  quotationValidityField: Vosae.DatePicker.extend
     didInsertElement: ->
       @_super()
       element = @$().closest('.invoice-head .validity')

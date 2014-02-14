@@ -15,6 +15,7 @@ if !window.testMode
 window.Vosae = VosaeApplication.create preWindowLocation: preWindowLocation
 Vosae.deferReadiness()
 
+require 'lib'
 require 'mixins'
 require 'objects'
 require 'helpers'

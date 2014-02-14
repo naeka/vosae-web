@@ -1,11 +1,13 @@
 ###
-  This component create a switch button that toggle a property
+  This view render a switch button that toggle a property
 
-  @class SwitchButton
+  @class SwitchView
+  @extends Ember.View
   @namespace Vosae
   @module Vosae
 ###
-Vosae.SwitchButtonComponent = Em.View.extend
+
+Vosae.SwitchView = Em.View.extend
   classNames: ["onoffswitch-container"]
   checkboxId: null
   defaultTemplate: Ember.Handlebars.compile('
@@ -20,5 +22,7 @@ Vosae.SwitchButtonComponent = Em.View.extend
   checkbox: Em.Checkbox.extend
     classNames: ["onoffswitch-checkbox"]
     setAttributeFor: (->
-      @get('parentView').$().find('label').attr 'for', @get('elementId')
-    ).on "didInsertElement"
+      @get("parentView").$().find("label").attr "for", @get("elementId")
+    ).on "didInsertElement" 
+
+Vosae.View.registerHelper "switch", Vosae.SwitchView

@@ -53,13 +53,13 @@
       <div class="pull-left">
         <div class="summary">
           {{#if isOwn}}
-            {{view Vosae.AutoGrowTextField
+            {{view Vosae.TextFieldAutoGrow
               valueBinding="calendar.summary"
               maxlength="64"
               classNames="form-control form-control-unstyled text-bold"
               placeholder="{% trans "Name of the calendar" %}"}}
           {{else}}
-            {{view Vosae.AutoGrowTextField
+            {{view Vosae.TextFieldAutoGrow
               valueBinding="summaryOverride"
               maxlength="64"
               classNames="form-control form-control-unstyled text-bold"
@@ -68,7 +68,7 @@
         </div>
         <div class="description">
           {{#if isOwn}}
-            {{view Vosae.TextAreaAutoSize
+            {{view Vosae.TextAreaAutoGrow
               valueBinding="calendar.description"
               maxlength="1024"
               classNames="form-control form-control-unstyled"
@@ -78,19 +78,19 @@
       </div>
       <div class="pull-right">
         <div class="color pull-right clearfix">
-          {{view Vosae.Components.CalendarListColorField
+          {{view view.calendarListColorField
             containerCssClass="success"
             valueBinding="color"}}
         </div>
         <div class="timezone">
           {{#if isOwn}}
-            {{view Vosae.Components.TimezonesField
+            {{view Vosae.TimezonesSelect
               valueBinding="calendar.timezone"}}
           {{/if}}
         </div>
         {% comment %}
         <div class="location">
-          {{view Vosae.AutoGrowTextField
+          {{view Vosae.TextFieldAutoGrow
             valueBinding="calendar.location"
             maxlength="256"
             classNames="edit"
@@ -130,7 +130,7 @@
               valueBinding="reminder.method"}}
           </td>
           <td class="minutes">
-            {{view Vosae.AutoGrowTextField
+            {{view Vosae.TextFieldAutoGrow
               valueBinding="reminder.minutes"
               maxlength="5"
               placeholder="0"

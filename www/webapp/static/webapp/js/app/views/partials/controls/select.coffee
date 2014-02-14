@@ -1,12 +1,13 @@
 ###
-  This component display a customised select element
+  This select allow us to customize his display thanks to $.select2()
 
   @class Select
+  @extends Ember.Select
   @namespace Vosae
-  @module Components
+  @module Vosae
 ###
 
-Vosae.Components.Select = Em.Select.extend
+Vosae.Select = Ember.Select.extend
   hideSearchField: true
   dropdownCssClass: ''
   containerCssClass: ''
@@ -56,3 +57,5 @@ Vosae.Components.Select = Em.Select.extend
   willDestroyElement: ->
     @$().select2('destroy')
     @_super()
+
+Vosae.View.registerHelper "select", Vosae.Select

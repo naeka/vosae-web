@@ -81,7 +81,7 @@ Vosae.SettingsOrganizationView = Vosae.PageSettingsView.extend
     registrationCountryType: Em.View.extend
       templateName: "settings/organization/registrationCountryType"
       tagName: "tbody"
-      select: Vosae.Components.Select.extend
+      select: Vosae.Select.extend
         init: ->
           @_super()
           countryCode = @get('tenant.registrationInfo.countryCode')

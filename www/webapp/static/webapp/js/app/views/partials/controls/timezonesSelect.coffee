@@ -1,13 +1,13 @@
 ###
-  This component display a select element that contains
-  all timezones.
+  This select display all timezones.
 
-  @class TimezonesField
+  @class TimezonesSelect
+  @extends Vosae.Select
   @namespace Vosae
-  @module Components
+  @module Vosae
 ###
 
-Vosae.Components.TimezonesField = Vosae.Components.Select.extend
+Vosae.TimezonesSelect = Vosae.Select.extend
   hideSearchField: false
   containerCssClass: 'timezones'
   content: Vosae.timezones

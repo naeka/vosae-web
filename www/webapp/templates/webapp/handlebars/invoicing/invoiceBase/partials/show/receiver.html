@@ -9,6 +9,11 @@
     <p>
       {{currentRevision.contact.fullName}}
     </p>
-    {{view Vosae.InvoiceBaseShowAddressBlock contentBinding="currentRevision.billingAddress" }}
+    <h4>{{unbound controller.session.tenant.name}}</h4>
+    <p>{{unbound currentRevision.billingAddress.sender}}</p>
+    <p>{{unbound currentRevision.billingAddress.streetAddress}}</p>
+    <p>{{unbound currentRevision.billingAddress.extendedAddress}} {{unbound currentRevision.billingAddress.postofficeBox}}</p>
+    <p>{{unbound currentRevision.billingAddress.postalCode}} {{unbound currentRevision.billingAddress.city}}</p>
+    <p>{{unbound currentRevision.billingAddress.state}} {{unbound currentRevision.billingAddress.country}}</p>
   </div>
 {% endtplhandlebars %}

@@ -9,14 +9,11 @@
         </div>
       {{/if}}
     </div>
-    <h4>
-      {{#if controller.session.tenant.isLoaded}}
-        {{unbound controller.session.tenant.name}}
-      {{/if}}
-    </h4>
-    <p>
-      {{unbound currentRevision.sender}}
-    </p>
-    {{view Vosae.InvoiceBaseShowAddressBlock contentBinding="currentRevision.senderAddress" }}
+    <h4>{{unbound controller.session.tenant.name}}</h4>
+    <p>{{unbound currentRevision.senderAddress.sender}}</p>
+    <p>{{unbound currentRevision.senderAddress.streetAddress}}</p>
+    <p>{{unbound currentRevision.senderAddress.extendedAddress}} {{unbound currentRevision.senderAddress.postofficeBox}}</p>
+    <p>{{unbound currentRevision.senderAddress.postalCode}} {{unbound currentRevision.senderAddress.city}}</p>
+    <p>{{unbound currentRevision.senderAddress.state}} {{unbound currentRevision.senderAddress.country}}</p>
   </div>
 {% endtplhandlebars %}

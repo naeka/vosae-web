@@ -1,0 +1,59 @@
+{% load i18n templatetag_handlebars %}
+
+
+{% tplhandlebars "edit-permissions-block" %}
+  {{#each module in view.allPermissions}}
+  <hr>
+  <section class="clearfix permissions">
+    <div class="inner">  
+      <h4>{{module.displayName}}</h4>
+      {{view view.permissionsModuleView groupBinding="view.group" modulePermissionsBinding="module.perms"}}
+    </div>
+  </section>
+  {{/each}}
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "edit-permissions-module-block" %}
+  <div class="permissions">
+    {{#each permission in view.modulePermissions}}
+      <div class="permission clearfix">
+        <div class="pull-left">
+          {{view view.permSwitchButton classNames="checkbox-container" permBinding="permission.perm" groupBinding="view.group" }}
+        </div>
+        <div class="pull-left">
+          <label class="perm-text">{{permission.name}}</label>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "edit-specific-permissions-block" %}
+  {{#each module in view.allPermissions}}
+  <hr>
+  <section class="clearfix permissions">
+    <div class="inner">
+      <h4>{{unbound module.displayName}}</h4>
+      {{view view.specificPermissionsModuleView specificPermissionsBinding="view.specificPermissions" modulePermissionsBinding="module.perms"}}
+    </div>
+  </section>
+  {{/each}}
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "edit-specific-permissions-module-block" %}
+  <div class="permissions">
+    {{#each permission in view.modulePermissions}}
+      <div class="permission clearfix">
+        <div class="pull-left">
+          {{view view.permSwitchButton classNames="checkbox-container" permBinding="permission.perm" specificPermissionsBinding="view.specificPermissions" }}
+        </div>
+        <div class="pull-left">
+          <label class="perm-text">{{unbound permission.name}}</label>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+{% endtplhandlebars %}

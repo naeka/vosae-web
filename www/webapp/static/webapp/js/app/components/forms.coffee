@@ -2,17 +2,6 @@
 # = Vosae ember common forms elements =
 # =====================================
 
-Vosae.FlipSwitchButton = Em.View.extend
-  templateName: 'flipswitch'
-  classNames: ["onoffswitch-container"]
-  checkboxId: null
-
-  checkbox: Em.Checkbox.extend
-    classNames: ["onoffswitch-checkbox"]
-    didInsertElement: ->
-      @get('parentView').$().find('label').attr('for', @get('elementId'))
-
-
 Vosae.StyledGreenSelect = Em.Select.extend
   init: ->
     @_super()
@@ -40,12 +29,6 @@ Vosae.CalendarSelectOption = Em.SelectOption.extend
       hash: {}
     Ember.Handlebars.helpers.bind.call(context, "view.label", options);
 
-
-Vosae.InvoiceBaseShowAddressBlock = Em.View.extend
-  templateName: 'invoicebase-show-address-block'
-  classNames: 'invoicebase-show-address-block'
-  content: null
-
 Vosae.InvoiceBaseEditBillingAddressBlock = Em.View.extend
   templateName: 'invoicebase-edit-billing-address-block'
   classNames: 'invoicebase-edit-billing-address-block'
@@ -59,27 +42,6 @@ Vosae.TextAreaAutoSize = Em.TextArea.extend
   didInsertElement: ->
     @$().autosize()
 
-Vosae.AutoCompleteField = Em.TextField.extend
-  labelKey: 'label'
-  valueKey: 'value'
-  minLength: 0
-  autoFocus: false
-  source: [{ label: "Choice1", value: "value1" }, { label: "Choice2", value: "value2" }]
-
-  didInsertElement: ->
-    self = this
-    @.$().autocomplete
-      autoFocus: @get('autoFocus')
-      minLength: @get('minLength')
-      source: @get('source')
-      focus: (event, ui) ->
-        self.$().val(ui.item.label)
-        return false
-      select: (event, ui) ->
-        self.$().val(ui.item.label)
-        return true
-  willDestroyElement: ->
-    @.$().autocomplete('destroy')
 
 
 ##
@@ -127,19 +89,6 @@ Vosae.AutoNumericField = Em.TextField.extend
 
   willDestroyElement: ->
     @.$().autoNumeric 'destroy'
-
-
-Vosae.DateField = Em.TextField.extend
-  type: "date"
-
-
-Vosae.DateTimeField = Em.TextField.extend
-  type: "datetime"
-
-
-Vosae.TimeField = Em.TextField.extend
-  type: "time"
-
 
 Vosae.DatePickerField = Em.TextField.extend
   datepicker_settings:
@@ -236,7 +185,7 @@ Vosae.PermissionsManager = Em.View.extend
   permissionsModuleView: Em.View.extend
     templateName: 'edit-permissions-module-block'
 
-    permSwitchButton: Vosae.FlipSwitchButton.extend
+    permSwitchButton: Vosae.SwitchButtonComponent.extend
       checkbox: Em.Checkbox.extend
         classNames: ["onoffswitch-checkbox"]
         freezeCheckedObserver: false
@@ -301,7 +250,7 @@ Vosae.SpecificPermissionsManager = Em.View.extend
   specificPermissionsModuleView: Em.View.extend
     templateName: 'edit-specific-permissions-module-block'
 
-    permSwitchButton: Vosae.FlipSwitchButton.extend
+    permSwitchButton: Vosae.SwitchButtonComponent.extend
       checkbox: Em.Checkbox.extend
         classNames: ["onoffswitch-checkbox"]
         freezeCheckedObserver: false
@@ -361,54 +310,3 @@ Vosae.SpecificPermissionsManager = Em.View.extend
         destroy: ->
           @removeObserver('checked')
           @_super()
-
-
-Vosae.ArraySortPropertySelect = Em.View.extend
-  selectedSortProperty: null
-  templateName: "array-sort-property-select"
-  classNames: ["btn-group"]
-
-  init: ->
-    @_super()
-    
-    if @sortProperties
-      sortProperty = @get('content').filterProperty('value', @sortProperties.toString())
-      if sortProperty then @set('selectedSortProperty', sortProperty[0].get('label'))
-
-  didInsertElement: ->
-    @.$().find('.dropdown-toggle').dropdown()
-
-  changeSortProperty: (sortProperty) ->
-    if sortProperty
-      @set('sortProperties', [sortProperty.get('value')])
-      @set('selectedSortProperty', sortProperty.get('label'))
-  
-  clearSortProperty: ->
-    @set('sortProperties', [''])
-    @set('selectedSortProperty', null)
-
-
-Vosae.ArraySortAscendingSelect = Em.View.extend
-  selectedSortAscending: null
-  templateName: "array-sort-ascending-select"
-  classNames: ["btn-group"]
-
-  init: ->
-    @_super()
-    
-    value = (if @sortAscending then true else false)
-    ascending = @get('content').filterProperty('value', value)
-
-    @set('selectedSortAscending', ascending[0].get('label'))
-
-  didInsertElement: ->
-    @.$().find('.dropdown-toggle').dropdown()
-
-  changeSortAscending: (ascending) ->
-    if ascending
-      @set('sortAscending', ascending.get('value'))
-      @set('selectedSortAscending', ascending.get('label'))
-  
-  clearSortAscending: ->
-    @set('sortAscending', [''])
-    @set('selectedSortAscending', null)

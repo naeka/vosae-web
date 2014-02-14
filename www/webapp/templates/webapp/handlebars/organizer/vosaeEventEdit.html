@@ -76,11 +76,11 @@
           {% trans "From" context "date" %}
           {{#isTouchEnabled}}
             {{#if allDay}}
-              {{view Vosae.DateField
+              {{input type="date"
                 valueBinding=start.date
                 classNames="form-control form-control-unstyled" }}
             {{else}}
-              {{view Vosae.DateTimeField
+              {{input type="datetime"
                 valueBinding=start.datetime
                 classNames="form-control form-control-unstyled" }}
             {{/if}}
@@ -99,11 +99,11 @@
           {% trans "to" context "date" %}
           {{#isTouchEnabled}}
             {{#if allDay}}
-              {{view Vosae.DateField
+              {{input type="date"
                 valueBinding=end.date
                 classNames="form-control form-control-unstyled" }}
             {{else}}
-              {{view Vosae.DateTimeField
+              {{input type="datetime"
                 valueBinding=end.datetime
                 classNames="form-control form-control-unstyled" }}
             {{/if}}

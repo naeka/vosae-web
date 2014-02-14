@@ -10,7 +10,7 @@ DS.JSONTransforms.date =
       null
 
   serialize: (date)->
-    if date instanceof Date
+    if date instanceof Date or moment.isMoment(date)
       moment(date).format('YYYY-MM-DD')
     else if date is `undefined`
       `undefined`
@@ -29,7 +29,7 @@ DS.JSONTransforms.datetime =
       null
 
   serialize: (date)->
-    if date instanceof Date
+    if date instanceof Date or moment.isMoment(date)
       moment(date).format()
     else if date is `undefined`
       `undefined`

@@ -58,8 +58,10 @@ require 'controllers/core/application'
 require 'controllers/core/dashboardShow'
 require 'controllers/core/search'
 require 'controllers/core/notifications'
-require 'controllers/core/tenantsShow'
-require 'controllers/core/tenantsAdd'
+require 'controllers/core/realtime'
+
+require 'controllers/tenants/tenantsShow'
+require 'controllers/tenants/tenantsAdd'
 
 require 'controllers/settings/settingsOrganization'
 require 'controllers/settings/settingsShowUsers'
@@ -72,8 +74,6 @@ require 'controllers/settings/settingsInvoicingGeneral'
 require 'controllers/settings/settingsNumbering'
 require 'controllers/settings/settingsApiKeys'
 require 'controllers/settings/settingsReport'
-
-require 'controllers/realtime/realtime'
 
 require 'controllers/contacts/entity'
 require 'controllers/contacts/entities'

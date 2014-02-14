@@ -15,8 +15,9 @@ require 'views/core/application'
 require 'views/core/search'
 require 'views/core/panels'
 require 'views/core/dashboardShow'
-require 'views/core/tenantsShow'
-require 'views/core/tenantsAdd'
+
+require 'views/tenants/tenantsShow'
+require 'views/tenants/tenantsAdd'
 
 require 'views/settings/settingsOrganization'
 require 'views/settings/settingsApplication'

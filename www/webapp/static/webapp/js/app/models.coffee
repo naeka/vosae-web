@@ -36,7 +36,6 @@ DS.Model.reopen
 #     @send('becameValid')
 
 # Imports models
-require 'models/core/tenant'
 require 'models/core/file'
 require 'models/core/group'
 require 'models/core/notification'
@@ -46,6 +45,8 @@ require 'models/core/reportSettings'
 require 'models/core/timeline'
 require 'models/core/user'
 require 'models/core/userSettings'
+
+require 'models/tenants/tenant'
 
 require 'models/settings/apiKey'
 require 'models/settings/tenantSettings'

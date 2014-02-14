@@ -148,9 +148,10 @@ Vosae.IndexRoute = Ember.Route.extend
 # Import routes
 require 'routes/core/root'
 require 'routes/core/dashboardShow'
-require 'routes/core/tenantsShow'
-require 'routes/core/tenantsAdd'
-require 'routes/core/tenantIndex'
+
+require 'routes/tenants/tenantsShow'
+require 'routes/tenants/tenantsAdd'
+require 'routes/tenants/tenantIndex'
 
 require 'routes/contacts/root'
 require 'routes/contacts/contactsShow'

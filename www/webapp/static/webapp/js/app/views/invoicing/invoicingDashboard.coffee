@@ -1,7 +1,7 @@
 Vosae.InvoicingDashboardView = Em.View.extend
   classNames: ["page-invoicing-dashboard"]
 
-Vosae.InvoicingDashboardSettingsView = Em.View.extend Vosae.HelpTour,
+Vosae.InvoicingDashboardSettingsView = Em.View.extend Vosae.HelpTourMixin,
   classNames: ["page-invoicing-dashboard-settings", "page-settings"]
 
   initHelpTour: ->

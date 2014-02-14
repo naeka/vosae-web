@@ -125,7 +125,7 @@ Vosae.VosaeEventEditView = Em.View.extend
       @$('input').autoGrow(0)
 
 
-Vosae.VosaeEventEditSettingsView = Em.View.extend Vosae.HelpTour,
+Vosae.VosaeEventEditSettingsView = Em.View.extend Vosae.HelpTourMixin,
   classNames: ["page-edit-event-settings", "page-settings"]
 
   initHelpTour: ->

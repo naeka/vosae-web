@@ -1,7 +1,7 @@
 Vosae.ContactEditView = Vosae.EntityEditView.extend
   classNames: ["app-contacts", "page-edit-contact"]
 
-Vosae.ContactEditSettingsView = Em.View.extend Vosae.HelpTour,
+Vosae.ContactEditSettingsView = Em.View.extend Vosae.HelpTourMixin,
   classNames: ["app-contacts", "page-edit-contact-settings", "page-settings"]
 
   initHelpTour: ->

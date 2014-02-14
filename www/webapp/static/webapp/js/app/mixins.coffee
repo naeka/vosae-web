@@ -1,7 +1,7 @@
 # Import mixins
 require 'mixins/autoGrow'
 require 'mixins/helpTour'
-require 'mixins/timelineEntries'
+require 'mixins/lazyResources'
 require 'mixins/meta'
 require 'mixins/fullScreenContainer'
 require 'mixins/infiniteScroll'

@@ -69,7 +69,7 @@ Vosae.InvoiceEditView = Vosae.InvoiceBaseEditView.extend Vosae.SortableLineItems
         dueDate = Vosae.paymentConditions.getDueDate invoicingDate, conditions
         @set 'currentRevision.dueDate', dueDate.toDate()
 
-Vosae.InvoiceEditSettingsView = Em.View.extend Vosae.HelpTour,
+Vosae.InvoiceEditSettingsView = Em.View.extend Vosae.HelpTourMixin,
   classNames: ["app-invoice", "page-edit-invoice-settings", "page-settings"]
 
   initHelpTour: ->

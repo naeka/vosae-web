@@ -54,7 +54,7 @@ Vosae.DashboardShowView = Vosae.PaginatedView.extend
       )
 
   
-Vosae.DashboardShowSettingsView = Em.View.extend Vosae.HelpTour,
+Vosae.DashboardShowSettingsView = Em.View.extend Vosae.HelpTourMixin,
   classNames: ["page-settings page-show-dashboard-settings"]
   filter: Vosae.dashboardAppFilter
 

@@ -162,7 +162,7 @@ Vosae.CalendarListsShowView = Em.ContainerView.extend
     willDestroyElement: ->
       @set('parentView.hasQuickAddEvent', false)
 
-Vosae.CalendarListsShowSettingsView = Em.View.extend Vosae.HelpTour,
+Vosae.CalendarListsShowSettingsView = Em.View.extend Vosae.HelpTourMixin,
   classNames: ["page-settings", "page-show-organizer-settings"]
 
   initHelpTour: ->

@@ -33,17 +33,17 @@ unless window.VosaeApplication
 
     # Meta controllers for models, should be moved elsewhere
     createMetaControllers: ->
-      @set 'metaForContact' , Em.Object.createWithMixins Vosae.MetaController
-      @set 'metaForOrganization' , Em.Object.createWithMixins Vosae.MetaController
-      @set 'metaForQuotation' , Em.Object.createWithMixins Vosae.MetaController
-      @set 'metaForInvoice' , Em.Object.createWithMixins Vosae.MetaController
-      @set 'metaForItem' , Em.Object.createWithMixins Vosae.MetaController
-      @set 'metaForTimeline' , Em.Object.createWithMixins Vosae.MetaController
-      @set 'metaForNotification' , Em.Object.createWithMixins Vosae.MetaController      
-      @set 'metaForCurrency' , Em.Object.createWithMixins Vosae.MetaController      
-      @set 'metaForTenant' , Em.Object.createWithMixins Vosae.MetaController
-      @set 'metaForPurchaseOrder', Em.Object.createWithMixins Vosae.MetaController
-      @set 'metaForApiKey', Em.Object.createWithMixins Vosae.MetaController
+      @set 'metaForContact' , Em.Object.createWithMixins Vosae.MetaControllerMixin
+      @set 'metaForOrganization' , Em.Object.createWithMixins Vosae.MetaControllerMixin
+      @set 'metaForQuotation' , Em.Object.createWithMixins Vosae.MetaControllerMixin
+      @set 'metaForInvoice' , Em.Object.createWithMixins Vosae.MetaControllerMixin
+      @set 'metaForItem' , Em.Object.createWithMixins Vosae.MetaControllerMixin
+      @set 'metaForTimeline' , Em.Object.createWithMixins Vosae.MetaControllerMixin
+      @set 'metaForNotification' , Em.Object.createWithMixins Vosae.MetaControllerMixin      
+      @set 'metaForCurrency' , Em.Object.createWithMixins Vosae.MetaControllerMixin      
+      @set 'metaForTenant' , Em.Object.createWithMixins Vosae.MetaControllerMixin
+      @set 'metaForPurchaseOrder', Em.Object.createWithMixins Vosae.MetaControllerMixin
+      @set 'metaForApiKey', Em.Object.createWithMixins Vosae.MetaControllerMixin
 
     configPlugins: ->
       # jQuery file upload

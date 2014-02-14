@@ -37,7 +37,7 @@ Vosae.ContactShowView = Em.View.extend
       $(@).next().addClass "expanded" if $(@).next().hasClass("detail")
 
 
-Vosae.ContactShowSettingsView = Em.View.extend Vosae.HelpTour,
+Vosae.ContactShowSettingsView = Em.View.extend Vosae.HelpTourMixin,
   classNames: ["app-contacts", "page-show-contact-settings", "page-settings"]
 
   initHelpTour: ->

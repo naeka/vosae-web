@@ -22,7 +22,7 @@ Vosae.ItemEditView = Vosae.ItemsAddView.extend
     ).observes('item.unitPrice')
   )
 
-Vosae.ItemEditSettingsView = Em.View.extend Vosae.HelpTour,
+Vosae.ItemEditSettingsView = Em.View.extend Vosae.HelpTourMixin,
   classNames: ["app-invoice", "page-edit-item-settings", "page-settings"]
 
   initHelpTour: ->

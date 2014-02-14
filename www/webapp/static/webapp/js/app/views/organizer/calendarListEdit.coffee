@@ -98,7 +98,7 @@ Vosae.CalendarListEditView = Em.View.extend
       @_super()
 
 
-Vosae.CalendarListEditSettingsView = Em.View.extend Vosae.HelpTour,
+Vosae.CalendarListEditSettingsView = Em.View.extend Vosae.HelpTourMixin,
   classNames: ["page-settings", "page-edit-calendar-settings"]
 
   initHelpTour: ->

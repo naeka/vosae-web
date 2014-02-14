@@ -90,7 +90,7 @@ Vosae.paymentConditions.getDueDate = (baseDate, conditions)->
   dueDate = moment(baseDate).add('days', conditions.numDays)
   if conditions.endOfMonth
     dueDate.endOf('month')
-  dueDate.add('days', conditions.afterDays)
+  dueDate.add('days', conditions.afterDays).toDate()
 
 # Items related objects
 Vosae.itemsTypeChoices = [

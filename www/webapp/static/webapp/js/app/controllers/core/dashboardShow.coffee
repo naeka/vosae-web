@@ -1,19 +1,27 @@
-Vosae.DashboardShowController = Em.ArrayController.extend
+###
+  Custom array controller for a collection of <Vosae.Timeline> based records.
+
+  @class DashboardShowController
+  @extends Ember.ArrayController
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.DashboardShowController = Ember.ArrayController.extend
   sortProperties: ['datetime']
   sortAscending: false
   meta: null
-  
-  init: ->
-    @_super()
-    
-    @set 'meta', Vosae.metaForTimeline
 
+  setMeta: (->
+    @set 'meta', Vosae.metaForTimeline
     if @get('meta') and !@get('meta.modelHasBeenFetched')
       @send("getNextPagination")
+  ).on "init"
 
-  # Action handlers
   actions:
-    # Pagination retrieve older items
+    ###
+      Pagination retrieve older items
+    ###
     getNextPagination: ->
       pagination = null
 
@@ -38,7 +46,9 @@ Vosae.DashboardShowController = Em.ArrayController.extend
                 else
                   @updateContent()
   
-    # This is for lazy load on timeline links
+    ###  
+      This is for lazy load on timeline links
+    ###
     transitionToResource: (resource) ->
       switch resource.type
         # Contact
@@ -71,7 +81,9 @@ Vosae.DashboardShowController = Em.ArrayController.extend
           creditNote = Vosae.CreditNote.find(resource.id)
           @transitionToRoute "creditNote.show", @get('session.tenant'), creditNote
 
-  # Traverse timeline items
+  ###
+    Traverse timeline items
+  ###
   updateContent: ->
     now = moment()
     currentDate = moment([now.year(), now.month(), now.day()])
@@ -109,7 +121,9 @@ Vosae.DashboardShowController = Em.ArrayController.extend
 
     return
 
-  # Traverse timeline items
+  ###
+    Traverse timeline items
+  ###
   updateContentFrom: (startIndex, stopIndex) ->
     i = startIndex
     z = if stopIndex? then stopIndex else @get('arrangedContent.length')

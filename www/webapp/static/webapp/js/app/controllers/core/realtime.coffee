@@ -1,12 +1,19 @@
-Vosae.RealtimeController = Em.ArrayController.extend
+###
+  Custom controller that manage real time data with pusher
+
+  @class RealtimeController
+  @extends Ember.ArrayController
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.RealtimeController = Ember.Controller.extend
   pusher: null
   userChannel: null
   needs: "dashboardShow"
   dashboardBinding: "controllers.dashboardShow"
 
-  init: ->
-    @_super()
-
+  initPusher: (->
     # Pusher subscriptions
     @pusher = new Pusher Vosae.Config.PUSHER_KEY,
       cluster: Vosae.Config.PUSHER_CLUSTER
@@ -27,7 +34,11 @@ Vosae.RealtimeController = Em.ArrayController.extend
     @userChannel.bind 'statistics-update', (data) =>
       for statistics in data.statistics
         Vosae.lookup("controller:#{statistics}").fetchResults()
+  ).on "init"
 
+  ###
+    Returns a timeline based class that matches the type
+  ###
   getTimelineSubModel: (type) ->
     switch type
       when 'contact_saved_te' then Vosae.ContactSavedTE
@@ -46,6 +57,9 @@ Vosae.RealtimeController = Em.ArrayController.extend
       when 'down_payment_invoice_cancelled_te' then Vosae.DownPaymentInvoiceCancelledTE
       else Vosae.Timeline
 
+  ###
+    Returns a notification based class that matches the type
+  ###
   getNotificationSubModel: (type) ->
     switch type
       when 'contact_saved_ne' then Vosae.ContactSavedNE

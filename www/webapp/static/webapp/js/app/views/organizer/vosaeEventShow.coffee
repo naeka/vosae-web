@@ -24,4 +24,4 @@ Vosae.ShowEventAddressMapView = Em.View.extend
 
   didInsertElement: ->
     if @get('location')
-      @get('controller.controllers.application').showAddressMap @$(), @get('location')
+      Vosae.Utilities.createGoogleMap @$(), @get('location')

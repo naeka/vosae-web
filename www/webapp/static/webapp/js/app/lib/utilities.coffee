@@ -87,6 +87,7 @@ Vosae.Utilities =
         processfail: (e, data) =>
           if data.files[data.index].error
             alert(data.files[data.index].name + ' : ' + data.files[data.index].error)
+
     return
 
   ###
@@ -125,3 +126,40 @@ Vosae.Utilities =
       xhrFields:
         withCredentials: true
     return
+
+  ###
+    Create a google map with the passed address, render it in the
+    selector.
+  ###
+  createGoogleMap: (selector, address, options) ->
+    defaults =
+      map:
+        address: "3 Rue Général Ferrié 38100 Grenoble France"
+        options:
+          streetViewControl: false
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+          mapTypeControl: false
+          draggable: false
+          scrollwheel: false
+          zoom: 17
+      marker:
+        address: "3 Rue Général Ferrié 38100 Grenoble France"
+        options:
+          draggable: false
+
+    opts = $.extend true, {}, defaults,
+      if address? then {
+        map:{ 
+          address: address
+        },
+        marker: {
+          address: address 
+        }
+      } else {}
+    return selector.gmap3 opts
+
+  ###
+    Check if the current device is touche device
+  ###
+  isTouchDevice: ->
+    (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0))

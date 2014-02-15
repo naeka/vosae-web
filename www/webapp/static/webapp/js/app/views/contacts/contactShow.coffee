@@ -53,13 +53,13 @@ Vosae.ShowEntityAddressMapView = Em.View.extend
       selector = $(".accordion-inner.map.no-address")
     
     # Show map for first address (default)
-    @get('controller.controllers.application').showAddressMap selector, address
+    Vosae.Utilities.createGoogleMap selector, address
 
 
 Vosae.ClickToShowEntityAddressMapView = Em.View.extend
   click: (event) ->
     accordion_body = $($(event.target).closest("a.accordion-toggle").attr("href"))
-    @get('controller.controllers.application').showAddressMap accordion_body.find(".map"), accordion_body.data("mapAddress")
+    Vosae.Utilities.createGoogleMap accordion_body.find(".map"), accordion_body.data("mapAddress")
     accordion_group = accordion_body.parent()
     if accordion_group.hasClass("active")
       accordion_group.removeClass "active"

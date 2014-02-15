@@ -1,24 +1,40 @@
-Vosae.NotificationsController = Vosae.ArrayController.extend
-  init: ->
-    @_super()
-    @set('content', Vosae.Notification.all())
+###
+  Custom array controller for a collection of <Vosae.Notification> based records.
 
+  @class NotificationsController
+  @extends Vosae.ArrayController
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.NotificationsController = Vosae.ArrayController.extend
+  
+  setContent: (->
+    @set('content', Vosae.Notification.all())
+  ).on "init"
+
+  ###
+    Returns unread notifications
+  ###
   unreadNotifications: (->
-    # All unread notifications
     @get("content").filter((notification) ->
       notification unless notification.get("read")
     ).sortBy("sentAt").reverse()
   ).property 'content', 'content.length', 'content.@each.read'
 
+  ###
+    Returns all notifications flaged as read
+  ###
   readNotifications: (->
-    # All notifications flaged as read
     @get("content").filter((notification) ->
       notification if notification.get("read")
     ).sortBy("sentAt").reverse()
   ).property 'content', 'content.length', 'content.@each.read'
 
   actions:
-    # This is for lazy load on timeline links
+    ###
+      This is for lazy load on timeline links
+    ###
     transitionToResource: (resource) ->
       switch resource.type
         # Contact
@@ -51,12 +67,16 @@ Vosae.NotificationsController = Vosae.ArrayController.extend
           creditNote = Vosae.CreditNote.find(resource.id)
           @transitionToRoute "creditNote.show", @get('session.tenant'), creditNote
 
-    # Flag all notifications as read
+    ###
+      Flag all notifications as read
+    ###
     markAllAsRead: ->
       @get('content').filterProperty('read', false).forEach (notification) ->
         notification.markAsRead()
 
-  # Amount of unread notifications
+  ###
+    Number of unread notifications
+  ###
   unreadCounter: (->
     length = @get('content').filterProperty('read', false).get('length')
     if length > 99

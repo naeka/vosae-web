@@ -94,10 +94,10 @@ Vosae.InvoiceBase = DS.Model.extend
     if @get("currentRevision.pdf.#{language}")
       pdf = @get("currentRevision.pdf.#{language}")
       if pdf.get("isLoaded")
-        $.fileDownload(APP_ENDPOINT + pdf.get("downloadLink"))
+        $.fileDownload(Vosae.Config.APP_ENDPOINT + pdf.get("downloadLink"))
       else
         pdf.one "didLoad", @, ->
-          $.fileDownload(APP_ENDPOINT + pdf.get("downloadLink"))
+          $.fileDownload(Vosae.Config.APP_ENDPOINT + pdf.get("downloadLink"))
     else
       invoiceBase = @
       invoiceBase.set 'isGeneratingPdfState', true
@@ -114,7 +114,7 @@ Vosae.InvoiceBase = DS.Model.extend
       # Send request to API
       adapter.ajax(url, "GET").then((json) ->
         Ember.run @, ->
-          $.fileDownload(APP_ENDPOINT + json.download_link)
+          $.fileDownload(Vosae.Config.APP_ENDPOINT + json.download_link)
           invoiceBase.set 'isGeneratingPdfState', false
           invoiceBase.reload()
       ).then null, adapter.rejectionHandler

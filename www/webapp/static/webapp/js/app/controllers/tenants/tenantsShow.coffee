@@ -68,10 +68,10 @@ Vosae.TenantsShowController = Em.ArrayController.extend
   # Get each dependencies for the tenant
   getTenantDependencies: ->
     # Current Vosae user
-    user = Vosae.User.find email: AUTH_USER
+    user = Vosae.User.find email: Vosae.Config.AUTH_USER
     user.one "didLoad", @, ->
       @set 'session.user', user.get('firstObject')
-      window.PUSHER_USER_CHANNEL = "private-user-#{@get('session.user.id')}"
+      Vosae.Config.PUSHER_USER_CHANNEL = "private-user-#{@get('session.user.id')}"
       @get "controllers.realtime"
       @set "currentUserIsLoaded", true
       @checkTenantDependencies()

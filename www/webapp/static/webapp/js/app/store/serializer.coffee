@@ -1,6 +1,12 @@
-# This is the main serializer of the application.
-# Mainly used to convert data between server 
-# semantics and application semantics
+###
+  Main serializer for Vosae. Mainly used to convert 
+  data between server semantics and application semantics.
+
+  @class Serializer
+  @extends DS.RESTSerializer
+  @namespace Vosae
+  @module Vosae
+###
 
 Vosae.Serializer = DS.RESTSerializer.extend
 
@@ -9,27 +15,29 @@ Vosae.Serializer = DS.RESTSerializer.extend
        type = Vosae.Timeline
     else if type.superclass == Vosae.Notification
        type = Vosae.Notification
-    return @_super(type)
+    @_super(type)
 
 
-  # Parse `resource_uri` and returns `id`
-  # This method is called when extracting
-  # `hasMany` & `belongsTo` relationships
-
+  ###
+    Parse `resource_uri` and returns `id`. This method 
+    is called when extracting `hasMany` & `belongsTo` relationships
+  ###
   deurlify: (value) ->
     if typeof value is "string"
       return value.split("/").reverse()[1]
-    return value
+    value
 
-  # Build a complete `resource_uri` from `type`
-  # and `id` of a specific record. This method 
-  # is called when adding `hasMany` & `belongsTo`
-
+  ###
+    Build a complete `resource_uri` from `type` and `id` of a specific 
+    record. This method is called when adding `hasMany` & `belongsTo`
+  ###
   getItemURL: (meta, id) ->
-    url = Ember.get(@, "adapter").rootForType(meta.type)
-    return ["", Ember.get(@, "namespace"), url, id, ""].join("/")
+    url = @get("adapter").rootForType meta.type
+    ["", Vosae.Config.API_NAMESPACE, url, id, ""].join("/")
 
-  # Can be optimize, should we have to custom this hooks ?
+  ###
+    Can be optimize, should we have to custom this hooks ?
+  ###
   addHasMany: (hash, record, key, relationship) ->
     type = record.constructor.toString()
     name = relationship.key
@@ -70,23 +78,21 @@ Vosae.Serializer = DS.RESTSerializer.extend
       else
         hash[key] = @getItemURL(relationship, id) unless Ember.isNone(id)
 
-
   extractHasMany: (type, hash, key) ->
     value = hash[key]
 
     if value
       value.forEach (item, i, collection) =>
         collection[i] = @deurlify(item)
-
-    return value
+    value
 
   extractBelongsTo: (type, hash, key) ->
     value = hash[key]
     value = @deurlify(value) if value
-    return value
+    value
 
   extractSince: (meta) ->
-    return meta.next if meta
+    meta.next if meta
 
   extractValidationErrors: (type, errors) ->
     if errors['error']?
@@ -94,16 +100,16 @@ Vosae.Serializer = DS.RESTSerializer.extend
     return
 
   pluralize: (name) ->
-    return name
+    name
 
   keyForBelongsTo: (type, name) ->
-    return @keyForAttributeName(type, name)
+    @keyForAttributeName(type, name)
 
   keyForHasMany: (type, name) ->
-    return @keyForAttributeName(type, name)
+    @keyForAttributeName(type, name)
 
   keyForEmbeddedType: ->
-    return 'resource_type'
+    'resource_type'
 
   extractRecordRepresentation: (loader, type, data, shouldSideload) ->
     keyForEmbeddedType = @keyForEmbeddedType()
@@ -115,9 +121,17 @@ Vosae.Serializer = DS.RESTSerializer.extend
     @_super(loader, type, data, shouldSideload)
 
 
-# This serializer is used to transform `ReferencedDictField`
-# An empty embedded `ReferencedDictField` returns {} ember-data
-# expect null
+###
+  This serializer is used to transform `ReferencedDictField`
+  An empty embedded `ReferencedDictField` returns {} ember-data
+  expect null.
+
+  @class InvoiceBaseSerializer
+  @extends Vosae.Serializer
+  @namespace Vosae
+  @module Vosae
+###
+
 Vosae.InvoiceBaseSerializer = Vosae.Serializer.extend
   transformRelatedToRelationship: (data) ->
     resourceUri = data['related_to']
@@ -138,16 +152,24 @@ Vosae.InvoiceBaseSerializer = Vosae.Serializer.extend
     @_super(loader, type, data, shouldSideload)
 
 
-# This is custom serializer for model <Vosae.User>
-# It helps us to transforms specific permissions 
-# and permissions to make it useable.
+###
+  This is a custom serializer for model <Vosae.User>
+  It helps us to transforms `specific_permissions`
+  and `permissions` keys to make it useable.
+
+  @class UserSerializer
+  @extends Vosae.Serializer
+  @namespace Vosae
+  @module Vosae
+###
 
 Vosae.UserSerializer = Vosae.Serializer.extend
   
-  # This custom hooks from adapter help us to transforms
-  # `specific_permissions` & `permissions` strings array
-  # to make it useable for Emberjs
-
+  ###
+    This custom hooks from adapter help us to transforms
+    `specific_permissions` & `permissions` strings array
+    to make it useable for Emberjs
+  ###
   extractRecordRepresentation: (loader, type, data, shouldSideload) ->
     if data['specific_permissions']
       array = []
@@ -157,10 +179,11 @@ Vosae.UserSerializer = Vosae.Serializer.extend
 
     @_super(loader, type, data, shouldSideload)
 
-  # This custom hooks from adapter help us to transforms
-  # `specificPermissions` & `permissions` objects array
-  # to make it useable for API
-
+  ###
+    This custom hooks from adapter help us to transforms
+    `specificPermissions` & `permissions` objects array
+    to make it useable for API
+  ###
   addHasMany: (hash, record, key, relationship) ->
     serializedHasMany = @_super(hash, record, key, relationship)
 
@@ -170,5 +193,4 @@ Vosae.UserSerializer = Vosae.Serializer.extend
         $.map serializedHasMany, (permission) ->
           obj[permission.name] = permission.value
         serializedHasMany = obj
-
     hash[key] = serializedHasMany

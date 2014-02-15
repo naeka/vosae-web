@@ -34,12 +34,19 @@
     var LANGUAGE = '{{ LANGUAGE_CODE }}';
     var APP_ENDPOINT = '{{ APP_ENDPOINT }}';
     var PUSHER_KEY = '{{ PUSHER_KEY }}';
-    var PUSHER_USER_CHANNEL = '';
     var PUSHER_CLUSTER = '{{ PUSHER_CLUSTER }}';
     var PUSHER_AUTH_ENDPOINT = '{{ APP_ENDPOINT }}/rt/auth/';
+    var WINDOW_LOCATION_AT_START = {
+      pathname: window.location.pathname,
+      protocol: window.location.protocol,
+      host: window.location.host
+    };
+    if (!window.testMode) {
+      window.history.pushState({}, "", WINDOW_LOCATION_AT_START.protocol + '//' + WINDOW_LOCATION_AT_START.host);
+    }
 
     Ember.onerror = function(error) {
         if(window.Raven)
-          Raven.captureMessage("Ember error", error);
+            Raven.captureMessage("Ember error", error);
     };
 </script>

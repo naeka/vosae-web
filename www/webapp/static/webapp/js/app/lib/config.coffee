@@ -1,10 +1,5 @@
 ###
-  General configuration for Vosae app, items are ordered by module
-    1) core
-    2) contacts
-    3) organizer
-    4) invoicing
-    5) settings
+  General configuration for Vosae application
 
   @class Config
   @namespace Vosae
@@ -12,6 +7,15 @@
 ###
 
 Vosae.Config =
+
+  AUTH_USER: AUTH_USER
+  LANGUAGE: LANGUAGE
+  APP_ENDPOINT: APP_ENDPOINT
+  API_NAMESPACE: "api/v1"
+  PUSHER_KEY: PUSHER_KEY
+  PUSHER_USER_CHANNEL: null
+  PUSHER_CLUSTER: PUSHER_CLUSTER
+  PUSHER_AUTH_ENDPOINT: PUSHER_AUTH_ENDPOINT
 
   ###
     Available languages

@@ -4,7 +4,7 @@ Vosae.EntityController = Em.ObjectController.extend
       format = "vcard"
       tenantSlug = @get('session.tenant.slug')
       entity_id = @get('content.id')
-      exportURL = "#{APP_ENDPOINT}/#{@get('store').adapter.namespace}/"
+      exportURL = "#{Vosae.Config.APP_ENDPOINT}/#{Vosae.Config.API_NAMESPACE}/"
       
       switch @constructor.toString()
         when Vosae.ContactShowController.toString()

@@ -4,7 +4,7 @@ Vosae.EntitiesController = Vosae.ArrayController.extend
     getExportFile: ->
       format = "vcard"
       tenantSlug = @get('session.tenant.slug')
-      exportURL = "#{APP_ENDPOINT}/#{@get('store').adapter.namespace}/"
+      exportURL = "#{Vosae.Config.APP_ENDPOINT}/#{Vosae.Config.API_NAMESPACE}/"
     
       switch @constructor.toString()
         when Vosae.ContactsShowController.toString()

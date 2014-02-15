@@ -5,4 +5,4 @@ Vosae.SettingsOrganizationController = Em.ObjectController.extend
       tenant.get('transaction').commit()
 
     downloadTerms: (terms)->
-      $.fileDownload(APP_ENDPOINT + terms.get('downloadLink'))
+      $.fileDownload(Vosae.Config.APP_ENDPOINT + terms.get('downloadLink'))

@@ -17,9 +17,9 @@ Vosae.Tenant = DS.Model.extend
 
   logoUri: (->
     if @get('imgLogo')
-      return APP_ENDPOINT + @get('imgLogo.streamLink')
+      return Vosae.Config.APP_ENDPOINT + @get('imgLogo.streamLink')
     else if @get('svgLogo')
-      return APP_ENDPOINT + @get('svgLogo.streamLink')
+      return Vosae.Config.APP_ENDPOINT + @get('svgLogo.streamLink')
     return null
   ).property('svgLogo.streamLink', 'imgLogo.streamLink')
 

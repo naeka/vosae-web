@@ -8,11 +8,11 @@ Vosae.RealtimeController = Em.ArrayController.extend
     @_super()
 
     # Pusher subscriptions
-    @pusher = new Pusher PUSHER_KEY,
-      cluster: PUSHER_CLUSTER
-      authEndpoint: PUSHER_AUTH_ENDPOINT
+    @pusher = new Pusher Vosae.Config.PUSHER_KEY,
+      cluster: Vosae.Config.PUSHER_CLUSTER
+      authEndpoint: Vosae.Config.PUSHER_AUTH_ENDPOINT
       authTransport: 'jsonp'
-    @userChannel = @pusher.subscribe PUSHER_USER_CHANNEL
+    @userChannel = @pusher.subscribe Vosae.Config.PUSHER_USER_CHANNEL
 
     # Pusher notification binding
     @userChannel.bind 'new-notification', (data) =>

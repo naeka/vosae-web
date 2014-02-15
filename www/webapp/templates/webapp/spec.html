@@ -4,10 +4,13 @@
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
   <head>
-    {% include "webapp/skeleton-head.html" %}
     <script>
+      // MUST BET SET BEFORE SKELETON-HEAD.HTML
       window.cachedSearch = window.location.search;
       window.testMode = true;
+    </script>
+    {% include "webapp/skeleton-head.html" %}
+    <script>
       minispade.require('vosae');
       Em.run(function(){
         Vosae.Utilities.setLanguage(LANGUAGE);

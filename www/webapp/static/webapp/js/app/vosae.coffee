@@ -26,5 +26,4 @@ unless window.testMode
 require 'components'
 require 'router'
 require 'controllers'
-require 'forms'
 require 'views'

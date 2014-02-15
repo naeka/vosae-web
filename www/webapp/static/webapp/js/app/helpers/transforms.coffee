@@ -1,3 +1,10 @@
+###
+  Adds support of type date to `DS.Model` attr
+
+  @type date
+  @module JSONTransforms
+  @namespace DS
+###
 DS.JSONTransforms.date =
   deserialize: (serialized)->
     type = typeof serialized
@@ -17,6 +24,13 @@ DS.JSONTransforms.date =
     else
       null
 
+###
+  Adds support of type datetime to `DS.Model` attr
+
+  @type datetime
+  @module JSONTransforms
+  @namespace DS
+###
 DS.JSONTransforms.datetime =
   deserialize: (serialized)->
     type = typeof serialized
@@ -36,6 +50,13 @@ DS.JSONTransforms.datetime =
     else
       null
 
+###
+  Adds support of type array to `DS.Model` attr
+
+  @type array
+  @module JSONTransforms
+  @namespace DS
+###
 DS.JSONTransforms.array =
   serialize: (serialized)->
     if Em.typeOf(serialized) is 'array'
@@ -47,7 +68,41 @@ DS.JSONTransforms.array =
       return deserialized
     return []
 
+###
+  Adds support of type object to `DS.Model` attr
+
+  @type object
+  @module JSONTransforms
+  @namespace DS
+###
+DS.JSONTransforms.object =
+  deserialize: (serialized) ->
+    serialized
+  
+  serialize: (deserialized) ->
+    deserialized
+
+###
+  Transforms an array that contains all payment types objects
+  See `Vosae.Config.paymentTypes`
+
+  @type paymentTypesArray
+  @module JSONTransforms
+  @namespace DS
+###
 DS.JSONTransforms.paymentTypesArray =
+  ###
+    Serialize an array of objects with label and value
+    
+    [
+      {label: 'Cash', value: 'CASH'},
+      {label: 'Credit card', value: 'CREDIT_CARD'}
+    ]
+
+    into an array of value
+
+    ['CASH', 'CREDIT_CARD']
+  ###
   serialize: (serialized)->
     if Em.typeOf(serialized) is 'array'
       array = []
@@ -57,6 +112,18 @@ DS.JSONTransforms.paymentTypesArray =
       return array
     return []
 
+  ###
+    Transforms an array of value
+    
+    ['CASH', 'CREDIT_CARD']
+
+    into an array of objects with label and value
+    
+    [
+      {label: 'Cash', value: 'CASH'},
+      {label: 'Credit card', value: 'CREDIT_CARD'}
+    ]
+  ###
   deserialize: (deserialized)->
     if Em.typeOf(deserialized) is 'array'
       array = []
@@ -65,10 +132,3 @@ DS.JSONTransforms.paymentTypesArray =
         array.pushObject(paymentTypeObject) if paymentTypeObject?
       return array
     return []
-
-DS.JSONTransforms.object =
-  deserialize: (serialized) ->
-    serialized
-  
-  serialize: (deserialized) ->
-    deserialized

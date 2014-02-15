@@ -1,7 +1,26 @@
-# ==================
-# = Emberjs & i18n =
-# ==================
+get = Ember.Handlebars.get
 
+isTranslatedAttribute = /(.+)Translation$/
+isBinding = /(.+)Binding$/
+
+getGettextString = (key, attrs) ->
+  if attrs.hasOwnProperty('context') and attrs.hasOwnProperty('plural')
+    return npgettext(attrs.context, key, attrs.plural, attrs.count)
+  if attrs.hasOwnProperty 'context'
+    return pgettext(attrs.context, key)
+  if attrs.hasOwnProperty 'plural'
+    return ngettext(key, attrs.plural, attrs.count)
+  return gettext(key)
+
+getTranslated = (key, attrs = {}) ->
+  gettext_str = getGettextString(key, attrs)
+  template = Handlebars.compile(gettext_str)
+  template attrs
+
+
+###
+  Adds I18n methods to the class `Ember.String`
+###
 Ember.String.gettext = (msgid) ->
   gettext(msgid)
 
@@ -21,37 +40,12 @@ Ember.String.interpolate = (fmt, obj, named) ->
   interpolate(fmt, obj, named)
 
 
-# =====================
-# = Handlebars & i18n =
-# =====================
+###
+  Look up a translation for an i18n key in our dictionary
 
-getGettextString = (key, attrs) ->
-  if attrs.hasOwnProperty('context') and attrs.hasOwnProperty('plural')
-    return npgettext(attrs.context, key, attrs.plural, attrs.count)
-  if attrs.hasOwnProperty 'context'
-    return pgettext(attrs.context, key)
-  if attrs.hasOwnProperty 'plural'
-    return ngettext(key, attrs.plural, attrs.count)
-  return gettext(key)
-
-getTranslated = (key, attrs = {}) ->
-  gettext_str = getGettextString(key, attrs)
-  template = Handlebars.compile(gettext_str)
-  template attrs
-
-
-isTranslatedAttribute = /(.+)Translation$/
-isBinding = /(.+)Binding$/
-
-# If we're on Ember 0.9.4 or later, we need the Ember.Handlebars
-# version of get, which knows how to look up globals properly.
-# If we're on Ember 1.0.0-pre2 or later, we need to use `Ember.Handlbars.get`
-# instead. `Ember.Handlebars.getPath` was deprecated. 
-
-get = Ember.Handlebars.get || Ember.Handlebars.getPath || Ember.getPath
-
-
-# Much of this code was adapated from Sproutcore's bindAttr helper.
+  @method trans
+  @for Handlebars
+###
 Handlebars.registerHelper 'trans', (key, options) ->
   context = this
   attrs = options.hash
@@ -101,12 +95,3 @@ Handlebars.registerHelper 'trans', (key, options) ->
 
   result = '<%@ id="%@">%@</%@>'.fmt tagName, elementID, getTranslated(key, attrs), tagName
   new Handlebars.SafeString result
-
-Handlebars.registerHelper 'translateAttr', (options) ->
-  attrs = options.hash
-  result = []
-  Em.keys(attrs).forEach (property) ->
-    translatedValue = I18n.t attrs[property]
-    result.push '%@="%@"'.fmt(property, translatedValue)
-  new Handlebars.SafeString result.join ' '
-

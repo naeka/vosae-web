@@ -12,8 +12,10 @@ unless window.VosaeApplication
     # Application runner
     run: ->
       @injectDependencies()
-      @configI18n()
-      @configPlugins()
+      Vosae.Utilities.updatePrototypes()
+      Vosae.Utilities.addCSRFToken()
+      Vosae.Utilities.setLanguage(LANGUAGE)
+      Vosae.Utilities.configPlugins()
       @createMetaControllers()
       @getTenants()
       @getCurrencies()
@@ -25,11 +27,6 @@ unless window.VosaeApplication
       this.inject 'view', 'session', 'session:current'
       this.inject 'route', 'session', 'session:current'
       this.inject 'controller', 'session', 'session:current'
-
-    # Configure the i18n according to the user language
-    configI18n: ->
-      Vosae.currentLanguage = LANGUAGE
-      moment.lang Vosae.currentLanguage
 
     # Meta controllers for models, should be moved elsewhere
     createMetaControllers: ->
@@ -44,23 +41,6 @@ unless window.VosaeApplication
       @set 'metaForTenant' , Em.Object.createWithMixins Vosae.MetaControllerMixin
       @set 'metaForPurchaseOrder', Em.Object.createWithMixins Vosae.MetaControllerMixin
       @set 'metaForApiKey', Em.Object.createWithMixins Vosae.MetaControllerMixin
-
-    configPlugins: ->
-      # jQuery file upload
-      $.widget 'blueimp.fileupload', $.blueimp.fileupload,
-        options:
-          messages:
-            acceptFileTypes: gettext("File type not allowed")
-            maxFileSize: gettext("This file is too large")
-            maxNumberOfFiles: gettext("The maximum number of files exceeded")
-            minFileSize: gettext("This file is too small")
-            uploadedBytes: gettext("Uploaded datas exceed file size")
-          maxFileSize: 2000000
-          minFileSize: 500
-          maxNumberOfFiles: 1
-          processfail: (e, data) =>
-            if data.files[data.index].error
-              alert(data.files[data.index].name + ' : ' + data.files[data.index].error)
 
     # Check that tenants and currencies have been fetched and loaded
     checkDataDependencies: ->
@@ -94,15 +74,3 @@ unless window.VosaeApplication
         else
           @set 'currenciesAreLoaded', true
           @checkDataDependencies()
-
-    # Display app laoder
-    showLoader: ->
-      $("#wrapper-loader").fadeIn()
-
-    # Hide app laoder
-    hideLoader: ->
-      $("#wrapper-loader").fadeOut()
-
-    # Set new title to page
-    setPageTitle: (title) ->
-      $(document).attr 'title', "#{title} - Vosae"

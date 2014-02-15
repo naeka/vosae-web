@@ -15,9 +15,9 @@ Vosae.TenantsShowController = Em.ArrayController.extend
     # Set the tenant as the current app tenant
     setAsCurrentTenant: (tenant) ->
       if tenant
-        @get('namespace').showLoader()
+        Vosae.Utilities.showLoader()
+        Vosae.Utilities.setPageTitle tenant.get('name')
         @get('session').set 'tenant', tenant
-        @get('namespace').setPageTitle tenant.get('name')
         @putTenantInAjaxHeaders tenant
         @getTenantDependencies()
 
@@ -62,7 +62,7 @@ Vosae.TenantsShowController = Em.ArrayController.extend
         @transitionToRoute 'dashboard.show', @get('session.tenant')
 
       Ember.run.later (=>
-        @get('namespace').hideLoader()
+        Vosae.Utilities.hideLoader()
       ), 500
 
   # Get each dependencies for the tenant

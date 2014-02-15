@@ -12,7 +12,7 @@ Vosae.DatePicker = Em.TextField.extend
     autoclose: true
 
   setLanguage: (->
-    @datepicker_settings.language = Vosae.currentLanguage
+    @datepicker_settings.language = Vosae.Utilities.CURRENT_LANGUAGE
   ).on "init"
 
   removeDatePicker: (->

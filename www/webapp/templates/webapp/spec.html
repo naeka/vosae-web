@@ -10,9 +10,7 @@
       window.testMode = true;
       minispade.require('vosae');
       Em.run(function(){
-        // I18n
-        Vosae.currentLanguage = LANGUAGE;
-        moment.lang(Vosae.currentLanguage);
+        Vosae.Utilities.setLanguage(LANGUAGE);
       });
     </script>
     <link rel="stylesheet" href="{% static 'webapp/spec/vendor/jasmine.css' %}">

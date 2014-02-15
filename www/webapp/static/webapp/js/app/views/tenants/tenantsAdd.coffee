@@ -13,7 +13,7 @@ Vosae.TenantsAddView = Vosae.PageTenantView.extend
     @get('controller').set 'defaultCurrency', null
     # Focus on first input text
     @.$().find('.ember-text-field').first().focus()
-    Vosae.hideLoader()
+    Vosae.Utilities.hideLoader()
 
   # Action handlers
   actions:

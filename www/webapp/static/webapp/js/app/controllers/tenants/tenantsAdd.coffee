@@ -88,9 +88,9 @@ Vosae.TenantsAddController = Em.ObjectController.extend
           else
             @get('controllers.tenantsShow').send "setAsCurrentTenant", tenant
       tenant.one 'becameInvalid', @, ->
-        Vosae.hideLoader()
+        Vosae.Utilities.hideLoader()
       tenant.get('transaction').commit()
-      Vosae.showLoader()
+      Vosae.Utilities.showLoader()
 
     # Cancel the tenant creation form 
     cancel: ->

@@ -10,7 +10,7 @@
 Vosae.TimezonesSelect = Vosae.Select.extend
   hideSearchField: false
   containerCssClass: 'timezones'
-  content: Vosae.timezones
+  content: Vosae.Timezones
   optionLabelPath: 'content.displayName'
   optionValuePath: 'content.value'
   prompt: gettext 'Timezone'

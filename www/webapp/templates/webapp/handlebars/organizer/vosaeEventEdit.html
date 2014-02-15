@@ -218,7 +218,7 @@
         </td>
         <td class="attendee-status">
           {{view view.responseStatutesSelect
-            contentBinding="Vosae.attendeeResponseStatutes"
+            contentBinding="Vosae.Config.attendeeResponseStatutes"
             valueBinding="responseStatus"
             optionLabelPath="content.displayName"
             optionValuePath="content.value" }}
@@ -235,7 +235,7 @@
 {% tplhandlebars "vosaeEvent/edit/reminder" %}
   <div>
     {{view Em.Select
-      contentBinding="Vosae.reminderEntries"
+      contentBinding="Vosae.Config.reminderEntries"
       valueBinding="method"
       optionLabelPath="content.displayName"
       optionValuePath="content.value" }}

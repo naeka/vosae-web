@@ -8,12 +8,12 @@ Vosae.ReportSettings = DS.Model.extend
   language: DS.attr("string")
 
   defaultLanguage: (->
-    Vosae.languages.findProperty('code', @get('language'))
+    Vosae.Config.languages.findProperty('code', @get('language'))
   ).property('language')
 
   otherLanguages: (->
     defaultLang = @get('language')
-    Vosae.languages.filter (language)->
+    Vosae.Config.languages.filter (language)->
       if language.get('code') != defaultLang
         return language
   ).property('language')

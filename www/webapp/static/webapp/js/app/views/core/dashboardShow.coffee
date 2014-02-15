@@ -1,3 +1,29 @@
+Vosae.dashboardAppFilter = Em.Object.create
+  showAppContact: true
+  showAppInvoicing: true
+  showAppOrganizer: true
+  showAppContactAsChanged: false
+  showAppInvoicingAsChanged: false
+  showAppOrganizerAsChanged: false
+ 
+  resetFilterObservers: ->
+    @set "showAppContactAsChanged", false
+    @set "showAppInvoicingAsChanged", false
+    @set "showAppOrganizerAsChanged", false
+ 
+  observesFilterContact: (->
+    @set "showAppContactAsChanged", true
+  ).observes("showAppContact")
+ 
+  observesFilterOrganizer: (->
+    @set "showAppOrganizerAsChanged", true
+  ).observes("showAppOrganizer")
+ 
+  observesFilterInvoicing: (->
+    @set "showAppInvoicingAsChanged", true
+  ).observes("showAppInvoicing")
+
+
 Vosae.DashboardShowView = Vosae.PaginatedView.extend
   classNames: ["page-show-dashboard"]
 

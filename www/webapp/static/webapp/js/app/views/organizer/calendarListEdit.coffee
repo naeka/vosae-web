@@ -3,7 +3,7 @@ Vosae.CalendarListEditView = Em.View.extend
 
   calendarListColorField: Vosae.Select.extend
     dropdownCssClass: 'calendarList-color'
-    content: Vosae.calendarListColors
+    content: Vosae.Config.calendarListColors
     optionLabelPath: 'content.displayName'
     optionValuePath: 'content.value'
     prompt: gettext 'Color'
@@ -62,7 +62,7 @@ Vosae.CalendarListEditView = Em.View.extend
 
   aclRuleRolesField: Vosae.Select.extend
     containerCssClass: 'calendarList-acl-role'
-    content: Vosae.calendarAclRuleRoles
+    content: Vosae.Config.calendarAclRuleRoles
     optionLabelPath: 'content.displayName'
     optionValuePath: 'content.value'
 
@@ -82,7 +82,7 @@ Vosae.CalendarListEditView = Em.View.extend
 
   reminderMethodField: Vosae.Select.extend
     containerCssClass: 'green reminder-method'
-    content: Vosae.reminderEntries
+    content: Vosae.Config.reminderEntries
     optionLabelPath: 'content.displayName'
     optionValuePath: 'content.value'
 

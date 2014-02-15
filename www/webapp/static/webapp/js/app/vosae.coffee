@@ -17,7 +17,6 @@ Vosae.deferReadiness()
 
 require 'lib'
 require 'mixins'
-require 'objects'
 require 'helpers'
 require 'store'
 require 'models'

@@ -10,7 +10,7 @@ Vosae.User = DS.Model.extend
 
   getStatus: (->
     statusValue = @get('status')
-    statusLabel = Vosae.userStatutes.findProperty 'value', statusValue
+    statusLabel = Vosae.Config.userStatutes.findProperty 'value', statusValue
     if statusLabel?
       return statusLabel.get 'label'
     return gettext('Unknown')

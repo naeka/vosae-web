@@ -11,7 +11,7 @@
 
 Vosae.SpecificPermissionsManager = Em.View.extend
   templateName: 'edit-specific-permissions-block'
-  allPermissions: Vosae.permissions
+  allPermissions: Vosae.Permissions
 
   ###
     This view will be render for each permission's module

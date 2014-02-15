@@ -15,12 +15,12 @@ Vosae.InvoiceEditView = Vosae.InvoiceBaseEditView.extend Vosae.SortableLineItems
         .on "changeDate", (ev) =>
           @get("currentRevision").set "invoicingDate", ev.date
           element.datepicker 'hide'
-          conditions = Vosae.paymentConditions.findProperty("value", @get('controller.session.tenantSettings.invoicing.paymentConditions'))
+          conditions = Vosae.Config.paymentConditions.findProperty("value", @get('controller.session.tenantSettings.invoicing.paymentConditions'))
           if not @get("currentRevision").get "dueDate"
-            @get("currentRevision").set "dueDate", Vosae.paymentConditions.getDueDate(ev.date, conditions)
+            @get("currentRevision").set "dueDate", Vosae.Config.paymentConditions.getDueDate(ev.date, conditions)
           else
             if confirm gettext("Also update payment due date?")
-              @get("currentRevision").set "dueDate", Vosae.paymentConditions.getDueDate(ev.date, conditions)
+              @get("currentRevision").set "dueDate", Vosae.Config.paymentConditions.getDueDate(ev.date, conditions)
 
   dueDateBlockView: Ember.View.extend
     templateName: "invoice/edit/_dueDateBlock"
@@ -31,13 +31,13 @@ Vosae.InvoiceEditView = Vosae.InvoiceBaseEditView.extend Vosae.SortableLineItems
       invoicingDate = @get 'currentRevision.invoicingDate'
       if dueDate?
         if invoicingDate?
-          for conditions in Vosae.paymentConditions
-            expectedDueDate = Vosae.paymentConditions.getDueDate invoicingDate, conditions
+          for conditions in Vosae.Config.paymentConditions
+            expectedDueDate = Vosae.Config.paymentConditions.getDueDate invoicingDate, conditions
             if moment(dueDate).isSame expectedDueDate, 'day'
               return conditions
         return
       else
-        return Vosae.paymentConditions.findProperty 'value', @get('controller.session.tenantSettings.invoicing.paymentConditions')
+        return Vosae.Config.paymentConditions.findProperty 'value', @get('controller.session.tenantSettings.invoicing.paymentConditions')
     ).property()
 
     isCustom: (->
@@ -66,7 +66,7 @@ Vosae.InvoiceEditView = Vosae.InvoiceBaseEditView.extend Vosae.SortableLineItems
         invoicingDate = @get 'currentRevision.invoicingDate'
         if conditions is null or conditions.get('value') is 'CUSTOM' or not invoicingDate
           return
-        dueDate = Vosae.paymentConditions.getDueDate invoicingDate, conditions
+        dueDate = Vosae.Config.paymentConditions.getDueDate invoicingDate, conditions
         @set 'currentRevision.dueDate', dueDate.toDate()
 
 Vosae.InvoiceEditSettingsView = Em.View.extend Vosae.HelpTourMixin,

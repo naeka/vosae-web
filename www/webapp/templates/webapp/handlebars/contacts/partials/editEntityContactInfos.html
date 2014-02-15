@@ -15,7 +15,7 @@
             {{view view.combinedPhoneTypesField 
               phoneBinding      = "phone"
               hideSearchField   = "true"
-              contentBinding    = "Vosae.phoneCombinedTypes"
+              contentBinding    = "Vosae.Config.phoneCombinedTypes"
               valueBinding      = "combinedTypes"
               containerCssClass = "success"
               optionLabelPath   = "content.name"
@@ -52,7 +52,7 @@
           </td>
           <td>
             {{view view.emailTypesField 
-              contentBinding    = "Vosae.emailTypeChoice"
+              contentBinding    = "Vosae.Config.emailTypeChoice"
               valueBinding      = "email.type"
               hideSearchField   = "true"
               containerCssClass = "success"
@@ -123,7 +123,7 @@
                 classNames   = "form-control form-control-unstyled country"
                 placeholder  = "{% trans 'Country' %}" }}
               {{view view.addressTypesField 
-                contentBinding    = "Vosae.addressTypeChoice"
+                contentBinding    = "Vosae.Config.addressTypeChoice"
                 hideSearchField   = "true"
                 containerCssClass = "type success"
                 valueBinding      = "address.type"

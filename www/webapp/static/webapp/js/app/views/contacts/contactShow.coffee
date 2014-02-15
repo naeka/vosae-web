@@ -18,16 +18,6 @@ Vosae.ContactShowView = Em.View.extend
         route.get('preFillInvoiceWith').organization = controller.get('content.organization')
       controller.transitionToRoute 'invoices.add', @get('session.tenant')
 
-  showMap: (event) ->
-    accordion_body = $($(event.target).closest("a.accordion-toggle").attr("href"))
-    vosae_base.showAddressMap accordion_body.find(".map"), accordion_body.data("mapAddress")
-    accordion_group = accordion_body.parent()
-    if accordion_group.hasClass("active")
-      accordion_group.removeClass "active"
-    else
-      accordion_group.parent().find(".accordion-group.active").removeClass "active"
-      accordion_group.addClass "active"
-
   expandInvoicingTable: ->
     # Append class to selected tr, expand content
     $(document).on "click", ".table-invoices tbody tr:not(.detail), .table-quotations tbody tr:not(.detail)", ->

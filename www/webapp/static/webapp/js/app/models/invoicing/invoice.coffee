@@ -10,7 +10,7 @@ Vosae.Invoice = Vosae.InvoiceBase.extend
 
   displayState: (->
     # Returns the current state readable and translated.
-    Vosae.invoiceStatesChoices.findProperty('value', @get('state')).get('label')
+    Vosae.Config.invoiceStatesChoices.findProperty('value', @get('state')).get('label')
   ).property('state')
 
   canAddPayment: (->
@@ -26,23 +26,23 @@ Vosae.Invoice = Vosae.InvoiceBase.extend
   availableStates: (->
     # List the available states for the `Invoice`, depending of its current state.
     if @get('state') is "DRAFT"
-      Vosae.invoiceStatesChoices.filter (state) ->
+      Vosae.Config.invoiceStatesChoices.filter (state) ->
         if ["REGISTERED"].contains state.get('value')
           state
     else if @get('state') is "REGISTERED"
-      Vosae.invoiceStatesChoices.filter (state) ->
+      Vosae.Config.invoiceStatesChoices.filter (state) ->
         if ["CANCELLED"].contains state.get('value')
           state
     else if @get('state') is "OVERDUE"
-      Vosae.invoiceStatesChoices.filter (state) ->
+      Vosae.Config.invoiceStatesChoices.filter (state) ->
         if ["CANCELLED"].contains state.get('value')
           state
     else if @get('state') is "PART_PAID"
-      Vosae.invoiceStatesChoices.filter (state) ->
+      Vosae.Config.invoiceStatesChoices.filter (state) ->
         if ["CANCELLED"].contains state.get('value')
           state
     else if @get('state') is "PAID"
-      Vosae.invoiceStatesChoices.filter (state) ->
+      Vosae.Config.invoiceStatesChoices.filter (state) ->
         if ["CANCELLED"].contains state.get('value')
           state
     else

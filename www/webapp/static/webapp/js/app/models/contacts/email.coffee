@@ -3,7 +3,7 @@ Vosae.Email = DS.Model.extend
   email: DS.attr('string')
 
   displayType: (->
-    obj = Vosae.emailTypeChoice.findProperty('value', @get('type'))
+    obj = Vosae.Config.emailTypeChoice.findProperty('value', @get('type'))
     if obj
       return obj.get('name')
     ''

@@ -8,7 +8,7 @@ Vosae.InvoicingNumberingSettings = DS.Model.extend
     if @get('scheme') is "N"
       preview = "00000"
     else
-      format = Vosae.invoicingDateFormats.findProperty('value', @get('dateFormat'))
+      format = Vosae.Config.invoicingDateFormats.findProperty('value', @get('dateFormat'))
       preview = moment().format(format.get('label'))
       preview += @get('separator') + "00000"
     preview

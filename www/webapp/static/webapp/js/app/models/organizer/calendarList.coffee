@@ -20,14 +20,14 @@ Vosae.CalendarList = DS.Model.extend
   displayColor: (->
     # Returns a formated `color`
     if @get 'color'
-      return Vosae.calendarListColors.findProperty('value', @get('color')).get('displayName')
+      return Vosae.Config.calendarListColors.findProperty('value', @get('color')).get('displayName')
     ''
   ).property 'color'
 
   displayTimezone: (->
     # Returns a formated `timezone`
     if @get 'timezone'
-      return Vosae.timezones.findProperty('value', @get('timezone')).get('displayName')
+      return Vosae.Timezones.findProperty('value', @get('timezone')).get('displayName')
     ''
   ).property('timezone')
 

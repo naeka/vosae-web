@@ -8,7 +8,7 @@ Vosae.CalendarAclRule = DS.Model.extend
   displayRole: (->
     # Return a formated `role`
     if @get 'role'
-      return Vosae.calendarAclRuleRoles.findProperty('value', @get('role')).get('displayName')
+      return Vosae.Config.calendarAclRuleRoles.findProperty('value', @get('role')).get('displayName')
     return ''
   ).property 'role'
 

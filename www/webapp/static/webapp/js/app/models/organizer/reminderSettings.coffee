@@ -21,7 +21,7 @@ Vosae.ReminderEntry = DS.Model.extend
   displayMethod: (->
     # Returns a formated `role`
     if @get 'method'
-      return Vosae.reminderEntries.findProperty('value', @get('method')).get('displayName')
+      return Vosae.Config.reminderEntries.findProperty('value', @get('method')).get('displayName')
     ''
   ).property 'method'
 

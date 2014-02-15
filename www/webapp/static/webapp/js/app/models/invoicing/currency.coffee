@@ -5,7 +5,7 @@ Vosae.Currency = DS.Model.extend
 
   description: (->
     # Return the description of the current currency
-  	obj = Vosae.currenciesDescription.findProperty 'symbol', @get('symbol')
+  	obj = Vosae.Config.currenciesDescription.findProperty 'symbol', @get('symbol')
   	if obj and obj.get('description')
   	  return obj.get('description')
   	return ""
@@ -15,7 +15,7 @@ Vosae.Currency = DS.Model.extend
     # The display symbol associated to the currency (e.g. '€', '$', '£').
     # The *symbol* attribute is in the iso4217 format (e.g. 'EUR', 'USD', 'GBP')
     if @get "symbol"
-      return Vosae.currenciesSign.findProperty('symbol', @get('symbol')).get('sign')
+      return Vosae.Config.currenciesSign.findProperty('symbol', @get('symbol')).get('sign')
     return ""
   ).property('symbol')
 

@@ -1,126 +1,21 @@
-Vosae.Session = Ember.Object.extend
-  forbidenTenantsNames: ["tenants"]
-  preWindowLocation: null
-  tenant: null
-  tenantSettings: null
-  preselectedTenant: null
-  nextUrl: null
+###
+  List of permissions available for Vosae, grouped by module :
+    1) core
+    2) contacts
+    3) organizer
+    4) invoicing
+  
+  @class Permissions
+  @namespace Vosae
+  @module Vosae
+###
 
-  init: ->
-    @_super()
+Vosae.Permissions = [
 
-    # Parse URL and extract tenant before app start
-    unless window.testMode
-      location = Vosae.get 'preWindowLocation'
-      Vosae.DEBUG = @
-      if location      
-        pathname = location.pathname
-        tenant = pathname.split('/')[1]
-         
-        unless @forbidenTenantsNames.contains tenant
-          @preselectedTenant = tenant
-          @nextUrl = pathname
-
-Vosae.userStatutes = Em.makeArray([
-  Em.Object.create
-    value: "ACTIVE"
-    label: gettext("Active")
-  Em.Object.create
-    value: "DISABLED"
-    label: gettext("Disabled")
-  Em.Object.create
-    value: "DELETED"
-    label: gettext("Deleted")
-])
-
-Vosae.languages = Em.makeArray([
-  Em.Object.create
-    code: "en"
-    name: gettext("English")
-  Em.Object.create
-    code: "en-gb"
-    name: gettext("British English")
-  Em.Object.create
-    code: "fr"
-    name: gettext("French")
-])
-
-Vosae.reportFontFamilies = [
-  Em.Object.create
-    value: "bariol"
-    name: gettext("Bariol (Vosae's font)")
-  Em.Object.create
-    value: "helvetica"
-    name: "Helvetica"
-  Em.Object.create
-    value: "times"
-    name: "Times New Roman"
-  Em.Object.create
-    value: "courier"
-    name: "Courier New"
-]
-
-Vosae.reportFontSizes = [
-  Em.Object.create
-    value: 8
-    name: '8pt'
-  Em.Object.create
-    value: 9
-    name: '9pt'
-  Em.Object.create
-    value: 10
-    name: '10pt'
-  Em.Object.create
-    value: 11
-    name: '11pt'
-  Em.Object.create
-    value: 12
-    name: '12pt'
-  Em.Object.create
-    value: 13
-    name: '13pt'
-  Em.Object.create
-    value: 14
-    name: '14pt'
-]
-
-Vosae.reportPaperSizes = [
-  Em.Object.create
-    value: 'a4'
-    name: gettext 'A4 (8.27" x 11.69")'
-  Em.Object.create
-    value: 'letter'
-    name: gettext 'Letter (8.5" x 11")'
-  Em.Object.create
-    value: 'legal'
-    name: gettext 'Legal (8.5" x 14")'
-]
-
-Vosae.supportedCountries = Em.makeArray([
-  Em.Object.create
-    countryCode: "BE"
-    countryName: gettext("Belgium")
-  Em.Object.create
-    countryCode: "CH"
-    countryName: gettext("Switzerland")
-  Em.Object.create
-    countryCode: "FR"
-    countryName: gettext("France")
-  Em.Object.create
-    countryCode: "GB"
-    countryName: gettext("Great Britain")
-  Em.Object.create
-    countryCode: "LU"
-    countryName: gettext("Luxembourg")
-  Em.Object.create
-    countryCode: "US"
-    countryName: gettext("United States")
-])
-
-Vosae.permissions = Em.makeArray([
+  # Core permissions
   Em.Object.create
     displayName: gettext('Core permissions')
-    perms: Em.makeArray([
+    perms: [
       Em.Object.create
         perm: 'core_access'
         authorization: false
@@ -173,11 +68,13 @@ Vosae.permissions = Em.makeArray([
         perm: 'delete_vosaefile'
         authorization: false
         name: gettext('Can delete files')
-    ])
-  
+    ]
+  ,
+
+  # Contacts permissions
   Em.Object.create
     displayName: gettext('Contacts permissions')
-    perms: Em.makeArray([
+    perms: [
       Em.Object.create
         perm: 'contacts_access'
         authorization: false
@@ -198,11 +95,24 @@ Vosae.permissions = Em.makeArray([
         perm: 'delete_contact'
         authorization: false
         name: gettext('Can delete contacts')
-    ])
+    ]
+  ,
 
+  # Organizer permissions
+  Em.Object.create
+    displayName: gettext('Organizer permissions')
+    perms: [
+      Em.Object.create
+        perm: 'organizer_access'
+        authorization: false
+        name: gettext('Access to the calendar module')
+    ]
+  ,
+
+  # Invoicing permissions
   Em.Object.create
     displayName: gettext('Invoicing permissions')
-    perms: Em.makeArray([
+    perms: [
       Em.Object.create
         perm: 'invoicing_access'
         authorization: false
@@ -251,46 +161,5 @@ Vosae.permissions = Em.makeArray([
         perm: 'delete_item'
         authorization: false
         name: gettext('Can delete items')
-    ])
-
-  Em.Object.create
-    displayName: gettext('Organizer permissions')
-    perms: Em.makeArray([
-      Em.Object.create
-        perm: 'organizer_access'
-        authorization: false
-        name: gettext('Access to the calendar module')
-    ])
-])
-
-
-Vosae.dashboardAppFilter = Em.Object.create
-  showAppContact: true
-  showAppInvoicing: true
-  showAppOrganizer: true
-  showAppContactAsChanged: false
-  showAppInvoicingAsChanged: false
-  showAppOrganizerAsChanged: false
-  
-  updateAppFilter: ->
-    vosae_base.adjustContentHeight()
-
-  resetFilterObservers: ->
-    @set "showAppContactAsChanged", false
-    @set "showAppInvoicingAsChanged", false
-    @set "showAppOrganizerAsChanged", false
-
-  observesFilterContact: (->
-    @set "showAppContactAsChanged", true
-    @updateAppFilter()
-  ).observes("showAppContact")
-
-  observesFilterOrganizer: (->
-    @set "showAppOrganizerAsChanged", true
-    @updateAppFilter()
-  ).observes("showAppOrganizer")
-
-  observesFilterInvoicing: (->
-    @set "showAppInvoicingAsChanged", true
-    @updateAppFilter()
-  ).observes("showAppInvoicing")
+    ]
+]

@@ -61,7 +61,7 @@ DS.JSONTransforms.paymentTypesArray =
     if Em.typeOf(deserialized) is 'array'
       array = []
       deserialized.forEach (paymentTypeValue) ->
-        paymentTypeObject = Vosae.paymentTypes.findProperty('value', paymentTypeValue)
+        paymentTypeObject = Vosae.Config.paymentTypes.findProperty('value', paymentTypeValue)
         array.pushObject(paymentTypeObject) if paymentTypeObject?
       return array
     return []

@@ -25,7 +25,7 @@ Vosae.Payment = DS.Model.extend
   displayType: (->
     # Display the payment type
     if @get("type")
-      return Vosae.paymentTypes.findProperty('value', @get('type')).get('label')
+      return Vosae.Config.paymentTypes.findProperty('value', @get('type')).get('label')
     return pgettext("payment type", "undefined")
   ).property("type")
 

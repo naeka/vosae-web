@@ -1,4 +1,13 @@
-Vosae.EntityController = Em.ObjectController.extend
+###
+  A custom object controller for a `Vosae.Entity` based record.
+
+  @class EntityController
+  @extends Ember.ObjectController
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.EntityController = Ember.ObjectController.extend
   actions:
     getExportFile: ->
       format = "vcard"

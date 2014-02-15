@@ -1,3 +1,12 @@
+###
+  A custom array controller for a collection of `Vosae.Entity` based records.
+
+  @class EntitiesController
+  @extends Vosae.ArrayController
+  @namespace Vosae
+  @module Vosae
+###
+
 Vosae.EntitiesController = Vosae.ArrayController.extend
   actions:
     # Return a generated url to export data

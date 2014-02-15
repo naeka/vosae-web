@@ -2,6 +2,7 @@
 require 'mixins/autoGrow'
 require 'mixins/helpTour'
 require 'mixins/lazyResources'
+require 'mixins/transitionToLazyResource'
 require 'mixins/meta'
 require 'mixins/fullScreenContainer'
 require 'mixins/infiniteScroll'

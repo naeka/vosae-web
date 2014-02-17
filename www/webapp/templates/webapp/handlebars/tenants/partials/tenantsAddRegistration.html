@@ -17,16 +17,18 @@
     {# Tenant supported currencies #}
     <div class="row">
       <div class="col-xs-4">
-        {% braces %} 
-          view Bootstrap.Forms.Select
-          label="{% trans "Supported currencies" %}"
-          multiple="true"
-          contentBinding="sortedCurrencies"
-          selectionBinding="controller.supportedCurrencies"
-          optionValuePath="content.id"
-          optionLabelPath="content.description"
-          classNames="supported-currencies"
-        {% endbraces %}
+        <div class="form-group has-no-error supported-currencies">
+          <label class="ember-view control-label">{% trans "Supported currencies" %}</label>
+            {{view Vosae.Components.Select
+              viewName="supportedCurrenciesView"
+              multiple="true"
+              contentBinding="sortedCurrencies"
+              selectionBinding="controller.supportedCurrencies"
+              optionValuePath="content.id"
+              optionLabelPath="content.description"}}
+          <div class="ember-view errors help-inline"></div>
+          <div class="ember-view help-block"></div>
+        </div>
       </div>
     </div>
 
@@ -42,6 +44,7 @@
             optionValuePath="content"
             optionLabelPath="content.description"
             classNames="default-currency"
+            containerCssClass="success"
           {% endbraces %}
         </div>
       </div>
@@ -84,6 +87,7 @@
         optionValuePath="content.countryCode"
         optionLabelPath="content.countryName"
         classNames="registration-country"
+        containerCssClass="success"
       {% endbraces %}
     </div>
   </div>

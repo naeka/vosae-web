@@ -1,3 +1,12 @@
+###
+  Custom controller for a `Vosae.InvoicingSettings` record.
+
+  @class SettingsInvoicingGeneralController
+  @extends Ember.ObjectController
+  @namespace Vosae
+  @module Vosae
+###
+
 Vosae.SettingsInvoicingGeneralController = Em.ObjectController.extend
   # Sort currencies by description
   sortedCurrencies: (->
@@ -14,7 +23,6 @@ Vosae.SettingsInvoicingGeneralController = Em.ObjectController.extend
         return cur
   ).property('invoicing.supportedCurrencies.@each.id', 'invoicing.supportedCurrencies.length')
 
-  # Actions handlers
   actions:
     save: (tenantSettings) ->
       tenantSettings.get('transaction').commit()

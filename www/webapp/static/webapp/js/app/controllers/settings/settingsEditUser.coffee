@@ -1,5 +1,13 @@
+###
+  Custom controller for a `Vosae.User` record.
+
+  @class SettingsEditUserController
+  @extends Ember.ObjectController
+  @namespace Vosae
+  @module Vosae
+###
+
 Vosae.SettingsEditUserController = Em.ObjectController.extend
-  # Actions handlers
   actions:  
     save: (user) ->
       event = if user.get('id') then 'didUpdate' else 'didCreate'

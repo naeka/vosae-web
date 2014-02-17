@@ -1,3 +1,12 @@
+###
+  Custom controller for a collection of `Vosae.ApiKey` records.
+
+  @class SettingsApiKeysController
+  @extends Vosae.ArrayController
+  @namespace Vosae
+  @module Vosae
+###
+
 Vosae.SettingsApiKeysController = Vosae.ArrayController.extend
   filteredApiKeys: (->
     apiKeys = @get('content').filter (apiKey) ->

@@ -1,5 +1,13 @@
+###
+  Custom controller for a `Vosae.Tenant` record.
+
+  @class SettingsOrganizationController
+  @extends Ember.ObjectController
+  @namespace Vosae
+  @module Vosae
+###
+
 Vosae.SettingsOrganizationController = Em.ObjectController.extend
-  # Actions handlers
   actions:
     save: (tenant)->
       tenant.get('transaction').commit()

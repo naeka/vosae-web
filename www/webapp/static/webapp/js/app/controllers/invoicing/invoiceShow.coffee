@@ -1,3 +1,12 @@
+###
+  Custom object controller for a `Vosae.Invoice` record.
+
+  @class InvoiceShowController
+  @extends Vosae.InvoiceBaseController
+  @namespace Vosae
+  @module Vosae
+###
+
 Vosae.InvoiceShowController = Vosae.InvoiceBaseController.extend
   actions:
     invoiceCancel: ->

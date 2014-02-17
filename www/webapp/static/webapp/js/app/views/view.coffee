@@ -40,3 +40,31 @@ Vosae.View.reopenClass
       @rerender()
       return
     Ember.observer.apply this, args
+
+
+###
+  A Generic view for all settings pages
+
+  @class PageSettingsView
+  @extends Ember.View
+  @uses Vosae.FullScreenContainerMixin
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.PageSettingsView = Em.View.extend Vosae.FullScreenContainerMixin, 
+  outletContainerID: "ct-settings"
+
+
+###
+  A Generic view for all tenant pages
+
+  @class PageTenantView
+  @extends Ember.View
+  @uses Vosae.FullScreenContainerMixin
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.PageTenantView = Em.View.extend Vosae.FullScreenContainerMixin,  
+  outletContainerID: "ct-tenant"

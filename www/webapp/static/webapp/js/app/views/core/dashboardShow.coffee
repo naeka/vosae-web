@@ -24,15 +24,16 @@ Vosae.dashboardAppFilter = Em.Object.create
   ).observes("showAppInvoicing")
 
 
-Vosae.DashboardShowView = Vosae.PaginatedView.extend
+Vosae.DashboardShowView = Ember.View.extend Vosae.InfiniteScrollMixin,
   classNames: ["page-show-dashboard"]
 
   actions:
     startHelpTour: ->
       $(".page-show-dashboard-settings .info a").click()
 
-  paginationAction: ->
-    @get('controller').send "getNextPagination"
+    paginationAction: ->
+      console.log "paginationAction"
+      @get('controller').send "getNextPagination"
 
   timelineItems: Em.View.extend
     templateName : "timelineItems"

@@ -1,3 +1,12 @@
+###
+  Custom object controller for a `Vosae.InvoiceBase` based record.
+
+  @class InvoiceBaseController
+  @extends Ember.ObjectController
+  @namespace Vosae
+  @module Vosae
+###
+
 Vosae.InvoiceBaseController = Em.ObjectController.extend
   attachmentUploads: []
 

@@ -1,3 +1,13 @@
+###
+  Custom controller for the invoicing flow statistics.
+
+  @class InvoicingFyFlowStatisticsController
+  @extends Ember.ObjectController
+  @uses Vosae.StatisticsMixin
+  @namespace Vosae
+  @module Vosae
+###
+
 Vosae.InvoicingFyFlowStatisticsController = Em.ObjectController.extend Vosae.StatisticsMixin,
   pipeline: ->
     [

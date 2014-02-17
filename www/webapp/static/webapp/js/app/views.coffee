@@ -1,14 +1,3 @@
-# Generic view for infinite scrolling pages
-Vosae.PaginatedView = Em.View.extend Vosae.InfiniteScrollMixin
-
-# Generic view for all settings pages
-Vosae.PageSettingsView = Em.View.extend Vosae.FullScreenContainerMixin, 
-  outletContainerID: "ct-settings"
-
-# Generic view for all tenant pages
-Vosae.PageTenantView = Em.View.extend Vosae.FullScreenContainerMixin,  
-  outletContainerID: "ct-tenant"
-
 # Import views
 require 'views/view'
 

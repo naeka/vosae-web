@@ -15,9 +15,8 @@ Vosae.InfiniteScrollMixin = Ember.Mixin.create
   initScrollPagination: (->
     $(window).scroll =>
       if $(window).scrollTop() >= $(document).height() - $(window).height() - @get('offset')
-        @paginationAction()
+        @send("paginationAction")
   ).on "init"
 
-  disableScrollPagination: (->
+  willDestroy: ->
     $(window).unbind "scroll"
-  ).on "willDestroy"

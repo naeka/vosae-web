@@ -1,3 +1,12 @@
+###
+  Custom controller for a `Vosae.Tenant` record.
+
+  @class TenantsAddController
+  @extends Ember.ObjectController
+  @namespace Vosae
+  @module Vosae
+###
+
 Vosae.TenantsAddController = Em.ObjectController.extend
   needs: ['tenantsShow']
 

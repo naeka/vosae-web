@@ -1,3 +1,12 @@
+###
+  Custom controller for a collection of `Vosae.Tenant` records.
+
+  @class TenantsShowController
+  @extends Em.ArrayController
+  @namespace Vosae
+  @module Vosae
+###
+
 Vosae.TenantsShowController = Em.ArrayController.extend
   needs: ['realtime']
   currentUserIsLoaded: false

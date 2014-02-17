@@ -5,7 +5,7 @@
   @extends Ember.Application
 ###
 window.Vosae = Em.Application.create
-  preWindowLocation: window.preWindowLocation # See skeleton-head.html
+  preWindowLocation: WINDOW_LOCATION_AT_START # See skeleton-head.html
   tenantsAreLoaded: false
   currenciesAreLoaded: false
 

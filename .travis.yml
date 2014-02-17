@@ -10,8 +10,8 @@ env:
         - secure: "CPt377sadrE3Wp70beQs8rnlzHkldtN1EOFfr+1CEkuHQJng4bdMmdaEohfe0+6hXMkXWOc6fYdjdrv9JuY06NWmWcTfKryV4CB9GCrbAPibsxiLDzgcXjQjd2jCn3DAAMXOG5ANqmr98IWOHiK7Z6DrNhFTGzoVBIoiXeRKOrA="
 
 before_install:
-    - gem install compass
-    - gem install sass
+    - gem install sass --version 3.2.14
+    - gem install compass --minimal-deps
     - gem install sass-rails
     - gem install bootstrap-sass --version 3.1.0.1
     - gem install --pre sass-css-importer

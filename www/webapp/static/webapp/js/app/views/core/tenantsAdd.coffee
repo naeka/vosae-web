@@ -58,8 +58,6 @@ Vosae.TenantsAddView = Vosae.PageTenantView.extend
             @get('controller').send "save", tenant
           else
             $("#ct-tenant").scrollTop(0)
-      # Focus on first input text
-      @.$().find('.ember-text-field').first().focus()
 
   # Returns form's current step
   getCurrentStep: ->
@@ -111,54 +109,47 @@ Vosae.TenantsAddView = Vosae.PageTenantView.extend
   stepRegistrationIsValid: (tenant) ->
     isValid = true
     
-    # Supported currencies
-    if Ember.isEmpty @get('controller.supportedCurrencies')
-      isValid = false
-      @setFieldAsRequired 'id_tenant_supported_currencies'
-    
-    # Default currencies
-    if Ember.isEmpty @get('controller.defaultCurrency')
-      isValid = false
-      @setFieldAsRequired 'id_tenant_default_currency'
-    
-    # Registration info share capital
-    if not tenant.get 'registrationInfo.shareCapital'
-      isValid = false
-      @setFieldAsRequired 'id_tenant_registration_share_capital'    
-    
+    fields = [
+      'registrationInfo.shareCapital'
+    ]
+
     # Registration info
     switch tenant.get 'registrationInfo.countryCode'
-      # France
-      when 'FR'
-        if not tenant.get 'registrationInfo.vatNumber'
-          isValid = false
-          @setFieldAsRequired 'id_tenant_registration_vat_number'
-        if not tenant.get 'registrationInfo.siret'
-          isValid = false
-          @setFieldAsRequired 'id_tenant_registration_siret'
-        if not tenant.get 'registrationInfo.rcsNumber'
-          isValid = false
-          @setFieldAsRequired 'id_tenant_registration_rcs_number'
-      # Belgium
-      when 'BE'
-        if not tenant.get 'registrationInfo.vatNumber'
-          isValid = false
-          @setFieldAsRequired 'id_tenant_registration_vat_number'
-      # Switzerland
-      when 'CH'
-        if not tenant.get 'registrationInfo.vatNumber'
-          isValid = false
-          @setFieldAsRequired 'id_tenant_registration_vat_number'
-      # Great Britain
-      when 'GB'
-        if not tenant.get 'registrationInfo.vatNumber'
-          isValid = false
-          @setFieldAsRequired 'id_tenant_registration_vat_number'
-      # Luxembourg
-      when 'LU'
-        if not tenant.get 'registrationInfo.vatNumber'
-          isValid = false
-          @setFieldAsRequired 'id_tenant_registration_vat_number'
+      when 'FR' # France
+        fields.pushObjects([
+          'registrationInfo.vatNumber',
+          'registrationInfo.siret',
+          'registrationInfo.rcsNumber'
+        ])
+      when 'BE' # Belgium
+        fields.push('registrationInfo.vatNumber')
+      when 'CH' # Switzerland
+        fields.push('registrationInfo.vatNumber')
+      when 'GB' # Great Britain
+        fields.push('registrationInfo.vatNumber')
+      when 'LU' # Luxembourg
+        fields.push('registrationInfo.vatNumber')
+
+    for field in fields
+      if Em.isNone(tenant.get(field))
+        @setFieldAsRequired tenant, field
+        isValid = false
+
+    # Manualy handle errors for supportedCurrencies and defaultCurrency
+    supportedCurrenciesView = @get('supportedCurrenciesView')
+    if Em.isEmpty(@get('controller.supportedCurrencies'))
+      @$().find('.supported-currencies')
+        .removeClass('has-no-error')
+        .addClass('has-error')
+        .find('.errors')
+        .html(gettext('This field is required.'))
+      isValid = false
+    else
+      @$().find('.supported-currencies')
+        .removeClass('has-error')
+        .addClass('has-no-error')
+        .find('.errors')
+        .html ''
 
     @set 'formIsValid', isValid
     return isValid

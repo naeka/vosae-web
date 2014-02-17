@@ -6,9 +6,10 @@
       <i class="picto-arrow-right text-{{unbound relatedColor}}"></i>
       {{displayTenant}}
     </h4>
-    <p>
-      {{currentRevision.contact.fullName}}
-    </p>
-    {{view Vosae.InvoiceBaseShowAddressBlock contentBinding="currentRevision.billingAddress" }}
+    <p>{{currentRevision.contact.fullName}}</p>
+    <p>{{unbound currentRevision.billingAddress.streetAddress}}</p>
+    <p>{{unbound currentRevision.billingAddress.extendedAddress}} {{unbound currentRevision.billingAddress.postofficeBox}}</p>
+    <p>{{unbound currentRevision.billingAddress.postalCode}} {{unbound currentRevision.billingAddress.city}}</p>
+    <p>{{unbound currentRevision.billingAddress.state}} {{unbound currentRevision.billingAddress.country}}</p>
   </div>
 {% endtplhandlebars %}

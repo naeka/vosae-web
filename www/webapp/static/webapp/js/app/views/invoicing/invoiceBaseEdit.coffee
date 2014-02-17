@@ -241,7 +241,6 @@ Vosae.InvoiceBaseEditView = Em.View.extend
         newAddress = (if billingAddress then billingAddress else newAddresses.objectAt(0))
         @get("parentView.billingAddressBlock").setAddress newAddress
         @get("currentRevision.billingAddress").dumpDataFrom newAddress
-        @get("currentRevision.deliveryAddress").dumpDataFrom newAddress
 
     # Set addresses has new list of choice
     addAddressesToChoiceList: (fullName, addresses) ->

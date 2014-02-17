@@ -109,6 +109,19 @@ Vosae.InvoiceRevision = DS.Model.extend
       return index
     undefined
 
+  # As long as delivery address can't be set in forms, we set
+  # content from the billing address
+  updateDeliveryAddress: (->
+    @get("deliveryAddress").dumpDataFrom @get("billingAddress")
+  ).observes(
+    "billingAddress.postofficeBox"
+    "billingAddress.streetAddress"
+    "billingAddress.extendedAddress"
+    "billingAddress.postalCode"
+    "billingAddress.city"
+    "billingAddress.state"
+    "billingAddress.country")
+
   # Returns the quotation date formated
   displayQuotationDate: (->
     if @get("quotationDate")?

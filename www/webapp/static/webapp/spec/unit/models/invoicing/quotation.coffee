@@ -59,13 +59,13 @@ describe 'Vosae.Quotation', ->
         "country": "gg"
       "delivery_address":
         "type": "WORK"
-        "postoffice_box": "aaa"
-        "street_address": "bbb" 
-        "extended_address": "ccc" 
-        "postal_code": "ddd" 
-        "city": "eee" 
-        "state": "fff"
-        "country": "ggg"
+        "postoffice_box": "aa"
+        "street_address": "bb" 
+        "extended_address": "cc" 
+        "postal_code": "dd" 
+        "city": "ee" 
+        "state": "ff"
+        "country": "gg"
       "currency":
         "symbol":"EUR"
         "resource_uri":null
@@ -215,15 +215,6 @@ describe 'Vosae.Quotation', ->
       "city": "ee" 
       "state": "ff"
       "country": "gg"
-
-    deliveryAddress.setProperties
-      "postofficeBox": "aaa"
-      "streetAddress": "bbb" 
-      "extendedAddress": "ccc" 
-      "postalCode": "ddd" 
-      "city": "eee" 
-      "state": "fff"
-      "country": "ggg"
     
     # Setup lineItem
     lineItem = currentRevision.get('lineItems').createRecord()

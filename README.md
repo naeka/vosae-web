@@ -61,8 +61,8 @@ You need both Node.js and Node Package Manager (npm) installed on your system.
 #### First, install grunt dependencies on your system:
 
 ```bash
-$ gem install compass
-$ gem install sass
+$ gem install sass --version 3.2.14
+$ gem install compass --minimal-deps
 $ gem install sass-rails
 $ gem install bootstrap-sass --version 3.1.0.1
 $ gem install --pre sass-css-importer

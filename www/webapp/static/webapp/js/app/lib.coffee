@@ -1,3 +1,4 @@
+# Imports lib
 require 'lib/permissions'
 require 'lib/timezones'
 require 'lib/session'

@@ -1,4 +1,4 @@
-# Import mixins
+# Imports mixins
 require 'mixins/autoGrow'
 require 'mixins/helpTour'
 require 'mixins/lazyResources'

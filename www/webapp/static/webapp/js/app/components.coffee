@@ -1,4 +1,4 @@
-# Import components
+# Imports components
 require 'components/uploadSpinner'
 require 'components/fromNow'
 require 'components/popup'

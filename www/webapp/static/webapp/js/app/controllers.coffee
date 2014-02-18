@@ -1,4 +1,4 @@
-# Import controllers
+# Imports controllers
 require 'controllers/controller'
 
 require 'controllers/core/application'

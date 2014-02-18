@@ -10,6 +10,6 @@ require 'models'
 Vosae.run() if !window.testMode
 
 require 'components'
-require 'router'
+require 'routes'
 require 'controllers'
 require 'views'

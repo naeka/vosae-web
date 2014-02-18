@@ -1,4 +1,13 @@
-Vosae.MetaController = Ember.Mixin.create
+###
+  This mixin help us to manage pagination for resources.
+
+  @class HelpTourMixin
+  @extends Ember.Mixin
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.MetaControllerMixin = Ember.Mixin.create
   offset: null
   limit: null
   next: null
@@ -7,18 +16,15 @@ Vosae.MetaController = Ember.Mixin.create
   loading: false
 
   totalCount: (->
-    return @get('total_count')
+    @get('total_count')
   ).property('total_count')
 
   modelHasBeenFetched: (->
     # Return true if model has already been fetched.
     if @get('previous') or @get('offset')?
       return true
-    return false
+    false
   ).property('previous', 'offset')
 
   getNextOffset: ->
-    if @get('offset') is null
-      return 0
-    else 
-      return @get('offset') + @get('limit')
+    if @get("offset")? then @get("offset") + @get("limit") else 0

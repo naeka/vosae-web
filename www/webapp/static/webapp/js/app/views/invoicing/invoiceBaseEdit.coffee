@@ -84,7 +84,7 @@ Vosae.InvoiceBaseEditView = Em.View.extend
   # ============================
   # = InvoiceBase Organization =
   # ============================
-  organizationSearchField: Vosae.Components.OrganizationSearchField.extend
+  organizationSearchField: Vosae.OrganizationSearchSelect.extend
     currentAddress: null
     
     init: ->
@@ -175,7 +175,7 @@ Vosae.InvoiceBaseEditView = Em.View.extend
   # =======================
   # = InvoiceBase Contact =
   # =======================
-  contactSearchField: Vosae.Components.ContactSearchField.extend
+  contactSearchField: Vosae.ContactSearchSelect.extend
     currentAddresses: null
     
     ajax: ->
@@ -332,7 +332,7 @@ Vosae.InvoiceBaseEditView = Em.View.extend
   # ========================
   # = InvoiceBase Currency =
   # ========================
-  currencyField: Vosae.Components.Select.extend
+  currencyField: Vosae.Select.extend
     currentRevisionBinding: Em.Binding.oneWay 'parentView.controller.content.currentRevision'
     contentBinding: Em.Binding.oneWay 'parentView.controller.session.tenantSettings.invoicing.supportedCurrencies'
     valueBinding: Em.Binding.oneWay 'parentView.controller.content.currentRevision.currency.symbol'
@@ -376,18 +376,18 @@ Vosae.InvoiceBaseEditView = Em.View.extend
   # =====================
   # = InvoiceBase Items =
   # =====================
-  lineItemQuantityField: Vosae.AutoNumericField.extend
+  lineItemQuantityField: Vosae.TextFieldAutoNumeric.extend
     disabledBinding: Em.Binding.oneWay 'currentItem.shouldDisableField'
 
     focusOut: (evt) ->
       val = @.$().autoNumeric('get') or 0
       @get('currentItem').set "quantity", val 
 
-  lineItemTextArea: Vosae.TextAreaAutoSize.extend
+  lineItemTextArea: Vosae.TextAreaAutoGrow.extend
     disabledBinding: Em.Binding.oneWay 'currentItem.shouldDisableField'
 
 
-  lineItemUnitPriceField: Vosae.AutoNumericField.extend
+  lineItemUnitPriceField: Vosae.TextFieldAutoNumeric.extend
     disabledBinding: Em.Binding.oneWay 'currentItem.shouldDisableField'
 
     didInsertElement: ->
@@ -407,7 +407,7 @@ Vosae.InvoiceBaseEditView = Em.View.extend
           @.$().autoNumeric('set', 0)
     ).observes('currentItem.unitPrice')
 
-  taxesSearchField: Vosae.Components.TaxSearchField.extend
+  taxesSearchField: Vosae.TaxSearchSelect.extend
     disabledBinding: Em.Binding.oneWay 'currentItem.shouldDisableField'
 
     didInsertElement: ->
@@ -440,7 +440,7 @@ Vosae.InvoiceBaseEditView = Em.View.extend
     onSelect: (event) ->      
       @get("currentItem").set "tax", Vosae.Tax.find event.object.id
 
-  itemsSearchField: Vosae.Components.ItemSearchField.extend    
+  itemsSearchField: Vosae.ItemSearchSelect.extend    
     didInsertElement: ->
       @_super()
  

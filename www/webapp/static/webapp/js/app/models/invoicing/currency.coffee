@@ -1,11 +1,20 @@
-Vosae.Currency = DS.Model.extend
+###
+  A data model that represents a currency
+
+  @class Currency
+  @extends Vosae.Model
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.Currency = Vosae.Model.extend
   symbol: DS.attr('string')
   rates: DS.hasMany('Vosae.ExchangeRate')
   resourceUri: DS.attr('string')
 
   description: (->
     # Return the description of the current currency
-  	obj = Vosae.currenciesDescription.findProperty 'symbol', @get('symbol')
+  	obj = Vosae.Config.currenciesDescription.findProperty 'symbol', @get('symbol')
   	if obj and obj.get('description')
   	  return obj.get('description')
   	return ""
@@ -15,7 +24,7 @@ Vosae.Currency = DS.Model.extend
     # The display symbol associated to the currency (e.g. '€', '$', '£').
     # The *symbol* attribute is in the iso4217 format (e.g. 'EUR', 'USD', 'GBP')
     if @get "symbol"
-      return Vosae.currenciesSign.findProperty('symbol', @get('symbol')).get('sign')
+      return Vosae.Config.currenciesSign.findProperty('symbol', @get('symbol')).get('sign')
     return ""
   ).property('symbol')
 
@@ -45,6 +54,7 @@ Vosae.Currency = DS.Model.extend
   exchangeRateFor: (symbol) ->
     # Return the rate associated to the specified symbol.
     return @get('rates').findProperty('currencyTo', symbol)
+
 
 Vosae.Adapter.map "Vosae.Currency",
   rates:

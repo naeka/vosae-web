@@ -12,7 +12,7 @@ Vosae.SettingsEditUserView = Vosae.PageSettingsView.extend
   
   userSpecificPermissionsView: Vosae.SpecificPermissionsManager.extend()
 
-  groups: Vosae.Components.Select.extend
+  groups: Vosae.Select.extend
     change: ->
       # Now we have to merge groups permissions into <Vosae.User.Permissions>
       @get('selection.owner').mergeGroupsPermissions()

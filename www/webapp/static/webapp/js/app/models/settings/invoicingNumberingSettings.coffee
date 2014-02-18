@@ -1,4 +1,13 @@
-Vosae.InvoicingNumberingSettings = DS.Model.extend
+###
+  A data model that represents settings for invoicing numbering
+
+  @class InvoicingNumberingSettings
+  @extends Vosae.Model
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.InvoicingNumberingSettings = Vosae.Model.extend
   scheme: DS.attr('string')
   separator: DS.attr('string')
   dateFormat: DS.attr('string')
@@ -8,7 +17,7 @@ Vosae.InvoicingNumberingSettings = DS.Model.extend
     if @get('scheme') is "N"
       preview = "00000"
     else
-      format = Vosae.invoicingDateFormats.findProperty('value', @get('dateFormat'))
+      format = Vosae.Config.invoicingDateFormats.findProperty('value', @get('dateFormat'))
       preview = moment().format(format.get('label'))
       preview += @get('separator') + "00000"
     preview

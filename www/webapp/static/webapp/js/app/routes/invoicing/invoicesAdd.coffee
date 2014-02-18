@@ -34,7 +34,7 @@ Vosae.InvoicesAddRoute = Ember.Route.extend
     currentRevision.get('lineItems').createRecord()
     currentRevision.setProperties
       'invoicingDate': new Date()
-      'dueDate': Vosae.paymentConditions.getDueDate(new Date(), Vosae.paymentConditions.findProperty("value", @get('session.tenantSettings.invoicing.paymentConditions')))
+      'dueDate': Vosae.Config.paymentConditions.getDueDate(new Date(), Vosae.Config.paymentConditions.findProperty("value", @get('session.tenantSettings.invoicing.paymentConditions')))
       'sender': @get('session.user.fullName')
       'currency': currency
       'billingAddress': billingAddress

@@ -1,4 +1,13 @@
-Vosae.Group = DS.Model.extend
+###
+  A data model that represents a group of permissions
+
+  @class Group
+  @extends Vosae.Model
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.Group = Vosae.Model.extend
   name: DS.attr('string')
   createdAt: DS.attr('datetime')
   permissions: DS.attr('array', defaultValue: [])
@@ -11,7 +20,6 @@ Vosae.Group = DS.Model.extend
   #     console.log perm
   #     return @get('permissions').filterProperty('name', perm).get('firstObject')
   #   return false
-  
 
   # This method load `permissions` from a <Vosae.Group>
   # into the this group.

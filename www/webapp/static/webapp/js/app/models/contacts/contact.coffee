@@ -1,3 +1,12 @@
+###
+  A data model that represents a contact
+
+  @class Contact
+  @extends Vosae.Entity
+  @namespace Vosae
+  @module Vosae
+###
+
 Vosae.Contact = Vosae.Entity.extend
   name: DS.attr("string")
   firstname: DS.attr("string")
@@ -26,6 +35,7 @@ Vosae.Contact = Vosae.Entity.extend
     unless @get('firstname')
       errors.addObject gettext('Firstname field must not be blank')
     return errors
+
 
 Vosae.Adapter.map "Vosae.Contact",
   addresses:

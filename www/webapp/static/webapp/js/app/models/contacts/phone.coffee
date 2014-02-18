@@ -1,4 +1,13 @@
-Vosae.Phone = DS.Model.extend
+###
+  A data model that represents a phone
+
+  @class Phone
+  @extends Vosae.Model
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.Phone = Vosae.Model.extend
   type: DS.attr("string", defaultValue: 'WORK')
   subtype: DS.attr("string")
   phone: DS.attr("string")
@@ -30,13 +39,13 @@ Vosae.Phone = DS.Model.extend
   
   displayCombinedType: (->
     # Display the combined type
-    obj = Vosae.phoneCombinedTypes.findProperty('value', @get("combinedType"))
+    obj = Vosae.Config.phoneCombinedTypes.findProperty('value', @get("combinedType"))
     if obj then obj.get('name') else ''
   ).property("combinedType")
 
   combinedTypeChanged: (string) ->
     # Set type and subtype from a combined type
-    obj = Vosae.phoneCombinedTypes.findProperty('value', string)
+    obj = Vosae.Config.phoneCombinedTypes.findProperty('value', string)
     if obj
       @set "type", obj.get("type")
       @set "subtype", obj.get("subtype")

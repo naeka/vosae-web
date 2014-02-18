@@ -1,3 +1,12 @@
+###
+  Custom array controller for a collection of `Vosae.CalendarList` records.
+
+  @class CalendarListsShowController
+  @extends Ember.ArrayController
+  @namespace Vosae
+  @module Vosae
+###
+
 Vosae.CalendarListsShowController = Em.ArrayController.extend
   fc: null
   lastView: null
@@ -7,6 +16,15 @@ Vosae.CalendarListsShowController = Em.ArrayController.extend
     @_super()
     @get('needs').addObjects(['calendarListsShowSettings', 'quickAddEvent'])
 
+
+###
+  Custom controller for a `Vosae.VosaeEvent` record.
+
+  @class QuickAddEventController
+  @extends Ember.ObjectController
+  @namespace Vosae
+  @module Vosae
+###
 
 Vosae.QuickAddEventController = Em.ObjectController.extend
   actions:
@@ -29,6 +47,15 @@ Vosae.QuickAddEventController = Em.ObjectController.extend
             message: message
       vosaeEvent.get('transaction').commit()
 
+
+###
+  Custom array controller for a collection of `Vosae.CalendarList` records.
+
+  @class CalendarListsShowSettingsController
+  @extends Ember.ArrayController
+  @namespace Vosae
+  @module Vosae
+###
 
 Vosae.CalendarListsShowSettingsController = Em.ArrayController.extend
   fcRendered: false

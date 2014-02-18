@@ -1,4 +1,13 @@
-Vosae.EventDateTime = DS.Model.extend
+###
+  A data model that represents an event date time
+
+  @class EventDateTime
+  @extends Vosae.Model
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.EventDateTime = Vosae.Model.extend
   date: DS.attr('date')
   datetime: DS.attr('datetime')
   timezone: DS.attr('string')

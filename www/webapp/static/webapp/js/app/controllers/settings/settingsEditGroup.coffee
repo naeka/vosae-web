@@ -1,5 +1,13 @@
+###
+  Custom controller for a `Vosae.Group` record.
+
+  @class SettingsEditGroupController
+  @extends Ember.ObjectController
+  @namespace Vosae
+  @module Vosae
+###
+
 Vosae.SettingsEditGroupController = Em.ObjectController.extend
-  # Actions handlers
   actions:  
     save: (group) ->
       event = if group.get('id') then 'didUpdate' else 'didCreate'

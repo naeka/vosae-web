@@ -56,10 +56,6 @@ Vosae.ApplicationView = Em.View.extend
       return true
     false
 
-  # Return true in case toucheable device
-  isTouchDevice: ->
-    (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0))
-
   # HTML events handlers
   drop: (e) ->
     e.preventDefault()
@@ -175,27 +171,6 @@ Vosae.ApplicationView = Em.View.extend
   #   #   pass = false;
   #   # });
 
-  showAddressMap: (selector, address, options) ->
-    defaults =
-      action: "addMarker"
-      address: "3 Rue Général Ferrié 38100 Grenoble France"
-      map:
-        streetViewControl: false
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-        mapTypeControlOptions: 
-          mapTypeIds: []
-        center: true
-        draggable: false
-        scrollwheel: false
-        zoom: 17
-      marker:
-        options:
-          draggable: false
-
-    opts = $.extend true, {}, defaults,
-      if options? then options else {},
-      if address? then {address: address} else {}
-    selector.gmap3 opts
 
   # Search field for desktop
   desktopSearchField: Em.TextField.extend

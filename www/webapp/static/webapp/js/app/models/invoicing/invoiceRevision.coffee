@@ -1,4 +1,13 @@
-Vosae.InvoiceRevision = DS.Model.extend
+###
+  A data model that represents an invoice revision
+
+  @class InvoiceRevision
+  @extends Vosae.Model
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.InvoiceRevision = Vosae.Model.extend
   issueDate: DS.attr('datetime')  # read-only date de creation de l'invoice revision
   quotationDate: DS.attr('date')  # date de création du devis
   quotationValidity: DS.attr('date')  # date validité du devis
@@ -250,9 +259,6 @@ Vosae.InvoiceRevision = DS.Model.extend
     
     return errors
 
-# Vosae.InvoiceRevision.reopen
-#   invoice: DS.belongsTo('Vosae.Invoice')
-#   quotation: DS.belongsTo('Vosae.Quotation')
 
 Vosae.Adapter.map "Vosae.InvoiceRevision",
   senderAddress:

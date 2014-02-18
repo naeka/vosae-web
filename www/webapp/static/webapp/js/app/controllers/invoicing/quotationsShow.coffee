@@ -1,3 +1,12 @@
+###
+  Custom array controller for a collection of `Vosae.Quotation` records.
+
+  @class QuotationsShowController
+  @extends Vosae.InvoicesBaseController
+  @namespace Vosae
+  @module Vosae
+###
+
 Vosae.QuotationsShowController = Vosae.InvoicesBaseController.extend
   sortProperties: ['currentRevision.dueDate']
   sortAscending: false

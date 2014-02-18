@@ -1,4 +1,4 @@
-Vosae.timezones = [
+Vosae.Timezones = [
   Em.Object.create
     value: "Pacific/Midway"
     utcOffset: -39600

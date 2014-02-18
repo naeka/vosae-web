@@ -1,10 +1,21 @@
-Vosae.SearchController = Vosae.ArrayController.extend
+###
+  Custom controller that manage search on application
+
+  @class SearchController
+  @extends Ember.ArrayController
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.SearchController = Ember.ArrayController.extend
   searchIsActive: false
   minSearchTerms: 2
   insufficientSearchTerms: false
   queryString: null
   
-  # Create a search with the passing query
+  ###
+    Create a search with the passing query
+  ###
   createSearchQuery: (string) ->
     adapter = @get('store.adapter')
     self = this
@@ -23,7 +34,9 @@ Vosae.SearchController = Vosae.ArrayController.extend
         self.set "searchIsActive", true
       ).then null, adapter.rejectionHandler
 
-  # Generate a get method for each object
+  ###
+    Generate a get method for each object
+  ###
   generateGetters: (objects) ->
     i = 0
     while i < objects.length
@@ -33,8 +46,11 @@ Vosae.SearchController = Vosae.ArrayController.extend
     objects[0].isFirstObject = true
     return
 
-  # Reset the query
+  ###
+    Reset the query
+  ###
   resetSearchQuery: ->
-    @set "searchIsActive", false
-    @set "content", []
+    @setProperties
+      "searchIsActive": false
+      "content": []
     return

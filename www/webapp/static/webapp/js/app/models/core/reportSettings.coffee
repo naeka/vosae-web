@@ -1,4 +1,13 @@
-Vosae.ReportSettings = DS.Model.extend
+###
+  A model that represents settings for reports
+
+  @class ReportSettings
+  @extends Vosae.Model
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.ReportSettings = Vosae.Model.extend
   fontName: DS.attr("string", defaultValue: 'bariol')
   fontSize: DS.attr("number")
   fontColor: DS.attr("string")
@@ -8,12 +17,12 @@ Vosae.ReportSettings = DS.Model.extend
   language: DS.attr("string")
 
   defaultLanguage: (->
-    Vosae.languages.findProperty('code', @get('language'))
+    Vosae.Config.languages.findProperty('code', @get('language'))
   ).property('language')
 
   otherLanguages: (->
     defaultLang = @get('language')
-    Vosae.languages.filter (language)->
+    Vosae.Config.languages.filter (language)->
       if language.get('code') != defaultLang
         return language
   ).property('language')

@@ -16,7 +16,7 @@ Vosae.SettingsOrganizationView = Vosae.PageSettingsView.extend
 
   initLogoUpload: ->
     @.$('.logo .fileupload').fileupload
-      url: "#{APP_ENDPOINT}/api/v1/file/"
+      url: "#{Vosae.Config.APP_ENDPOINT}/api/v1/file/"
       dataType: 'json'
       formData:
         ttl: 60*24  # 1 day
@@ -48,7 +48,7 @@ Vosae.SettingsOrganizationView = Vosae.PageSettingsView.extend
 
   initTermsUpload: ->
     @.$('.terms .fileupload').fileupload
-      url: "#{APP_ENDPOINT}/api/v1/file/"
+      url: "#{Vosae.Config.APP_ENDPOINT}/api/v1/file/"
       dataType: 'json'
       formData:
         ttl: 60*24  # 1 day
@@ -81,7 +81,7 @@ Vosae.SettingsOrganizationView = Vosae.PageSettingsView.extend
     registrationCountryType: Em.View.extend
       templateName: "settings/organization/registrationCountryType"
       tagName: "tbody"
-      select: Vosae.Components.Select.extend
+      select: Vosae.Select.extend
         init: ->
           @_super()
           countryCode = @get('tenant.registrationInfo.countryCode')

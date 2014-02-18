@@ -1,5 +1,13 @@
+###
+  Custom controller for a `Vosae.Tax` record.
+
+  @class SettingsEditTaxController
+  @extends Ember.ObjectController
+  @namespace Vosae
+  @module Vosae
+###
+
 Vosae.SettingsEditTaxController = Em.ObjectController.extend
-  # Actions handlers
   actions:  
     save: (tax) ->
       if tax.checkValidity()

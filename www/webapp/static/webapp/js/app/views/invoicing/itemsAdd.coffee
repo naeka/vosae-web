@@ -12,7 +12,7 @@ Vosae.ItemsAddView = Em.View.extend
       text = @get('value').replace(/[^a-zA-Z0-9-_]/g, "")
       @set('value', text)
 
-  unitPriceField: Vosae.AutoNumericField.extend(
+  unitPriceField: Vosae.TextFieldAutoNumeric.extend(
     focusOut: (evt) ->
       @get('item').set "unitPrice", @.$().autoNumeric('get')     
 

@@ -1,4 +1,13 @@
-Vosae.Tenant = DS.Model.extend
+###
+  A data model that represents a tenant
+
+  @class Tenant
+  @extends Vosae.Model
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.Tenant = Vosae.Model.extend
   slug: DS.attr("string")
   name: DS.attr("string")
   email: DS.attr("string")
@@ -17,9 +26,9 @@ Vosae.Tenant = DS.Model.extend
 
   logoUri: (->
     if @get('imgLogo')
-      return APP_ENDPOINT + @get('imgLogo.streamLink')
+      return Vosae.Config.APP_ENDPOINT + @get('imgLogo.streamLink')
     else if @get('svgLogo')
-      return APP_ENDPOINT + @get('svgLogo.streamLink')
+      return Vosae.Config.APP_ENDPOINT + @get('svgLogo.streamLink')
     return null
   ).property('svgLogo.streamLink', 'imgLogo.streamLink')
 
@@ -64,6 +73,7 @@ Vosae.Tenant = DS.Model.extend
     message = gettext("The settings of your organization have been successfully updated")
     Vosae.SuccessPopupComponent.open
       message: message
+
 
 Vosae.Adapter.map "Vosae.Tenant",
   registrationInfo:

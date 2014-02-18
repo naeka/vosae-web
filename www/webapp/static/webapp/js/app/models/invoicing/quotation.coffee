@@ -1,3 +1,12 @@
+###
+  A data model that represents a quotation
+
+  @class Quotation
+  @extends Vosae.InvoiceBase
+  @namespace Vosae
+  @module Vosae
+###
+
 Vosae.Quotation = Vosae.InvoiceBase.extend
   state: DS.attr('string')
 
@@ -5,25 +14,25 @@ Vosae.Quotation = Vosae.InvoiceBase.extend
 
   displayState: (->
     # Returns the current state readable and translated.
-    Vosae.quotationStatesChoices.findProperty('value', @get('state')).get('label')
+    Vosae.Config.quotationStatesChoices.findProperty('value', @get('state')).get('label')
   ).property('state')
 
   availableStates: (->
     # List the available states for the `Quotation`, depending of its current state.
     if @get('state') is "DRAFT"
-      Vosae.quotationStatesChoices.filter (state) ->
+      Vosae.Config.quotationStatesChoices.filter (state) ->
         if ["AWAITING_APPROVAL", "APPROVED", "REFUSED"].contains state.get('value')
           state
     else if @get('state') is "AWAITING_APPROVAL"
-      Vosae.quotationStatesChoices.filter (state) ->
+      Vosae.Config.quotationStatesChoices.filter (state) ->
         if ["APPROVED", "REFUSED"].contains state.get('value')
           state
     else if @get('state') is "EXPIRED"
-      Vosae.quotationStatesChoices.filter (state) ->
+      Vosae.Config.quotationStatesChoices.filter (state) ->
         if ["AWAITING_APPROVAL", "APPROVED", "REFUSED"].contains state.get('value')
           state
     else if @get('state') is "REFUSED"
-      Vosae.quotationStatesChoices.filter (state) ->
+      Vosae.Config.quotationStatesChoices.filter (state) ->
         if ["AWAITING_APPROVAL", "APPROVED"].contains state.get('value')
           state
     else

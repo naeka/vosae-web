@@ -1,3 +1,12 @@
+###
+  Custom object controller for a `Vosae.CalendarList` record.
+
+  @class CalendarListEditController
+  @extends Ember.ObjectController
+  @namespace Vosae
+  @module Vosae
+###
+
 Vosae.CalendarListEditController = Em.ObjectController.extend
   isSaving: false
 

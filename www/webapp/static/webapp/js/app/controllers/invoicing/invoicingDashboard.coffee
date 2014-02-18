@@ -1,3 +1,13 @@
+###
+  Custom array controller for the invoicing dashboard. Manages invoicing
+  statistics, pending quotations and draft invoices.
+
+  @class InvoicingDashboardController
+  @extends Ember.ArrayController
+  @namespace Vosae
+  @module Vosae
+###
+
 Vosae.InvoicingDashboardController = Em.ArrayController.extend
   needs: ['invoicing', 'invoicingFyFlowStatistics']
   itemsPerTable: 5

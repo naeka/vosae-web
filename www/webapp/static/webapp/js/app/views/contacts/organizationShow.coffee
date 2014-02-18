@@ -17,7 +17,7 @@ Vosae.OrganizationShowView = Em.View.extend
 Vosae.OrganizationShowSettingsView = Em.View.extend
   classNames: ["app-contacts", "page-settings", "page-show-organization-settings"]
 
-  privateSwitchButton: Vosae.SwitchButtonComponent.extend
+  privateSwitchView: Vosae.SwitchView.extend
     change: ->
       organization = @get('controller.content')
       organization.get('transaction').commit()

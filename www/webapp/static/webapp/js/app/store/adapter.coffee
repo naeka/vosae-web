@@ -1,20 +1,26 @@
+###
+  Main adapter for Vosae
+
+  @class Adapter
+  @extends DS.RESTAdapter
+  @namespace Vosae
+  @module Vosae
+###
+
 Vosae.Adapter = DS.RESTAdapter.extend
   serializer: Vosae.Serializer.create()
+  namespace: Vosae.Config.API_NAMESPACE
+  url: Vosae.Config.APP_ENDPOINT
   bulkCommit: false
   since: "next"
-  url: APP_ENDPOINT
-  namespace: "api/v1"
 
-  init: ->
-    @_super()
-
-    namespace = Ember.get @, "namespace"
-    Em.assert "API namespace parameter is mandatory.", !!namespace
-    
-    # Make the adapter available for the serializer
-    serializer = Ember.get @, "serializer"
-    Ember.set serializer, "adapter", @
-    Ember.set serializer, "namespace", namespace
+  ###
+    Make the adapter available for the serializer
+  ###
+  injectAdapterInSerializer: (->
+    serializer = @get "serializer"
+    serializer.set "adapter", @
+  ).on "init"
 
   rejectionHandler: (reason) ->
     if window.Raven?
@@ -22,7 +28,10 @@ Vosae.Adapter = DS.RESTAdapter.extend
     Ember.Logger.error "[#{reason.statusText}] #{reason.responseText}", reason
     throw reason
 
-  # Return Meta controller for the specific model
+  ###
+    Returns Meta controller for the specific model. This should be
+    removed when we will use ember data 1.X
+  ###
   getMetaForModel: (model) ->
     switch model
       when Vosae.Contact
@@ -48,6 +57,10 @@ Vosae.Adapter = DS.RESTAdapter.extend
       else
         `undefined`
 
+  ###
+    This method save meta data returned by the api for a specific model
+    and query. It should be removed when will use ember data 1.X.
+  ###
   storeMetaData: (meta, model, query) ->
     unless meta is `undefined`
       metaController = @getMetaForModel(model)
@@ -170,10 +183,8 @@ Vosae.Adapter = DS.RESTAdapter.extend
     url
 
   sinceQuery: (since) ->
-    offsetParam = undefined
-    query = undefined
     query = {}
-    unless not since
+    if since
       offsetParam = since.match(/offset=(\d+)/)
       offsetParam = (if (!!offsetParam and !!offsetParam[1]) then offsetParam[1] else null)
       query.offset = offsetParam
@@ -197,12 +208,14 @@ Vosae.Adapter = DS.RESTAdapter.extend
             record.set 'currentState', DS.RootState.loaded.created.uncommitted
           when 'root.loaded.updated.inFlight'
             record.set 'currentState', DS.RootState.loaded.updated.uncommitted
-
-          
+  
   pluralize: (name) ->
     name
 
-# Polymorph configuration
+
+###
+  Configuration for timeline entries polymorph
+###
 Vosae.Adapter.configure 'Vosae.ContactSavedTE',
   alias: 'contact_saved_te'
 Vosae.Adapter.configure 'Vosae.OrganizationSavedTE',
@@ -232,6 +245,9 @@ Vosae.Adapter.configure 'Vosae.InvoiceCancelledTE',
 Vosae.Adapter.configure 'Vosae.DownPaymentInvoiceCancelledTE',
   alias: 'down_payment_invoice_cancelled_te'
 
+###
+  Configuration for notifications polymorph
+###
 Vosae.Adapter.configure 'Vosae.ContactSavedNE',
   alias: 'contact_saved_ne'
 Vosae.Adapter.configure 'Vosae.OrganizationSavedNE',
@@ -247,6 +263,9 @@ Vosae.Adapter.configure 'Vosae.CreditNoteSavedNE',
 Vosae.Adapter.configure 'Vosae.EventReminderNE',
   alias: 'event_reminder_ne'
 
+###
+  Configuration for registration info polymorph
+###
 Vosae.Adapter.configure 'Vosae.BeRegistrationInfo',
   alias: 'be_registration_info'
 Vosae.Adapter.configure 'Vosae.ChRegistrationInfo',

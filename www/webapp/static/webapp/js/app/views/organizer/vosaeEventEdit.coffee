@@ -6,13 +6,13 @@ Vosae.VosaeEventEditView = Em.View.extend
     # Focus on first input text
     @.$().find('.ember-text-field').first().focus()
 
-  calendarsField: Vosae.Components.Select.extend
+  calendarsField: Vosae.Select.extend
     formatResult: (state) ->
       return state.text unless state.id 
       "<span class='calendar-color'></span> #{state.text}"
 
 
-  startDateField: Vosae.DatePickerField.extend
+  startDateField: Vosae.DatePicker.extend
     didInsertElement: ->
       @_super()
       @$()
@@ -23,7 +23,7 @@ Vosae.VosaeEventEditView = Em.View.extend
           @set 'content.onlyDate', ev.date
         .autoGrow(0)
 
-  startTimeField: Vosae.TimePickerField.extend
+  startTimeField: Vosae.TimePicker.extend
     didInsertElement: ->
       @_super()
       @$(':first-child')
@@ -34,7 +34,7 @@ Vosae.VosaeEventEditView = Em.View.extend
           @set 'content.onlyTime', new Date(0, 0, 0, ev.time.hours, ev.time.minutes)
         .autoGrow(0)
 
-  endDateField: Vosae.DatePickerField.extend
+  endDateField: Vosae.DatePicker.extend
     didInsertElement: ->
       @_super()
       @$()
@@ -45,7 +45,7 @@ Vosae.VosaeEventEditView = Em.View.extend
           @set 'content.onlyDate', ev.date
         .autoGrow(0)
 
-  endTimeField: Vosae.TimePickerField.extend
+  endTimeField: Vosae.TimePicker.extend
     didInsertElement: ->
       @_super()
       @$(':first-child')
@@ -99,7 +99,7 @@ Vosae.VosaeEventEditView = Em.View.extend
         Em.run.next(@, -> @get('parentView').$('input').change())
     )
 
-    responseStatutesSelect: Vosae.StyledGreenSelect.extend
+    responseStatutesSelect: Vosae.Select.extend
       select2Settings:
         minimumResultsForSearch: 6
         formatSelection: (object, container)->
@@ -125,7 +125,7 @@ Vosae.VosaeEventEditView = Em.View.extend
       @$('input').autoGrow(0)
 
 
-Vosae.VosaeEventEditSettingsView = Em.View.extend Vosae.HelpTour,
+Vosae.VosaeEventEditSettingsView = Em.View.extend Vosae.HelpTourMixin,
   classNames: ["page-edit-event-settings", "page-settings"]
 
   initHelpTour: ->

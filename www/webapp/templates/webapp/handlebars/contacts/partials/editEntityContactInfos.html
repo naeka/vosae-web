@@ -15,14 +15,14 @@
             {{view view.combinedPhoneTypesField 
               phoneBinding      = "phone"
               hideSearchField   = "true"
-              contentBinding    = "Vosae.phoneCombinedTypes"
+              contentBinding    = "Vosae.Config.phoneCombinedTypes"
               valueBinding      = "combinedTypes"
               containerCssClass = "success"
               optionLabelPath   = "content.name"
               optionValuePath   = "content.value" }}
           </td>
           <td>
-            {{view Vosae.AutoGrowTextField
+            {{input-autogrow
               valueBinding = "phone.phone"
               maxlength    = "16"
               classNames   = "form-control form-control-unstyled text-primary text-bold"
@@ -52,7 +52,7 @@
           </td>
           <td>
             {{view view.emailTypesField 
-              contentBinding    = "Vosae.emailTypeChoice"
+              contentBinding    = "Vosae.Config.emailTypeChoice"
               valueBinding      = "email.type"
               hideSearchField   = "true"
               containerCssClass = "success"
@@ -60,7 +60,7 @@
               optionValuePath   = "content.value" }}
           </td>
           <td>
-            {{view Vosae.AutoGrowTextField
+            {{input-autogrow
               valueBinding = "email.email"
               maxlength    = "64"
               classNames   = "form-control form-control-unstyled text-bold"
@@ -123,7 +123,7 @@
                 classNames   = "form-control form-control-unstyled country"
                 placeholder  = "{% trans 'Country' %}" }}
               {{view view.addressTypesField 
-                contentBinding    = "Vosae.addressTypeChoice"
+                contentBinding    = "Vosae.Config.addressTypeChoice"
                 hideSearchField   = "true"
                 containerCssClass = "type success"
                 valueBinding      = "address.type"

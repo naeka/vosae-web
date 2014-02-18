@@ -1,4 +1,13 @@
-Vosae.InvoiceBase = DS.Model.extend
+###
+  A base model that represents an invoice base
+
+  @class InvoiceBase
+  @extends Vosae.Model
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.InvoiceBase = Vosae.Model.extend
   ref: DS.attr('string')
   accountType: DS.attr('string')
   total: DS.attr('number')
@@ -94,10 +103,10 @@ Vosae.InvoiceBase = DS.Model.extend
     if @get("currentRevision.pdf.#{language}")
       pdf = @get("currentRevision.pdf.#{language}")
       if pdf.get("isLoaded")
-        $.fileDownload(APP_ENDPOINT + pdf.get("downloadLink"))
+        $.fileDownload(Vosae.Config.APP_ENDPOINT + pdf.get("downloadLink"))
       else
         pdf.one "didLoad", @, ->
-          $.fileDownload(APP_ENDPOINT + pdf.get("downloadLink"))
+          $.fileDownload(Vosae.Config.APP_ENDPOINT + pdf.get("downloadLink"))
     else
       invoiceBase = @
       invoiceBase.set 'isGeneratingPdfState', true
@@ -114,7 +123,7 @@ Vosae.InvoiceBase = DS.Model.extend
       # Send request to API
       adapter.ajax(url, "GET").then((json) ->
         Ember.run @, ->
-          $.fileDownload(APP_ENDPOINT + json.download_link)
+          $.fileDownload(Vosae.Config.APP_ENDPOINT + json.download_link)
           invoiceBase.set 'isGeneratingPdfState', false
           invoiceBase.reload()
       ).then null, adapter.rejectionHandler
@@ -166,9 +175,3 @@ Vosae.InvoiceBase = DS.Model.extend
         gettext 'Your purchase order has been successfully deleted'
     Vosae.SuccessPopupComponent.open
       message: message
-
-# Vosae.InvoiceBase.reopenClass
-#   inverseFor: (name) ->
-#     if @metaForProperty(name).options.inverse is null
-#       return null 
-#     this._super.apply this, arguments

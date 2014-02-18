@@ -1,12 +1,39 @@
-Vosae.DashboardShowView = Vosae.PaginatedView.extend
+Vosae.dashboardAppFilter = Em.Object.create
+  showAppContact: true
+  showAppInvoicing: true
+  showAppOrganizer: true
+  showAppContactAsChanged: false
+  showAppInvoicingAsChanged: false
+  showAppOrganizerAsChanged: false
+ 
+  resetFilterObservers: ->
+    @set "showAppContactAsChanged", false
+    @set "showAppInvoicingAsChanged", false
+    @set "showAppOrganizerAsChanged", false
+ 
+  observesFilterContact: (->
+    @set "showAppContactAsChanged", true
+  ).observes("showAppContact")
+ 
+  observesFilterOrganizer: (->
+    @set "showAppOrganizerAsChanged", true
+  ).observes("showAppOrganizer")
+ 
+  observesFilterInvoicing: (->
+    @set "showAppInvoicingAsChanged", true
+  ).observes("showAppInvoicing")
+
+
+Vosae.DashboardShowView = Ember.View.extend Vosae.InfiniteScrollMixin,
   classNames: ["page-show-dashboard"]
 
   actions:
     startHelpTour: ->
       $(".page-show-dashboard-settings .info a").click()
 
-  paginationAction: ->
-    @get('controller').send "getNextPagination"
+    paginationAction: ->
+      console.log "paginationAction"
+      @get('controller').send "getNextPagination"
 
   timelineItems: Em.View.extend
     templateName : "timelineItems"
@@ -54,7 +81,7 @@ Vosae.DashboardShowView = Vosae.PaginatedView.extend
       )
 
   
-Vosae.DashboardShowSettingsView = Em.View.extend Vosae.HelpTour,
+Vosae.DashboardShowSettingsView = Em.View.extend Vosae.HelpTourMixin,
   classNames: ["page-settings page-show-dashboard-settings"]
   filter: Vosae.dashboardAppFilter
 

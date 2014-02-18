@@ -19,7 +19,7 @@
     {{#each permission in view.modulePermissions}}
       <div class="permission clearfix">
         <div class="pull-left">
-          {{view view.permSwitchButton classNames="checkbox-container" permBinding="permission.perm" groupBinding="view.group" }}
+          {{view view.permSwitchView classNames="checkbox-container" permBinding="permission.perm" groupBinding="view.group" }}
         </div>
         <div class="pull-left">
           <label class="perm-text">{{permission.name}}</label>
@@ -48,7 +48,7 @@
     {{#each permission in view.modulePermissions}}
       <div class="permission clearfix">
         <div class="pull-left">
-          {{view view.permSwitchButton classNames="checkbox-container" permBinding="permission.perm" specificPermissionsBinding="view.specificPermissions" }}
+          {{view view.permSwitchView classNames="checkbox-container" permBinding="permission.perm" specificPermissionsBinding="view.specificPermissions" }}
         </div>
         <div class="pull-left">
           <label class="perm-text">{{unbound permission.name}}</label>

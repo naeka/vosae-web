@@ -1,42 +1,8 @@
-DS.Model.reopen
-  becameDirty: ->
-    return if @get('isDirty')
-    if @get('id')
-      @set 'currentState', DS.RootState.loaded.updated.uncommitted
-    else
-      @set 'currentState', DS.RootState.loaded.created.uncommitted
-
-  becameError: ->
-    message = "An error happened on #{@toString()}"
-    Vosae.ErrorPopupComponent.open
-      message: message
-
-  resetErrors: ->
-    # Remove errors
-    if !Ember.isNone @get('errors')
-      @set 'errors', null
-    # Flag record has valid
-    if !@get 'isValid'
-      @send 'becameValid'
-
-  pushError: (key, error) ->
-    if Ember.isNone @get('errors')
-      @set 'errors', {}
-    if Ember.isNone @get('errors')[key]
-      @get('errors')[key] = []
-    if !Ember.isNone error
-      @get('errors')[key].push error
-      if @get 'isValid'
-        @send 'becameInvalid'
-
-#   becameInvalid: ->
-#     message = "#{@toString()} became invalid because of: #{@get('errors')}"
-#     Vosae.ErrorPopupComponent.open
-#       message: message
-#     @send('becameValid')
-
 # Imports models
+require 'models/model'
+
 require 'models/core/file'
+require 'models/core/localizedFile'
 require 'models/core/group'
 require 'models/core/notification'
 require 'models/core/permission'
@@ -83,8 +49,10 @@ require 'models/organizer/calendar'
 require 'models/organizer/attendee'
 require 'models/organizer/calendar'
 require 'models/organizer/calendarAcl'
+require 'models/organizer/calendarAclRule'
 require 'models/organizer/calendarList'
 require 'models/organizer/event'
 require 'models/organizer/eventDateTime'
 require 'models/organizer/eventOccurrence'
 require 'models/organizer/reminderSettings'
+require 'models/organizer/reminderEntry'

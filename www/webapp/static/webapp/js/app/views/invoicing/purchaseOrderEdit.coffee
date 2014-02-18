@@ -1,6 +1,6 @@
 Vosae.PurchaseOrderEditView = Vosae.QuotationEditView.extend
 
-  purchaseOrderDateField: Vosae.DatePickerField.extend
+  purchaseOrderDateField: Vosae.DatePicker.extend
     didInsertElement: ->
       @_super()
       element = @$().closest('.invoice-head .date')

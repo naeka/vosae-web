@@ -2,35 +2,39 @@
   This mixin automaticaly adapt a container size with the
   window width and height.
 
-  @class FullScreenContainer
+  @class FullScreenContainerMixin
+  @extends Ember.Mixin
   @namespace Vosae
   @module Vosae
 ###
-Vosae.FullScreenContainer = Ember.Mixin.create
-  outletContainerId: null
 
-  init: ->
-    @_super()
-    outletContainerId = @get "outletContainerId"
-    Em.assert "The `outletContainerId` property is mandatory when Vosae.FullScreenContainer mixin", !!outletContainerId
+Vosae.FullScreenContainerMixin = Ember.Mixin.create
+  outletContainerID: null
 
-  didInsertElement: ->
-    eventName = "resize.#{@get('outletContainerId')}"
+  checkContainerID: (->
+    outletContainerID = @get "outletContainerID"
+    Em.assert "The `outletContainerID` property is mandatory for the Vosae.FullScreenContainerMixin", !!outletContainerID
+  ).on "init"
+
+  enableResizeEvent: (->
+    eventName = "resize.#{@get('outletContainerID')}"
     $(window)
       .on(eventName, => @resizeOutletContainer())
       .trigger(eventName)
       .find("body").css("overflow", "hidden")
-    $("#" + @get("outletContainerId")).show()
+    $("#" + @get("outletContainerID")).show()
+  ).on "didInsertElement"
 
-  willDestroyElement: ->
-    eventName = "resize.#{@get('outletContainerId')}"
+  disableResizeEvent: (->
+    eventName = "resize.#{@get('outletContainerID')}"
     $(window)
       .off(eventName)
       .find("body").css("overflow", "auto")
     $("#ct-middle").click()
-    $("#" + @get("outletContainerId")).hide()
+    $("#" + @get("outletContainerID")).hide()
+  ).on "willDestroyElement"
 
   resizeOutletContainer: ->
-    $("#" + @get("outletContainerId")).css
+    $("#" + @get("outletContainerID")).css
       "height": $(window).outerHeight()
       "width": $(window).outerWidth()

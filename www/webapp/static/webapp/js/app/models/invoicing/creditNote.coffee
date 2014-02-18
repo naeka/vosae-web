@@ -1,7 +1,17 @@
+###
+  A data model that represents a credit note
+
+  @class CreditNote
+  @extends Vosae.InvoiceBase
+  @namespace Vosae
+  @module Vosae
+###
+
 Vosae.CreditNote = Vosae.InvoiceBase.extend
   state: DS.attr('string')
   relatedDownPaymentInvoice: DS.belongsTo('Vosae.DownPaymentInvoice')
   relatedInvoice: DS.belongsTo('Vosae.Invoice')
+
 
 Vosae.Adapter.map "Vosae.CreditNote",
   # revisions:

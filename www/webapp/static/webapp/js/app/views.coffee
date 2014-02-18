@@ -1,16 +1,30 @@
-# Generic view for infinite scrolling pages
-Vosae.PaginatedView = Em.View.extend Vosae.InfiniteScroll,
-  offset: 100
-
-# Generic view for all settings pages
-Vosae.PageSettingsView = Em.View.extend Vosae.FullScreenContainer, 
-  outletContainerId: "ct-settings"
-
-# Generic view for all tenant pages
-Vosae.PageTenantView = Em.View.extend Vosae.FullScreenContainer,  
-  outletContainerId: "ct-tenant"
-
 # Import views
+require 'views/view'
+
+require 'views/partials/controls/switch'
+require 'views/partials/controls/datePicker'
+require 'views/partials/controls/timePicker'
+require 'views/partials/controls/colorPicker'
+require 'views/partials/controls/simpleColorPicker'
+require 'views/partials/controls/textAreaAutoGrow'
+require 'views/partials/controls/textFieldAutoGrow'
+require 'views/partials/controls/textFieldAutoNumeric'
+require 'views/partials/controls/select'
+require 'views/partials/controls/timezonesSelect'
+require 'views/partials/controls/resourceSearchSelect'
+require 'views/partials/controls/contactSearchSelect'
+require 'views/partials/controls/organizationSearchSelect'
+require 'views/partials/controls/itemSearchSelect'
+require 'views/partials/controls/taxSearchSelect'
+require 'views/partials/controls/userSearchSelect'
+require 'views/partials/bootstrap/alert'
+require 'views/partials/bootstrap/button'
+require 'views/partials/bootstrap/field'
+require 'views/partials/bootstrap/select'
+require 'views/partials/bootstrap/textField'
+require 'views/partials/permissionsManager'
+require 'views/partials/specificPermissionsManager'
+
 require 'views/core/application'
 require 'views/core/search'
 require 'views/core/panels'
@@ -69,6 +83,3 @@ require 'views/organizer/vosaeEventShow'
 require 'views/organizer/vosaeEventEdit'
 require 'views/organizer/calendarListsShow'
 require 'views/organizer/calendarListsAdd'
-
-require 'views/bootstrap/alert'
-require 'views/bootstrap/button'

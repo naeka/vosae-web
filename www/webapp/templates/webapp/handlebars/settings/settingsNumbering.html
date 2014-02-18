@@ -14,8 +14,8 @@
               <label>{% trans "Scheme" %}</label>
             </td>
             <td>
-              {{view Vosae.Components.Select
-                contentBinding="Vosae.invoicingSchemes"
+              {{select
+                contentBinding="Vosae.Config.invoicingSchemes"
                 valueBinding="invoicing.numbering.scheme"
                 optionValuePath="content.value"
                 optionLabelPath="content.label"
@@ -28,8 +28,8 @@
               <label>{% trans "Dates format" %}</label>
             </td>
             <td>
-              {{view Vosae.Components.Select
-                contentBinding="Vosae.invoicingDateFormats"
+              {{select
+                contentBinding="Vosae.Config.invoicingDateFormats"
                 valueBinding="invoicing.numbering.dateFormat"
                 optionValuePath="content.value"
                 optionLabelPath="content.label"
@@ -41,8 +41,8 @@
               <label>{% trans "Separator" %}</label>
             </td>
             <td>
-              {{view Vosae.Components.Select
-                contentBinding="Vosae.invoicingSeparators"
+              {{select
+                contentBinding="Vosae.Config.invoicingSeparators"
                 valueBinding="invoicing.numbering.separator"
                 optionValuePath="content.value"
                 optionLabelPath="content.label"
@@ -54,7 +54,7 @@
               <label>{% trans "Reset at end of period" %}</label>
             </td>
             <td>
-              {{switch-button
+              {{switch
                 checkedBinding="invoicing.numbering.fyReset" }}
             </td>
           </tr>

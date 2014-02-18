@@ -1,3 +1,12 @@
+###
+  Custom object controller for a `Vosae.Item` record.
+
+  @class ItemEditController
+  @extends Ember.ObjectController
+  @namespace Vosae
+  @module Vosae
+###
+
 Vosae.ItemEditController = Em.ObjectController.extend
   actions:
     cancel: (item) ->

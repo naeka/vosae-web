@@ -19,8 +19,8 @@
     </div>
     <div class="pull-right">
       <h4 class="type">
-        {{view Vosae.Components.Select
-          contentBinding="Vosae.itemsTypeChoices"
+        {{select
+          contentBinding="Vosae.Config.itemsTypeChoices"
           valueBinding="type"
           containerCssClass="helptour-itemtype"
           optionLabelPath="content.label"
@@ -36,7 +36,7 @@
           <label>{% trans "Product name" %}</label>
         </td>
         <td>
-          {{view Vosae.TextAreaAutoSize
+          {{textarea-autogrow
             valueBinding="description"
             maxlength="512"
             resize="none"
@@ -71,7 +71,7 @@
           <label>{% trans "Tax" %}</label>
         </td>
         <td>
-          {{view Vosae.Components.Select
+          {{select
             contentBinding="controller.taxes"
             selectionBinding="tax"
             containerCssClass="taxes"
@@ -84,7 +84,7 @@
           <label>{% trans "Currency" %}</label>
         </td>
         <td>
-          {{view Vosae.Components.Select
+          {{select
             contentBinding="controller.session.tenantSettings.invoicing.supportedCurrencies"
             selectionBinding="currency"
             containerCssClass="currencies"

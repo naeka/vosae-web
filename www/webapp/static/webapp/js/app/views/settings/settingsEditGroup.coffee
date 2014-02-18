@@ -13,7 +13,7 @@ Vosae.SettingsEditGroupView = Vosae.PageSettingsView.extend
   groupPermissionsView: Vosae.PermissionsManager.extend()
 
 
-  loadPermissions: Vosae.Components.Select.extend
+  loadPermissions: Vosae.Select.extend
     change: ->
       if @get('group') and @get('selection')
         @get('group').loadPermissionsFromGroup(@get('selection'))

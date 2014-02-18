@@ -1,4 +1,13 @@
-Vosae.Address = DS.Model.extend
+###
+  A data model that represents an address
+
+  @class Address
+  @extends Vosae.Model
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.Address = Vosae.Model.extend
   type: DS.attr("string", defaultValue: 'WORK')
   postofficeBox: DS.attr('string')
   streetAddress: DS.attr('string')
@@ -62,6 +71,7 @@ Vosae.Address = DS.Model.extend
         city: address.get 'city'
         state: address.get 'state'
         country: address.get 'country'
+
 
 Vosae.Address.reopen
   contact: DS.belongsTo('Vosae.Contact')

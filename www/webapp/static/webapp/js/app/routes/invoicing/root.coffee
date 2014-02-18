@@ -1,3 +1,7 @@
+Vosae.AppInvoicingRoute = Vosae.SelectedTenantRoute.extend
+  setupController: ->
+    Vosae.lookup('controller:application').set('currentRoute', 'invoicing')
+
 Vosae.InvoicingRoute = Vosae.AppInvoicingRoute.extend()
 Vosae.InvoiceRoute = Vosae.AppInvoicingRoute.extend()
 Vosae.InvoicesRoute = Vosae.AppInvoicingRoute.extend()

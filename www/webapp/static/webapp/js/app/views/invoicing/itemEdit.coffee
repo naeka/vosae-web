@@ -4,7 +4,7 @@ Vosae.ItemEditView = Vosae.ItemsAddView.extend
 
   didInsertElement: ->
     
-  unitPriceField: Vosae.AutoNumericField.extend(
+  unitPriceField: Vosae.TextFieldAutoNumeric.extend(
     didInsertElement: ->
       @_super()
       if @get('item.unitPrice')
@@ -22,7 +22,7 @@ Vosae.ItemEditView = Vosae.ItemsAddView.extend
     ).observes('item.unitPrice')
   )
 
-Vosae.ItemEditSettingsView = Em.View.extend Vosae.HelpTour,
+Vosae.ItemEditSettingsView = Em.View.extend Vosae.HelpTourMixin,
   classNames: ["app-invoice", "page-edit-item-settings", "page-settings"]
 
   initHelpTour: ->

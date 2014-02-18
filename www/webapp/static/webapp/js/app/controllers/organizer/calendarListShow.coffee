@@ -1,3 +1,12 @@
+###
+  Custom object controller for a `Vosae.CalendarList` record.
+
+  @class CalendarListShowController
+  @extends Ember.ObjectController
+  @namespace Vosae
+  @module Vosae
+###
+
 Vosae.CalendarListShowController = Em.ObjectController.extend
   delete: (calendarList)->
     Vosae.ConfirmPopupComponent.open

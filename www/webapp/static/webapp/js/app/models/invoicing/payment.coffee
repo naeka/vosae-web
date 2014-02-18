@@ -1,4 +1,13 @@
-Vosae.Payment = DS.Model.extend
+###
+  A data model that represents a payment
+
+  @class Payment
+  @extends Vosae.Model
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.Payment = Vosae.Model.extend
   issuer: DS.belongsTo('Vosae.User')
   issuedAt: DS.attr('datetime')
   amount: DS.attr('number')
@@ -25,7 +34,7 @@ Vosae.Payment = DS.Model.extend
   displayType: (->
     # Display the payment type
     if @get("type")
-      return Vosae.paymentTypes.findProperty('value', @get('type')).get('label')
+      return Vosae.Config.paymentTypes.findProperty('value', @get('type')).get('label')
     return pgettext("payment type", "undefined")
   ).property("type")
 

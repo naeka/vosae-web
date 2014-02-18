@@ -1,13 +1,15 @@
 ###
   This component display an alert panel to the bottom
-  of the window
+  of the window.
 
-  @class AlertPanel
+  @class PopupComponent
+  @extends Ember.Component
+  @uses Ember.DeferredMixin
   @namespace Vosae
-  @module Components
+  @module Vosae
 ###
 
-Vosae.PopupComponent = Em.Component.extend Ember.DeferredMixin,
+Vosae.PopupComponent = Ember.Component.extend Ember.DeferredMixin,
   defaultTemplate: Em.Handlebars.compile([
     '<div class="inner">'
       '<table>'

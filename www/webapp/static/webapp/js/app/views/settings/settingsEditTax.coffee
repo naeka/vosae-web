@@ -6,6 +6,6 @@ Vosae.SettingsEditTaxView = Vosae.PageSettingsView.extend
     # Focus on first input text
     @.$().find('.ember-text-field').first().focus()
 
-  rateField: Vosae.AutoNumericField.extend 
+  rateField: Vosae.TextFieldAutoNumeric.extend 
     focusOut: (evt) ->
       @set('rate', (@.$().autoNumeric('get')/100))

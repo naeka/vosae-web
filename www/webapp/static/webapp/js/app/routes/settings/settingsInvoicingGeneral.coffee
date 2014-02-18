@@ -6,7 +6,7 @@ Vosae.SettingsInvoicingGeneralRoute = Ember.Route.extend
     controller.setProperties
       'content': model
       'currencies': Vosae.Currency.all().filterProperty('id')
-      'paymentTypes': Vosae.paymentTypes
+      'paymentTypes': Vosae.Config.paymentTypes
 
   renderTemplate: ->
     @render 'settings.invoicingGeneral',

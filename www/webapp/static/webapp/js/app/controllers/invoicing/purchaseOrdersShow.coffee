@@ -1,3 +1,12 @@
+###
+  Custom array controller for a collection of `Vosae.PurchaseOrder` records.
+
+  @class PurchaseOrdersShowController
+  @extends Vosae.InvoicesBaseController
+  @namespace Vosae
+  @module Vosae
+###
+
 Vosae.PurchaseOrdersShowController = Vosae.InvoicesBaseController.extend
   sortProperties: ['currentRevision.dueDate']
   sortAscending: false

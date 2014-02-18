@@ -68,19 +68,19 @@
     </li>
     <li class="clearfix">
       <i class="picto-users pull-left"></i>
-      {{switch-button
+      {{switch
         checkedBinding="view.filter.showAppContact"
         classNames="pull-left" }}
     </li>
     <li class="clearfix">
       <i class="picto-agenda pull-left helptour-timelineoptions"></i>
-      {{switch-button
+      {{switch
         checkedBinding="view.filter.showAppOrganizer"
         classNames="pull-left" }}
     </li>
     <li class="clearfix">
       <i class="picto-moneybox pull-left"></i>
-      {{switch-button
+      {{switch
         checkedBinding="view.filter.showAppInvoicing"
         classNames="pull-left" }}
     </li>
@@ -176,7 +176,7 @@
 
 {% tplhandlebars "timelineEntry/quotationChangedState" %}
   {{#with view.content}}
-    {% verbatimblocktrans %}{{issuerName}} has changed quotation {{#if quotationResource}}<a {{action transitionToResource quotationResource target="controller"}}>{{quotationReference}}</a>{{else}}{{quotationReference}}{{/if}} state from <i>{{stateLabel Vosae.quotationStatesChoices previousState}}</i> to <i>{{stateLabel Vosae.quotationStatesChoices newState}}</i>{% endverbatimblocktrans %}
+    {% verbatimblocktrans %}{{issuerName}} has changed quotation {{#if quotationResource}}<a {{action transitionToResource quotationResource target="controller"}}>{{quotationReference}}</a>{{else}}{{quotationReference}}{{/if}} state from <i>{{stateLabel Vosae.Config.quotationStatesChoices previousState}}</i> to <i>{{stateLabel Vosae.Config.quotationStatesChoices newState}}</i>{% endverbatimblocktrans %}
   {{/with}}
 {% endtplhandlebars %}
 
@@ -188,14 +188,14 @@
       {{#if invoiceResource}}<a {{action transitionToResource invoiceResource target="controller"}}>this invoice</a>{{else}}an invoice{{/if}}
     {{else}}
       invoice {{#if invoiceResource}}<a {{action transitionToResource invoiceResource target="controller"}}>{{invoiceReference}}</a>{{else}}{{invoiceReference}}{{/if}}
-    {{/if}} state from <i>{{stateLabel Vosae.invoiceStatesChoices previousState}}</i> to <i>{{stateLabel Vosae.invoiceStatesChoices newState}}</i>{% endverbatimblocktrans %}
+    {{/if}} state from <i>{{stateLabel Vosae.Config.invoiceStatesChoices previousState}}</i> to <i>{{stateLabel Vosae.Config.invoiceStatesChoices newState}}</i>{% endverbatimblocktrans %}
   {{/with}}
 {% endtplhandlebars %}
 
 
 {% tplhandlebars "timelineEntry/downPaymentInvoiceChangedState" %}
   {{#with view.content}}
-    {% verbatimblocktrans %}{{issuerName}} has changed down-payment invoice {{#if resource}}<a {{action transitionToResource resource target="controller"}}>{{downPaymentInvoiceReference}}</a>{{else}}{{downPaymentInvoiceReference}}{{/if}} state from <i>{{stateLabel Vosae.invoiceStatesChoices previousState}}</i> to <i>{{stateLabel Vosae.invoiceStatesChoices newState}}</i>{% endverbatimblocktrans %}
+    {% verbatimblocktrans %}{{issuerName}} has changed down-payment invoice {{#if resource}}<a {{action transitionToResource resource target="controller"}}>{{downPaymentInvoiceReference}}</a>{{else}}{{downPaymentInvoiceReference}}{{/if}} state from <i>{{stateLabel Vosae.Config.invoiceStatesChoices previousState}}</i> to <i>{{stateLabel Vosae.Config.invoiceStatesChoices newState}}</i>{% endverbatimblocktrans %}
   {{/with}}
 {% endtplhandlebars %}
 

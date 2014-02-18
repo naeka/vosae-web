@@ -1,11 +1,10 @@
-Handlebars.registerHelper "generateLoopCounter", (property, options) ->
-  ###
-  Iterate on each record of the recordArray and generate index
+###
+  Iterate on each record of the recordArray and generate index.
    
-  @recordArray: array
-
-  Usage : {{#generateLoopCounter recordArray}}{{/generateLoopCounter}}
-  ###
+  @method generateLoopCounter
+  @for Handlebars
+###
+Handlebars.registerHelper "generateLoopCounter", (property, options) ->
   context = (options.fn.contexts and options.fn.contexts[0]) or this
   val = Ember.Handlebars.get(context, property, options)
   if val.get("content.length") > 0
@@ -18,6 +17,12 @@ Handlebars.registerHelper "generateLoopCounter", (property, options) ->
   return
 
 
+###
+  Compares both value and return true if equals.
+   
+  @method ifEqual
+  @for Handlebars
+###
 Ember.Handlebars.registerHelper "ifEqual", (lvalue, rvalue, options) ->
   context = (options.fn.contexts and options.fn.contexts[0]) or this
   lvalue = Ember.Handlebars.get(context, lvalue, options)
@@ -28,41 +33,39 @@ Ember.Handlebars.registerHelper "ifEqual", (lvalue, rvalue, options) ->
     options.fn this
 
 
-Ember.Handlebars.registerBoundHelper "formatDate", (date, options) ->
-  ###
+###
   Return a date formatted.
-  
-  @date: DS.attr('date')
-  @format: DS.attr('string') [optional] default="LL"
-  
   Usage : {{formatDate date format="LLLL"}}
-  ###
+
+  @method formateDate
+  @for Handlebars
+###
+Ember.Handlebars.registerBoundHelper "formatDate", (date, options) ->
   format = (if options.hash.format then options.hash.format else "LL")
   if date
     return moment(date).format(format)
   return '-'
 
 
-Ember.Handlebars.helper "formatNow", (options) ->
-  ###
+###
   Return the current time formatted.
-  
-  @format: DS.attr('string') [optional] default="LL"
-  
   Usage : {{formatNow format="LLLL"}}
-  ###
+  
+  @method formatNow
+  @for Handlebars
+###
+Ember.Handlebars.helper "formatNow", (options) ->
   return moment().format(if options.hash.format then options.hash.format else "LL")
 
 
-Ember.Handlebars.registerHelper "formatMoneyHack", (amount, symbol) ->
-  ###
+###
   Returns a money amount formatted.
-  
-  @amount: DS.attr('number')
-  @symbol: DS.attr('string')
-  
   Usage : {{#formatMoneyHack amount symbol}}{{/formatMoneyHack}}
-  ###
+  
+  @method formatMoneyHack
+  @for Handlebars
+###
+Ember.Handlebars.registerHelper "formatMoneyHack", (amount, symbol) ->
   options = [].slice.call(arguments, -1)[0]
   params = [].slice.call(arguments, 1, -1)
   context = (options.fn.contexts and options.fn.contexts[0]) or this
@@ -73,15 +76,14 @@ Ember.Handlebars.registerHelper "formatMoneyHack", (amount, symbol) ->
   accounting.formatMoney(amount, symbol: symbol)
 
 
-Ember.Handlebars.registerBoundHelper 'formatMoney', (amount, symbol) ->
-  ###
+###
   Returns a money amount formatted.
-  
-  @amount: DS.attr('number')
-  @symbol: DS.attr('string')
-  
   Usage : {{formatMoney amount symbol}}
-  ###
+  
+  @method formatMoney
+  @for Handlebars
+###
+Ember.Handlebars.registerBoundHelper 'formatMoney', (amount, symbol) ->
   symbol = '' unless symbol
   accounting.formatMoney(amount, symbol: symbol)
 
@@ -90,52 +92,38 @@ Ember.Handlebars.registerBoundHelper 'formatMoney', (amount, symbol) ->
   return '-'
 
 
-Ember.Handlebars.registerHelper "isTouchEnabled", (options) ->
-  ###
-  Returns true if device is toucheable
-  
-  Usage : {{#isTouchEnabled}}{{/isTouchEnabled}}
-  ###
-  if @get("controllers.application").isTouchDevice()
-    options.fn this
-  else
-    options.inverse this
-
-
-Ember.Handlebars.registerBoundHelper "nl2br", (text) ->
-  ###
-  Convert new line (\n\r) to <br>
-
-  @text: DS.attr('string')
-  
+###
+  Convert new line (\n\r) to <br>.
   Usage : {{nl2br content}}
-  ###
+
+  @method nl2br
+  @for Handlebars
+###
+Ember.Handlebars.registerBoundHelper "nl2br", (text) ->
   text = Handlebars.Utils.escapeExpression(text)
   nl2br = (text + "").replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, "$1" + "<br>" + "$2")
   new Handlebars.SafeString(nl2br)
 
 
-Ember.Handlebars.registerBoundHelper 'stateLabel', (states, state) ->
-  ###
+###
   Returns a money amount formatted.
-  
-  @states: Array
-  @symbol: DS.attr('string')
-  
   Usage : {{stateLabel states state}}
-  ###
+
+  @method stateLabel
+  @for Handlebars
+###
+Ember.Handlebars.registerBoundHelper 'stateLabel', (states, state) ->
   states.findProperty('value', state).get('label').toLowerCase()
 
 
-Em.Handlebars.registerBoundHelper 'humanFileSize', (bytes, options) ->
-  ###
+###
   Returns a file size readeable by humans.
-  
-  @bytes: String
-  
   Usage : {{humanFileSize file.size}}
-  ###
-
+  
+  @method humanFileSize
+  @for Handlebars
+###
+Em.Handlebars.registerBoundHelper 'humanFileSize', (bytes, options) ->
   humanFileSize = (bytes, si) ->
     bytes = parseInt(bytes)
     thresh = (if si then 1000 else 1024)

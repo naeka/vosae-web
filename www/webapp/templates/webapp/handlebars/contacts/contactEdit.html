@@ -60,19 +60,19 @@
 
       <div class="infos pull-left">
         <span class="name">
-          {{view Vosae.AutoGrowTextField 
+          {{input-autogrow 
             valueBinding = "firstname"
             maxlength    = "64" 
             classNames   = "form-control form-control-unstyled"
             placeholder  = "{% trans 'First name' %}" }}
-          {{view Vosae.AutoGrowTextField 
+          {{input-autogrow 
             valueBinding = "name" 
             maxlength    = "64"
             classNames   = "form-control form-control-unstyled"
             placeholder  = "{% trans 'Last name' %}" }}
         </span>
         <span class="role">
-          {{view Vosae.AutoGrowTextField
+          {{input-autogrow
             valueBinding = "role"
             maxlength    = "64"
             classNames   = "form-control form-control-unstyled imput-sm"

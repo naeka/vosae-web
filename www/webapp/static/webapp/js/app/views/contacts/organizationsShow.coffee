@@ -2,7 +2,7 @@ Vosae.OrganizationsShowView = Em.View.extend
   classNames: ["app-contacts", "page-content", "page-list-organizations"]
 
 
-Vosae.OrganizationsShowSettingsView = Em.View.extend Vosae.HelpTour,
+Vosae.OrganizationsShowSettingsView = Em.View.extend Vosae.HelpTourMixin,
   classNames: ["app-contacts", "page-settings", "page-list-organization-settings"]
 
   initHelpTour: ->

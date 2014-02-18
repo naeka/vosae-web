@@ -1,4 +1,13 @@
-Vosae.Notification = DS.Model.extend
+###
+  A base model that represents a notification
+
+  @class Notification
+  @extends Vosae.Model
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.Notification = Vosae.Model.extend
   read: DS.attr('boolean')
   sentAt: DS.attr('datetime')
 
@@ -27,7 +36,17 @@ Vosae.Notification = DS.Model.extend
           @didSaveRecord store, Vosae.Notification, record, json 
 
 
-Vosae.ContactSavedNE = Vosae.Notification.extend Vosae.LazyContactResource,
+###
+  A data model that represents a notification of type contact saved
+
+  @class ContactSavedNE
+  @extends Vosae.Notification
+  @uses Vosae.LazyContactResourceMixin
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.ContactSavedNE = Vosae.Notification.extend Vosae.LazyContactResourceMixin,
   contactName: DS.attr('string')
   contact: DS.belongsTo('Vosae.Contact')
 
@@ -38,7 +57,18 @@ Vosae.ContactSavedNE = Vosae.Notification.extend Vosae.LazyContactResource,
     "contact"
   ).property()
 
-Vosae.OrganizationSavedNE = Vosae.Notification.extend Vosae.LazyOrganizationResource,
+
+###
+  A data model that represents a notification of type organization saved
+
+  @class OrganizationSavedNE
+  @extends Vosae.Notification
+  @uses Vosae.LazyOrganizationResourceMixin
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.OrganizationSavedNE = Vosae.Notification.extend Vosae.LazyOrganizationResourceMixin,
   organizationName: DS.attr('string')
   organization: DS.belongsTo('Vosae.Organization')
 
@@ -49,7 +79,18 @@ Vosae.OrganizationSavedNE = Vosae.Notification.extend Vosae.LazyOrganizationReso
     "contact"
   ).property()
 
-Vosae.QuotationSavedNE = Vosae.Notification.extend Vosae.LazyQuotationResource,
+
+###
+  A data model that represents a notification of type quotation saved
+
+  @class QuotationSavedNE
+  @extends Vosae.Notification
+  @uses Vosae.LazyQuotationResourceMixin
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.QuotationSavedNE = Vosae.Notification.extend Vosae.LazyQuotationResourceMixin,
   customerDisplay: DS.attr('string')
   quotationReference: DS.attr('string')
   quotation: DS.belongsTo('Vosae.Quotation')
@@ -61,7 +102,18 @@ Vosae.QuotationSavedNE = Vosae.Notification.extend Vosae.LazyQuotationResource,
     "invoicing"
   ).property()
 
-Vosae.InvoiceSavedNE = Vosae.Notification.extend Vosae.LazyInvoiceResource,
+
+###
+  A data model that represents a notification of type invoice saved
+
+  @class InvoiceSavedNE
+  @extends Vosae.Notification
+  @uses Vosae.LazyInvoiceResourceMixin
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.InvoiceSavedNE = Vosae.Notification.extend Vosae.LazyInvoiceResourceMixin,
   customerDisplay: DS.attr('string')
   invoiceReference: DS.attr('string')
   invoice: DS.belongsTo('Vosae.Invoice')
@@ -74,7 +126,18 @@ Vosae.InvoiceSavedNE = Vosae.Notification.extend Vosae.LazyInvoiceResource,
     "invoicing"
   ).property()
 
-Vosae.DownPaymentInvoiceSavedNE = Vosae.Notification.extend Vosae.LazyDownPaymentInvoiceResource,
+
+###
+  A data model that represents a notification of type downpayment invoice saved
+
+  @class DownPaymentInvoiceSavedNE
+  @extends Vosae.Notification
+  @uses Vosae.LazyDownPaymentInvoiceResourceMixin
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.DownPaymentInvoiceSavedNE = Vosae.Notification.extend Vosae.LazyDownPaymentInvoiceResourceMixin,
   customerDisplay: DS.attr('string')
   downPaymentInvoiceReference: DS.attr('string')
   downPaymentInvoice: DS.belongsTo('Vosae.DownPaymentInvoice')
@@ -86,7 +149,18 @@ Vosae.DownPaymentInvoiceSavedNE = Vosae.Notification.extend Vosae.LazyDownPaymen
     "invoicing"
   ).property()
 
-Vosae.CreditNoteSavedNE = Vosae.Notification.extend Vosae.LazyCreditNoteResource,
+
+###
+  A data model that represents a notification of type credit note saved
+
+  @class CreditNoteSavedNE
+  @extends Vosae.Notification
+  @uses Vosae.LazyCreditNoteResourceMixin
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.CreditNoteSavedNE = Vosae.Notification.extend Vosae.LazyCreditNoteResourceMixin,
   customerDisplay: DS.attr('string')
   creditNoteReference: DS.attr('string')
   creditNote: DS.belongsTo('Vosae.CreditNote')
@@ -98,7 +172,18 @@ Vosae.CreditNoteSavedNE = Vosae.Notification.extend Vosae.LazyCreditNoteResource
     "invoicing"
   ).property()
 
-Vosae.EventReminderNE = Vosae.Notification.extend Vosae.LazyEventReminderResource,
+
+###
+  A data model that represents a notification of type event reminder
+
+  @class EventReminderNE
+  @extends Vosae.Notification
+  @uses Vosae.LazyEventReminderResourceMixin
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.EventReminderNE = Vosae.Notification.extend Vosae.LazyEventReminderResourceMixin,
   occursAt: DS.attr('datetime')
   summary: DS.attr('string')
   vosaeEvent: DS.belongsTo('Vosae.VosaeEvent')

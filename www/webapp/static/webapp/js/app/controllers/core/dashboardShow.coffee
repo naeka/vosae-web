@@ -1,19 +1,28 @@
-Vosae.DashboardShowController = Em.ArrayController.extend
+###
+  Custom array controller for a collection of <Vosae.Timeline> based records.
+
+  @class DashboardShowController
+  @extends Ember.ArrayController
+  @uses Vosae.TransitionToLazyResourceMixin
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.DashboardShowController = Ember.ArrayController.extend Vosae.TransitionToLazyResourceMixin,
   sortProperties: ['datetime']
   sortAscending: false
   meta: null
-  
-  init: ->
-    @_super()
-    
-    @set 'meta', Vosae.metaForTimeline
 
+  setMeta: (->
+    @set 'meta', Vosae.metaForTimeline
     if @get('meta') and !@get('meta.modelHasBeenFetched')
       @send("getNextPagination")
+  ).on "init"
 
-  # Action handlers
   actions:
-    # Pagination retrieve older items
+    ###
+      Pagination retrieve older items
+    ###
     getNextPagination: ->
       pagination = null
 
@@ -37,41 +46,10 @@ Vosae.DashboardShowController = Em.ArrayController.extend
                   @updateContentFrom(startIndex)
                 else
                   @updateContent()
-  
-    # This is for lazy load on timeline links
-    transitionToResource: (resource) ->
-      switch resource.type
-        # Contact
-        when "Vosae.Contact"
-          contact = Vosae.Contact.find(resource.id)
-          @transitionToRoute "contact.show", @get('session.tenant'), contact
-        
-        # Organization
-        when "Vosae.Organization"
-          organization = Vosae.Organization.find(resource.id)
-          @transitionToRoute "organization.show", @get('session.tenant'), organization
-        
-        # Quotation
-        when "Vosae.Quotation"
-          quotation = Vosae.Quotation.find(resource.id)
-          @transitionToRoute "quotation.show", @get('session.tenant'), quotation
-       
-        # Invoice
-        when "Vosae.Invoice"
-          invoice = Vosae.Invoice.find(resource.id)
-          @transitionToRoute "invoice.show", @get('session.tenant'), invoice
-       
-        # DownPaymentInvoice
-        when "Vosae.DownPaymentInvoice"
-          downPaymentInvoice = Vosae.DownPaymentInvoice.find(resource.id)
-          @transitionToRoute "downPaymentInvoice.show", @get('session.tenant'), downPaymentInvoice
 
-        # CreditNote
-        when "Vosae.CreditNote"
-          creditNote = Vosae.CreditNote.find(resource.id)
-          @transitionToRoute "creditNote.show", @get('session.tenant'), creditNote
-
-  # Traverse timeline items
+  ###
+    Traverse timeline items
+  ###
   updateContent: ->
     now = moment()
     currentDate = moment([now.year(), now.month(), now.day()])
@@ -109,7 +87,9 @@ Vosae.DashboardShowController = Em.ArrayController.extend
 
     return
 
-  # Traverse timeline items
+  ###
+    Traverse timeline items
+  ###
   updateContentFrom: (startIndex, stopIndex) ->
     i = startIndex
     z = if stopIndex? then stopIndex else @get('arrangedContent.length')

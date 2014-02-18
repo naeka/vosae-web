@@ -1,3 +1,5 @@
+Vosae.AppSettingsRoute = Vosae.SelectedTenantRoute.extend()
+
 Vosae.SettingsRoute = Vosae.AppSettingsRoute.extend
   renderTemplate: ->
     @render

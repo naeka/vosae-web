@@ -18,7 +18,7 @@
     {{view item.displayView contentBinding="item"}}
   </div>
   <div class="d-cell date text-right">
-    {{fromNow valueBinding="item.sentAt"}}
+    {{from-now valueBinding="item.sentAt"}}
   </div>
 {% endtplhandlebars %}
 
@@ -80,6 +80,6 @@
 
 {% tplhandlebars "notificationEntry/eventReminder" %}
   {{#with view.content}}
-    {% verbatimblocktrans %}The event {{#if resource}}<a {{action transitionToResource resource target="controller.controllers.notifications"}}>{{summary}}</a>{{else}}{{summary}}{{/if}} {{#if inFuture}}occurs{{else}}occured{{/if}} {{fromNow value=occursAt}}{% endverbatimblocktrans %}
+    {% verbatimblocktrans %}The event {{#if resource}}<a {{action transitionToResource resource target="controller.controllers.notifications"}}>{{summary}}</a>{{else}}{{summary}}{{/if}} {{#if inFuture}}occurs{{else}}occured{{/if}} {{from-now value=occursAt}}{% endverbatimblocktrans %}
   {{/with}}
 {% endtplhandlebars %}

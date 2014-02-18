@@ -1,4 +1,13 @@
-Vosae.HelpTour = Ember.Mixin.create
+###
+  This mixin allow us to create an help tour for each page.
+
+  @class HelpTourMixin
+  @extends Ember.Mixin
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.HelpTourMixin = Ember.Mixin.create
   helpTour: null
 
   actions:

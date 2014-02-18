@@ -137,14 +137,14 @@
     </li>
     <li class="clearfix">
       <i class="picto-star pull-left"></i>
-      {{switch-button
+      {{switch
         checkedBinding=""
         classNames="pull-left" }}
     </li>
     {{#if isOwned}}
     <li class="clearfix">
       <i class="picto-lock pull-left"></i>
-      {{view view.privateSwitchButton 
+      {{view view.privateSwitchView 
         checkedBinding="private"
         classNames="pull-left" }}
     </li>

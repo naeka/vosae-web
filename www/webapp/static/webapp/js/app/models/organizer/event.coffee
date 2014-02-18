@@ -1,4 +1,13 @@
-Vosae.VosaeEvent = DS.Model.extend
+###
+  A data model that represents an event
+
+  @class VosaeEvent
+  @extends Vosae.Model
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.VosaeEvent = Vosae.Model.extend
   status: DS.attr('string')
   created_at: DS.attr('datetime')
   updated_at: DS.attr('datetime')

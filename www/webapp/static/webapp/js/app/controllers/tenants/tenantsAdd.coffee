@@ -1,3 +1,12 @@
+###
+  Custom controller for a `Vosae.Tenant` record.
+
+  @class TenantsAddController
+  @extends Ember.ObjectController
+  @namespace Vosae
+  @module Vosae
+###
+
 Vosae.TenantsAddController = Em.ObjectController.extend
   needs: ['tenantsShow']
 
@@ -88,9 +97,9 @@ Vosae.TenantsAddController = Em.ObjectController.extend
           else
             @get('controllers.tenantsShow').send "setAsCurrentTenant", tenant
       tenant.one 'becameInvalid', @, ->
-        Vosae.hideLoader()
+        Vosae.Utilities.hideLoader()
       tenant.get('transaction').commit()
-      Vosae.showLoader()
+      Vosae.Utilities.showLoader()
 
     # Cancel the tenant creation form 
     cancel: ->

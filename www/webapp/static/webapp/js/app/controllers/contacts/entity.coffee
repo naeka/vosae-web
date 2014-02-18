@@ -1,10 +1,19 @@
-Vosae.EntityController = Em.ObjectController.extend
+###
+  A custom object controller for a `Vosae.Entity` based record.
+
+  @class EntityController
+  @extends Ember.ObjectController
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.EntityController = Ember.ObjectController.extend
   actions:
     getExportFile: ->
       format = "vcard"
       tenantSlug = @get('session.tenant.slug')
       entity_id = @get('content.id')
-      exportURL = "#{APP_ENDPOINT}/#{@get('store').adapter.namespace}/"
+      exportURL = "#{Vosae.Config.APP_ENDPOINT}/#{Vosae.Config.API_NAMESPACE}/"
       
       switch @constructor.toString()
         when Vosae.ContactShowController.toString()

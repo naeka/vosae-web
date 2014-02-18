@@ -1,3 +1,12 @@
+###
+  This mixin fetch statistics.
+
+  @class StatisticsMixin
+  @extends Ember.Mixin
+  @namespace Vosae
+  @module Vosae
+###
+
 Vosae.StatisticsMixin = Ember.Mixin.create
   _results: null
   _object: Em.Object.extend 

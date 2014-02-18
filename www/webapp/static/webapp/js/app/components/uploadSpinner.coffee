@@ -1,12 +1,15 @@
 ###
   This component is used for ajax upload progression
 
-  @class RoundProgressBar
+  @class RoundProgressBarComponent
+  @extends Ember.Component
   @namespace Vosae
-  @module Components
+  @module Vosae
 ###
 
-Vosae.Components.RoundProgressBar = Em.View.extend
+Vosae.RoundProgressBarComponent = Ember.Component.extend
+  classNames: ["round-progress-bar", "clearfix"]
+  progress: 0
   template: Handlebars.compile('
     <div class="loader">
       <div class="loader-bg">
@@ -34,8 +37,6 @@ Vosae.Components.RoundProgressBar = Em.View.extend
       </div>
     </div>
   ')
-  classNames: ["round-progress-bar", "clearfix"]
-  progress: 0
 
   shouldBeHidden: (->
     if @get('isUploading')

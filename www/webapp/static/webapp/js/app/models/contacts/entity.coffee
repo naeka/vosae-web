@@ -1,4 +1,13 @@
-Vosae.Entity = DS.Model.extend
+###
+  A data model that represents an entity
+
+  @class Entity
+  @extends Vosae.Model
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.Entity = Vosae.Model.extend
   photoSource: DS.attr("string")
   photoUri: DS.attr("string")
   gravatarMail: DS.attr("string")

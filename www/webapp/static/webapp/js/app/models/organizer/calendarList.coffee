@@ -1,4 +1,13 @@
-Vosae.CalendarList = DS.Model.extend
+###
+  A data model that represents a calendar list
+
+  @class CalendarList
+  @extends Vosae.Model
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.CalendarList = Vosae.Model.extend
   summary: DS.attr('string')
   description: DS.attr('string')
   location: DS.attr('string')
@@ -63,6 +72,7 @@ Vosae.CalendarList = DS.Model.extend
     events.forEach (event)->
       fc_events.push event.getFullCalendarEvent()
     fc_events
+
 
 Vosae.Adapter.map "Vosae.CalendarList",
   reminders:

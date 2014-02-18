@@ -1,4 +1,13 @@
-Vosae.Email = DS.Model.extend
+###
+  A data model that represents an email
+
+  @class Email
+  @extends Vosae.Model
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.Email = Vosae.Model.extend
   type: DS.attr("string", defaultValue: 'WORK')
   email: DS.attr('string')
 

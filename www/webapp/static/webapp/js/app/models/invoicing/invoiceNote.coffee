@@ -1,4 +1,13 @@
-Vosae.InvoiceNote = DS.Model.extend
+###
+  A data model that represents an invoice note
+
+  @class InvoiceNote
+  @extends Vosae.Model
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.InvoiceNote = Vosae.Model.extend
   registrationDate: DS.attr('datetime')
   issuer: DS.belongsTo('Vosae.User')
   note: DS.attr('string')

@@ -1,3 +1,12 @@
+###
+  A data model that represents an invoice
+
+  @class Invoice
+  @extends Vosae.InvoiceBase
+  @namespace Vosae
+  @module Vosae
+###
+
 Vosae.Invoice = Vosae.InvoiceBase.extend
   state: DS.attr('string')
   paid: DS.attr('number')

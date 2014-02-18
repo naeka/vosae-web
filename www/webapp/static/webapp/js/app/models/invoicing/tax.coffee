@@ -1,4 +1,13 @@
-Vosae.Tax = DS.Model.extend
+###
+  A data model that represents a tax
+
+  @class Tax
+  @extends Vosae.Model
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.Tax = Vosae.Model.extend
   name: DS.attr('string')
   rate: DS.attr('number', defaultValue: 0.00)
   

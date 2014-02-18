@@ -1,4 +1,13 @@
-Vosae.InvoicingSettings = DS.Model.extend
+###
+  A data model that represents settings for invoicing application
+
+  @class InvoicingSettings
+  @extends Vosae.Model
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.InvoicingSettings = Vosae.Model.extend
   supportedCurrencies: DS.hasMany('Vosae.Currency')
   defaultCurrency: DS.belongsTo('Vosae.Currency')
   fyStartMonth: DS.attr('number')
@@ -38,6 +47,7 @@ Vosae.InvoicingSettings = DS.Model.extend
   currentFyStartYear: (->
     @get('currentFyStartAt').year()
   ).property('currentFyStartAt')
+
 
 Vosae.Adapter.map "Vosae.InvoicingSettings",
   numbering:

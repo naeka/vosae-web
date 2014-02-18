@@ -1,4 +1,13 @@
-Vosae.ReportSettings = DS.Model.extend
+###
+  A model that represents settings for reports
+
+  @class ReportSettings
+  @extends Vosae.Model
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.ReportSettings = Vosae.Model.extend
   fontName: DS.attr("string", defaultValue: 'bariol')
   fontSize: DS.attr("number")
   fontColor: DS.attr("string")

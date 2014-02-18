@@ -1,4 +1,13 @@
-Vosae.Attendee = DS.Model.extend
+###
+  A data model that represents an attendee
+
+  @class Attende
+  @extends Vosae.Model
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.Attendee = Vosae.Model.extend
   email: DS.attr('string')
   displayName: DS.attr('string')
   organizer: DS.attr('boolean')

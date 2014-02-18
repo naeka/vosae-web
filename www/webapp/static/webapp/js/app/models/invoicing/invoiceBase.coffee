@@ -1,4 +1,13 @@
-Vosae.InvoiceBase = DS.Model.extend
+###
+  A base model that represents an invoice base
+
+  @class InvoiceBase
+  @extends Vosae.Model
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.InvoiceBase = Vosae.Model.extend
   ref: DS.attr('string')
   accountType: DS.attr('string')
   total: DS.attr('number')
@@ -166,9 +175,3 @@ Vosae.InvoiceBase = DS.Model.extend
         gettext 'Your purchase order has been successfully deleted'
     Vosae.SuccessPopupComponent.open
       message: message
-
-# Vosae.InvoiceBase.reopenClass
-#   inverseFor: (name) ->
-#     if @metaForProperty(name).options.inverse is null
-#       return null 
-#     this._super.apply this, arguments

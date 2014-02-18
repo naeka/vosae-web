@@ -5,6 +5,7 @@
   @module JSONTransforms
   @namespace DS
 ###
+
 DS.JSONTransforms.date =
   deserialize: (serialized)->
     type = typeof serialized
@@ -24,6 +25,7 @@ DS.JSONTransforms.date =
     else
       null
 
+
 ###
   Adds support of type datetime to `DS.Model` attr
 
@@ -31,6 +33,7 @@ DS.JSONTransforms.date =
   @module JSONTransforms
   @namespace DS
 ###
+
 DS.JSONTransforms.datetime =
   deserialize: (serialized)->
     type = typeof serialized
@@ -50,6 +53,7 @@ DS.JSONTransforms.datetime =
     else
       null
 
+
 ###
   Adds support of type array to `DS.Model` attr
 
@@ -57,6 +61,7 @@ DS.JSONTransforms.datetime =
   @module JSONTransforms
   @namespace DS
 ###
+
 DS.JSONTransforms.array =
   serialize: (serialized)->
     if Em.typeOf(serialized) is 'array'
@@ -68,6 +73,7 @@ DS.JSONTransforms.array =
       return deserialized
     return []
 
+
 ###
   Adds support of type object to `DS.Model` attr
 
@@ -75,12 +81,14 @@ DS.JSONTransforms.array =
   @module JSONTransforms
   @namespace DS
 ###
+
 DS.JSONTransforms.object =
   deserialize: (serialized) ->
     serialized
   
   serialize: (deserialized) ->
     deserialized
+
 
 ###
   Transforms an array that contains all payment types objects
@@ -90,6 +98,7 @@ DS.JSONTransforms.object =
   @module JSONTransforms
   @namespace DS
 ###
+
 DS.JSONTransforms.paymentTypesArray =
   ###
     Serialize an array of objects with label and value

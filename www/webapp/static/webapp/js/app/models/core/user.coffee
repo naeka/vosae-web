@@ -1,4 +1,13 @@
-Vosae.User = DS.Model.extend
+###
+  A data model that represents a user
+
+  @class User
+  @extends Vosae.Model
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.User = Vosae.Model.extend
   email: DS.attr('string')
   fullName: DS.attr('string')
   groups: DS.hasMany('Vosae.Group')
@@ -74,6 +83,7 @@ Vosae.User = DS.Model.extend
     message = gettext 'The user has been successfully deleted'
     Vosae.SuccessPopupComponent.open
       message: message
+
 
 Vosae.Adapter.map "Vosae.User",
   specificPermissions:

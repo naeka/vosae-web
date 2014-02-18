@@ -1,3 +1,12 @@
+###
+  A data model that represents a purchase order
+
+  @class PurchaseOrder
+  @extends Vosae.Quotation
+  @namespace Vosae
+  @module Vosae
+###
+
 Vosae.PurchaseOrder = Vosae.Quotation.extend
   makeInvoice: (controller) ->
     # Make an `Invoice` record from the `PurchaseOrder`.

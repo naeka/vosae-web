@@ -1,4 +1,13 @@
-Vosae.LineItem = DS.Model.extend
+###
+  A data model that represents a line item
+
+  @class LineItem
+  @extends Vosae.Model
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.LineItem = Vosae.Model.extend
   ref: DS.attr('string')
   description: DS.attr('string')
   itemId: DS.attr('string')
@@ -86,6 +95,7 @@ Vosae.LineItem = DS.Model.extend
     if @get 'tax'
       return false
     return true
+
 
 Vosae.Adapter.map "Vosae.LineItem",
   ref:

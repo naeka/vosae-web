@@ -1,3 +1,12 @@
+###
+  A data model that represents a quotation
+
+  @class Quotation
+  @extends Vosae.InvoiceBase
+  @namespace Vosae
+  @module Vosae
+###
+
 Vosae.Quotation = Vosae.InvoiceBase.extend
   state: DS.attr('string')
 

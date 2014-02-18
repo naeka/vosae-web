@@ -1,4 +1,13 @@
-Vosae.File = DS.Model.extend
+###
+  A data model that represents a file
+
+  @class File
+  @extends Vosae.Model
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.File = Vosae.Model.extend
   name: DS.attr("string")
   size: DS.attr("number")
   sha1_checksum: DS.attr("string")
@@ -22,8 +31,3 @@ Vosae.File = DS.Model.extend
       return moment(@get("modifiedAt")).format "LL"
     return pgettext("date", "undefined")
   ).property("modifiedAt")
-
-Vosae.LocalizedFile = DS.Model.extend
-  'fr': DS.belongsTo("Vosae.File")
-  'en': DS.belongsTo("Vosae.File")
-  'en-gb': DS.belongsTo("Vosae.File")

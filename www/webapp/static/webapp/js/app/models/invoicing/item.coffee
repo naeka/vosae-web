@@ -1,4 +1,13 @@
-Vosae.Item = DS.Model.extend
+###
+  A data model that represents an item
+
+  @class Item
+  @extends Vosae.Model
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.Item = Vosae.Model.extend
   ref: DS.attr('string')
   description: DS.attr('string')
   unitPrice: DS.attr('number')
@@ -65,6 +74,7 @@ Vosae.Item = DS.Model.extend
     message = gettext 'Your item has been successfully deleted'
     Vosae.SuccessPopupComponent.open
       message: message
+
 
 Vosae.Adapter.map "Vosae.Item",
   ref:

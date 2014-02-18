@@ -1,4 +1,13 @@
-Vosae.Phone = DS.Model.extend
+###
+  A data model that represents a phone
+
+  @class Phone
+  @extends Vosae.Model
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.Phone = Vosae.Model.extend
   type: DS.attr("string", defaultValue: 'WORK')
   subtype: DS.attr("string")
   phone: DS.attr("string")

@@ -1,4 +1,13 @@
-Vosae.Currency = DS.Model.extend
+###
+  A data model that represents a currency
+
+  @class Currency
+  @extends Vosae.Model
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.Currency = Vosae.Model.extend
   symbol: DS.attr('string')
   rates: DS.hasMany('Vosae.ExchangeRate')
   resourceUri: DS.attr('string')
@@ -45,6 +54,7 @@ Vosae.Currency = DS.Model.extend
   exchangeRateFor: (symbol) ->
     # Return the rate associated to the specified symbol.
     return @get('rates').findProperty('currencyTo', symbol)
+
 
 Vosae.Adapter.map "Vosae.Currency",
   rates:

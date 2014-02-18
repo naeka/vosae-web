@@ -1,4 +1,13 @@
-Vosae.TenantSettings = DS.Model.extend
+###
+  A data model that represents settings for a tenant
+
+  @class TenantSettings
+  @extends Vosae.Model
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.TenantSettings = Vosae.Model.extend
   core: DS.belongsTo('Vosae.CoreSettings')
   invoicing: DS.belongsTo('Vosae.InvoicingSettings')
 
@@ -6,6 +15,7 @@ Vosae.TenantSettings = DS.Model.extend
     message = gettext "Invoicing settings have been successfully updated"
     Vosae.SuccessPopupComponent.open
       message: message
+
 
 Vosae.Adapter.map "Vosae.TenantSettings",
   core:

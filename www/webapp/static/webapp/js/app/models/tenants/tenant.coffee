@@ -1,4 +1,13 @@
-Vosae.Tenant = DS.Model.extend
+###
+  A data model that represents a tenant
+
+  @class Tenant
+  @extends Vosae.Model
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.Tenant = Vosae.Model.extend
   slug: DS.attr("string")
   name: DS.attr("string")
   email: DS.attr("string")
@@ -64,6 +73,7 @@ Vosae.Tenant = DS.Model.extend
     message = gettext("The settings of your organization have been successfully updated")
     Vosae.SuccessPopupComponent.open
       message: message
+
 
 Vosae.Adapter.map "Vosae.Tenant",
   registrationInfo:

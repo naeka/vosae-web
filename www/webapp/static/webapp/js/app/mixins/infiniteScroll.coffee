@@ -10,12 +10,13 @@
 
 Vosae.InfiniteScrollMixin = Ember.Mixin.create
   paginationAction: Em.K
-  offset: 100
+  offset: 160
 
-  initScrollPagination: (->
-    $(window).scroll =>
-      if $(window).scrollTop() >= $(document).height() - $(window).height() - @get('offset')
+  initScrollSpy: (->
+    $(window).scroll Vosae.Utilities.debounce(=>
+      if $(window).scrollTop() >= $(document).height() - $(window).height() - @offset
         @send("paginationAction")
+    , 100)
   ).on "init"
 
   willDestroy: ->

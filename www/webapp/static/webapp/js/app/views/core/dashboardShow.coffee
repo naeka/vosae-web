@@ -32,7 +32,6 @@ Vosae.DashboardShowView = Ember.View.extend Vosae.InfiniteScrollMixin,
       $(".page-show-dashboard-settings .info a").click()
 
     paginationAction: ->
-      console.log "paginationAction"
       @get('controller').send "getNextPagination"
 
   timelineItems: Em.View.extend

@@ -163,3 +163,38 @@ Vosae.Utilities =
   ###
   isTouchDevice: ->
     (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0))
+
+  ###
+    Returns a function, that, as long as it continues to be invoked, will not
+    be triggered. The function will be called after it stops being called for
+    N milliseconds. If `immediate` is passed, trigger the function on the
+    leading edge, instead of the trailing.
+  ###
+  debounce: (func, wait, immediate) ->
+    timeout = undefined
+    args = undefined
+    context = undefined
+    timestamp = undefined
+    result = undefined
+
+    later = ->
+      last = moment().valueOf() - timestamp
+      if last < wait
+        timeout = setTimeout(later, wait - last)
+      else
+        timeout = null
+        unless immediate
+          result = func.apply(context, args)
+          context = args = null
+      return
+
+    ->
+      context = this
+      args = arguments
+      timestamp = moment().valueOf()
+      callNow = immediate and not timeout
+      timeout = setTimeout(later, wait)  unless timeout
+      if callNow
+        result = func.apply(context, args)
+        context = args = null
+      result

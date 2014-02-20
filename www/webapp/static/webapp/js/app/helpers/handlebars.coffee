@@ -137,3 +137,17 @@ Em.Handlebars.registerBoundHelper 'humanFileSize', (bytes, options) ->
     bytes.toFixed(1) + " " + units[u]
 
   humanFileSize(bytes)
+
+
+###
+  Returns true if device is toucheable
+  Usage : {{#isTouchEnabled}}{{/isTouchEnabled}}
+
+  @method isTouchDevice
+  @for Handlebars
+###
+Ember.Handlebars.registerHelper "isTouchDevice", (options) ->
+  if Vosae.Utilities.isTouchDevice()
+    options.fn this
+  else
+    options.inverse this

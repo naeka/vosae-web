@@ -17,6 +17,10 @@ Vosae.CalendarListsShowController = Em.ArrayController.extend
     @get('needs').addObjects(['calendarListsShowSettings', 'quickAddEvent'])
 
 
+  calendarListsLoaded: (->
+    !@get('content').findProperty 'isLoaded', false
+  ).property "content.@each.isLoaded"
+
 ###
   Custom controller for a `Vosae.VosaeEvent` record.
 

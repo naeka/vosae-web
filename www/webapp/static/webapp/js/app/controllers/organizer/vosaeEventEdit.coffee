@@ -8,6 +8,8 @@
 ###
 
 Vosae.VosaeEventEditController = Em.ObjectController.extend
+  needs: ['calendarListsShow']
+
   actions:
     cancel: (vosaeEvent)->
       if vosaeEvent.get('id')

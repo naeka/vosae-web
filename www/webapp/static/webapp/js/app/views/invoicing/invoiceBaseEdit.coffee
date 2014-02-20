@@ -99,7 +99,7 @@ Vosae.InvoiceBaseEditView = Em.View.extend
         data: (term, page) =>
           query = "q=#{term}"
           resourceType = @get('resourceType')
-          if typeIsArray resourceType
+          if Vosae.Utilities.isArray resourceType
             resourceType.forEach (type) ->
               query += "&types=#{type}"
           else

@@ -59,14 +59,13 @@
             placeholder='{% trans "Summary" context "event" %}' }}
         </div>
         <div class="calendar">
-          {{#if calendar.isLoaded}}
-            {{#if calendarLists.isLoaded}}
-              {{view view.calendarsField
-                contentBinding="calendarLists"
-                dataColorBinding="content.color"
-                valueBinding="calendar"
-                optionLabelPath="content.displayName"
-                optionValuePath="content.calendar"  }}
+          {{#if controllers.calendarListsShow.calendarListsLoaded}}
+            {{#if calendar.isLoaded}}
+                {{view view.calendarsField
+                  contentBinding="controllers.calendarListsShow"
+                  valueBinding="content.calendar.id"
+                  optionLabelPath="content.displayName"
+                  optionValuePath="content.calendar.id"  }}
             {{/if}}
           {{/if}}
         </div>
@@ -74,14 +73,14 @@
       <div class="date">
         <span class="dt-start">
           {% trans "From" context "date" %}
-          {{#isTouchEnabled}}
+          {{#isTouchDevice}}
             {{#if allDay}}
               {{input type="date"
-                valueBinding=start.date
+                valueBinding="start.date"
                 classNames="form-control form-control-unstyled" }}
             {{else}}
               {{input type="datetime"
-                valueBinding=start.datetime
+                valueBinding="start.datetime"
                 classNames="form-control form-control-unstyled" }}
             {{/if}}
           {{else}}
@@ -93,18 +92,18 @@
                 contentBinding="start"
                 classNames="form-control form-control-unstyled" }}
             {{/unless}}
-          {{/isTouchEnabled}}
+          {{/isTouchDevice}}
         </span>
         <span class="dt-end">
           {% trans "to" context "date" %}
-          {{#isTouchEnabled}}
+          {{#isTouchDevice}}
             {{#if allDay}}
               {{input type="date"
-                valueBinding=end.date
+                valueBinding="end.date"
                 classNames="form-control form-control-unstyled" }}
             {{else}}
               {{input type="datetime"
-                valueBinding=end.datetime
+                valueBinding="end.datetime"
                 classNames="form-control form-control-unstyled" }}
             {{/if}}
           {{else}}
@@ -116,7 +115,7 @@
                 contentBinding="end"
                 classNames="form-control form-control-unstyled" }}
             {{/unless}}
-          {{/isTouchEnabled}}
+          {{/isTouchDevice}}
         </span>
         <span class="date-ad">
           <label>
@@ -149,7 +148,7 @@
               {% trans "Color" %}
             </div>
             <div class="colors d-cell">
-              {{view Vosae.SimpleColorPickerField
+              {{view Vosae.SimpleColorPicker
                 valueBinding="color" }}
             </div>
           </div>
@@ -161,11 +160,11 @@
               <ul>
                 {{#if reminders.useDefault}}
                   {{#each calendarList.reminders}}
-                    {{view view.reminderView contentBinding=this}}
+                    {{view view.reminderView contentBinding="this"}}
                   {{/each}}
                 {{/if}}
                 {{#each reminders.overrides}}
-                  {{view view.reminderView contentBinding=this}}
+                  {{view view.reminderView contentBinding="this"}}
                 {{/each}}
               </ul>
               <a class="addReminder btn btn-rounded btn-success" {{action "addReminder"}}>{% trans "Add a reminder" %}</a>
@@ -178,7 +177,7 @@
         {{#if attendees.length}}
           <ul class="attendees">
           {{#each attendees}}
-            {{view view.attendeeView contentBinding=this}}
+            {{view view.attendeeView contentBinding="this"}}
           {{/each}}
           </ul>
         {{/if}}

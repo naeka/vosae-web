@@ -17,9 +17,13 @@ Vosae.Utilities =
   updatePrototypes: ->
     unless typeof String::startsWith is "function"
       String::startsWith = (str) -> @slice(0, str.length) is str
-
-    Array.isArray || ( value ) -> return {}.toString.call( value ) is '[object Array]'
     return
+
+  ###
+    Returns true if obj is an array
+  ###
+  isArray: (obj) ->
+    Object.prototype.toString.call(obj) is '[object Array]'
 
   ###
     Allows us to supply bindings without "binding" to a helper.
@@ -159,7 +163,7 @@ Vosae.Utilities =
     return selector.gmap3 opts
 
   ###
-    Check if the current device is touche device
+    Check if the current device is touch device
   ###
   isTouchDevice: ->
     (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0))

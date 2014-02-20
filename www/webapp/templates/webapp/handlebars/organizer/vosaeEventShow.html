@@ -32,7 +32,7 @@
       </div>
       <div class="calendar">
         {{#if calendarList.isLoaded}}
-          {{view view.calendarView contentBinding=calendarList}}
+          {{view view.calendarView contentBinding="calendarList"}}
         {{/if}}
       </div>
     </section>
@@ -40,7 +40,7 @@
     <section class="event-infos clearfix">
       <div class="pull-left">
         {{#if location}}
-          {{#view Vosae.ShowEventAddressMapView locationBinding=location}}{{/view}}
+          {{#view Vosae.ShowEventAddressMapView locationBinding="location"}}{{/view}}
           <div class='event-location'>{{location}}</div>
         {{/if}}
         {{#if description}}
@@ -51,7 +51,7 @@
         {{#if attendees.length}}
           <ul class="attendees">
           {{#each attendees}}
-            {{view view.attendeeView contentBinding=this}}
+            {{view view.attendeeView contentBinding="this"}}
           {{/each}}
           </ul>
         {{else}}

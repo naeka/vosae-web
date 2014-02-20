@@ -1,8 +1,8 @@
 Vosae.VosaeEventEditRoute = Ember.Route.extend
   setupController: (controller, model) ->
+    @controllerFor('calendarListsShow').set('model', Vosae.CalendarList.find({}))
     controller.setProperties
       'content': @modelFor("vosaeEvent")
-      'calendarLists': Vosae.CalendarList.find()
 
   renderTemplate: ->
     @_super()

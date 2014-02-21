@@ -24,7 +24,7 @@ Vosae.Adapter = DS.RESTAdapter.extend
 
   rejectionHandler: (reason) ->
     if window.Raven?
-      Raven.captureMessage("[#{reason.statusText}] #{reason.responseText}", reason)
+      Raven.captureMessage("[#{reason.statusText}] #{reason.responseText}", {extra: {reason: reason}})
     Ember.Logger.error "[#{reason.statusText}] #{reason.responseText}", reason
     throw reason
 

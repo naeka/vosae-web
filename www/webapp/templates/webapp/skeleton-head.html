@@ -47,6 +47,6 @@
 
     Ember.onerror = function(error) {
         if(window.Raven)
-            Raven.captureMessage("Ember error", error);
+            Raven.captureMessage("Ember error", {extra: {error: error}});
     };
 </script>

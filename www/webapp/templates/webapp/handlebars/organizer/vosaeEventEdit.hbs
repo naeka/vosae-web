@@ -59,13 +59,13 @@
             placeholder='{% trans "Summary" context "event" %}' }}
         </div>
         <div class="calendar">
-          {{#if controllers.calendarListsShow.calendarListsLoaded}}
-            {{#if calendar.isLoaded}}
-                {{view view.calendarsField
-                  contentBinding="controllers.calendarListsShow"
-                  valueBinding="content.calendar.id"
-                  optionLabelPath="content.displayName"
-                  optionValuePath="content.calendar.id"  }}
+          {{#if calendar.isLoaded}}
+            {{#if controllers.calendarListsShow.calendarListsLoaded}}
+              {{view view.calendarsField
+                contentBinding="controllers.calendarListsShow"
+                valueBinding="content.calendar.id"
+                optionLabelPath="content.displayName"
+                optionValuePath="content.calendar.id"  }}
             {{/if}}
           {{/if}}
         </div>

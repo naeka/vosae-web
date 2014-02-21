@@ -25,12 +25,12 @@ Vosae.Tenant = Vosae.Model.extend
   isUploadingTerms: false
 
   logoUri: (->
-    if @get('imgLogo')
+    if @get('imgLogo.streamLink')
       return Vosae.Config.APP_ENDPOINT + @get('imgLogo.streamLink')
-    else if @get('svgLogo')
+    else if @get('svgLogo.streamLink')
       return Vosae.Config.APP_ENDPOINT + @get('svgLogo.streamLink')
     return null
-  ).property('svgLogo.streamLink', 'imgLogo.streamLink')
+  ).property('svgLogo.streamLink', 'svgLogo.isLoaded', 'imgLogo.streamLink', 'imgLogo.isLoaded')
 
   checkValidity: ->
     errors = []

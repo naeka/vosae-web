@@ -34,6 +34,8 @@ module.exports = (grunt) ->
     #
     coffee:
       webapp_js_ember:
+        options:
+          bare: true
         expand: true
         cwd: WEBAPP_JS_DIR
         src: GLOB_COFFEE_FILES
@@ -52,8 +54,7 @@ module.exports = (grunt) ->
       options:
         report: "min"
         compress: true
-        mangle:
-          except: ['Vosae', 'Ember', 'Em']
+        mangle: false
       webapp_js_vendor:
         options:
           compress: false
@@ -249,6 +250,9 @@ module.exports = (grunt) ->
         WEBAPP_SASS_DIR
         WEBAPP_CSS_DIR
       ]
+      dev: [
+        WEBAPP_TMP_DIR
+      ]
 
     # 
     # Images minification
@@ -328,6 +332,9 @@ module.exports = (grunt) ->
   grunt.registerTask 'build-dev', 'Development build', ->
     grunt.config.set 'minispade.options.stringModule', true
     grunt.task.run [
+      # Cleaning
+      'clean:dev'
+
       # Webapp
       'compass:webapp'
       'concat:webapp_css'
@@ -337,6 +344,9 @@ module.exports = (grunt) ->
       
       # i18n
       'i18n:false'
+
+      # Cleaning
+      'clean:dev'
     ]
 
   grunt.registerTask 'build-prod', 'Production build', -> 

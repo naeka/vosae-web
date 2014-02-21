@@ -257,7 +257,7 @@ describe 'Vosae.CalendarList', ->
 
     # Test
     expect(calendarList.get('displayColor')).toEqual ''
-    Vosae.calendarListColors.forEach (color) ->
+    Vosae.Config.calendarListColors.forEach (color) ->
       calendarList.set 'color', color.get('value')
       expect(calendarList.get('displayColor')).toEqual color.get('displayName')
 
@@ -269,7 +269,7 @@ describe 'Vosae.CalendarList', ->
 
     # Test
     expect(calendarList.get('displayTimezone')).toEqual ''
-    Vosae.timezones.forEach (timezone) ->
+    Vosae.Timezones.forEach (timezone) ->
       calendarList.set 'timezone', timezone.get('value')
       expect(calendarList.get('displayTimezone')).toEqual timezone.get('displayName')
 

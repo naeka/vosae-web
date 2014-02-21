@@ -117,7 +117,7 @@ describe 'Vosae.Payment', ->
     
     # Test
     expect(payment.get('displayType')).toEqual "undefined"
-    Vosae.paymentTypes.forEach (type) ->
+    Vosae.Config.paymentTypes.forEach (type) ->
       payment.set 'type', type.get('value')
       expect(payment.get('displayType')).toEqual type.get('label')
 

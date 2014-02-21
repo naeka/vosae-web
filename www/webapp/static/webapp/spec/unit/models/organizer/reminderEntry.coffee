@@ -67,6 +67,6 @@ describe 'Vosae.ReminderEntry', ->
 
     # Test
     expect(reminderEntry.get('displayMethod')).toEqual ''
-    Vosae.reminderEntries.forEach (method) ->
+    Vosae.Config.reminderEntries.forEach (method) ->
       reminderEntry.set 'method', method.get('value')
       expect(reminderEntry.get('displayMethod')).toEqual method.get('displayName')

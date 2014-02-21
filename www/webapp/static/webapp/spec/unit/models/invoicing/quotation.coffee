@@ -527,7 +527,7 @@ describe 'Vosae.Quotation', ->
     quotation = store.find Vosae.Quotation, 1
     
     # Test
-    Vosae.quotationStatesChoices.forEach (state) ->
+    Vosae.Config.quotationStatesChoices.forEach (state) ->
       quotation.set('state', state.get('value'))
       expect(quotation.get('displayState')).toBeTruthy()
 

@@ -594,7 +594,7 @@ describe 'Vosae.Invoice', ->
     invoice = store.find Vosae.Invoice, 1
     
     # Test
-    Vosae.invoiceStatesChoices.forEach (state) ->
+    Vosae.Config.invoiceStatesChoices.forEach (state) ->
       invoice.set('state', state.get('value'))
       expect(invoice.get('displayState')).toBeTruthy()
 
@@ -631,7 +631,7 @@ describe 'Vosae.Invoice', ->
 
     # Test
     expect(invoice.get('isPayableOrPaid')).toEqual false
-    Vosae.invoiceStatesChoices.forEach (state) ->
+    Vosae.Config.invoiceStatesChoices.forEach (state) ->
       invoice.set('state', state.get('value'))
       if ["REGISTERED", "OVERDUE", "PART_PAID", "PAID"].contains state.get('value')
         expect(invoice.get('isPayableOrPaid')).toBeTruthy()
@@ -694,7 +694,7 @@ describe 'Vosae.Invoice', ->
 
     # Test
     expect(invoice.get('isModifiable')).toBeFalsy()
-    Vosae.invoiceStatesChoices.forEach (state) ->
+    Vosae.Config.invoiceStatesChoices.forEach (state) ->
       invoice.set('state', state.get('value'))
       if state.get('value') is 'DRAFT'
         expect(invoice.get('isModifiable')).toBeTruthy()
@@ -724,7 +724,7 @@ describe 'Vosae.Invoice', ->
 
     # Test
     expect(invoice.get('isCancelable')).toBeFalsy()
-    Vosae.invoiceStatesChoices.forEach (state) ->
+    Vosae.Config.invoiceStatesChoices.forEach (state) ->
       invoice.set('state', state.get('value'))
       if ["REGISTERED", "OVERDUE", "PART_PAID", "PAID"].contains state.get('value')
         expect(invoice.get('isCancelable')).toBeTruthy()
@@ -738,7 +738,7 @@ describe 'Vosae.Invoice', ->
 
     # Test
     expect(invoice.get('isPayable')).toBeFalsy()
-    Vosae.invoiceStatesChoices.forEach (state) ->
+    Vosae.Config.invoiceStatesChoices.forEach (state) ->
       invoice.set('state', state.get('value'))
       if ["REGISTERED", "OVERDUE", "PART_PAID"].contains state.get('value')
         expect(invoice.get('isPayable')).toBeTruthy()
@@ -752,7 +752,7 @@ describe 'Vosae.Invoice', ->
 
     # Test
     expect(invoice.get('isPaid')).toBeFalsy()
-    Vosae.invoiceStatesChoices.forEach (state) ->
+    Vosae.Config.invoiceStatesChoices.forEach (state) ->
       invoice.set('state', state.get('value'))
       if state.get('value') is 'PAID'
         expect(invoice.get('isPaid')).toBeTruthy()
@@ -766,7 +766,7 @@ describe 'Vosae.Invoice', ->
 
     # Test
     expect(invoice.get('isDraft')).toBeFalsy()
-    Vosae.invoiceStatesChoices.forEach (state) ->
+    Vosae.Config.invoiceStatesChoices.forEach (state) ->
       invoice.set('state', state.get('value'))
       if state.get('value') is 'DRAFT'
         expect(invoice.get('isDraft')).toBeTruthy()
@@ -780,7 +780,7 @@ describe 'Vosae.Invoice', ->
 
     # Test
     expect(invoice.get('isCancelled')).toBeFalsy()
-    Vosae.invoiceStatesChoices.forEach (state) ->
+    Vosae.Config.invoiceStatesChoices.forEach (state) ->
       invoice.set('state', state.get('value'))
       if state.get('value') is 'CANCELLED'
         expect(invoice.get('isCancelled')).toBeTruthy()

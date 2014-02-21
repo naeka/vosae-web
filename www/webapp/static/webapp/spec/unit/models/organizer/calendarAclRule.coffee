@@ -35,6 +35,6 @@ describe 'Vosae.CalendarAclRule', ->
 
     # Test
     expect(calendarAclRule.get('displayRole')).toEqual ''
-    Vosae.calendarAclRuleRoles.forEach (role) ->
+    Vosae.Config.calendarAclRuleRoles.forEach (role) ->
       calendarAclRule.set 'role', role.get('value')
       expect(calendarAclRule.get('displayRole')).toEqual role.get('displayName')

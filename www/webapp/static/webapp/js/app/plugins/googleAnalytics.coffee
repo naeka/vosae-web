@@ -7,7 +7,7 @@ Ember.GoogleAnalyticsTrackingMixin = Ember.Mixin.create
       unless page
         loc = window.location
         page = (if loc.hash then loc.hash.substring(1) else loc.pathname + loc.search)
-      _gaq.push "_trackPageview", page
+      _gaq.push ["_trackPageview", page]
     return
 
   trackEvent: (category, action) ->

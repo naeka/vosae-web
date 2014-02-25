@@ -344,9 +344,6 @@ module.exports = (grunt) ->
       
       # i18n
       'i18n:false'
-
-      # Cleaning
-      'clean:dev'
     ]
 
   grunt.registerTask 'build-prod', 'Production build', -> 

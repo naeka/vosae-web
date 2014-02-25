@@ -22,7 +22,7 @@
         {{select
           contentBinding="Vosae.Config.itemsTypeChoices"
           valueBinding="type"
-          containerCssClass="helptour-itemtype"
+          containerCssClass="helptour-itemtype success"
           optionLabelPath="content.label"
           optionValuePath="content.value" }}
       </h4>
@@ -61,7 +61,7 @@
         </td>
         <td>
           {{view view.unitPriceField
-            itemBinding=this
+            itemBinding="this"
             classNames="form-control form-control-unstyled"
             placeholder="0" }}
         </td>
@@ -71,12 +71,14 @@
           <label>{% trans "Tax" %}</label>
         </td>
         <td>
-          {{select
-            contentBinding="controller.taxes"
-            selectionBinding="tax"
-            containerCssClass="taxes"
-            optionValuePath="content"
-            optionLabelPath="content.displayTax" }}
+          {{#if controller.taxes}}
+            {{select
+              contentBinding="controller.taxes"
+              valueBinding="tax.id"
+              containerCssClass="taxes success"
+              optionValuePath="content.id"
+              optionLabelPath="content.displayTax" }}
+          {{/if}}
         </td>
       </tr>
       <tr>
@@ -84,12 +86,14 @@
           <label>{% trans "Currency" %}</label>
         </td>
         <td>
-          {{select
-            contentBinding="controller.session.tenantSettings.invoicing.supportedCurrencies"
-            selectionBinding="currency"
-            containerCssClass="currencies"
-            optionValuePath="content.symbol"
-            optionLabelPath="content.symbol" }}
+          {{#if controller.session.tenantSettings.invoicing.supportedCurrencies}}
+            {{select
+              contentBinding="controller.session.tenantSettings.invoicing.supportedCurrencies"
+              valueBinding="currency.id"
+              containerCssClass="currencies success"
+              optionValuePath="content.id"
+              optionLabelPath="content.symbol" }}
+          {{/if}}
         </td>
       </tr>
     </table>

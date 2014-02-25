@@ -12,7 +12,6 @@ Vosae.PurchaseOrderEditView = Vosae.QuotationEditView.extend
       element
         .datepicker(@datepicker_settings)
         .on "changeDate", (ev) =>
-          console.log ev.date
           @get("currentRevision").set "purchaseOrderDate", ev.date
           element.datepicker 'hide'
 

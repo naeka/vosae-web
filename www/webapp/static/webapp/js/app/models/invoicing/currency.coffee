@@ -34,6 +34,7 @@ Vosae.Currency = Vosae.Model.extend
     symbol = @get('symbol')
     if sign and symbol
       return "#{sign} - #{symbol}"
+    console.log sign, symbol
     return ""
   ).property('symbol')
 

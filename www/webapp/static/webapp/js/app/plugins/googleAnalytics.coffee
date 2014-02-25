@@ -1,17 +1,17 @@
 Ember.GoogleAnalyticsTrackingMixin = Ember.Mixin.create
-  pageHasGa: ->
-    window.ga and typeof window.ga is "function"
+  pageHasGaq: ->
+    window._gaq and typeof window._gaq is "object"
 
   trackPageView: (page) ->
-    if @pageHasGa()
+    if @pageHasGaq()
       unless page
         loc = window.location
         page = (if loc.hash then loc.hash.substring(1) else loc.pathname + loc.search)
-      ga "send", "pageview", page
+      _gaq.push "_trackPageview", page
     return
 
   trackEvent: (category, action) ->
-    ga "send", "event", category, action if @pageHasGa()
+    _gaq.push ["_trackEvent", category, action] if @pageHasGaq()
     return
 
 Ember.Application.initializer

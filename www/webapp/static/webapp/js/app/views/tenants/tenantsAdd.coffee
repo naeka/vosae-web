@@ -1,4 +1,4 @@
-Vosae.TenantsAddView = Vosae.PageTenantView.extend
+Vosae.TenantsAddView = Vosae.PageTenantView.extend Ember.GoogleAnalyticsTrackingMixin,
   classNames: ["outlet-tenants", "page-add-tenant"]
   
   inStepIdentity: true
@@ -14,7 +14,7 @@ Vosae.TenantsAddView = Vosae.PageTenantView.extend
     # Focus on first input text
     @.$().find('.ember-text-field').first().focus()
     Vosae.Utilities.hideLoader()
-
+    @trackEvent('Subscription', 'in ' + @getCurrentStep())
   # Action handlers
   actions:
     # Go to form previous step
@@ -33,6 +33,8 @@ Vosae.TenantsAddView = Vosae.PageTenantView.extend
             inStepRegistration: false
       @set 'formIsValid', true
       $("#ct-tenant").scrollTop(0)
+      # Track event for google analytics
+      @trackEvent('Subscription', 'back to ' + currentStep)
 
     # Go to form next step
     nextStep: (tenant) ->
@@ -58,6 +60,8 @@ Vosae.TenantsAddView = Vosae.PageTenantView.extend
             @get('controller').send "save", tenant
           else
             $("#ct-tenant").scrollTop(0)
+      # Track event for google analytics
+      @trackEvent('Subscription', 'go to ' + currentStep)
 
   # Returns form's current step
   getCurrentStep: ->
@@ -156,6 +160,8 @@ Vosae.TenantsAddView = Vosae.PageTenantView.extend
 
   # Set a field as required
   setFieldAsRequired: (record, field) ->
+    @trackEvent('Subscription', "error: '#{field}' is required")
+
     error = gettext 'This field is required.'
     record.pushError(field, error)
 

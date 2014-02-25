@@ -21,9 +21,7 @@
       var page = window.location.hash.length > 0 ? window.location.hash.substring(1) : window.location.pathname;
 
       _gaq.push(['_setAccount', 'UA-8785414-10']);
-      _gaq.push(['_setDomainName', 'vosae.com']);
-      _gaq.push(['_trackPageview'], page.split('/').removeAt(1, 1).join('/'));
-      _gaq.push(['_setCustomVar', 1, 'Member Type', 'Registered', 1]);
+      _gaq.push(['_trackPageview']);
 
       (function() {
         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
@@ -31,6 +29,5 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
     </script> 
-
   </body>
 </html>

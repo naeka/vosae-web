@@ -7,7 +7,7 @@
   @module Vosae
 ###
 
-Vosae.TenantsAddController = Em.ObjectController.extend
+Vosae.TenantsAddController = Em.ObjectController.extend Ember.GoogleAnalyticsTrackingMixin,
   needs: ['tenantsShow']
 
   supportedCurrencies: []
@@ -90,6 +90,7 @@ Vosae.TenantsAddController = Em.ObjectController.extend
   actions:
     # Post the tenant and get tenantSettings
     save: (tenant) ->
+      @trackEvent('Subscription', 'completed')
       tenant.one 'didCreate', @, ->
         Ember.run.next @, ->
           if @get('session.tenant')
@@ -103,6 +104,7 @@ Vosae.TenantsAddController = Em.ObjectController.extend
 
     # Cancel the tenant creation form 
     cancel: ->
+      @trackEvent('Subscription', 'aborted')
       if confirm gettext('Do you realy want to leave this page ?')
         if @get('session.tenant')
           # @transitionToRoute 'dashboard.show', @get('session.tenant')

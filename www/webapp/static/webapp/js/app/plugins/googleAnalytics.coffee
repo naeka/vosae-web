@@ -7,8 +7,16 @@ Ember.GoogleAnalyticsTrackingMixin = Ember.Mixin.create
       unless page
         loc = window.location
         page = (if loc.hash then loc.hash.substring(1) else loc.pathname + loc.search)
-      _gaq.push ["_trackPageview", page]
+      _gaq.push ["_trackPageview", @removeTenantFromPage(page)]
     return
+
+  removeTenantFromPage: (page) ->
+    tenantSlug = Vosae.lookup('session:current').get('tenant.slug')
+    if tenantSlug and page.split('/')[1] is tenantSlug
+      page = page.split('/')
+      page.splice(1, 1)
+      page = page.join('/')
+    page
 
   trackEvent: (category, action) ->
     _gaq.push ["_trackEvent", category, action] if @pageHasGaq()

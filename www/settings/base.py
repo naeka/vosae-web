@@ -133,6 +133,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'webapp.context_processors.vosae_settings',
     'webapp.context_processors.debug',
     'webapp.context_processors.travis',
+    'webapp.context_processors.template_cache_timeout',
 )
 
 STATICI18N_PACKAGES = ('webapp',)
@@ -150,5 +151,7 @@ AWS_QUERYSTRING_AUTH = False
 DEFAULT_FILE_STORAGE = 'vosae_utils.VosaeS3BotoStorage'
 
 SENTRY_DSN = None
+
+TEMPLATE_CACHE_TIMEOUT = 60 * 60 * 24 * 7
 
 # DO NOT PUT ANYTHING BELOW

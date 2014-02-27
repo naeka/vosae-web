@@ -2,8 +2,10 @@ Vosae.InvoiceBaseController = Em.ObjectController.extend
   attachmentUploads: []
 
   actions:
-    setLineItemAsOptional: (lineItem) ->
-      console.log "setLineItemAsOptional"
+    toggleOptionalLineItem: (lineItem) ->
+      console.log lineItem.get('optional')
+      lineItem.set('optional', !lineItem.get('optional'))
+      console.log lineItem.get('optional')
 
     addLineItemAbove: (lineItem) ->
       currentRevision = @get "currentRevision"

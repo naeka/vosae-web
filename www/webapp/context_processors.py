@@ -18,3 +18,6 @@ def debug(context):
 
 def travis(context):
     return {'TRAVIS': settings.TRAVIS}
+
+def template_cache_timeout(context):
+	return {'cache_timeout': settings.TEMPLATE_CACHE_TIMEOUT}

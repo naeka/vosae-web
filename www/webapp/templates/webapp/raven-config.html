@@ -48,7 +48,4 @@ var ravenOptions = {
 };
 {# Configure Raven and install default handler to capture uncaught exceptions #}
 Raven.config('{{ SENTRY_DSN }}', ravenOptions).install();
-Raven.setUser({
-  email: "{{ request.user.email }}",
-})
 </script>

@@ -4,7 +4,7 @@ Vosae.InvoiceBaseController = Em.ObjectController.extend
   actions:
     toggleOptionalLineItem: (lineItem) ->
       console.log lineItem.get('optional')
-      lineItem.set('optional', !lineItem.get('optional'))
+      lineItem.set('optional', not lineItem.get('optional'))
       console.log lineItem.get('optional')
 
     addLineItemAbove: (lineItem) ->

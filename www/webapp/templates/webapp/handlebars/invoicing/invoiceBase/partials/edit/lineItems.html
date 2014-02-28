@@ -65,10 +65,12 @@
                 <i class="picto-options"></i>
               </button>
               <ul class="dropdown-menu">
-                {{#if optional}}
-                  <li {{action toggleOptionalLineItem this}}><a>{% trans "Unset optional" %}</a></li>
-                {{else}}
-                  <li {{action toggleOptionalLineItem this}}><a>{% trans "Set as optional" %}</a></li>
+                {{#if controller.canHaveOptionalLineItems}}
+                  {{#if optional}}
+                    <li {{action toggleOptionalLineItem this}}><a>{% trans "Unset optional" %}</a></li>
+                  {{else}}
+                    <li {{action toggleOptionalLineItem this}}><a>{% trans "Set as optional" %}</a></li>
+                  {{/if}}
                 {{/if}}
                 <li {{action addLineItemAbove this}}><a>{% trans "Insert one above" %}</a></li>
                 <li {{action addLineItemBelow this}}><a>{% trans "Insert one below" %}</a></li>

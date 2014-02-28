@@ -5,7 +5,7 @@ Vosae.LineItem = DS.Model.extend
   quantity: DS.attr('number')
   unitPrice: DS.attr('number')
   tax: DS.belongsTo('Vosae.Tax')
-  optional: DS.attr('boolean')
+  optional: DS.attr('boolean', defaultValue: false)
   
   shouldDisableField: (->
     # Returns true if current line item hasn't reference

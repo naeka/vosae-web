@@ -1,4 +1,13 @@
-Vosae.Components.SimpleEditor = Em.TextArea.extend
+###
+  This render a simple editor with CKEditor
+
+  @class SimpleEditor
+  @extends Ember.TextArea
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.SimpleEditor = Em.TextArea.extend
   maxLength: 512
   placeholder: null
     
@@ -8,7 +17,7 @@ Vosae.Components.SimpleEditor = Em.TextArea.extend
     editor = CKEDITOR.inline @get('elementId'),
       customConfig: false
       stylesSet: false
-      language: Vosae.currentLanguage
+      language: Vosae.Config.currentLanguage
       extraPlugins: 'wordcount,confighelper'
       toolbar: [
         ['Bold', 'Italic', 'Underline'],
@@ -37,6 +46,8 @@ Vosae.Components.SimpleEditor = Em.TextArea.extend
     context.set 'editor', editor
 
     editor.on 'change', =>
+      # console.log 'changed'
+      # console.log editor.getData()
       @set 'value', editor.getData()
 
   willDestroyElement: ->

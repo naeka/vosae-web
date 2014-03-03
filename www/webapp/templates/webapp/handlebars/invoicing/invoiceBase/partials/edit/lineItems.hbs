@@ -27,12 +27,12 @@
               placeholder="{% trans 'Reference' %}…" }}
           </td>
           <td class="description">
-            {{view Vosae.Components.SimpleEditor
+            {{!-- {{view Vosae.SimpleEditor
               currentItemBinding="this"
               valueBinding="description"
-              maxLength=1024
+              maxLength="1024"
               classNames="form-control form-control-unstyled description"
-              placeholder="{% trans 'Description' %}…" }}
+              placeholder="{% trans 'Description' %}…" }} --}}
             {{#if optional}}<p class="optional-label">{% trans "Optional" context "line item" %}</p>{{/if}}
           </td>
           <td class="quantity">

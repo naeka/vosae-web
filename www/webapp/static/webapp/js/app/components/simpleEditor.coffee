@@ -17,6 +17,8 @@ Vosae.Components.SimpleEditor = Em.TextArea.extend
       placeholder: @get('placeholder')
       allowedContent: 'b i u br'
       forcePasteAsPlainText: true
+      fillEmptyBlocks: false
+      autoParagraph: false
       enterMode: CKEDITOR.ENTER_BR
       coreStyles_bold:
         element: 'b'

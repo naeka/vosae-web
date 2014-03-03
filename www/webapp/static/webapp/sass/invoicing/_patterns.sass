@@ -156,6 +156,8 @@
   th, td
     &.reference
       min-width: 120px
+    &.description
+      min-width: 300px
     &.quantity
       text-align: right
       min-width: 70px
@@ -219,21 +221,21 @@
         .glyphicon
           font-size: 14px
 
+      &.description
+        padding: auto 0
+
+        > div.cke_editable
+          padding-top: 3px
+
+          & > p
+            margin: 0
+
       &.taxe
         .select2-container
           min-width: initial
 
-      &.description
-        padding: auto 0
-
-        textarea
-          vertical-align: middle
-          line-height: 26px
-          border: 0px
-          width: 100%
-
       &.total
-        line-height: 26px
+        line-height: 28px
 
       &.actions
         vertical-align: middle
@@ -248,6 +250,9 @@
           line-height: 23px
         .picto-options
           font-size: 17px
+
+      &.form-control-unstyled
+        line-height: 28px
 
     &.table-striped > tbody > tr:nth-child(odd) 
       & > td

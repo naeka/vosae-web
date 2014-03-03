@@ -202,8 +202,7 @@ module.exports = (grunt) ->
         dest: WEBAPP_BUILD_DIR + "locales/locale-<%= grunt.option(\"i18n_lang\") %>.js"
       webapp_css:
         src: [
-          WEBAPP_CSS_DIR + "webapp.css",
-          WEBAPP_CSS_DIR + "ckeditor.css"
+          WEBAPP_CSS_DIR + "webapp.css"
         ]
         dest: WEBAPP_BUILD_DIR + "webapp.css"
 

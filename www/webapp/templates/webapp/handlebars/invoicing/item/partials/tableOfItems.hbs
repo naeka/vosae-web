@@ -18,13 +18,9 @@
               {{item.ref}}
             {{/linkTo}}
           </td>
-          <td class="description">{{nl2br item.description}}</td>
+          <td class="description">{{{item.description}}}</td>
           <td class="unit-price">{{#formatMoneyHack item.unitPrice item.currency.displaySymbol}}{{/formatMoneyHack}}</td>
           <td class="tax">{{item.tax.displayTax}}</td>
-        </tr>
-      {{else}}
-        <tr>
-          <td class="no-data text-center" colspan="4">{% trans "No items" %}</td>
         </tr>
       {{/each}}
     </tbody>

@@ -14,13 +14,19 @@
     </thead>
     <tbody>
       {{#each currentRevision.lineItems}}
-        <tr>
+        <tr {{bind-attr class="optional"}}>
           <td class="reference">{{ref}}</td>
-          <td class="description">{{nl2br description}}</td>
+          <td class="description">
+            {{{description}}}
+            {{#if optional}}<p class="optional-label">{% trans "Optional" context "line item" %}</p>{{/if}}
+          </td>
           <td class="quantity">{{displayQuantity}}</td>
           <td class="unit-price">{{displayUnitPrice}}</td>
           <td class="tax">{{tax.displayTax}}</td>
-          <td class="total">{{displayTotal}}</td>
+          <td class="total">
+            {{displayTotal}}
+            {{#if optional}}<p class="optional-label">{% trans "Optional" context "line item" %}</p>{{/if}}
+          </td>
         </tr>
       {{else}}
         <tr>

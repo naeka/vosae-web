@@ -182,17 +182,19 @@ Vosae.InvoiceRevision = Vosae.Model.extend
   total: (->
     total = 0
     @get("lineItems").forEach (item) ->
-      total += item.get("total")
+      if not item.get("optional")
+        total += item.get("total")
     total
-  ).property("lineItems.@each.quantity", "lineItems.@each.unitPrice")
+  ).property("lineItems.@each.quantity", "lineItems.@each.unitPrice", "lineItems.@each.optional")
 
   # Returns quotation total VAT
   totalPlusTax: (->
     total = 0
     @get("lineItems").forEach (item) ->
-      total += item.get("totalPlusTax")
+      if not item.get("optional")
+        total += item.get("totalPlusTax")
     total
-  ).property("lineItems.@each.quantity", "lineItems.@each.unitPrice", "lineItems.@each.tax")
+  ).property("lineItems.@each.quantity", "lineItems.@each.unitPrice", "lineItems.@each.tax", "lineItems.@each.optional")
 
   # Returns the total formated with accounting
   displayTotal: (->
@@ -209,19 +211,20 @@ Vosae.InvoiceRevision = Vosae.Model.extend
     # console.log "here"
     groupedTaxes = []
     @get("lineItems").toArray().forEach (lineItem) ->
-      lineItemTax = lineItem.VAT()
-      if lineItemTax
-        if groupedTaxes.length
-          addedd = false
-          groupedTaxes.forEach (tax) ->
-            if lineItemTax.tax.get("id") is tax.tax.get("id")
-              tax.total = tax.total + lineItemTax.total
-              addedd = true
-          groupedTaxes.pushObject lineItemTax unless addedd
-        else
-          groupedTaxes.pushObject lineItemTax
+      if not lineItem.get("optional")
+        lineItemTax = lineItem.VAT()
+        if lineItemTax
+          if groupedTaxes.length
+            addedd = false
+            groupedTaxes.forEach (tax) ->
+              if lineItemTax.tax.get("id") is tax.tax.get("id")
+                tax.total = tax.total + lineItemTax.total
+                addedd = true
+            groupedTaxes.pushObject lineItemTax unless addedd
+          else
+            groupedTaxes.pushObject lineItemTax
     groupedTaxes
-  ).property("lineItems.@each.quantity", "lineItems.@each.unitPrice", "lineItems.@each.tax")
+  ).property("lineItems.@each.quantity", "lineItems.@each.unitPrice", "lineItems.@each.tax", "lineItems.@each.optional")
 
   getErrors: (type) ->
     errors = []

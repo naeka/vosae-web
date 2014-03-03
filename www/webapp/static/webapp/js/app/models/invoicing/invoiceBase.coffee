@@ -79,6 +79,12 @@ Vosae.InvoiceBase = Vosae.Model.extend
     return 'success'
   ).property()
 
+  canHaveOptionalLineItems: (->
+    if @get('isQuotation') or @get('isPurchaseOrder')
+      return true
+    return false
+  ).property()
+
   markAsState: (state) ->
     # Set state of `InvoiceBase`.
     if state and @get('id')

@@ -3,10 +3,10 @@
   a specific resource endpoint when user is typing his query.
   Example: /api/search/&q=tom&types=user
 
-  @class ResourceSearchField
+  @class ResourceSearchSelect
   @extends Ember.TextField
   @namespace Vosae
-  @module Components
+  @module Vosae
 ###
 
 Vosae.ResourceSearchSelect = Ember.TextField.extend

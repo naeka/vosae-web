@@ -35,6 +35,7 @@ describe 'Vosae.Quotation', ->
         "quantity":1
         "unit_price":100
         "tax":"/api/v1/tax/1/"
+        "optional":false
       ]
       "pdf":null
       "organization":"/api/v1/organization/1/"

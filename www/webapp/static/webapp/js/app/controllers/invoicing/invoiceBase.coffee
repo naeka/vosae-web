@@ -12,9 +12,7 @@ Vosae.InvoiceBaseController = Em.ObjectController.extend
 
   actions:
     toggleOptionalLineItem: (lineItem) ->
-      console.log lineItem.get('optional')
       lineItem.set('optional', not lineItem.get('optional'))
-      console.log lineItem.get('optional')
 
     addLineItemAbove: (lineItem) ->
       currentRevision = @get "currentRevision"
@@ -63,19 +61,19 @@ Vosae.InvoiceBaseController = Em.ObjectController.extend
       switch invoiceBase.constructor.toString()
         when Vosae.Quotation.toString()
           if invoiceBase.get('id')
-            return @transitionToRoute 'quotation.show', invoiceBase
+            return @transitionToRoute 'quotation.show', @get('session.tenant'), invoiceBase
           else
-            return @transitionToRoute 'quotations.show'
+            return @transitionToRoute 'quotations.show', @get('session.tenant')
         when Vosae.Invoice.toString()
           if invoiceBase.get('id')
-            return @transitionToRoute 'invoice.show', invoiceBase
+            return @transitionToRoute 'invoice.show', @get('session.tenant'), invoiceBase
           else
-            return @transitionToRoute 'invoices.show'
+            return @transitionToRoute 'invoices.show', @get('session.tenant')
         when Vosae.PurchaseOrder.toString()
           if invoiceBase.get('id')
-            return @transitionToRoute 'purchaseOrder.show', invoiceBase
+            return @transitionToRoute 'purchaseOrder.show', @get('session.tenant'), invoiceBase
           else
-            return @transitionToRoute 'purchaseOrders.show'
+            return @transitionToRoute 'purchaseOrders.show', @get('session.tenant')
       return
 
     save: (invoiceBase) ->

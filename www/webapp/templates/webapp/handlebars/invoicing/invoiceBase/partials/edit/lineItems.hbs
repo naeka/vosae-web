@@ -27,12 +27,12 @@
               placeholder="{% trans 'Reference' %}…" }}
           </td>
           <td class="description">
-            {{!-- {{view Vosae.SimpleEditor
+            {{view Vosae.SimpleEditor
               currentItemBinding="this"
               valueBinding="description"
               maxLength="1024"
               classNames="form-control form-control-unstyled description"
-              placeholder="{% trans 'Description' %}…" }} --}}
+              placeholder="{% trans 'Description' %}…" }}
             {{#if optional}}<p class="optional-label">{% trans "Optional" context "line item" %}</p>{{/if}}
           </td>
           <td class="quantity">
@@ -65,12 +65,16 @@
                 <i class="picto-options"></i>
               </button>
               <ul class="dropdown-menu">
-                {{#if controller.canHaveOptionalLineItems}}
-                  {{#if optional}}
-                    <li {{action toggleOptionalLineItem this}}><a>{% trans "Unset optional" %}</a></li>
-                  {{else}}
-                    <li {{action toggleOptionalLineItem this}}><a>{% trans "Set as optional" %}</a></li>
-                  {{/if}}
+                {{#if controller.canHaveOptionalLineItems}}                  
+                  <li {{action toggleOptionalLineItem this}}>
+                    <a>
+                      {{#if optional}}
+                        {% trans "Unset optional" %}
+                      {{else}}
+                        {% trans "Set as optional" %}
+                      {{/if}}
+                    </a>
+                  </li>
                 {{/if}}
                 <li {{action addLineItemAbove this}}><a>{% trans "Insert one above" %}</a></li>
                 <li {{action addLineItemBelow this}}><a>{% trans "Insert one below" %}</a></li>

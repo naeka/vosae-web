@@ -12,6 +12,9 @@ Vosae.QuotationEditRoute = Ember.Route.extend
       outlet: 'outletPageSettings'
 
   deactivate: ->
-    quotation = @controller.get 'content'
-    if quotation.get 'isDirty'
-      quotation.get("transaction").rollback()
+    try
+      quotation = @controller.get 'content'
+      if quotation.get('currentRevision.currentState.stateName') is "root.loaded.updated.uncommitted"
+        quotation.set 'currentRevision.currentState', DS.RootState.loaded.saved
+      if quotation.get 'isDirty'
+        quotation.get("transaction").rollback()

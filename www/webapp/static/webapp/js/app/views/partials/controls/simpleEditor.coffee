@@ -10,9 +10,10 @@
 Vosae.SimpleEditor = Em.TextArea.extend
   maxLength: 512
   placeholder: null
-    
-  didInsertElement: ->
-    @_super()
+
+  initCKEditor: (->
+    # We don't want CKEditor to load any stylesheets
+    CKEDITOR.skin.loadPart = (part, callback) -> callback && callback()
 
     editor = CKEDITOR.inline @get('elementId'),
       customConfig: false
@@ -39,26 +40,36 @@ Vosae.SimpleEditor = Em.TextArea.extend
         charLimit: @get 'maxLength'
         countHTML: true
 
+    # Empty title, this prevent us to have a title
+    # like 'Rich text editor, ember 1924'
+    editor.title = ''
+
     context = @get 'context'
-    value = @get 'value'
+    value = @get 'currentItem.description'
     if value
-      editor.setData value, undefined, true
-    context.set 'editor', editor
+      editor.setData value
 
+    # Editor -> Model
     editor.on 'change', =>
-      # console.log 'changed'
-      # console.log editor.getData()
-      @set 'value', editor.getData()
+      @set 'currentItem.description', editor.getData()
 
-  willDestroyElement: ->
-    context = @get 'context'
-    editor = context.get 'editor'
-    editor.destroy false
+    context.set 'editor', editor
+  ).on "didInsertElement"
 
+  destroyCKEditor: (->
+    # try / catch is needed to prevent an error due to a bug on CKEDITOR
+    # `Cannot call method 'clearCustomData' of undefined`
+    try
+      context = @get 'context'
+      editor = context.get 'editor'
+      editor.destroy false
+  ).on "willDestroyElement"
+
+  # Model -> Editor
   valueChanged: (->
     context = @get 'context'
     editor = context.get 'editor'
-    value = @get('value')
+    value = @get('currentItem.description')
     if not Em.isEqual value, editor.getData()
       editor.setData @get('value')
-  ).observes('value')
+  ).observes "value"

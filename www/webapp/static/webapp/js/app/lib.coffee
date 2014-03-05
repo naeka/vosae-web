@@ -1,4 +1,5 @@
 # Imports lib
+require 'lib/initializer'
 require 'lib/permissions'
 require 'lib/timezones'
 require 'lib/session'

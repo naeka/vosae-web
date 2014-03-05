@@ -146,7 +146,8 @@ module.exports = (grunt) ->
           WEBAPP_JS_VENDOR_DIR + "ckeditor.lang-all.js",
           WEBAPP_JS_VENDOR_DIR + "handlebars.js",
           WEBAPP_JS_VENDOR_DIR + "ember.js",
-          WEBAPP_JS_VENDOR_DIR + "ember-data.js"
+          WEBAPP_JS_VENDOR_DIR + "ember-data.js",
+          WEBAPP_JS_VENDOR_DIR + "embedded-adapter.js"
         ]
         dest: WEBAPP_BUILD_DIR + "vendor.js"
       webapp_js_vendor_prod:
@@ -191,6 +192,7 @@ module.exports = (grunt) ->
           WEBAPP_JS_VENDOR_DIR + "handlebars.js",
           WEBAPP_JS_VENDOR_DIR + "ember.min.js",
           WEBAPP_JS_VENDOR_DIR + "ember-data.min.js"
+          WEBAPP_JS_VENDOR_DIR + "embedded-adapter.min.js"
         ]
         dest: WEBAPP_BUILD_DIR + "vendor.js"  
       webapp_js_i18n:

@@ -8,7 +8,7 @@
 ###
 
 Vosae.CalendarAclRule = Vosae.Model.extend
-  principal: DS.belongsTo('Vosae.User')
+  principal: DS.belongsTo('user')
   role: DS.attr('string', defaultValue: 'NONE')
 
   displayRole: (->

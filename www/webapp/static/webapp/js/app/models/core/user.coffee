@@ -10,11 +10,11 @@
 Vosae.User = Vosae.Model.extend
   email: DS.attr('string')
   fullName: DS.attr('string')
-  groups: DS.hasMany('Vosae.Group')
+  groups: DS.hasMany('group')
   photoUri: DS.attr('string')
   permissions: DS.attr('array', defaultValue: [])
-  specificPermissions: DS.hasMany('Vosae.SpecificPermission')
-  settings: DS.belongsTo('Vosae.UserSettings')
+  specificPermissions: DS.hasMany('specificPermission')
+  settings: DS.belongsTo('userSettings')
   status: DS.attr('string')
 
   getStatus: (->
@@ -83,10 +83,3 @@ Vosae.User = Vosae.Model.extend
     message = gettext 'The user has been successfully deleted'
     Vosae.SuccessPopupComponent.open
       message: message
-
-
-Vosae.Adapter.map "Vosae.User",
-  specificPermissions:
-    embedded: 'always'
-  settings:
-    embedded: 'always'

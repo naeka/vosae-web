@@ -8,14 +8,14 @@
 ###
 
 Vosae.Payment = Vosae.Model.extend
-  issuer: DS.belongsTo('Vosae.User')
+  issuer: DS.belongsTo('user')
   issuedAt: DS.attr('datetime')
   amount: DS.attr('number')
-  currency: DS.belongsTo('Vosae.Currency')
+  currency: DS.belongsTo('currency')
   type: DS.attr('string')
   date: DS.attr('date')
   note: DS.attr('string')
-  relatedTo: DS.belongsTo('Vosae.Invoice')
+  relatedTo: DS.belongsTo('invoice')
 
   displayDate: (->
     # Return the date formated

@@ -13,7 +13,7 @@ Vosae.LineItem = Vosae.Model.extend
   itemId: DS.attr('string')
   quantity: DS.attr('number')
   unitPrice: DS.attr('number')
-  tax: DS.belongsTo('Vosae.Tax')
+  tax: DS.belongsTo('tax')
   optional: DS.attr('boolean', defaultValue: false)
   
   shouldDisableField: (->
@@ -96,8 +96,3 @@ Vosae.LineItem = Vosae.Model.extend
     if @get 'tax'
       return false
     return true
-
-
-Vosae.Adapter.map "Vosae.LineItem",
-  ref:
-    key: "reference"

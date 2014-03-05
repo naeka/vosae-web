@@ -48,7 +48,7 @@ Vosae.Notification = Vosae.Model.extend
 
 Vosae.ContactSavedNE = Vosae.Notification.extend Vosae.LazyContactResourceMixin,
   contactName: DS.attr('string')
-  contact: DS.belongsTo('Vosae.Contact')
+  contact: DS.belongsTo('contact')
 
   displayView: Em.View.extend
     templateName: 'notificationEntry/contactSaved'
@@ -70,7 +70,7 @@ Vosae.ContactSavedNE = Vosae.Notification.extend Vosae.LazyContactResourceMixin,
 
 Vosae.OrganizationSavedNE = Vosae.Notification.extend Vosae.LazyOrganizationResourceMixin,
   organizationName: DS.attr('string')
-  organization: DS.belongsTo('Vosae.Organization')
+  organization: DS.belongsTo('organization')
 
   displayView: Em.View.extend
     templateName: 'notificationEntry/organizationSaved'
@@ -93,7 +93,7 @@ Vosae.OrganizationSavedNE = Vosae.Notification.extend Vosae.LazyOrganizationReso
 Vosae.QuotationSavedNE = Vosae.Notification.extend Vosae.LazyQuotationResourceMixin,
   customerDisplay: DS.attr('string')
   quotationReference: DS.attr('string')
-  quotation: DS.belongsTo('Vosae.Quotation')
+  quotation: DS.belongsTo('quotation')
 
   displayView: Em.View.extend
     templateName: 'notificationEntry/quotationSaved'
@@ -116,7 +116,7 @@ Vosae.QuotationSavedNE = Vosae.Notification.extend Vosae.LazyQuotationResourceMi
 Vosae.InvoiceSavedNE = Vosae.Notification.extend Vosae.LazyInvoiceResourceMixin,
   customerDisplay: DS.attr('string')
   invoiceReference: DS.attr('string')
-  invoice: DS.belongsTo('Vosae.Invoice')
+  invoice: DS.belongsTo('invoice')
   invoiceHasTemporaryReference: DS.attr('boolean')
 
   displayView: Em.View.extend
@@ -140,7 +140,7 @@ Vosae.InvoiceSavedNE = Vosae.Notification.extend Vosae.LazyInvoiceResourceMixin,
 Vosae.DownPaymentInvoiceSavedNE = Vosae.Notification.extend Vosae.LazyDownPaymentInvoiceResourceMixin,
   customerDisplay: DS.attr('string')
   downPaymentInvoiceReference: DS.attr('string')
-  downPaymentInvoice: DS.belongsTo('Vosae.DownPaymentInvoice')
+  downPaymentInvoice: DS.belongsTo('downPaymentInvoice')
 
   displayView: Em.View.extend
     templateName: 'notificationEntry/downPaymentInvoiceSaved'
@@ -163,7 +163,7 @@ Vosae.DownPaymentInvoiceSavedNE = Vosae.Notification.extend Vosae.LazyDownPaymen
 Vosae.CreditNoteSavedNE = Vosae.Notification.extend Vosae.LazyCreditNoteResourceMixin,
   customerDisplay: DS.attr('string')
   creditNoteReference: DS.attr('string')
-  creditNote: DS.belongsTo('Vosae.CreditNote')
+  creditNote: DS.belongsTo('creditNote')
 
   displayView: Em.View.extend
     templateName: 'notificationEntry/creditNoteSaved'
@@ -186,7 +186,7 @@ Vosae.CreditNoteSavedNE = Vosae.Notification.extend Vosae.LazyCreditNoteResource
 Vosae.EventReminderNE = Vosae.Notification.extend Vosae.LazyEventReminderResourceMixin,
   occursAt: DS.attr('datetime')
   summary: DS.attr('string')
-  vosaeEvent: DS.belongsTo('Vosae.VosaeEvent')
+  vosaeEvent: DS.belongsTo('vosaeEvent')
 
   displayView: Em.View.extend
     templateName: 'notificationEntry/eventReminder'

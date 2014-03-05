@@ -16,7 +16,7 @@ Vosae.File = Vosae.Model.extend
   ttl: DS.attr('number')
   createdAt: DS.attr('datetime')
   modifiedAt: DS.attr('datetime')
-  issuer: DS.belongsTo("Vosae.User")
+  issuer: DS.belongsTo("user")
 
   # Returns the created date formated
   displayCreatedAt: (->

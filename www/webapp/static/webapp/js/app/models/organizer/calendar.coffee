@@ -12,9 +12,4 @@ Vosae.VosaeCalendar = Vosae.Model.extend
   description: DS.attr('string')
   location: DS.attr('string')
   timezone: DS.attr('string')
-  acl: DS.belongsTo('Vosae.CalendarAcl')
-
-
-Vosae.Adapter.map "Vosae.VosaeCalendar",
-  acl:
-    embedded: "always"
+  acl: DS.belongsTo('calendarAcl')

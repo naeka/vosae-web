@@ -16,8 +16,8 @@ Vosae.CalendarList = Vosae.Model.extend
   color: DS.attr('string')
   selected: DS.attr('boolean', defaultValue: true)
   isOwn: DS.attr('boolean', defaultValue: true)
-  calendar: DS.belongsTo('Vosae.VosaeCalendar')
-  reminders: DS.hasMany('Vosae.ReminderEntry')
+  calendar: DS.belongsTo('vosaeCalendar')
+  reminders: DS.hasMany('reminderEntry')
 
   displayName: (->
     # Returns summary or summaryOverride in case of user overrided it
@@ -72,8 +72,3 @@ Vosae.CalendarList = Vosae.Model.extend
     events.forEach (event)->
       fc_events.push event.getFullCalendarEvent()
     fc_events
-
-
-Vosae.Adapter.map "Vosae.CalendarList",
-  reminders:
-    embedded: "always"

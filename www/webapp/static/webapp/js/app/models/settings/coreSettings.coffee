@@ -8,9 +8,4 @@
 ###
 
 Vosae.CoreSettings = Vosae.Model.extend
-  quotas: DS.belongsTo('Vosae.StorageQuotasSettings')
-
-
-Vosae.Adapter.map "Vosae.CoreSettings",
-  quotas:
-    embedded: "always"
+  quotas: DS.belongsTo('storageQuotasSettings')

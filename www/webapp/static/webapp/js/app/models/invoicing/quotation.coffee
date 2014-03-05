@@ -104,14 +104,3 @@ Vosae.Quotation = Vosae.InvoiceBase.extend
     errors = []
     errors = errors.concat @get("currentRevision").getErrors("Quotation")
     return errors
-
-
-Vosae.Adapter.map "Vosae.Quotation",
-  # revisions:
-  #   embedded: "always"
-  ref:
-    key: "reference"
-  notes:
-    embedded: "always"
-  currentRevision:
-    embedded: "always"

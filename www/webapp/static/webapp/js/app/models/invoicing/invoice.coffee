@@ -12,10 +12,10 @@ Vosae.Invoice = Vosae.InvoiceBase.extend
   paid: DS.attr('number')
   balance: DS.attr('number')
   hasTemporaryReference: DS.attr('boolean', defaultValue: true)
-  payments: DS.hasMany('Vosae.Payment')
-  relatedQuotation: DS.belongsTo('Vosae.Quotation')
-  relatedPurchaseOrder: DS.belongsTo('Vosae.PurchaseOrder')
-  # relatedDeliveryOrder: DS.belongsTo('Vosae.DeliveryOrder')
+  payments: DS.hasMany('payment')
+  relatedQuotation: DS.belongsTo('quotation')
+  relatedPurchaseOrder: DS.belongsTo('purchaseOrder')
+  # relatedDeliveryOrder: DS.belongsTo('deliveryOrder')
 
   displayState: (->
     # Returns the current state readable and translated.
@@ -176,14 +176,3 @@ Vosae.Invoice = Vosae.InvoiceBase.extend
     errors = []
     errors = errors.concat @get("currentRevision").getErrors("Invoice")
     return errors
-
-
-Vosae.Adapter.map "Vosae.Invoice",
-  # revisions:
-  #   embedded: "always"
-  ref:
-    key: "reference"
-  notes:
-    embedded: "always"
-  currentRevision:
-    embedded: "always"

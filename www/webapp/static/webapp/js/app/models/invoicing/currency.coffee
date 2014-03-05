@@ -9,7 +9,7 @@
 
 Vosae.Currency = Vosae.Model.extend
   symbol: DS.attr('string')
-  rates: DS.hasMany('Vosae.ExchangeRate')
+  rates: DS.hasMany('exchangeRate')
   resourceUri: DS.attr('string')
 
   description: (->
@@ -55,8 +55,3 @@ Vosae.Currency = Vosae.Model.extend
   exchangeRateFor: (symbol) ->
     # Return the rate associated to the specified symbol.
     return @get('rates').findProperty('currencyTo', symbol)
-
-
-Vosae.Adapter.map "Vosae.Currency",
-  rates:
-    embedded: 'always'

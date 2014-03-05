@@ -21,15 +21,15 @@ Vosae.InvoiceRevision = Vosae.Model.extend
   sender: DS.attr('string')
   customerReference: DS.attr('string')
   taxesApplication: DS.attr('string')
-  lineItems: DS.hasMany('Vosae.LineItem')
-  pdf: DS.belongsTo('Vosae.LocalizedFile')
-  organization: DS.belongsTo('Vosae.Organization')
-  issuer: DS.belongsTo('Vosae.User')
-  contact: DS.belongsTo('Vosae.Contact')
-  senderAddress: DS.belongsTo('Vosae.Address')
-  billingAddress: DS.belongsTo('Vosae.Address')
-  deliveryAddress: DS.belongsTo('Vosae.Address')
-  currency: DS.belongsTo('Vosae.Currency')
+  lineItems: DS.hasMany('lineItem')
+  pdf: DS.belongsTo('localizedFile')
+  organization: DS.belongsTo('organization')
+  issuer: DS.belongsTo('user')
+  contact: DS.belongsTo('contact')
+  senderAddress: DS.belongsTo('address')
+  billingAddress: DS.belongsTo('address')
+  deliveryAddress: DS.belongsTo('address')
+  currency: DS.belongsTo('currency')
 
   # Update an invoice revision with a new currency
   updateWithCurrency: (newCurrency) ->
@@ -261,18 +261,3 @@ Vosae.InvoiceRevision = Vosae.Model.extend
         errors.addObject gettext("Quotation must have a currency")
     
     return errors
-
-
-Vosae.Adapter.map "Vosae.InvoiceRevision",
-  senderAddress:
-    embedded: "always"
-  billingAddress:
-    embedded: "always"
-  deliveryAddress:
-    embedded: "always"
-  currency:
-    embedded: "always"
-  pdf:
-    embedded: "always"
-  lineItems:
-    embedded: "always"

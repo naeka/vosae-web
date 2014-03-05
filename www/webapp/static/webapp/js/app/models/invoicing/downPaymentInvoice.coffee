@@ -9,14 +9,4 @@
 
 Vosae.DownPaymentInvoice = Vosae.Invoice.extend
   percentage: DS.attr('string')
-  taxApplied: DS.belongsTo('Vosae.Tax')
-
-Vosae.Adapter.map "Vosae.DownPaymentInvoice",
-  # revisions:
-  #   embedded: "always"
-  ref:
-    key: "reference"
-  notes:
-    embedded: "always"
-  currentRevision:
-    embedded: "always"
+  taxApplied: DS.belongsTo('tax')

@@ -13,13 +13,13 @@ Vosae.Tenant = Vosae.Model.extend
   email: DS.attr("string")
   phone: DS.attr("string")
   fax: DS.attr("string")
-  registrationInfo: DS.belongsTo('Vosae.RegistrationInfo', {polymorphic: true})
-  reportSettings: DS.belongsTo('Vosae.ReportSettings')
-  postalAddress: DS.belongsTo("Vosae.Address")
-  billingAddress: DS.belongsTo("Vosae.Address")
-  svgLogo: DS.belongsTo("Vosae.File")
-  imgLogo: DS.belongsTo("Vosae.File")
-  terms: DS.belongsTo("Vosae.File")
+  registrationInfo: DS.belongsTo('registrationInfo', {polymorphic: true})
+  reportSettings: DS.belongsTo('reportSettings')
+  postalAddress: DS.belongsTo("address")
+  billingAddress: DS.belongsTo("address")
+  svgLogo: DS.belongsTo("file")
+  imgLogo: DS.belongsTo("file")
+  terms: DS.belongsTo("file")
 
   isUploadingImg: false
   isUploadingTerms: false
@@ -73,14 +73,3 @@ Vosae.Tenant = Vosae.Model.extend
     message = gettext("The settings of your organization have been successfully updated")
     Vosae.SuccessPopupComponent.open
       message: message
-
-
-Vosae.Adapter.map "Vosae.Tenant",
-  registrationInfo:
-    embedded: "always"
-  reportSettings:
-    embedded: "always"
-  postalAddress:
-    embedded: "always"
-  billingAddress:
-    embedded: "always"

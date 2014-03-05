@@ -12,7 +12,7 @@ Vosae.Timeline = Vosae.Model.extend
   created: DS.attr('boolean')
   module: DS.attr('string')
   issuerName: DS.attr('string')
-  issuer: DS.belongsTo('Vosae.User')
+  issuer: DS.belongsTo('user')
 
   dateFormated: (->
     moment(@.get('datetime')).format "LL"
@@ -34,7 +34,7 @@ Vosae.Timeline = Vosae.Model.extend
 
 Vosae.ContactSavedTE = Vosae.Timeline.extend Vosae.LazyContactResourceMixin,
   contactName: DS.attr('string')
-  contact: DS.belongsTo('Vosae.Contact')
+  contact: DS.belongsTo('contact')
 
   displayView: Em.View.extend
     templateName: 'timelineEntry/contactSaved'
@@ -52,7 +52,7 @@ Vosae.ContactSavedTE = Vosae.Timeline.extend Vosae.LazyContactResourceMixin,
 
 Vosae.OrganizationSavedTE = Vosae.Timeline.extend Vosae.LazyOrganizationResourceMixin,
   organizationName: DS.attr('string')
-  organization: DS.belongsTo('Vosae.Organization')
+  organization: DS.belongsTo('organization')
 
   displayView: Em.View.extend
     templateName: 'timelineEntry/organizationSaved'
@@ -71,7 +71,7 @@ Vosae.OrganizationSavedTE = Vosae.Timeline.extend Vosae.LazyOrganizationResource
 Vosae.QuotationSavedTE = Vosae.Timeline.extend Vosae.LazyQuotationResourceMixin,
   customerDisplay: DS.attr('string')
   quotationReference: DS.attr('string')
-  quotation: DS.belongsTo('Vosae.Quotation')
+  quotation: DS.belongsTo('quotation')
 
   displayView: Em.View.extend
     templateName: 'timelineEntry/quotationSaved'
@@ -90,7 +90,7 @@ Vosae.QuotationSavedTE = Vosae.Timeline.extend Vosae.LazyQuotationResourceMixin,
 Vosae.InvoiceSavedTE = Vosae.Timeline.extend Vosae.LazyInvoiceResourceMixin,
   customerDisplay: DS.attr('string')
   invoiceReference: DS.attr('string')
-  invoice: DS.belongsTo('Vosae.Invoice')
+  invoice: DS.belongsTo('invoice')
   invoiceHasTemporaryReference: DS.attr('boolean')
 
   displayView: Em.View.extend
@@ -110,7 +110,7 @@ Vosae.InvoiceSavedTE = Vosae.Timeline.extend Vosae.LazyInvoiceResourceMixin,
 Vosae.DownPaymentInvoiceSavedTE = Vosae.Timeline.extend Vosae.LazyDownPaymentInvoiceResourceMixin,
   customerDisplay: DS.attr('string')
   downPaymentInvoiceReference: DS.attr('string')
-  downPaymentInvoice: DS.belongsTo('Vosae.DownPaymentInvoice')
+  downPaymentInvoice: DS.belongsTo('downPaymentInvoice')
 
   displayView: Em.View.extend
     templateName: 'timelineEntry/downPaymentInvoiceSaved'
@@ -129,7 +129,7 @@ Vosae.DownPaymentInvoiceSavedTE = Vosae.Timeline.extend Vosae.LazyDownPaymentInv
 Vosae.CreditNoteSavedTE = Vosae.Timeline.extend Vosae.LazyCreditNoteResourceMixin,
   customerDisplay: DS.attr('string')
   creditNoteReference: DS.attr('string')
-  creditNote: DS.belongsTo('Vosae.CreditNote')
+  creditNote: DS.belongsTo('creditNote')
 
   displayView: Em.View.extend
     templateName: 'timelineEntry/creditNoteSaved'
@@ -149,7 +149,7 @@ Vosae.QuotationChangedStateTE = Vosae.Timeline.extend Vosae.LazyQuotationResourc
   previousState: DS.attr('string')
   newState: DS.attr('string')
   quotationReference: DS.attr('string')
-  quotation: DS.belongsTo('Vosae.Quotation')
+  quotation: DS.belongsTo('quotation')
 
   displayView: Em.View.extend
     templateName: 'timelineEntry/quotationChangedState'
@@ -169,7 +169,7 @@ Vosae.InvoiceChangedStateTE = Vosae.Timeline.extend Vosae.LazyInvoiceResourceMix
   previousState: DS.attr('string')
   newState: DS.attr('string')
   invoiceReference: DS.attr('string')
-  invoice: DS.belongsTo('Vosae.Invoice')
+  invoice: DS.belongsTo('invoice')
 
   displayView: Em.View.extend
     templateName: 'timelineEntry/invoiceChangedState'
@@ -189,7 +189,7 @@ Vosae.DownPaymentInvoiceChangedStateTE = Vosae.Timeline.extend Vosae.LazyDownPay
   previousState: DS.attr('string')
   newState: DS.attr('string')
   downPaymentInvoiceReference: DS.attr('string')
-  downPaymentInvoice: DS.belongsTo('Vosae.DownPaymentInvoice')
+  downPaymentInvoice: DS.belongsTo('downPaymentInvoice')
 
   displayView: Em.View.extend
     templateName: 'timelineEntry/downPaymentInvoiceChangedState'
@@ -209,7 +209,7 @@ Vosae.CreditNoteChangedStateTE = Vosae.Timeline.extend Vosae.LazyCreditNoteResou
   previousState: DS.attr('string')
   newState: DS.attr('string')
   creditNoteReference: DS.attr('string')
-  creditNote: DS.belongsTo('Vosae.CreditNote')
+  creditNote: DS.belongsTo('creditNote')
 
   displayView: Em.View.extend
     templateName: 'timelineEntry/creditNoteChangedState'
@@ -226,9 +226,9 @@ Vosae.CreditNoteChangedStateTE = Vosae.Timeline.extend Vosae.LazyCreditNoteResou
 ###
 
 Vosae.QuotationAddedAttachmentTE = Vosae.Timeline.extend Vosae.LazyQuotationResourceMixin,
-  vosaeFile: DS.belongsTo('Vosae.File')
+  vosaeFile: DS.belongsTo('file')
   quotationReference: DS.attr('string')
-  quotation: DS.belongsTo('Vosae.Quotation')
+  quotation: DS.belongsTo('quotation')
 
   displayView: Em.View.extend
     templateName: 'timelineEntry/quotationAddedAttachment'
@@ -245,9 +245,9 @@ Vosae.QuotationAddedAttachmentTE = Vosae.Timeline.extend Vosae.LazyQuotationReso
 ###
 
 Vosae.InvoiceAddedAttachmentTE = Vosae.Timeline.extend Vosae.LazyInvoiceResourceMixin,
-  vosaeFile: DS.belongsTo('Vosae.File')
+  vosaeFile: DS.belongsTo('file')
   invoiceReference: DS.attr('string')
-  invoice: DS.belongsTo('Vosae.Invoice')
+  invoice: DS.belongsTo('invoice')
 
   displayView: Em.View.extend
     templateName: 'timelineEntry/invoiceAddedAttachment'
@@ -264,9 +264,9 @@ Vosae.InvoiceAddedAttachmentTE = Vosae.Timeline.extend Vosae.LazyInvoiceResource
 ###
 
 Vosae.DownPaymentInvoiceAddedAttachmentTE = Vosae.Timeline.extend Vosae.LazyDownPaymentInvoiceResourceMixin,
-  vosaeFile: DS.belongsTo('Vosae.File')
+  vosaeFile: DS.belongsTo('file')
   downPaymentInvoiceReference: DS.attr('string')
-  downPaymentInvoice: DS.belongsTo('Vosae.DownPaymentInvoice')
+  downPaymentInvoice: DS.belongsTo('downPaymentInvoice')
 
   displayView: Em.View.extend
     templateName: 'timelineEntry/downPaymentInvoiceAddedAttachment'
@@ -283,9 +283,9 @@ Vosae.DownPaymentInvoiceAddedAttachmentTE = Vosae.Timeline.extend Vosae.LazyDown
 ###
 
 Vosae.CreditNoteAddedAttachmentTE = Vosae.Timeline.extend Vosae.LazyCreditNoteResourceMixin,
-  vosaeFile: DS.belongsTo('Vosae.File')
+  vosaeFile: DS.belongsTo('file')
   creditNoteReference: DS.attr('string')
-  creditNote: DS.belongsTo('Vosae.CreditNote')
+  creditNote: DS.belongsTo('creditNote')
 
   displayView: Em.View.extend
     templateName: 'timelineEntry/creditNoteAddedAttachment'
@@ -304,10 +304,10 @@ Vosae.CreditNoteAddedAttachmentTE = Vosae.Timeline.extend Vosae.LazyCreditNoteRe
 Vosae.QuotationMakeInvoiceTE = Vosae.Timeline.extend Vosae.LazyQuotationResourceMixin, Vosae.LazyInvoiceResourceMixin,
   customerDisplay: DS.attr('string')
   quotationReference: DS.attr('string')
-  quotation: DS.belongsTo('Vosae.Quotation')
+  quotation: DS.belongsTo('quotation')
   invoiceReference: DS.attr('string')
   invoiceHasTemporaryReference: DS.attr('boolean')
-  invoice: DS.belongsTo('Vosae.Invoice')
+  invoice: DS.belongsTo('invoice')
 
   displayView: Em.View.extend
     templateName: 'timelineEntry/quotationMakeInvoice'
@@ -325,8 +325,8 @@ Vosae.QuotationMakeInvoiceTE = Vosae.Timeline.extend Vosae.LazyQuotationResource
 
 Vosae.QuotationMakeDownPaymentInvoiceTE = Vosae.Timeline.extend Vosae.LazyQuotationResourceMixin,
   quotationReference: DS.attr('string')
-  quotation: DS.belongsTo('Vosae.Quotation')
-  downPaymentInvoice: DS.belongsTo('Vosae.DownPaymentInvoice')
+  quotation: DS.belongsTo('quotation')
+  downPaymentInvoice: DS.belongsTo('downPaymentInvoice')
 
   displayView: Em.View.extend
     templateName: 'timelineEntry/quotationMakeDownPaymentInvoice'
@@ -344,8 +344,8 @@ Vosae.QuotationMakeDownPaymentInvoiceTE = Vosae.Timeline.extend Vosae.LazyQuotat
 
 Vosae.InvoiceCancelledTE = Vosae.Timeline.extend Vosae.LazyInvoiceResourceMixin,
   invoiceReference: DS.attr('string')
-  invoice: DS.belongsTo('Vosae.Invoice')
-  creditNote: DS.belongsTo('Vosae.CreditNote')
+  invoice: DS.belongsTo('invoice')
+  creditNote: DS.belongsTo('creditNote')
 
   displayView: Em.View.extend
     templateName: 'timelineEntry/invoiceCancelled'
@@ -363,8 +363,8 @@ Vosae.InvoiceCancelledTE = Vosae.Timeline.extend Vosae.LazyInvoiceResourceMixin,
 
 Vosae.DownPaymentInvoiceCancelledTE = Vosae.Timeline.extend Vosae.LazyDownPaymentInvoiceResourceMixin,
   downPaymentInvoiceReference: DS.attr('string')
-  downPaymentInvoice: DS.belongsTo('Vosae.DownPaymentInvoice')
-  creditNote: DS.belongsTo('Vosae.CreditNote')
+  downPaymentInvoice: DS.belongsTo('downPaymentInvoice')
+  creditNote: DS.belongsTo('creditNote')
 
   displayView: Em.View.extend
     templateName: 'timelineEntry/downPaymentInvoiceCancelled'

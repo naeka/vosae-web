@@ -13,13 +13,13 @@ Vosae.InvoiceBase = Vosae.Model.extend
   total: DS.attr('number')
   amount: DS.attr('number')
   # revisions: DS.hasMany('Vosae.InvoiceRevision')
-  notes: DS.hasMany('Vosae.InvoiceNote')
-  attachments: DS.hasMany('Vosae.File')
-  issuer: DS.belongsTo('Vosae.User')
-  organization: DS.belongsTo('Vosae.Organization')
-  contact: DS.belongsTo('Vosae.Contact')
-  currentRevision: DS.belongsTo('Vosae.InvoiceRevision')
-  group: DS.belongsTo('Vosae.InvoiceBaseGroup', inverse: null)
+  notes: DS.hasMany('invoiceNote')
+  attachments: DS.hasMany('file')
+  issuer: DS.belongsTo('user')
+  organization: DS.belongsTo('organization')
+  contact: DS.belongsTo('contact')
+  currentRevision: DS.belongsTo('invoiceRevision')
+  group: DS.belongsTo('invoiceBaseGroup', inverse: null)
 
   isUploading: false
   isUpdatingState: false

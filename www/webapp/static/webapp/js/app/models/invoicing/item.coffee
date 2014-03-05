@@ -12,8 +12,8 @@ Vosae.Item = Vosae.Model.extend
   description: DS.attr('string')
   unitPrice: DS.attr('number')
   type: DS.attr('string')
-  currency: DS.belongsTo('Vosae.Currency')
-  tax: DS.belongsTo('Vosae.Tax')
+  currency: DS.belongsTo('currency')
+  tax: DS.belongsTo('tax')
 
   displayUnitPrice: (->
     # Returns the unit price formated with a precision of 2
@@ -74,8 +74,3 @@ Vosae.Item = Vosae.Model.extend
     message = gettext 'Your item has been successfully deleted'
     Vosae.SuccessPopupComponent.open
       message: message
-
-
-Vosae.Adapter.map "Vosae.Item",
-  ref:
-    key: "reference"

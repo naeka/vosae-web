@@ -31,14 +31,3 @@ Vosae.PurchaseOrder = Vosae.Quotation.extend
             controller.transitionToRoute 'invoice.show', controller.get('session.tenant'), store.find(Vosae.Invoice, invoiceId)
           purchaseOrder.set 'isMakingInvoice', false
       ).then null, adapter.rejectionHandler
-
-
-Vosae.Adapter.map "Vosae.PurchaseOrder",
-  # revisions:
-  #   embedded: "always"
-  ref:
-    key: "reference"
-  notes:
-    embedded: "always"
-  currentRevision:
-    embedded: "always"

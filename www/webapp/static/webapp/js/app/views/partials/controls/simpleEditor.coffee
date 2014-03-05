@@ -26,6 +26,7 @@ Vosae.SimpleEditor = Em.TextArea.extend
       ]
       placeholder: @get('placeholder')
       allowedContent: 'b i u br'
+      entities: false
       forcePasteAsPlainText: true
       fillEmptyBlocks: false
       autoParagraph: false

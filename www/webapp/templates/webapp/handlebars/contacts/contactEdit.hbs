@@ -6,17 +6,17 @@
       <div class="btn-toolbar pull-left">
         {{#if id}}
           <div class="btn-group">    
-            {{#linkTo "contact.show" controller.session.tenant content class="btn btn-default"}}
+            {{#link-to "contact.show" controller.session.tenant content class="btn btn-default"}}
               <i class="picto-arrow-left"></i>
               {{unbound this.fullName}}
-            {{/linkTo}}
+            {{/link-to}}
           </div>
         {{else}}
           <div class="btn-group">
-            {{#linkTo "contacts.show" controller.session.tenant class="btn btn-default"}}
+            {{#link-to "contacts.show" controller.session.tenant class="btn btn-default"}}
               <i class="picto-arrow-left"></i>
               {% trans "My contacts" %}
-            {{/linkTo}}
+            {{/link-to}}
           </div>
         {{/if}}
       </div>
@@ -45,11 +45,11 @@
     </section>
     
     <section class="main-infos clearfix">
-      <div {{bindAttr class="isUploading:uploading :avatar :rounded :pull-left"}}>
+      <div {{bind-attr class="isUploading:uploading :avatar :rounded :pull-left"}}>
         {{view view.uploadProgressBar isUploadingBinding="content.isUploading"}}
         {{#if photoUri}}
           {{#unless isUploading}}
-            <img {{bindAttr src="photoUri"}}>
+            <img {{bind-attr src="photoUri"}}>
           {{/unless}}
         {{/if}}
         <input class="fileupload fill" type="file" multiple/>

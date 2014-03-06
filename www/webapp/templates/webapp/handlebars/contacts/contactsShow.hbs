@@ -4,18 +4,18 @@
   <section class="actions clearfix">
     <div class="btn-toolbar pull-left">
       <div class="btn-group">
-        {{#linkTo "organizations.show" controller.session.tenant class="btn btn-default"}}
+        {{#link-to "organizations.show" controller.session.tenant class="btn btn-default"}}
           <i class="picto-arrow-left"></i>
           {% trans "My organizations" %}
-        {{/linkTo}}
+        {{/link-to}}
       </div>
     </div>
     <div class="btn-toolbar pull-right">
       <div class="btn-group">
-        {{#linkTo "contacts.add" controller.session.tenant class="btn btn-success"}}
+        {{#link-to "contacts.add" controller.session.tenant class="btn btn-success"}}
           <i class="picto-add"></i>
           {% trans "Contact" context "contacts" %}
-        {{/linkTo}}
+        {{/link-to}}
       </div>
     </div>
   </section>

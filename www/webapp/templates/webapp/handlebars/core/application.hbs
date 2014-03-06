@@ -37,7 +37,7 @@
             <a id="desktop-header-settings" {{action openPanelRight target="view"}}>
               <div class="avatar" title="{% trans 'My settings' %}">
                 {{#if controller.session.user.photoUri}}
-                  <img {{bindAttr src="controller.session.user.photoUri"}}>
+                  <img {{bind-attr src="controller.session.user.photoUri"}}>
                 {{/if}}
               </div>
               <span class="username">{{controller.session.user.fullName}}</span>
@@ -87,37 +87,37 @@
             {{#if controller.session.tenant}}
             <nav id="desktop-app-menu" class="bootstro">
               <ul class="list-unstyled">
-                <li class="dashboard" {{bindAttr class="isDashboard:active"}}>
-                  {{#linkTo "dashboard.show" controller.session.tenant}}
+                <li class="dashboard" {{bind-attr class="isDashboard:active"}}>
+                  {{#link-to "dashboard.show" controller.session.tenant}}
                     <span class="circle">
                       <i class="picto-home"></i>
                     </span>
                     {% trans "Timeline" %}
-                  {{/linkTo}}
+                  {{/link-to}}
                 </li>
-                <li class="contacts" {{bindAttr class="isContacts:active"}}>
-                  {{#linkTo "organizations.show" controller.session.tenant}}
+                <li class="contacts" {{bind-attr class="isContacts:active"}}>
+                  {{#link-to "organizations.show" controller.session.tenant}}
                     <span class="circle">
                       <i class="picto-users"></i>
                     </span>
                     {% trans "Contacts" %}
-                  {{/linkTo}}
+                  {{/link-to}}
                 </li>
-                <li class="calendar" {{bindAttr class="isOrganizer:active"}}>
-                  {{#linkTo "calendarLists.show" controller.session.tenant}}
+                <li class="calendar" {{bind-attr class="isOrganizer:active"}}>
+                  {{#link-to "calendarLists.show" controller.session.tenant}}
                     <span class="circle">
                       <i class="picto-agenda"></i>
                     </span>
                     {% trans "Organizer" %}
-                  {{/linkTo}}
+                  {{/link-to}}
                 </li>
-                <li class="invoicing" {{bindAttr class="isInvoicing:active"}}>
-                  {{#linkTo "invoicing.dashboard" controller.session.tenant}}
+                <li class="invoicing" {{bind-attr class="isInvoicing:active"}}>
+                  {{#link-to "invoicing.dashboard" controller.session.tenant}}
                     <span class="circle">
                       <i class="picto-moneybox"></i>
                     </span>
                     {% trans "Invoicing" %}
-                  {{/linkTo}}
+                  {{/link-to}}
                 </li>
               </ul>
             </nav>

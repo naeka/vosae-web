@@ -73,10 +73,10 @@
           </tr>
           <tr>
             <td colspan="2" class="logo">
-              <div {{bindAttr class=":dropzone logoUri::empty"}}>
+              <div {{bind-attr class=":dropzone logoUri::empty"}}>
                 {{#unless isUploadingLogo}}
                   {{#if logoUri}}
-                    <img {{bindAttr src="logoUri"}}>
+                    <img {{bind-attr src="logoUri"}}>
                   {{/if}}
                   <div class="drag-drop-message">{% trans "Drop here" %}</div>
                 {{else}}
@@ -107,7 +107,7 @@
           </tr>
           <tr>
             <td colspan="2" class="terms">
-              <div {{bindAttr class=":dropzone terms::empty"}}>
+              <div {{bind-attr class=":dropzone terms::empty"}}>
                 {{#unless isUploadingTerms}}
                   {{#if terms}}
                     <span class="filename" {{action downloadTerms terms}}>{{terms.name}} <span>({{formatDate terms.modifiedAt}})</span></span>

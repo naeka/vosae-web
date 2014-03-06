@@ -2,7 +2,7 @@
 
 {% tplhandlebars "dashboard/show" %}
   {{#if content.length}}
-    <div {{bindAttr class="content.length:showCrossBar:hideCrossBar"}}>
+    <div {{bind-attr class="content.length:showCrossBar:hideCrossBar"}}>
       <div class="cross-bar"></div>
       {{view view.timelineItems arrangedContentBinding="arrangedContent"}}
       {{#if content.meta.loading}}
@@ -39,7 +39,7 @@
           <li class="item show no-animation join">
             <div class="avatar">
               {{#if controller.session.user.photoUri}}
-                <img {{bindAttr src="controller.session.user.photoUri"}}>
+                <img {{bind-attr src="controller.session.user.photoUri"}}>
               {{/if}}
             </div>
             <span class="icon"></span>
@@ -91,7 +91,7 @@
   {{#each item in arrangedContent}}
     {# Display date #}
     {{#if item.dateChanged}}
-      <li {{bindAttr class="item.isFirst:first :date :show"}}><div><span>{{unbound item.dateFormated}}</span></div></li>
+      <li {{bind-attr class="item.isFirst:first :date :show"}}><div><span>{{unbound item.dateFormated}}</span></div></li>
     {{else}}
       {{#if item.isFirst}}
         <li class="date show first"><div><span>{% trans "Today" %}</span></div></li>
@@ -104,7 +104,7 @@
 {% tplhandlebars "timelineEntry" %}
   <div class="avatar">
     {{#if item.issuer.photoUri}}
-      <img {{bindAttr src="item.issuer.photoUri"}}>
+      <img {{bind-attr src="item.issuer.photoUri"}}>
     {{/if}}
   </div>
   <span class="icon"></span>

@@ -10,14 +10,14 @@
 
 {% tplhandlebars "desktop-right-panel" %}
   <nav>
-    {{#linkTo 'settings.application' controller.session.tenant class="btn btn-panel btn-yellow"}}
+    {{#link-to 'settings.application' controller.session.tenant class="btn btn-panel btn-yellow"}}
       <i class="picto-settings"></i>
       {% trans "Settings" %}
-    {{/linkTo}}
+    {{/link-to}}
     <div class="btn-group tenant">
-      {{#linkTo 'settings.organization' controller.session.tenant class="btn btn-yellow" tagName="button"}}
+      {{#link-to 'settings.organization' controller.session.tenant class="btn btn-yellow" tagName="button"}}
         <i class="picto-documents"></i> {% trans "My organization" %}
-      {{/linkTo}}
+      {{/link-to}}
       <button class="btn dropdown-toggle btn-yellow" data-toggle="dropdown">
         <span class="caret"></span>
       </button>
@@ -31,9 +31,9 @@
           <li class="divider"></li>
         {{/if}}
         <li>
-          {{#linkTo 'tenants.add'}}
+          {{#link-to 'tenants.add'}}
             {% trans "Add new organization" %}
-          {{/linkTo}}
+          {{/link-to}}
         </li>
       </ul>
     </div>

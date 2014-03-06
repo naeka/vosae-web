@@ -33,23 +33,23 @@
   <section class="sub-actions clearfix">
     <div class="btn-toolbar pull-left helptour-addbtn">
       <div class="btn-group">
-        {{#linkTo "quotations.add" controller.session.tenant class="btn btn-primary"}}
+        {{#link-to "quotations.add" controller.session.tenant class="btn btn-primary"}}
           <i class="picto-add"></i>
           {% trans "Quotation" %}
-        {{/linkTo}}
+        {{/link-to}}
       </div>
       <div class="btn-group">
-        {{#linkTo "invoices.add" controller.session.tenant class="btn btn-success invoice"}}
+        {{#link-to "invoices.add" controller.session.tenant class="btn btn-success invoice"}}
           <i class="picto-add"></i>
           {% trans "Invoice" %}
-        {{/linkTo}}
+        {{/link-to}}
       </div>
       {# <a class="btn add grey">{% trans "Purchase" %}</a> #}
       <div class="btn-group">
-        {{#linkTo "items.add" controller.session.tenant class="btn btn-default"}}
+        {{#link-to "items.add" controller.session.tenant class="btn btn-default"}}
           <i class="picto-add"></i>
           {% trans "Item" %}
-        {{/linkTo}}
+        {{/link-to}}
       </div>
     </div>
   </section>
@@ -62,9 +62,9 @@
       </h4>
       <div class="btn-toolbar pull-right">
         <div class="btn-group">
-          {{#linkTo "invoices.add" controller.session.tenant class="btn btn-sm btn-rounded btn-success"}}
+          {{#link-to "invoices.add" controller.session.tenant class="btn btn-sm btn-rounded btn-success"}}
             {% trans "Add" %}
-          {{/linkTo}}
+          {{/link-to}}
         </div>
       </div>
     </div>
@@ -74,9 +74,9 @@
 
     {{#if shouldDisplayAllInvoicesButton}}
     <p class="table-see-more">
-      {{#linkTo "invoices.show" controller.session.tenant class="btn btn-sm btn-rounded btn-default text-bold"}}
+      {{#link-to "invoices.show" controller.session.tenant class="btn btn-sm btn-rounded btn-default text-bold"}}
         {% trans "See all invoices" %}...
-      {{/linkTo}}
+      {{/link-to}}
     </p>
     {{/if}}
   </section>
@@ -89,9 +89,9 @@
       </h4>
       <div class="btn-toolbar pull-right">
         <div class="btn-group">
-          {{#linkTo "quotations.add" controller.session.tenant class="btn btn-sm btn-primary btn-rounded"}}
+          {{#link-to "quotations.add" controller.session.tenant class="btn btn-sm btn-primary btn-rounded"}}
             {% trans "Add" %}
-          {{/linkTo}}
+          {{/link-to}}
         </div>
       </div>
     </div>
@@ -101,9 +101,9 @@
 
     {{#if shouldDisplayAllQuotationsButton}}
     <p class="table-see-more">
-      {{#linkTo "quotations.show" controller.session.tenant class="btn btn-sm btn-rounded btn-default text-bold"}}
+      {{#link-to "quotations.show" controller.session.tenant class="btn btn-sm btn-rounded btn-default text-bold"}}
         {% trans "See all quotations" %}...
-      {{/linkTo}}
+      {{/link-to}}
     </p>
     {{/if}}
   </section>

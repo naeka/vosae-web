@@ -5,24 +5,24 @@
     <div class="inner">
       <ul class="clearfix">
         <li class="exit">
-          {{#linkTo "dashboard.show" controller.session.tenant class="btn"}}
+          {{#link-to "dashboard.show" controller.session.tenant class="btn"}}
             <i class="picto-arrow-left"></i>&nbsp;{% trans "Return to application" %}
-          {{/linkTo}}
+          {{/link-to}}
         </li>
         <li class="module"><strong>{% trans "Global settings" %}</strong></li>
         <li class="links">
-          {{#linkTo 'settings.application' controller.session.tenant}}{% trans "Application" %}{{/linkTo}}
-          {{#linkTo 'settings.apiKeys' controller.session.tenant}}{% trans "API keys" %}{{/linkTo}}
-          {{#linkTo 'settings.organization' controller.session.tenant}}{% trans "Organization" %}{{/linkTo}}
-          {{#linkTo 'settings.showUsers' controller.session.tenant}}{% trans "Users" %}{{/linkTo}}
-          {{#linkTo 'settings.showGroups' controller.session.tenant}}{% trans "Groups" %}{{/linkTo}}
-          {{#linkTo 'settings.report' controller.session.tenant}}{% trans "Reports" %}{{/linkTo}}
+          {{#link-to 'settings.application' controller.session.tenant}}{% trans "Application" %}{{/link-to}}
+          {{#link-to 'settings.apiKeys' controller.session.tenant}}{% trans "API keys" %}{{/link-to}}
+          {{#link-to 'settings.organization' controller.session.tenant}}{% trans "Organization" %}{{/link-to}}
+          {{#link-to 'settings.showUsers' controller.session.tenant}}{% trans "Users" %}{{/link-to}}
+          {{#link-to 'settings.showGroups' controller.session.tenant}}{% trans "Groups" %}{{/link-to}}
+          {{#link-to 'settings.report' controller.session.tenant}}{% trans "Reports" %}{{/link-to}}
         </li>
         <li class="module"><strong>{% trans "Invoicing settings" %}</strong></li>
         <li class="links">
-          {{#linkTo 'settings.invoicingGeneral' controller.session.tenant}}{% trans "General" %}{{/linkTo}}
-          {{#linkTo 'settings.showTaxes' controller.session.tenant}}{% trans "Taxes" %}{{/linkTo}}
-          {{#linkTo 'settings.numbering' controller.session.tenant}}{% trans "Numbering" %}{{/linkTo}}
+          {{#link-to 'settings.invoicingGeneral' controller.session.tenant}}{% trans "General" %}{{/link-to}}
+          {{#link-to 'settings.showTaxes' controller.session.tenant}}{% trans "Taxes" %}{{/link-to}}
+          {{#link-to 'settings.numbering' controller.session.tenant}}{% trans "Numbering" %}{{/link-to}}
         </li>
       </ul>
     </div>

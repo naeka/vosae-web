@@ -6,9 +6,9 @@
     <section class="actions clearfix">
       <ul class="nav nav-tabs">
         <li>
-          {{#linkTo "invoicing.dashboard" controller.session.tenant}}
+          {{#link-to "invoicing.dashboard" controller.session.tenant}}
             {% trans "Dashboard" context "invoicing" %}
-          {{/linkTo}}
+          {{/link-to}}
         </li>
         <li class="pull-right dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -16,26 +16,26 @@
           </a>
           <ul class="dropdown-menu" role="menu">
             <li>
-              {{#linkTo "purchaseOrders.show" controller.session.tenant}}
+              {{#link-to "purchaseOrders.show" controller.session.tenant}}
                 {% trans "Purchase orders" %}
-              {{/linkTo}}
+              {{/link-to}}
             </li>
             <li>
-              {{#linkTo "items.show" controller.session.tenant}}
+              {{#link-to "items.show" controller.session.tenant}}
                 {% trans "Items" %}
-              {{/linkTo}}
+              {{/link-to}}
             </li>
           </ul>
         </li>
         <li class="pull-right">
-          {{#linkTo "invoices.show" controller.session.tenant}}
+          {{#link-to "invoices.show" controller.session.tenant}}
             {% trans "Invoices" %}
-          {{/linkTo}}
+          {{/link-to}}
         </li>
         <li class="pull-right">
-          {{#linkTo "quotations.show" controller.session.tenant}}
+          {{#link-to "quotations.show" controller.session.tenant}}
             {% trans "Quotations" %}
-          {{/linkTo}}
+          {{/link-to}}
         </li>
       </ul>
     </section>

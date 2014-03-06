@@ -16,9 +16,9 @@
           {{#each group in controller}}
           <tr>
             <td class="name">
-              {{#linkTo 'settings.editGroup' controller.session.tenant group}}
+              {{#link-to 'settings.editGroup' controller.session.tenant group}}
                 {{group.name}}
-              {{/linkTo}}
+              {{/link-to}}
             </td>
             <td class="created-by">
               {{#if group.createdBy}}
@@ -33,9 +33,9 @@
         </tbody>
       </table>
       <br/>
-      {{#linkTo 'settings.addGroup' controller.session.tenant class="pull-right btn btn-sm btn-success btn-rounded"}}
+      {{#link-to 'settings.addGroup' controller.session.tenant class="pull-right btn btn-sm btn-success btn-rounded"}}
         {% trans "Add" %}
-      {{/linkTo}}
+      {{/link-to}}
     </div>
   </section>
 {% endtplhandlebars %}

@@ -5,19 +5,19 @@
   <section class="actions clearfix">
     <div class="btn-toolbar pull-left">
       {{#if id}}            
-        {{#linkTo "calendarList.show" controller.session.tenant content class="btn btn-default"}}
+        {{#link-to "calendarList.show" controller.session.tenant content class="btn btn-default"}}
           <i class="picto-arrow-left"></i>
           {{#if summary}}
             {{summary}}
           {{else}}
             {% trans "Back" context "go back" %}
           {{/if}}
-        {{/linkTo}}
+        {{/link-to}}
       {{else}}
-        {{#linkTo "calendarLists.show" controller.session.tenant class="btn btn-default"}}
+        {{#link-to "calendarLists.show" controller.session.tenant class="btn btn-default"}}
           <i class="picto-arrow-left"></i>
           {% trans "Organizer" %}
-        {{/linkTo}}
+        {{/link-to}}
       {{/if}}
     </div>
     <div class="btn-toolbar pull-right">

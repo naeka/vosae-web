@@ -9,9 +9,9 @@
   </div>
   <div>
     {{#each group.creditNotes}}
-      {{#linkTo "creditNote.show" controller.session.tenant this}}
+      {{#link-to "creditNote.show" controller.session.tenant this}}
         {% trans "See related credit note" %}
-      {{/linkTo}}
+      {{/link-to}}
     {{/each}}
   </div>
 {% endtplhandlebars %}

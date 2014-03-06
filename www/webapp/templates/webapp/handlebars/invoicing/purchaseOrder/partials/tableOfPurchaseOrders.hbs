@@ -25,20 +25,20 @@
       {{#each purchaseOrder in this}}
         <tr>
           <td class="reference">
-            {{#linkTo "purchaseOrder.show" controller.session.tenant purchaseOrder}}
+            {{#link-to "purchaseOrder.show" controller.session.tenant purchaseOrder}}
               {{purchaseOrder.ref}}
-            {{/linkTo}}
+            {{/link-to}}
           </td>
           <td class="customer">
             {{#if purchaseOrder.organization}}
-              {{#linkTo "organization.show" controller.session.tenant purchaseOrder.organization}}
+              {{#link-to "organization.show" controller.session.tenant purchaseOrder.organization}}
                 {{purchaseOrder.organization.corporateName}}
-              {{/linkTo}}
+              {{/link-to}}
             {{else}}
               {{#if purchaseOrder.contanct}}
-                {{#linkTo "contact.show" controller.session.tenant purchaseOrder.contact}}
+                {{#link-to "contact.show" controller.session.tenant purchaseOrder.contact}}
                   {{purchaseOrder.contact.fullName}}
-                {{/linkTo}}
+                {{/link-to}}
               {{/if}}
             {{/if}}
           </td>

@@ -45,16 +45,16 @@
   <br>
   <a class="button-sidebar settings no-text"></a>
   <ul class="mines">
-    <li>{% trans "My calendars" %} {{#linkTo "calendarLists.add" controller.session.tenant}}<i class="picto-add"></i>{{/linkTo}}</li>
+    <li>{% trans "My calendars" %} {{#link-to "calendarLists.add" controller.session.tenant}}<i class="picto-add"></i>{{/link-to}}</li>
     {{#each calendarList in ownCalendarList}}
       <li>
         {{#view view.calendarEntryView contentBinding='calendarList'}}
           <span {{action "toggleCalendar" this calendarList}}>
             {{calendarList.displayName}}
           </span>
-          {{#linkTo "calendarList.show" controller.session.tenant calendarList}}
+          {{#link-to "calendarList.show" controller.session.tenant calendarList}}
             <i class="picto-settings"></i>
-          {{/linkTo}}
+          {{/link-to}}
         {{/view}}
       </li>
     {{/each}}
@@ -68,9 +68,9 @@
             <span {{action "toggleCalendar" this calendarList}}>
               {{calendarList.displayName}}
             </span>
-            {{#linkTo "calendarList.show" controller.session.tenant calendarList}}
+            {{#link-to "calendarList.show" controller.session.tenant calendarList}}
               <i class="picto-settings"></i>
-            {{/linkTo}}
+            {{/link-to}}
           {{/view}}
         </li>
       {{/each}}

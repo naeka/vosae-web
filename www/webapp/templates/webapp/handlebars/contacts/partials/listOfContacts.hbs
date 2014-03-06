@@ -7,14 +7,14 @@
       <div class="inner">
         <div class="avatar rounded pull-left">
           {{#if contact.photoUri}}
-            <img {{bindAttr src="contact.photoUri"}}>
+            <img {{bind-attr src="contact.photoUri"}}>
           {{/if}}
         </div>
         <div class="infos pull-left">
-          {{#linkTo "contact.show" controller.session.tenant contact}}
+          {{#link-to "contact.show" controller.session.tenant contact}}
             <span class="capitalize">{{contact.firstname}}</span><br>
             <span class="uppercase">{{contact.name}}</span>&nbsp;
-          {{/linkTo}}
+          {{/link-to}}
           <span class="role">
             {{#if contact.role}}
               {{trans "{{role}} at {{corporateName}}" roleBinding="contact.role" corporateNameBinding="contact.organization.corporateName"}}
@@ -29,9 +29,9 @@
         </div>
         <div class="options pull-right">
           <div class="btn-group btn-group-vertical">
-            {{#linkTo "contact.show" controller.session.tenant contact class="detail"}}
+            {{#link-to "contact.show" controller.session.tenant contact class="detail"}}
               <i class="picto-search"></i>
-            {{/linkTo}}
+            {{/link-to}}
             {{#if contact.private}}
               <a class="active private">
                 <i class="picto-lock"></i>

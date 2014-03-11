@@ -8,7 +8,7 @@ Vosae.TenantsShowView = Vosae.PageTenantView.extend
   ###
   checkTenants: (->
     preselectedTenant = @get 'controller.session.preselectedTenant'
-    tenantsLength = Vosae.Tenant.all().get('length')
+    tenantsLength = @get('controller.length')
     if not preselectedTenant and tenantsLength != 1
       Vosae.Utilities.hideLoader()
   ).on "didInsertElement"

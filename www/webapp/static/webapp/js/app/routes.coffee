@@ -2,6 +2,8 @@
 require 'routes/router'
 require 'routes/route'
 
+require 'routes/application'
+
 require 'routes/core/root'
 require 'routes/core/dashboardShow'
 

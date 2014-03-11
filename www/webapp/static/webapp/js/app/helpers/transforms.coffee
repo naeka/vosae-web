@@ -6,7 +6,7 @@
   @namespace DS
 ###
 
-DS.JSONTransforms.date =
+Vosae.DateTransform = DS.Transform.extend
   deserialize: (serialized)->
     type = typeof serialized
     date = null
@@ -34,7 +34,7 @@ DS.JSONTransforms.date =
   @namespace DS
 ###
 
-DS.JSONTransforms.datetime =
+Vosae.DatetimeTransform = DS.Transform.extend
   deserialize: (serialized)->
     type = typeof serialized
     date = null
@@ -62,7 +62,7 @@ DS.JSONTransforms.datetime =
   @namespace DS
 ###
 
-DS.JSONTransforms.array =
+Vosae.ArrayTransform = DS.Transform.extend
   serialize: (serialized)->
     if Em.typeOf(serialized) is 'array'
       return serialized
@@ -82,7 +82,7 @@ DS.JSONTransforms.array =
   @namespace DS
 ###
 
-DS.JSONTransforms.object =
+Vosae.ObjectTransform = DS.Transform.extend
   deserialize: (serialized) ->
     serialized
   
@@ -99,7 +99,7 @@ DS.JSONTransforms.object =
   @namespace DS
 ###
 
-DS.JSONTransforms.paymentTypesArray =
+Vosae.PaymentTypesArrayTransform = DS.Transform.extend
   ###
     Serialize an array of objects with label and value
     

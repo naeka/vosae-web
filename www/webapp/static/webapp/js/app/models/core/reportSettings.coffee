@@ -26,3 +26,6 @@ Vosae.ReportSettings = Vosae.Model.extend
       if language.get('code') != defaultLang
         return language
   ).property('language')
+
+Vosae.ReportSettings.reopen
+  tenant: DS.belongsTo('tenant')

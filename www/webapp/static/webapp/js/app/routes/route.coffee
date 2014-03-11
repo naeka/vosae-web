@@ -16,13 +16,14 @@ Ember.Route.reopen
 
 
 ###
-  The parent route for all discovery routes. Handles the logic for showing
-  the loading spinners.
+  The parent of all routes that require a tenant. If there's no
+  tenant in the current session user will be redirected to a page
+  which list all the user's tenants.
 
-  @class DiscoveryRoute
-  @extends Discourse.Route
-  @namespace Discourse
-  @module Discourse
+  @class SelectedTenantRoute
+  @extends Ember.Route
+  @namespace Vosae
+  @module Vosae
 ###
 
 Vosae.SelectedTenantRoute = Ember.Route.extend

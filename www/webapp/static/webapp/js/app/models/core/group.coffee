@@ -11,7 +11,7 @@ Vosae.Group = Vosae.Model.extend
   name: DS.attr('string')
   createdAt: DS.attr('datetime')
   permissions: DS.attr('array', defaultValue: [])
-  createdBy: DS.belongsTo('Vosae.User')
+  createdBy: DS.belongsTo('user')
 
   # This method returns a <Vosae.Permissions> if 
   # `permissions` contains the permission name

@@ -13,13 +13,15 @@ Vosae.Tenant = Vosae.Model.extend
   email: DS.attr("string")
   phone: DS.attr("string")
   fax: DS.attr("string")
-  registrationInfo: DS.belongsTo('registrationInfo', {polymorphic: true})
+  registrationInfo: DS.belongsTo('registrationInfo', polymorphic: true)
+  postalAddress: DS.belongsTo('address')
+  billingAddress: DS.belongsTo('address')
   reportSettings: DS.belongsTo('reportSettings')
-  postalAddress: DS.belongsTo("address")
-  billingAddress: DS.belongsTo("address")
   svgLogo: DS.belongsTo("file")
   imgLogo: DS.belongsTo("file")
   terms: DS.belongsTo("file")
+
+  # notifiesEmbedded: ['reportSettings', 'postalAddress', 'billingAddress']
 
   isUploadingImg: false
   isUploadingTerms: false

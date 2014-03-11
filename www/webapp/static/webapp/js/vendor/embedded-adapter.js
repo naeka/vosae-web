@@ -721,6 +721,16 @@ function updatePayloadWithEmbeddedBelongsTo(store, primaryType, relationship, pa
   if (!partial[attribute]) {
     return;
   }
+
+  // For embedded belongsTo polymorphic
+  if(relationship.options.polymorphic) {
+    partial[expandedKey] = partial[attribute].id;
+    partial[attribute + "_type"] = partial[attribute].resource_type;
+    embeddedTypeKey = partial[attribute].resource_type.camelize().pluralize();
+
+    delete partial[attribute].resource_type;
+  }
+
   payload[embeddedTypeKey] = payload[embeddedTypeKey] || [];
   var embeddedType = store.modelFor(relationship.type.typeKey);
   for (var key in partial) {

@@ -9,11 +9,6 @@
 
 Vosae.TenantsShowController = Em.ArrayController.extend
   needs: ['realtime']
-  currentUserIsLoaded: false
-  tenantSettingsAreLoaded: false
-  taxesAreLoaded: false
-  usersAreLoaded: false  
-  groupsAreLoaded: false
 
   actions:
     # Redirection to the tenant root with a complete reload of the application
@@ -45,66 +40,33 @@ Vosae.TenantsShowController = Em.ArrayController.extend
     $.ajaxSetup
       headers: 
         'X-Tenant': tenant.get 'slug'
+   
+  # Get each dependencies for the tenant
+  getTenantDependencies: ->
+    currentUser = @store.findQuery('user', email: Vosae.Config.AUTH_USER).then (user) =>
+      @set 'session.user', user.get('firstObject')
+      Vosae.Config.PUSHER_USER_CHANNEL = "private-user-#{@get('session.user.id')}"
+      @get "controllers.realtime"
 
-  # Check dependencies until loaded and then redirect the user
-  checkTenantDependencies: ->
-    tenantDepenciesAreLoaded = true
-    depencies = [
-      'currentUserIsLoaded',
-      'tenantSettingsAreLoaded',
-      'taxesAreLoaded',
-      'usersAreLoaded',
-      'groupsAreLoaded',
-    ]
+    tenantSettings = @store.find('tenantSettings').then (tenantSettings) =>
+      @set 'session.tenantSettings', tenantSettings.get('firstObject')
 
-    depencies.forEach (dep) =>
-      unless @get(dep)
-        tenantDepenciesAreLoaded = false
+    groups = @store.findAll 'group'
+    taxes = @store.findAll 'tax'
+    users = @store.findAll 'user'
 
-    if tenantDepenciesAreLoaded      
+    Ember.RSVP.all([currentUser, tenantSettings, groups, taxes, users]).then =>
       nextUrl = @get 'session.nextUrl'
       if nextUrl and nextUrl.startsWith("/#{@get('session.tenant.slug')}")
+        console.log 'here 1'
         router = Vosae.lookup 'router:main'
         router.router.updateURL nextUrl
         router.handleURL nextUrl
       else
+        console.log 'here 2'
         @transitionToRoute 'dashboard.show', @get('session.tenant')
 
+      # Hide the loader
       Ember.run.later (=>
         Vosae.Utilities.hideLoader()
       ), 500
-
-  # Get each dependencies for the tenant
-  getTenantDependencies: ->
-    # Current Vosae user
-    user = Vosae.User.find email: Vosae.Config.AUTH_USER
-    user.one "didLoad", @, ->
-      @set 'session.user', user.get('firstObject')
-      Vosae.Config.PUSHER_USER_CHANNEL = "private-user-#{@get('session.user.id')}"
-      @get "controllers.realtime"
-      @set "currentUserIsLoaded", true
-      @checkTenantDependencies()
-
-    # Fetch tenant settings
-    @set 'session.tenantSettings', Vosae.TenantSettings.find(1)
-    @get('session.tenantSettings').one "didLoad", @, ->
-      @set "tenantSettingsAreLoaded", true
-      @checkTenantDependencies()
-
-    # Fetch Groups
-    groups = Vosae.Group.find({})
-    groups.one "didLoad", @, ->
-      @set "groupsAreLoaded", true
-      @checkTenantDependencies()
-
-    # Fetch Taxes
-    taxes = Vosae.Tax.find({})
-    taxes.one "didLoad", @, ->
-      @set "taxesAreLoaded", true
-      @checkTenantDependencies()
-
-    # Fetch Users
-    users = Vosae.User.find({})
-    users.one "didLoad", @, ->
-      @set "usersAreLoaded", true
-      @checkTenantDependencies()

@@ -13,39 +13,46 @@ Vosae.DashboardShowController = Ember.ArrayController.extend Vosae.TransitionToL
   sortAscending: false
   meta: null
 
-  setMeta: (->
-    @set 'meta', Vosae.metaForTimeline
-    if @get('meta') and !@get('meta.modelHasBeenFetched')
-      @send("getNextPagination")
-  ).on "init"
+  mergedRecordArrays: (->
+    mergedRecordArrays = []
+    @get("unmergedContent").forEach (recordArray) ->
+      mergedRecordArrays = mergedRecordArrays.concat recordArray.get("content").toArray()
+    @set "content", mergedRecordArrays
+  ).observes("unmergedContent", "unmergedContent.length", "unmergedContent.@each", "unmergedContent.@each.length")
+  
+  # setMeta: (->
+  #   @set 'meta', Vosae.metaForTimeline
+  #   if @get('meta') and !@get('meta.modelHasBeenFetched')
+  #     @send("getNextPagination")
+  # ).on "init"
 
-  actions:
+  # actions:
     ###
       Pagination retrieve older items
     ###
-    getNextPagination: ->
-      pagination = null
+    # getNextPagination: ->
+      # pagination = null
 
-      if @get('meta') and !@get('meta.loading')
-        if @get('meta.next') or !@get('meta.modelHasBeenFetched')
-          offset = if @get('meta.offset')? then @get('meta.offset') + @get('meta.limit') else 0
-          pagination =
-            data: Vosae.Timeline.find(offset: offset)
-            offset: @get('meta.offset')
-            limit: @get('meta.limit')
-            lastLength: Vosae.Timeline.all().get('length')
+      # if @get('meta') and !@get('meta.loading')
+      #   if @get('meta.next') or !@get('meta.modelHasBeenFetched')
+      #     offset = if @get('meta.offset')? then @get('meta.offset') + @get('meta.limit') else 0
+      #     pagination =
+      #       data: Vosae.Timeline.find(offset: offset)
+      #       offset: @get('meta.offset')
+      #       limit: @get('meta.limit')
+      #       lastLength: Vosae.Timeline.all().get('length')
           
-          @set 'meta.loading', true
+      #     @set 'meta.loading', true
 
-          if pagination and pagination.data  
-            pagination.data.one 'didLoad', @, ->
-              Ember.run @, ->
-                @set 'content', Vosae.Timeline.all() # Workaround
-                if pagination.lastLength > 0
-                  startIndex = pagination.lastLength - 1
-                  @updateContentFrom(startIndex)
-                else
-                  @updateContent()
+      #     if pagination and pagination.data  
+      #       pagination.data.one 'didLoad', @, ->
+      #         Ember.run @, ->
+      #           @set 'content', Vosae.Timeline.all() # Workaround
+      #           if pagination.lastLength > 0
+      #             startIndex = pagination.lastLength - 1
+      #             @updateContentFrom(startIndex)
+      #           else
+      #             @updateContent()
 
   ###
     Traverse timeline items

@@ -4,7 +4,7 @@
   {{#if content.length}}
     <div {{bind-attr class="content.length:showCrossBar:hideCrossBar"}}>
       <div class="cross-bar"></div>
-      {{view view.timelineItems arrangedContentBinding="arrangedContent"}}
+      {{view view.timelineItems arrangedContentBinding="content"}}
       {{#if content.meta.loading}}
         {{partial "core/partials/spinner"}}
       {{/if}}

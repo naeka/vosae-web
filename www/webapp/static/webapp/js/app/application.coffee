@@ -7,7 +7,8 @@
 
 window.Vosae = Em.Application.create
   LOG_TRANSITIONS: true
-  # LOG_TRANSITIONS_INTERNAL: true
+  LOG_TRANSITIONS_INTERNAL: true
+  LOG_VIEW_LOOKUPS: true
 
   preWindowLocation: WINDOW_LOCATION_AT_START # See skeleton-head.html
 

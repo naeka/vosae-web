@@ -41,7 +41,7 @@ Vosae.DashboardShowView = Ember.View.extend Vosae.InfiniteScrollMixin,
     filter: Vosae.dashboardAppFilter
 
     didInsertElement: ->
-     $('.cross-bar').addClass('animated')
+      $('.cross-bar').addClass('animated')
 
     timelineEntryView: Em.View.extend
       templateName: "timelineEntry"

@@ -18,6 +18,3 @@ Vosae.TenantSerializer = Vosae.ApplicationSerializer.extend
       delete hash.resource_uri
 
       return hash
-
-      
-      

@@ -10,17 +10,6 @@ Vosae.Router.reopen
   location: 'history'
   rootURL: '/'
 
-  ###
-    Shortcut method that returns meta object for a type.
-
-    @type "String"
-  ###
-  metaForType: (type) ->
-    meta = @typeMapFor(@modelFor(type)).metadata
-    if meta and Em.typeof(meta) is "object"
-      return meta
-    return null
-
 Vosae.Router.map ->
   @route 'index', path: '/'
   @route 'forbidden', path: '/403'

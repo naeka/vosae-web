@@ -11,7 +11,7 @@
 Vosae.NotificationsController = Vosae.ArrayController.extend Vosae.TransitionToLazyResourceMixin,
   
   setContent: (->
-    @set('content', Vosae.Notification.all())
+    # @set('content', Vosae.Notification.all())
   ).on "init"
 
   ###

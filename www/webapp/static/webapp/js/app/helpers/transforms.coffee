@@ -7,9 +7,8 @@
 ###
 
 Vosae.DateTransform = DS.Transform.extend
-  deserialize: (serialized)->
+  deserialize: (serialized) ->
     type = typeof serialized
-    date = null
     if type is "string" or type is "number"
       moment(serialized).toDate()
     else if serialized is null or serialized is `undefined`
@@ -17,7 +16,7 @@ Vosae.DateTransform = DS.Transform.extend
     else
       null
 
-  serialize: (date)->
+  serialize: (date) ->
     if date instanceof Date or moment.isMoment(date)
       moment(date).format('YYYY-MM-DD')
     else if date is `undefined`
@@ -35,9 +34,8 @@ Vosae.DateTransform = DS.Transform.extend
 ###
 
 Vosae.DatetimeTransform = DS.Transform.extend
-  deserialize: (serialized)->
+  deserialize: (serialized) ->
     type = typeof serialized
-    date = null
     if type is "string" or type is "number"
       moment(serialized).toDate()
     else if serialized is null or serialized is `undefined`
@@ -45,7 +43,7 @@ Vosae.DatetimeTransform = DS.Transform.extend
     else
       null
 
-  serialize: (date)->
+  serialize: (date) ->
     if date instanceof Date or moment.isMoment(date)
       moment(date).format()
     else if date is `undefined`

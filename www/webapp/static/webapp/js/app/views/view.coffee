@@ -66,5 +66,5 @@ Vosae.PageSettingsView = Em.View.extend Vosae.FullScreenContainerMixin,
   @module Vosae
 ###
 
-Vosae.PageTenantView = Em.View.extend Vosae.FullScreenContainerMixin,  
+Vosae.PageTenantView = Em.View.extend Vosae.FullScreenContainerMixin,
   outletContainerID: "ct-tenant"

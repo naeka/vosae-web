@@ -11,6 +11,23 @@ Vosae.Utilities =
   WRAPPER_LOADER_ID: "#wrapper-loader"
   CURRENT_LANGUAGE: null
 
+  TIMELINE_MODELS: [
+    'contactSavedTE'
+    'organizationSavedTE'
+    'quotationSavedTE'
+    'invoiceSavedTE'
+    'downPaymentInvoiceSavedTE'
+    'creditNoteSavedTE'
+    'quotationChangedStateTE'
+    'invoiceChangedStateTE'
+    'downPaymentInvoiceChangedStateTE'
+    'creditNoteChangedStateTE'
+    'quotationMakeInvoiceTE'
+    'quotationMakeDownPaymentInvoiceTE'
+    'invoiceCancelledTE'
+    'downPaymentInvoiceCancelledTE'
+  ]
+
   ###
     Updates prototypes to add usefull methods
   ###

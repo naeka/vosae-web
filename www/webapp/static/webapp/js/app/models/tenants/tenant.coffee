@@ -7,7 +7,7 @@
   @module Vosae
 ###
 
-Vosae.Tenant = Vosae.Model.extend
+Vosae.Tenant = Vosae.Model.extend DS.ModelWithEmbeddedMixin,
   slug: DS.attr("string")
   name: DS.attr("string")
   email: DS.attr("string")
@@ -21,7 +21,7 @@ Vosae.Tenant = Vosae.Model.extend
   imgLogo: DS.belongsTo("file")
   terms: DS.belongsTo("file")
 
-  # notifiesEmbedded: ['reportSettings', 'postalAddress', 'billingAddress']
+  notifiesEmbedded: ['registrationInfo', 'reportSettings', 'postalAddress', 'billingAddress']
 
   isUploadingImg: false
   isUploadingTerms: false

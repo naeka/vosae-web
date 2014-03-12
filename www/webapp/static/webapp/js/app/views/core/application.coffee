@@ -1,6 +1,6 @@
 Vosae.ApplicationView = Em.View.extend
   elementId: "wrapper"
-  
+
   init: ->
     @_super()
     @zoneFocusEvents()

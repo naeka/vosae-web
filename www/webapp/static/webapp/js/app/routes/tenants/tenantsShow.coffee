@@ -8,13 +8,11 @@ Vosae.TenantsShowRoute = Ember.Route.extend
     if tenants.length is 0
       @transitionTo 'tenants.add'
 
-  setupController: (controller, tenants) ->
-    @controllerFor('application').set 'currentRoute', 'tenants.show'
-
     # User has only one tenant
-    if tenants.length == 1
+    else if tenants.length == 1
       tenant = tenants.get 'firstObject'
-      controller.send "setAsCurrentTenant", tenant
+      transition.send "setAsCurrentTenant", tenant
+    
     # User has several tenants
     else 
       # If there is a tenant slug in URL like `/my-company/contact/1/`
@@ -22,11 +20,52 @@ Vosae.TenantsShowRoute = Ember.Route.extend
       preselectedTenant = @get 'session.preselectedTenant'
       if preselectedTenant
         tenant = tenants.findProperty 'slug', preselectedTenant
-        controller.send "setAsCurrentTenant", tenant if tenant
-    
-    # Otherwise user will have to select a tenant in list
-    controller.set "content", tenants
+        transition.send "setAsCurrentTenant", tenant if tenant
 
-  renderTemplate: ->
-    @render
-      into: 'tenants'
+    @controllerFor('application').set 'currentRoute', 'tenants.show'
+
+  # Update the ajax headers with the tenant slug
+  putTenantInAjaxHeaders: (tenant) ->
+    $.ajaxSetup
+      headers: 
+        'X-Tenant': tenant.get 'slug'
+
+  # Get each dependencies for the tenant
+  getTenantDependencies: ->
+    currentUser = @store.findQuery('user', email: Vosae.Config.AUTH_USER).then (user) =>
+      @set 'session.user', user.get('firstObject')
+      Vosae.Config.PUSHER_USER_CHANNEL = "private-user-#{@get('session.user.id')}"
+      @get "controllers.realtime"
+
+    tenantSettings = @store.find('tenantSettings').then (tenantSettings) =>
+      @set 'session.tenantSettings', tenantSettings.get('firstObject')
+
+    groups = @store.findAll 'group'
+    taxes = @store.findAll 'tax'
+    users = @store.findAll 'user'
+
+    Ember.RSVP.all([currentUser, tenantSettings, groups, taxes, users]).then =>
+      nextUrl = @get 'session.nextUrl'
+      if nextUrl and nextUrl.startsWith("/#{@get('session.tenant.slug')}")
+        @replaceWith nextUrl
+      else
+        @transitionTo 'dashboard.show', @get('session.tenant')
+
+      # Hide the loader
+      Ember.run.later (=>
+        Vosae.Utilities.hideLoader()
+      ), 1500
+
+  actions:
+    # Redirection to the tenant root with a complete reload of the application
+    redirectToTenantRoot: (tenant) ->
+      url = window.location.origin + '/' + tenant.get('slug')
+      $(location).attr 'href', url
+
+    # Set the tenant as the current app tenant
+    setAsCurrentTenant: (tenant) ->
+      Vosae.Utilities.showLoader()
+      Vosae.Utilities.setPageTitle tenant.get('name')
+      @get('session').set 'tenant', tenant
+      @putTenantInAjaxHeaders tenant
+      @getTenantDependencies()

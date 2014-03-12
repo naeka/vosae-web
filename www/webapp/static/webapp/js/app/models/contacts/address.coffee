@@ -74,5 +74,6 @@ Vosae.Address = Vosae.Model.extend
 
 
 Vosae.Address.reopen
-  contact: DS.belongsTo('Vosae.Contact')
-  organization: DS.belongsTo('Vosae.Organization')
+  tenant: DS.belongsTo('tenant')
+  # contact: DS.belongsTo('Vosae.Contact')
+  # organization: DS.belongsTo('Vosae.Organization')

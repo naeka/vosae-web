@@ -16,4 +16,4 @@ Vosae.ApplicationRoute = Ember.Route.extend
     tenants = @store.findAll 'tenant'
     currencies = @store.findAll 'currency'
 
-    Ember.RSVP.all([tenants, currencies])
+    Ember.RSVP.all [tenants, currencies]

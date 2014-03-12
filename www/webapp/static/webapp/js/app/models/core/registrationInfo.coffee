@@ -7,7 +7,7 @@
   @module Vosae
 ###
 
-Vosae.RegistrationInfo = Vosae.Model.extend
+Vosae.RegistrationInfo = Vosae.Model.extend DS.EmbeddedInModelMixin,
   businessEntity: DS.attr('string')
   shareCapital: DS.attr('string')
 

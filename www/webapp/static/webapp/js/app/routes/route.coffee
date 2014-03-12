@@ -12,6 +12,7 @@ Ember.Route.reopen
       object[name] = Ember.get(model, "slug")
     else
       object[name] = model
+
     return object
 
 

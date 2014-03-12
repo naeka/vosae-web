@@ -21,10 +21,6 @@ Vosae.TenantsAddRoute = Ember.Route.extend
       'currencies': Vosae.Currency.all().filterProperty('id')
       'tenants': Vosae.Tenant.all()
 
-  renderTemplate: ->
-    @render
-      into: 'tenants'
-
   deactivate: ->
     tenant = @controller.get 'content'
     if tenant.get 'isDirty'

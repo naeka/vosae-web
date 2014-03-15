@@ -43,6 +43,6 @@ Vosae.IndexRoute = Ember.Route.extend
   redirect: ->
     tenant = @get('session.tenant')
     if tenant and tenant.get('slug')
-      this.transitionTo 'dashboard.show', tenant
+      this.transitionTo 'dashboard', tenant
     else
       this.transitionTo 'tenants.show'

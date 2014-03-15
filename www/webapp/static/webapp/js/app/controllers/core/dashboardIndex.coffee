@@ -8,7 +8,7 @@
   @module Vosae
 ###
 
-Vosae.DashboardShowController = Vosae.ArrayController.extend Vosae.TransitionToLazyResourceMixin,
+Vosae.DashboardIndexController = Vosae.ArrayController.extend Vosae.TransitionToLazyResourceMixin,
   sortProperties: ['datetime']
   sortAscending: false
 

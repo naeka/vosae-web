@@ -23,7 +23,6 @@ Vosae.Router.map ->
     @route 'index', path: '/'
 
     @resource 'dashboard', path: '/timeline', ->  
-      @route 'show', path: '/'
 
     @resource 'contacts', path: '/contacts', ->
       @route 'show', path: '/'

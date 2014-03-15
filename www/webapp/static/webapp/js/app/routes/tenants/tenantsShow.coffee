@@ -47,7 +47,7 @@ Vosae.TenantsShowRoute = Ember.Route.extend
       if nextUrl and nextUrl.startsWith("/#{@get('session.tenant.slug')}")
         @replaceWith nextUrl
       else
-        @transitionTo 'dashboard.show', @get('session.tenant')
+        @transitionTo 'dashboard', @get('session.tenant')
 
       # Hide the loader
       Ember.run.later (=>

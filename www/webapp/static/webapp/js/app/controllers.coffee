@@ -2,7 +2,7 @@
 require 'controllers/controller'
 
 require 'controllers/core/application'
-require 'controllers/core/dashboardShow'
+require 'controllers/core/dashboardIndex'
 require 'controllers/core/search'
 require 'controllers/core/notifications'
 require 'controllers/core/realtime'

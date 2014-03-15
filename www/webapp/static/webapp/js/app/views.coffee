@@ -29,7 +29,7 @@ require 'views/partials/specificPermissionsManager'
 require 'views/core/application'
 require 'views/core/search'
 require 'views/core/panels'
-require 'views/core/dashboardShow'
+require 'views/core/dashboardIndex'
 
 require 'views/tenants/tenant'
 require 'views/tenants/tenantsShow'

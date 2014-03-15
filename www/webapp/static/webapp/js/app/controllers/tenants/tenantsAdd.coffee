@@ -105,7 +105,6 @@ Vosae.TenantsAddController = Em.ObjectController.extend
     cancel: ->
       if confirm gettext('Do you realy want to leave this page ?')
         if @get('session.tenant')
-          # @transitionToRoute 'dashboard.show', @get('session.tenant')
           router = Vosae.lookup('router:main')
           router.location.history.back()
         else

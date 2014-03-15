@@ -33,9 +33,9 @@
           <div class="d-cell notif">
             <a id="desktop-header-notifications" {{action "openPanelLeft" target="view"}}>
               Vosae 
-              {{!-- {{#if controllers.notifications.unreadCounter}} --}}
-                {{!-- <span class="counter">{{controllers.notifications.unreadCounter}}</span> --}}
-              {{!-- {{/if}} --}}
+              {{#if controllers.notifications.unreadCounter}}
+                <span class="counter">{{controllers.notifications.unreadCounter}}</span>
+              {{/if}}
             </a>
           </div>
           <div class="d-cell search">
@@ -66,7 +66,7 @@
             <nav id="desktop-app-menu" class="bootstro">
               <ul class="list-unstyled">
                 <li class="dashboard" {{bind-attr class="controllers.application.isDashboard:active"}}>
-                  {{#link-to "dashboard.show" session.tenant}}
+                  {{#link-to "dashboard" session.tenant}}
                     <span class="circle">
                       <i class="picto-home"></i>
                     </span>

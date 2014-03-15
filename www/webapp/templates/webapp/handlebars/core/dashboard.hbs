@@ -1,6 +1,6 @@
 {% load i18n templatetag_handlebars i18n_handlebars %}
 
-{% tplhandlebars "dashboard/show" %}
+{% tplhandlebars "dashboard/index" %}
   {{#if content.length}}
     <div {{bind-attr class="content.length:showCrossBar:hideCrossBar"}}>
       <div class="cross-bar"></div>

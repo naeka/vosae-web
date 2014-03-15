@@ -38,7 +38,7 @@ Vosae.ArrayController = Ember.ArrayController.extend
   ###
   getRelatedType: ->
     type = switch
-      when @ instanceof Vosae.DashboardShowController then Vosae.Timeline
+      when @ instanceof Vosae.DashboardIndexController then Vosae.Timeline
       when @ instanceof Vosae.NotificationsController then Vosae.Notification
       when @ instanceof Vosae.ContactsShowController then Vosae.Contact
       when @ instanceof Vosae.OrganizationsShowController then Vosae.Organization

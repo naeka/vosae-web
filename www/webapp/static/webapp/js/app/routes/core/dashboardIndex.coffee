@@ -1,4 +1,4 @@
-Vosae.DashboardShowRoute = Ember.Route.extend    
+Vosae.DashboardIndexRoute = Ember.Route.extend    
   beforeModel: ->
     meta = @store.metadataFor "timeline"
     # Only fetch `timeline` once
@@ -18,6 +18,6 @@ Vosae.DashboardShowRoute = Ember.Route.extend
 
   # renderTemplate: ->
   #   @_super()
-  #   @render 'dashboard.show.settings',
+  #   @render 'dashboard.index.settings',
   #     into: 'application'
   #     outlet: 'outletPageSettings'

@@ -24,8 +24,8 @@ Vosae.dashboardAppFilter = Em.Object.create
   ).observes("showAppInvoicing")
 
 
-Vosae.DashboardShowView = Ember.View.extend Vosae.InfiniteScrollMixin,
-  classNames: ["page-show-dashboard"]
+Vosae.DashboardIndexView = Ember.View.extend Vosae.InfiniteScrollMixin,
+  classNames: ["page-dashboard-index"]
   infiniteScrollSelector: window
   actions:
     startHelpTour: ->
@@ -80,7 +80,7 @@ Vosae.DashboardShowView = Ember.View.extend Vosae.InfiniteScrollMixin,
       )
 
   
-Vosae.DashboardShowSettingsView = Em.View.extend Vosae.HelpTourMixin,
+Vosae.DashboardIndexSettingsView = Em.View.extend Vosae.HelpTourMixin,
   classNames: ["page-settings page-show-dashboard-settings"]
   filter: Vosae.dashboardAppFilter
 

@@ -8,28 +8,27 @@
 ###
 
 Vosae.ApplicationController = Ember.Controller.extend
-  needs: ['notifications', 'search', 'realtime', 'tenantsShow'],
-  
+
   isDashboard: (->
-    @get('currentRoute') == 'dashboard'
-  ).property 'currentRoute'
+    @get('currentPath').startsWith 'tenant.dashboard.'
+  ).property('currentPath')
 
   isContacts: (->
-    @get('currentRoute') == 'contacts'
-  ).property 'currentRoute'
+    @get('currentPath').startsWith 'tenant.contacts.'
+  ).property('currentPath')
 
   isOrganizer: (->
-    @get('currentRoute') == 'organizer'
-  ).property 'currentRoute'
+    @get('currentPath').startsWith 'tenant.organizer.'
+  ).property('currentPath')
 
   isInvoicing: (->
-    @get('currentRoute') == 'invoicing'
-  ).property 'currentRoute'
+    @get('currentPath').startsWith 'tenant.invoicing.'
+  ).property('currentPath')
 
   isTenantsShow: (->
-    @get('currentRoute') == 'tenants.show'
-  ).property 'currentRoute'
+    @get('currentPath').startsWith 'tenants.show'
+  ).property('currentPath')
 
   isTenantsAdd: (->
-    @get('currentRoute') == 'tenants.add'
-  ).property 'currentRoute'
+    @get('currentPath').startsWith 'tenants.add'
+  ).property('currentPath')

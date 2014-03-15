@@ -11,17 +11,35 @@ Vosae.Store = DS.Store.extend
   metaForType: (type, metadata) ->
     type = @modelFor type
 
-    # Create an `Ember.Object` instance from the metadata object
-    newMetadata = Em.Object.createWithMixins Vosae.MetaMixin, metadata
-
-    # The first time, oldMetadata should be an empty object { } so we 
-    # need to create an `Ember.Object` instance before merging the 
-    # newMetadata and the oldMetadata.
-    oldMetadata = @typeMapFor(type).metadata
-    if Em.typeOf oldMetadata is "object"
-      oldMetadata = Em.Object.createWithMixins Vosae.MetaMixin, oldMetadata
-
     # Set the new metadata for the type
-    @typeMapFor(type).metadata = Ember.merge oldMetadata, newMetadata
+    for prop of metadata
+      @typeMapFor(type).metadata.set prop, metadata[prop]
 
+
+  ###
+    Returns a map of IDs to client IDs for a given type. We overide this method 
+    because we want the metadata propery to return an Ember.Object rather than 
+    an empty dict {}.
+
+    @method typeMapFor
+    @param type
+    @return {Object} typeMap
+  ###
+  typeMapFor: (type) ->
+    typeMaps = @get "typeMaps"
+    guid = Ember.guidFor(type)
+    typeMap = typeMaps[guid]
+
+    return typeMap if typeMap
+
+    typeMap =
+      idToRecord: {}
+      records: []
+      metadata: Em.Object.createWithMixins(Vosae.MetaMixin, {})
+      type: type
+
+    typeMaps[guid] = typeMap
+    typeMap
+
+# Create an instance
 Vosae.Store.create()

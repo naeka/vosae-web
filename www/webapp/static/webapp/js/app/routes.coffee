@@ -4,7 +4,7 @@ require 'routes/route'
 
 require 'routes/application'
 
-require 'routes/core/root'
+require 'routes/core/dashboard'
 require 'routes/core/dashboardShow'
 
 require 'routes/tenants/tenantsShow'

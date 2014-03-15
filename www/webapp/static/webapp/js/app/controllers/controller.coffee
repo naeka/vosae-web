@@ -22,42 +22,29 @@ Ember.ArrayController.reopen
   @module Vosae
 ###
 
-Vosae.ArrayController = Ember.ArrayController.extend()
-  # meta: null
+Vosae.ArrayController = Ember.ArrayController.extend
+  meta: null
 
-  # getModel :->
-  #   switch @constructor.toString()
-  #     when Vosae.NotificationsController.toString() then Vosae.Notification
-  #     when Vosae.ContactsShowController.toString() then Vosae.Contact
-  #     when Vosae.OrganizationsShowController.toString() then Vosae.Organization
-  #     when Vosae.InvoicesShowController.toString() then Vosae.Invoice
-  #     when Vosae.QuotationsShowController.toString() then Vosae.Quotation
-  #     when Vosae.ItemsShowController.toString() then Vosae.Item
-  #     when Vosae.PurchaseOrdersShowController.toString() then Vosae.PurchaseOrder
-  #     when Vosae.SettingsApiKeysController.toString() then Vosae.ApiKey
-  #     else undefined
+  ###
+    Make the metadata for the related model available in the templates
+  ###
+  setMeta: (->
+    type = @getRelatedType()
+    @set "meta", @store.metadataFor(type) if type
+  ).on "init"
 
-  # checkMetaDatai: (->
-  #   meta = @store.typeMapFor(@getModel()).metaData
-  #   console.log meta
-  #   # Check if model hasn't be fetched yet
-  #   # if @get('meta') and !@get('meta.modelHasBeenFetched')
-  #   #   @send("getNextPagination")
-  # ).on "init"
-
-  # actions:
-  #   # Pagination retrieve next model objects
-  #   getNextPagination: ->
-  #     pagination = null
-
-  #     if @get('meta') and !@get('meta.loading')
-  #       if @get('meta.next') or !@get('meta.modelHasBeenFetched')
-  #         offset = if @get('meta.offset')? then @get('meta.offset') + @get('meta.limit') else 0
-  #         pagination =
-  #           data: @getModel().find(offset: offset)
-  #           offset: @get('meta.offset')
-  #           limit: @get('meta.limit')
-  #           lastLength: @getModel().all().get('length')
-  #         @set 'meta.loading', true
-
-  #     return pagination
+  ###
+    Returns the model related to the controller
+  ###
+  getRelatedType: ->
+    type = switch
+      when @ instanceof Vosae.DashboardShowController then Vosae.Timeline
+      when @ instanceof Vosae.NotificationsController then Vosae.Notification
+      when @ instanceof Vosae.ContactsShowController then Vosae.Contact
+      when @ instanceof Vosae.OrganizationsShowController then Vosae.Organization
+      when @ instanceof Vosae.InvoicesShowController then Vosae.Invoice
+      when @ instanceof Vosae.QuotationsShowController then Vosae.Quotation
+      when @ instanceof Vosae.ItemsShowController then Vosae.Item
+      when @ instanceof Vosae.PurchaseOrdersShowController then Vosae.PurchaseOrder
+      when @ instanceof Vosae.SettingsApiKeysController then Vosae.ApiKey
+      else undefined

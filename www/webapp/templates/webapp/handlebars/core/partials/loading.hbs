@@ -1,0 +1,13 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "core/partials/_loading" %}
+   {{#if meta.next}} 
+    <div class="meta-loading">
+      {{#if meta.loading}}
+        <div class="text-center">
+          <button disabled="disabled" class="btn btn-small btn-success">{% trans "Loading..." %}</button>
+        </div>
+      {{/if}}
+    </div>
+  {{/if}}
+{% endtplhandlebars %}

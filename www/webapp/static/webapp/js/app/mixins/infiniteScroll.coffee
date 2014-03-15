@@ -9,15 +9,24 @@
 ###
 
 Vosae.InfiniteScrollMixin = Ember.Mixin.create
+  classNames: ["infinite-scroll"]
   paginationAction: Em.K
-  offset: 160
+  offset: 100
+  infiniteScrollSelector: null
 
-  initScrollSpy: (->
-    $(window).scroll Vosae.Utilities.debounce(=>
-      if $(window).scrollTop() >= $(document).height() - $(window).height() - @offset
-        @send("paginationAction")
-    , 100)
-  ).on "init"
+  didInsertElement: ->
+    @setupInfiniteScrollListener()
 
   willDestroy: ->
-    $(window).unbind "scroll"
+    @teardownInfiniteScrollListener()
+
+  teardownInfiniteScrollListener: ->
+    $(@infiniteScrollSelector).unbind("scroll")
+
+  setupInfiniteScrollListener: ->
+    selector = @infiniteScrollSelector
+
+    $(selector).scroll Vosae.Utilities.debounce(=>
+      if $(selector).scrollTop() >= $(document).height() - $(window).height() - @offset
+        @send("paginationAction")
+    , 100)

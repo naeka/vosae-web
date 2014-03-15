@@ -1,4 +1,4 @@
-Vosae.TenantsShowView = Vosae.PageTenantView.extend
+Vosae.TenantsShowView = Vosae.ContainerTenantsView.extend
   classNames: ["outlet-tenants", "page-show-tenants"]
 
   ###

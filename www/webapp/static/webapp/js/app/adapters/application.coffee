@@ -8,3 +8,10 @@ Vosae.ApplicationAdapter = DS.EmbeddedAdapter.extend
 
   pathForType: (type) ->
     Ember.String.decamelize(type)
+
+  findAll: (store, type, sinceToken) ->
+    if sinceToken
+      query =
+        offset: sinceToken
+
+    @ajax(this.buildURL(type.typeKey), 'GET', data: query)

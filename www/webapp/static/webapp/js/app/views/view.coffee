@@ -57,14 +57,14 @@ Vosae.PageSettingsView = Em.View.extend Vosae.FullScreenContainerMixin,
 
 
 ###
-  A Generic view for all tenant pages
+  A Generic view for view rendered in container "#ct-tenants"
 
-  @class PageTenantView
+  @class ContainerTenantsView
   @extends Ember.View
   @uses Vosae.FullScreenContainerMixin
   @namespace Vosae
   @module Vosae
 ###
 
-Vosae.PageTenantView = Em.View.extend Vosae.FullScreenContainerMixin,
-  outletContainerID: "ct-tenant"
+Vosae.ContainerTenantsView = Em.View.extend Vosae.FullScreenContainerMixin,
+  outletContainerID: "ct-tenants"

@@ -8,51 +8,41 @@
   @module Vosae
 ###
 
-Vosae.DashboardShowController = Ember.ArrayController.extend Vosae.TransitionToLazyResourceMixin,
+Vosae.DashboardShowController = Vosae.ArrayController.extend Vosae.TransitionToLazyResourceMixin,
   sortProperties: ['datetime']
   sortAscending: false
-  meta: null
+
+  actions:
+    ###
+      Fetch more timeline entries
+    ###
+    getNextPagination: ->
+      meta = @get "meta"
+
+      # If there's metadata and there's more records to load
+      if meta.get "canFetchMore"
+        length = @getTimelineEntriesLength()
+        meta.set 'loading', true
+        # Fetch old timeline entries
+        @store.find('timeline').then =>
+          if length > 0 then @updateContentFrom(length - 1) else @updateContent()
+          meta.set 'loading', false
 
   mergedRecordArrays: (->
     mergedRecordArrays = []
     @get("unmergedContent").forEach (recordArray) ->
       mergedRecordArrays = mergedRecordArrays.concat recordArray.get("content").toArray()
     @set "content", mergedRecordArrays
-  ).observes("unmergedContent", "unmergedContent.length", "unmergedContent.@each", "unmergedContent.@each.length")
-  
-  # setMeta: (->
-  #   @set 'meta', Vosae.metaForTimeline
-  #   if @get('meta') and !@get('meta.modelHasBeenFetched')
-  #     @send("getNextPagination")
-  # ).on "init"
+    @updateContent()
+  ).observes "unmergedContent.length", "unmergedContent.@each.length"
 
-  # actions:
-    ###
-      Pagination retrieve older items
-    ###
-    # getNextPagination: ->
-      # pagination = null
-
-      # if @get('meta') and !@get('meta.loading')
-      #   if @get('meta.next') or !@get('meta.modelHasBeenFetched')
-      #     offset = if @get('meta.offset')? then @get('meta.offset') + @get('meta.limit') else 0
-      #     pagination =
-      #       data: Vosae.Timeline.find(offset: offset)
-      #       offset: @get('meta.offset')
-      #       limit: @get('meta.limit')
-      #       lastLength: Vosae.Timeline.all().get('length')
-          
-      #     @set 'meta.loading', true
-
-      #     if pagination and pagination.data  
-      #       pagination.data.one 'didLoad', @, ->
-      #         Ember.run @, ->
-      #           @set 'content', Vosae.Timeline.all() # Workaround
-      #           if pagination.lastLength > 0
-      #             startIndex = pagination.lastLength - 1
-      #             @updateContentFrom(startIndex)
-      #           else
-      #             @updateContent()
+  ###
+    Get the length of each recordArray and sum each length. @unmergedContent is an array 
+    of recordArray, each recordArray match a polymorphic model such as `ContactSavedTE`
+  ###
+  getTimelineEntriesLength: ->
+    @get("unmergedContent").getEach("length").reduce (previousLength, currentLength) ->
+      previousLength + currentLength
 
   ###
     Traverse timeline items

@@ -26,7 +26,7 @@ Vosae.dashboardAppFilter = Em.Object.create
 
 Vosae.DashboardShowView = Ember.View.extend Vosae.InfiniteScrollMixin,
   classNames: ["page-show-dashboard"]
-
+  infiniteScrollSelector: window
   actions:
     startHelpTour: ->
       $(".page-show-dashboard-settings .info a").click()

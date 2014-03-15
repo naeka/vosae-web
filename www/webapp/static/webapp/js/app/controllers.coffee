@@ -7,6 +7,7 @@ require 'controllers/core/search'
 require 'controllers/core/notifications'
 require 'controllers/core/realtime'
 
+require 'controllers/tenants/tenant'
 require 'controllers/tenants/tenantsShow'
 require 'controllers/tenants/tenantsAdd'
 

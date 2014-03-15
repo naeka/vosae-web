@@ -3,7 +3,7 @@ Vosae.DashboardShowRoute = Ember.Route.extend
     meta = @store.metadataFor "timeline"
     # Only fetch `timeline` once
     if !meta or !meta.hasBeenFetched
-      @store.findAll "timeline"
+      @store.find "timeline"
 
   model: ->
     promises = []

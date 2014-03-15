@@ -28,6 +28,16 @@ Vosae.Utilities =
     'downPaymentInvoiceCancelledTE'
   ]
 
+  NOTIFICATION_MODELS: [
+    'contactSavedNE'
+    'organizationSavedNE'
+    'quotationSavedNE'
+    'invoiceSavedNE'
+    'downPaymentInvoiceSavedNE'
+    'creditNoteSavedNE'
+    'eventReminderNE'
+  ]
+
   ###
     Updates prototypes to add usefull methods
   ###

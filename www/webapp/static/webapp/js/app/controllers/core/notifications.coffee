@@ -9,11 +9,45 @@
 ###
 
 Vosae.NotificationsController = Vosae.ArrayController.extend Vosae.TransitionToLazyResourceMixin,
-  
-  setContent: (->
-    # @set('content', Vosae.Notification.all())
+
+  actions:
+    ###
+      Fetch more notification entries
+    ###
+    getNextPagination: ->
+      meta = @get "meta"
+      # If there's metadata and there's more records to load
+      if meta.get "canFetchMore"
+        meta.set 'loading', true
+        # Fetch old timeline entries
+        @store.find('notification').then =>
+          meta.set 'loading', false
+    ###
+      Flag all notifications as read
+    ###
+    markAllAsRead: ->
+      @get('content').filterProperty('read', false).forEach (notification) ->
+        notification.markAsRead()
+
+  fetchContent: (->
+    meta = @store.metadataFor "notification"
+    # Notification hasn't been fetched
+    if !meta or !meta.hasBeenFetched
+      @store.findAll "notification"
+      promises = []
+      for model in Vosae.Utilities.NOTIFICATION_MODELS
+        promises.push @store.all(model)
+      Ember.RSVP.all(promises).then (notifications) =>
+        @set 'unmergedContent', notifications
   ).on "init"
 
+  mergedRecordArrays: (->
+    notifications = []
+    @get("unmergedContent").forEach (recordArray) ->
+      notifications = notifications.concat recordArray.get("content").toArray()
+    @set "content", notifications
+  ).observes "unmergedContent.length", "unmergedContent.@each.length"
+  
   ###
     Returns unread notifications
   ###
@@ -31,14 +65,6 @@ Vosae.NotificationsController = Vosae.ArrayController.extend Vosae.TransitionToL
       notification if notification.get("read")
     ).sortBy("sentAt").reverse()
   ).property 'content', 'content.length', 'content.@each.read'
-
-  actions:
-    ###
-      Flag all notifications as read
-    ###
-    markAllAsRead: ->
-      @get('content').filterProperty('read', false).forEach (notification) ->
-        notification.markAsRead()
 
   ###
     Number of unread notifications

@@ -22,8 +22,6 @@ Vosae.TenantsShowRoute = Ember.Route.extend
         tenant = tenants.findProperty 'slug', preselectedTenant
         transition.send "setAsCurrentTenant", tenant if tenant
 
-    @controllerFor('application').set 'currentRoute', 'tenants.show'
-
   # Update the ajax headers with the tenant slug
   putTenantInAjaxHeaders: (tenant) ->
     $.ajaxSetup

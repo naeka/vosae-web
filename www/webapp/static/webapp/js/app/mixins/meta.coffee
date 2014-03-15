@@ -12,15 +12,16 @@ Vosae.MetaMixin = Ember.Mixin.create
   limit: null
   next: null
   previous: null
+  since: null
   totalCount: 0
   loading: false
 
+  # Returns true if model has already been fetched on the API.
   hasBeenFetched: (->
-    # Return true if model has already been fetched.
-    if @get('previous') or @get('offset')?
-      return true
-    false
-  ).property "previous", "offset"
+    if @previous or @offset? then true else false
+  ).property().volatile()
 
-  getNextOffset: ->
-    if @get("offset")? then @get("offset") + @get("limit") else 0
+  # Returns true if there's more records to fetch on the API.
+  canFetchMore: (->
+    if !@loading and @next then true else false
+  ).property().volatile()

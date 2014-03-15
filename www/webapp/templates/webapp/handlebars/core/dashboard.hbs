@@ -4,50 +4,42 @@
   {{#if content.length}}
     <div {{bind-attr class="content.length:showCrossBar:hideCrossBar"}}>
       <div class="cross-bar"></div>
-      {{view view.timelineItems arrangedContentBinding="content"}}
-      {{#if content.meta.loading}}
-        {{partial "core/partials/spinner"}}
-      {{/if}}
+      {{view view.timelineItems arrangedContentBinding="arrangedContent"}}
+      {{partial "core/partials/loading"}}
     </div>
   {{else}}
-    {{#if content.meta.loading}}
-      {{partial "core/partials/spinner"}}
-    {{else}}
-      <div class="intro clearfix">
-        <div class="pull-left text">
-          <h1>
-            {% trans 'Welcome!' %}
-          </h1>
-          <p>
-            {% verbatimblocktrans %}
-              <strong>Thank you for using Vosae.</strong> It's now time to take your first steps on the application. Want to know more about the application? Click on the <a class="orange" {{action 'startHelpTour' target="view"}}>Get Started</a> button to understand how works the interface.
-            {% endverbatimblocktrans %}
-          </p>
-        </div>
-        <div class="pull-left button">
-          <a class="btn btn-primary" {{action 'startHelpTour' target="view"}}>
-            {% trans "Get Started!" %}
-          </a>
-        </div>
+    <div class="intro clearfix">
+      <div class="pull-left text">
+        <h1>{% trans 'Welcome!' %}</h1>
+        <p>
+          {% verbatimblocktrans %}
+            <strong>Thank you for using Vosae.</strong> It's now time to take your first steps on the application. Want to know more about the application? Click on the <a class="orange" {{action 'startHelpTour' target="view"}}>Get Started</a> button to understand how works the interface.
+          {% endverbatimblocktrans %}
+        </p>
       </div>
-      <div class="showCrossBar">
-        <div class="cross-bar animated"></div>
-        <ul class="timeline">
-          <li class="first date show">
-            <div><span>{% trans "Today" %}</span></div>
-          </li>
-          <li class="item show no-animation join">
-            <div class="avatar">
-              {{#if controller.session.user.photoUri}}
-                <img {{bind-attr src="controller.session.user.photoUri"}}>
-              {{/if}}
-            </div>
-            <span class="icon"></span>
-            <span class="desc">{% trans "You joined Vosae" %}</span>
-          </li>
-        </ul>
+      <div class="pull-left button">
+        <a class="btn btn-primary" {{action 'startHelpTour' target="view"}}>
+          {% trans "Get Started!" %}
+        </a>
       </div>
-    {{/if}}
+    </div>
+    <div class="showCrossBar">
+      <div class="cross-bar animated"></div>
+      <ul class="timeline">
+        <li class="first date show">
+          <div><span>{% trans "Today" %}</span></div>
+        </li>
+        <li class="item show no-animation join">
+          <div class="avatar">
+            {{#if controller.session.user.photoUri}}
+              <img {{bind-attr src="controller.session.user.photoUri"}}>
+            {{/if}}
+          </div>
+          <span class="icon"></span>
+          <span class="desc">{% trans "You joined Vosae" %}</span>
+        </li>
+      </ul>
+    </div>
   {{/if}}
 {% endtplhandlebars %}
 
@@ -110,7 +102,6 @@
   <span class="icon"></span>
   <span class="desc">
     {{#if item.issuer.isLoaded}}
-      {# {{unbound item.display_text}} #}
       {{view item.displayView contentBinding="item"}}
     {{else}}
       {% trans "Loading..." %}

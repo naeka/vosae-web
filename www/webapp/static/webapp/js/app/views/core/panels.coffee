@@ -1,7 +1,12 @@
-Vosae.DesktopLeftPanelView = Em.View.extend
+Vosae.DesktopLeftPanelView = Em.View.extend Vosae.InfiniteScrollMixin,
   templateName: "desktop-left-panel"
   elementId: "desktop-left-panel"
   classNames: ["desktop"]
+  infiniteScrollSelector: "#ct-left"
+
+  actions:
+    paginationAction: ->
+      @get('controller.controllers.notifications').send "getNextPagination"
 
   notificationItems: Em.View.extend
     templateName : "notificationItems"
@@ -24,15 +29,3 @@ Vosae.DesktopRightPanelView = Em.View.extend
   templateName: "desktop-right-panel"
   elementId: "desktop-right-panel"
   classNames: ["desktop"]
-
-
-Vosae.PhoneLeftPanelView = Em.View.extend
-  templateName: "phone-left-panel"
-  elementId: "phone-left-panel"
-  classNames: ["phone hidden-desktop"]
-
-
-Vosae.PhoneRightPanelView = Em.View.extend
-  templateName: "phone-right-panel"
-  elementId: "phone-right-panel"
-  classNames: ["phone hidden-desktop"]

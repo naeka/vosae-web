@@ -9,16 +9,19 @@ DS.EmbeddedSerializer.reopen
     value
 
   ###
-    Extract all meta from requests
+    Extract all meta from request
   ###
   extractMeta: (store, type, payload) ->
     if payload and payload.meta
-      meta = Em.Object.createWithMixins Vosae.MetaMixin, payload.meta
-      store.metaForType type, meta
+      payload.meta.since = if payload.meta.offset? then payload.meta.offset + payload.meta.limit else 0
+      payload.meta.totalCount = payload.meta.total_count
+      delete payload.meta.total_count
+      store.metaForType(type, payload.meta)
       delete payload.meta
 
 require 'serializers/application'
 
+require 'serializers/core/notification'
 require 'serializers/core/timeline'
 require 'serializers/core/tenant'
 require 'serializers/core/tenantSettings'

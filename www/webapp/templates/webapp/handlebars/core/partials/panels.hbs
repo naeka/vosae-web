@@ -2,9 +2,12 @@
 
 
 {% tplhandlebars "desktop-left-panel" %}
-  {{!-- {{#if controllers.notifications.content}} --}}
-    {{!-- {{view view.notificationItems contentBinding="controllers.notifications.content"}} --}}
-  {{!-- {{/if}} --}}
+  {{#if controllers.notifications.content}}
+    {{view view.notificationItems contentBinding="controllers.notifications.content"}}
+    {{#with controllers.notifications}}
+      {{partial "core/partials/loading"}}
+    {{/with}}
+  {{/if}}
 {% endtplhandlebars %}
 
 

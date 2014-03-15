@@ -8,7 +8,7 @@
 ###
 
 Vosae.Address = Vosae.Model.extend
-  type: DS.attr("string", defaultValue: 'WORK')
+  # type: DS.attr("string", defaultValue: 'WORK')
   postofficeBox: DS.attr('string')
   streetAddress: DS.attr('string')
   extendedAddress: DS.attr('string')

@@ -9,7 +9,7 @@
 
 Vosae.TenantSettings = Vosae.Model.extend
   core: DS.belongsTo('coreSettings')
-  invoicing: DS.belongsTo('invoicingSettings')
+  # invoicing: DS.belongsTo('invoicingSettings')
 
   didUpdate: ->
     message = gettext "Invoicing settings have been successfully updated"

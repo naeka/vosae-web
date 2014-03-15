@@ -14,30 +14,30 @@ Vosae.TransitionToLazyResourceMixin = Ember.Mixin.create
       switch resource.type
         # Contact
         when "Vosae.Contact"
-          contact = Vosae.Contact.find(resource.id)
+          contact = @store.find "contact", resource.id
           @transitionToRoute "contact.show", @get('session.tenant'), contact
         
         # Organization
         when "Vosae.Organization"
-          organization = Vosae.Organization.find(resource.id)
+          organization = @store.find "organization", resource.id Vosae.Organization.find(resource.id)
           @transitionToRoute "organization.show", @get('session.tenant'), organization
         
         # Quotation
         when "Vosae.Quotation"
-          quotation = Vosae.Quotation.find(resource.id)
+          quotation = @store.find "quotation", resource.id
           @transitionToRoute "quotation.show", @get('session.tenant'), quotation
        
         # Invoice
         when "Vosae.Invoice"
-          invoice = Vosae.Invoice.find(resource.id)
+          invoice = @store.find "invoice", resource.id
           @transitionToRoute "invoice.show", @get('session.tenant'), invoice
        
         # DownPaymentInvoice
         when "Vosae.DownPaymentInvoice"
-          downPaymentInvoice = Vosae.DownPaymentInvoice.find(resource.id)
+          downPaymentInvoice = @store.find "downPaymentInvoice", resource.id
           @transitionToRoute "downPaymentInvoice.show", @get('session.tenant'), downPaymentInvoice
 
         # CreditNote
         when "Vosae.CreditNote"
-          creditNote = Vosae.CreditNote.find(resource.id)
+          creditNote = @store.find "creditNote", resource.id
           @transitionToRoute "creditNote.show", @get('session.tenant'), creditNote

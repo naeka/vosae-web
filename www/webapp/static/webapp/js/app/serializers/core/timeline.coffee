@@ -1,4 +1,4 @@
-Vosae.TimelineSerializer = DS.EmbeddedSerializer.extend
+Vosae.TimelineSerializer = Vosae.ApplicationSerializer.extend
   
   ###
     Format the timeline entry resource type for Ember data. If resource type
@@ -10,23 +10,20 @@ Vosae.TimelineSerializer = DS.EmbeddedSerializer.extend
     return resourceType.camelize().pluralize()
 
   extractArray: (store, primaryType, payload) ->
-    timelineEntries = payload.objects
-    payload = {}
-    payload.timelines = []
-
-    for te in timelineEntries
+    for te in payload.objects
       # Create root key in payload
       type = @rootTypeForResource te.resource_type
       payload[type] = payload[type] or []
       
       # Deurlify issuer belongsTo url
-      te.issuer_id = @deurlify te.issuer
+      te.issuer = @deurlify te.issuer
 
       # Delete unwanted properties
-      delete te.issuer
       delete te.resource_type
       delete te.resource_uri
 
       payload[type].push(te)
 
+    payload.objects = []
+    
     return @_super store, primaryType, payload

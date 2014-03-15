@@ -1,4 +1,4 @@
-Vosae.NotificationSerializer = DS.EmbeddedSerializer.extend
+Vosae.NotificationSerializer = Vosae.ApplicationSerializer.extend
   
   ###
     Format the notification entry resource_type for Ember data. If resource_type
@@ -10,23 +10,25 @@ Vosae.NotificationSerializer = DS.EmbeddedSerializer.extend
     return resourceType.camelize().pluralize()
 
   extractArray: (store, primaryType, payload) ->
-    notificationEntries = payload.objects
-    payload = {}
-    payload.notifications = []
-
-    for ne in notificationEntries
+    for ne in payload.objects
       # Create root key in payload
       type = @rootTypeForResource ne.resource_type
       payload[type] = payload[type] or []
       
       # Deurlify issuer belongsTo url
-      ne.issuer_id = @deurlify ne.issuer
+      ne.issuer = @deurlify ne.issuer
 
       # Delete unwanted properties
-      delete ne.issuer
       delete ne.resource_type
       delete ne.resource_uri
 
       payload[type].push(ne)
+    
+    payload.objects = []
 
     return @_super store, primaryType, payload
+
+# Vosae.OrganizationSavedNE = DS.EmbeddedSerializer.extend
+#   normalize: (type, hash, prop) ->
+#     console.log type, hash, prop
+#     

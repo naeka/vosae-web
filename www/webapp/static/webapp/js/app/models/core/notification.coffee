@@ -14,27 +14,6 @@ Vosae.Notification = Vosae.Model.extend
   displayView: Em.View.extend
     templateName: 'notificationEntry/base'
 
-  markAsRead: ->
-    @set('read', true)
-
-    # Get record and manually update his current state
-    record = @
-    record.set 'currentState', DS.RootState.loaded.updated.inFlight
-    
-    # Get store and adapter instances
-    store = @get('store')
-    adapter = store.get('adapter')
-    
-    # Generate url used to mark notification as read
-    url = adapter.buildURL('notification', @get('id'))
-    url = url + 'mark_as_read/'
-
-    # Then send request to API
-    adapter.ajax url, "PUT",
-      success: (json) ->
-        Ember.run @, ->
-          @didSaveRecord store, Vosae.Notification, record, json 
-
 
 ###
   A data model that represents a notification of type contact saved

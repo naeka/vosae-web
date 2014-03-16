@@ -16,7 +16,7 @@ Vosae.NotificationsController = Vosae.ArrayController.extend Vosae.TransitionToL
     ###
     getNextPagination: ->
       meta = @get "meta"
-      # If there's metadata and there's more records to load
+      # If there's metadata and more records to load
       if meta.get "canFetchMore"
         meta.set 'loading', true
         # Fetch old timeline entries
@@ -26,8 +26,12 @@ Vosae.NotificationsController = Vosae.ArrayController.extend Vosae.TransitionToL
       Flag all notifications as read
     ###
     markAllAsRead: ->
-      @get('content').filterProperty('read', false).forEach (notification) ->
-        notification.markAsRead()
+      # unreadNotifs = @get('content').filterProperty('read', false)
+      unreadNotifs = @get('content.firstObject')
+      unreadNotifs.set 'read', false
+      unreadNotifs.save()
+      # Ember.RSVP.all(unreadNotifs.invoke('save')).then (notifications) ->
+      #   console.log "markAsRead for each notifications :)"
 
   fetchContent: (->
     meta = @store.metadataFor "notification"

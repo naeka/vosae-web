@@ -37,6 +37,15 @@ Vosae.Utilities =
     'creditNoteSavedNE'
     'eventReminderNE'
   ]
+  
+  REGISTRATION_INFO_MODELS: [
+    'beRegistrationInfo'  
+    'chRegistrationInfo'  
+    'frRegistrationInfo'  
+    'gbRegistrationInfo'  
+    'luRegistrationInfo'  
+    'usRegistrationInfo'
+  ]
 
   ###
     Updates prototypes to add usefull methods

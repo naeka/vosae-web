@@ -12,6 +12,8 @@ Vosae.CreditNote = Vosae.InvoiceBase.extend
   relatedDownPaymentInvoice: DS.belongsTo('Vosae.DownPaymentInvoice')
   relatedInvoice: DS.belongsTo('Vosae.Invoice')
 
+  isCreditNote: true
+
 
 Vosae.Adapter.map "Vosae.CreditNote",
   # revisions:

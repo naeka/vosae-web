@@ -17,6 +17,8 @@ Vosae.Invoice = Vosae.InvoiceBase.extend
   relatedPurchaseOrder: DS.belongsTo('Vosae.PurchaseOrder')
   # relatedDeliveryOrder: DS.belongsTo('Vosae.DeliveryOrder')
 
+  isInvoice: true
+
   displayState: (->
     # Returns the current state readable and translated.
     Vosae.Config.invoiceStatesChoices.findProperty('value', @get('state')).get('label')

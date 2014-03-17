@@ -39,3 +39,6 @@ Vosae.Model.reopen
       @get('errors')[key].push error
       if @get 'isValid'
         @send 'becameInvalid'
+
+  getEndpoint: ->
+    @constructor.toString().split('.').get('lastObject').decamelize()

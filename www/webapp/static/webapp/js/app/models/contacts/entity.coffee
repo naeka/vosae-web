@@ -13,20 +13,18 @@ Vosae.Entity = Vosae.Model.extend
   gravatarMail: DS.attr("string")
   note: DS.attr("string")
   private: DS.attr("boolean", defaultValue: false)
-  addresses: DS.hasMany("address")
-  emails: DS.hasMany("email")
-  phones: DS.hasMany("phone")
+  addresses: DS.hasMany("vosaeAddress", async: true)
+  emails: DS.hasMany("vosaeEmail", async: true)
+  phones: DS.hasMany("vosaePhone", async: true)
   creator: DS.belongsTo("user")
   photo: DS.belongsTo("file")
   status: DS.attr("string")
 
   isUploading: false
 
+  # Return true if entity has been created by current Vosae.User
   isOwned: (->
-    # Return true if entity has been created by current Vosae.User
-    if @get('creator') is Vosae.lookup("session:current").get('user')
-      return true
-    false
+    @get('creator') is @get("session.user")
   ).property 'creator'
 
   didCreate: ->

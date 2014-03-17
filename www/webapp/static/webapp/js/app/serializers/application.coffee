@@ -17,21 +17,123 @@ inflector.irregular 'invoicingNumberingSettings', 'invoicingNumberingSettings'
 ###
 
 Vosae.ApplicationSerializer = DS.RESTSerializer.extend
+  ###
+    Parse `resource_uri` and returns `id`. This method is called when
+    extracting `hasMany` & `belongsTo` relationships
+  ###
+  deurlify: (value) ->
+    if typeof value is "string"
+      return value.split("/").reverse()[1]
+    value
 
   ###
-    Serializes a polymorphic type as a fully capitalized model name.
+    Called when the server has returned a payload representing
+    multiple records, such as in response to a `findAll` or `findQuery`.
+    
+    Here we transform the payload to match the ember-data conventions. 
+    - Update the payload root : payload.objects -> payload.contacts for example.
+    - Create fake ids to embedded `belongsTo` and `hasMany` objects. Sideload embedded 
+    `belongsTo` and `hasMany`.
 
-    @method serializePolymorphicType
-    @param {DS.Model} record
-    @param {Object} json
-    @param relationship
+    @method extractArray
+    @param {DS.Store} store
+    @param {subclass of DS.Model} type
+    @param {Object} payload
+    @param {'findAll'|'findMany'|'findHasMany'|'findQuery'} requestType
+    @returns {Array} The primary array that was returned in response to the original query.
   ###
-  serializePolymorphicType: (record, json, relationship) ->
-    key = relationship.key
-    belongsTo = record.get key
-    if belongsTo
-      key = @keyForAttribute key
-      json[key + "_type"] = Ember.String.capitalize belongsTo.constructor.typeKey
+  extractArray: (store, primaryType, payload) ->
+    # 1) Update the payload root according to the type
+    root = @payloadRootForType primaryType, "extractArray"
+    payload[root] = payload.objects  
+    delete payload.objects
+  
+    # 2) Update payload, adds fake id to embedded relationship and sideload all embedded belongsTo and hasMany
+    partials = payload[root]
+    forEach partials, ((partial) ->
+      updatePayloadWithEmbedded.call this, store, primaryType, payload, partial
+      return
+    ), this
+
+    return @_super store, primaryType, payload
+
+  ###
+    Extract all meta from request
+  ###
+  extractMeta: (store, type, payload) ->
+    if payload and payload.meta
+      payload.meta.since = if payload.meta.offset? then payload.meta.offset + payload.meta.limit else 0
+      payload.meta.totalCount = payload.meta.total_count
+      delete payload.meta.total_count
+      store.metaForType(type, payload.meta)
+      delete payload.meta
+
+  ###
+    Called when the server has returned a payload representing
+    a single record, such as in response to a `find` or `save`.
+    
+    Here we transform the payload to match the ember-data conventions. 
+    - Update the payload root : payload -> payload.contact for example.
+    - Create fake ids to embedded `belongsTo` and `hasMany` objects. Sideload embedded 
+    `belongsTo` and `hasMany`.
+
+    @method extractSingle
+    @param {DS.Store} store
+    @param {subclass of DS.Model} type
+    @param {Object} payload
+    @param {String} id
+    @param {'find'|'createRecord'|'updateRecord'|'deleteRecord'} requestType
+    @returns {Object} the primary response to the original request
+  ###
+  extractSingle: (store, type, payload, id, requestType) ->
+    # 1) Update the payload root according to the type
+    root = @payloadRootForType type, "extractSingle"
+    object = payload
+    payload = {}
+    payload[root] = object  
+    partial = payload[root]
+  
+    # 2) Update payload, adds fake id to embedded relationship and sideload all embedded belongsTo and hasMany
+    updatePayloadWithEmbedded.call this, store, type, payload, partial
+
+    return @_super store, type, payload, id, requestType
+
+  ###
+    Converts camelCased attributes to underscored when serializing.
+
+    @method keyForAttribute
+    @param {String} attribute
+    @return String
+  ###
+  keyForAttribute: (attr) ->
+    Ember.String.decamelize(attr)
+
+  ###
+    Underscores relationship names and appends "_id" or "_ids" when serializing
+    relationship keys.
+
+    @method keyForRelationship
+    @param {String} key
+    @param {String} kind
+    @return String
+  ###
+  keyForRelationship: (key, kind) ->
+    Ember.String.decamelize(key)
+
+  ###
+    Returns the expected payload root for a specific type. Pluralize if method 
+    is called by an extractArray.
+
+    @method payloadRootForType
+    @param {subclass of DS.Model} type
+    @param {String} extractMethod, must be "extractArray" or "extractSing"
+    @returns {String} The payload root for the type
+  ###
+  payloadRootForType: (type, extractMethod) ->
+    payloadRoot = type.toString().split('.')[1].camelize()
+    if extractMethod is "extractArray"
+      return payloadRoot.pluralize()
+    payloadRoot
 
   ###
     Serialize `belongsTo` relationship when it is configured as an embedded object.
@@ -103,7 +205,6 @@ Vosae.ApplicationSerializer = DS.RESTSerializer.extend
       removeId parentKey, json[key] if parentKey
       delete json[key][parentKey]
     return
-
 
   ###
     Serialize `hasMany` relationship when it is configured as embedded objects.
@@ -199,92 +300,22 @@ Vosae.ApplicationSerializer = DS.RESTSerializer.extend
       , this)
     return
 
-  ###
-    Parse `resource_uri` and returns `id`. This method is called when
-    extracting `hasMany` & `belongsTo` relationships
-  ###
-  deurlify: (value) ->
-    if typeof value is "string"
-      return value.split("/").reverse()[1]
-    value
 
   ###
-    Extract all meta from request
-  ###
-  extractMeta: (store, type, payload) ->
-    if payload and payload.meta
-      payload.meta.since = if payload.meta.offset? then payload.meta.offset + payload.meta.limit else 0
-      payload.meta.totalCount = payload.meta.total_count
-      delete payload.meta.total_count
-      store.metaForType(type, payload.meta)
-      delete payload.meta
-  ###
-    Converts camelCased attributes to underscored when serializing.
+    Serializes a polymorphic type as a fully capitalized model name.
 
-    @method keyForAttribute
-    @param {String} attribute
-    @return String
+    @method serializePolymorphicType
+    @param {DS.Model} record
+    @param {Object} json
+    @param relationship
   ###
-  keyForAttribute: (attr) ->
-    Ember.String.decamelize(attr)
+  serializePolymorphicType: (record, json, relationship) ->
+    key = relationship.key
+    belongsTo = record.get key
+    if belongsTo
+      key = @keyForAttribute key
+      json[key + "_type"] = Ember.String.capitalize belongsTo.constructor.typeKey
 
-  ###
-    Underscores relationship names and appends "_id" or "_ids" when serializing
-    relationship keys.
-
-    @method keyForRelationship
-    @param {String} key
-    @param {String} kind
-    @return String
-  ###
-  keyForRelationship: (key, kind) ->
-    Ember.String.decamelize(key)
-
-  ###
-    Returns the expected payload root for a specific type. Pluralize if method 
-    is called by an extractArray.
-
-    @method payloadRootForType
-    @param {subclass of DS.Model} type
-    @param {String} extractMethod, must be "extractArray" or "extractSing"
-    @returns {String} The payload root for the type
-  ###
-  payloadRootForType: (type, extractMethod) ->
-    payloadRoot = type.toString().split('.')[1].camelize()
-    if extractMethod is "extractArray"
-      return payloadRoot.pluralize()
-    payloadRoot
-
-  ###
-    Called when the server has returned a payload representing
-    multiple records, such as in response to a `findAll` or `findQuery`.
-    
-    Here we transform the payload to match the ember-data conventions. 
-    - Update the payload root : payload.objects -> payload.timelines for exemple.
-    - Create fake ids to embedded `belongsTo` and `hasMany` objects.
-    - Sideload embedded `belongsTo` and `hasMany`.
-
-    @method extractArray
-    @param {DS.Store} store
-    @param {subclass of DS.Model} type
-    @param {Object} payload
-    @param {'findAll'|'findMany'|'findHasMany'|'findQuery'} requestType
-    @returns {Array} The primary array that was returned in response to the original query.
-  ###
-  extractArray: (store, primaryType, payload) ->
-    # 1) Update the payload root according to the type
-    root = @payloadRootForType primaryType, "extractArray"
-    payload[root] = payload.objects  
-    delete payload.objects
-  
-    # 2) Update payload, adds fake id to embedded relationship and sideload all embedded belongsTo and hasMany
-    partials = payload[root]
-    forEach partials, ((partial) ->
-      updatePayloadWithEmbedded.call this, store, primaryType, payload, partial
-      return
-    ), this
-
-    return @_super store, primaryType, payload
 
 ###
   All the following functions are used by the ApplicationSerializer
@@ -311,7 +342,7 @@ removeId = (key, json) ->
 # Chooses a relationship kind to branch which function is used to update payload
 # does not change payload if attr is not embedded
 updatePayloadWithEmbedded = (store, type, payload, partial) ->
-  attrs = @get "attrs"
+  attrs = @get "attrs"    
   type.eachRelationship ((key, relationship) ->
     # Embedded relationship
     if attrs and isEmbedded(attrs[key])
@@ -402,7 +433,7 @@ updatePayloadWithEmbeddedBelongsTo = (store, primaryType, relationship, payload,
   payload[embeddedTypeKey] = payload[embeddedTypeKey] or []
   embeddedType = store.modelFor(relationship.type.typeKey)
   for key of partial
-    if partial.hasOwnProperty(key) and key.camelize() is attribute
+    if partial.hasOwnProperty(key) and key is attribute
       updatePayloadWithEmbedded.call serializer, store, embeddedType, payload, partial[key]
 
   id = partial[attribute].id

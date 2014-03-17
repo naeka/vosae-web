@@ -26,9 +26,9 @@ Vosae.InvoiceRevision = Vosae.Model.extend
   organization: DS.belongsTo('organization')
   issuer: DS.belongsTo('user')
   contact: DS.belongsTo('contact')
-  senderAddress: DS.belongsTo('address')
-  billingAddress: DS.belongsTo('address')
-  deliveryAddress: DS.belongsTo('address')
+  senderAddress: DS.belongsTo('vosaeAddress')
+  billingAddress: DS.belongsTo('vosaeAddress')
+  deliveryAddress: DS.belongsTo('vosaeAddress')
   currency: DS.belongsTo('currency')
 
   # Update an invoice revision with a new currency

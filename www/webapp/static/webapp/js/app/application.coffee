@@ -6,7 +6,7 @@
 ###
 
 window.Vosae = Em.Application.create
-  LOG_TRANSITIONS: true
+  # LOG_TRANSITIONS: true
 
   preWindowLocation: WINDOW_LOCATION_AT_START # See skeleton-head.html
 
@@ -33,6 +33,7 @@ window.Vosae = Em.Application.create
   ###
   injectSession: ->
     this.register 'session:current', Vosae.Session, {singleton: true}
+    this.inject 'store', 'session', 'session:current'
     this.inject 'view', 'session', 'session:current'
     this.inject 'route', 'session', 'session:current'
     this.inject 'controller', 'session', 'session:current'

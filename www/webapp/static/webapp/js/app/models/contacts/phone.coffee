@@ -7,7 +7,7 @@
   @module Vosae
 ###
 
-Vosae.Phone = Vosae.Model.extend
+Vosae.VosaePhone = Vosae.Model.extend
   type: DS.attr("string", defaultValue: 'WORK')
   subtype: DS.attr("string")
   phone: DS.attr("string")

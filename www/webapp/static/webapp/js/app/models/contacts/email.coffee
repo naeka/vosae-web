@@ -7,7 +7,7 @@
   @module Vosae
 ###
 
-Vosae.Email = Vosae.Model.extend
+Vosae.VosaeEmail = Vosae.Model.extend
   type: DS.attr("string", defaultValue: 'WORK')
   email: DS.attr('string')
 

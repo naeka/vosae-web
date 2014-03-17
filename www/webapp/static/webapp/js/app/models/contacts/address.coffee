@@ -7,7 +7,7 @@
   @module Vosae
 ###
 
-Vosae.Address = Vosae.Model.extend
+Vosae.VosaeAddress = Vosae.Model.extend
   type: DS.attr("string", defaultValue: 'WORK')
   postofficeBox: DS.attr('string')
   streetAddress: DS.attr('string')
@@ -73,18 +73,7 @@ Vosae.Address = Vosae.Model.extend
         country: address.get 'country'
 
 
-Vosae.Address.reopen
+Vosae.VosaeAddress.reopen
   tenant: DS.belongsTo('tenant')
   # contact: DS.belongsTo('Vosae.Contact')
   # organization: DS.belongsTo('Vosae.Organization')
-
-# DEBUG ONLY
-Vosae.VosaeAddress = Vosae.Model.extend
-  type: DS.attr("string", defaultValue: 'WORK')
-  postofficeBox: DS.attr('string')
-  streetAddress: DS.attr('string')
-  extendedAddress: DS.attr('string')
-  postalCode: DS.attr('string')
-  city: DS.attr('string')
-  state: DS.attr('string')
-  country: DS.attr('string')

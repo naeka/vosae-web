@@ -1,3 +1,12 @@
+###
+  Serializer for model `Vosae.Notification` and all polymorphic sub models.
+
+  @class NotificationSerializer
+  @extends Vosae.ApplicationSerializer
+  @namespace Vosae
+  @module Vosae
+###
+
 Vosae.NotificationSerializer = Vosae.ApplicationSerializer.extend
   
   ###

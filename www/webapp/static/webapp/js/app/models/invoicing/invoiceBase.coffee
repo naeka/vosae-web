@@ -12,9 +12,9 @@ Vosae.InvoiceBase = Vosae.Model.extend
   accountType: DS.attr('string')
   total: DS.attr('number')
   amount: DS.attr('number')
-  # revisions: DS.hasMany('Vosae.InvoiceRevision')
+  # revisions: DS.hasMany('invoiceRevision')
   notes: DS.hasMany('invoiceNote')
-  attachments: DS.hasMany('file')
+  attachments: DS.hasMany('file', async: true)
   issuer: DS.belongsTo('user')
   organization: DS.belongsTo('organization')
   contact: DS.belongsTo('contact')
@@ -36,10 +36,10 @@ Vosae.InvoiceBase = Vosae.Model.extend
 
   addAttachmentUrl: (->
     # Return the url to add attachment
-    if @get("id")?
-      adapter = @get('store.adapter')
-      root = adapter.rootForType(@constructor.toString())
-      return adapter.buildURL(root, @get('id')) + "add_attachment/"
+    # if @get("id")?
+    #   adapter = @get('store.adapter')
+    #   root = adapter.rootForType(@constructor.toString())
+    #   return adapter.buildURL(root, @get('id')) + "add_attachment/"
     return
   ).property("id")
 
@@ -168,6 +168,7 @@ Vosae.InvoiceBase = Vosae.Model.extend
       message: message
 
   didDelete: ->
+    plop('')
     message = switch @constructor.toString()
       when Vosae.Quotation.toString()
         gettext 'Your quotation has been successfully deleted'

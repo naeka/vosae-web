@@ -3155,7 +3155,9 @@ define("ember-data/lib/serializers/rest_serializer",
       */
       extractArray: function(store, primaryType, payload) {
         payload = this.normalizePayload(primaryType, payload);
-        console.log(JSON.parse(JSON.stringify(payload)));
+        if(primaryType === Vosae.Invoice) {
+          console.log(JSON.parse(JSON.stringify(payload)));
+        }
         var primaryTypeName = primaryType.typeKey,
             primaryArray;
 

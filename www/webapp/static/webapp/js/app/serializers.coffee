@@ -10,6 +10,10 @@ require 'serializers/contacts/organization'
 require 'serializers/contacts/contact'
 
 require 'serializers/invoicing/currency'
+require 'serializers/invoicing/quotation'
+require 'serializers/invoicing/invoice'
+require 'serializers/invoicing/invoiceRevision'
+require 'serializers/invoicing/purchaseOrder'
 
 require 'serializers/settings/coreSettings'
 require 'serializers/settings/invoicingSettings'

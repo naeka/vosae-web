@@ -12,10 +12,7 @@ Vosae.Invoice = Vosae.InvoiceBase.extend
   paid: DS.attr('number')
   balance: DS.attr('number')
   hasTemporaryReference: DS.attr('boolean', defaultValue: true)
-  payments: DS.hasMany('payment')
-  relatedQuotation: DS.belongsTo('quotation')
-  relatedPurchaseOrder: DS.belongsTo('purchaseOrder')
-  # relatedDeliveryOrder: DS.belongsTo('deliveryOrder')
+  payments: DS.hasMany('payment', async: true)
 
   displayState: (->
     # Returns the current state readable and translated.

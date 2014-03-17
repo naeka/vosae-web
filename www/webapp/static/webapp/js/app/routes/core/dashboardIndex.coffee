@@ -2,7 +2,7 @@ Vosae.DashboardIndexRoute = Ember.Route.extend
   beforeModel: ->
     meta = @store.metadataFor "timeline"
     # Only fetch `timeline` once
-    if !meta or !meta.hasBeenFetched
+    if !meta or !meta.get "hasBeenFetched"
       @store.find "timeline"
 
   model: ->
@@ -16,8 +16,7 @@ Vosae.DashboardIndexRoute = Ember.Route.extend
       'content': null
       'unmergedContent': model
 
-  # renderTemplate: ->
-  #   @_super()
-  #   @render 'dashboard.index.settings',
-  #     into: 'application'
-  #     outlet: 'outletPageSettings'
+  renderTemplate: ->
+    @_super()
+    @render 'dashboard.index.settings',
+      outlet: 'outletPageSettings'

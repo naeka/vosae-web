@@ -1,5 +1,6 @@
 ###
-  A base model that represents a notification
+  A base model that represents a notification. All notification models are read
+  only models.
 
   @class Notification
   @extends Vosae.Model

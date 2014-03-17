@@ -22,8 +22,10 @@ Vosae.Router.map ->
   @resource 'tenant', path: '/:tenant_slug', ->
     @route 'index', path: '/'
 
+    # Routes for app dashboard
     @resource 'dashboard', path: '/timeline', ->  
 
+    # Routes for app contacts
     @resource 'contacts', path: '/contacts', ->
       @route 'show', path: '/'
       @route 'add'
@@ -38,6 +40,7 @@ Vosae.Router.map ->
       @route 'edit'
       @route 'addContact', path: '/contact/add'
 
+    # Routes for app organizer
     @resource 'calendarLists', path: '/organizer', ->
       @route 'show', path: '/'
       @route 'add'
@@ -48,6 +51,7 @@ Vosae.Router.map ->
       @route 'show', path: '/'
       @route 'edit'
 
+    # Routes for app invoicing
     @resource 'invoicing', path: '/invoicing', ->
       @route 'dashboard', path: '/'
     @resource 'quotations', path: '/invoicing/quotations', ->
@@ -77,6 +81,7 @@ Vosae.Router.map ->
       @route 'show', path: '/'
       @route 'edit'
 
+    # Routes for app settings
     @resource 'settings', path: '/settings', ->
       @route 'application'
       @route 'apiKeys', path: '/api_keys'

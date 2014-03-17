@@ -12,4 +12,4 @@ Vosae.OrganizationShowController = Vosae.EntityController.extend
     Ember.ArrayProxy.createWithMixins Ember.SortableMixin,
       sortProperties: ['name']
       content: @get('content.contacts')
-  ).property('content.contacts', 'content.contacts.@each')
+  ).property('content.contacts', 'content.contacts.length', 'content.contacts.@each.name')

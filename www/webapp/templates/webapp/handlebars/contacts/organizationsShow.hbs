@@ -44,19 +44,11 @@
   </section>
 
   <section class="list clearfix">
-    {{#if content.isLoaded}}
+    {{#if content}}
       {{#with arrangedContent}}
         {{partial "contacts/partials/listOfOrganizations"}}
       {{/with}}
-      {{#if meta.next}}
-        <p class="pagination text-center">
-          <a class="btn btn-default" {{action 'getNextPagination'}}>
-            {% trans "More" context "display more" %}
-          </a>
-        </p>
-      {{/if}}
-    {{else}}
-      {{partial "core/partials/spinner"}}
+      {{partial "core/partials/pagination"}}      
     {{/if}}
   </section>
 {% endtplhandlebars %}

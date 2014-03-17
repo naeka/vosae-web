@@ -7,6 +7,15 @@ inflector.irregular 'invoicingSettings', 'invoicingSettings'
 inflector.irregular 'storageQuotasSettings', 'storageQuotasSettings'
 inflector.irregular 'invoicingNumberingSettings', 'invoicingNumberingSettings'
 
+###
+  Main serializer for the application.
+
+  @class ApplicationSerializer
+  @extends Vosae.ApplicationSerializer
+  @namespace Vosae
+  @module Vosae
+###
+
 Vosae.ApplicationSerializer = DS.RESTSerializer.extend
 
   ###
@@ -231,8 +240,20 @@ Vosae.ApplicationSerializer = DS.RESTSerializer.extend
   keyForRelationship: (key, kind) ->
     Ember.String.decamelize(key)
 
-  payloadRootForType: (type) ->
-    type.toString().split('.')[1].camelize().pluralize()
+  ###
+    Returns the expected payload root for a specific type. Pluralize if method 
+    is called by an extractArray.
+
+    @method payloadRootForType
+    @param {subclass of DS.Model} type
+    @param {String} extractMethod, must be "extractArray" or "extractSing"
+    @returns {String} The payload root for the type
+  ###
+  payloadRootForType: (type, extractMethod) ->
+    payloadRoot = type.toString().split('.')[1].camelize()
+    if extractMethod is "extractArray"
+      return payloadRoot.pluralize()
+    payloadRoot
 
   ###
     Called when the server has returned a payload representing
@@ -252,7 +273,7 @@ Vosae.ApplicationSerializer = DS.RESTSerializer.extend
   ###
   extractArray: (store, primaryType, payload) ->
     # 1) Update the payload root according to the type
-    root = @payloadRootForType(primaryType)
+    root = @payloadRootForType primaryType, "extractArray"
     payload[root] = payload.objects  
     delete payload.objects
   
@@ -291,14 +312,37 @@ removeId = (key, json) ->
 # does not change payload if attr is not embedded
 updatePayloadWithEmbedded = (store, type, payload, partial) ->
   attrs = @get "attrs"
-  return unless attrs
   type.eachRelationship ((key, relationship) ->
-    config = attrs[key]
-    if isEmbedded(config)
+    # Embedded relationship
+    if attrs and isEmbedded(attrs[key])
       updatePayloadWithEmbeddedHasMany.call this, store, key, relationship, payload, partial if relationship.kind is "hasMany"
       updatePayloadWithEmbeddedBelongsTo.call this, store, key, relationship, payload, partial if relationship.kind is "belongsTo"
+    # Traditionnal relationship
+    else
+      updatePayloadWithHasMany.call this, store, key, relationship, payload, partial if relationship.kind is "hasMany"
+      updatePayloadWithBelongsTo.call this, store, key, relationship, payload, partial if relationship.kind is "belongsTo"
     return
   ), this
+  return
+
+# Handles `belongsTo` relationship, deurlify content
+updatePayloadWithBelongsTo = (store, primaryType, relationship, payload, partial) ->
+  serializer = store.serializerFor(relationship.type.typeKey)
+  attribute = serializer.keyForAttribute(primaryType)
+
+  url = partial[attribute]
+  partial[attribute] = serializer.deurlify(url) if url
+
+  return
+
+# Handles `hasMany` relationship, deurlify content
+updatePayloadWithHasMany = (store, primaryType, relationship, payload, partial) ->
+  serializer = store.serializerFor(relationship.type.typeKey)
+  attribute = serializer.keyForAttribute(primaryType)
+
+  forEach partial[attribute], (url, i) ->
+    partial[attribute][i] = serializer.deurlify(url)
+
   return
 
 # Handles embedding for `hasMany` relationship

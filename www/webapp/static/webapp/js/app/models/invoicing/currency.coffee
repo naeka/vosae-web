@@ -1,5 +1,5 @@
 ###
-  A data model that represents a currency
+  A data model that represents a currency. The currency model is read only model
 
   @class Currency
   @extends Vosae.Model
@@ -34,7 +34,6 @@ Vosae.Currency = Vosae.Model.extend
     symbol = @get('symbol')
     if sign and symbol
       return "#{sign} - #{symbol}"
-    console.log sign, symbol
     return ""
   ).property('symbol')
 

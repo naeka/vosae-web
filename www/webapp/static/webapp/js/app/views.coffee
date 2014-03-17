@@ -26,7 +26,8 @@ require 'views/partials/bootstrap/textField'
 require 'views/partials/permissionsManager'
 require 'views/partials/specificPermissionsManager'
 
-require 'views/core/application'
+require 'views/application'
+
 require 'views/core/search'
 require 'views/core/panels'
 require 'views/core/dashboardIndex'

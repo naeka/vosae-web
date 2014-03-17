@@ -1,3 +1,12 @@
+###
+  Serializer for model `Vosae.User`.
+
+  @class UserSerializer
+  @extends Vosae.ApplicationSerializer
+  @namespace Vosae
+  @module Vosae
+###
+
 Vosae.UserSerializer = Vosae.ApplicationSerializer.extend
   attrs:
     specificPermissions:

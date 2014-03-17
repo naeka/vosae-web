@@ -1,5 +1,6 @@
 ###
-  A base model that represents a timeline entry
+  A base model that represents a timeline entry. All timeline models are read
+  only models.
 
   @class Timeline
   @extends Vosae.Model

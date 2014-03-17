@@ -1,4 +1,4 @@
-Vosae.AppOrganizerRoute = Vosae.SelectedTenantRoute.extend
+Vosae.AppOrganizerRoute = Em.Route.extend
   setupController: ->
     Vosae.lookup('controller:application').set('currentRoute', 'organizer')
 

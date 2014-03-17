@@ -13,11 +13,11 @@ Vosae.Entity = Vosae.Model.extend
   gravatarMail: DS.attr("string")
   note: DS.attr("string")
   private: DS.attr("boolean", defaultValue: false)
-  addresses: DS.hasMany("Vosae.Address")
-  emails: DS.hasMany("Vosae.Email")
-  phones: DS.hasMany("Vosae.Phone")
-  creator: DS.belongsTo("Vosae.User")
-  photo: DS.belongsTo("Vosae.File")
+  addresses: DS.hasMany("address")
+  emails: DS.hasMany("email")
+  phones: DS.hasMany("phone")
+  creator: DS.belongsTo("user")
+  photo: DS.belongsTo("file")
   status: DS.attr("string")
 
   isUploading: false

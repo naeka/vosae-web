@@ -38,13 +38,27 @@ Vosae.ArrayController = Ember.ArrayController.extend
   ###
   getRelatedType: ->
     type = switch
-      when @ instanceof Vosae.DashboardIndexController then Vosae.Timeline
-      when @ instanceof Vosae.NotificationsController then Vosae.Notification
-      when @ instanceof Vosae.ContactsShowController then Vosae.Contact
-      when @ instanceof Vosae.OrganizationsShowController then Vosae.Organization
-      when @ instanceof Vosae.InvoicesShowController then Vosae.Invoice
-      when @ instanceof Vosae.QuotationsShowController then Vosae.Quotation
-      when @ instanceof Vosae.ItemsShowController then Vosae.Item
-      when @ instanceof Vosae.PurchaseOrdersShowController then Vosae.PurchaseOrder
-      when @ instanceof Vosae.SettingsApiKeysController then Vosae.ApiKey
+      when @ instanceof Vosae.DashboardIndexController then "timeline"
+      when @ instanceof Vosae.NotificationsController then "notification"
+      when @ instanceof Vosae.ContactsShowController then "contact"
+      when @ instanceof Vosae.OrganizationsShowController then "organization"
+      when @ instanceof Vosae.InvoicesShowController then "invoice"
+      when @ instanceof Vosae.QuotationsShowController then "quotation"
+      when @ instanceof Vosae.ItemsShowController then "item"
+      when @ instanceof Vosae.PurchaseOrdersShowController then "purchaseOrder"
+      when @ instanceof Vosae.SettingsApiKeysController then "apiKey"
       else undefined
+
+  actions:
+    ###
+      Fetch more model entries
+    ###
+    getNextPagination: ->
+      type = @getRelatedType()
+      meta = @get "meta"
+      # If there's metadata and more records to load
+      if type and meta.get "canFetchMore"
+        meta.set 'loading', true
+        # Fetch old timeline entries
+        @store.find(type).then =>
+          meta.set 'loading', false

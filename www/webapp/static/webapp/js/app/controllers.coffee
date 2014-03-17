@@ -1,7 +1,8 @@
 # Imports controllers
 require 'controllers/controller'
 
-require 'controllers/core/application'
+require 'controllers/application'
+
 require 'controllers/core/dashboardIndex'
 require 'controllers/core/search'
 require 'controllers/core/notifications'

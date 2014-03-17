@@ -12,31 +12,16 @@ Vosae.NotificationsController = Vosae.ArrayController.extend Vosae.TransitionToL
 
   actions:
     ###
-      Fetch more notification entries
-    ###
-    getNextPagination: ->
-      meta = @get "meta"
-      # If there's metadata and more records to load
-      if meta.get "canFetchMore"
-        meta.set 'loading', true
-        # Fetch old timeline entries
-        @store.find('notification').then =>
-          meta.set 'loading', false
-    ###
       Flag all notifications as read
     ###
     markAllAsRead: ->
-      # unreadNotifs = @get('content').filterProperty('read', false)
-      unreadNotifs = @get('content.firstObject')
-      unreadNotifs.set 'read', false
-      unreadNotifs.save()
-      # Ember.RSVP.all(unreadNotifs.invoke('save')).then (notifications) ->
-      #   console.log "markAsRead for each notifications :)"
+      unreadNotifs = @get('content').filterProperty('read', false)
+      unreadNotifs.invoke('save') if unreadNotifs
 
   fetchContent: (->
     meta = @store.metadataFor "notification"
     # Notification hasn't been fetched
-    if !meta or !meta.hasBeenFetched
+    if !meta or !meta.get "hasBeenFetched"
       @store.findAll "notification"
       promises = []
       for model in Vosae.Utilities.NOTIFICATION_MODELS
@@ -62,7 +47,7 @@ Vosae.NotificationsController = Vosae.ArrayController.extend Vosae.TransitionToL
   ).property 'content', 'content.length', 'content.@each.read'
 
   ###
-    Returns all notifications flaged as read
+    Returns all notifications marked as read
   ###
   readNotifications: (->
     @get("content").filter((notification) ->

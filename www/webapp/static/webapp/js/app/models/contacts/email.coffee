@@ -8,7 +8,7 @@
 ###
 
 Vosae.Email = Vosae.Model.extend
-  # type: DS.attr("string", defaultValue: 'WORK')
+  type: DS.attr("string", defaultValue: 'WORK')
   email: DS.attr('string')
 
   displayType: (->

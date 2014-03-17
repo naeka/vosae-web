@@ -1,3 +1,12 @@
+###
+  Serializer for model `Vosae.Timeline` and all polymorphic sub models.
+
+  @class TimelineSerializer
+  @extends Vosae.ApplicationSerializer
+  @namespace Vosae
+  @module Vosae
+###
+
 Vosae.TimelineSerializer = Vosae.ApplicationSerializer.extend
   
   ###

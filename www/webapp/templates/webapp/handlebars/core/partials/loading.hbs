@@ -1,12 +1,25 @@
 {% load i18n templatetag_handlebars %}
 
 {% tplhandlebars "core/partials/_loading" %}
-   {{#if meta.next}} 
+  {{#if meta.next}} 
     <div class="meta-loading">
       {{#if meta.loading}}
         <div class="text-center">
           <button disabled="disabled" class="btn btn-small btn-success">{% trans "Loading..." %}</button>
         </div>
+      {{/if}}
+    </div>
+  {{/if}}
+{% endtplhandlebars %}
+
+
+{% tplhandlebars "core/partials/_pagination" %}
+  {{#if meta.next}} 
+    <div class="meta-pagination text-center">
+      {{#if meta.loading}}
+        <button disabled="disabled" class="btn btn-success">{% trans "Loading..." %}</button>
+      {{else}}
+        <button class="btn btn-default" {{action 'getNextPagination'}}>{% trans "More" context "display more" %}</button>
       {{/if}}
     </div>
   {{/if}}

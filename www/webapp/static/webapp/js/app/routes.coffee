@@ -6,11 +6,11 @@ require 'routes/application'
 
 require 'routes/core/dashboardIndex'
 
+require 'routes/tenants/tenant'
+require 'routes/tenants/tenantIndex'
 require 'routes/tenants/tenantsShow'
 require 'routes/tenants/tenantsAdd'
-require 'routes/tenants/tenantIndex'
 
-require 'routes/contacts/root'
 require 'routes/contacts/contactsShow'
 require 'routes/contacts/contactsAdd'
 require 'routes/contacts/contactEdit'

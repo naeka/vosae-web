@@ -1,0 +1,19 @@
+{% load templatetag_handlebars i18n %}
+
+{% tplhandlebars "tenants" %}
+  <div id="ct-tenants">
+    <div class="inner">
+      <header class="main">
+        <h1> 
+          {{#if controllers.application.isTenantsAdd}}
+            <i class="picto-rounded-add"></i>{% trans "Create a new organization" %}
+          {{/if}}
+          {{#if controllers.application.isTenantsShow}}
+            <i class="picto-check"></i>{% trans "Select an organization" %}
+          {{/if}}
+        </h1>
+      </header>
+      {{outlet}}
+    </div>
+  </div>
+{% endtplhandlebars %}

@@ -27,8 +27,3 @@ Vosae.NotificationSerializer = Vosae.ApplicationSerializer.extend
     payload.objects = []
 
     return @_super store, primaryType, payload
-
-# Vosae.OrganizationSavedNE = DS.EmbeddedSerializer.extend
-#   normalize: (type, hash, prop) ->
-#     console.log type, hash, prop
-#     

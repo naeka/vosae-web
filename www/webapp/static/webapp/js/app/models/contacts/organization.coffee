@@ -9,8 +9,8 @@
 
 Vosae.Organization = Vosae.Entity.extend
   corporateName: DS.attr('string')
-  contacts: DS.hasMany('contact')
-  # tags: DS.attr('string')
+  contacts: DS.hasMany('contact', async: true)
+  tags: DS.attr('string')
  
   getErrors: ->
     errors = []

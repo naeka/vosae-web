@@ -18,7 +18,7 @@
   </div>
     
   {# InvoiceBase is Invoice #}
-  {{#if isInvoice}}
+  {{#or isInvoice isDownPaymentInvoice}}
     {{#if isInvoicable}}
       {{#if isUpdatingState}}
         <div class="btn-group">
@@ -48,7 +48,7 @@
         {{/linkTo}}
       </div>
     {{/if}}
-  {{/if}}
+  {{/or}}
 
   {# InvoiceBase is Quotation #}
   {{#if isQuotation}}  

@@ -557,7 +557,7 @@ describe 'Vosae.Invoice', ->
     # Test
     expect(invoice.get('relatedColor')).toEqual "success"
 
-  it 'isInvoice property should return false', ->
+  it 'isInvoice property should return true', ->
     # Setup
     store.adapterForType(Vosae.Invoice).load store, Vosae.Invoice, {id: 1}
     invoice = store.find Vosae.Invoice, 1
@@ -573,7 +573,7 @@ describe 'Vosae.Invoice', ->
     # Test
     expect(invoice.get('isQuotation')).toBeFalsy()
 
-  it 'isCreditNote property should return true', ->
+  it 'isCreditNote property should return false', ->
     # Setup
     store.adapterForType(Vosae.Invoice).load store, Vosae.Invoice, {id: 1}
     invoice = store.find Vosae.Invoice, 1
@@ -581,7 +581,7 @@ describe 'Vosae.Invoice', ->
     # Test
     expect(invoice.get('isCreditNote')).toBeFalsy()
 
-  it 'isPurchaseOrder property should return true', ->
+  it 'isPurchaseOrder property should return false', ->
     # Setup
     store.adapterForType(Vosae.Invoice).load store, Vosae.Invoice, {id: 1}
     invoice = store.find Vosae.Invoice, 1

@@ -10,6 +10,8 @@
 
 Vosae.PurchaseOrder = Vosae.InvoiceBase.extend Vosae.InvoiceMakableMixin,
   state: DS.attr('string')
+  currentRevision: DS.belongsTo('Vosae.PurchaseOrderRevision')
+  # revisions: DS.hasMany('Vosae.PurchaseOrderRevision')
 
   isPurchaseOrder: true
 

@@ -8,7 +8,7 @@ Vosae.PurchaseOrdersAddRoute = Ember.Route.extend
 
   setupController: (controller, model) ->
     unusedTransaction = @get('store').transaction()
-    currentRevision = unusedTransaction.createRecord Vosae.InvoiceRevision
+    currentRevision = unusedTransaction.createRecord Vosae.PurchaseOrderRevision
     currency = unusedTransaction.createRecord Vosae.Currency
     billingAddress = unusedTransaction.createRecord Vosae.Address
     deliveryAddress = unusedTransaction.createRecord Vosae.Address

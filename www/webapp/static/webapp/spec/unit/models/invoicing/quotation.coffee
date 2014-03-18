@@ -178,7 +178,7 @@ describe 'Vosae.Quotation', ->
     organization = store.find Vosae.Organization, 1
 
     unusedTransaction = store.transaction()
-    currentRevision = unusedTransaction.createRecord Vosae.InvoiceRevision
+    currentRevision = unusedTransaction.createRecord Vosae.QuotationRevision
     currency = unusedTransaction.createRecord Vosae.Currency
     billingAddress = unusedTransaction.createRecord Vosae.Address
     deliveryAddress = unusedTransaction.createRecord Vosae.Address

@@ -16,7 +16,7 @@ Vosae.QuotationsAddRoute = Ember.Route.extend
       organization = if preFill.organization then preFill.organization else null
 
     unusedTransaction = @get('store').transaction()
-    currentRevision = unusedTransaction.createRecord Vosae.InvoiceRevision
+    currentRevision = unusedTransaction.createRecord Vosae.QuotationRevision
     currency = unusedTransaction.createRecord Vosae.Currency
     billingAddress = unusedTransaction.createRecord Vosae.Address
     deliveryAddress = unusedTransaction.createRecord Vosae.Address

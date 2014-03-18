@@ -9,6 +9,8 @@
 
 Vosae.Invoice = Vosae.InvoiceBase.extend
   state: DS.attr('string')
+  currentRevision: DS.belongsTo('Vosae.InvoiceRevision')
+  # revisions: DS.hasMany('Vosae.InvoiceRevision')
   paid: DS.attr('number')
   balance: DS.attr('number')
   hasTemporaryReference: DS.attr('boolean', defaultValue: true)

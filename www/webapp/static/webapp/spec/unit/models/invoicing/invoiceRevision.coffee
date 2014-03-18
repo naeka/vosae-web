@@ -123,31 +123,31 @@ describe 'Vosae.InvoiceRevision', ->
 
   it 'displayQuotationDate property should format the quotationDate', ->
     # Setup
-    store.adapterForType(Vosae.InvoiceRevision).load store, Vosae.InvoiceRevision, {id: 1, quotation_date: "2013-07-17T14:51:37+02:00"}
-    invoiceRevision = store.find Vosae.InvoiceRevision, 1
+    store.adapterForType(Vosae.QuotationRevision).load store, Vosae.QuotationRevision, {id: 1, quotation_date: "2013-07-17T14:51:37+02:00"}
+    quotationRevision = store.find Vosae.QuotationRevision, 1
 
     # Test
-    expect(invoiceRevision.get('displayQuotationDate')).toEqual "July 17 2013"
+    expect(quotationRevision.get('displayQuotationDate')).toEqual "July 17 2013"
 
     # Setup
-    invoiceRevision.set 'quotationDate', null
+    quotationRevision.set 'quotationDate', null
 
     # Test
-    expect(invoiceRevision.get('displayQuotationDate')).toEqual "undefined"
+    expect(quotationRevision.get('displayQuotationDate')).toEqual "undefined"
 
   it 'displayQuotationValidity property should format the quotationValidity', ->
     # Setup
-    store.adapterForType(Vosae.InvoiceRevision).load store, Vosae.InvoiceRevision, {id: 1, quotation_validity: "2013-07-17T14:51:37+02:00"}
-    invoiceRevision = store.find Vosae.InvoiceRevision, 1
+    store.adapterForType(Vosae.QuotationRevision).load store, Vosae.QuotationRevision, {id: 1, quotation_validity: "2013-07-17T14:51:37+02:00"}
+    quotationRevision = store.find Vosae.QuotationRevision, 1
 
     # Test
-    expect(invoiceRevision.get('displayQuotationValidity')).toEqual "July 17 2013"
+    expect(quotationRevision.get('displayQuotationValidity')).toEqual "July 17 2013"
 
     # Setup
-    invoiceRevision.set 'quotationValidity', null
+    quotationRevision.set 'quotationValidity', null
 
     # Test
-    expect(invoiceRevision.get('displayQuotationValidity')).toEqual "undefined"
+    expect(quotationRevision.get('displayQuotationValidity')).toEqual "undefined"
  
   it 'displayInvoicingDate property should format the invoicingDate', ->
     # Setup
@@ -165,31 +165,31 @@ describe 'Vosae.InvoiceRevision', ->
 
   it 'displayCreditNoteEmissionDate property should format the creditNoteEmissionDate', ->
     # Setup
-    store.adapterForType(Vosae.InvoiceRevision).load store, Vosae.InvoiceRevision, {id: 1, credit_note_emission_date: "2013-07-17T14:51:37+02:00"}
-    invoiceRevision = store.find Vosae.InvoiceRevision, 1
+    store.adapterForType(Vosae.CreditNoteRevision).load store, Vosae.CreditNoteRevision, {id: 1, credit_note_emission_date: "2013-07-17T14:51:37+02:00"}
+    creditNoteRevision = store.find Vosae.CreditNoteRevision, 1
 
     # Test
-    expect(invoiceRevision.get('displayCreditNoteEmissionDate')).toEqual "July 17 2013"
+    expect(creditNoteRevision.get('displayCreditNoteEmissionDate')).toEqual "July 17 2013"
 
     # Setup
-    invoiceRevision.set 'creditNoteEmissionDate', null
+    creditNoteRevision.set 'creditNoteEmissionDate', null
 
     # Test
-    expect(invoiceRevision.get('displayCreditNoteEmissionDate')).toEqual "undefined"
+    expect(creditNoteRevision.get('displayCreditNoteEmissionDate')).toEqual "undefined"
 
   it 'displayPurchaseOrderDate property should format the purchaseOrderDate', ->
     # Setup
-    store.adapterForType(Vosae.InvoiceRevision).load store, Vosae.InvoiceRevision, {id: 1, purchase_order_date: "2013-07-17T14:51:37+02:00"}
-    invoiceRevision = store.find Vosae.InvoiceRevision, 1
+    store.adapterForType(Vosae.PurchaseOrderRevision).load store, Vosae.PurchaseOrderRevision, {id: 1, purchase_order_date: "2013-07-17T14:51:37+02:00"}
+    purchaseOrderRevision = store.find Vosae.PurchaseOrderRevision, 1
 
     # Test
-    expect(invoiceRevision.get('displayPurchaseOrderDate')).toEqual "July 17 2013"
+    expect(purchaseOrderRevision.get('displayPurchaseOrderDate')).toEqual "July 17 2013"
 
     # Setup
-    invoiceRevision.set 'purchaseOrderDate', null
+    purchaseOrderRevision.set 'purchaseOrderDate', null
 
     # Test
-    expect(invoiceRevision.get('displayPurchaseOrderDate')).toEqual "undefined"
+    expect(purchaseOrderRevision.get('displayPurchaseOrderDate')).toEqual "undefined"
 
   it 'displayDueDate property should format the dueDate', ->
     # Setup

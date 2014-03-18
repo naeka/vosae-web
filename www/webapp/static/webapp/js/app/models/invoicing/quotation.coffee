@@ -10,6 +10,8 @@
 
 Vosae.Quotation = Vosae.InvoiceBase.extend Vosae.InvoiceMakableMixin,
   state: DS.attr('string')
+  currentRevision: DS.belongsTo('Vosae.QuotationRevision')
+  # revisions: DS.hasMany('Vosae.QuotationRevision')
 
   isQuotation: true
 

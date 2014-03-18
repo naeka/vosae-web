@@ -12,13 +12,11 @@ Vosae.InvoiceBase = Vosae.Model.extend
   accountType: DS.attr('string')
   total: DS.attr('number')
   amount: DS.attr('number')
-  # revisions: DS.hasMany('Vosae.InvoiceRevision')
   notes: DS.hasMany('Vosae.InvoiceNote')
   attachments: DS.hasMany('Vosae.File')
   issuer: DS.belongsTo('Vosae.User')
   organization: DS.belongsTo('Vosae.Organization')
   contact: DS.belongsTo('Vosae.Contact')
-  currentRevision: DS.belongsTo('Vosae.InvoiceRevision')
   group: DS.belongsTo('Vosae.InvoiceBaseGroup', inverse: null)
 
   isUploading: false

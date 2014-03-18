@@ -143,7 +143,7 @@ Vosae.InvoiceBaseSerializer = Vosae.Serializer.extend
 
   extractRecordRepresentation: (loader, type, data, shouldSideload) ->
     # Field PDF
-    if type is Vosae.InvoiceRevision
+    if [Vosae.QuotationRevision, Vosae.PurchaseOrderRevision, Vosae.InvoiceRevision, Vosae.CreditNoteRevision].contains(type)
       if data['pdf'] and jQuery.isEmptyObject data['pdf']
         data['pdf'] = null
     # Field RelatedTo

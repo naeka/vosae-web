@@ -28,7 +28,7 @@ Vosae.InvoiceBase = Vosae.Model.extend
   isDownPaymentInvoice: false
   isCreditNote: false
 
-  displayTenant: (->
+  displayReceiver: (->
     # Return organization name or contact name.
     if @get('organization')
       return @get('organization.corporateName')

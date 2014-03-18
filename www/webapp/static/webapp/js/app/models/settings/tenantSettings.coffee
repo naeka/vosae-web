@@ -13,5 +13,5 @@ Vosae.TenantSettings = Vosae.Model.extend
 
   didUpdate: ->
     message = gettext "Invoicing settings have been successfully updated"
-    Vosae.SuccessPopupComponent.open
+    Vosae.SuccessPopup.open
       message: message

@@ -32,14 +32,14 @@ Vosae.InvoiceBaseController = Em.ObjectController.extend
       @get("currentRevision.lineItems").createRecord()
 
     deleteLineItem: (lineItem) ->
-      Vosae.ConfirmPopupComponent.open
+      Vosae.ConfirmPopup.open
         message: gettext 'Do you really want to delete this line?'
         callback: (opts, event) =>
           if opts.primary
             @get('currentRevision.lineItems').removeObject lineItem
 
     deleteAttachment: (attachment) ->
-      Vosae.ConfirmPopupComponent.open
+      Vosae.ConfirmPopup.open
         message: gettext 'Do you really want to delete this attachment?'
         callback: (opts, event) =>
           if opts.primary
@@ -125,7 +125,7 @@ Vosae.InvoiceBaseController = Em.ObjectController.extend
         when Vosae.PurchaseOrder.toString()
           gettext("Do you really want to delete this purchase order?")
 
-      Vosae.ConfirmPopupComponent.open
+      Vosae.ConfirmPopup.open
         message: message
         callback: (opts, event) =>
           if opts.primary

@@ -33,7 +33,7 @@ Vosae.Entity = Vosae.Model.extend
         gettext 'Your contact has been successfully created'
       when Vosae.Organization.toString()
         gettext 'Your organization has been successfully created'
-    Vosae.SuccessPopupComponent.open
+    Vosae.SuccessPopup.open
       message: message
 
   didUpdate: ->
@@ -42,7 +42,7 @@ Vosae.Entity = Vosae.Model.extend
         gettext 'Your contact has been successfully updated'
       when Vosae.Organization.toString()
         gettext 'Your organization has been successfully updated'
-    Vosae.SuccessPopupComponent.open
+    Vosae.SuccessPopup.open
       message: message
 
   didDelete: ->
@@ -51,5 +51,5 @@ Vosae.Entity = Vosae.Model.extend
         gettext 'Your contact has been successfully deleted'
       when Vosae.Organization.toString()
         gettext 'Your organization has been successfully deleted'
-    Vosae.SuccessPopupComponent.open
+    Vosae.SuccessPopup.open
       message: message

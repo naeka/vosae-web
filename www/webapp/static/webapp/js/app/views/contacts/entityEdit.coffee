@@ -58,14 +58,14 @@ Vosae.EntityEditView = Em.View.extend
 
       error: =>
         @get('controller.content').set 'isUploading', false
-        Vosae.ErrorPopupComponent.open
+        Vosae.ErrorPopup.open
           message: gettext 'An error occurred, please try again or contact the support'
 
       progress: (e, data) =>
         progress = parseInt(data.loaded / data.total * 100, 10)
         @get("uploadProgressInstance").set "progress", progress
 
-  uploadProgressBar: Vosae.RoundProgressBarComponent.extend
+  uploadProgressBar: Vosae.RoundProgressBar.extend
     init: ->
       @_super()
       @get('parentView').set "uploadProgressInstance", @

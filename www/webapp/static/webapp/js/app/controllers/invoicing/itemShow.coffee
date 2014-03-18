@@ -10,7 +10,7 @@
 Vosae.ItemShowController = Ember.ObjectController.extend
   actions:
     delete: (item) ->
-      Vosae.ConfirmPopupComponent.open
+      Vosae.ConfirmPopup.open
         message: gettext 'Do you really want to delete this item?'
         callback: (opts, event) =>
           if opts.primary    

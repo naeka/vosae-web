@@ -17,7 +17,7 @@ Vosae.SettingsEditGroupController = Em.ObjectController.extend
       group.get('transaction').commit()
     
     delete: (group) ->
-      Vosae.ConfirmPopupComponent.open
+      Vosae.ConfirmPopup.open
         message: gettext 'Do you really want to delete this group?'
         callback: (opts, event) =>
           if opts.primary

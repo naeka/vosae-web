@@ -47,7 +47,7 @@ Vosae.QuickAddEventController = Em.ObjectController.extend
             message = gettext 'Your event has been successfully created'
           else
             message = gettext 'Your event has been successfully updated'
-          Vosae.SuccessPopupComponent.open
+          Vosae.SuccessPopup.open
             message: message
       vosaeEvent.get('transaction').commit()
 

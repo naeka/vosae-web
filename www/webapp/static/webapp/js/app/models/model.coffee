@@ -19,7 +19,7 @@ Vosae.Model = DS.Model.extend()
 
 #   becameError: ->
 #     message = "An error happened on #{@toString()}"
-#     Vosae.ErrorPopupComponent.open
+#     Vosae.ErrorPopup.open
 #       message: message
 
 #   resetErrors: ->

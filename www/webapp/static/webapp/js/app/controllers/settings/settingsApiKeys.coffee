@@ -19,7 +19,7 @@ Vosae.SettingsApiKeysController = Vosae.ArrayController.extend
       apiKey.get('transaction').commit()
 
     deleteApiKey: (apiKey) ->
-      Vosae.ConfirmPopupComponent.open
+      Vosae.ConfirmPopup.open
         message: gettext 'Do you really want to revoke this API key?'
         callback: (opts, event) =>
           if opts.primary

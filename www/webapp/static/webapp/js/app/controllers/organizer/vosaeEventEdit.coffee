@@ -25,19 +25,19 @@ Vosae.VosaeEventEditController = Em.ObjectController.extend
             message = gettext 'Your event has been successfully created'
           else
             message = gettext 'Your event has been successfully updated'
-          Vosae.SuccessPopupComponent.open
+          Vosae.SuccessPopup.open
             message: message
           @transitionToRoute 'vosaeEvent.show', @get('session.tenant'), vosaeEvent       
       vosaeEvent.get('transaction').commit()
     
     delete: (vosaeEvent) ->
-      Vosae.ConfirmPopupComponent.open
+      Vosae.ConfirmPopup.open
         message: gettext 'Do you really want to delete this event?'
         callback: (opts, event) =>
           if opts.primary
             vosaeEvent.one 'didDelete', @, ->
               Ember.run.next @, ->
-                Vosae.SuccessPopupComponent.open
+                Vosae.SuccessPopup.open
                   message: gettext 'Your event has been successfully deleted'
                 @transitionToRoute 'calendarLists.show', @get('session.tenant')
             vosaeEvent.deleteRecord()
@@ -47,7 +47,7 @@ Vosae.VosaeEventEditController = Em.ObjectController.extend
       @get('attendees').insertAt(0, Vosae.Attendee.createRecord())
 
     removeAttendee: (attendee) ->
-      Vosae.ConfirmPopupComponent.open
+      Vosae.ConfirmPopup.open
         message: gettext 'Do you really want to delete this attendee?'
         callback: (opts, event) =>
           if opts.primary
@@ -57,7 +57,7 @@ Vosae.VosaeEventEditController = Em.ObjectController.extend
       @get('reminders.overrides').pushObject(Vosae.ReminderEntry.createRecord({minutes: 10}))
 
     removeReminder: (reminder) ->
-      Vosae.ConfirmPopupComponent.open
+      Vosae.ConfirmPopup.open
         message: gettext 'Do you really want to delete this reminder?'
         callback: (opts, event) =>
           if opts.primary

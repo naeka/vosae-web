@@ -44,21 +44,21 @@ Vosae.EntityController = Ember.ObjectController.extend
       ), 200
 
     deletePhone: (phone) ->
-      Vosae.ConfirmPopupComponent.open
+      Vosae.ConfirmPopup.open
         message: gettext 'Do you really want to delete this phone?'
         callback: (opts, event) =>
           if opts.primary
            @get('phones').removeObject phone      
 
     deleteEmail: (email) ->
-      Vosae.ConfirmPopupComponent.open
+      Vosae.ConfirmPopup.open
         message: gettext 'Do you really want to delete this email?'
         callback: (opts, event) =>
           if opts.primary
            @get('emails').removeObject email
 
     deleteAddress: (address) ->
-      Vosae.ConfirmPopupComponent.open
+      Vosae.ConfirmPopup.open
         message: gettext 'Do you really want to delete this address?'
         callback: (opts, event) =>
           if opts.primary
@@ -119,7 +119,7 @@ Vosae.EntityController = Ember.ObjectController.extend
         when Vosae.Organization.toString()
           gettext 'Do you really want to delete this organization?'
 
-      Vosae.ConfirmPopupComponent.open
+      Vosae.ConfirmPopup.open
         message: message
         callback: (opts, event) =>
           if opts.primary

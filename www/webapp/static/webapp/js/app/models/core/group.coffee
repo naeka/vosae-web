@@ -30,15 +30,15 @@ Vosae.Group = Vosae.Model.extend
 
   didCreate: ->
     message = gettext 'The group has been successfully created'
-    Vosae.SuccessPopupComponent.open
+    Vosae.SuccessPopup.open
       message: message
 
   didUpdate: ->
     message = gettext 'The group has been successfully updated'
-    Vosae.SuccessPopupComponent.open
+    Vosae.SuccessPopup.open
       message: message
 
   didDelete: ->
     message = gettext 'The group has been successfully deleted'
-    Vosae.SuccessPopupComponent.open
+    Vosae.SuccessPopup.open
       message: message

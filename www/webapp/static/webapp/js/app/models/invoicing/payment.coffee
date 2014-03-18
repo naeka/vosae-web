@@ -68,5 +68,5 @@ Vosae.Payment = Vosae.Model.extend
 
   didCreate: ->
     message = gettext 'Your payment has been successfully added'
-    Vosae.SuccessPopupComponent.open
+    Vosae.SuccessPopup.open
       message: message

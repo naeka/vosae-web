@@ -162,7 +162,7 @@ Vosae.Invoice = Vosae.InvoiceBase.extend
         if creditNoteId
           invoice.reload()
           Em.run @, ->
-            Vosae.SuccessPopupComponent.open
+            Vosae.SuccessPopup.open
               message: gettext 'Your invoice has been cancelled'
             controller.transitionToRoute 'creditNote.show', controller.get('session.tenant'), store.find(Vosae.CreditNote, creditNoteId)
             invoice.set 'isCancelling', false

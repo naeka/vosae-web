@@ -62,15 +62,15 @@ Vosae.Item = Vosae.Model.extend
 
   didCreate: ->
     message = gettext 'Your item has been successfully created'
-    Vosae.SuccessPopupComponent.open
+    Vosae.SuccessPopup.open
       message: message
 
   didUpdate: ->
     message = gettext 'Your item has been successfully updated'
-    Vosae.SuccessPopupComponent.open
+    Vosae.SuccessPopup.open
       message: message
 
   didDelete: ->
     message = gettext 'Your item has been successfully deleted'
-    Vosae.SuccessPopupComponent.open
+    Vosae.SuccessPopup.open
       message: message

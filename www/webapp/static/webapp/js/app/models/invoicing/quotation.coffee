@@ -93,7 +93,7 @@ Vosae.Quotation = Vosae.InvoiceBase.extend
         if invoiceId
           quotation.reload()
           Em.run @, ->
-            Vosae.SuccessPopupComponent.open
+            Vosae.SuccessPopup.open
               message: gettext 'Your quotation has been transformed into an invoice'
             controller.transitionToRoute 'invoice.show', controller.get('session.tenant'), store.find(Vosae.Invoice, invoiceId)
           quotation.set 'isMakingInvoice', false

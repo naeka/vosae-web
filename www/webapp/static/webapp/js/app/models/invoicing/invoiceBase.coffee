@@ -149,7 +149,7 @@ Vosae.InvoiceBase = Vosae.Model.extend
         gettext 'Your down payment invoice has been successfully created'
       when Vosae.PurchaseOrder.toString()
         gettext 'Your purchase order has been successfully created' 
-    Vosae.SuccessPopupComponent.open
+    Vosae.SuccessPopup.open
       message: message
 
   didUpdate: ->
@@ -164,7 +164,7 @@ Vosae.InvoiceBase = Vosae.Model.extend
         gettext 'Your down payment invoice has been successfully updated'
       when Vosae.PurchaseOrder.toString()
         gettext 'Your purchase order has been successfully updated'
-    Vosae.SuccessPopupComponent.open
+    Vosae.SuccessPopup.open
       message: message
 
   didDelete: ->
@@ -180,5 +180,5 @@ Vosae.InvoiceBase = Vosae.Model.extend
         gettext 'Your down payment invoice has been successfully deleted'
       when Vosae.PurchaseOrder.toString()
         gettext 'Your purchase order has been successfully deleted'
-    Vosae.SuccessPopupComponent.open
+    Vosae.SuccessPopup.open
       message: message

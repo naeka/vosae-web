@@ -21,7 +21,7 @@ Vosae.CalendarListEditController = Em.ObjectController.extend
       @get('calendar.acl.rules').createRecord()
 
     deleteAclRule: (rule) ->
-      Vosae.ConfirmPopupComponent.open
+      Vosae.ConfirmPopup.open
         message: gettext 'Do you really want to delete this permission?'
         callback: (opts, event) =>
           if opts.primary
@@ -31,7 +31,7 @@ Vosae.CalendarListEditController = Em.ObjectController.extend
       @get('reminders').createRecord()
 
     deleteReminder: (reminder) ->
-      Vosae.ConfirmPopupComponent.open
+      Vosae.ConfirmPopup.open
         message: gettext 'Do you really want to delete this reminder?'
         callback: (opts, event) =>
           if opts.primary
@@ -61,7 +61,7 @@ Vosae.CalendarListEditController = Em.ObjectController.extend
               calendarList.one 'didCreate', @, -> # Then <Vosae.CalendarList>
                 Ember.run.next @, ->
                   @set 'isSaving', false
-                  Vosae.SuccessPopupComponent.open
+                  Vosae.SuccessPopup.open
                     message: gettext 'Your calendar has been successfully created'
                   @transitionToRoute 'calendarList.show', @get('session.tenant'), calendarList          
               calendarList.get('transaction').commit()    
@@ -77,13 +77,13 @@ Vosae.CalendarListEditController = Em.ObjectController.extend
                 if calendarList.get 'isDirty'
                   calendarList.one 'didUpdate', @, -> # Then <Vosae.CalendarList>
                     @set 'isSaving', false
-                    Vosae.SuccessPopupComponent.open
+                    Vosae.SuccessPopup.open
                       message: gettext 'Your calendar has been successfully updated'
                     @transitionToRoute 'calendarList.show', @get('session.tenant'), calendarList     
                   calendarList.get('transaction').commit()
                 else
                   @set 'isSaving', false
-                  Vosae.SuccessPopupComponent.open
+                  Vosae.SuccessPopup.open
                     message: gettext 'Your calendar has been successfully updated'
                   @transitionToRoute 'calendarList.show', @get('session.tenant'), calendarList
             calendar.get('transaction').commit()
@@ -93,7 +93,7 @@ Vosae.CalendarListEditController = Em.ObjectController.extend
             calendarList.one 'didUpdate', @, ->
               Ember.run.next @, ->
                 @set 'isSaving', false
-                Vosae.SuccessPopupComponent.open
+                Vosae.SuccessPopup.open
                   message: gettext 'Your calendar has been successfully updated'
                 @transitionToRoute 'calendarList.show', @get('session.tenant'), calendarList
             calendarList.get('transaction').commit()
@@ -103,20 +103,20 @@ Vosae.CalendarListEditController = Em.ObjectController.extend
         calendarList.one 'didUpdate', @, ->
           Ember.run.next @, ->
             @set 'isSaving', false
-            Vosae.SuccessPopupComponent.open
+            Vosae.SuccessPopup.open
               message: gettext 'Your calendar has been successfully updated'
             @transitionToRoute 'calendarList.show', @get('session.tenant'), calendarList          
         calendarList.get('transaction').commit()
 
 
     delete: (calendarList)->
-      Vosae.ConfirmPopupComponent.open
+      Vosae.ConfirmPopup.open
         message: gettext 'Do you really want to delete this calendar?'
         callback: (opts, event) =>
           if opts.primary
             calendarList.one 'didDelete', @, ->
               Ember.run.next @, ->
-                Vosae.SuccessPopupComponent.open
+                Vosae.SuccessPopup.open
                   message: gettext 'Your calendar has been successfully deleted'
                 @transitionToRoute 'calendarLists.show'
             calendarList.deleteRecord()

@@ -19,7 +19,7 @@ Vosae.SettingsEditTaxController = Em.ObjectController.extend
         tax.get('transaction').commit()
     
     delete: (tax) ->
-      Vosae.ConfirmPopupComponent.open
+      Vosae.ConfirmPopup.open
         message: gettext 'Do you really want to delete this tax?'
         callback: (opts, event) =>
           if opts.primary

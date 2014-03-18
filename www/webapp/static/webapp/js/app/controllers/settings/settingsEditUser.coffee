@@ -22,7 +22,7 @@ Vosae.SettingsEditUserController = Em.ObjectController.extend
       user.get('transaction').commit()
 
     delete: (user) ->
-      Vosae.ConfirmPopupComponent.open
+      Vosae.ConfirmPopup.open
         message: gettext 'Do you really want to delete this user?'
         callback: (opts, event) =>
           if opts.primary

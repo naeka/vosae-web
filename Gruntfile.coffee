@@ -257,6 +257,7 @@ module.exports = (grunt) ->
         WEBAPP_CSS_DIR
       ]
       dev: [
+        WEBAPP_BUILD_DIR
         WEBAPP_TMP_DIR
       ]
 

@@ -73,5 +73,5 @@ Vosae.Tenant = Vosae.Model.extend DS.ModelWithEmbeddedMixin,
 
   didUpdate: ->
     message = gettext("The settings of your organization have been successfully updated")
-    Vosae.SuccessPopupComponent.open
+    Vosae.SuccessPopup.open
       message: message

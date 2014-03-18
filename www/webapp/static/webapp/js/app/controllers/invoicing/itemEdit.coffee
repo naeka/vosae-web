@@ -29,7 +29,7 @@ Vosae.ItemEditController = Em.ObjectController.extend
         item.get('transaction').commit()
 
     delete: (item) ->
-      Vosae.ConfirmPopupComponent.open
+      Vosae.ConfirmPopup.open
         message: gettext 'Do you really want to delete this item?'
         callback: (opts, event) =>
           if opts.primary    

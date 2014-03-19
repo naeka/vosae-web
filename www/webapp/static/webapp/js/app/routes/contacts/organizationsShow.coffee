@@ -10,5 +10,5 @@ Vosae.OrganizationsShowRoute = Ember.Route.extend
   renderTemplate: ->
     @_super()
     @render 'organizations.show.settings',
-      into: 'application'
+      into: 'tenant'
       outlet: 'outletPageSettings'

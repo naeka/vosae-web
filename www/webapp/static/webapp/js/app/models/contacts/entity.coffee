@@ -12,13 +12,13 @@ Vosae.Entity = Vosae.Model.extend
   photoUri: DS.attr("string")
   gravatarMail: DS.attr("string")
   note: DS.attr("string")
+  status: DS.attr("string")
   private: DS.attr("boolean", defaultValue: false)
   addresses: DS.hasMany("vosaeAddress", async: true)
   emails: DS.hasMany("vosaeEmail", async: true)
   phones: DS.hasMany("vosaePhone", async: true)
-  creator: DS.belongsTo("user")
-  photo: DS.belongsTo("file")
-  status: DS.attr("string")
+  creator: DS.belongsTo("user", async: true)
+  photo: DS.belongsTo("file", async: true)
 
   isUploading: false
 

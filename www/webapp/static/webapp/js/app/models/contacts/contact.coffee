@@ -14,7 +14,7 @@ Vosae.Contact = Vosae.Entity.extend
   civility: DS.attr("string", defaultValue: null)
   birthday: DS.attr("date")
   role: DS.attr("string")
-  organization: DS.belongsTo("organization")
+  organization: DS.belongsTo("organization", async: true)
 
   fullName: (->
     firstname = @get('firstname')

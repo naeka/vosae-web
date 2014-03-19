@@ -7,4 +7,5 @@
   @module Vosae
 ###
 
-Vosae.OrganizationEditController = Vosae.EntityController.extend()
+Vosae.OrganizationEditController = Vosae.EntityController.extend
+  relatedType: "organization"

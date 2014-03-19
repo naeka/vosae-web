@@ -9,6 +9,7 @@
 ###
 
 Vosae.DashboardIndexController = Vosae.ArrayController.extend Vosae.TransitionToLazyResourceMixin,
+  relatedType: "timeline"
   sortProperties: ['datetime']
   sortAscending: false
 

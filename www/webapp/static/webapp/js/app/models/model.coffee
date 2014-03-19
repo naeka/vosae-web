@@ -9,7 +9,7 @@
 
 Vosae.Model = DS.Model.extend()
 
-# Vosae.Model.reopen
+Vosae.Model.reopen
 #   becameDirty: ->
 #     return if @get('isDirty')
 #     if @get('id')
@@ -17,10 +17,10 @@ Vosae.Model = DS.Model.extend()
 #     else
 #       @set 'currentState', DS.RootState.loaded.created.uncommitted
 
-#   becameError: ->
-#     message = "An error happened on #{@toString()}"
-#     Vosae.ErrorPopup.open
-#       message: message
+  becameError: ->
+    message = "An error happened on #{@toString()}"
+    Vosae.ErrorPopup.open
+      message: message
 
 #   resetErrors: ->
 #     # Remove errors

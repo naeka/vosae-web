@@ -33,13 +33,11 @@
               {% trans  "Cancel" %}
             </a>
           </div>
-          {{#if isDirty}}
-            <div class="btn-group">
-              <a class="btn btn-rounded btn-success" {{action 'save' content}}>
-                {{#if id}}{% trans "Save" %}{{else}}{% trans "Add" %}{{/if}}
-              </a>
-            </div>
-          {{/if}}
+          <div class="btn-group">
+            <a class="btn btn-rounded btn-success" {{action 'save' content}}>
+              {{#if id}}{% trans "Save" %}{{else}}{% trans "Add" %}{{/if}}
+            </a>
+          </div>
         {{/if}}
       </div>
     </section>
@@ -97,13 +95,11 @@
               {% trans  "Cancel" %}
             </a>
           </div>
-          {{#if isDirty}}
-            <div class="btn-group">
-              <a class="btn btn-rounded btn-success" {{action 'save' content}}>
-                {{#if id}}{% trans "Save" %}{{else}}{% trans "Add" %}{{/if}}
-              </a>
-            </div>
-          {{/if}}
+          <div class="btn-group">
+            <a class="btn btn-rounded btn-success" {{action 'save' content}}>
+              {{#if id}}{% trans "Save" %}{{else}}{% trans "Add" %}{{/if}}
+            </a>
+          </div>
         {{/if}}
       </div>
     </div>

@@ -1,14 +1,13 @@
 Vosae.OrganizationEditRoute = Ember.Route.extend
-  setupController: (controller, model) ->
-    controller.set 'content', @modelFor("organization")
-  
-  deactivate: ->
-    organization = @controller.get 'content'
-    if organization.get 'transaction'
-      organization.get("transaction").rollback()
+  model: ->
+    @modelFor("organization")  
   
   renderTemplate: ->
     @_super()
     @render 'organization.edit.settings',
-      into: 'application'
+      into: 'tenant'
       outlet: 'outletPageSettings'
+
+  deactivate: ->
+    model = @controller.get "content"
+    model.rollback() if model

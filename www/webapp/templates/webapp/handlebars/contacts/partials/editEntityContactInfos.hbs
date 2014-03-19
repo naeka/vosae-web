@@ -7,7 +7,7 @@
         {{#each phone in phones}}
         <tr>
           <td>
-            <a class="btn btn-icon btn-primary" {{action deletePhone phone}}>
+            <a class="btn btn-icon btn-primary" {{action 'deletePhone' phone}}>
               <i class="picto-delete"></i>
             </a>
           </td>
@@ -16,7 +16,7 @@
               phoneBinding      = "phone"
               hideSearchField   = "true"
               contentBinding    = "Vosae.Config.phoneCombinedTypes"
-              valueBinding      = "combinedTypes"
+              valueBinding      = "phone.combinedType"
               containerCssClass = "success"
               optionLabelPath   = "content.name"
               optionValuePath   = "content.value" }}
@@ -30,7 +30,7 @@
           </td>
         </tr>
         {{/each}}
-        <tr class="add" {{action addPhone}}>
+        <tr class="add" {{action 'addPhone'}}>
           <td colspan="3">
             <a class="btn btn-icon btn-success">
               <i class="picto-add"></i>
@@ -46,7 +46,7 @@
         {{#each email in emails}}
         <tr>
           <td>
-            <a class="btn btn-icon btn-primary" {{action deleteEmail email}}>
+            <a class="btn btn-icon btn-primary" {{action 'deleteEmail' email}}>
               <i class="picto-delete"></i>
             </a>
           </td>
@@ -68,7 +68,7 @@
           </td>
         </tr>
         {{/each}}
-        <tr class="add" {{action addEmail}}>
+        <tr class="add" {{action 'addEmail'}}>
           <td colspan="3">
             <a class="btn btn-icon btn-success">
               <i class="picto-add"></i>
@@ -129,14 +129,14 @@
                 valueBinding      = "address.type"
                 optionLabelPath   = "content.name"
                 optionValuePath   = "content.value" }} 
-              <a class="btn btn-icon btn-primary" {{action deleteAddress address}}>
+              <a class="btn btn-icon btn-primary" {{action 'deleteAddress' address}}>
                 <i class="picto-delete"></i>
               </a>
             </div>
           </td>
         </tr>
         {{/each}}
-        <tr class="add" {{action addAddress}}>
+        <tr class="add" {{action 'addAddress'}}>
           <td colspan="3">
             <a class="btn btn-icon btn-success">
               <i class="picto-add"></i>

@@ -36,13 +36,13 @@ Vosae.ResourceSearchSelect = Ember.TextField.extend
 
   ajax: ->
     dict = 
-      url: Vosae.lookup('store:main').get('adapter').buildURL('search')
+      url: @get("targetObject.store").adapterFor('application').buildURL('search')
       type: 'GET',
       quietMillis: 100,
       data: (term, page) =>
         query = "q=#{term}"
         resourceType = @get('resourceType')
-        if Vosae.Utilities.isArray resourceType
+        if Em.isArray resourceType
           resourceType.forEach (type) ->
             query += "&types=#{type}"
         else

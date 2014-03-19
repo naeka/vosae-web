@@ -23,38 +23,24 @@ Ember.ArrayController.reopen
 ###
 
 Vosae.ArrayController = Ember.ArrayController.extend
+  relatedType: null
   meta: null
 
   ###
     Make the metadata for the related model available in the templates
   ###
   setMeta: (->
-    type = @getRelatedType()
-    @set "meta", @store.metadataFor(type) if type
+    type = @get "relatedType"
+    Ember.Logger.error(@toString() + " needs the `relatedType` property to be defined.") if Em.isNone type
+    @set "meta", @store.metadataFor(type)
   ).on "init"
-
-  ###
-    Returns the model related to the controller
-  ###
-  getRelatedType: ->
-    type = switch
-      when @ instanceof Vosae.DashboardIndexController then "timeline"
-      when @ instanceof Vosae.NotificationsController then "notification"
-      when @ instanceof Vosae.ContactsShowController then "contact"
-      when @ instanceof Vosae.OrganizationsShowController then "organization"
-      when @ instanceof Vosae.InvoicesShowController then "invoice"
-      when @ instanceof Vosae.QuotationsShowController then "quotation"
-      when @ instanceof Vosae.ItemsShowController then "item"
-      when @ instanceof Vosae.PurchaseOrdersShowController then "purchaseOrder"
-      when @ instanceof Vosae.SettingsApiKeysController then "apiKey"
-      else undefined
 
   actions:
     ###
       Fetch more model entries
     ###
     getNextPagination: ->
-      type = @getRelatedType()
+      type = @get "relatedType"
       meta = @get "meta"
       # If there's metadata and more records to load
       if type and meta.get "canFetchMore"

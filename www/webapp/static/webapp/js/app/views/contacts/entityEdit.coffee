@@ -44,17 +44,23 @@ Vosae.EntityEditView = Em.View.extend
 
       done: (e, data) =>
         store = @get('controller.store')
-        fileId = store.adapterForType(Vosae.File).get('serializer').deurlify data.result['resource_uri']
-        data.result.id = fileId
-        store.adapterForType(Vosae.File).load store, Vosae.File, data.result
-        file = store.find Vosae.File, fileId
-        @get('controller.content').setProperties
-          photoSource: 'LOCAL'
-          photo: file
-          photoUri: file.get('streamLink')        
-        Em.run.later @, (->
-          @get('controller.content').set 'isUploading', false
-        ), 1000
+        serializer = store.serializerFor("file")
+        
+        # Deurlify resource_uri to get the file ID
+        fileID = serializer.deurlify data.result['resource_uri']
+
+        # Push file data into the store
+        serializer.extractSingle store, Vosae.File, data, fileID, 'find'
+
+        # Get the file record
+        store.find("file", fileID).then (file) =>
+          @get('controller.content').setProperties
+            photoSource: 'LOCAL'
+            photo: file
+            photoUri: file.get('streamLink')        
+          Em.run.later @, (->
+            @get('controller.content').set 'isUploading', false
+          ), 1000
 
       error: =>
         @get('controller.content').set 'isUploading', false
@@ -82,23 +88,17 @@ Vosae.EntityEditView = Em.View.extend
     allowClear: true
 
     onSelect: (event) ->
-      organization = Vosae.Organization.find(event.object.id).then (organization) =>
+      @get("targetObject.store").find("organization", event.object.id).then (organization) =>
         @get('contact').set 'organization', organization
 
-    didInsertElement: ->
-      @_super()
- 
-      organization = @get("contact.organization")
- 
-      if organization
-        if organization.get('isLoaded')
+    onRemove: ->
+      @get('contact').set 'organization', null
+
+    updateFieldData: (->
+      if @get("contact.organization")
+        @get("contact.organization").then (organization) =>
           @.$().select2 'data',
             id: organization.get 'id'
             corporate_name: organization.get 'corporateName'
           @.$().select2 'val', organization.get('id')
-        else
-          organization.one "didLoad", @, ->
-            @.$().select2 'data',
-              id: organization.get 'id'
-              corporate_name: organization.get 'corporateName'
-            @.$().select2 'val', organization.get('id')
+    ).on "didInsertElement"

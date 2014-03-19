@@ -1,12 +1,9 @@
 Vosae.OrganizationsAddRoute = Ember.Route.extend
-  init: ->
-    @_super()
-    @get('container').register 'controller:organizations.add', Vosae.OrganizationEditController
+  controllerName: "organizationEdit"
 
   model: ->
-    Vosae.Organization.createRecord()
+    @store.createRecord "organization"
 
   deactivate: ->
-    organization = @controller.get 'content'
-    if organization.get 'transaction'
-      organization.get("transaction").rollback()
+    model = @controller.get "content"
+    model.rollback() if model 

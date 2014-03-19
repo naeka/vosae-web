@@ -8,5 +8,6 @@
 ###
 
 Vosae.ContactsShowController = Vosae.EntitiesController.extend
+  relatedType: "contact"
   sortProperties: ['name']
   sortAscending: true

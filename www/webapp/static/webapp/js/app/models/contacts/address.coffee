@@ -71,9 +71,3 @@ Vosae.VosaeAddress = Vosae.Model.extend
         city: address.get 'city'
         state: address.get 'state'
         country: address.get 'country'
-
-
-Vosae.VosaeAddress.reopen
-  tenant: DS.belongsTo('tenant')
-  # contact: DS.belongsTo('Vosae.Contact')
-  # organization: DS.belongsTo('Vosae.Organization')

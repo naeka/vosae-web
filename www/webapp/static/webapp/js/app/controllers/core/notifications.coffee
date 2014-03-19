@@ -9,6 +9,7 @@
 ###
 
 Vosae.NotificationsController = Vosae.ArrayController.extend Vosae.TransitionToLazyResourceMixin,
+  relatedType: "notification"
 
   actions:
     ###

@@ -33,13 +33,11 @@
               {% trans  "Cancel" %}
             </a>
           </div>
-          {{#if isDirty}}
-            <div class="btn-group">
-                <a class="btn btn-success btn-rounded" {{action 'save' content}}>
-                  {{#if id}}{% trans "Save" %}{{else}}{% trans "Add" %}{{/if}}
-                </a>
-            </div>
-          {{/if}}
+          <div class="btn-group">
+              <a class="btn btn-success btn-rounded" {{action 'save' content}}>
+                {{#if id}}{% trans "Save" %}{{else}}{% trans "Add" %}{{/if}}
+              </a>
+          </div>
         {{/if}}
       </div>
     </section>
@@ -80,12 +78,6 @@
         </span>
       </div>
       <div class="organization pull-right">
-        {% comment %}
-        <label>
-          <strong>{% trans "Organization" %} :</strong>
-        </label>          
-        {% endcomment %}
-
         {{view view.organizationSearchField 
           contactBinding="this"
           containerCssClass="success"
@@ -113,13 +105,11 @@
             {% trans  "Cancel" %}
           </a>
         </div>
-        {{#if isDirty}}
-          <div class="btn-group">
-              <a class="btn btn-success btn-rounded" {{action 'save' content}}>
-                {{#if id}}{% trans "Save" %}{{else}}{% trans "Add" %}{{/if}}
-              </a>
-          </div>
-        {{/if}}
+        <div class="btn-group">
+            <a class="btn btn-success btn-rounded" {{action 'save' content}}>
+              {{#if id}}{% trans "Save" %}{{else}}{% trans "Add" %}{{/if}}
+            </a>
+        </div>
       {{/if}}
     </div>
   {{else}}

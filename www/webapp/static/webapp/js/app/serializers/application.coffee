@@ -25,6 +25,14 @@ Vosae.ApplicationSerializer = DS.RESTSerializer.extend
     if typeof value is "string"
       return value.split("/").reverse()[1]
     value
+  
+  ###
+    Build a complete `resource_uri` from `type` and `id` of a specific 
+    record. This method is called when adding `hasMany` & `belongsTo`
+  ###
+  urlify: (type, id) ->
+    url = type.toString().split('.')[1].decamelize()
+    ["", Vosae.Config.API_NAMESPACE, url, id, ""].join("/")
 
   ###
     Called when the server has returned a payload representing
@@ -135,49 +143,32 @@ Vosae.ApplicationSerializer = DS.RESTSerializer.extend
       return payloadRoot.pluralize()
     payloadRoot
 
+
+  serialize: (record, options) ->
+    json = {}
+    promises = []
+    finalizer = ->
+      json
+
+    if options and options.includeId
+      id = record.get "id"
+      json[@get("primaryKey")] = id if id
+    record.eachAttribute ((key, attribute) ->
+      @serializeAttribute record, json, key, attribute
+      return
+    ), this
+    record.eachRelationship ((key, relationship) ->
+      if relationship.kind is "belongsTo"
+        promises.push @serializeBelongsTo(record, json, relationship)
+      else if relationship.kind is "hasMany"
+        promises.push @serializeHasMany(record, json, relationship)
+      return
+    ), this
+
+    Ember.RSVP.all(promises).then finalizer
+
   ###
     Serialize `belongsTo` relationship when it is configured as an embedded object.
-
-    This example of an author model belongs to a post model:
-
-    ```js
-    Post = DS.Model.extend({
-      title:    DS.attr('string'),
-      body:     DS.attr('string'),
-      author:   DS.belongsTo('author')
-    });
-
-    Author = DS.Model.extend({
-      name:     DS.attr('string'),
-      post:     DS.belongsTo('post')
-    });
-    ```
-
-    Use a custom (type) serializer for the post model to configure embedded author
-
-    ```js
-    App.PostSerializer = DS.RESTSerializer.extend(DS.EmbeddedMixin, {
-      attrs: {
-        author: {embedded: 'always'}
-      }
-    })
-    ```
-
-    A payload with an attribute configured for embedded records can serialize
-    the records together under the root attribute's payload:
-
-    ```js
-    {
-      "post": {
-        "id": "1"
-        "title": "Rails is omakase",
-        "author": {
-          "id": "2"
-          "name": "dhh"
-        }
-      }
-    }
-    ```
 
     @method serializeBelongsTo
     @param {DS.Model} record
@@ -187,92 +178,56 @@ Vosae.ApplicationSerializer = DS.RESTSerializer.extend
   serializeBelongsTo: (record, json, relationship) ->
     attr = relationship.key
     config = @get("attrs")
+    key = (if @keyForRelationship then @keyForRelationship(attr, "belongsTo") else attr)
 
+    finalizer = ->
+      return json
+
+    # BelongsTo is not embedded
     if not config or not isEmbedded(config[attr])
-      @_super record, json, relationship
-      return
+      belongsTo = record.get attr
+      
+      # Async belongsTo need to get record instance with a resolver
+      if relationship.options.async
+        Ember.RSVP.resolve(belongsTo).then((record) =>
+          if Em.isNone record
+            json[key] = null
+          else
+            json[key] = @urlify relationship.type, record.get "id"
+          return
+        ).then(finalizer)
 
-    key = @keyForAttribute(attr)
-    embeddedRecord = record.get(attr)
+      # Not async belongsTo don't need to get record with a resolvee
+      else
+        if Em.isNone belongsTo
+          json[key] = null
+        else
+          json[key] = @urlify relationship.type, belongsTo.get "id"
 
-    unless embeddedRecord
-      json[key] = null
-    else
-      json[key] = embeddedRecord.serialize()
-      id = embeddedRecord.get("id")
-      json[key].id = id  if id
-      parentKey = @keyForAttribute(relationship.parentType.typeKey)
-      removeId parentKey, json[key] if parentKey
-      delete json[key][parentKey]
+    #   # For polymorphic belongsTo only
+    #   if relationship.options.polymorphic
+    #     @serializePolymorphicType record, json, relationship  
+    #   return
+    
+    # # BelongsTo should be embedded
+    # else  
+    #   key = @keyForAttribute attr
+    #   embeddedRecord = record.get attr
+
+    #   if not embeddedRecord
+    #     json[key] = null
+    #   else
+    #     json[key] = embeddedRecord.serialize()
+    #     id = embeddedRecord.get("id")
+    #     json[key].id = id if id
+    #     parentKey = @keyForAttribute(relationship.parentType.typeKey)
+    #     removeId parentKey, json[key] if parentKey
+    #     delete json[key][parentKey]
+
     return
 
   ###
     Serialize `hasMany` relationship when it is configured as embedded objects.
-
-    This example of a post model has many comments:
-
-    ```js
-    Post = DS.Model.extend({
-      title:    DS.attr('string'),
-      body:     DS.attr('string'),
-      comments: DS.hasMany('comment')
-    });
-
-    Comment = DS.Model.extend({
-      body:     DS.attr('string'),
-      post:     DS.belongsTo('post')
-    });
-    ```
-
-    Use a custom (type) serializer for the post model to configure embedded comments
-
-    ```js
-    App.PostSerializer = DS.RESTSerializer.extend(DS.EmbeddedMixin, {
-      attrs: {
-        comments: {embedded: 'always'}
-      }
-    })
-    ```
-
-    A payload with an attribute configured for embedded records can serialize
-    the records together under the root attribute's payload:
-
-    ```js
-    {
-      "post": {
-        "id": "1"
-        "title": "Rails is omakase",
-        "body": "I want this for my ORM, I want that for my template language..."
-        "comments": [{
-          "id": "1",
-          "body": "Rails is unagi"
-        }, {
-          "id": "2",
-          "body": "Omakase O_o"
-        }]
-      }
-    }
-    ```
-
-    To embed the ids for a related object (using a hasMany relationship):
-    ```js
-    App.PostSerializer = DS.RESTSerializer.extend(DS.EmbeddedMixin, {
-      attrs: {
-        comments: {embedded: 'ids'}
-      }
-    })
-    ```
-
-    ```js
-    {
-      "post": {
-        "id": "1"
-        "title": "Rails is omakase",
-        "body": "I want this for my ORM, I want that for my template language..."
-        "comments": ["1", "2"]
-      }
-    }
-    ```
 
     @method serializeHasMany
     @param {DS.Model} record
@@ -282,24 +237,48 @@ Vosae.ApplicationSerializer = DS.RESTSerializer.extend
   serializeHasMany: (record, json, relationship) ->
     attr = relationship.key
     config = @get("attrs")
-    key = undefined
+
+    finalizer = ->
+      return json
+
+    # HasMany is not embedded
     if not config or (not isEmbedded(config[attr]) and not hasEmbeddedIds(config[attr]))
       @_super record, json, relationship
       return
-    if hasEmbeddedIds(config[attr])
-      key = @keyForRelationship(attr, relationship.kind)
-      json[key] = get(record, attr).mapBy(get(this, "primaryKey"))
+
+    # HasMany is embedded
     else
       key = @keyForAttribute(attr)
-      json[key] = get(record, attr).map((relation) ->
-        data = relation.serialize()
-        primaryKey = get(this, "primaryKey")
-        data[primaryKey] = get(relation, primaryKey)
-        delete data.id if data.id is null
-        data
-      , this)
+
+      # Create a main promise that will contains an array of promises which will
+      # be resolved once his related record will be serialized
+      return new Ember.RSVP.Promise (resolve) =>
+        promises = []
+        record.get(attr).map((relation) ->
+          promises.push Ember.RSVP.resolve(relation.serialize()).then (data) ->
+            data
+        , this)
+
+        # Once all records in hasMany are serialized, resolve the main promise
+        Ember.RSVP.all(promises).then (hasMany) ->
+          json[key] = hasMany
+          resolve()
+
     return
 
+  ###
+    We don't want any root key serialized into the JSON 
+
+    @method serializeIntoHash
+    @param {Object} hash
+    @param {subclass of DS.Model} type
+    @param {DS.Model} record
+    @param {Object} options
+  ###
+  serializeIntoHash: (hash, type, record, options) ->
+    @serialize(record, options).then (serialized) ->
+      hash.object = serialized
+      hash
 
   ###
     Serializes a polymorphic type as a fully capitalized model name.

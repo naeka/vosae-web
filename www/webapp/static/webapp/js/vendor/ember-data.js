@@ -10175,6 +10175,7 @@ define("ember-data/lib/system/store",
         if (kind === 'belongsTo') {
           deserializeRecordId(store, data, key, relationship, value);
         } else if (kind === 'hasMany') {
+          if (typeof value.pushObjects !== 'function') { value = Ember.A(value); }
           deserializeRecordIds(store, data, key, relationship, value);
           addUnsavedRecords(record, key, value);
         }
@@ -10216,9 +10217,19 @@ define("ember-data/lib/system/store",
     // If there are any unsaved records that are in a hasMany they won't be
     // in the payload, so add them back in manually.
     function addUnsavedRecords(record, key, data) {
-      if(record) {
-        data.pushObjects(record.get(key).filterBy('isNew'));
+      if(record && data.length) {
+        var unsavedRecords = uniqById(data, record.get(key).filterBy('isNew'));
+        forEach(unsavedRecords, function(unsavedRecord) {
+          unsavedRecord.rollback();
+        });
       }
+    }
+    
+    function uniqById(data, records) {
+      var currentIds = data.mapBy("id");
+      return records.reject(function(record) {
+        return Ember.A(currentIds).contains(record.id);
+      });
     }
 
     // Delegation to the adapter and promise management

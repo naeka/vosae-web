@@ -1,4 +1,6 @@
 Vosae.ContactsAddRoute = Ember.Route.extend
+  controllerName: "contactEdit"
+
   model: ->
     @store.createRecord "contact"
 

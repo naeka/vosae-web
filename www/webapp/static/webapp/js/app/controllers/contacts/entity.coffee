@@ -107,7 +107,6 @@ Vosae.EntityController = Ember.ObjectController.extend
       if errors.length
         alert(errors.join('\n'))
       else
-        event = if entity.get('id') then 'didUpdate' else 'didCreate'
         entity.save().then (entity) =>
           switch
             when entity instanceof Vosae.Contact

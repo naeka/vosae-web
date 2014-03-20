@@ -10,7 +10,7 @@
 Vosae.QuotationsShowController = Ember.ArrayController.extend
   sortProperties: ['currentRevision.dueDate']
   sortAscending: false
-  queryLimit: 2
+  queryLimit: 5
 
   metaPending: null
   metaFailed: null

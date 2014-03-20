@@ -1,1 +1,0 @@
-# Vosae.QuotationsShowRoute = Ember.Route.extend()

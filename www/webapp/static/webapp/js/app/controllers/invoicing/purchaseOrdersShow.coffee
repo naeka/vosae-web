@@ -2,7 +2,7 @@
   Custom array controller for a collection of `Vosae.PurchaseOrder` records.
 
   @class PurchaseOrdersShowController
-  @extends Vosae.InvoicesBaseController
+  @extends Ember.ArrayController
   @namespace Vosae
   @module Vosae
 ###

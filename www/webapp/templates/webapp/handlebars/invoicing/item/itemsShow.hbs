@@ -31,21 +31,23 @@
   <section class="items with-head">
     <div class="header clearfix">
       <h4 class="pull-left">
-        {% trans "Inventory" %}
+        {% trans "Inventory" %} <span class="badge primary">{{meta.totalCount}}</span>
       </h4>
       <div class="btn-toolbar pull-right"></div>
     </div>
-    {{#with content}}
+    {{#with arrangedContent}}
       {{partial "invoicing/partials/tableOfItems"}}
     {{/with}}
 
     {# Pagination #}
-    {{#if meta.next}}
-      <p class="text-center">
-        <a class="btn btn-default btn-rounded btn-sm" {{action getNextPagination}}>
-          {% trans "Load more items" %}
-        </a>
-      </p>
-    {{/if}}
+    <div class="meta-pagination text-center">
+      {{#if meta.loading}}
+        <button disabled="disabled" class="btn btn-default">{% trans "Loading..." %}</button>
+      {{else}}
+        {{#if meta.next}}
+          <button class="btn btn-default" {{action 'getNextPagination'}}>{% trans "More" context "display more" %}</button>
+        {{/if}}
+      {{/if}}
+    </div>
   </section>
 {% endtplhandlebars %}

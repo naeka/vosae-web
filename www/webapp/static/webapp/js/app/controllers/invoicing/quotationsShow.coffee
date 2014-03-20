@@ -2,7 +2,7 @@
   Custom array controller for a collection of `Vosae.Quotation` records.
 
   @class QuotationsShowController
-  @extends Vosae.ArrayController
+  @extends Ember.ArrayController
   @namespace Vosae
   @module Vosae
 ###

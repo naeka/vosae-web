@@ -8,7 +8,7 @@
 ###
 
 Vosae.Item = Vosae.Model.extend
-  ref: DS.attr('string')
+  reference: DS.attr('string')
   description: DS.attr('string')
   unitPrice: DS.attr('number')
   type: DS.attr('string')
@@ -31,7 +31,7 @@ Vosae.Item = Vosae.Model.extend
 
   isEmpty: ->
     # Return true if item is empty
-    if @get 'ref'
+    if @get 'reference'
       return false
     if @get 'description'
       return false
@@ -48,7 +48,7 @@ Vosae.Item = Vosae.Model.extend
   getErrors: (type) ->
     errors = []
 
-    unless @get("ref")
+    unless @get("reference")
       errors.addObject gettext("Item reference must not be blank")
     unless @get("description")
       errors.addObject gettext("Item description must not be blank")

@@ -15,7 +15,7 @@
     <tbody>
       {{#each currentRevision.lineItems}}
         <tr {{bind-attr class="optional"}}>
-          <td class="reference">{{ref}}</td>
+          <td class="reference">{{reference}}</td>
           <td class="description">
             {{{description}}}
             {{#if optional}}<p class="optional-label">{% trans "Optional" context "line item" %}</p>{{/if}}

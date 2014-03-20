@@ -451,13 +451,13 @@ Vosae.InvoiceBaseEditView = Em.View.extend
         if currentItem.get('isLoaded')
           @.$().select2 'data',
             id: currentItem.get 'itemId'
-            reference: currentItem.get 'ref'
+            reference: currentItem.get 'reference'
           @.$().select2 'val', currentItem.get('itemId')
         else
           currentItem.one "didLoad", @, ->
             @.$().select2 'data',
               id: currentItem.get 'itemId'
-              reference: currentItem.get 'ref'
+              reference: currentItem.get 'reference'
             @.$().select2 'val', currentItem.get('id')
 
     onSelect: (event) ->
@@ -483,7 +483,7 @@ Vosae.InvoiceBaseEditView = Em.View.extend
           unitPrice = item.get("unitPrice")
 
         @get("currentItem").set "unitPrice", unitPrice
-        @get("currentItem").set "ref", item.get('ref')
+        @get("currentItem").set "reference", item.get('reference')
         @get("currentItem").set "tax", item.get("tax")              
         @get("currentItem").set "description", item.get("description")
         @get("currentItem").set "type", item.get("type")

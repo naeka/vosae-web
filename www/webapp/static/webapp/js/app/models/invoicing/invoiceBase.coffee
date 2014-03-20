@@ -8,7 +8,7 @@
 ###
 
 Vosae.InvoiceBase = Vosae.Model.extend
-  ref: DS.attr('string')
+  reference: DS.attr('string')
   accountType: DS.attr('string')
   total: DS.attr('number')
   amount: DS.attr('number')
@@ -168,7 +168,6 @@ Vosae.InvoiceBase = Vosae.Model.extend
       message: message
 
   didDelete: ->
-    plop('')
     message = switch @constructor.toString()
       when Vosae.Quotation.toString()
         gettext 'Your quotation has been successfully deleted'

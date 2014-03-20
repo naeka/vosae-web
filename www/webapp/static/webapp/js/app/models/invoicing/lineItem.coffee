@@ -8,7 +8,7 @@
 ###
 
 Vosae.LineItem = Vosae.Model.extend
-  ref: DS.attr('string')
+  reference: DS.attr('string')
   description: DS.attr('string')
   itemId: DS.attr('string')
   quantity: DS.attr('number')
@@ -18,10 +18,10 @@ Vosae.LineItem = Vosae.Model.extend
   
   shouldDisableField: (->
     # Returns true if current line item hasn't reference
-    if @get('ref')
+    if @get('reference')
       return false
     true
-  ).property('ref')
+  ).property('reference')
 
   total: (->
     if @get("quantity") and @get("unitPrice")
@@ -83,7 +83,7 @@ Vosae.LineItem = Vosae.Model.extend
 
   isEmpty: ->
     # Return true if item is empty
-    if @get 'ref'
+    if @get 'reference'
       return false
     if @get 'description'
       return false

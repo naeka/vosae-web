@@ -8,5 +8,5 @@
 ###
 
 Vosae.ItemsShowController = Vosae.ArrayController.extend
-  sortProperties: ['ref']
+  sortProperties: ['reference']
   sortAscending: false

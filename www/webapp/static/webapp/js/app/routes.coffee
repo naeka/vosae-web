@@ -43,7 +43,6 @@ require 'routes/invoicing/itemEdit'
 require 'routes/invoicing/creditNoteShow'
 require 'routes/invoicing/purchaseOrderShow'
 require 'routes/invoicing/purchaseOrderEdit'
-require 'routes/invoicing/purchaseOrdersShow'
 require 'routes/invoicing/purchaseOrdersAdd'
 
 require 'routes/settings/root'

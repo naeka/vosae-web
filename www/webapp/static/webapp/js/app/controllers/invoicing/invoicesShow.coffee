@@ -58,7 +58,7 @@ Vosae.InvoicesShowController = Em.ArrayController.extend
   ###
   queryPending: Ember.Object.create
     name: 'pending'
-    query: 'state__in=DRAFT&?state__in=REGISTERED&?state__in=PART_PAID'
+    query: 'state__in=DRAFT&state__in=REGISTERED&state__in=PART_PAID'
 
   queryOverdue: Ember.Object.create
     name: 'overdue'
@@ -66,7 +66,7 @@ Vosae.InvoicesShowController = Em.ArrayController.extend
 
   queryPaid: Ember.Object.create
     name: 'paid'
-    query: 'state__in=PAID&?state__in=CANCELLED'
+    query: 'state__in=PAID&state__in=CANCELLED'
 
   ###
     Returns invoices grouped by states
@@ -96,9 +96,9 @@ Vosae.InvoicesShowController = Em.ArrayController.extend
     return if !query or !query.hasOwnProperty("name")
 
     if !meta.get('hasBeenFetched')
-      queryString = query.get('query') + '&?offset=' + 0 + '&?limit=' + @get("queryLimit")
+      queryString = query.get('query') + '&offset=' + 0 + '&limit=' + @get("queryLimit")
     else
-      queryString = query.get('query') + '&?offset=' + meta.get('since') + '&?limit=' + @get("queryLimit")
+      queryString = query.get('query') + '&offset=' + meta.get('since') + '&limit=' + @get("queryLimit")
 
     meta.setProperties
       "lastQuery": queryString

@@ -20,12 +20,12 @@ Vosae.MetaMixin = Ember.Mixin.create
   # Returns true if model has already been fetched on the API.
   hasBeenFetched: (->
     if @previous or @offset? then true else false
-  ).property().volatile()
+  ).property('previous', 'offset').volatile()
 
   # Returns true if there's more records to fetch on the API.
   canFetchMore: (->
     if !@loading and @next then true else false
-  ).property().volatile()
+  ).property('loading', 'next').volatile()
 
   getMetaForQuery: (query) ->
     @get("queries").findBy 'name', query

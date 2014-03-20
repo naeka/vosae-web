@@ -1,3 +1,1 @@
-Vosae.QuotationsShowRoute = Ember.Route.extend
-  model: ->
-    Vosae.Quotation.all()
+# Vosae.QuotationsShowRoute = Ember.Route.extend()

@@ -10,7 +10,7 @@
 Vosae.QuotationsShowController = Ember.ArrayController.extend
   sortProperties: ['currentRevision.dueDate']
   sortAscending: false
-  queryLimit: 5
+  queryLimit: 2
 
   metaPending: null
   metaFailed: null
@@ -58,15 +58,15 @@ Vosae.QuotationsShowController = Ember.ArrayController.extend
   ###
   queryPending: Ember.Object.create
     name: 'pending'
-    query: 'state__in=DRAFT&?state__in=AWAITING_APPROVAL'
+    query: 'state__in=DRAFT&state__in=AWAITING_APPROVAL'
 
   queryFailed: Ember.Object.create
     name: 'failed'
-    query: 'state__in=EXPIRED&?state__in=REFUSED'
+    query: 'state__in=EXPIRED&state__in=REFUSED'
 
   querySucceeded: Ember.Object.create
     name: 'succeeded'
-    query: 'state__in=APPROVED&?state__in=INVOICED'
+    query: 'state__in=APPROVED&state__in=INVOICED'
 
   ###
     Returns quotations grouped by states
@@ -96,9 +96,9 @@ Vosae.QuotationsShowController = Ember.ArrayController.extend
     return if !query or !query.hasOwnProperty("name")
 
     if !meta.get('hasBeenFetched')
-      queryString = query.get('query') + '&?offset=' + 0 + '&?limit=' + @get("queryLimit")
+      queryString = query.get('query') + '&offset=' + 0 + '&limit=' + @get("queryLimit")
     else
-      queryString = query.get('query') + '&?offset=' + meta.get('since') + '&?limit=' + @get("queryLimit")
+      queryString = query.get('query') + '&offset=' + meta.get('since') + '&limit=' + @get("queryLimit")
 
     meta.setProperties
       "lastQuery": queryString

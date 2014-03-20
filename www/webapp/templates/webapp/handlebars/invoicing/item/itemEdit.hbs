@@ -1,12 +1,9 @@
 {% load i18n templatetag_handlebars %}
 
 {% tplhandlebars "item/edit" %}
-
-  {{#if content.isLoaded}}
   <section class="desc clearfix">
     <div class="pull-left">
-      {% comment %}
-      <div class="icon">
+      {{!-- <div class="icon">
         <i class="picto-tags"></i>
       </div>
       <div class="desc">
@@ -14,8 +11,7 @@
           <i class="picto-arrow-right green"></i>
         </h4>
         <p></p>
-      </div>
-      {% endcomment %}
+      </div> --}}
     </div>
     <div class="pull-right">
       <h4 class="type">
@@ -32,11 +28,10 @@
   <section class="detail clearfix">
     <table class="helptour-itemprice">
       <tr class="product">
+        <td><label>{% trans "Product name" %}</label></td>
         <td>
-          <label>{% trans "Product name" %}</label>
-        </td>
-        <td>
-          {{view Vosae.SimpleEditor
+          {{simple-editor
+            modelBinding="this"
             valueBinding="description"
             maxLength="1024"
             classNames="form-control form-control-unstyled"
@@ -56,9 +51,7 @@
         </td>
       </tr>
       <tr>
-        <td>
-          <label>{% trans "Price" %}</label>
-        </td>
+        <td><label>{% trans "Price" %}</label></td>
         <td>
           {{view view.unitPriceField
             itemBinding="this"
@@ -67,67 +60,33 @@
         </td>
       </tr>
       <tr>
+        <td><label>{% trans "Tax" %}</label></td>
         <td>
-          <label>{% trans "Tax" %}</label>
-        </td>
-        <td>
-          {{#if controller.taxes}}
-            {{select
-              contentBinding="controller.taxes"
-              valueBinding="tax.id"
-              containerCssClass="taxes success"
-              optionValuePath="content.id"
-              optionLabelPath="content.displayTax" }}
-          {{/if}}
+          {{select
+            contentBinding="controller.taxes"
+            valueBinding="tax"
+            containerCssClass="taxes success"
+            optionValuePath="content"
+            optionLabelPath="content.displayTax" }}
         </td>
       </tr>
       <tr>
-        <td>
-          <label>{% trans "Currency" %}</label>
-        </td>
+        <td><label>{% trans "Currency" %}</label></td>
         <td>
           {{#if controller.session.tenantSettings.invoicing.supportedCurrencies}}
             {{select
               contentBinding="controller.session.tenantSettings.invoicing.supportedCurrencies"
-              valueBinding="currency.id"
+              valueBinding="currency"
               containerCssClass="currencies success"
-              optionValuePath="content.id"
+              optionValuePath="content"
               optionLabelPath="content.symbol" }}
           {{/if}}
         </td>
       </tr>
     </table>
   </section>
-
-  <div class="actions-form">
-    {{#if isSaving}}
-      <div class="btn-group">
-        <a class="btn btn-rounded btn-success">
-          {% trans "Saving" %}…
-        </a>
-      </div>
-    {{else}}
-      <div class="btn-group">
-        <a class="btn btn-rounded btn-default" {{action cancel content}}>
-          {% trans "Cancel" %}
-        </a>
-      </div>
-      {{#if isDirty}}
-        <div class="btn-group helptour-itemsave">
-          <a class="btn btn-rounded btn-success" {{action save content}}>
-            {{#if id}}
-              {% trans "Save" %}
-            {{else}}
-              {% trans "Create" %}
-            {{/if}}
-          </a>
-        </div>
-      {{/if}}
-    {{/if}}
-  </div>
-  {{else}}
-    {{partial "core/partials/spinner"}}
-  {{/if}}
+  
+  {{partial "core/partials/formActions"}}
 
 {% endtplhandlebars %}
 

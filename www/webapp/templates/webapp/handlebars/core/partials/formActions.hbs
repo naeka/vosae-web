@@ -1,0 +1,24 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "core/partials/_formActions" %}
+  <div class="actions-form">
+    {{#if isSaving}}
+      <div class="btn-group">
+        <a class="btn btn-rounded btn-success">
+          {% trans "Saving" %}…
+        </a>
+      </div>
+    {{else}}
+      <div class="btn-group">
+        <a class="btn btn-rounded btn-default" {{action 'cancel' this}}>
+          {% trans "Cancel" %}
+        </a>
+      </div>
+      <div class="btn-group helptour-itemsave">
+        <a class="btn btn-rounded btn-success" {{action 'save' this}}>
+          {{#if id}}{% trans "Save" %}{{else}}{% trans "Create" %}{{/if}}
+        </a>
+      </div>
+    {{/if}}
+  </div>
+{% endtplhandlebars %}

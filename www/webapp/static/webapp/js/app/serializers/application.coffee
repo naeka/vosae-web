@@ -180,10 +180,14 @@ Vosae.ApplicationSerializer = DS.RESTSerializer.extend
     if options and options.includeId
       id = record.get "id"
       json[@get("primaryKey")] = id if id
+
+    # Serialize attributes
     record.eachAttribute ((key, attribute) ->
       @serializeAttribute record, json, key, attribute
       return
     ), this
+
+    # Serialize relationship
     record.eachRelationship ((key, relationship) ->
       if relationship.kind is "belongsTo"
         promises.push @serializeBelongsTo(record, json, relationship)

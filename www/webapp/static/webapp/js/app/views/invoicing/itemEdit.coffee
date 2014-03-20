@@ -1,17 +1,23 @@
-Vosae.ItemEditView = Vosae.ItemsAddView.extend
+Vosae.ItemEditView = Em.View.extend
   templateName: "item/edit"
   classNames: ["page-edit-item", "page-show-item"]
 
-  didInsertElement: ->
-    
-  unitPriceField: Vosae.TextFieldAutoNumeric.extend(
+  # Field for item reference
+  referenceField: Em.TextField.extend
+    keyUp: (evt) ->
+      text = @get('value').replace(/[^a-zA-Z0-9-_]/g, "")
+      @set('value', text)
+
+  # Field for item unit price`
+  unitPriceField: Vosae.TextFieldAutoNumeric.extend
     didInsertElement: ->
       @_super()
+      # Set initial value
       if @get('item.unitPrice')
         @.$().autoNumeric('set', @get('item.unitPrice'))
 
     focusOut: (evt) ->
-      @get('item').set "unitPrice", @.$().autoNumeric('get')     
+      @get('item').set "unitPrice", @.$().autoNumeric('get')
 
     itemUnitPriceObserver: (->
       if @.$().autoNumeric('get') isnt @get('item.unitPrice')
@@ -20,7 +26,7 @@ Vosae.ItemEditView = Vosae.ItemsAddView.extend
         else
           @.$().autoNumeric('set', 0)
     ).observes('item.unitPrice')
-  )
+
 
 Vosae.ItemEditSettingsView = Em.View.extend Vosae.HelpTourMixin,
   classNames: ["app-invoice", "page-edit-item-settings", "page-settings"]

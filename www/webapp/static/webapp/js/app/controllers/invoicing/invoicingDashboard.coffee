@@ -9,53 +9,35 @@
 ###
 
 Vosae.InvoicingDashboardController = Em.ArrayController.extend
-  needs: ['invoicing', 'invoicingFyFlowStatistics']
+  needs: ['invoicing', 'invoicingFyFlowStatistics', 'quotationsShow', 'invoicesShow']
   itemsPerTable: 5
   defaultCurrencyBinding: Em.Binding.oneWay('session.tenantSettings.invoicing.defaultCurrency')
   invoicingFyFlowStatisticsBinding: Em.Binding.oneWay('controllers.invoicingFyFlowStatistics')
 
-  init: ->
-    @_super()
-    @get('needs').addObjects(['quotationsShow', 'invoicesShow'])
-    
-  # invoicesTotalCount: (->
-  #   if(@get('invoicesController.meta.totalCount') <= @get('itemsPerTable'))
-  #     return 0
-  #   return (@get('invoicesController.meta.totalCount') - @get('itemsPerTable'))
-  # ).property('invoicesController.meta.totalCount', 'itemsPerTable')
-
-  # quotationsTotalCount: (->
-  #   if(@get('quotationsController.meta.totalCount') <= @get('itemsPerTable'))
-  #     return 0
-  #   return (@get('quotationsController.meta.totalCount') - @get('itemsPerTable'))
-  # ).property('quotationsController.meta.totalCount', 'itemsPerTable')
-
+  ###
+    Returns a maxium of 5 invoices in state OVERDUE
+  ###
   invoicesOverdue: (->
-    # Returns a maxium of 5 invoices in state OVERDUE
-    invoices = @get('controllers.invoicesShow.invoicesOverdue')
-    if invoices.get('length')
-      return invoices.slice(0, 5)
-    return []
+    @get('controllers.invoicesShow.invoicesOverdue').slice(0, @itemsPerTable)
   ).property('controllers.invoicesShow.invoicesOverdue.length')
 
-  quotationsDraftAwaitingApproval: (->
-    # Returns a maxium of 5 quotations in state DRAFT or AWAITING_APPROVAL
-    quotations = @get('controllers.quotationsShow.quotationsDraftAwaitingApproval')
-    if quotations.get('length')
-      return quotations.slice(0, 5)
-    return []
-  ).property('controllers.quotationsShow.quotationsDraftAwaitingApproval.length')
+  ###
+    Returns a maxium of 5 quotations in state DRAFT or AWAITING_APPROVAL
+  ###
+  quotationsPending: (->
+    @get('controllers.quotationsShow.quotationsPending').slice(0, @itemsPerTable)
+  ).property('controllers.quotationsShow.quotationsPending.length')
 
-  shouldDisplayAllQuotationsButton: (->
-    # Return true if there is more than 5 quotation in state DRAFT or AWAITING_APPROVAL
-    if @get('controllers.quotationsShow.quotationsDraftAwaitingApproval.length') > @get('itemsPerTable')
-      return true
-    false
-  ).property('controllers.quotationsShow.quotationsDraftAwaitingApproval.length')
+  ###
+    Returns true if there is more than 5 quotation in state DRAFT or AWAITING_APPROVAL
+  ###
+  moreQuotationsPending: (->
+    @get('controllers.quotationsShow.metaPending.totalCount') > @itemsPerTable
+  ).property('controllers.quotationsShow.metaPending.totalCount')
 
-  shouldDisplayAllInvoicesButton: (->
-    # Return true if there is more than 5 invoice in state OVERDUE
-    if @get('controllers.invoicesShow.invoicesOverdue.length') > @get('itemsPerTable')
-      return true
-    false
-  ).property('controllers.invoicesShow.invoicesOverdue.length')
+  ###
+    Returns true if there is more than 5 invoice in state OVERDUE
+  ###
+  moreInvoicesOverdue: (->
+    @get('controllers.invoicesShow.metaOverdue.totalCount') > @itemsPerTable
+  ).property('controllers.invoicesShow.metaOverdue.totalCount')

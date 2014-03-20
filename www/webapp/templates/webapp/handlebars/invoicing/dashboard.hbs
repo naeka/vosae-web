@@ -58,7 +58,7 @@
   <section class="invoices with-head">
     <div class="header clearfix">
       <h4 class="pull-left">
-        {% trans "Overdue invoices" %}
+        {% trans "Overdue invoices" %} <span class="badge success">{{controllers.invoicesShow.metaOverdue.totalCount}}</span>
       </h4>
       <div class="btn-toolbar pull-right">
         <div class="btn-group">
@@ -72,12 +72,12 @@
       {{partial "invoicing/partials/tableOfInvoices"}}
     {{/with}}
 
-    {{#if shouldDisplayAllInvoicesButton}}
-    <p class="table-see-more">
-      {{#link-to "invoices.show" controller.session.tenant class="btn btn-sm btn-rounded btn-default text-bold"}}
-        {% trans "See all invoices" %}...
-      {{/link-to}}
-    </p>
+    {{#if moreInvoicesOverdue}}
+      <p class="table-see-more">
+        {{#link-to "invoices.show" controller.session.tenant class="btn btn-sm btn-rounded btn-default text-bold"}}
+          {% trans "See all invoices" %}...
+        {{/link-to}}
+      </p>
     {{/if}}
   </section>
 
@@ -85,7 +85,7 @@
   <section class="quotations with-head">
     <div class="header clearfix">
       <h4 class="pull-left">
-        {% trans "Quotes to bill" %}
+        {% trans "Quotes to bill" %} <span class="badge primary">{{controllers.quotationsShow.metaPending.totalCount}}</span>
       </h4>
       <div class="btn-toolbar pull-right">
         <div class="btn-group">
@@ -95,16 +95,16 @@
         </div>
       </div>
     </div>
-    {{#with quotationsDraftAwaitingApproval}}
+    {{#with quotationsPending}}
       {{partial "invoicing/partials/tableOfQuotations"}}
     {{/with}}
 
-    {{#if shouldDisplayAllQuotationsButton}}
-    <p class="table-see-more">
-      {{#link-to "quotations.show" controller.session.tenant class="btn btn-sm btn-rounded btn-default text-bold"}}
-        {% trans "See all quotations" %}...
-      {{/link-to}}
-    </p>
+    {{#if moreQuotationsPending}}
+      <p class="table-see-more">
+        {{#link-to "quotations.show" controller.session.tenant class="btn btn-sm btn-rounded btn-default text-bold"}}
+          {% trans "See all quotations" %}...
+        {{/link-to}}
+      </p>
     {{/if}}
   </section>
 {% endtplhandlebars %}

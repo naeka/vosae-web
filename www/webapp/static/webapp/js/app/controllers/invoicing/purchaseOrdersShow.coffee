@@ -7,7 +7,7 @@
   @module Vosae
 ###
 
-Vosae.PurchaseOrdersShowController = Vosae.InvoicesBaseController.extend
+Vosae.PurchaseOrdersShowController = Vosae.ArrayController.extend
   sortProperties: ['currentRevision.dueDate']
   sortAscending: false
 

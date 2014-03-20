@@ -35,6 +35,33 @@ Vosae.ApplicationSerializer = DS.RESTSerializer.extend
     ["", Vosae.Config.API_NAMESPACE, url, id, ""].join("/")
 
   ###
+    The `extract` method is used to deserialize payload data from the
+    server. By default the `JSONSerializer` does not push the records
+    into the store. However records that subclass `JSONSerializer`
+    such as the `RESTSerializer` may push records into the store as
+    part of the extract call.
+
+    This method delegates to a more specific extract method based on
+    the `requestType`.
+    
+    We need the requestType and the query object when extracting meta.
+
+    @method extract
+    @param {DS.Store} store
+    @param {subclass of DS.Model} type
+    @param {Object} payload
+    @param {String or Number} id
+    @param {String} requestType
+    @param {String or Object} query the query in case of "findQuery" request
+    @return {Object} json The deserialized payload
+  ###
+  extract: (store, type, payload, id, requestType, query) ->
+    @extractMeta store, type, payload, requestType, query
+
+    specificExtract = "extract" + requestType.charAt(0).toUpperCase() + requestType.substr(1)
+    @[specificExtract](store, type, payload, id, requestType)
+
+  ###
     Called when the server has returned a payload representing
     multiple records, such as in response to a `findAll` or `findQuery`.
     
@@ -68,12 +95,12 @@ Vosae.ApplicationSerializer = DS.RESTSerializer.extend
   ###
     Extract all meta from request
   ###
-  extractMeta: (store, type, payload) ->
+  extractMeta: (store, type, payload, requestType, query) ->
     if payload and payload.meta
       payload.meta.since = if payload.meta.offset? then payload.meta.offset + payload.meta.limit else 0
       payload.meta.totalCount = payload.meta.total_count
       delete payload.meta.total_count
-      store.metaForType(type, payload.meta)
+      store.metaForType(type, payload.meta, requestType, query)
       delete payload.meta
 
   ###

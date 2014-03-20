@@ -25,16 +25,16 @@ Vosae.ApplicationController = Ember.Controller.extend
 
   # Routes that belongs to app invoicing
   appInvoicingPaths: [
-    'invoicing'
-    'quotations'
-    'quotation'
-    'invoices'
-    'invoice'
-    'items'
-    'item'
-    'creditNote'
-    'purchaseOrders'
-    'purchaseOrder'
+    'tenant.invoicing'
+    'tenant.quotations'
+    'tenant.quotation'
+    'tenant.invoices'
+    'tenant.invoice'
+    'tenant.items'
+    'tenant.item'
+    'tenant.creditNote'
+    'tenant.purchaseOrders'
+    'tenant.purchaseOrder'
   ]
 
   isDashboard: (->

@@ -7,13 +7,20 @@ Vosae.Store = DS.Store.extend
     @method metaForType
     @param {String or subclass of DS.Model} type
     @param {Object} metadata
+    @param {String} requestType (findAll, findQuery, ...)
+    @param {String or Object} query '?offset=40&?limit=5'
   ###
-  metaForType: (type, metadata) ->
+  metaForType: (type, metadata, requestType, query) ->
     type = @modelFor type
 
+    if requestType is "findQuery" and Em.typeOf query is "string"
+      meta = @typeMapFor(type).metadata.get("queries").findBy('lastQuery', query)
+    else
+      meta = @typeMapFor(type).metadata
+
     # Set the new metadata for the type
-    for prop of metadata
-      @typeMapFor(type).metadata.set prop, metadata[prop]
+    if meta then for prop of metadata
+      meta.set prop, metadata[prop]
 
   ###
     Returns a map of IDs to client IDs for a given type. We overide this method 
@@ -57,7 +64,6 @@ Vosae.Store = DS.Store.extend
     
     @_super type
 
-
   ###
     Returns an instance of the serializer for a given type. For
     example, `serializerFor('person')` will return an instance of
@@ -86,7 +92,6 @@ Vosae.Store = DS.Store.extend
       type = "registrationInfo"
 
     @_super type
-
 
 # Create an instance
 Vosae.Store.create()

@@ -76,28 +76,28 @@ Vosae.Quotation = Vosae.InvoiceBase.extend
   ).property('state')
 
   makeInvoice: (controller) ->
-    # Make an `Invoice` record from the `Quotation`.
-    if @get('id') and @get('isInvoiceable')
-      quotation = @
-      quotation.set 'isMakingInvoice', true
+    # # Make an `Invoice` record from the `Quotation`.
+    # if @get('id') and @get('isInvoiceable')
+    #   quotation = @
+    #   quotation.set 'isMakingInvoice', true
       
-      store = @get('store')
-      adapter = store.adapterForType(Vosae.Quotation)
-      serializer = adapter.get 'serializer'
+    #   store = @get('store')
+    #   adapter = store.adapterForType(Vosae.Quotation)
+    #   serializer = adapter.get 'serializer'
 
-      url = adapter.buildURL('quotation', @get('id'))
-      url += "make_invoice/"
+    #   url = adapter.buildURL('quotation', @get('id'))
+    #   url += "make_invoice/"
 
-      adapter.ajax(url, "PUT").then((json) ->
-        invoiceId = serializer.deurlify json['invoice_uri']
-        if invoiceId
-          quotation.reload()
-          Em.run @, ->
-            Vosae.SuccessPopup.open
-              message: gettext 'Your quotation has been transformed into an invoice'
-            controller.transitionToRoute 'invoice.show', controller.get('session.tenant'), store.find(Vosae.Invoice, invoiceId)
-          quotation.set 'isMakingInvoice', false
-      ).then null, adapter.rejectionHandler
+    #   adapter.ajax(url, "PUT").then((json) ->
+    #     invoiceId = serializer.deurlify json['invoice_uri']
+    #     if invoiceId
+    #       quotation.reload()
+    #       Em.run @, ->
+    #         Vosae.SuccessPopup.open
+    #           message: gettext 'Your quotation has been transformed into an invoice'
+    #         controller.transitionToRoute 'invoice.show', controller.get('session.tenant'), store.find(Vosae.Invoice, invoiceId)
+    #       quotation.set 'isMakingInvoice', false
+    #   ).then null, adapter.rejectionHandler
 
   getErrors: ->
     # Return an array of string that contains form validation errors 

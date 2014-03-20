@@ -10422,7 +10422,7 @@ define("ember-data/lib/system/store",
           label = "DS: Handle Adapter#findQuery of " + type;
 
       return Promise.cast(promise, label).then(function(adapterPayload) {
-        var payload = serializer.extract(store, type, adapterPayload, null, 'findQuery');
+        var payload = serializer.extract(store, type, adapterPayload, null, 'findQuery', query);
 
         Ember.assert("The response from a findQuery must be an Array, not " + Ember.inspect(payload), Ember.typeOf(payload) === 'array');
 

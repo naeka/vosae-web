@@ -29,7 +29,6 @@ require 'routes/organizer/calendarListEdit'
 require 'routes/organizer/vosaeEventShow'
 require 'routes/organizer/vosaeEventEdit'
 
-require 'routes/invoicing/root'
 require 'routes/invoicing/invoiceEdit'
 require 'routes/invoicing/invoicesAdd'
 require 'routes/invoicing/invoiceShow'

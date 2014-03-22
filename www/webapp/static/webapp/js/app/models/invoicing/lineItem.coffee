@@ -81,7 +81,7 @@ Vosae.LineItem = Vosae.Model.extend
       )
     null
 
-  isEmpty: ->
+  recordIsEmpty: ->
     # Return true if item is empty
     if @get 'reference'
       return false

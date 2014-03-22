@@ -29,7 +29,7 @@ Vosae.Item = Vosae.Model.extend
     gettext('Service')
   ).property('type')
 
-  isEmpty: ->
+  recordIsEmpty: ->
     # Return true if item is empty
     if @get 'reference'
       return false

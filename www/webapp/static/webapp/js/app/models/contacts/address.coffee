@@ -34,7 +34,7 @@ Vosae.VosaeAddress = Vosae.Model.extend
     return address
   ).property('streetAddress', 'city', 'country')
 
-  isEmpty: ->
+  recordIsEmpty: ->
     # Return true if address is empty
     # if @get 'type'
     #   return false

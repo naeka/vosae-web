@@ -247,7 +247,7 @@ Vosae.InvoiceRevision = Vosae.Model.extend
     # Line items
     if @get("lineItems.length") > 0
       @get('lineItems').forEach (item) ->
-        unless item.isEmpty()
+        unless item.recordIsEmpty()
           unless item.get("reference")
             errors.addObject gettext("Items reference must not be blank")
           unless item.get("description")

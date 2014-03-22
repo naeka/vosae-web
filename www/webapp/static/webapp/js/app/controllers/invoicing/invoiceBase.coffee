@@ -85,21 +85,21 @@ Vosae.InvoiceBaseController = Em.ObjectController.extend
       else
         # Remove empty records
         senderAddress = invoiceBase.get('currentRevision.senderAddress')
-        if senderAddress and senderAddress.isEmpty()
+        if senderAddress and senderAddress.recordIsEmpty()
           invoiceBase.get('currentRevision').set 'senderAddress', null
 
         billingAddress = invoiceBase.get('currentRevision.billingAddress')
-        if billingAddress and billingAddress.isEmpty()
+        if billingAddress and billingAddress.recordIsEmpty()
           invoiceBase.get('currentRevision').set 'billingAddress', null
 
         deliveryAddress = invoiceBase.get('currentRevision.deliveryAddress')
-        if deliveryAddress and deliveryAddress.isEmpty()
+        if deliveryAddress and deliveryAddress.recordIsEmpty()
           invoiceBase.get('currentRevision').set 'deliveryAddress', null
 
         if invoiceBase.get('currentRevision.lineItems')
           notEmptyItems = []
           invoiceBase.get('currentRevision.lineItems').forEach (item) ->
-            if not item.isEmpty()
+            if not item.recordIsEmpty()
               notEmptyItems.push item
           invoiceBase.set('currentRevision.lineItems.content', [])
           invoiceBase.get('currentRevision.lineItems').addObjects notEmptyItems

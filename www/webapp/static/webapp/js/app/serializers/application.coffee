@@ -131,6 +131,7 @@ Vosae.ApplicationSerializer = DS.RESTSerializer.extend
     # 2) Update payload, adds fake id to embedded relationship and sideload all embedded belongsTo and hasMany
     updatePayloadWithEmbedded.call this, store, type, payload, partial
 
+    console.log JSON.parse(JSON.stringify(payload))
     return @_super store, type, payload, id, requestType
 
   ###
@@ -403,7 +404,7 @@ updatePayloadWithEmbeddedHasMany = (store, primaryType, relationship, payload, p
   payload[embeddedTypeKey] = payload[embeddedTypeKey] or []
   forEach partial[attribute], (data, i) ->
     # Generate fake id
-    data[primaryKey] = partial.id + "_" + attribute.decamelize() + "_" + i
+    data[primaryKey] = Ember.uuid++
     embeddedType = store.modelFor(attr)
     updatePayloadWithEmbedded.call serializer, store, embeddedType, payload, data
     ids.push data[primaryKey]
@@ -430,7 +431,7 @@ updatePayloadWithEmbeddedBelongsTo = (store, primaryType, relationship, payload,
     return
 
   # Generate fake id
-  partial[attribute].id = partial.id + "_" + attribute.decamelize()
+  partial[attribute].id = Ember.uuid++
 
   # For embedded belongsTo polymorphic
   if relationship.options.polymorphic
@@ -446,8 +447,6 @@ updatePayloadWithEmbeddedBelongsTo = (store, primaryType, relationship, payload,
     if partial.hasOwnProperty(key) and key is attribute
       updatePayloadWithEmbedded.call serializer, store, embeddedType, payload, partial[key]
 
-  id = partial[attribute].id
-
   # Need a reference to the parent so relationship works between both `belongsTo` records
   partial[attribute][relationship.parentType.typeKey] = partial.id
 
@@ -455,6 +454,6 @@ updatePayloadWithEmbeddedBelongsTo = (store, primaryType, relationship, payload,
   payload[embeddedTypeKey].push partial[attribute]
 
   # Replace the embedded `belongTo` object by his id
-  partial[expandedKey] = id
+  partial[expandedKey] = partial[attribute].id
 
   return

@@ -1,6 +1,8 @@
 Vosae.InvoiceShowRoute = Ember.Route.extend
+  model: ->
+    @modelFor("invoice")
+
   setupController: (controller, model) ->
     controller.setProperties
-      'content': @modelFor("invoice")
-      'currencies': Vosae.Currency.all().filterProperty('id')
+      'content': model
       'invoicingSettings': @get('session.tenantSettings.invoicing')

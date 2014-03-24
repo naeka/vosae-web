@@ -14,13 +14,13 @@ Vosae.TaxSearchSelect = Vosae.ResourceSearchSelect.extend
 
   ajax: ->
     object = 
-      url: Vosae.lookup('store:main').get('adapter').buildURL('search')
+      url: @get("targetObject.store").adapterFor('application').buildURL('search')
       type: 'GET',
       quietMillis: 100,
       data: (term, page) =>
         "q=#{term}"
       results: (data, page) =>
-        objects = $.map Vosae.Tax.all().toArray(), (obj) ->
+        objects = $.map @get("targetObject.store").all('tax').toArray(), (obj) ->
           id: obj.get('id')
           display_tax: obj.get('displayTax')
         results: objects

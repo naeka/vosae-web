@@ -11,21 +11,19 @@
         </div>
       {{else}}
         <div class="btn-group">
-          <a class="btn btn-rounded btn-default" {{action cancel content}}>
+          <a class="btn btn-rounded btn-default" {{action 'cancel' content}}>
             {% trans "Cancel" %}
           </a>
         </div>
-        {{#if isDirty}}
-          <div class="btn-group">
-            <a class="btn btn-rounded btn-{{unbound relatedColor}} helptour-create" {{action save content}}>
-              {{#if id}}
-                {% trans "Save" %}
-              {{else}}
-                {% trans "Create" %}
-              {{/if}}
-            </a>
-          </div>
-        {{/if}}
+        <div class="btn-group">
+          <a class="btn btn-rounded btn-{{unbound relatedColor}} helptour-create" {{action 'save' content}}>
+            {{#if id}}
+              {% trans "Save" %}
+            {{else}}
+              {% trans "Create" %}
+            {{/if}}
+          </a>
+        </div>
       {{/if}}
     {{/unless}}
   </div>

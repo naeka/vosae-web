@@ -15,11 +15,11 @@ Vosae.InvoiceBase = Vosae.Model.extend
   # revisions: DS.hasMany('invoiceRevision')
   notes: DS.hasMany('invoiceNote')
   attachments: DS.hasMany('file', async: true)
-  issuer: DS.belongsTo('user')
-  organization: DS.belongsTo('organization')
-  contact: DS.belongsTo('contact')
+  issuer: DS.belongsTo('user', async: true)
+  organization: DS.belongsTo('organization', async: true)
+  contact: DS.belongsTo('contact', async: true)
   currentRevision: DS.belongsTo('invoiceRevision')
-  group: DS.belongsTo('invoiceBaseGroup', inverse: null)
+  group: DS.belongsTo('invoiceBaseGroup', {async: true, inverse: null})
 
   isUploading: false
   isUpdatingState: false
@@ -36,10 +36,9 @@ Vosae.InvoiceBase = Vosae.Model.extend
 
   addAttachmentUrl: (->
     # Return the url to add attachment
-    # if @get("id")?
-    #   adapter = @get('store.adapter')
-    #   root = adapter.rootForType(@constructor.toString())
-    #   return adapter.buildURL(root, @get('id')) + "add_attachment/"
+    if @get("id")?
+      adapter = @get('store').adapterFor 'invoiceBase'
+      return adapter.buildURL(@constructor.typeKey, @get('id')) + "add_attachment/"
     return
   ).property("id")
 
@@ -87,97 +86,85 @@ Vosae.InvoiceBase = Vosae.Model.extend
 
   markAsState: (state) ->
     # Set state of `InvoiceBase`.
-    if state and @get('id')
-      invoiceBase = @
-      invoiceBase.set 'isUpdatingState', true
-     
-      adapter = @get 'store.adapter'
-      root = adapter.rootForType(invoiceBase.constructor.toString())
-      
+    if state and @get('id') and not @get('isUpdatingState')
+      @set 'isUpdatingState', true
+      adapter = @get('store').adapterFor 'invoiceBase'
+
       # URL to update invoiceBase state
-      url = adapter.buildURL root, @get('id')
+      url = adapter.buildURL @constructor.typeKey, @get('id')
       url += "mark_as_#{state.toLowerCase()}/"
 
       # Send request to API
-      adapter.ajax(url, "PUT").then((json) ->
-        Ember.run.next ->
-          invoiceBase.reload()
-          invoiceBase.set 'isUpdatingState', false
-      ).then null, adapter.rejectionHandler
+      adapter.ajax(url, "PUT").then (json) =>
+        @reload()
+        @set 'isUpdatingState', false
 
-  downloadPdf: (language)->
-    if @get("currentRevision.pdf.#{language}")
-      pdf = @get("currentRevision.pdf.#{language}")
-      if pdf.get("isLoaded")
-        $.fileDownload(Vosae.Config.APP_ENDPOINT + pdf.get("downloadLink"))
-      else
-        pdf.one "didLoad", @, ->
-          $.fileDownload(Vosae.Config.APP_ENDPOINT + pdf.get("downloadLink"))
-    else
-      invoiceBase = @
-      invoiceBase.set 'isGeneratingPdfState', true
-      adapter = @get 'store.adapter'
-      root = adapter.rootForType(invoiceBase.constructor.toString())
+  downloadPdf: (language) ->
+    # if @get("currentRevision.pdf.#{language}")
+    #   @get("currentRevision.pdf.#{language}").then (pdf) =>
+    #     $.fileDownload(Vosae.Config.APP_ENDPOINT + pdf.get("downloadLink"))
+    # else
+    if not @get('isGeneratingPdfState')
+      @set 'isGeneratingPdfState', true
+      adapter = @get('store').adapterFor 'invoiceBase'
       
       # URL to update invoiceBase state
-      url = adapter.buildURL root, @get('id')
+      url = adapter.buildURL @constructor.typeKey, @get('id')
       url += "generate_pdf/"
 
       # DIRTY 
       $.ajaxSetup()['headers']['X-Report-Language'] = language
 
       # Send request to API
-      adapter.ajax(url, "GET").then((json) ->
-        Ember.run @, ->
-          $.fileDownload(Vosae.Config.APP_ENDPOINT + json.download_link)
-          invoiceBase.set 'isGeneratingPdfState', false
-          invoiceBase.reload()
-      ).then null, adapter.rejectionHandler
+      adapter.ajax(url, "GET").then (json) =>
+        $.fileDownload Vosae.Config.APP_ENDPOINT + json.download_link
+        @set 'isGeneratingPdfState', false
+        @reload()
 
       # DIRTY
       delete $.ajaxSetup()['headers']['X-Report-Language']
 
   didCreate: ->
-    message = switch @constructor.toString()
-      when Vosae.Quotation.toString()
+    message = switch
+      when @ instanceof Vosae.Quotation
         gettext 'Your quotation has been successfully created'
-      when Vosae.Invoice.toString()
+      when @ instanceof Vosae.Invoice
         gettext 'Your invoice has been successfully created'
-      when Vosae.CreditNote.toString()
+      when @ instanceof Vosae.CreditNote
         gettext 'Your credit note has been successfully created'
-      when Vosae.DownPaymentInvoice.toString()
+      when @ instanceof Vosae.DownPaymentInvoice
         gettext 'Your down payment invoice has been successfully created'
-      when Vosae.PurchaseOrder.toString()
+      when @ instanceof Vosae.PurchaseOrder
         gettext 'Your purchase order has been successfully created' 
     Vosae.SuccessPopup.open
       message: message
 
   didUpdate: ->
-    message = switch @constructor.toString()
-      when Vosae.Quotation.toString()
+    message = switch
+      when @ instanceof Vosae.Quotation
         gettext 'Your quotation has been successfully updated'
-      when Vosae.Invoice.toString()
+      when @ instanceof Vosae.Invoice
         gettext 'Your invoice has been successfully updated'
-      when Vosae.CreditNote.toString()
+      when @ instanceof Vosae.CreditNote
         gettext 'Your credit note has been successfully updated'
-      when Vosae.DownPaymentInvoice.toString()
+      when @ instanceof Vosae.DownPaymentInvoice
         gettext 'Your down payment invoice has been successfully updated'
-      when Vosae.PurchaseOrder.toString()
+      when @ instanceof Vosae.PurchaseOrder
         gettext 'Your purchase order has been successfully updated'
     Vosae.SuccessPopup.open
       message: message
 
   didDelete: ->
-    message = switch @constructor.toString()
-      when Vosae.Quotation.toString()
+    message = switch
+      when @ instanceof Vosae.Quotation
         gettext 'Your quotation has been successfully deleted'
-      when Vosae.Invoice.toString()
+      when @ instanceof Vosae.Invoice
         gettext 'Your invoice has been successfully deleted'
-      when Vosae.CreditNote.toString()
+      when @ instanceof Vosae.CreditNote
         gettext 'Your credit note has been successfully deleted'
-      when Vosae.DownPaymentInvoice.toString()
+      when @ instanceof Vosae.DownPaymentInvoice
         gettext 'Your down payment invoice has been successfully deleted'
-      when Vosae.PurchaseOrder.toString()
+      when @ instanceof Vosae.PurchaseOrder
         gettext 'Your purchase order has been successfully deleted'
     Vosae.SuccessPopup.open
       message: message

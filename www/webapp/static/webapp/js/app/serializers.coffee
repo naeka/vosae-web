@@ -14,6 +14,7 @@ require 'serializers/invoicing/quotation'
 require 'serializers/invoicing/invoice'
 require 'serializers/invoicing/invoiceRevision'
 require 'serializers/invoicing/purchaseOrder'
+require 'serializers/invoicing/downPaymentInvoice'
 
 require 'serializers/settings/coreSettings'
 require 'serializers/settings/invoicingSettings'

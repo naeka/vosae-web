@@ -131,8 +131,7 @@ Vosae.ApplicationSerializer = DS.RESTSerializer.extend
     # 2) Update payload, adds fake id to embedded relationship and sideload all embedded belongsTo and hasMany
     updatePayloadWithEmbedded.call this, store, type, payload, partial
 
-    console.log JSON.parse(JSON.stringify(payload))
-    return @_super store, type, payload, id, requestType
+    @_super store, type, payload, id, requestType
 
   ###
     Converts camelCased attributes to underscored when serializing.
@@ -221,13 +220,12 @@ Vosae.ApplicationSerializer = DS.RESTSerializer.extend
       
       # Async belongsTo need to get record instance with a resolver
       if relationship.options.async
-        Ember.RSVP.resolve(belongsTo).then((record) =>
+        return Ember.RSVP.resolve(belongsTo).then (record) =>
           if Em.isNone record
             json[key] = null
           else
             json[key] = @urlify relationship.type, record.get "id"
-          return
-        ).then(finalizer)
+        .then(finalizer)
 
       # Not async belongsTo don't need to get record with a resolvee
       else
@@ -235,26 +233,16 @@ Vosae.ApplicationSerializer = DS.RESTSerializer.extend
           json[key] = null
         else
           json[key] = @urlify relationship.type, belongsTo.get "id"
-
-    #   # For polymorphic belongsTo only
-    #   if relationship.options.polymorphic
-    #     @serializePolymorphicType record, json, relationship  
-    #   return
     
-    # # BelongsTo should be embedded
-    # else  
-    #   key = @keyForAttribute attr
-    #   embeddedRecord = record.get attr
-
-    #   if not embeddedRecord
-    #     json[key] = null
-    #   else
-    #     json[key] = embeddedRecord.serialize()
-    #     id = embeddedRecord.get("id")
-    #     json[key].id = id if id
-    #     parentKey = @keyForAttribute(relationship.parentType.typeKey)
-    #     removeId parentKey, json[key] if parentKey
-    #     delete json[key][parentKey]
+    # BelongsTo is embedded
+    else
+      embeddedBelongsTo = record.get attr
+      if Em.isNone embeddedBelongsTo
+        json[key] = null
+      else
+        return Ember.RSVP.resolve(embeddedBelongsTo.serialize()).then (record) =>
+          json[key] = record
+        .then(finalizer)
 
     return
 

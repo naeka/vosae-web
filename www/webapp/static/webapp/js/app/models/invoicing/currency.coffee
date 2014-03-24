@@ -53,4 +53,6 @@ Vosae.Currency = Vosae.Model.extend
 
   exchangeRateFor: (symbol) ->
     # Return the rate associated to the specified symbol.
-    return @get('rates').findProperty('currencyTo', symbol)
+    if symbol is @get('symbol')
+      return 1
+    return @get('rates').findProperty('currencyTo', symbol).get('rate')

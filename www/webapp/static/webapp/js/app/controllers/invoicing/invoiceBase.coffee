@@ -44,36 +44,36 @@ Vosae.InvoiceBaseController = Em.ObjectController.extend
         callback: (opts, event) =>
           if opts.primary
             @get('attachments').removeObject attachment
-            # Why the hell do we have to do this ?
-            @get('content.stateManager').goToState('rootState.loaded.updated')
-            # @get('content').set 'currentState', DS.RootState.loaded.updated
 
     downloadAttachment: (attachment) ->
-      $.fileDownload(APP_ENDPOINT + attachment.get('downloadLink'))
+      $.fileDownload(Vosae.Config.APP_ENDPOINT + attachment.get('downloadLink'))
+      return
 
     markAsState: (state) ->
       @get('content').markAsState state
+      return
 
     downloadPdf: (language) ->
       @get('content').downloadPdf language
+      return
 
     cancel: (invoiceBase) ->
-      switch invoiceBase.constructor.toString()
-        when Vosae.Quotation.toString()
+      switch 
+        when invoiceBase instanceof Vosae.Quotation
           if invoiceBase.get('id')
-            return @transitionToRoute 'quotation.show', @get('session.tenant'), invoiceBase
+            @transitionToRoute 'quotation.show', @get('session.tenant'), invoiceBase
           else
-            return @transitionToRoute 'quotations.show', @get('session.tenant')
-        when Vosae.Invoice.toString()
+            @transitionToRoute 'quotations.show', @get('session.tenant')
+        when invoiceBase instanceof Vosae.Invoice
           if invoiceBase.get('id')
-            return @transitionToRoute 'invoice.show', @get('session.tenant'), invoiceBase
+            @transitionToRoute 'invoice.show', @get('session.tenant'), invoiceBase
           else
-            return @transitionToRoute 'invoices.show', @get('session.tenant')
-        when Vosae.PurchaseOrder.toString()
+            @transitionToRoute 'invoices.show', @get('session.tenant')
+        when invoiceBase instanceof Vosae.PurchaseOrder
           if invoiceBase.get('id')
-            return @transitionToRoute 'purchaseOrder.show', @get('session.tenant'), invoiceBase
+            @transitionToRoute 'purchaseOrder.show', @get('session.tenant'), invoiceBase
           else
-            return @transitionToRoute 'purchaseOrders.show', @get('session.tenant')
+            @transitionToRoute 'purchaseOrders.show', @get('session.tenant')
       return
 
     save: (invoiceBase) ->
@@ -104,39 +104,35 @@ Vosae.InvoiceBaseController = Em.ObjectController.extend
           invoiceBase.set('currentRevision.lineItems.content', [])
           invoiceBase.get('currentRevision.lineItems').addObjects notEmptyItems
 
-        event = if invoiceBase.get('id') then 'didUpdate' else 'didCreate'
-        invoiceBase.one event, @, ->
-          Ember.run.next @, ->
-            switch invoiceBase.constructor.toString()
-              when Vosae.Quotation.toString()
-                @transitionToRoute 'quotation.show', @get('session.tenant'), invoiceBase
-              when Vosae.Invoice.toString()
-                @transitionToRoute 'invoice.show', @get('session.tenant'), invoiceBase
-              when Vosae.PurchaseOrder.toString()
-                @transitionToRoute 'purchaseOrder.show', @get('session.tenant'), invoiceBase
-        invoiceBase.get('transaction').commit()
+        invoiceBase.save().then (invoiceBase) =>
+          switch 
+            when invoiceBase instanceof Vosae.Quotation
+              @transitionToRoute 'quotation.show', @get('session.tenant'), invoiceBase
+            when invoiceBase instanceof Vosae.Invoice
+              @transitionToRoute 'invoice.show', @get('session.tenant'), invoiceBase
+            when invoiceBase instanceof Vosae.PurchaseOrder
+              @transitionToRoute 'purchaseOrder.show', @get('session.tenant'), invoiceBase
 
     delete: (invoiceBase) ->
-      message = switch invoiceBase.constructor.toString()
-        when Vosae.Quotation.toString()
+      message = switch 
+        when invoiceBase instanceof Vosae.Quotation
           gettext("Do you really want to delete this quotation?")
-        when Vosae.Invoice.toString()
+        when invoiceBase instanceof Vosae.Invoice
           gettext("Do you really want to delete this invoice?")
-        when Vosae.PurchaseOrder.toString()
+        when invoiceBase instanceof Vosae.PurchaseOrder
           gettext("Do you really want to delete this purchase order?")
 
       Vosae.ConfirmPopup.open
         message: message
         callback: (opts, event) =>
           if opts.primary
-            invoiceBase.one 'didDelete', @, ->
-              Ember.run.next @, ->
-                switch invoiceBase.constructor.toString()
-                  when Vosae.Quotation.toString()
-                    @transitionToRoute 'quotations.show', @get('session.tenant')
-                  when Vosae.Invoice.toString()
-                    @transitionToRoute 'invoices.show', @get('session.tenant')
-                  when Vosae.PurchaseOrder.toString()
-                    @transitionToRoute 'purchaseOrders.show', @get('session.tenant')
-            invoiceBase.deleteRecord()
-            invoiceBase.get('transaction').commit()
+            invoiceBase.delete()
+            invoiceBase.save().then () =>
+              switch
+                when invoiceBase instanceof Vosae.Quotation
+                  @transitionToRoute 'quotations.show', @get('session.tenant')
+                when invoiceBase instanceof Vosae.Invoice
+                  @transitionToRoute 'invoices.show', @get('session.tenant')
+                when invoiceBase instanceof Vosae.PurchaseOrder
+                  @transitionToRoute 'purchaseOrders.show', @get('session.tenant')
+

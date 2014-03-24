@@ -8,9 +8,9 @@
 ###
 
 Vosae.InvoiceBaseGroup = Vosae.Model.extend
-  quotation: DS.belongsTo('quotation', inverse: null)
-  purchaseOrder: DS.belongsTo('purchaseOrder', inverse: null)
-  downPaymentInvoices: DS.hasMany('downPaymentInvoice', inverse: null)
-  invoice: DS.belongsTo('invoice', inverse: null)
-  invoicesCancelled: DS.hasMany('invoice', inverse: null)
-  creditNotes: DS.hasMany('creditNote', inverse: null)
+  quotation: DS.belongsTo('quotation', {async: true, inverse: null})
+  purchaseOrder: DS.belongsTo('purchaseOrder', {async: true, inverse: null})
+  downPaymentInvoices: DS.hasMany('downPaymentInvoice', {async: true, inverse: null})
+  invoice: DS.belongsTo('invoice', {async: true, inverse: null})
+  invoicesCancelled: DS.hasMany('invoice', {async: true, inverse: null})
+  creditNotes: DS.hasMany('creditNote', {async: true, inverse: null})

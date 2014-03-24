@@ -13,7 +13,7 @@ Vosae.LineItem = Vosae.Model.extend
   itemId: DS.attr('string')
   quantity: DS.attr('number')
   unitPrice: DS.attr('number')
-  tax: DS.belongsTo('tax')
+  tax: DS.belongsTo('tax', async: true)
   optional: DS.attr('boolean', defaultValue: false)
   
   shouldDisableField: (->
@@ -69,17 +69,21 @@ Vosae.LineItem = Vosae.Model.extend
     # on model InvoiceRevision once the current tax is loaded
     tax = @get 'tax'
     if tax? and not tax.get('isLoaded')
-      tax.one 'didLoad', @, ->
+      tax.then =>
         @propertyDidChange('tax')
 
   VAT: ->
-    if @get("quantity") and @get("unitPrice") and @get("tax.isLoaded")
-      total = (@get("quantity") * @get("unitPrice")) * @get("tax.rate")
-      return (
-        total: total
-        tax: @get("tax")
-      )
-    null
+    tax = @get 'tax'
+    new Ember.RSVP.Promise (resolve) =>
+      resolve(null) if not tax 
+      tax.then (tax) =>
+        if @get("quantity") and @get("unitPrice")
+          total = (@get("quantity") * @get("unitPrice")) * tax.get("rate")
+          resolve(
+            total: total
+            tax: tax
+          )
+        resolve(null)
 
   recordIsEmpty: ->
     # Return true if item is empty

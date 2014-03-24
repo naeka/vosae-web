@@ -1,17 +1,19 @@
 Vosae.InvoiceEditRoute = Ember.Route.extend
+  model: ->
+    @modelFor("invoice")
+
   setupController: (controller, model) ->
     controller.setProperties
-      'content': @modelFor("invoice")
-      'taxes': Vosae.Tax.all()
+      'content': model
+      'taxes': @store.all('tax')
       'invoicingSettings': @get('session.tenantSettings.invoicing')
 
   renderTemplate: ->
     @_super()
     @render 'invoice.edit.settings',
-      into: 'application'
+      into: 'tenant'
       outlet: 'outletPageSettings'
 
   deactivate: ->
-    invoice = @controller.get 'content'
-    if invoice.get 'isDirty'
-      invoice.get("transaction").rollback()
+    model = @controller.get "content"
+    model.rollback() if model

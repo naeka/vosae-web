@@ -1,6 +1,5 @@
 {% load i18n templatetag_handlebars %}
 
-
 {% tplhandlebars "invoicing/_navTabs"%}
   <div class="app-invoicing">
     <section class="actions clearfix">
@@ -42,54 +41,4 @@
     </section>
     {{outlet}}
   </div>
-{% endtplhandlebars %}
-
-
-{% tplhandlebars "invoicing" %}
-  {{partial "invoicing/navTabs"}}  
-{% endtplhandlebars %}
-
-
-{% tplhandlebars "quotation" %}
-  {{partial "invoicing/navTabs"}}
-{% endtplhandlebars %}
-
-
-{% tplhandlebars "quotations" %}
-  {{partial "invoicing/navTabs"}}
-{% endtplhandlebars %}
-
-
-{% tplhandlebars "invoices" %}
-  {{partial "invoicing/navTabs"}}
-{% endtplhandlebars %}
-
-
-{% tplhandlebars "invoice" %}
-  {{partial "invoicing/navTabs"}}
-{% endtplhandlebars %}
-
-
-{% tplhandlebars "items" %}
-  {{partial "invoicing/navTabs"}}
-{% endtplhandlebars %}
-
-
-{% tplhandlebars "item" %}
-  {{partial "invoicing/navTabs"}}
-{% endtplhandlebars %}
-
-
-{% tplhandlebars "creditNote" %}
-  {{partial "invoicing/navTabs"}}
-{% endtplhandlebars %}
-
-
-{% tplhandlebars "purchaseOrders" %}
-  {{partial "invoicing/navTabs"}}
-{% endtplhandlebars %}
-
-
-{% tplhandlebars "purchaseOrder" %}
-  {{partial "invoicing/navTabs"}}
 {% endtplhandlebars %}

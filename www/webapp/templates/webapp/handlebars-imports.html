@@ -21,7 +21,7 @@
 
 
 {# Settings #}
-{% include "webapp/handlebars/settings/root.hbs" %}
+{% include "webapp/handlebars/settings/settings.hbs" %}
 {% include "webapp/handlebars/settings/settingsApplication.hbs" %}
 {% include "webapp/handlebars/settings/settingsApiKeys.hbs" %}
 {% include "webapp/handlebars/settings/settingsOrganization.hbs" %}
@@ -40,13 +40,16 @@
 
 
 {# Contacts #}
-{% include "webapp/handlebars/contacts/root.hbs" %}
-{% include "webapp/handlebars/contacts/contactsShow.hbs" %}
-{% include "webapp/handlebars/contacts/organizationsShow.hbs" %}
+{% include "webapp/handlebars/contacts/contact.hbs" %}
 {% include "webapp/handlebars/contacts/contactShow.hbs" %}
-{% include "webapp/handlebars/contacts/organizationShow.hbs" %}
 {% include "webapp/handlebars/contacts/contactEdit.hbs" %}
+{% include "webapp/handlebars/contacts/contacts.hbs" %}
+{% include "webapp/handlebars/contacts/contactsShow.hbs" %}
+{% include "webapp/handlebars/contacts/organization.hbs" %}
+{% include "webapp/handlebars/contacts/organizationShow.hbs" %}
 {% include "webapp/handlebars/contacts/organizationEdit.hbs" %}
+{% include "webapp/handlebars/contacts/organizations.hbs" %}
+{% include "webapp/handlebars/contacts/organizationsShow.hbs" %}
 {% include "webapp/handlebars/contacts/partials/listOfOrganizations.hbs" %}
 {% include "webapp/handlebars/contacts/partials/listOfContacts.hbs" %}
 {% include "webapp/handlebars/contacts/partials/showEntityContactInfos.hbs" %}
@@ -63,14 +66,20 @@
 
 
 {# Invoicing #}
-{% include "webapp/handlebars/invoicing/root.hbs" %}
+{% include "webapp/handlebars/invoicing/invoicing.hbs" %}
 {% include "webapp/handlebars/invoicing/dashboard.hbs" %}
+{% include "webapp/handlebars/invoicing/partials/navTabs.hbs" %}
+{% include "webapp/handlebars/invoicing/creditNote/creditNote.hbs" %}
 {% include "webapp/handlebars/invoicing/creditNote/creditNoteShow.hbs" %}
+{% include "webapp/handlebars/invoicing/invoice/invoice.hbs" %}
 {% include "webapp/handlebars/invoicing/invoice/invoiceShow.hbs" %}
 {% include "webapp/handlebars/invoicing/invoice/invoiceEdit.hbs" %}
+{% include "webapp/handlebars/invoicing/invoice/invoices.hbs" %}
 {% include "webapp/handlebars/invoicing/invoice/invoicesShow.hbs" %}
 {% include "webapp/handlebars/invoicing/invoice/partials/tableOfInvoices.hbs" %}
+{% include "webapp/handlebars/invoicing/quotation/quotations.hbs" %}
 {% include "webapp/handlebars/invoicing/quotation/quotationsShow.hbs" %}
+{% include "webapp/handlebars/invoicing/quotation/quotation.hbs" %}
 {% include "webapp/handlebars/invoicing/quotation/quotationShow.hbs" %}
 {% include "webapp/handlebars/invoicing/quotation/quotationEdit.hbs" %}
 {% include "webapp/handlebars/invoicing/quotation/partials/tableOfQuotations.hbs" %}
@@ -100,12 +109,16 @@
 {% include "webapp/handlebars/invoicing/invoiceBase/partials/edit/validity.hbs" %}
 {% include "webapp/handlebars/invoicing/invoiceBase/partials/edit/receiver.hbs" %}
 {% include "webapp/handlebars/invoicing/invoiceBase/partials/edit/summary.hbs" %}
+{% include "webapp/handlebars/invoicing/item/items.hbs" %}
 {% include "webapp/handlebars/invoicing/item/itemsShow.hbs" %}
+{% include "webapp/handlebars/invoicing/item/item.hbs" %}
 {% include "webapp/handlebars/invoicing/item/itemShow.hbs" %}
 {% include "webapp/handlebars/invoicing/item/itemEdit.hbs" %}
 {% include "webapp/handlebars/invoicing/item/partials/tableOfItems.hbs" %}
+{% include "webapp/handlebars/invoicing/purchaseOrder/purchaseOrder.hbs" %}
 {% include "webapp/handlebars/invoicing/purchaseOrder/purchaseOrderEdit.hbs" %}
 {% include "webapp/handlebars/invoicing/purchaseOrder/purchaseOrderShow.hbs" %}
+{% include "webapp/handlebars/invoicing/purchaseOrder/purchaseOrders.hbs" %}
 {% include "webapp/handlebars/invoicing/purchaseOrder/purchaseOrdersShow.hbs" %}
 {% include "webapp/handlebars/invoicing/purchaseOrder/partials/tableOfPurchaseOrders.hbs" %}
 

@@ -77,7 +77,7 @@ Vosae.TenantsAddController = Em.ObjectController.extend
     
     if Em.isEmpty currencies then return []
     currencies.forEach (currency) ->
-      array.pushObject currency.get('resourceUri')
+      array.pushObject currency.get('resourceURI')
     array
 
   # Returns the default currency serialized 
@@ -85,7 +85,7 @@ Vosae.TenantsAddController = Em.ObjectController.extend
     currency = @get('defaultCurrency')
     if Em.isNone currency
       return null
-    currency.get 'resourceUri'
+    currency.get 'resourceURI'
 
   actions:
     # Post the tenant and get tenantSettings

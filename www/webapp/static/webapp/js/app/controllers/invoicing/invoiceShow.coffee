@@ -33,23 +33,22 @@ Vosae.InvoiceShowController = Vosae.InvoiceBaseController.extend
 
     addPayment: ->
       date = new Date()
-      invCurrency = @get('content.currentRevision.currency')
-      currency = Vosae.Currency.all().findProperty 'symbol', invCurrency.get('symbol')
       invoice = @get('content')
-      @get("content.payments").createRecord
-        date: date
-        currency: currency
-        type: 'CASH'
-        relatedTo: invoice
-
-      @get('content').notifyPropertyChange "canAddPayment"
+      invCurrency = invoice.get('currentRevision.currency')
+      currency = @get('store').all('currency').findProperty 'symbol', invCurrency.get('symbol')
+      @get("content.payments").then (payments) =>
+        payments.createRecord
+          date: date
+          currency: currency
+          type: 'CASH'
+          relatedTo: invoice
+        invoice.notifyPropertyChange "canAddPayment"
 
     savePayment: (payment) ->
       unless payment.get('isSaving')
         invoice = @get('content')
-        payment.one "didCreate", @, ->
+        payment.save().then () =>
           invoice.reload()
-        payment.get('transaction').commit()
 
     # deletePayment: (payment) ->
     #   if confirm('Do you really want to delete this payment ?')

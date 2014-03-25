@@ -10,7 +10,7 @@
 Vosae.Currency = Vosae.Model.extend
   symbol: DS.attr('string')
   rates: DS.hasMany('exchangeRate')
-  resourceUri: DS.attr('string')
+  resourceURI: DS.attr('string')
 
   description: (->
     # Return the description of the current currency
@@ -42,14 +42,14 @@ Vosae.Currency = Vosae.Model.extend
     # Based on the current rates.
     if currencyTo is @get('symbol')
       return amount
-    return amount * @exchangeRateFor(currencyTo).get('rate')
+    return amount * @exchangeRateFor(currencyTo)
 
   fromCurrency: (currencyFrom, amount) ->
     # Convert a `Currency` to another.
     # Based on the current rates.
     if currencyFrom is @get('symbol')
       return amount
-    return amount / @exchangeRateFor(currencyFrom).get('rate')
+    return amount / @exchangeRateFor(currencyFrom)
 
   exchangeRateFor: (symbol) ->
     # Return the rate associated to the specified symbol.

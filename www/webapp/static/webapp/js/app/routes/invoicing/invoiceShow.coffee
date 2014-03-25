@@ -5,4 +5,5 @@ Vosae.InvoiceShowRoute = Ember.Route.extend
   setupController: (controller, model) ->
     controller.setProperties
       'content': model
+      'currencies': @store.all('currency')
       'invoicingSettings': @get('session.tenantSettings.invoicing')

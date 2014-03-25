@@ -45,7 +45,6 @@ require 'routes/invoicing/purchaseOrderShow'
 require 'routes/invoicing/purchaseOrderEdit'
 require 'routes/invoicing/purchaseOrdersAdd'
 
-require 'routes/settings/root'
 require 'routes/settings/settingsAddGroup'
 require 'routes/settings/settingsAddTax'
 require 'routes/settings/settingsAddUser'

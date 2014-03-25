@@ -8,13 +8,11 @@
       </a>
     </div>
   {{else}}
-    {{#if isDirty}}
-      <div class="btn-group">
-        <a {{action save content}} class="btn btn-rounded btn-success">
-          {% trans "Save" %}
-        </a>
-      </div>
-    {{/if}}
+    <div class="btn-group">
+      <a {{action save content}} class="btn btn-rounded btn-success">
+        {% trans "Save" %}
+      </a>
+    </div>
   {{/if}}
 {% endtplhandlebars %}
 

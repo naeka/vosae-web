@@ -1,18 +1,9 @@
 Vosae.SettingsAddTaxRoute = Ember.Route.extend
-  init: ->
-    @_super()
-    @get('container').register('controller:settings.addTax', Vosae.SettingsEditTaxController)
+  controllerName: "settingsEditTax"
 
   model: ->
-    Vosae.Tax.createRecord()
-      
-  renderTemplate: ->
-    @render 'settings.editTax',
-      into: 'settings'
-      outlet: 'content'
-      controller: @controller
+    @store.createRecord("tax")
 
   deactivate: ->
-    tax = @controller.get 'content'
-    if tax.get 'isDirty'
-      tax.get("transaction").rollback()
+    model = @controller.get "content"
+    model.rollback() if model

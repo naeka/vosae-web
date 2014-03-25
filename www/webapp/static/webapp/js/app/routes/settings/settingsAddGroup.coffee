@@ -1,23 +1,14 @@
 Vosae.SettingsAddGroupRoute = Ember.Route.extend
-  init: ->
-    @_super()
-    @get('container').register 'controller:settings.addGroup', Vosae.SettingsEditGroupController
+  controllerName: "settingsEditGroup"
 
   model: ->
-    Vosae.Group.createRecord()
+    @store.createRecord("group")
 
   setupController: (controller, model) ->
     controller.setProperties
       'content': model
-      'groupsList': Vosae.Group.all()
+      'groupsList': @store.all("group")
       
-  renderTemplate: ->
-    @render 'settings.editGroup',
-      into: 'settings'
-      outlet: 'content'
-      controller: @controller
-
   deactivate: ->
-    group = @controller.get 'content'
-    if group.get 'isDirty'
-      group.get("transaction").rollback()
+    model = @controller.get "content"
+    model.rollback() if model

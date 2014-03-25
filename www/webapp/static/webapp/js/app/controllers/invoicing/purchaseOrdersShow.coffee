@@ -54,7 +54,7 @@ Vosae.PurchaseOrdersShowController = Ember.ArrayController.extend
   ###
   queryPending: Ember.Object.create
     name: 'pending'
-    query: 'state__in=DRAFT&state__in=AWAITING_APPROVAL&state__in=REFUSED'
+    query: 'state__in=DRAFT&state__in=AWAITING_APPROVAL'
 
   querySucceeded: Ember.Object.create
     name: 'succeeded'

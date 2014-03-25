@@ -54,7 +54,7 @@
     </div>
   </section>
 
-  {# Section list of invoices #}
+  {# Section list of overdue invoices #}
   <section class="invoices with-head">
     <div class="header clearfix">
       <h4 class="pull-left">
@@ -73,6 +73,33 @@
     {{/with}}
 
     {{#if moreInvoicesOverdue}}
+      <p class="table-see-more">
+        {{#link-to "invoices.show" controller.session.tenant class="btn btn-sm btn-rounded btn-default text-bold"}}
+          {% trans "See all invoices" %}...
+        {{/link-to}}
+      </p>
+    {{/if}}
+  </section>
+
+  {# Section list of pending invoices #}
+  <section class="invoices with-head">
+    <div class="header clearfix">
+      <h4 class="pull-left">
+        {% trans "Pending invoices" %} <span class="badge success">{{controllers.invoicesShow.metaPending.totalCount}}</span>
+      </h4>
+      <div class="btn-toolbar pull-right">
+        <div class="btn-group">
+          {{#link-to "invoices.add" controller.session.tenant class="btn btn-sm btn-rounded btn-success"}}
+            {% trans "Add" %}
+          {{/link-to}}
+        </div>
+      </div>
+    </div>
+    {{#with invoicesPending}}
+      {{partial "invoicing/partials/tableOfInvoices"}}
+    {{/with}}
+
+    {{#if moreInvoicesPending}}
       <p class="table-see-more">
         {{#link-to "invoices.show" controller.session.tenant class="btn btn-sm btn-rounded btn-default text-bold"}}
           {% trans "See all invoices" %}...
@@ -103,6 +130,33 @@
       <p class="table-see-more">
         {{#link-to "quotations.show" controller.session.tenant class="btn btn-sm btn-rounded btn-default text-bold"}}
           {% trans "See all quotations" %}...
+        {{/link-to}}
+      </p>
+    {{/if}}
+  </section>
+
+  {# Section list of purchase orders #}
+  <section class="quotations with-head">
+    <div class="header clearfix">
+      <h4 class="pull-left">
+        {% trans "Purchase orders to bill" %} <span class="badge primary">{{controllers.purchaseOrdersShow.metaPending.totalCount}}</span>
+      </h4>
+      <div class="btn-toolbar pull-right">
+        <div class="btn-group">
+          {{#link-to "purchaseOrders.add" controller.session.tenant class="btn btn-sm btn-primary btn-rounded"}}
+            {% trans "Add" %}
+          {{/link-to}}
+        </div>
+      </div>
+    </div>
+    {{#with purchaseOrdersPending}}
+      {{partial "invoicing/partials/tableOfPurchaseOrders"}}
+    {{/with}}
+
+    {{#if morePurchaseOrdersPending}}
+      <p class="table-see-more">
+        {{#link-to "quotations.show" controller.session.tenant class="btn btn-sm btn-rounded btn-default text-bold"}}
+          {% trans "See all purchase orders" %}...
         {{/link-to}}
       </p>
     {{/if}}

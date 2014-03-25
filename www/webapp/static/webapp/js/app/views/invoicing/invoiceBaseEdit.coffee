@@ -1,77 +1,60 @@
 Vosae.InvoiceBaseEditView = Em.View.extend
   attachmentUpload: Em.Object.extend
     progress: 0
-    displayProgress: (->
-      "width: #{@get('progress')}%"
+    progressAttr: (->
+      "width: " + @get('progress') + "%"
     ).property('progress')
 
   actions:
     openFileUploadBrowser: ->
       @.$('input.fileupload').trigger('click')
 
-  didInsertElement: ->
-    @_super()
-    @initAttachmentsUpload()
 
-  initAttachmentsUpload: ->
-    # # Initialize file upload zones
-    # _this = @
-    # dropZone = @.$('.invoice-attachments td.fileupload .inner')
+  # Initialize file upload zones
+  initAttachmentsUpload: (->
+    dropZone = @.$('.invoice-attachments td.fileupload .inner')
+    adapter = @get('controller.store').adapterFor("file")
 
-    # adapter = @get('controller.store.adapter')
-    # rootForVosaeFile = adapter.rootForType(Vosae.File)
-    # url = adapter.buildURL(adapter.pluralize(rootForVosaeFile))
+    @.$('input.fileupload').fileupload
+      url: adapter.buildURL("file")
+      dataType: 'json'
+      formData:
+        ttl: 60*24  # 1 day
+      dropZone: dropZone
+      pasteZone: dropZone
+      paramName: 'uploaded_file'
 
-    # @.$('input.fileupload').fileupload
-    #   url: url
-    #   dataType: 'json'
-    #   formData:
-    #     ttl: 60*24  # 1 day
-    #   dropZone: dropZone
-    #   pasteZone: dropZone
-    #   paramName: 'uploaded_file'
+      start: (e) =>
+        @get('controller.content').set 'isUploading', true
 
-    #   start: (e) =>
-    #     _this.get('controller.content').set 'isUploading', true
+      processdone: (e, data) =>
+        attachmentUploadId = data.files[data.index].emberId = ++Em.uuid
+        attachmentUpload = @get('attachmentUpload').create
+          id: attachmentUploadId
+          name: data.files[data.index].name
+        @get('controller.attachmentUploads').addObject attachmentUpload
 
-    #   processdone: (e, data) =>
-    #     attachmentUploadId = data.files[data.index].emberId = ++Em.uuid
-    #     attachmentUpload = _this.get('attachmentUpload').create
-    #       id: attachmentUploadId
-    #       name: data.files[data.index].name
-    #     _this.get('controller.attachmentUploads').addObject attachmentUpload
+      getFilesFromResponse: (data) =>
+        attachmentUploadId = data.files[0].emberId
+        attachmentUpload = @get('controller.attachmentUploads').findProperty 'id', attachmentUploadId
 
-    #   processalways: (e, data) =>
-    #     Em.run.later _this, (->
-    #       attachmentUploadId = data.files[data.index].emberId
-    #       attachmentUpload = _this.get('controller.attachmentUploads').findProperty 'id', attachmentUploadId
-    #       _this.get('controller.attachmentUploads').removeObject attachmentUpload
-    #     ), 2000
+        @get('controller.store').find("file", data.result['id']).then (file) =>
+          @get('controller.content.attachments').addObject file
+          @get('controller.content').set 'isUploading', false
+          @get('controller.attachmentUploads').removeObject attachmentUpload
 
-    #   done: (e, data) =>
-    #     store = _this.get('controller.store')
-    #     fileId = store.adapterForType(Vosae.File).get('serializer').deurlify data.result['resource_uri']
-    #     data.result.id = fileId
-    #     store.adapterForType(Vosae.File).load store, Vosae.File, data.result
-    #     file = store.find Vosae.File, fileId
-    #     _this.get('controller.content.attachments').addObject file
-        
-    #     if _this.get('controller.content.id')
-    #       _this.get('controller.content').set 'currentState', DS.RootState.loaded.updated.uncommitted
-    #     _this.get('controller.content').set 'isUploading', false
+      stop: (e) =>
+        @get('controller.content').set 'isUploading', false
 
-    #   stop: (e) =>
-    #     _this.get('controller.content').set 'isUploading', false
-
-    #   error: =>
-    #     _this.get('controller.content').set 'isUploading', false        
+      error: =>
+        @get('controller.content').set 'isUploading', false        
       
-    #   progress: (e, data) =>
-    #     progress = parseInt(data.loaded / data.total * 100, 10)
-    #     attachmentUploadId = data.files['0'].emberId
-    #     attachmentUpload = _this.get('controller.attachmentUploads').findProperty('id', attachmentUploadId)
-    #     if attachmentUpload
-    #       attachmentUpload.set 'progress', progress
+      progress: (e, data) =>
+        progress = parseInt(data.loaded / data.total * 100, 10)
+        attachmentUploadId = data.files['0'].emberId
+        attachmentUpload = @get('controller.attachmentUploads').findProperty('id', attachmentUploadId)
+        attachmentUpload.set 'progress', progress
+  ).on "didInsertElement"
 
   # ==============================
   # = InvoiceBase Sender Address =
@@ -135,15 +118,14 @@ Vosae.InvoiceBaseEditView = Em.View.extend
       @get('targetObject.currentRevision').set "organization", organization
       @get("parentView.billingAddressBlock").removeFromAddressList "organization" # Remove old organization addresses
 
-      newAddresses = organization.get "addresses"
-
-      # If new organization has addresses
-      if newAddresses and newAddresses.get('length') > 0
-        billingAddress = @addAddressesToChoiceList organization.get('corporateName'), newAddresses
-        newAddress = (if billingAddress then billingAddress else newAddresses.objectAt(0))
-        @get("parentView.billingAddressBlock").setAddress newAddress
-        @get("targetObject.currentRevision.billingAddress").dumpDataFrom newAddress
-        @get("targetObject.currentRevision.deliveryAddress").dumpDataFrom newAddress
+      organization.get("addresses").then (newAddresses) =>
+        # If new organization has addresses
+        if newAddresses and newAddresses.get('length') > 0
+          billingAddress = @addAddressesToChoiceList organization.get('corporateName'), newAddresses
+          newAddress = (if billingAddress then billingAddress else newAddresses.objectAt(0))
+          @get("parentView.billingAddressBlock").setAddress newAddress
+          @get("targetObject.currentRevision.billingAddress").dumpDataFrom newAddress
+          @get("targetObject.currentRevision.deliveryAddress").dumpDataFrom newAddress
 
     # Set addresses has new list of choice
     addAddressesToChoiceList: (corporateName, addresses) ->
@@ -220,14 +202,13 @@ Vosae.InvoiceBaseEditView = Em.View.extend
       @get('targetObject.currentRevision').set "contact", contact
       @get("parentView.billingAddressBlock").removeFromAddressList "contact" # Remove old contact addresses
 
-      newAddresses = contact.get "addresses"
-
-      # If new contact has addresses
-      if newAddresses and newAddresses.get('length') > 0
-        billingAddress = @addAddressesToChoiceList contact.get('fullName'), newAddresses
-        newAddress = (if billingAddress then billingAddress else newAddresses.objectAt(0))
-        @get("parentView.billingAddressBlock").setAddress newAddress
-        @get("targetObject.currentRevision.billingAddress").dumpDataFrom newAddress
+      contact.get("addresses").then (newAddresses) =>
+        # If new contact has addresses
+        if newAddresses and newAddresses.get('length') > 0
+          billingAddress = @addAddressesToChoiceList contact.get('fullName'), newAddresses
+          newAddress = (if billingAddress then billingAddress else newAddresses.objectAt(0))
+          @get("parentView.billingAddressBlock").setAddress newAddress
+          @get("targetObject.currentRevision.billingAddress").dumpDataFrom newAddress
 
     # Set addresses has new list of choice
     addAddressesToChoiceList: (fullName, addresses) ->
@@ -320,39 +301,30 @@ Vosae.InvoiceBaseEditView = Em.View.extend
   # = InvoiceBase Currency =
   # ========================
   currencyField: Vosae.Select.extend
-    currentRevisionBinding: Em.Binding.oneWay 'parentView.controller.content.currentRevision'
-    contentBinding: Em.Binding.oneWay 'parentView.controller.session.tenantSettings.invoicing.supportedCurrencies'
-    valueBinding: Em.Binding.oneWay 'parentView.controller.content.currentRevision.currency.symbol'
-    colorBinding: Em.Binding.oneWay 'parentView.controller.content.relatedColor'
-    optionLabelPath: 'content.displaySignWithSymbol'
-    optionValuePath: 'content.symbol'
+    currentRevisionBinding: Em.Binding.oneWay 'controller.currentRevision'
+    contentBinding: Em.Binding.oneWay 'controller.session.tenantSettings.invoicing.supportedCurrenciesSymbols'
+    valueBinding: Em.Binding.oneWay 'controller.currentRevision.currency.symbol'
+    colorBinding: Em.Binding.oneWay 'controller.relatedColor'
     containerCssClass: 'currency'
 
-    init: ->
-      @_super()
-      @classNames.addObject @get('parentView.controller.content.relatedColor')
+    setRelatedCorlor: (->
+      @classNames.addObject @get('controller.relatedColor')
+    ).on "init"
 
     didInsertElement: ->
       @_super()
 
       # We are in a new invoiceBase record, currency is empty
-      unless @get('parentView.controller.content.id')
-        defaultCurrency = @get 'parentView.controller.session.tenantSettings.invoicing.defaultCurrency'
-        @refreshCurrency defaultCurrency.get('symbol')
+      if not @get('controller.id')
+        defaultCurrency = @get 'controller.session.tenantSettings.invoicing.defaultCurrency'
+        @.$().select2 "val", defaultCurrency.get('symbol')
+        @get('currentRevision').updateWithCurrency defaultCurrency
 
     change: ->
-      if @get('value') and @get('value') isnt @get('currentRevision.currency.symbol')
-        @refreshCurrency @get('value')
-
-    refreshCurrency: (symbol) ->
-      # Currency may has been updated (especially rates) so
-      # we fetch the currency on the server by security
-      @get("controller.store").find("currency",
-        symbol: symbol
-        limit: 1
-      ).then (refreshedCurrency) =>
-        currency = refreshedCurrency.get 'firstObject'
-        @get('currentRevision').updateWithCurrency currency
+      symbol = @get('value')
+      if symbol and symbol isnt @get('currentRevision.currency.symbol')
+        currency = @get('controller.session.tenantSettings.invoicing.supportedCurrencies').findBy('symbol', symbol)
+        @get('currentRevision').updateWithCurrency currency if currency
 
   # =====================
   # = InvoiceBase Items =
@@ -430,14 +402,13 @@ Vosae.InvoiceBaseEditView = Em.View.extend
         @addLineWithItem item
 
     addLineWithItem: (item) ->
-      if Em.typeOf(@get("currentItem")) is "instance"
+      if @get("currentItem") instanceof Vosae.LineItem
 
-        currentCurrency = @get("parentView.controller.currentRevision.currency")
-
+        currentCurrency = @get("targetObject.currentRevision.currency")
         # If the currency is different we convert the unit price
         if currentCurrency.get("symbol") isnt item.get("currency.symbol")
           exchangeRate = currentCurrency.exchangeRateFor item.get("currency.symbol")
-          unitPrice = (item.get('unitPrice') / exchangeRate.get('rate')).round(2)
+          unitPrice = (item.get('unitPrice') / exchangeRate).round(2)
         else
           unitPrice = item.get("unitPrice")
 

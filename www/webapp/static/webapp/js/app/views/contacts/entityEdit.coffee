@@ -43,17 +43,8 @@ Vosae.EntityEditView = Em.View.extend
         @get('controller.content').set 'isUploading', true
 
       done: (e, data) =>
-        store = @get('controller.store')
-        serializer = store.serializerFor("file")
-        
-        # Deurlify resource_uri to get the file ID
-        fileID = serializer.deurlify data.result['resource_uri']
-
-        # Push file data into the store
-        serializer.extractSingle store, Vosae.File, data, fileID, 'find'
-
         # Get the file record
-        store.find("file", fileID).then (file) =>
+        @get('controller.store').find("file", data.result['id']).then (file) =>
           @get('controller.content').setProperties
             photoSource: 'LOCAL'
             photo: file

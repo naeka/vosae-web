@@ -1,12 +1,9 @@
 Vosae.QuotationsAddRoute = Ember.Route.extend
+  controllerName: "quotationEdit"
   preFillQuotationWith: {}
 
-  init: ->
-    @_super()
-    @get('container').register('controller:quotations.add', Vosae.QuotationEditController)
-
   model: ->
-    Vosae.Quotation.createRecord()
+    @store.createRecord "quotation"
 
   setupController: (controller, model) ->
     # This is dirty and must be improved
@@ -15,12 +12,11 @@ Vosae.QuotationsAddRoute = Ember.Route.extend
       contact = if preFill.contact then preFill.contact else null
       organization = if preFill.organization then preFill.organization else null
 
-    unusedTransaction = @get('store').transaction()
-    currentRevision = unusedTransaction.createRecord Vosae.InvoiceRevision
-    currency = unusedTransaction.createRecord Vosae.Currency
-    billingAddress = unusedTransaction.createRecord Vosae.Address
-    deliveryAddress = unusedTransaction.createRecord Vosae.Address
-    senderAddress = unusedTransaction.createRecord Vosae.Address
+    currentRevision = @store.createRecord "invoiceRevision"
+    currency = @store.createRecord "snapshotCurrency"
+    billingAddress = @store.createRecord "vosaeAddress"
+    deliveryAddress = @store.createRecord "vosaeAddress"
+    senderAddress = @store.createRecord "vosaeAddress"
 
     senderAddress.setProperties
       'postofficeBox': @get "session.tenant.billingAddress.postofficeBox"
@@ -31,7 +27,6 @@ Vosae.QuotationsAddRoute = Ember.Route.extend
       'state': @get "session.tenant.billingAddress.state"
       'country': @get "session.tenant.billingAddress.country"
     
-    currentRevision.get('lineItems').createRecord()
     currentRevision.setProperties
       'quotationDate': new Date()
       'sender': @get("session.user.fullName")
@@ -40,6 +35,7 @@ Vosae.QuotationsAddRoute = Ember.Route.extend
       'deliveryAddress': deliveryAddress
       'senderAddress': senderAddress
 
+    currentRevision.get('lineItems').createRecord()
     currentRevision.set('contact', contact) if contact
     currentRevision.set('organization', organization) if organization
 
@@ -49,21 +45,15 @@ Vosae.QuotationsAddRoute = Ember.Route.extend
 
     controller.setProperties
       'content': model
-      'unusedTransaction': unusedTransaction
-      'taxes': Vosae.Tax.all()
+      'taxes': @store.all("tax")
 
   renderTemplate: ->
     @_super()
     @render 'quotation.edit.settings',
-      into: 'application'
+      into: 'tenant'
       outlet: 'outletPageSettings'
 
   deactivate: ->
     @set 'preFillQuotationWith', {}
-
-    quotation = @controller.get 'content'
-    if quotation.get 'isDirty'
-      quotation.get("transaction").rollback()
-
-    unusedTransaction = @controller.get 'unusedTransaction'
-    unusedTransaction.rollback() if unusedTransaction
+    model = @controller.get "content"
+    model.rollback() if model

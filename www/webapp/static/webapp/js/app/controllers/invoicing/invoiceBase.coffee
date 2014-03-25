@@ -17,14 +17,14 @@ Vosae.InvoiceBaseController = Em.ObjectController.extend
     addLineItemAbove: (lineItem) ->
       currentRevision = @get "currentRevision"
       index = currentRevision.getLineItemIndex lineItem
-      newLineItem = @get('content.transaction').createRecord Vosae.LineItem
+      newLineItem = @get('store').createRecord "lineItem"
       unless typeof index is `undefined`
         currentRevision.get('lineItems').insertAt index, newLineItem
 
     addLineItemBelow: (lineItem) ->
       currentRevision = @get "currentRevision"
       index = currentRevision.getLineItemIndex lineItem
-      newLineItem = @get('content.transaction').createRecord Vosae.LineItem
+      newLineItem = @get('store').createRecord "lineItem"
       unless typeof index is `undefined`
         currentRevision.get('lineItems').insertAt index+1, newLineItem
 

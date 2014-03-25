@@ -29,7 +29,7 @@ Vosae.InvoiceRevision = Vosae.Model.extend
   senderAddress: DS.belongsTo('vosaeAddress')
   billingAddress: DS.belongsTo('vosaeAddress')
   deliveryAddress: DS.belongsTo('vosaeAddress')
-  currency: DS.belongsTo('currency')
+  currency: DS.belongsTo('snapshotCurrency')
 
   # Update an invoice revision with a new currency
   updateWithCurrency: (newCurrency) ->
@@ -38,7 +38,7 @@ Vosae.InvoiceRevision = Vosae.Model.extend
     # We want to be sure that currencies are different
     if currentCurrency.get('symbol') isnt newCurrency.get('symbol')
       ids = @_getLineItemsReferences()
-      
+
       # Update <Vosae.Currency>
       if Ember.isEmpty ids
         @set 'currency.symbol', newCurrency.get('symbol')

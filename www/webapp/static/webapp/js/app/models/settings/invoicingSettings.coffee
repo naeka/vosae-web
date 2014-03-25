@@ -47,3 +47,7 @@ Vosae.InvoicingSettings = Vosae.Model.extend
   currentFyStartYear: (->
     @get('currentFyStartAt').year()
   ).property('currentFyStartAt')
+
+  supportedCurrenciesSymbols: (->
+    @get('supportedCurrencies').getEach('symbol')
+  ).property('supportedCurrencies.@each.symbol', 'supportedCurrencies.length')

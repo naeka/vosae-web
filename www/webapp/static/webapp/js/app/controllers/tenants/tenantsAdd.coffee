@@ -90,16 +90,21 @@ Vosae.TenantsAddController = Em.ObjectController.extend
   actions:
     # Post the tenant and get tenantSettings
     save: (tenant) ->
-      tenant.one 'didCreate', @, ->
-        Ember.run.next @, ->
-          if @get('session.tenant')
-            @get('controllers.tenantsShow').send "redirectToTenantRoot", tenant
-          else
-            @get('controllers.tenantsShow').send "setAsCurrentTenant", tenant
+      @trackEvent('Subscription', 'completed')
+
+      Vosae.Utilities.showLoader()
+
       tenant.one 'becameInvalid', @, ->
         Vosae.Utilities.hideLoader()
-      tenant.get('transaction').commit()
-      Vosae.Utilities.showLoader()
+
+      tenant.save().then((tenant) =>
+          if @get('session.tenant')
+            @send "redirectToTenantRoot", tenant
+          else
+            @send "setAsCurrentTenant", tenant
+      , () =>
+        Vosae.Utilities.hideLoader()
+      )
 
     # Cancel the tenant creation form 
     cancel: ->

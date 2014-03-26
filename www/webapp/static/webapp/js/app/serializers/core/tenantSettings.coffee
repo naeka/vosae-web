@@ -64,3 +64,8 @@ Vosae.TenantSettingsSerializer = Vosae.ApplicationSerializer.extend
     payload.objects.push tenantSettings
 
     return @_super store, primaryType, payload
+
+  extractSingle: (store, primaryType, payload) ->
+    payload.id = "tenant_settings_1"
+
+    return @_super store, primaryType, payload

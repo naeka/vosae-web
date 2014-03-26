@@ -6,4 +6,4 @@ Vosae.SettingsEditUserRoute = Ember.Route.extend
 
   deactivate: ->
     model = @controller.get "content"
-    model.rollback() if model
+    model.rollback() if model and not model.get('isDeleted')

@@ -210,6 +210,7 @@ Vosae.ApplicationSerializer = DS.RESTSerializer.extend
     attr = relationship.key
     config = @get("attrs")
     key = (if @keyForRelationship then @keyForRelationship(attr, "belongsTo") else attr)
+    polymorphic = if relationship.options.polymorphic then true else false
 
     finalizer = ->
       return json
@@ -241,6 +242,9 @@ Vosae.ApplicationSerializer = DS.RESTSerializer.extend
         json[key] = null
       else
         return Ember.RSVP.resolve(embeddedBelongsTo.serialize()).then (record) =>
+          # If embeddedBelongsTo is polymorphic
+          if polymorphic
+            record["resource_type"] = embeddedBelongsTo.constructor.typeKey.decamelize()
           json[key] = record
         .then(finalizer)
 
@@ -256,6 +260,7 @@ Vosae.ApplicationSerializer = DS.RESTSerializer.extend
   ###
   serializeHasMany: (record, json, relationship) ->
     attr = relationship.key
+    key = @keyForAttribute(attr)
     config = @get("attrs")
 
     finalizer = ->
@@ -263,13 +268,12 @@ Vosae.ApplicationSerializer = DS.RESTSerializer.extend
 
     # HasMany is not embedded
     if not config or (not isEmbedded(config[attr]) and not hasEmbeddedIds(config[attr]))
-      @_super record, json, relationship
+      json[key] = record.get(attr).map (hasMany) =>
+        @urlify hasMany.constructor, hasMany.get('id')
       return
 
     # HasMany is embedded
     else
-      key = @keyForAttribute(attr)
-
       # Create a main promise that will contains an array of promises which will
       # be resolved once his related record will be serialized
       return new Ember.RSVP.Promise (resolve) =>
@@ -309,11 +313,12 @@ Vosae.ApplicationSerializer = DS.RESTSerializer.extend
     @param relationship
   ###
   serializePolymorphicType: (record, json, relationship) ->
+    console.log "serializePolymorphicType"
     key = relationship.key
     belongsTo = record.get key
     if belongsTo
       key = @keyForAttribute key
-      json[key + "_type"] = Ember.String.capitalize belongsTo.constructor.typeKey
+      json["resource_type"] = belongsTo.constructor.typeKey.decamelize()
 
 
 ###

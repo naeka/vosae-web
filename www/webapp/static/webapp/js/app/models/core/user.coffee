@@ -32,6 +32,10 @@ Vosae.User = Vosae.Model.extend
     return gettext 'To define'
   ).property 'fullName'
 
+  isDeleteable: (->
+    @get('status') isnt "DELETED"
+  ).property 'status'
+
   # This method returns true if `permissions`
   # array contains the permission `@perm` 
   permissionsContains: (perm) ->

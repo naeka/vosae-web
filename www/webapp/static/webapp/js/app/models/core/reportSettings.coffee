@@ -7,7 +7,7 @@
   @module Vosae
 ###
 
-Vosae.ReportSettings = Vosae.Model.extend DS.EmbeddedInModelMixin,
+Vosae.ReportSettings = Vosae.Model.extend
   fontName: DS.attr("string", defaultValue: 'bariol')
   fontSize: DS.attr("number")
   fontColor: DS.attr("string")
@@ -26,6 +26,3 @@ Vosae.ReportSettings = Vosae.Model.extend DS.EmbeddedInModelMixin,
       if language.get('code') != defaultLang
         return language
   ).property('language')
-
-Vosae.ReportSettings.reopen
-  tenant: DS.belongsTo('tenant')

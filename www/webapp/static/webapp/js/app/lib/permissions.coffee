@@ -69,7 +69,6 @@ Vosae.Permissions = [
         authorization: false
         name: gettext('Can delete files')
     ]
-  ,
 
   # Contacts permissions
   Em.Object.create
@@ -96,7 +95,6 @@ Vosae.Permissions = [
         authorization: false
         name: gettext('Can delete contacts')
     ]
-  ,
 
   # Organizer permissions
   Em.Object.create
@@ -107,7 +105,6 @@ Vosae.Permissions = [
         authorization: false
         name: gettext('Access to the calendar module')
     ]
-  ,
 
   # Invoicing permissions
   Em.Object.create

@@ -7,13 +7,11 @@
   @module Vosae
 ###
 
-Vosae.RegistrationInfo = Vosae.Model.extend DS.EmbeddedInModelMixin,
+Vosae.RegistrationInfo = Vosae.Model.extend
   businessEntity: DS.attr('string')
   shareCapital: DS.attr('string')
 
 Vosae.RegistrationInfo.reopen
-  tenant: DS.belongsTo('tenant')
-
   registrationInfoFor: (countryCode) ->
     switch countryCode
       when 'BE' then Vosae.BeRegistrationInfo

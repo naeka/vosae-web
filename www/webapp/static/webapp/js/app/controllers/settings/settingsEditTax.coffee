@@ -13,7 +13,7 @@ Vosae.SettingsEditTaxController = Em.ObjectController.extend
       if tax.checkValidity()
         tax.save().then () =>
           @transitionToRoute 'settings.showTaxes', @get('session.tenant')
-    
+
     delete: (tax) ->
       Vosae.ConfirmPopup.open
         message: gettext 'Do you really want to delete this tax?'

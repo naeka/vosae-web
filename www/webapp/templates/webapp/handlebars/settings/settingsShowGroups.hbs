@@ -29,6 +29,10 @@
             </td>
             <td class="creation-date">{{formatDate group.createdAt}}</td>
           </tr>
+          {{else}}
+          <tr>
+            <td class="no-data text-center" colspan="3">{% trans "No groups" %}</td>
+          </tr>
           {{/each}}
         </tbody>
       </table>

@@ -8,6 +8,10 @@ Vosae.TenantView = Ember.View.extend
 
   updateActiveAppLink: (->
     @get('controller.controllers.application').notifyPropertyChange('currentPath')
+
+    # Important, if user come back from the settings, 
+    # we don't want the left panel to be open
+    $("#ct-middle").trigger "zoneFocus"
   ).on "didInsertElement"
 
   actions:

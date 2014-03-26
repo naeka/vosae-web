@@ -1,13 +1,18 @@
 Vosae.SettingsAddGroupRoute = Ember.Route.extend
   controllerName: "settingsEditGroup"
+  viewName: "settingsEditGroup"
+  templateName: "settings/editGroup"
 
   model: ->
     @store.createRecord("group")
 
   setupController: (controller, model) ->
+    groups = @store.all("group").filter (group) =>
+      group if group.get('id') and group isnt model
+
     controller.setProperties
       'content': model
-      'groupsList': @store.all("group")
+      'groupsList': groups
       
   deactivate: ->
     model = @controller.get "content"

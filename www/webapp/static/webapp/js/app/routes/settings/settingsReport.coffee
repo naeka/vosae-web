@@ -1,6 +1,6 @@
 Vosae.SettingsReportRoute = Ember.Route.extend
   model: ->
-    @get('session.tenant.reportSettings')
+    @get('session.tenant')
   
   deactivate: ->
     model = @controller.get "content"

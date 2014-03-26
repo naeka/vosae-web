@@ -24,7 +24,6 @@
                   contentBinding="sortedCurrencies"
                   selectionBinding="invoicing.supportedCurrencies"
                   multiple="true"
-                  containerCssClass="success"
                   optionValuePath="content"
                   optionLabelPath="content.description" }}
               {{/if}}
@@ -49,14 +48,6 @@
       </table>
     </div>
   </section>
-  {% comment %}
-    Yes this line is fucking useless, but it fix a shitty bug on stateManager.
-    Without doing this, when selecting a different `defaultCurrency` in the 
-    Em.Select above, the stateManager of `tenantSettings.invoicing.numbering`
-    trigger the following error :
-    Attempted to handle event `becomeDirty` while in state 'rootState.loaded.materializing.firstTime
-  {% endcomment %}
-  {{#if invoicing.numbering}}{{/if}}
   <hr>
   <section class="clearfix">
     <div class="inner">
@@ -76,7 +67,6 @@
                 contentBinding="paymentTypes"
                 selectionBinding="invoicing.acceptedPaymentTypes"
                 multiple="true"
-                containerCssClass="green"
                 optionValuePath="content.value"
                 optionLabelPath="content.label" }}
             </td>
@@ -97,9 +87,4 @@
       </table>
     </div>
   </section>
-{% endtplhandlebars %}
-
-
-{% tplhandlebars "settings/invoicingGeneral/actions" %}
-  {{partial "settings/partials/saveSettings"}}
 {% endtplhandlebars %}

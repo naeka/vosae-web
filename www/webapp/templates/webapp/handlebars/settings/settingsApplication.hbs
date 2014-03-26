@@ -8,7 +8,7 @@
     <div class="inner">
       <h4>{% trans "General information" %}</h4>
       <div class="progress">
-        <div class="bar" style="width: {{unbound controller.session.tenantSettings.core.quotas.usedSpacePercent}}%;"></div>
+        <div class="progress-bar" style="width: {{unbound controller.session.tenantSettings.core.quotas.usedSpacePercent}}%;"></div>
       </div>
       <div class="clearfix">
         <span class="grey pull-left">{{humanFileSize controller.session.tenantSettings.core.quotas.usedSpace}}</span>

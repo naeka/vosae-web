@@ -1,14 +1,26 @@
 {% load i18n templatetag_handlebars %}
 
 {% tplhandlebars "settings/editUser" %}
-  {{#if content.isLoaded}}
   <header>
     {{#if id}}
       <h3>{% trans "Global settings" %} &nbsp;>&nbsp; {% trans "Users" %} &nbsp;>&nbsp; {% trans "Edit" %} &nbsp;>&nbsp; {{fullName}}</h3>
     {{else}}
       <h3>{% trans "Global settings" %} &nbsp;>&nbsp; {% trans "Users" %} &nbsp;>&nbsp; {% trans "Add" %}</h3>
     {{/if}}
-    <div class="btn-toolbar pull-right">{{partial "settings/partials/saveDeleteSettings"}}</div>
+    <div class="btn-toolbar pull-right">
+      {{#if id}}
+        {{#if isDeleteable}}
+          {{#unless isSaving}}
+            <div class="btn-group">
+              <a {{action 'delete' content}} class="btn btn-rounded btn-primary">
+                {% trans "Delete" %}
+              </a>
+            </div>
+          {{/unless}}
+        {{/if}}
+        {{partial "settings/partials/saveSettings"}}
+      {{/if}}
+    </div>
   </header>
   <section class="clearfix global-informations">
     <div class="inner">
@@ -57,32 +69,18 @@
               <label>{% trans "Groups" %}</label>
             </td>
             <td>
-              {{view view.groups
+              {{view view.groupsField
                 userBinding="content"
                 contentBinding="groupsList"
                 selectionBinding="content.groups"
                 multiple="true"
-                containerCssClass="green"
                 optionValuePath="content.id"
                 optionLabelPath="content.name" }}
             </td>
-            {% comment %}
-              Yes this line is fucking useless, but it fix a shitty bug on stateManager.
-              Without doing this, when updated `groups` field above, the stateManager of 
-              `user.settings` trigger the following error :
-              Attempted to handle event `becomeDirty` while in state 'rootState.loaded.materializing.firstTime
-            {% endcomment %}
-            {# {{#if content.settings}}{{/if}} #}
           </tr>
         </tbody>
       </table>
     </div>
   </section>
   {{view view.userSpecificPermissionsView specificPermissionsBinding="content.specificPermissions"}}
-  {{/if}}
-{% endtplhandlebars %}
-
-
-{% tplhandlebars "settings/editUser/actions" %}
-  {{partial "settings/partials/saveSettings"}}
 {% endtplhandlebars %}

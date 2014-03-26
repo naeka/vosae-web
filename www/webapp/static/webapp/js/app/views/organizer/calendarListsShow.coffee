@@ -93,14 +93,13 @@ Vosae.CalendarListsShowView = Em.ContainerView.extend
 
           # create a new record
           store = _this.get('controller.store')
-          start = store.createRecord "eventDateTime"
-          end = store.createRecord "eventDateTime"           
-          ev = store.createRecord "vosaeEvent", color: null
-          ev.setProperties
+          ev = store.createRecord 'vosaeEvent',
+            'color': null
             'calendar': calendarLists.get 'firstObject.calendar'
             'calendarList': calendarLists.get 'firstObject'
-            'start': start
-            'end': end
+            'start': store.createRecord("eventDateTime")
+            'end': store.createRecord("eventDateTime")
+            'reminders': store.createRecord("reminderSettings")
 
           if allDay
             ev.setProperties

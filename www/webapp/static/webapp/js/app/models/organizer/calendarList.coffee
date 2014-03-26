@@ -48,6 +48,7 @@ Vosae.CalendarList = Vosae.Model.extend
   ).property('color')
 
   source: (->
+    return if not @get('calendar.id')
     source =
       events: (start, end, callback) =>
         # Filter by start, end and calendar

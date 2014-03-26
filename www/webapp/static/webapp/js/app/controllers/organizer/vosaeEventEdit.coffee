@@ -48,7 +48,7 @@ Vosae.VosaeEventEditController = Em.ObjectController.extend
             @get('attendees').removeObject(attendee)
 
     addReminder: ->
-      @get('reminders.overrides').pushObject @get('store').createRecord('attendee', {minutes: 10})
+      @get('reminders.overrides').createRecord minutes: 10
 
     removeReminder: (reminder) ->
       Vosae.ConfirmPopup.open

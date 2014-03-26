@@ -48,60 +48,25 @@ Vosae.CalendarListEditController = Em.ObjectController.extend
       @set 'isSaving', true
 
       # Current user is the owner of the calendar
-      if calendarList.get 'isOwn'
-        # Creation of a <Vosae.CalendarList> record
-        if not calendarList.get 'id'
-          calendar.one 'didCreate', @, -> # <Vosae.VosaeCalendar> first
-            Ember.run.next @, ->
-              calendarList.one 'didCreate', @, -> # Then <Vosae.CalendarList>
-                Ember.run.next @, ->
-                  @set 'isSaving', false
-                  Vosae.SuccessPopup.open
-                    message: gettext 'Your calendar has been successfully created'
-                  @transitionToRoute 'calendarList.show', @get('session.tenant'), calendarList          
-              calendarList.get('transaction').commit()    
-          calendar.get('transaction').commit()
-
-        # Edition of a <Vosae.CalendarList>
+      if calendarList.get('isOwn')
+        if calendarList.get('isNew')
+           message: gettext 'Your calendar has been successfully created'
         else
-          # If <Vosae.VosaeCalendar> is dirty
-          if calendar.get 'isDirty'
-            calendar.one 'didUpdate', @, -> # <Vosae.VosaeCalendar> first
-              Ember.run.next @, ->
-                # If <Vosae.CalendarList> is dirty
-                if calendarList.get 'isDirty'
-                  calendarList.one 'didUpdate', @, -> # Then <Vosae.CalendarList>
-                    @set 'isSaving', false
-                    Vosae.SuccessPopup.open
-                      message: gettext 'Your calendar has been successfully updated'
-                    @transitionToRoute 'calendarList.show', @get('session.tenant'), calendarList     
-                  calendarList.get('transaction').commit()
-                else
-                  @set 'isSaving', false
-                  Vosae.SuccessPopup.open
-                    message: gettext 'Your calendar has been successfully updated'
-                  @transitionToRoute 'calendarList.show', @get('session.tenant'), calendarList
-            calendar.get('transaction').commit()
-
-          # Only <Vosae.CalendarList> is dirty
-          else
-            calendarList.one 'didUpdate', @, ->
-              Ember.run.next @, ->
-                @set 'isSaving', false
-                Vosae.SuccessPopup.open
-                  message: gettext 'Your calendar has been successfully updated'
-                @transitionToRoute 'calendarList.show', @get('session.tenant'), calendarList
-            calendarList.get('transaction').commit()
+           message: gettext 'Your calendar has been successfully updated'
+        calendar.save().then (calendar) =>
+          calendarList.save().then (calendarList) =>
+            @set 'isSaving', false
+            Vosae.SuccessPopup.open
+              message: gettext 'Your calendar has been successfully created'
+            @transitionToRoute 'calendarList.show', @get('session.tenant'), calendarList
 
       # Current user is not the owner of the calendar
       else
-        calendarList.one 'didUpdate', @, ->
-          Ember.run.next @, ->
-            @set 'isSaving', false
-            Vosae.SuccessPopup.open
-              message: gettext 'Your calendar has been successfully updated'
-            @transitionToRoute 'calendarList.show', @get('session.tenant'), calendarList          
-        calendarList.get('transaction').commit()
+        calendarList.save().then (calendarList) =>
+          @set 'isSaving', false
+          Vosae.SuccessPopup.open
+            message: gettext 'Your calendar has been successfully updated'
+          @transitionToRoute 'calendarList.show', @get('session.tenant'), calendarList          
 
 
     delete: (calendarList)->

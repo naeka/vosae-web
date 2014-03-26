@@ -24,3 +24,8 @@ Vosae.CalendarListsAddRoute = Ember.Route.extend
     @render 'calendarList.edit.settings',
       into: 'tenant'
       outlet: 'outletPageSettings'
+
+  deactivate: ->
+    model = @get('controller.model')
+    model.get('calendar').rollback()
+    model.rollback()

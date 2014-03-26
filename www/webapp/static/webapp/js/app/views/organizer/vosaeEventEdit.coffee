@@ -64,14 +64,14 @@ Vosae.VosaeEventEditView = Em.View.extend
     emailField: Vosae.TypeaheadField.extend(Vosae.AutoGrowMixin,
       minLength: 1
       source: (typeahead, query) ->
-        $.map @get('controller.store').all('user') (user) =>
-          if user.get('email') in @get('parentView.parentView.controller.attendees').getEach('email')
+        $.map @get('targetObject.store').all('user').toArray(), (user) =>
+          if user.get('email') in @get('targetObject.attendees').getEach('email')
             return null
           id: user.get 'id'
           name: user.get 'email'
       onSelect: (obj) ->
-        @get('controller.store').find('user', obj.id).then (user) =>
-          isOrganizer = if user is @get('controller.content.organizer') then true else false
+        @get('targetObject.store').find('user', obj.id).then (user) =>
+          isOrganizer = if user is @get('targetObject.content.organizer') then true else false
           @get('parentView.content').setProperties
             displayName: user.get('fullName')
             photoUri: user.get('photoUri')
@@ -83,13 +83,13 @@ Vosae.VosaeEventEditView = Em.View.extend
     displayNameField: Vosae.TypeaheadField.extend(Vosae.AutoGrowMixin,
       minLength: 1
       source: (typeahead, query) ->
-        $.map @get('controller.store').all('user') (user) =>
-          if user.get('email') in @get('parentView.parentView.controller.attendees').getEach('email')
+        $.map @get('targetObject.store').all('user').toArray(), (user) =>
+          if user.get('email') in @get('targetObject.attendees').getEach('email')
             return null
           id: user.get 'id'
           name: user.get 'fullName'
       onSelect: (obj) ->
-        @get('controller.store').find('user', obj.id).then (user) =>
+        @get('targetObject.store').find('user', obj.id).then (user) =>
           @get('parentView.content').setProperties
             email: user.get('email')
             photoUri: user.get('photoUri')

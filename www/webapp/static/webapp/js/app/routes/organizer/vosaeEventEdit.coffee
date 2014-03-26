@@ -18,3 +18,7 @@ Vosae.VosaeEventEditRoute = Ember.Route.extend
     @render 'vosaeEvent.edit.settings',
       into: 'tenant'
       outlet: 'outletPageSettings'
+
+  deactivate: ->
+    model = @controller.get "content"
+    model.rollback()

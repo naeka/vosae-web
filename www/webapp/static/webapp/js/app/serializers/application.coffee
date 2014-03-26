@@ -6,6 +6,7 @@ inflector.irregular 'coreSettings', 'coreSettings'
 inflector.irregular 'invoicingSettings', 'invoicingSettings'
 inflector.irregular 'storageQuotasSettings', 'storageQuotasSettings'
 inflector.irregular 'invoicingNumberingSettings', 'invoicingNumberingSettings'
+inflector.irregular 'reminderSettings', 'reminderSettings'
 
 ###
   Main serializer for the application.

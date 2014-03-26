@@ -9,6 +9,12 @@ require 'serializers/core/user'
 require 'serializers/contacts/organization'
 require 'serializers/contacts/contact'
 
+require 'serializers/organizer/calendarList'
+require 'serializers/organizer/calendarAcl'
+require 'serializers/organizer/vosaeEvent'
+require 'serializers/organizer/vosaeCalendar'
+require 'serializers/organizer/reminderSettings'
+
 require 'serializers/invoicing/currency'
 require 'serializers/invoicing/snapshotCurrency'
 require 'serializers/invoicing/quotation'

@@ -44,11 +44,6 @@ Vosae.CalendarListEditController = Em.ObjectController.extend
         @transitionToRoute 'calendarLists.show'
 
     save: (calendarList) ->
-      if calendarList.get 'id'
-        @preventTransactionErrorsForEdition calendarList
-      else
-        @preventTransactionErrorsForCreation calendarList
-
       calendar = calendarList.get 'calendar'
       @set 'isSaving', true
 
@@ -114,33 +109,7 @@ Vosae.CalendarListEditController = Em.ObjectController.extend
         message: gettext 'Do you really want to delete this calendar?'
         callback: (opts, event) =>
           if opts.primary
-            calendarList.one 'didDelete', @, ->
-              Ember.run.next @, ->
-                Vosae.SuccessPopup.open
-                  message: gettext 'Your calendar has been successfully deleted'
-                @transitionToRoute 'calendarLists.show'
-            calendarList.deleteRecord()
-            calendarList.get('transaction').commit()
-
-  preventTransactionErrorsForEdition: (calendarList) ->
-    calendarListTrans = calendarList.get('transaction')
-    calendarTrans = @get('store').transaction()
-
-    # We dont want <Vosae.VosaeCalendar> and its <Vosae.CalendarAcl> 
-    # to be part of the <Vosae.CalendarList> transaction
-    calendarListTrans.remove calendarList.get('calendar')
-    calendarListTrans.remove calendarList.get('calendar.acl')
-    calendarTrans.add calendarList.get('calendar')
-    calendarTrans.add calendarList.get('calendar.acl')
-
-  preventTransactionErrorsForCreation: (calendarList) ->
-    calendarListTrans = calendarList.get('transaction')
-    calendarTrans = @get('store').transaction()
-    aclTrans = @get('store').transaction()
-
-    # We dont want <Vosae.VosaeCalendar> and its <Vosae.CalendarAcl> 
-    # to be part of the <Vosae.CalendarList> transaction
-    calendarListTrans.remove calendarList.get('calendar')
-    calendarListTrans.remove calendarList.get('calendar.acl')
-    calendarTrans.add calendarList.get('calendar')
-    aclTrans.add calendarList.get('calendar.acl')
+            calendarList.destroyRecord().then () =>
+              Vosae.SuccessPopup.open
+                message: gettext 'Your calendar has been successfully deleted'
+              @transitionToRoute 'calendarLists.show'

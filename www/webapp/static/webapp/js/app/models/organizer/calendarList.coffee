@@ -48,23 +48,19 @@ Vosae.CalendarList = Vosae.Model.extend
   ).property('color')
 
   source: (->
-    self = @
     source =
-      events: (start, end, callback)->
+      events: (start, end, callback) =>
         # Filter by start, end and calendar
-        events = Vosae.VosaeEvent.find
-          start__gte: $.fullCalendar.formatDate(start, 'u')
-          end__lt: $.fullCalendar.formatDate(end, 'u')
-          calendar: self.get('calendar.id')
-          limit: 100
-        events.one 'didLoad', @, ->
-          Em.run.next ->
-            callback self.makeFcEvents(events)
-      color: ->
-        self.get('color')
-      textColor: ->
-        self.get('textColor')
-    source
+        query = 'start__gte=' + $.fullCalendar.formatDate(start, 'u')
+        query += '&end__lt=' + $.fullCalendar.formatDate(end, 'u')
+        query += '&calendar=' + @get('calendar.id')
+        query += '&limit=' + 100
+        @get('store').findQuery('vosaeEvent', query).then (events) =>
+          callback @makeFcEvents(events)
+      color: =>
+        @get('color')
+      textColor: =>
+        @get('textColor')
   ).property()
 
   makeFcEvents: (events)->

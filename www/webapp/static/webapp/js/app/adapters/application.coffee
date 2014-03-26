@@ -7,7 +7,7 @@
   @module Vosae
 ###
 
-Vosae.ApplicationAdapter = DS.EmbeddedAdapter.extend
+Vosae.ApplicationAdapter = DS.RESTAdapter.extend
   defaultSerializer: 'Vosae/application'
   host: Vosae.Config.APP_ENDPOINT
   namespace: Vosae.Config.API_NAMESPACE

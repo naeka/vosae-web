@@ -21,7 +21,6 @@ require 'routes/contacts/organizationEdit'
 require 'routes/contacts/organizationShow'
 require 'routes/contacts/organizationAddContact'
 
-require 'routes/organizer/root'
 require 'routes/organizer/calendarListsShow'
 require 'routes/organizer/calendarListsAdd'
 require 'routes/organizer/calendarListShow'

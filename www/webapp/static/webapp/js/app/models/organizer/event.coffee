@@ -9,8 +9,8 @@
 
 Vosae.VosaeEvent = Vosae.Model.extend
   status: DS.attr('string')
-  created_at: DS.attr('datetime')
-  updated_at: DS.attr('datetime')
+  createdAt: DS.attr('datetime')
+  updatedAt: DS.attr('datetime')
   summary: DS.attr('string')
   description: DS.attr('string')
   location: DS.attr('string')

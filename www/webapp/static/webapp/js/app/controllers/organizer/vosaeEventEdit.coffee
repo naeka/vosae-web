@@ -18,33 +18,27 @@ Vosae.VosaeEventEditController = Em.ObjectController.extend
         @transitionToRoute 'calendarLists.show', @get('session.tenant')
 
     save: (vosaeEvent) ->
-      event = if vosaeEvent.get('id') then 'didUpdate' else 'didCreate'
-      vosaeEvent.one event, @, ->
-        Ember.run.next @, ->
-          if event is 'didCreate'
-            message = gettext 'Your event has been successfully created'
-          else
-            message = gettext 'Your event has been successfully updated'
-          Vosae.SuccessPopup.open
-            message: message
-          @transitionToRoute 'vosaeEvent.show', @get('session.tenant'), vosaeEvent       
-      vosaeEvent.get('transaction').commit()
+      if vosaeEvent.get('isNew')
+        message = gettext 'Your event has been successfully created'
+      else
+        message = gettext 'Your event has been successfully updated'
+      vosaeEvent.save().then (vosaeEvent) =>
+        Vosae.SuccessPopup.open
+          message: message
+        @transitionToRoute 'vosaeEvent.show', @get('session.tenant'), vosaeEvent       
     
     delete: (vosaeEvent) ->
       Vosae.ConfirmPopup.open
         message: gettext 'Do you really want to delete this event?'
         callback: (opts, event) =>
           if opts.primary
-            vosaeEvent.one 'didDelete', @, ->
-              Ember.run.next @, ->
-                Vosae.SuccessPopup.open
-                  message: gettext 'Your event has been successfully deleted'
-                @transitionToRoute 'calendarLists.show', @get('session.tenant')
-            vosaeEvent.deleteRecord()
-            vosaeEvent.get('transaction').commit()
+            vosaeEvent.destroyRecord().then () =>
+              Vosae.SuccessPopup.open
+                message: gettext 'Your event has been successfully deleted'
+              @transitionToRoute 'calendarLists.show', @get('session.tenant')
 
     addAttendee: ->
-      @get('attendees').insertAt(0, Vosae.Attendee.createRecord())
+      @get('attendees').insertAt(0, @get('store').createRecord('attendee'))
 
     removeAttendee: (attendee) ->
       Vosae.ConfirmPopup.open
@@ -54,7 +48,7 @@ Vosae.VosaeEventEditController = Em.ObjectController.extend
             @get('attendees').removeObject(attendee)
 
     addReminder: ->
-      @get('reminders.overrides').pushObject(Vosae.ReminderEntry.createRecord({minutes: 10}))
+      @get('reminders.overrides').pushObject @get('store').createRecord('attendee', {minutes: 10})
 
     removeReminder: (reminder) ->
       Vosae.ConfirmPopup.open

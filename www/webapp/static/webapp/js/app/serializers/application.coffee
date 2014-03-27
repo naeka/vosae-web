@@ -131,7 +131,7 @@ Vosae.ApplicationSerializer = DS.RESTSerializer.extend
     payload = {}
     payload[root] = object  
     partial = payload[root]
-  
+
     # 2) Update payload, adds fake id to embedded relationship and sideload all embedded belongsTo and hasMany
     updatePayloadWithEmbedded.call this, store, type, payload, partial
 
@@ -317,7 +317,6 @@ Vosae.ApplicationSerializer = DS.RESTSerializer.extend
     @param relationship
   ###
   serializePolymorphicType: (record, json, relationship) ->
-    console.log "serializePolymorphicType"
     key = relationship.key
     belongsTo = record.get key
     if belongsTo

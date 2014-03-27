@@ -29,7 +29,7 @@ Vosae.ApplicationRoute = Ember.Route.extend
     currentUser = @store.findQuery('user', email: Vosae.Config.AUTH_USER).then (user) =>
       @set 'session.user', user.get('firstObject')
       Vosae.Config.PUSHER_USER_CHANNEL = "private-user-#{@get('session.user.id')}"
-      @get "controllers.realtime"
+      @controllerFor "realtime"
 
     tenantSettings = @store.find('tenantSettings').then (tenantSettings) =>
       @set 'session.tenantSettings', tenantSettings.get('firstObject')

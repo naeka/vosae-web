@@ -12,6 +12,8 @@ Vosae.Notification = Vosae.Model.extend
   read: DS.attr('boolean')
   sentAt: DS.attr('datetime')
 
+  fixLazyLoadResource: Em.computed.property()
+ 
   displayView: Em.View.extend
     templateName: 'notificationEntry/base'
 

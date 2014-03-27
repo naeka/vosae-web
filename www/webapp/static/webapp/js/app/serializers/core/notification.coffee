@@ -14,14 +14,16 @@ Vosae.NotificationSerializer = Vosae.ApplicationSerializer.extend
     is `quotation_saved_ne` it must match the model `Vosae.QuotationSavedNE` 
     so ember data expect to find the key `quotationSavedNEs` in the payload
   ###
-  rootTypeForResource: (resourceType) ->
+  rootTypeForResource: (resourceType, pluralize) ->
     resourceType = resourceType.substring(0, resourceType.length - 2) + "NE"
-    return resourceType.camelize().pluralize()
+    if pluralize
+      return resourceType.camelize().pluralize()
+    return resourceType.camelize()
 
   extractArray: (store, primaryType, payload) ->
     for ne in payload.objects
       # Create root key in payload
-      type = @rootTypeForResource ne.resource_type
+      type = @rootTypeForResource ne.resource_type, true
       payload[type] = payload[type] or []
       delete ne.resource_type
 

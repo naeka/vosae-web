@@ -22,7 +22,6 @@ Vosae.TransitionToLazyResourceMixin = Ember.Mixin.create
         
         # Quotation
         when "Vosae.Quotation"
-          console.log resource.id
           @transitionToRoute "quotation.show", @get('session.tenant'), resource.id
        
         # Invoice

@@ -5,11 +5,11 @@ Vosae.TenantsShowRoute = Ember.Route.extend
 
   afterModel: (tenants, transition) ->
     # Without tenant, user must create one
-    if tenants.length is 0
+    if tenants.get('length') is 0
       @transitionTo 'tenants.add'
 
     # User has only one tenant
-    else if tenants.length == 1
+    else if tenants.get('length') == 1
       tenant = tenants.get 'firstObject'
       transition.send "setAsCurrentTenant", tenant
     

@@ -12,6 +12,8 @@ Vosae.DashboardIndexController = Vosae.ArrayController.extend Vosae.TransitionTo
   relatedType: "timeline"
   sortProperties: ['datetime']
   sortAscending: false
+  test: false
+  contentHasBeenUpdated: false
 
   actions:
     ###
@@ -34,7 +36,10 @@ Vosae.DashboardIndexController = Vosae.ArrayController.extend Vosae.TransitionTo
     @get("unmergedContent").forEach (recordArray) ->
       mergedRecordArrays = mergedRecordArrays.concat recordArray.get("content").toArray()
     @set "content", mergedRecordArrays
-    @updateContent()
+    # DIRTY & TEMPORARY
+    unless @get('contentHasBeenUpdated')
+      @updateContent()
+      @set('contentHasBeenUpdated', true)
   ).observes "unmergedContent.length", "unmergedContent.@each.length"
 
   ###
@@ -42,8 +47,11 @@ Vosae.DashboardIndexController = Vosae.ArrayController.extend Vosae.TransitionTo
     of recordArray, each recordArray match a polymorphic model such as `ContactSavedTE`
   ###
   getTimelineEntriesLength: ->
-    @get("unmergedContent").getEach("length").reduce (previousLength, currentLength) ->
-      previousLength + currentLength
+    unmergedContent = @get("unmergedContent")
+    if unmergedContent
+      return @get("unmergedContent").getEach("length").reduce (previousLength, currentLength) ->
+        previousLength + currentLength
+    0
 
   ###
     Traverse timeline items
@@ -58,7 +66,7 @@ Vosae.DashboardIndexController = Vosae.ArrayController.extend Vosae.TransitionTo
       item = @objectAt(i)
       itemDate = item.get "datetime"
       itemDate = moment([itemDate.getFullYear(), itemDate.getMonth(), itemDate.getDay()])
-  
+
       # Compare dates and set dateChanged if different
       if currentDate.unix() isnt itemDate.unix()
         item.set "dateChanged", true
@@ -90,9 +98,8 @@ Vosae.DashboardIndexController = Vosae.ArrayController.extend Vosae.TransitionTo
   ###
   updateContentFrom: (startIndex, stopIndex) ->
     i = startIndex
-    z = if stopIndex? then stopIndex else @get('arrangedContent.length')
-
-    if @get('arrangedContent.length') > 1
+    z = if stopIndex? then stopIndex else @getTimelineEntriesLength()
+    if @getTimelineEntriesLength() > 1
       currentDate = @get('arrangedContent').objectAt(startIndex).get "datetime"
       currentDate = moment([
         currentDate.getFullYear()

@@ -16,8 +16,11 @@ Vosae.NotificationsController = Vosae.ArrayController.extend Vosae.TransitionToL
       Flag all notifications as read
     ###
     markAllAsRead: ->
-      unreadNotifs = @get('content').filterProperty('read', false)
-      unreadNotifs.invoke('save') if unreadNotifs
+      unreadNotifs = @get('content').filterProperty 'read', false
+      unreadNotifs.forEach (unreadNotif) =>
+        unreadNotif.set 'read', true
+      Ember.RSVP.all(unreadNotifs.invoke('save'))
+      return
 
   fetchContent: (->
     meta = @store.metadataFor "notification"

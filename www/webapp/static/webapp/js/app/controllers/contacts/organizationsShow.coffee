@@ -8,6 +8,7 @@
 ###
 
 Vosae.OrganizationsShowController = Vosae.EntitiesController.extend
+  relatedType: "organization"
   needs: ['contactsShow']
   sortProperties: ['corporateName']
   sortAscending: true

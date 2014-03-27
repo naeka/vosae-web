@@ -8,8 +8,8 @@
 ###
 
 Vosae.InvoicingSettings = Vosae.Model.extend
-  supportedCurrencies: DS.hasMany('Vosae.Currency')
-  defaultCurrency: DS.belongsTo('Vosae.Currency')
+  supportedCurrencies: DS.hasMany('currency')
+  defaultCurrency: DS.belongsTo('currency')
   fyStartMonth: DS.attr('number')
   invTaxesApplication: DS.attr('string')
   quotationValidity: DS.attr('number')
@@ -21,7 +21,7 @@ Vosae.InvoicingSettings = Vosae.Model.extend
   automaticReminders: DS.attr('boolean')
   automaticRemindersText: DS.attr('string')
   automaticRemindersSendCopy: DS.attr('boolean')
-  numbering: DS.belongsTo('Vosae.InvoicingNumberingSettings')
+  numbering: DS.belongsTo('invoicingNumberingSettings')
 
   acceptedPaymentTypesFormatted: (->
     paymentTypes = @get('acceptedPaymentTypes')
@@ -48,7 +48,6 @@ Vosae.InvoicingSettings = Vosae.Model.extend
     @get('currentFyStartAt').year()
   ).property('currentFyStartAt')
 
-
-Vosae.Adapter.map "Vosae.InvoicingSettings",
-  numbering:
-    embedded: "always"
+  supportedCurrenciesSymbols: (->
+    @get('supportedCurrencies').getEach('symbol')
+  ).property('supportedCurrencies.@each.symbol', 'supportedCurrencies.length')

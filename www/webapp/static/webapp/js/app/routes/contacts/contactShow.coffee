@@ -1,21 +1,18 @@
 Vosae.ContactShowRoute = Ember.Route.extend
-  setupController: (controller, model) ->
-    contact = @modelFor("contact")
-    invoices = Vosae.Invoice.find(
-      contact: contact.get('id')
-      limit: 5
-    )
-    quotations = Vosae.Quotation.find(
-      contact: contact.get('id')
-      limit: 5
-    )
+  model: ->
+    @modelFor("contact")
 
-    controller.set 'content', contact
-    controller.set 'invoices', invoices
-    controller.set 'quotations', quotations
+  setupController: (controller, model) ->
+    invoices = @store.find 'invoice', {contact: model.get('id'), limit: 4}
+    quotations = @store.find 'quotation', {contact: model.get('id'), limit: 4}
+
+    controller.setProperties
+      'content': model
+      'invoices': invoices
+      'quotations': quotations
 
   renderTemplate: ->
     @_super()
     @render 'contact.show.settings',
-      into: 'application'
+      into: 'tenant'
       outlet: 'outletPageSettings'

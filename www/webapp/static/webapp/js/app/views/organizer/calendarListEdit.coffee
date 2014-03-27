@@ -32,13 +32,8 @@ Vosae.CalendarListEditView = Em.View.extend
   aclEntitySearchField: Vosae.UserSearchSelect.extend
     onSelect: (event) ->
       rule = @get 'rule'
-      user = Vosae.User.find(event.object.id)
-      
-      if user.get 'isLoaded'
+      @get('controller.store').find('user', event.object.id).then (user) =>      
         rule.set 'principal', user
-      else
-        user.one 'didLoad', ->
-          rule.set 'principal', user
     
     # When field is rendered check if the <Vosae.CalendarAclRule> is linked to a <Vosae.User>
     didInsertElement: ->
@@ -53,7 +48,7 @@ Vosae.CalendarListEditView = Em.View.extend
             full_name: principal.get 'fullName'
           @.$().select2 'val', principal.get('id')
         else
-          principal.one "didLoad", @, ->
+          principal.then (principal) =>
             @.$().select2 'data',
               id: principal.get 'id'
               full_name: principal.get 'fullName'

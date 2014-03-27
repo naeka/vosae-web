@@ -25,7 +25,7 @@ Vosae.InvoiceShowView = Em.View.extend
       @_super()
 
     change: ->
-      currency = Vosae.Currency.all().findProperty 'symbol', @get('value')
+      currency = @get('controller.store').all('currency').findProperty 'symbol', @get('value')
       @get('payment').updateWithCurrency currency
   )
 

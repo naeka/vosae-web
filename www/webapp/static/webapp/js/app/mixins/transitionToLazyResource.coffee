@@ -14,30 +14,24 @@ Vosae.TransitionToLazyResourceMixin = Ember.Mixin.create
       switch resource.type
         # Contact
         when "Vosae.Contact"
-          contact = Vosae.Contact.find(resource.id)
-          @transitionToRoute "contact.show", @get('session.tenant'), contact
+          @transitionToRoute "contact.show", @get('session.tenant'), resource.id
         
         # Organization
         when "Vosae.Organization"
-          organization = Vosae.Organization.find(resource.id)
-          @transitionToRoute "organization.show", @get('session.tenant'), organization
+          @transitionToRoute "organization.show", @get('session.tenant'), resource.id
         
         # Quotation
         when "Vosae.Quotation"
-          quotation = Vosae.Quotation.find(resource.id)
-          @transitionToRoute "quotation.show", @get('session.tenant'), quotation
+          @transitionToRoute "quotation.show", @get('session.tenant'), resource.id
        
         # Invoice
         when "Vosae.Invoice"
-          invoice = Vosae.Invoice.find(resource.id)
-          @transitionToRoute "invoice.show", @get('session.tenant'), invoice
+          @transitionToRoute "invoice.show", @get('session.tenant'), resource.id
        
         # DownPaymentInvoice
         when "Vosae.DownPaymentInvoice"
-          downPaymentInvoice = Vosae.DownPaymentInvoice.find(resource.id)
-          @transitionToRoute "downPaymentInvoice.show", @get('session.tenant'), downPaymentInvoice
+          @transitionToRoute "downPaymentInvoice.show", @get('session.tenant'), resource.id
 
         # CreditNote
         when "Vosae.CreditNote"
-          creditNote = Vosae.CreditNote.find(resource.id)
-          @transitionToRoute "creditNote.show", @get('session.tenant'), creditNote
+          @transitionToRoute "creditNote.show", @get('session.tenant'), resource.id

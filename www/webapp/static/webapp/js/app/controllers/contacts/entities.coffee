@@ -8,19 +8,19 @@
 ###
 
 Vosae.EntitiesController = Vosae.ArrayController.extend
+  exportFormat: "vcard"
+
   actions:
-    # Return a generated url to export data
+    ###
+      Generate an ajax download with the url from @getExportURL
+    ###
     getExportFile: ->
-      format = "vcard"
-      tenantSlug = @get('session.tenant.slug')
-      exportURL = "#{Vosae.Config.APP_ENDPOINT}/#{Vosae.Config.API_NAMESPACE}/"
-    
-      switch @constructor.toString()
-        when Vosae.ContactsShowController.toString()
-          exportURL += "contact/"
-        when Vosae.OrganizationsShowController.toString()
-          exportURL += "organization/"
+      $.fileDownload @getExportURL()
 
-      exportURL += "export/#{format}/?x_tenant=#{tenantSlug}"
-
-      $.fileDownload(exportURL)
+  ###
+    Build the URL that will be used by the library `fileDownload`
+  ###
+  getExportURL: ->
+    tenantSlug = @get "session.tenant.slug"
+    url = "#{Vosae.Config.APP_ENDPOINT}/#{Vosae.Config.API_NAMESPACE}/"
+    url + "#{@relatedType}/export/#{@exportFormat}/?x_tenant=#{tenantSlug}"

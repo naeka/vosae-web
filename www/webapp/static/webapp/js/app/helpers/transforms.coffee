@@ -6,10 +6,9 @@
   @namespace DS
 ###
 
-DS.JSONTransforms.date =
-  deserialize: (serialized)->
+Vosae.DateTransform = DS.Transform.extend
+  deserialize: (serialized) ->
     type = typeof serialized
-    date = null
     if type is "string" or type is "number"
       moment(serialized).toDate()
     else if serialized is null or serialized is `undefined`
@@ -17,7 +16,7 @@ DS.JSONTransforms.date =
     else
       null
 
-  serialize: (date)->
+  serialize: (date) ->
     if date instanceof Date or moment.isMoment(date)
       moment(date).format('YYYY-MM-DD')
     else if date is `undefined`
@@ -34,10 +33,9 @@ DS.JSONTransforms.date =
   @namespace DS
 ###
 
-DS.JSONTransforms.datetime =
-  deserialize: (serialized)->
+Vosae.DatetimeTransform = DS.Transform.extend
+  deserialize: (serialized) ->
     type = typeof serialized
-    date = null
     if type is "string" or type is "number"
       moment(serialized).toDate()
     else if serialized is null or serialized is `undefined`
@@ -45,7 +43,7 @@ DS.JSONTransforms.datetime =
     else
       null
 
-  serialize: (date)->
+  serialize: (date) ->
     if date instanceof Date or moment.isMoment(date)
       moment(date).format()
     else if date is `undefined`
@@ -62,7 +60,7 @@ DS.JSONTransforms.datetime =
   @namespace DS
 ###
 
-DS.JSONTransforms.array =
+Vosae.ArrayTransform = DS.Transform.extend
   serialize: (serialized)->
     if Em.typeOf(serialized) is 'array'
       return serialized
@@ -82,7 +80,7 @@ DS.JSONTransforms.array =
   @namespace DS
 ###
 
-DS.JSONTransforms.object =
+Vosae.ObjectTransform = DS.Transform.extend
   deserialize: (serialized) ->
     serialized
   
@@ -99,7 +97,7 @@ DS.JSONTransforms.object =
   @namespace DS
 ###
 
-DS.JSONTransforms.paymentTypesArray =
+Vosae.PaymentTypesArrayTransform = DS.Transform.extend
   ###
     Serialize an array of objects with label and value
     

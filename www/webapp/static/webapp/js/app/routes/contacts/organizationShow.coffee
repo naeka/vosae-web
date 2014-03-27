@@ -1,21 +1,18 @@
 Vosae.OrganizationShowRoute = Ember.Route.extend
+  model: ->
+    @modelFor("organization")
+
   setupController: (controller, model) ->
-    organization = @modelFor("organization")
-    invoices = Vosae.Invoice.find(
-      organization: organization.get('id')
-      limit: 5
-    )
-    quotations = Vosae.Quotation.find(
-      organization: organization.get('id')
-      limit: 5
-    )
-    
-    controller.set 'content', organization
-    controller.set 'invoices', invoices
-    controller.set 'quotations', quotations
+    invoices = @store.find 'invoice', {organization: model.get('id'), limit: 4}
+    quotations = @store.find 'quotation', {organization: model.get('id'), limit: 4}
+
+    controller.setProperties
+      'content': model
+      'invoices': invoices
+      'quotations': quotations
 
   renderTemplate: ->
     @_super()
     @render 'organization.show.settings',
-      into: 'application'
+      into: 'tenant'
       outlet: 'outletPageSettings'

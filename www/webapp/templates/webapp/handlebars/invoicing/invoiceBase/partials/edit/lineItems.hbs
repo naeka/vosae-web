@@ -27,8 +27,8 @@
               placeholder="{% trans 'Reference' %}…" }}
           </td>
           <td class="description">
-            {{view Vosae.SimpleEditor
-              currentItemBinding="this"
+            {{simple-editor
+              modelBinding="this"
               valueBinding="description"
               maxLength="1024"
               classNames="form-control form-control-unstyled description"
@@ -66,7 +66,7 @@
               </button>
               <ul class="dropdown-menu">
                 {{#if controller.canHaveOptionalLineItems}}                  
-                  <li {{action toggleOptionalLineItem this}}>
+                  <li {{action 'toggleOptionalLineItem' this}}>
                     <a>
                       {{#if optional}}
                         {% trans "Unset optional" %}
@@ -76,10 +76,10 @@
                     </a>
                   </li>
                 {{/if}}
-                <li {{action addLineItemAbove this}}><a>{% trans "Insert one above" %}</a></li>
-                <li {{action addLineItemBelow this}}><a>{% trans "Insert one below" %}</a></li>
+                <li {{action 'addLineItemAbove' this}}><a>{% trans "Insert one above" %}</a></li>
+                <li {{action 'addLineItemBelow' this}}><a>{% trans "Insert one below" %}</a></li>
                 <li class="divider"></li>
-                <li {{action deleteLineItem this}}><a>{% trans "Delete" %}</a></li>
+                <li {{action 'deleteLineItem' this}}><a>{% trans "Delete" %}</a></li>
               </ul>
             </div>
           </td>

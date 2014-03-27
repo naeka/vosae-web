@@ -5,7 +5,7 @@
     <label><strong>{% trans "Payment conditions:" %}</strong></label>
     {{view view.paymentConditionsField
       contentBinding="Vosae.Config.paymentConditions"
-      selectionBinding="view.currentPaymentConditions"
+      selectionBinding="view.parentView.currentPaymentConditions"
       currentRevisionBinding="currentRevision"
       containerCssClass="success"
       prompt="{% trans 'Choose one' context 'payment condition' %}"

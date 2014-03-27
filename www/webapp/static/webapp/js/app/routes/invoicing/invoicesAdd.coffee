@@ -1,12 +1,9 @@
 Vosae.InvoicesAddRoute = Ember.Route.extend
+  controllerName: "invoiceEdit"
   preFillInvoiceWith: {}
 
-  init: ->
-    @_super()
-    @get('container').register('controller:invoices.add', Vosae.InvoiceEditController)
-
   model: ->
-    Vosae.Invoice.createRecord()
+    @store.createRecord "invoice"
 
   setupController: (controller, model) ->
     # This is dirty and must be improved
@@ -15,12 +12,11 @@ Vosae.InvoicesAddRoute = Ember.Route.extend
       contact = if preFill.contact then preFill.contact else null
       organization = if preFill.organization then preFill.organization else null
 
-    unusedTransaction = @get('store').transaction()    
-    currentRevision = unusedTransaction.createRecord Vosae.InvoiceRevision
-    currency = unusedTransaction.createRecord Vosae.Currency
-    billingAddress = unusedTransaction.createRecord Vosae.Address
-    deliveryAddress = unusedTransaction.createRecord Vosae.Address
-    senderAddress = unusedTransaction.createRecord Vosae.Address
+    currentRevision = @store.createRecord "invoiceRevision"
+    currency = @store.createRecord "snapshotCurrency"
+    billingAddress = @store.createRecord "vosaeAddress"
+    deliveryAddress = @store.createRecord "vosaeAddress"
+    senderAddress = @store.createRecord "vosaeAddress"
 
     senderAddress.setProperties
       'postofficeBox': @get "session.tenant.billingAddress.postofficeBox"
@@ -31,7 +27,6 @@ Vosae.InvoicesAddRoute = Ember.Route.extend
       'state': @get "session.tenant.billingAddress.state"
       'country': @get "session.tenant.billingAddress.country"
     
-    currentRevision.get('lineItems').createRecord()
     currentRevision.setProperties
       'invoicingDate': new Date()
       'dueDate': Vosae.Config.paymentConditions.getDueDate(new Date(), Vosae.Config.paymentConditions.findProperty("value", @get('session.tenantSettings.invoicing.paymentConditions')))
@@ -41,6 +36,7 @@ Vosae.InvoicesAddRoute = Ember.Route.extend
       'deliveryAddress': deliveryAddress
       'senderAddress': senderAddress
 
+    currentRevision.get('lineItems').createRecord()
     currentRevision.set('contact', contact) if contact
     currentRevision.set('organization', organization) if organization
 
@@ -50,22 +46,16 @@ Vosae.InvoicesAddRoute = Ember.Route.extend
 
     controller.setProperties
       'content': model
-      'unusedTransaction': unusedTransaction
-      'taxes': Vosae.Tax.all()
+      'taxes': @store.all('tax')
       'invoicingSettings': @get('session.tenantSettings.invoicing')
 
   renderTemplate: ->
     @_super()
     @render 'invoice.edit.settings',
-      into: 'application'
+      into: 'tenant'
       outlet: 'outletPageSettings'
-  
+
   deactivate: ->
     @set 'preFillInvoiceWith', {}
-    
-    invoice = @controller.get 'content'
-    if invoice.get 'isDirty'
-      invoice.get("transaction").rollback()
-    
-    unusedTransaction = @controller.get 'unusedTransaction'
-    unusedTransaction.rollback() if unusedTransaction
+    model = @controller.get "content"
+    model.rollback() if model

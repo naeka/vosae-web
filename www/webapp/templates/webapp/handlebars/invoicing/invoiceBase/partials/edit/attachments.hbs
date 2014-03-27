@@ -26,18 +26,16 @@
           </div>
         </td>
       </tr>
-      {{#if attachmentUploads}}
-        {{#each attachmentUploads}}
-          <tr class="upload-process">
-            <td class="name" colspan="4">{{name}}</td>
-            <td class="upload-progress" colspan="2">
-              <div class="progress">
-                <div class="bar" {{bindAttr style="displayProgress"}}></div>
-              </div>
-            </td>
-          </tr>
-        {{/each}}
-      {{/if}}
+      {{#each attachmentUploads}}
+        <tr class="upload-process">
+          <td class="name" colspan="4">{{name}}</td>
+          <td class="upload-progress" colspan="2">
+            <div class="progress">
+              <div class="progress-bar" {{bind-attr style="progressAttr"}}>{{progress}}%</div>
+            </div>
+          </td>
+        </tr>
+      {{/each}}
       {{#each attachments}}
         <tr>
           <td class="name">{{name}}</td>

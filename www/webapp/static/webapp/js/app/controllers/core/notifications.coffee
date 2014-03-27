@@ -9,11 +9,38 @@
 ###
 
 Vosae.NotificationsController = Vosae.ArrayController.extend Vosae.TransitionToLazyResourceMixin,
-  
-  setContent: (->
-    @set('content', Vosae.Notification.all())
+  relatedType: "notification"
+
+  actions:
+    ###
+      Flag all notifications as read
+    ###
+    markAllAsRead: ->
+      unreadNotifs = @get('content').filterProperty 'read', false
+      unreadNotifs.forEach (unreadNotif) =>
+        unreadNotif.set 'read', true
+      Ember.RSVP.all(unreadNotifs.invoke('save'))
+      return
+
+  fetchContent: (->
+    meta = @store.metadataFor "notification"
+    # Notification hasn't been fetched
+    if !meta or !meta.get "hasBeenFetched"
+      @store.findAll "notification"
+      promises = []
+      for model in Vosae.Utilities.NOTIFICATION_MODELS
+        promises.push @store.all(model)
+      Ember.RSVP.all(promises).then (notifications) =>
+        @set 'unmergedContent', notifications
   ).on "init"
 
+  mergedRecordArrays: (->
+    notifications = []
+    @get("unmergedContent").forEach (recordArray) ->
+      notifications = notifications.concat recordArray.get("content").toArray()
+    @set "content", notifications
+  ).observes "unmergedContent.length", "unmergedContent.@each.length"
+  
   ###
     Returns unread notifications
   ###
@@ -24,21 +51,13 @@ Vosae.NotificationsController = Vosae.ArrayController.extend Vosae.TransitionToL
   ).property 'content', 'content.length', 'content.@each.read'
 
   ###
-    Returns all notifications flaged as read
+    Returns all notifications marked as read
   ###
   readNotifications: (->
     @get("content").filter((notification) ->
       notification if notification.get("read")
     ).sortBy("sentAt").reverse()
   ).property 'content', 'content.length', 'content.@each.read'
-
-  actions:
-    ###
-      Flag all notifications as read
-    ###
-    markAllAsRead: ->
-      @get('content').filterProperty('read', false).forEach (notification) ->
-        notification.markAsRead()
 
   ###
     Number of unread notifications

@@ -8,20 +8,20 @@
 ###
 
 Vosae.LineItem = Vosae.Model.extend
-  ref: DS.attr('string')
+  reference: DS.attr('string')
   description: DS.attr('string')
   itemId: DS.attr('string')
   quantity: DS.attr('number')
   unitPrice: DS.attr('number')
-  tax: DS.belongsTo('Vosae.Tax')
+  tax: DS.belongsTo('tax', async: true)
   optional: DS.attr('boolean', defaultValue: false)
   
   shouldDisableField: (->
     # Returns true if current line item hasn't reference
-    if @get('ref')
+    if @get('reference')
       return false
     true
-  ).property('ref')
+  ).property('reference')
 
   total: (->
     if @get("quantity") and @get("unitPrice")
@@ -69,21 +69,25 @@ Vosae.LineItem = Vosae.Model.extend
     # on model InvoiceRevision once the current tax is loaded
     tax = @get 'tax'
     if tax? and not tax.get('isLoaded')
-      tax.one 'didLoad', @, ->
+      tax.then =>
         @propertyDidChange('tax')
 
   VAT: ->
-    if @get("quantity") and @get("unitPrice") and @get("tax.isLoaded")
-      total = (@get("quantity") * @get("unitPrice")) * @get("tax.rate")
-      return (
-        total: total
-        tax: @get("tax")
-      )
-    null
+    tax = @get 'tax'
+    new Ember.RSVP.Promise (resolve) =>
+      resolve(null) if not tax 
+      tax.then (tax) =>
+        if @get("quantity") and @get("unitPrice")
+          total = (@get("quantity") * @get("unitPrice")) * tax.get("rate")
+          resolve(
+            total: total
+            tax: tax
+          )
+        resolve(null)
 
-  isEmpty: ->
+  recordIsEmpty: ->
     # Return true if item is empty
-    if @get 'ref'
+    if @get 'reference'
       return false
     if @get 'description'
       return false
@@ -96,8 +100,3 @@ Vosae.LineItem = Vosae.Model.extend
     if @get 'tax'
       return false
     return true
-
-
-Vosae.Adapter.map "Vosae.LineItem",
-  ref:
-    key: "reference"

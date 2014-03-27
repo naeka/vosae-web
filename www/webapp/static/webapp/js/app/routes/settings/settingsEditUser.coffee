@@ -1,14 +1,9 @@
 Vosae.SettingsEditUserRoute = Ember.Route.extend
   setupController: (controller, model) ->
-    controller.set('content', model)
-    controller.set('groupsList', Vosae.Group.all())
+    controller.setProperties
+      'content': model
+      'groupsList': @store.all("group")
 
-  renderTemplate: ->
-    @render 'settings.editUser',
-      into: 'settings'
-      outlet: 'content'
-  
   deactivate: ->
-    user = @controller.get 'content'
-    if user.get 'isDirty'
-      user.get("transaction").rollback()
+    model = @controller.get "content"
+    model.rollback() if model and not model.get('isDeleted')

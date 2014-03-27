@@ -12,21 +12,19 @@ Vosae.Entity = Vosae.Model.extend
   photoUri: DS.attr("string")
   gravatarMail: DS.attr("string")
   note: DS.attr("string")
-  private: DS.attr("boolean", defaultValue: false)
-  addresses: DS.hasMany("Vosae.Address")
-  emails: DS.hasMany("Vosae.Email")
-  phones: DS.hasMany("Vosae.Phone")
-  creator: DS.belongsTo("Vosae.User")
-  photo: DS.belongsTo("Vosae.File")
   status: DS.attr("string")
+  private: DS.attr("boolean", defaultValue: false)
+  addresses: DS.hasMany("vosaeAddress", async: true)
+  emails: DS.hasMany("vosaeEmail", async: true)
+  phones: DS.hasMany("vosaePhone", async: true)
+  creator: DS.belongsTo("user", async: true)
+  photo: DS.belongsTo("file", async: true)
 
   isUploading: false
 
+  # Return true if entity has been created by current Vosae.User
   isOwned: (->
-    # Return true if entity has been created by current Vosae.User
-    if @get('creator') is Vosae.lookup("session:current").get('user')
-      return true
-    false
+    @get('creator') is @get("session.user")
   ).property 'creator'
 
   didCreate: ->
@@ -35,7 +33,7 @@ Vosae.Entity = Vosae.Model.extend
         gettext 'Your contact has been successfully created'
       when Vosae.Organization.toString()
         gettext 'Your organization has been successfully created'
-    Vosae.SuccessPopupComponent.open
+    Vosae.SuccessPopup.open
       message: message
 
   didUpdate: ->
@@ -44,7 +42,7 @@ Vosae.Entity = Vosae.Model.extend
         gettext 'Your contact has been successfully updated'
       when Vosae.Organization.toString()
         gettext 'Your organization has been successfully updated'
-    Vosae.SuccessPopupComponent.open
+    Vosae.SuccessPopup.open
       message: message
 
   didDelete: ->
@@ -53,5 +51,5 @@ Vosae.Entity = Vosae.Model.extend
         gettext 'Your contact has been successfully deleted'
       when Vosae.Organization.toString()
         gettext 'Your organization has been successfully deleted'
-    Vosae.SuccessPopupComponent.open
+    Vosae.SuccessPopup.open
       message: message

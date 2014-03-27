@@ -14,7 +14,7 @@ Vosae.Contact = Vosae.Entity.extend
   civility: DS.attr("string", defaultValue: null)
   birthday: DS.attr("date")
   role: DS.attr("string")
-  organization: DS.belongsTo("Vosae.Organization")
+  organization: DS.belongsTo("organization", async: true)
 
   fullName: (->
     firstname = @get('firstname')
@@ -35,12 +35,3 @@ Vosae.Contact = Vosae.Entity.extend
     unless @get('firstname')
       errors.addObject gettext('Firstname field must not be blank')
     return errors
-
-
-Vosae.Adapter.map "Vosae.Contact",
-  addresses:
-    embedded: "always"
-  emails:
-    embedded: "always"
-  phones:
-    embedded: "always"

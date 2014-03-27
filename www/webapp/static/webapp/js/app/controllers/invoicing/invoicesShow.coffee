@@ -2,140 +2,126 @@
   Custom array controller for a collection of `Vosae.Invoice` records.
 
   @class InvoicesShowController
-  @extends Vosae.InvoicesBaseController
+  @extends Vosae.ArrayController
   @namespace Vosae
   @module Vosae
 ###
 
-Vosae.InvoicesShowController = Vosae.InvoicesBaseController.extend
+Vosae.InvoicesShowController = Em.ArrayController.extend
   sortProperties: ['currentRevision.dueDate']
   sortAscending: false
+  queryLimit: 5
 
-  actions:
-    getNextInvoicesPending: ->
-      lastQueryPending = @get('meta.queries').get(@get('paginationPending.metaQueryName'))
-      if lastQueryPending 
-        newQueryPending =
-          name: @get('paginationPending.metaQueryName')
-          string: @get('paginationPending.query') + '&offset=' + (lastQueryPending.get('limit') + lastQueryPending.get('offset'))
-        @getModel().find(newQueryPending)
-    
-    getNextInvoicesOverdue: ->
-      lastQueryOverdue = @get('meta.queries').get(@get('paginationOverdue.metaQueryName'))
-      if lastQueryOverdue
-        newQueryOverdue =
-          name: @get('paginationOverdue.metaQueryName')
-          string: @get('paginationOverdue.query') + '&offset=' + (lastQueryOverdue.get('limit') + lastQueryOverdue.get('offset'))
-        @getModel().find(newQueryOverdue)
+  metaPending: null
+  metaOverdue: null
+  metaPaid: null
 
-    getNextInvoicesPaid: ->
-      lastQueryPaid = @get('meta.queries').get(@get('paginationPaid.metaQueryName'))
-      if lastQueryPaid
-        newQueryPaid =
-          name: @get('paginationPaid.metaQueryName')
-          string: @get('paginationPaid.query') + '&offset=' + (lastQueryPaid.get('limit') + lastQueryPaid.get('offset'))
-        @getModel().find(newQueryPaid)
-  
-  totalOfSelection: (->
-    total = 0
-    @get('content').forEach (x, idx, i) ->
-      total = total + x.get('total')
-    return accounting.formatMoney(total, "EUR")
-  ).property('content.length')
+  checkQueryLimit: (->
+    Ember.Logger.error(@toString() + " needs the `queryLimit` property to be defined.") if Em.isNone @queryLimit
+  ).on "init"
 
-  ##
-  # Queries for grouping invoices by states
-  #
-  paginationPending: Ember.Object.create
-    metaQueryName: 'stateIsPending'
+  ###
+    Fetch each query once on controller initialization
+  ###
+  fetchQueriesOnce: (->
+    @set "content", @store.all("invoice")
+
+    # Create meta for queries
+    @createMetadataForQueries()
+
+    # Fetch queries
+    @send "getNextPaginationPending"
+    @send "getNextPaginationOverdue"
+    @send "getNextPaginationPaid"
+  ).on "init"
+
+  ###
+    Create a metadata object for each queries
+  ###
+  createMetadataForQueries: ->
+    # Create a meta object for each queries
+    @set "metaPending", Em.Object.createWithMixins Vosae.MetaMixin, 
+      name: 'pending'
+    @set "metaOverdue", Em.Object.createWithMixins Vosae.MetaMixin, 
+      name: 'overdue'
+    @set "metaPaid", Em.Object.createWithMixins Vosae.MetaMixin,
+      name: 'paid'
+
+    # Push meta to their meta parent queries array
+    queries = @get("store").metadataFor("invoice").get("queries")
+    queries.push @get("metaPending")
+    queries.push @get("metaOverdue")
+    queries.push @get("metaPaid")
+
+  ###
+    Queries for grouping invoices by states
+  ###
+  queryPending: Ember.Object.create
+    name: 'pending'
     query: 'state__in=DRAFT&state__in=REGISTERED&state__in=PART_PAID'
-  
-  paginationOverdue: Ember.Object.create
-    metaQueryName: 'stateIsOverdue'
+
+  queryOverdue: Ember.Object.create
+    name: 'overdue'
     query: 'state__in=OVERDUE'
-  
-  paginationPaid: Ember.Object.create
-    metaQueryName: 'stateIsPaid'
+
+  queryPaid: Ember.Object.create
+    name: 'paid'
     query: 'state__in=PAID&state__in=CANCELLED'
 
-  ##
-  # Returns invoices grouped by states
-  #
+  ###
+    Returns invoices grouped by states
+  ###
   invoicesPending: (->
-    ret = []
-    Vosae.Invoice.all().forEach (invoice) ->
-      if ['DRAFT', 'REGISTERED', 'PART_PAID'].contains(invoice.get('state'))
-        ret.addObject(invoice)
-    ret
+    @get("content").filter (invoice) ->
+      ['DRAFT', 'REGISTERED', 'PART_PAID'].contains invoice.get('state')
   ).property('content.length', 'content.@each.state')
 
   invoicesOverdue: (->
-    ret = []
-    Vosae.Invoice.all().forEach (invoice) ->
-      if ['OVERDUE'].contains(invoice.get('state'))
-        ret.addObject(invoice)
-    ret
+    @get("content").filter (invoice) ->
+      ['OVERDUE'].contains invoice.get('state')
   ).property('content.length', 'content.@each.state')
 
   invoicesPaid: (->
-    ret = []
-    Vosae.Invoice.all().forEach (invoice) ->
-      if ['PAID', 'CANCELLED'].contains(invoice.get('state'))
-        ret.addObject(invoice)
-    ret
+    @get("content").filter (invoice) ->
+      ['PAID', 'CANCELLED'].contains invoice.get('state')
   ).property('content.length', 'content.@each.state')
 
-  ##
-  # Those properties indicates if more invoices can be loaded
-  # 
-  paginationPendingHasNext: (->
-    if @get('meta.queries.stateIsPending.next')
-      return true
-    false
-  ).property('meta.queries.stateIsPending')
+  ###
+    Main method that will check meta for the specific query and fetch data
 
-  paginationOverdueHasNext: (->
-    if @get('meta.queries.stateIsOverdue.next')
-      return true
-    false
-  ).property('meta.queries.stateIsOverdue')
+    @query {Object} The query object with the name of the query and the query her self
+  ###
+  getNextPaginationForQuery: (query, meta)  ->
+    # Nothing to do if there's no query object
+    return if !query or !query.hasOwnProperty("name")
 
-  paginationPaidHasNext: (->
-    if @get('meta.queries.stateIsPaid.next')
-      return true
-    false
-  ).property('meta.queries.stateIsPaid')
+    if !meta.get('hasBeenFetched')
+      queryString = query.get('query') + '&offset=' + 0 + '&limit=' + @get("queryLimit")
+    else
+      queryString = query.get('query') + '&offset=' + meta.get('since') + '&limit=' + @get("queryLimit")
 
-  getNextPagination: ->
-    if @get('meta') && @getModel()
+    meta.setProperties
+      "lastQuery": queryString
+      "loading": true
 
-      if @get('meta.queries')
-        queryPendingExist = @get('meta.queries')[@get('paginationPending.metaQueryName')]
-        queryOverdueExist = @get('meta.queries')[@get('paginationOverdue.metaQueryName')]
-        queryPaidExist = @get('meta.queries')[@get('paginationPaid.metaQueryName')]
-    
-      else
-        queryPendingExist = null
-        queryOverdueExist = null
-        queryPaidExist = null
+    @store.findQuery('invoice', queryString).then () ->
+      meta.set "loading", false
 
-      # First time call 
-      unless queryPendingExist && queryOverdueExist && queryPaidExist
-        
-        # DRAFT & REGISTERED & PART_PAID
-        queryPending =
-          name: @get('paginationPending.metaQueryName')
-          string: @get('paginationPending.query') + '&offset=0'
-        @getModel().find(queryPending)
+  ###
+    Actions handler for pagination
+  ###
+  actions:
+    getNextPaginationPending: ->
+      query = @get("queryPending")
+      meta = @get("metaPending")
+      @getNextPaginationForQuery query, meta
 
-        # OVERDUE
-        queryOverdue =
-          name: @get('paginationOverdue.metaQueryName')
-          string: @get('paginationOverdue.query') + '&offset=0'
-        @getModel().find(queryOverdue)
+    getNextPaginationOverdue: ->
+      query = @get("queryOverdue")
+      meta = @get("metaOverdue")
+      @getNextPaginationForQuery query, meta
 
-        # PAID & CANCELLED
-        queryPaid =
-          name: @get('paginationPaid.metaQueryName')
-          string: @get('paginationPaid.query') + '&offset=0'
-        @getModel().find(queryPaid)
+    getNextPaginationPaid: ->
+      query = @get("queryPaid")
+      meta = @get("metaPaid")
+      @getNextPaginationForQuery query, meta

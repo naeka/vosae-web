@@ -4,7 +4,6 @@
   <header>
     <h3>{% trans "Global settings" %} &nbsp;>&nbsp; {% trans "Api keys" %}</h3>
   </header>
-  {{#if filteredApiKeys}}
   <section class="clearfix">
     <div class="inner"> 
       <h4>{% trans "Your applications" %}</h4>
@@ -16,22 +15,23 @@
         </thead>
         <tbody>
           {{#each apiKey in filteredApiKeys}}
-          <tr>
-            <td>{{apiKey.label}}</td>
-            <td>{{formatDate apiKey.createdAt format="LLLL"}}</td>
-            <td class="revoke">
-              <a {{action deleteApiKey apiKey}} class="btn btn-sm btn-rounded btn-primary">
-                {% trans "Revoke" %}
-              </a>
-            </td>
-          </tr>
+            <tr>
+              <td>{{apiKey.label}}</td>
+              <td>{{formatDate apiKey.createdAt format="LLLL"}}</td>
+              <td class="revoke">
+                <a {{action deleteApiKey apiKey}} class="btn btn-sm btn-rounded btn-primary">
+                  {% trans "Revoke" %}
+                </a>
+              </td>
+            </tr>
+          {{else}}
+            <tr><td colspan="3" class="text-center no-data">{% trans "No API keys" %}</td></tr>
           {{/each}}
         </tbody>
       </table>
     </div>
   </section>
   <hr>
-  {{/if}}
   <section class="clearfix">
     <div class="inner">
       <h4>{% trans "Create a new application" %}</h4>

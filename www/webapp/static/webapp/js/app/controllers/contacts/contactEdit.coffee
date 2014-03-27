@@ -7,4 +7,5 @@
   @module Vosae
 ###
 
-Vosae.ContactEditController = Vosae.EntityController.extend()
+Vosae.ContactEditController = Vosae.EntityController.extend
+  relatedType: "contact"

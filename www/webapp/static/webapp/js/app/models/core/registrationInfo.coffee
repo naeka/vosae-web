@@ -12,7 +12,7 @@ Vosae.RegistrationInfo = Vosae.Model.extend
   shareCapital: DS.attr('string')
 
 Vosae.RegistrationInfo.reopen
-  registrationInfoFor: (countryCode)->
+  registrationInfoFor: (countryCode) ->
     switch countryCode
       when 'BE' then Vosae.BeRegistrationInfo
       when 'CH' then Vosae.ChRegistrationInfo

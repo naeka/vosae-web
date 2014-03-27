@@ -16,7 +16,7 @@
             <td>
               {{select
                 contentBinding="Vosae.Config.languages"
-                valueBinding="language"
+                valueBinding="reportSettings.language"
                 optionValuePath="content.code"
                 optionLabelPath="content.name"
                 containerCssClass="success" }}
@@ -29,7 +29,7 @@
             <td>
               {{select
                 contentBinding="Vosae.Config.reportFontFamilies"
-                valueBinding="fontName"
+                valueBinding="reportSettings.fontName"
                 optionValuePath="content.value"
                 optionLabelPath="content.name"
                 containerCssClass="success" }}
@@ -42,7 +42,7 @@
             <td>
               {{select
                 contentBinding="Vosae.Config.reportFontSizes"
-                valueBinding="fontSize"
+                valueBinding="reportSettings.fontSize"
                 optionValuePath="content.value"
                 optionLabelPath="content.name"
                 containerCssClass="success" }}
@@ -54,7 +54,7 @@
             </td>
             <td>
               {{color-picker
-                valueBinding="fontColor"
+                valueBinding="reportSettings.fontColor"
                 classNames="form-control form-control-settings" }}
             </td>
           </tr>
@@ -64,7 +64,7 @@
             </td>
             <td>
               {{color-picker
-                valueBinding="baseColor"
+                valueBinding="reportSettings.baseColor"
                 classNames="form-control form-control-settings" }}
             </td>
           </tr>
@@ -74,7 +74,7 @@
             </td>
             <td>
               {{switch
-                checkedBinding="forceBw" }}
+                checkedBinding="reportSettings.forceBw" }}
             </td>
           </tr>
           <tr>
@@ -84,7 +84,7 @@
             <td>
               {{select
                 contentBinding="Vosae.Config.reportPaperSizes"
-                valueBinding="paperSize"
+                valueBinding="reportSettings.paperSize"
                 optionValuePath="content.value"
                 optionLabelPath="content.name"
                 containerCssClass="success" }}
@@ -94,9 +94,4 @@
       </table>
     </div>
   </section>
-{% endtplhandlebars %}
-
-
-{% tplhandlebars "settings/report/actions" %}
-  {{partial "settings/partials/saveSettings"}}
 {% endtplhandlebars %}

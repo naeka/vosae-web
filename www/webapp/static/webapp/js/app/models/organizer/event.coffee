@@ -9,24 +9,24 @@
 
 Vosae.VosaeEvent = Vosae.Model.extend
   status: DS.attr('string')
-  created_at: DS.attr('datetime')
-  updated_at: DS.attr('datetime')
+  createdAt: DS.attr('datetime')
+  updatedAt: DS.attr('datetime')
   summary: DS.attr('string')
   description: DS.attr('string')
   location: DS.attr('string')
   color: DS.attr('string')
-  start: DS.belongsTo('Vosae.EventDateTime')
-  end: DS.belongsTo('Vosae.EventDateTime')
+  start: DS.belongsTo('eventDateTime')
+  end: DS.belongsTo('eventDateTime')
   recurrence: DS.attr('string')
-  originalStart: DS.belongsTo('Vosae.EventDateTime')
+  originalStart: DS.belongsTo('eventDateTime')
   instanceId: DS.attr('string')
   transparency: DS.attr('string')
-  calendar: DS.belongsTo('Vosae.VosaeCalendar')
-  calendarList: DS.belongsTo('Vosae.CalendarList')
-  creator: DS.belongsTo('Vosae.User')
-  organizer: DS.belongsTo('Vosae.User')
-  attendees: DS.hasMany('Vosae.Attendee')
-  reminders: DS.belongsTo('Vosae.ReminderSettings')
+  calendar: DS.belongsTo('vosaeCalendar')
+  calendarList: DS.belongsTo('calendarList')
+  creator: DS.belongsTo('user')
+  organizer: DS.belongsTo('user')
+  attendees: DS.hasMany('attendee')
+  reminders: DS.belongsTo('reminderSettings')
 
   allDay: ((key, value)->
     if arguments.length is 1
@@ -69,16 +69,3 @@ Vosae.VosaeEvent = Vosae.Model.extend
         color: @get('color')
         textColor: @get('textColor')
     ev
-
-
-Vosae.Adapter.map "Vosae.VosaeEvent",
-  start:
-    embedded: "always"
-  end:
-    embedded: "always"
-  originalStart:
-    embedded: "always"
-  attendees:
-    embedded: "always"
-  reminders:
-    embedded: "always"

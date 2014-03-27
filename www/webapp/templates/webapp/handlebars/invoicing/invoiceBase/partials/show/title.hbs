@@ -4,8 +4,8 @@
   <h4 class="invoice-base-title">
     {{#if isQuotation}}
       <span class="invoice-base-type">{% trans "Quotation" %}</span>
-      {{#if ref}}
-        <span class="invoice-base-ref">{{ref}}</span>
+      {{#if reference}}
+        <span class="invoice-base-ref">{{reference}}</span>
       {{else}}
         <span class="invoice-base-noref">{% trans "Reference will be generated on save" %}</span>
       {{/if}}
@@ -13,8 +13,8 @@
 
     {{#if isPurchaseOrder}}
        <span class="invoice-base-type">{% trans "Purchase order" %}</span>
-      {{#if ref}}
-        <span class="invoice-base-ref">{{ref}}</span>
+      {{#if reference}}
+        <span class="invoice-base-ref">{{reference}}</span>
       {{else}}
         <span class="invoice-base-noref">{% trans "Reference will be generated on save" %}</span>
       {{/if}}
@@ -25,13 +25,13 @@
       {{#if hasTemporaryReference}}
         <span class="invoice-base-noref">{% trans "Reference will be generated when registered" %}</span>
       {{else}}
-        <span class="invoice-base-ref">{{ref}}</span>
+        <span class="invoice-base-ref">{{reference}}</span>
       {{/if}}
     {{/if}}
 
     {{#if isCreditNote}}
       <span class="invoice-base-type">{% trans "Credit Note" %}</span>
-      <span class="invoice-base-ref">{{ref}}</span>
+      <span class="invoice-base-ref">{{reference}}</span>
     {{/if}}
   </h4>
 {% endtplhandlebars %}

@@ -1,15 +1,13 @@
 Vosae.ContactEditRoute = Ember.Route.extend
-  setupController: (controller, model) ->
-    controller.set 'content', @modelFor("contact")
-    controller.set 'organizations', Vosae.Organization.find()
-
-  deactivate: ->
-    contact = @controller.get 'content'
-    if contact.get 'transaction'
-      contact.get("transaction").rollback()
+  model: ->
+    @modelFor("contact")
 
   renderTemplate: ->
     @_super()
     @render 'contact.edit.settings',
-      into: 'application'
+      into: 'tenant'
       outlet: 'outletPageSettings'
+
+  deactivate: ->
+    model = @controller.get "content"
+    model.rollback() if model

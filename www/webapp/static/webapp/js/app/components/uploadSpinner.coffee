@@ -1,13 +1,13 @@
 ###
-  This component is used for ajax upload progression
+  This view is used for ajax upload progression
 
-  @class RoundProgressBarComponent
-  @extends Ember.Component
+  @class RoundProgressBar
+  @extends Ember.View
   @namespace Vosae
   @module Vosae
 ###
 
-Vosae.RoundProgressBarComponent = Ember.Component.extend
+Vosae.RoundProgressBar = Ember.View.extend
   classNames: ["round-progress-bar", "clearfix"]
   progress: 0
   template: Handlebars.compile('

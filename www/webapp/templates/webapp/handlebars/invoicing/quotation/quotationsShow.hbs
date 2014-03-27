@@ -6,10 +6,10 @@
     <div class="btn-toolbar pull-left"></div>
     <div class="btn-toolbar pull-right">
       <div class="btn-group">
-        {{#linkTo "quotations.add" controller.session.tenant class="btn btn-primary"}}
+        {{#link-to "quotations.add" controller.session.tenant class="btn btn-primary"}}
           <i class="picto-add"></i>
           {% trans "Quotation" %}
-        {{/linkTo}}
+        {{/link-to}}
       </div>
     </div>
   </section>
@@ -18,65 +18,71 @@
   <section class="quotations with-head">
     <div class="header clearfix">
       <h4 class="pull-left">
-        {% trans "Pending" %}
+        {% trans "Pending" %} <span class="badge primary">{{metaPending.totalCount}}</span>
       </h4>
       <div class="btn-toolbar pull-right"></div>
     </div>
-    {{#with quotationsDraftAwaitingApproval}}
+    {{#with quotationsPending}}
       {{partial "invoicing/partials/tableOfQuotations"}}
     {{/with}}
 
     {# Pagination #}
-    {{#if paginationDraftHasNext}}
-      <p class="text-center">
-        <a class="btn btn-default btn-rounded btn-sm" {{action getNextQuotationsDraft}}>
-          {% trans "Load more quotations" %}
-        </a>
-      </p>
-    {{/if}}
+    <div class="meta-pagination text-center">
+      {{#if metaPending.loading}}
+        <button disabled="disabled" class="btn btn-default">{% trans "Loading..." %}</button>
+      {{else}}
+        {{#if metaPending.next}}
+          <button class="btn btn-default" {{action 'getNextPaginationPending'}}>{% trans "More" context "display more" %}</button>
+        {{/if}}
+      {{/if}}
+    </div>
   </section>
 
   {# Expired and Refused #}
   <section class="quotations with-head">
     <div class="header clearfix">
       <h4 class="pull-left">
-        {% trans "Expired" %}
+        {% trans "Expired" %} <span class="badge primary">{{metaFailed.totalCount}}</span>
       </h4>
       <div class="btn-toolbar pull-right"></div>
     </div>
-    {{#with quotationsExpiredRefused}}
+    {{#with quotationsFailed}}
       {{partial "invoicing/partials/tableOfQuotations"}}
     {{/with}}
     
     {# Pagination #}
-    {{#if paginationExpiredHasNext}}
-      <p class="text-center">
-        <a class="btn btn-default btn-rounded btn-sm" {{action getNextQuotationsExpired}}>
-          {% trans "Load more quotations" %}
-        </a>
-      </p>
-    {{/if}}
+    <div class="meta-pagination text-center">
+      {{#if metaFailed.loading}}
+        <button disabled="disabled" class="btn btn-default">{% trans "Loading..." %}</button>
+      {{else}}
+        {{#if metaFailed.next}}
+          <button class="btn btn-default" {{action 'getNextPaginationFailed'}}>{% trans "More" context "display more" %}</button>
+        {{/if}}
+      {{/if}}
+    </div>
   </section>
 
   {# Approved #}
   <section class="quotations with-head">
     <div class="header clearfix">
       <h4 class="pull-left">
-        {% trans "Approved" %}
+        {% trans "Approved" %} <span class="badge primary">{{metaSucceeded.totalCount}}</span>
       </h4>
       <div class="btn-toolbar pull-right"></div>
     </div>
-    {{#with quotationsApprovedInvoiced}}
+    {{#with quotationsSucceeded}}
       {{partial "invoicing/partials/tableOfQuotations"}}
     {{/with}}
 
     {# Pagination #}
-    {{#if paginationApprovedHasNext}}
-      <p class="text-center">
-        <a class="btn btn-default btn-rounded btn-sm" {{action getNextQuotationsApproved}}>
-          {% trans "Load more quotations" %}
-        </a>
-      </p>
-    {{/if}}
+    <div class="meta-pagination text-center">
+      {{#if metaSucceeded.loading}}
+        <button disabled="disabled" class="btn btn-default">{% trans "Loading..." %}</button>
+      {{else}}
+        {{#if metaSucceeded.next}}
+          <button class="btn btn-default" {{action 'getNextPaginationSucceeded'}}>{% trans "More" context "display more" %}</button>
+        {{/if}}
+      {{/if}}
+    </div>
   </section>
 {% endtplhandlebars %}

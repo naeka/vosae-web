@@ -1,0 +1,44 @@
+{% load i18n templatetag_handlebars %}
+
+{% tplhandlebars "invoicing/_navTabs"%}
+  <div class="app-invoicing">
+    <section class="actions clearfix">
+      <ul class="nav nav-tabs">
+        <li>
+          {{#link-to "invoicing.dashboard" controller.session.tenant}}
+            {% trans "Dashboard" context "invoicing" %}
+          {{/link-to}}
+        </li>
+        <li class="pull-right dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            {% trans "More" context "documents" %}&nbsp;<span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li>
+              {{#link-to "purchaseOrders.show" controller.session.tenant}}
+                {% trans "Purchase orders" %}
+              {{/link-to}}
+            </li>
+            <li class="divider"></li>
+            <li>
+              {{#link-to "items.show" controller.session.tenant}}
+                {% trans "Items" %}
+              {{/link-to}}
+            </li>
+          </ul>
+        </li>
+        <li class="pull-right">
+          {{#link-to "invoices.show" controller.session.tenant}}
+            {% trans "Invoices" %}
+          {{/link-to}}
+        </li>
+        <li class="pull-right">
+          {{#link-to "quotations.show" controller.session.tenant}}
+            {% trans "Quotations" %}
+          {{/link-to}}
+        </li>
+      </ul>
+    </section>
+    {{outlet}}
+  </div>
+{% endtplhandlebars %}

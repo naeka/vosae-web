@@ -9,9 +9,9 @@
 
 Vosae.InvoiceNote = Vosae.Model.extend
   registrationDate: DS.attr('datetime')
-  issuer: DS.belongsTo('Vosae.User')
+  issuer: DS.belongsTo('user')
   note: DS.attr('string')
 
 Vosae.InvoiceNote.reopen
-  invoice: DS.belongsTo('Vosae.Invoice')
-  quotation: DS.belongsTo('Vosae.Quotation')
+  invoice: DS.belongsTo('invoice')
+  quotation: DS.belongsTo('quotation')

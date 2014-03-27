@@ -43,9 +43,9 @@
     {{/if}}
     {{#if isModifiable}}
       <div class="btn-group">
-        {{#linkTo "invoice.edit" controller.session.tenant content class="btn btn-success"}}
+        {{#link-to "invoice.edit" controller.session.tenant content class="btn btn-success"}}
           {% trans "Edit" %}
-        {{/linkTo}}
+        {{/link-to}}
       </div>
     {{/if}}
   {{/if}}
@@ -86,9 +86,9 @@
 
       {{#if isModifiable}}
         <div class="btn-group">
-          {{#linkTo "quotation.edit" controller.session.tenant content class="btn btn-primary"}}
+          {{#link-to "quotation.edit" controller.session.tenant content class="btn btn-primary"}}
             {% trans "Edit" %}
-          {{/linkTo}}
+          {{/link-to}}
         </div>
       {{/if}}
     {{/if}}
@@ -130,9 +130,9 @@
 
       {{#if isModifiable}}
         <div class="btn-group">
-          {{#linkTo "purchaseOrder.edit" controller.session.tenant content class="btn btn-primary"}}
+          {{#link-to "purchaseOrder.edit" controller.session.tenant content class="btn btn-primary"}}
             {% trans "Edit" %}
-          {{/linkTo}}
+          {{/link-to}}
         </div>
       {{/if}}
     {{/if}}

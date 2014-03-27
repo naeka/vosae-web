@@ -1,0 +1,108 @@
+{% load templatetag_handlebars i18n %}
+
+{% tplhandlebars "tenant" %}
+  <div id="ct-left">
+    <div class="inner">
+      {{view Vosae.DesktopLeftPanelView}}
+    </div>
+  </div>
+
+  <div id="ct-middle">
+    <header id="header" role="banner">
+      <div class="d-table desktop">
+        <div class="d-row">
+          <div class="d-cell notif">
+            <a id="desktop-header-notifications" {{action "openPanelLeft" target="view"}}>
+              Vosae 
+              {{#if controllers.notifications.unreadCounter}}
+                <span class="counter">{{controllers.notifications.unreadCounter}}</span>
+              {{/if}}
+            </a>
+          </div>
+          <div class="d-cell search">
+            {{view view.desktopSearchField}}
+            <i class="picto-search"></i>
+          </div>
+          <div class="d-cell settings">
+            <a id="desktop-header-settings" {{action "openPanelRight" target="view"}}>
+              <div class="avatar" title="{% trans 'My settings' %}">
+                {{#if session.user.photoUri}}
+                  <img {{bind-attr src="session.user.photoUri"}}>
+                {{/if}}
+              </div>
+              <span class="username">{{session.user.fullName}}</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    {{view Vosae.SearchView}}
+
+    <div id="content" role="main">
+      <div class="d-table">
+        <div class="d-row">
+          {# Menu #}
+          <div class="d-cell menu">
+            <nav id="desktop-app-menu" class="bootstro">
+              <ul class="list-unstyled">
+                <li class="dashboard" {{bind-attr class="controllers.application.isDashboard:active"}}>
+                  {{#link-to "dashboard" session.tenant}}
+                    <span class="circle">
+                      <i class="picto-home"></i>
+                    </span>
+                    {% trans "Timeline" %}
+                  {{/link-to}}
+                </li>
+                <li class="contacts" {{bind-attr class="controllers.application.isContacts:active"}}>
+                  {{#link-to "organizations.show" session.tenant}}
+                    <span class="circle">
+                      <i class="picto-users"></i>
+                    </span>
+                    {% trans "Contacts" %}
+                  {{/link-to}}
+                </li>
+                <li class="calendar" {{bind-attr class="controllers.application.isOrganizer:active"}}>
+                  {{#link-to "calendarLists.show" session.tenant}}
+                    <span class="circle">
+                      <i class="picto-agenda"></i>
+                    </span>
+                    {% trans "Organizer" %}
+                  {{/link-to}}
+                </li>
+                <li class="invoicing" {{bind-attr class="controllers.application.isInvoicing:active"}}>
+                  {{#link-to "invoicing.dashboard" session.tenant}}
+                    <span class="circle">
+                      <i class="picto-moneybox"></i>
+                    </span>
+                    {% trans "Invoicing" %}
+                  {{/link-to}}
+                </li>
+              </ul>
+            </nav>
+          </div>
+          {# Page #}
+          <div class="d-cell content">
+            <div class="content-min-height">
+              <div id="main-content" class="inner">
+                {{outlet}}
+              </div>
+            </div>
+          </div>
+          {# Page settings #}
+          <div class="d-cell page-actions">
+            <div class="inner"> 
+              {{outlet outletPageSettings}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="ct-right">
+    <div class="inner">
+      {{view Vosae.DesktopRightPanelView}}
+    </div>
+  </div>
+{% endtplhandlebars %}

@@ -7,7 +7,7 @@
   @module Vosae
 ###
 
-Vosae.Email = Vosae.Model.extend
+Vosae.VosaeEmail = Vosae.Model.extend
   type: DS.attr("string", defaultValue: 'WORK')
   email: DS.attr('string')
 
@@ -23,8 +23,3 @@ Vosae.Email = Vosae.Model.extend
     unless @get('email')
       errors.addObject gettext('Email field must not be blank')
     return errors
-
-
-Vosae.Email.reopen
-  contact: DS.belongsTo('Vosae.Contact')
-  organization: DS.belongsTo('Vosae.Organization')

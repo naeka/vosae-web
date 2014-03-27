@@ -4,7 +4,7 @@ Vosae.SettingsEditUserView = Vosae.PageSettingsView.extend
   didInsertElement: ->
     @_super()
     # Focus on first input text
-    @.$().find('.ember-text-field').first().focus()
+    # @.$().find('.ember-text-field').first().focus()
 
   # This view generates a template with all permissions
   # grouped by modules. Each permission is binded to
@@ -12,7 +12,7 @@ Vosae.SettingsEditUserView = Vosae.PageSettingsView.extend
   
   userSpecificPermissionsView: Vosae.SpecificPermissionsManager.extend()
 
-  groups: Vosae.Select.extend
+  groupsField: Vosae.Select.extend
     change: ->
       # Now we have to merge groups permissions into <Vosae.User.Permissions>
       @get('selection.owner').mergeGroupsPermissions()

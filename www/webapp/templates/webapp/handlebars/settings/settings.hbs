@@ -1,0 +1,44 @@
+{% load i18n static templatetag_handlebars %}
+
+{% tplhandlebars "settings" %}
+  <div id="ct-settings">
+    <div class="inner"> 
+      <header class="main"><h1><i class="picto-settings"></i>{% trans "Settings" %}</h1></header>
+      <div class="d-table">
+        <div class="d-row">
+          <div class="settings-menu d-cell">    
+            <div class="inner">
+              <ul class="clearfix">
+                <li class="exit">
+                  {{#link-to "dashboard" session.tenant class="btn"}}
+                    <i class="picto-arrow-left"></i>&nbsp;{% trans "Return to application" %}
+                  {{/link-to}}
+                </li>
+                <li class="module"><strong>{% trans "Global settings" %}</strong></li>
+                <li class="links">
+                  {{#link-to 'settings.application' session.tenant}}{% trans "Application" %}{{/link-to}}
+                  {{#link-to 'settings.apiKeys' session.tenant}}{% trans "API keys" %}{{/link-to}}
+                  {{#link-to 'settings.organization' session.tenant}}{% trans "Organization" %}{{/link-to}}
+                  {{#link-to 'settings.showUsers' session.tenant}}{% trans "Users" %}{{/link-to}}
+                  {{#link-to 'settings.showGroups' session.tenant}}{% trans "Groups" %}{{/link-to}}
+                  {{#link-to 'settings.report' session.tenant}}{% trans "Reports" %}{{/link-to}}
+                </li>
+                <li class="module"><strong>{% trans "Invoicing settings" %}</strong></li>
+                <li class="links">
+                  {{#link-to 'settings.invoicingGeneral' session.tenant}}{% trans "General" %}{{/link-to}}
+                  {{#link-to 'settings.showTaxes' session.tenant}}{% trans "Taxes" %}{{/link-to}}
+                  {{#link-to 'settings.numbering' session.tenant}}{% trans "Numbering" %}{{/link-to}}
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="settings-content d-cell">
+            <div class="inner">
+              {{outlet}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endtplhandlebars %}

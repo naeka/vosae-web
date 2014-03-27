@@ -1,15 +1,15 @@
 ###
-  This component display an alert panel to the bottom
+  This view display an alert panel to the bottom
   of the window.
 
-  @class PopupComponent
-  @extends Ember.Component
+  @class Popup
+  @extends Ember.View
   @uses Ember.DeferredMixin
   @namespace Vosae
   @module Vosae
 ###
 
-Vosae.PopupComponent = Ember.Component.extend Ember.DeferredMixin,
+Vosae.Popup = Ember.View.extend Ember.DeferredMixin,
   defaultTemplate: Em.Handlebars.compile([
     '<div class="inner">'
       '<table>'
@@ -55,7 +55,7 @@ Vosae.PopupComponent = Ember.Component.extend Ember.DeferredMixin,
 
   keyPress: (event) ->
     if event.keyCode is 27
-      unless @constructor.toString() is Vosae.ErrorPopupComponent.toString()
+      unless @constructor.toString() is Vosae.ErrorPopup.toString()
         @_triggerCallbackAndDestroy {close: true}, event
 
   click: (event) ->
@@ -111,27 +111,27 @@ Vosae.PopupComponent = Ember.Component.extend Ember.DeferredMixin,
         @destroy()
       ), 300
 
-Vosae.PopupComponent.reopenClass
+Vosae.Popup.reopenClass
   open: (options) ->
     if window.testMode
       return
     options = {} if !options
-    popupComponent = @create options
-    popupComponent.append()
-    popupComponent
+    popupView = @create options
+    popupView.append()
+    popupView
 
-Vosae.ErrorPopupComponent = Vosae.PopupComponent.extend
+Vosae.ErrorPopup = Vosae.Popup.extend
   classNames: 'error'
   showBackdrop: true
   primary: gettext 'Ok'
 
-Vosae.ConfirmPopupComponent = Vosae.PopupComponent.extend
+Vosae.ConfirmPopup = Vosae.Popup.extend
   classNames: 'confirm'
   showBackdrop: true
   primary: gettext 'Yes'
   secondary: gettext 'No'
 
-Vosae.SuccessPopupComponent = Vosae.PopupComponent.extend
+Vosae.SuccessPopup = Vosae.Popup.extend
   classNames: 'success'
   autoClose: true
   primary: gettext 'Ok'

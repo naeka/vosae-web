@@ -70,10 +70,10 @@ Bootstrap.Forms.Field = Ember.View.extend
           fieldName = parent.get("label")
           object = parent.get("context")
         if object and not object.get("isValid")
-          errors = object.get("errors")
-          if errors and fieldName of errors and not Ember.isEmpty(errors[fieldName])
+          errors = object.get("errors").errorsFor(fieldName)
+          if not Ember.isEmpty(errors)
             parent.set "isValid", false
-            return errors[fieldName].join ", "
+            return errors.getEach('message').join ", "
           else
             parent.set "isValid", true
             return ""

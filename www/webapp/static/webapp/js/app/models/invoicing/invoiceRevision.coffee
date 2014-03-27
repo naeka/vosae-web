@@ -21,15 +21,15 @@ Vosae.InvoiceRevision = Vosae.Model.extend
   sender: DS.attr('string')
   customerReference: DS.attr('string')
   taxesApplication: DS.attr('string')
-  lineItems: DS.hasMany('Vosae.LineItem')
-  pdf: DS.belongsTo('Vosae.LocalizedFile')
-  organization: DS.belongsTo('Vosae.Organization')
-  issuer: DS.belongsTo('Vosae.User')
-  contact: DS.belongsTo('Vosae.Contact')
-  senderAddress: DS.belongsTo('Vosae.Address')
-  billingAddress: DS.belongsTo('Vosae.Address')
-  deliveryAddress: DS.belongsTo('Vosae.Address')
-  currency: DS.belongsTo('Vosae.Currency')
+  lineItems: DS.hasMany('lineItem')
+  pdf: DS.belongsTo('localizedFile')
+  organization: DS.belongsTo('organization', async: true)
+  issuer: DS.belongsTo('user', async: true)
+  contact: DS.belongsTo('contact', async: true)
+  senderAddress: DS.belongsTo('vosaeAddress')
+  billingAddress: DS.belongsTo('vosaeAddress')
+  deliveryAddress: DS.belongsTo('vosaeAddress')
+  currency: DS.belongsTo('snapshotCurrency')
 
   # Update an invoice revision with a new currency
   updateWithCurrency: (newCurrency) ->
@@ -38,67 +38,76 @@ Vosae.InvoiceRevision = Vosae.Model.extend
     # We want to be sure that currencies are different
     if currentCurrency.get('symbol') isnt newCurrency.get('symbol')
       ids = @_getLineItemsReferences()
-      
+
       # Update <Vosae.Currency>
       if Ember.isEmpty ids
         @set 'currency.symbol', newCurrency.get('symbol')
         @set 'currency.rates.content', []
-        @get('currency.rates').addObjects newCurrency.get('rates').toArray() 
+        @set 'currency.rates.content', newCurrency.get('rates').toArray()
 
       # Update all <Vosae.LineItems> and then the <Vosae.Currency>
       else
-        @get('store').findMany(Vosae.Item, ids).then (items) =>
-          @_convertLineItemsPrice currentCurrency, newCurrency
+        @get('store').find("item", ids).then (items) =>
+          @_convertLineItemsPrice(currentCurrency, newCurrency)
 
   # Convert each line item price with the new currency
   _convertLineItemsPrice: (currentCurrency, newCurrency) ->
     lineItems = @get 'lineItems'
+    subPromises = []
 
-    # Currency has been updated, convert each line items
-    lineItems.forEach (lineItem) =>
-      item = @get('store').find Vosae.Item, lineItem.get('itemId')
+    new Ember.RSVP.Promise (resolve) =>
+      resolve() if lineItems.get('length') == 0
 
-      # Item currency and new invoice currency are the same
-      if item.get('currency.symbol') is newCurrency.get('symbol')
-        
-        # If user overridden the unit price 
-        if @_userOverrodeUnitPrice lineItem, item, currentCurrency
-          exchangeRate = newCurrency.exchangeRateFor currentCurrency.get('symbol')
-          lineItemPrice = lineItem.get 'unitPrice'
+      # Currency has been updated, convert each line items
+      lineItems.forEach (lineItem, i) =>
+        subPromises.push new Ember.RSVP.Promise (resolve) =>
+          @get('store').find("item", lineItem.get('itemId')).then (item) =>
+            # Item currency and new invoice currency are the same
+            if item.get('currency.symbol') is newCurrency.get('symbol')
 
-          # Then we convert the unit price with new currency
-          lineItem.set 'unitPrice', (lineItemPrice / exchangeRate.get('rate')).round(2)
+              # If user overridden the unit price 
+              if @_userOverrodeUnitPrice lineItem, item, currentCurrency
+                exchangeRate = newCurrency.exchangeRateFor currentCurrency.get('symbol')
+                lineItemPrice = lineItem.get 'unitPrice'
 
-        # User didn't overide unit price, nothing to convert
-        else
-          lineItem.set 'unitPrice', item.get 'unitPrice'
+                # Then we convert the unit price with new currency
+                lineItem.set 'unitPrice', (lineItemPrice / exchangeRate).round(2)
 
-      # Item currency and new invoice currency are different
-      else
-        # If user overridden the unit price 
-        if @_userOverrodeUnitPrice lineItem, item, currentCurrency
-          exchangeRate = newCurrency.exchangeRateFor currentCurrency.get('symbol')
-          lineItemPrice = lineItem.get 'unitPrice'
+              # User didn't overide unit price, nothing to convert
+              else
+                lineItem.set 'unitPrice', item.get 'unitPrice'
 
-          # Then we convert the unit price with new currency
-          lineItem.set 'unitPrice', (lineItemPrice / exchangeRate.get('rate')).round(2)
+            # Item currency and new invoice currency are different
+            else
+              # If user overridden the unit price 
+              if @_userOverrodeUnitPrice lineItem, item, currentCurrency
+                exchangeRate = newCurrency.exchangeRateFor currentCurrency.get('symbol')
+                lineItemPrice = lineItem.get 'unitPrice'
 
-        # User didn't override unit price, just convert item price
-        else
-          exchangeRate = newCurrency.exchangeRateFor item.get('currency.symbol')
-          lineItem.set 'unitPrice', (item.get('unitPrice') / exchangeRate.get('rate')).round(2)
+                # Then we convert the unit price with new currency
+                lineItem.set 'unitPrice', (lineItemPrice / exchangeRate).round(2)
 
-    @set 'currency.symbol', newCurrency.get('symbol')
-    @set 'currency.rates.content', []
-    @get('currency.rates').addObjects newCurrency.get('rates').toArray()
+              # User didn't override unit price, just convert item price
+              else
+                exchangeRate = newCurrency.exchangeRateFor item.get('currency.symbol')
+                lineItem.set 'unitPrice', (item.get('unitPrice') / exchangeRate).round(2)
+            # Resolve subPromises
+            resolve()
+
+      Promise.all(subPromises).then () =>
+        @set 'currency.symbol', newCurrency.get('symbol')
+        @set 'currency.rates.content', []
+        @set 'currency.rates.content', newCurrency.get('rates').toArray()
+        # Resolve mainPromise
+        resolve()
 
   # Returns true or false if user overridden an item price
   _userOverrodeUnitPrice: (lineItem, item, currentCurrency) ->
     lineItemPrice = lineItem.get 'unitPrice'
-    itemPrice = item.get 'unitPrice'   
+    itemPrice = item.get 'unitPrice'
     exchangeRate = currentCurrency.exchangeRateFor item.get('currency.symbol')
 
-    if lineItemPrice isnt (itemPrice / exchangeRate.get('rate')).round(2)
+    if lineItemPrice isnt (itemPrice / exchangeRate).round(2)
       return true
     false
   
@@ -208,21 +217,20 @@ Vosae.InvoiceRevision = Vosae.Model.extend
 
   # Returns an array with each tax amount
   taxes: (->
-    # console.log "here"
     groupedTaxes = []
     @get("lineItems").toArray().forEach (lineItem) ->
       if not lineItem.get("optional")
-        lineItemTax = lineItem.VAT()
-        if lineItemTax
-          if groupedTaxes.length
-            addedd = false
-            groupedTaxes.forEach (tax) ->
-              if lineItemTax.tax.get("id") is tax.tax.get("id")
-                tax.total = tax.total + lineItemTax.total
-                addedd = true
-            groupedTaxes.pushObject lineItemTax unless addedd
-          else
-            groupedTaxes.pushObject lineItemTax
+        lineItem.VAT().then (lineItemTax) =>
+          if lineItemTax
+            if groupedTaxes.length
+              addedd = false
+              groupedTaxes.forEach (tax) ->
+                if lineItemTax.tax.get("id") is tax.tax.get("id")
+                  tax.total = tax.total + lineItemTax.total
+                  addedd = true
+              groupedTaxes.pushObject lineItemTax unless addedd
+            else
+              groupedTaxes.pushObject lineItemTax
     groupedTaxes
   ).property("lineItems.@each.quantity", "lineItems.@each.unitPrice", "lineItems.@each.tax", "lineItems.@each.optional")
 
@@ -247,8 +255,8 @@ Vosae.InvoiceRevision = Vosae.Model.extend
     # Line items
     if @get("lineItems.length") > 0
       @get('lineItems').forEach (item) ->
-        unless item.isEmpty()
-          unless item.get("ref")
+        unless item.recordIsEmpty()
+          unless item.get("reference")
             errors.addObject gettext("Items reference must not be blank")
           unless item.get("description")
             errors.addObject gettext("Items description must not be blank")
@@ -261,18 +269,3 @@ Vosae.InvoiceRevision = Vosae.Model.extend
         errors.addObject gettext("Quotation must have a currency")
     
     return errors
-
-
-Vosae.Adapter.map "Vosae.InvoiceRevision",
-  senderAddress:
-    embedded: "always"
-  billingAddress:
-    embedded: "always"
-  deliveryAddress:
-    embedded: "always"
-  currency:
-    embedded: "always"
-  pdf:
-    embedded: "always"
-  lineItems:
-    embedded: "always"

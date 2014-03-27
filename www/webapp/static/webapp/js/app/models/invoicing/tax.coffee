@@ -36,15 +36,15 @@ Vosae.Tax = Vosae.Model.extend
 
   didCreate: ->
     message = gettext 'The tax has been successfully created'
-    Vosae.SuccessPopupComponent.open
+    Vosae.SuccessPopup.open
       message: message
 
   didUpdate: ->
     message = gettext 'The tax has been successfully updated'
-    Vosae.SuccessPopupComponent.open
+    Vosae.SuccessPopup.open
       message: message
 
   didDelete: ->
     message = gettext 'The tax has been successfully deleted'
-    Vosae.SuccessPopupComponent.open
+    Vosae.SuccessPopup.open
       message: message

@@ -1,10 +1,11 @@
 Vosae.CalendarListsShowRoute = Ember.Route.extend
   beforeModel: ->
-    Vosae.CalendarList.all().then (calendarLists) ->
-      Vosae.CalendarList.find() if calendarLists.get('length') == 0
+    meta = @store.metadataFor "calendarList"
+    if !meta or !meta.get "hasBeenFetched"
+      @store.find "calendarList"
 
   model: ->
-    Vosae.CalendarList.all()
+    @store.all('calendarList')
 
   setupController: (controller, model) ->
     controller.set 'content', model
@@ -13,6 +14,6 @@ Vosae.CalendarListsShowRoute = Ember.Route.extend
   renderTemplate: ->
     @_super()
     @render 'calendarLists.show.settings',
-      into: 'application'
+      into: 'tenant'
       outlet: 'outletPageSettings'
       controller: 'calendarListsShowSettings'

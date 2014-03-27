@@ -1,115 +1,86 @@
 {% load i18n templatetag_handlebars %}
 
 {% tplhandlebars "organization/edit" %}
-  {{#if content.isLoaded}}
-    <section class="actions clearfix">
-      <div class="btn-toolbar pull-left">
-        {{#if id}}
-          <div class="btn-group">    
-            {{#linkTo "organization.show" controller.session.tenant content class="btn btn-default"}}
-              <i class="picto-arrow-left"></i>
-              {{unbound this.corporateName}}
-            {{/linkTo}}
-          </div>
-        {{else}}
-          <div class="btn-group">
-            {{#linkTo "organizations.show" controller.session.tenant class="btn btn-default"}}
-              <i class="picto-arrow-left"></i>
-              {% trans "My organizations" %}
-            {{/linkTo}}
-          </div>
-        {{/if}}
-      </div>
-      <div class="btn-toolbar pull-right">
-        {{#if isSaving}}
-          <div class="btn-group">
-            <a class="btn btn-rounded btn-success">
-              {% trans "Saving" %}…
-            </a>
-          </div>
-        {{else}}
-          <div class="btn-group">
-            <a class="btn btn-rounded btn-default" {{action 'cancel' content}}>
-              {% trans  "Cancel" %}
-            </a>
-          </div>
-          {{#if isDirty}}
-            <div class="btn-group">
-              <a class="btn btn-rounded btn-success" {{action 'save' content}}>
-                {{#if id}}{% trans "Save" %}{{else}}{% trans "Add" %}{{/if}}
-              </a>
-            </div>
-          {{/if}}
-        {{/if}}
-      </div>
-    </section>
-
-    <section class="main-infos clearfix">
-      <div {{bindAttr class="isUploading:uploading :avatar :default-organization :rounded :pull-left"}}>
-        {{view view.uploadProgressBar isUploadingBinding="content.isUploading"}}
-        {{#if photoUri}}
-          {{#unless isUploading}}
-            <img {{bindAttr src="photoUri"}}>
-          {{/unless}}
-        {{/if}}
-        <input class="fileupload fill" type="file" multiple/>
-      </div>
-      <a class="btn btn-xs btn-success upload" {{action "openFileUploadBrowser" target="view"}}>
-        {% trans "Edit" %}
-      </a>
-
-      <div class="infos pull-left">
-        <span class="corporate-name">
-          {{view Ember.TextField 
-            valueBinding = "corporateName"
-            maxlength    = "64" 
-            classNames   = "form-control form-control-unstyled"
-            placeholder  = "{% trans 'Corporate name' %}" }}
-        </span>
-        <span class="desc">
-          {{input-autogrow
-            valueBinding = "note"
-            maxlength    = "64"
-            classNames   = "form-control form-control-unstyled imput-sm"
-            placeholder  = "{% trans 'Description' %}" }}
-        </span>
-      </div>
-      <div class="drag-drop-message">
-        {% trans "Drop a logo here" %}
-      </div>
-    </section>
-
-    <section class="contact-infos clearfix">
-      {{partial "contacts/partials/editEntityContactInfos"}}
-    </section>
-    
-    <div class="actions-form">
-      <div class="btn-toolbar pull-right">
-        {{#if isSaving}}
-          <div class="btn-group">
-            <a class="btn btn-rounded btn-success">
-              {% trans "Saving" %}…
-            </a>
-          </div>
-        {{else}}
-          <div class="btn-group">
-            <a class="btn btn-rounded btn-default" {{action 'cancel' content}}>
-              {% trans  "Cancel" %}
-            </a>
-          </div>
-          {{#if isDirty}}
-            <div class="btn-group">
-              <a class="btn btn-rounded btn-success" {{action 'save' content}}>
-                {{#if id}}{% trans "Save" %}{{else}}{% trans "Add" %}{{/if}}
-              </a>
-            </div>
-          {{/if}}
-        {{/if}}
-      </div>
+  <section class="actions clearfix">
+    <div class="btn-toolbar pull-left">
+      {{#if id}}
+        <div class="btn-group">    
+          {{#link-to "organization.show" controller.session.tenant content class="btn btn-default"}}
+            <i class="picto-arrow-left"></i>
+            {{unbound this.corporateName}}
+          {{/link-to}}
+        </div>
+      {{else}}
+        <div class="btn-group">
+          {{#link-to "organizations.show" controller.session.tenant class="btn btn-default"}}
+            <i class="picto-arrow-left"></i>
+            {% trans "My organizations" %}
+          {{/link-to}}
+        </div>
+      {{/if}}
     </div>
-  {{else}}
-    {{partial "core/partials/spinner"}}
-  {{/if}}
+    <div class="btn-toolbar pull-right">
+      {{#if isSaving}}
+        <div class="btn-group">
+          <a class="btn btn-rounded btn-success">
+            {% trans "Saving" %}…
+          </a>
+        </div>
+      {{else}}
+        <div class="btn-group">
+          <a class="btn btn-rounded btn-default" {{action 'cancel' content}}>
+            {% trans  "Cancel" %}
+          </a>
+        </div>
+        <div class="btn-group">
+          <a class="btn btn-rounded btn-success" {{action 'save' content}}>
+            {{#if id}}{% trans "Save" %}{{else}}{% trans "Add" %}{{/if}}
+          </a>
+        </div>
+      {{/if}}
+    </div>
+  </section>
+
+  <section class="main-infos clearfix">
+    <div {{bind-attr class="isUploading:uploading :avatar :default-organization :rounded :pull-left"}}>
+      {{view view.uploadProgressBar isUploadingBinding="content.isUploading"}}
+      {{#if photoUri}}
+        {{#unless isUploading}}
+          <img {{bind-attr src="photoUri"}}>
+        {{/unless}}
+      {{/if}}
+      <input class="fileupload fill" type="file" multiple/>
+    </div>
+    <a class="btn btn-xs btn-success upload" {{action "openFileUploadBrowser" target="view"}}>
+      {% trans "Edit" %}
+    </a>
+
+    <div class="infos pull-left">
+      <span class="corporate-name">
+        {{view Ember.TextField 
+          valueBinding = "corporateName"
+          maxlength    = "64" 
+          classNames   = "form-control form-control-unstyled"
+          placeholder  = "{% trans 'Corporate name' %}" }}
+      </span>
+      <span class="desc">
+        {{input-autogrow
+          valueBinding = "note"
+          maxlength    = "64"
+          classNames   = "form-control form-control-unstyled imput-sm"
+          placeholder  = "{% trans 'Description' %}" }}
+      </span>
+    </div>
+    <div class="drag-drop-message">
+      {% trans "Drop a logo here" %}
+    </div>
+  </section>
+
+  <section class="contact-infos clearfix">
+    {{partial "contacts/partials/editEntityContactInfos"}}
+  </section>
+  
+  {{partial "core/partials/formActions"}}
 {% endtplhandlebars %}
 
 {% tplhandlebars "organization/edit/settings" %}

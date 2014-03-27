@@ -1,18 +1,15 @@
 Vosae.PurchaseOrdersAddRoute = Ember.Route.extend
-  init: ->
-    @_super()
-    @get('container').register('controller:purchaseOrders.add', Vosae.PurchaseOrderEditController)
+  controllerName: "purchaseOrderEdit"
 
   model: ->
-    Vosae.PurchaseOrder.createRecord()
+    @store.createRecord "purchaseOrder"
 
   setupController: (controller, model) ->
-    unusedTransaction = @get('store').transaction()
-    currentRevision = unusedTransaction.createRecord Vosae.InvoiceRevision
-    currency = unusedTransaction.createRecord Vosae.Currency
-    billingAddress = unusedTransaction.createRecord Vosae.Address
-    deliveryAddress = unusedTransaction.createRecord Vosae.Address
-    senderAddress = unusedTransaction.createRecord Vosae.Address
+    currentRevision = @store.createRecord "invoiceRevision"
+    currency = @store.createRecord "snapshotCurrency"
+    billingAddress = @store.createRecord "vosaeAddress"
+    deliveryAddress = @store.createRecord "vosaeAddress"
+    senderAddress = @store.createRecord "vosaeAddress"
 
     senderAddress.setProperties
       'postofficeBox': @get "session.tenant.billingAddress.postofficeBox"
@@ -23,7 +20,6 @@ Vosae.PurchaseOrdersAddRoute = Ember.Route.extend
       'state': @get "session.tenant.billingAddress.state"
       'country': @get "session.tenant.billingAddress.country"
     
-    currentRevision.get('lineItems').createRecord()
     currentRevision.setProperties
       'quotationDate': new Date()
       'sender': @get("session.user.fullName")
@@ -32,6 +28,7 @@ Vosae.PurchaseOrdersAddRoute = Ember.Route.extend
       'deliveryAddress': deliveryAddress
       'senderAddress': senderAddress
 
+    currentRevision.get('lineItems').createRecord()
     currentRevision.set('contact', contact) if contact?
     currentRevision.set('organization', organization) if organization?
 
@@ -41,19 +38,15 @@ Vosae.PurchaseOrdersAddRoute = Ember.Route.extend
 
     controller.setProperties
       'content': model
-      'unusedTransaction': unusedTransaction
-      'taxes': Vosae.Tax.all()
+      'taxes': @store.all("tax")
 
   renderTemplate: ->
     @_super()
     @render 'purchaseOrder.edit.settings',
-      into: 'application'
+      into: 'tenant'
       outlet: 'outletPageSettings'
 
   deactivate: ->
-    purchaseOrder = @controller.get 'content'
-    if purchaseOrder.get 'isDirty'
-      purchaseOrder.get("transaction").rollback()
-
-    unusedTransaction = @controller.get 'unusedTransaction'
-    unusedTransaction.rollback() if unusedTransaction
+    @set 'preFillInvoiceWith', {}
+    model = @controller.get "content"
+    model.rollback() if model

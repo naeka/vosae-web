@@ -16,8 +16,8 @@ Vosae.CalendarList = Vosae.Model.extend
   color: DS.attr('string')
   selected: DS.attr('boolean', defaultValue: true)
   isOwn: DS.attr('boolean', defaultValue: true)
-  calendar: DS.belongsTo('Vosae.VosaeCalendar')
-  reminders: DS.hasMany('Vosae.ReminderEntry')
+  calendar: DS.belongsTo('vosaeCalendar')
+  reminders: DS.hasMany('reminderEntry')
 
   displayName: (->
     # Returns summary or summaryOverride in case of user overrided it
@@ -48,23 +48,20 @@ Vosae.CalendarList = Vosae.Model.extend
   ).property('color')
 
   source: (->
-    self = @
+    return if not @get('calendar.id')
     source =
-      events: (start, end, callback)->
+      events: (start, end, callback) =>
         # Filter by start, end and calendar
-        events = Vosae.VosaeEvent.find
-          start__gte: $.fullCalendar.formatDate(start, 'u')
-          end__lt: $.fullCalendar.formatDate(end, 'u')
-          calendar: self.get('calendar.id')
-          limit: 100
-        events.one 'didLoad', @, ->
-          Em.run.next ->
-            callback self.makeFcEvents(events)
-      color: ->
-        self.get('color')
-      textColor: ->
-        self.get('textColor')
-    source
+        query = 'start__gte=' + $.fullCalendar.formatDate(start, 'u')
+        query += '&end__lt=' + $.fullCalendar.formatDate(end, 'u')
+        query += '&calendar=' + @get('calendar.id')
+        query += '&limit=' + 100
+        @get('store').findQuery('vosaeEvent', query).then (events) =>
+          callback @makeFcEvents(events)
+      color: =>
+        @get('color')
+      textColor: =>
+        @get('textColor')
   ).property()
 
   makeFcEvents: (events)->
@@ -72,8 +69,3 @@ Vosae.CalendarList = Vosae.Model.extend
     events.forEach (event)->
       fc_events.push event.getFullCalendarEvent()
     fc_events
-
-
-Vosae.Adapter.map "Vosae.CalendarList",
-  reminders:
-    embedded: "always"

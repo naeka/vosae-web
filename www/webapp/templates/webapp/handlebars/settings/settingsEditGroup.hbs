@@ -1,7 +1,6 @@
 {% load i18n templatetag_handlebars %}
 
 {% tplhandlebars "settings/editGroup" %}
-  {{#if content.isLoaded}}
   <header>
     {{#if id}}
       <h3>
@@ -54,10 +53,4 @@
     </div>
   </section>
   {{view view.groupPermissionsView groupBinding="content"}}
-  {{/if}}
-{% endtplhandlebars %}
-
-
-{% tplhandlebars "settings/editGroup/actions" %}
-  {{partial "settings/partials/saveSettings"}}
 {% endtplhandlebars %}

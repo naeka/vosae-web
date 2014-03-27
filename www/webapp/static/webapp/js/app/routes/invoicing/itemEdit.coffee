@@ -1,17 +1,21 @@
 Vosae.ItemEditRoute = Ember.Route.extend
+  controllerName: "item"
+
+  model: ->
+    @modelFor("item")
+
   setupController: (controller, model) ->
     controller.setProperties
-      'content': @modelFor("item")
-      'taxes': Vosae.Tax.all()
-      'currencies': Vosae.Currency.all()
+      'content': model
+      'taxes': @store.all("tax")
+      'currencies': @store.all("currency")
 
   renderTemplate: ->
     @_super()
     @render 'item.edit.settings',
-      into: 'application'
+      into: 'tenant'
       outlet: 'outletPageSettings'
 
   deactivate: ->
-    item = @controller.get 'content'
-    if item.get 'isDirty'
-      item.get("transaction").rollback()
+    model = @controller.get "content"
+    model.rollback() if model

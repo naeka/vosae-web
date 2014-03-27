@@ -4,21 +4,28 @@ Vosae.CalendarListsAddRoute = Ember.Route.extend
   ).on "init"
 
   model: ->
-    Vosae.CalendarList.createRecord()
+    @store.createRecord('calendarList')
 
   setupController: (controller, model) ->
-    acl = Vosae.CalendarAcl.createRecord()
-    calendar = Vosae.VosaeCalendar.createRecord()
-    model.get('reminders').createRecord()
+    acl = @store.createRecord('calendarAcl')
     acl.get('rules').createRecord
       'principal': @get("session.user")
       'role': 'OWNER'
-    calendar.set 'acl', acl
+    
+    calendar = @store.createRecord('vosaeCalendar', {'acl': acl})
+
+    model.get('reminders').createRecord()
     model.set 'calendar', calendar
+
     controller.set 'content', model
 
   renderTemplate: ->
     @_super()
     @render 'calendarList.edit.settings',
-      into: 'application'
+      into: 'tenant'
       outlet: 'outletPageSettings'
+
+  deactivate: ->
+    model = @get('controller.model')
+    model.get('calendar').rollback()
+    model.rollback()

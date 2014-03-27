@@ -5,10 +5,10 @@
     <section class="actions clearfix">
       <div class="btn-toolbar pull-left">
         <div class="btn-group">
-          {{#linkTo "organizations.show" controller.session.tenant class="btn btn-default"}}
+          {{#link-to "organizations.show" controller.session.tenant class="btn btn-default"}}
             <i class="picto-arrow-left"></i>
             {% trans "My organizations" %}
-          {{/linkTo}}
+          {{/link-to}}
         </div>
       </div>
       <div class="btn-toolbar pull-right">
@@ -18,9 +18,9 @@
           </a>
         </div>
         <div class="btn-group">
-          {{#linkTo "organization.edit" controller.session.tenant content class="btn btn-rounded btn-default"}}
+          {{#link-to "organization.edit" controller.session.tenant content class="btn btn-rounded btn-default"}}
             {% trans "Edit" %}
-          {{/linkTo}}
+          {{/link-to}}
         </div>
       </div>
     </section>
@@ -28,7 +28,7 @@
     <section class="main-infos clearfix">
       <div class="avatar default-organization rounded pull-left">
         {{#if photoUri}}
-          <img {{bindAttr src="photoUri"}}>
+          <img {{bind-attr src="photoUri"}}>
         {{/if}}
       </div>
       <div class="infos pull-left">
@@ -48,10 +48,10 @@
       <div class="actions pull-right">
         <div class="btn-toolbar">
           <div class="btn-group">
-            {{#linkTo "organization.addContact" controller.session.tenant content class="btn btn-primary"}}
+            {{#link-to "organization.addContact" controller.session.tenant content class="btn btn-primary"}}
               <i class="picto-add"></i>
               {% trans "Contact" %}
-            {{/linkTo}}
+            {{/link-to}}
           </div>
         </div>
       </div>
@@ -104,9 +104,9 @@
         </h4>
         <div class="btn-toolbar pull-right">
           <div class="btn-group">
-            {{#linkTo "organization.addContact" controller.session.tenant content class="btn btn-darkgrey btn-sm btn-rounded"}}
+            {{#link-to "organization.addContact" controller.session.tenant content class="btn btn-darkgrey btn-sm btn-rounded"}}
               {% trans "Add" %}
-            {{/linkTo}}
+            {{/link-to}}
           </div>
         </div>
       </div>

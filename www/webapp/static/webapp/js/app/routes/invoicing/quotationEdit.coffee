@@ -1,20 +1,19 @@
 Vosae.QuotationEditRoute = Ember.Route.extend
+  model: ->
+    @modelFor("quotation")
+
   setupController: (controller, model) ->
     controller.setProperties
-      'content': @modelFor("quotation")
-      'taxes': Vosae.Tax.all()
+      'content': model
+      'taxes': @store.all('tax')
       'invoicingSettings': @get('session.tenantSettings.invoicing')
 
   renderTemplate: ->
     @_super()
     @render 'quotation.edit.settings',
-      into: 'application'
+      into: 'tenant'
       outlet: 'outletPageSettings'
 
   deactivate: ->
-    try
-      quotation = @controller.get 'content'
-      if quotation.get('currentRevision.currentState.stateName') is "root.loaded.updated.uncommitted"
-        quotation.set 'currentRevision.currentState', DS.RootState.loaded.saved
-      if quotation.get 'isDirty'
-        quotation.get("transaction").rollback()
+    model = @controller.get "content"
+    model.rollback() if model

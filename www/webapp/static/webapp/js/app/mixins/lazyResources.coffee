@@ -15,7 +15,7 @@ Vosae.LazyContactResourceMixin = Ember.Mixin.create
         id: @_data.contact.id
       return dict
     return null
-  ).property('contact')
+  ).property('contact', 'fixLazyLoadResource')
 
 
 ###
@@ -35,7 +35,7 @@ Vosae.LazyOrganizationResourceMixin = Ember.Mixin.create
         id: @_data.organization.id
       return dict
     return null
-  ).property('organization')
+  ).property('organization', 'fixLazyLoadResource')
 
 
 ###
@@ -55,7 +55,7 @@ Vosae.LazyInvoiceResourceMixin = Ember.Mixin.create
         id: @_data.invoice.id
       return dict
     return null
-  ).property('invoice')
+  ).property('invoice', 'fixLazyLoadResource')
 
 
 ###
@@ -75,7 +75,7 @@ Vosae.LazyQuotationResourceMixin = Ember.Mixin.create
         id: @_data.quotation.id
       return dict
     return null
-  ).property('quotation')
+  ).property('quotation', 'fixLazyLoadResource')
 
 
 ###
@@ -95,7 +95,7 @@ Vosae.LazyDownPaymentInvoiceResourceMixin = Ember.Mixin.create
         id: @_data.downPaymentInvoice.id
       return dict
     return null
-  ).property('downPaymentInvoice')
+  ).property('downPaymentInvoice', 'fixLazyLoadResource')
 
 
 ###
@@ -115,7 +115,7 @@ Vosae.LazyCreditNoteResourceMixin = Ember.Mixin.create
         id: @_data.creditNote.id
       return dict
     return null
-  ).property('creditNote')
+  ).property('creditNote', 'fixLazyLoadResource')
 
 
 ###
@@ -135,4 +135,4 @@ Vosae.LazyEventReminderResourceMixin = Ember.Mixin.create
         id: @_data.vosaeEvent.id
       return dict
     return null
-  ).property('vosaeEvent')
+  ).property('vosaeEvent', 'fixLazyLoadResource')

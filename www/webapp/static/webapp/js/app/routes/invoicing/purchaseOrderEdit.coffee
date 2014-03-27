@@ -1,17 +1,19 @@
 Vosae.PurchaseOrderEditRoute = Ember.Route.extend
+  model: ->
+    @modelFor("purchaseOrder")
+
   setupController: (controller, model) ->
     controller.setProperties
-      'content': @modelFor("purchaseOrder")
-      'taxes': Vosae.Tax.all()
+      'content': model
+      'taxes': @store.all('tax')
       'invoicingSettings': @get('session.tenantSettings.invoicing')
 
   renderTemplate: ->
     @_super()
     @render 'purchaseOrder.edit.settings',
-      into: 'application'
+      into: 'tenant'
       outlet: 'outletPageSettings'
 
   deactivate: ->
-    purchaseOrder = @controller.get 'content'
-    if purchaseOrder.get 'isDirty'
-      purchaseOrder.get("transaction").rollback()
+    model = @controller.get "content"
+    model.rollback() if model

@@ -18,11 +18,10 @@ Vosae.SettingsInvoicingGeneralController = Em.ObjectController.extend
   # Hack 
   supportedCurrencies: (->
     ids = @get('invoicing.supportedCurrencies').getEach('id')
-    Vosae.Currency.all().filter (cur) ->
-      if ids.contains cur.get('id')
-        return cur
+    @get('store').all('currency').filter (cur) ->
+      cur if ids.contains cur.get('id')
   ).property('invoicing.supportedCurrencies.@each.id', 'invoicing.supportedCurrencies.length')
 
   actions:
     save: (tenantSettings) ->
-      tenantSettings.get('transaction').commit()
+      tenantSettings.save()

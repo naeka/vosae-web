@@ -1,7 +1,6 @@
 {% load i18n templatetag_handlebars %}
 
 {% tplhandlebars "settings/editTax" %}
-  {{#if content.isLoaded}}
   <header>
     {{#if id}}
       <h3>
@@ -59,10 +58,4 @@
       </table>
     </div>
   </section>
-  {{/if}}
-{% endtplhandlebars %}
-
-
-{% tplhandlebars "settings/editTax/actions" %}
-  {{partial "settings/partials/saveSettings"}}
 {% endtplhandlebars %}

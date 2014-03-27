@@ -30,6 +30,7 @@ require 'models/contacts/contact'
 require 'models/contacts/contactGroup'
 
 require 'models/invoicing/currency'
+require 'models/invoicing/snapshotCurrency'
 require 'models/invoicing/exchangeRate'
 require 'models/invoicing/tax'
 require 'models/invoicing/invoiceNote'

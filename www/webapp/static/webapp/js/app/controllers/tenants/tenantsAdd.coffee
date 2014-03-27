@@ -77,7 +77,7 @@ Vosae.TenantsAddController = Em.ObjectController.extend
     
     if Em.isEmpty currencies then return []
     currencies.forEach (currency) ->
-      array.pushObject currency.get('resourceUri')
+      array.pushObject currency.get('resourceURI')
     array
 
   # Returns the default currency serialized 
@@ -85,27 +85,29 @@ Vosae.TenantsAddController = Em.ObjectController.extend
     currency = @get('defaultCurrency')
     if Em.isNone currency
       return null
-    currency.get 'resourceUri'
+    currency.get 'resourceURI'
 
   actions:
     # Post the tenant and get tenantSettings
     save: (tenant) ->
-      tenant.one 'didCreate', @, ->
-        Ember.run.next @, ->
-          if @get('session.tenant')
-            @get('controllers.tenantsShow').send "redirectToTenantRoot", tenant
-          else
-            @get('controllers.tenantsShow').send "setAsCurrentTenant", tenant
+      Vosae.Utilities.showLoader()
+
       tenant.one 'becameInvalid', @, ->
         Vosae.Utilities.hideLoader()
-      tenant.get('transaction').commit()
-      Vosae.Utilities.showLoader()
+
+      tenant.save().then((tenant) =>
+          if @get('session.tenant')
+            @send "redirectToTenantRoot", tenant
+          else
+            @send "setAsCurrentTenant", tenant
+      , () =>
+        Vosae.Utilities.hideLoader()
+      )
 
     # Cancel the tenant creation form 
     cancel: ->
       if confirm gettext('Do you realy want to leave this page ?')
         if @get('session.tenant')
-          # @transitionToRoute 'dashboard.show', @get('session.tenant')
           router = Vosae.lookup('router:main')
           router.location.history.back()
         else

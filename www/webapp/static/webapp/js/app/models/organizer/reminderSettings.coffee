@@ -9,9 +9,4 @@
 
 Vosae.ReminderSettings = Vosae.Model.extend
   useDefault: DS.attr('boolean')
-  overrides: DS.hasMany('Vosae.ReminderEntry')
-
-
-Vosae.Adapter.map "Vosae.ReminderSettings",
-  overrides:
-    embedded: "always"
+  overrides: DS.hasMany('reminderEntry')

@@ -12,10 +12,7 @@ Vosae.Invoice = Vosae.InvoiceBase.extend
   paid: DS.attr('number')
   balance: DS.attr('number')
   hasTemporaryReference: DS.attr('boolean', defaultValue: true)
-  payments: DS.hasMany('Vosae.Payment')
-  relatedQuotation: DS.belongsTo('Vosae.Quotation')
-  relatedPurchaseOrder: DS.belongsTo('Vosae.PurchaseOrder')
-  # relatedDeliveryOrder: DS.belongsTo('Vosae.DeliveryOrder')
+  payments: DS.hasMany('payment', async: true)
 
   displayState: (->
     # Returns the current state readable and translated.
@@ -146,44 +143,8 @@ Vosae.Invoice = Vosae.InvoiceBase.extend
     'currentRevision.lineItems.length'
   )
 
-  invoiceCancel: (controller) ->
-    # Cancel the invoice and returns the associated credit note.
-    if @get('id') and @get('isCancelable')
-      invoice = @
-      invoice.set 'isCancelling', true
-     
-      store = @get('store')
-      adapter = store.adapterForType invoice.constructor
-      root = adapter.rootForType(invoice.constructor)
-      serializer = adapter.get 'serializer'
-
-      url = adapter.buildURL root, @get('id')
-      url += "cancel/"
-
-      adapter.ajax(url, "PUT").then((json) ->
-        creditNoteId = serializer.deurlify json['credit_note_uri']
-        if creditNoteId
-          invoice.reload()
-          Em.run @, ->
-            Vosae.SuccessPopupComponent.open
-              message: gettext 'Your invoice has been cancelled'
-            controller.transitionToRoute 'creditNote.show', controller.get('session.tenant'), store.find(Vosae.CreditNote, creditNoteId)
-            invoice.set 'isCancelling', false
-      ).then null, adapter.rejectionHandler
-
   getErrors: ->
     # Return an array of string that contains form validation errors 
     errors = []
     errors = errors.concat @get("currentRevision").getErrors("Invoice")
     return errors
-
-
-Vosae.Adapter.map "Vosae.Invoice",
-  # revisions:
-  #   embedded: "always"
-  ref:
-    key: "reference"
-  notes:
-    embedded: "always"
-  currentRevision:
-    embedded: "always"

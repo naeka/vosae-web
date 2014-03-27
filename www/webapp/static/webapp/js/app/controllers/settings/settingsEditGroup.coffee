@@ -10,19 +10,14 @@
 Vosae.SettingsEditGroupController = Em.ObjectController.extend
   actions:  
     save: (group) ->
-      event = if group.get('id') then 'didUpdate' else 'didCreate'
-      group.one event, @, ->
-        Ember.run.next @, ->
-          @transitionToRoute 'settings.showGroups', @get('session.tenant')
-      group.get('transaction').commit()
+      group.save().then () =>
+        @transitionToRoute 'settings.showGroups', @get('session.tenant')
     
     delete: (group) ->
-      Vosae.ConfirmPopupComponent.open
+      Vosae.ConfirmPopup.open
         message: gettext 'Do you really want to delete this group?'
         callback: (opts, event) =>
           if opts.primary
-            group.one 'didDelete', @, ->
-              Ember.run.next @, ->
-                @transitionToRoute 'settings.showGroups', @get('session.tenant')
             group.deleteRecord()
-            group.get('transaction').commit()
+            group.save().then () =>
+              @transitionToRoute 'settings.showGroups', @get('session.tenant')

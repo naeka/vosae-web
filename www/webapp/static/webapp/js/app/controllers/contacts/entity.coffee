@@ -8,75 +8,83 @@
 ###
 
 Vosae.EntityController = Ember.ObjectController.extend
+  exportFormat: "vcard"
+  relatedType: null
+
+  checkRelatedType: (->
+    Ember.Logger.error(@toString() + " needs the property `relatedType` to be defined.") if Em.isNone @relatedType
+  ).on "init"
+
+  ###
+    Build the URL that will be used by the library `fileDownload`
+  ###
+  getExportURL: ->
+    tenantSlug = @get "session.tenant.slug"
+    entityID = @get "content.id"
+    url = "#{Vosae.Config.APP_ENDPOINT}/#{Vosae.Config.API_NAMESPACE}/"      
+    url + "#{@relatedType}/#{entityID}/export/#{@exportFormat}/?x_tenant=#{tenantSlug}"
+
   actions:
+    ###
+      Generate an ajax download with the url from @getExportURL
+    ###
     getExportFile: ->
-      format = "vcard"
-      tenantSlug = @get('session.tenant.slug')
-      entity_id = @get('content.id')
-      exportURL = "#{Vosae.Config.APP_ENDPOINT}/#{Vosae.Config.API_NAMESPACE}/"
-      
-      switch @constructor.toString()
-        when Vosae.ContactShowController.toString()
-          exportURL += "contact/"
-        when Vosae.OrganizationShowController.toString()
-          exportURL += "organization/"
-      
-      exportURL += "#{entity_id}/export/#{format}/?x_tenant=#{tenantSlug}"
-
-      $.fileDownload(exportURL)
-
+      $.fileDownload @getExportURL()
+    
     addAddress: ->
-      @get('addresses').createRecord()
-      Em.run.later @, (->
-        $('table.addresses tr:not(.add) .ember-text-field.address').focus()
-      ), 200
+      @get('addresses').then (addresses) ->
+        addresses.createRecord()
+        Em.run.later @, (->
+          $('table.addresses tr:not(.add) .ember-text-field.address').focus()
+        ), 200
 
     addPhone: ->
-      @get('phones').createRecord()
-      Em.run.later @, (->
-        $('table.phones tr:not(.add) .ember-text-field').focus()
-      ), 200
+      @get('phones').then (phones) ->
+        phones.createRecord()
+        Em.run.later @, (->
+          $('table.phones tr:not(.add) .ember-text-field').focus()
+        ), 200
 
     addEmail: ->
-      @get('emails').createRecord()
-      Em.run.later @, (->
-        $('table.emails tr:not(.add) .ember-text-field').focus()
-      ), 200
+      @get('emails').then (emails) ->
+        emails.createRecord()
+        Em.run.later @, (->
+          $('table.emails tr:not(.add) .ember-text-field').focus()
+        ), 200
 
     deletePhone: (phone) ->
-      Vosae.ConfirmPopupComponent.open
+      Vosae.ConfirmPopup.open
         message: gettext 'Do you really want to delete this phone?'
         callback: (opts, event) =>
           if opts.primary
-           @get('phones').removeObject phone      
+            @get('phones').removeObject phone      
 
     deleteEmail: (email) ->
-      Vosae.ConfirmPopupComponent.open
+      Vosae.ConfirmPopup.open
         message: gettext 'Do you really want to delete this email?'
         callback: (opts, event) =>
           if opts.primary
-           @get('emails').removeObject email
+            @get('emails').removeObject email
 
     deleteAddress: (address) ->
-      Vosae.ConfirmPopupComponent.open
+      Vosae.ConfirmPopup.open
         message: gettext 'Do you really want to delete this address?'
         callback: (opts, event) =>
           if opts.primary
-           @get('addresses').removeObject address
+            @get('addresses').removeObject address
 
     cancel: (entity) ->
-      switch entity.constructor.toString()
-        when Vosae.Contact.toString()
+      switch
+        when entity instanceof Vosae.Contact
           if entity.get('id')
-            return @transitionToRoute 'contact.show', @get('session.tenant'), entity
+            @transitionToRoute 'contact.show', @get('session.tenant'), entity
           else
-            return @transitionToRoute 'contacts.show', @get('session.tenant')
-        when Vosae.Organization.toString()
+            @transitionToRoute 'contacts.show', @get('session.tenant')
+        when entity instanceof Vosae.Organization
           if entity.get('id')
-            return @transitionToRoute 'organization.show', @get('session.tenant'), entity
+            @transitionToRoute 'organization.show', @get('session.tenant'), entity
           else
-            return @transitionToRoute 'organizations.show', @get('session.tenant')
-      return
+            @transitionToRoute 'organizations.show', @get('session.tenant')
 
     save: (entity) ->
       errors = []
@@ -99,38 +107,32 @@ Vosae.EntityController = Ember.ObjectController.extend
       if errors.length
         alert(errors.join('\n'))
       else
-        event = if entity.get('id') then 'didUpdate' else 'didCreate'
-        entity.one event, @, ->
-          Ember.run.next @, ->
-            switch entity.constructor.toString()
-              when Vosae.Contact.toString()
-                Vosae.metaForContact.incrementProperty('total_count')
-                @transitionToRoute 'contact.show', @get('session.tenant'), entity
-              when Vosae.Organization.toString()
-                Vosae.metaForOrganization.incrementProperty('total_count')
-                @transitionToRoute 'organization.show', @get('session.tenant'), entity
-
-        entity.get('transaction').commit()
+        entity.save().then (entity) =>
+          switch
+            when entity instanceof Vosae.Contact
+              @store.metadataFor("contact").incrementProperty('totalCount')
+              @transitionToRoute 'contact.show', @get('session.tenant'), entity
+            when entity instanceof Vosae.Organization
+              @store.metadataFor("organization").incrementProperty('totalCount')
+              @transitionToRoute 'organization.show', @get('session.tenant'), entity
 
     delete: (entity) ->
-      message = switch entity.constructor.toString()
-        when Vosae.Contact.toString()
+      message = switch
+        when entity instanceof Vosae.Contact
           gettext 'Do you really want to delete this contact?'
-        when Vosae.Organization.toString()
+        when entity instanceof Vosae.Organization
           gettext 'Do you really want to delete this organization?'
 
-      Vosae.ConfirmPopupComponent.open
+      Vosae.ConfirmPopup.open
         message: message
         callback: (opts, event) =>
           if opts.primary
-            entity.one 'didDelete', @, ->
-              Ember.run.next @, ->
-                switch entity.constructor.toString()
-                  when Vosae.Contact.toString()
-                    Vosae.metaForContact.decrementProperty('total_count')
-                    @transitionToRoute 'contacts.show', @get('session.tenant')
-                  when Vosae.Organization.toString()
-                    Vosae.metaForOrganization.decrementProperty('total_count')
-                    @transitionToRoute 'organizations.show', @get('session.tenant')
             entity.deleteRecord()
-            entity.get('transaction').commit()
+            entity.save().then =>
+              switch
+                when entity instanceof Vosae.Contact
+                  @store.metadataFor("contact").decrementProperty('totalCount')
+                  @transitionToRoute 'organizations.show', @get('session.tenant')
+                when entity instanceof Vosae.Organization
+                  @store.metadataFor("organization").decrementProperty('totalCount')
+                  @transitionToRoute 'organizations.show', @get('session.tenant')

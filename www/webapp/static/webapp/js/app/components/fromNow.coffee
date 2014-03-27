@@ -10,7 +10,7 @@
 
 Vosae.FromNowComponent = Ember.Component.extend
   tagName: "time"
-  template: Ember.Handlebars.compile("{{view.output}}")
+  layout: Ember.Handlebars.compile("{{view.output}}")
 
   initTick: (->
     @tick()

@@ -1,5 +1,5 @@
 ###
-  A data model that represents a currency
+  A data model that represents a currency. The currency model is read only model
 
   @class Currency
   @extends Vosae.Model
@@ -9,8 +9,8 @@
 
 Vosae.Currency = Vosae.Model.extend
   symbol: DS.attr('string')
-  rates: DS.hasMany('Vosae.ExchangeRate')
-  resourceUri: DS.attr('string')
+  rates: DS.hasMany('exchangeRate')
+  resourceURI: DS.attr('string')
 
   description: (->
     # Return the description of the current currency
@@ -34,7 +34,6 @@ Vosae.Currency = Vosae.Model.extend
     symbol = @get('symbol')
     if sign and symbol
       return "#{sign} - #{symbol}"
-    console.log sign, symbol
     return ""
   ).property('symbol')
 
@@ -43,20 +42,17 @@ Vosae.Currency = Vosae.Model.extend
     # Based on the current rates.
     if currencyTo is @get('symbol')
       return amount
-    return amount * @exchangeRateFor(currencyTo).get('rate')
+    return amount * @exchangeRateFor(currencyTo)
 
   fromCurrency: (currencyFrom, amount) ->
     # Convert a `Currency` to another.
     # Based on the current rates.
     if currencyFrom is @get('symbol')
       return amount
-    return amount / @exchangeRateFor(currencyFrom).get('rate')
+    return amount / @exchangeRateFor(currencyFrom)
 
   exchangeRateFor: (symbol) ->
     # Return the rate associated to the specified symbol.
-    return @get('rates').findProperty('currencyTo', symbol)
-
-
-Vosae.Adapter.map "Vosae.Currency",
-  rates:
-    embedded: 'always'
+    if symbol is @get('symbol')
+      return 1
+    return @get('rates').findProperty('currencyTo', symbol).get('rate')

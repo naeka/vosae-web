@@ -8,6 +8,6 @@
 ###
 
 Vosae.LocalizedFile = Vosae.Model.extend
-  'fr': DS.belongsTo("Vosae.File")
-  'en': DS.belongsTo("Vosae.File")
-  'en-gb': DS.belongsTo("Vosae.File")
+  'fr': DS.belongsTo("file")
+  'en': DS.belongsTo("file")
+  'en-gb': DS.belongsTo("file")

@@ -75,43 +75,8 @@ Vosae.Quotation = Vosae.InvoiceBase.extend
     return false
   ).property('state')
 
-  makeInvoice: (controller) ->
-    # Make an `Invoice` record from the `Quotation`.
-    if @get('id') and @get('isInvoiceable')
-      quotation = @
-      quotation.set 'isMakingInvoice', true
-      
-      store = @get('store')
-      adapter = store.adapterForType(Vosae.Quotation)
-      serializer = adapter.get 'serializer'
-
-      url = adapter.buildURL('quotation', @get('id'))
-      url += "make_invoice/"
-
-      adapter.ajax(url, "PUT").then((json) ->
-        invoiceId = serializer.deurlify json['invoice_uri']
-        if invoiceId
-          quotation.reload()
-          Em.run @, ->
-            Vosae.SuccessPopupComponent.open
-              message: gettext 'Your quotation has been transformed into an invoice'
-            controller.transitionToRoute 'invoice.show', controller.get('session.tenant'), store.find(Vosae.Invoice, invoiceId)
-          quotation.set 'isMakingInvoice', false
-      ).then null, adapter.rejectionHandler
-
   getErrors: ->
     # Return an array of string that contains form validation errors 
     errors = []
     errors = errors.concat @get("currentRevision").getErrors("Quotation")
     return errors
-
-
-Vosae.Adapter.map "Vosae.Quotation",
-  # revisions:
-  #   embedded: "always"
-  ref:
-    key: "reference"
-  notes:
-    embedded: "always"
-  currentRevision:
-    embedded: "always"

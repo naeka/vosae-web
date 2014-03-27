@@ -5,15 +5,9 @@ Vosae.SettingsInvoicingGeneralRoute = Ember.Route.extend
   setupController: (controller, model) ->
     controller.setProperties
       'content': model
-      'currencies': Vosae.Currency.all().filterProperty('id')
+      'currencies': @store.all("currency").filterProperty('id')
       'paymentTypes': Vosae.Config.paymentTypes
-
-  renderTemplate: ->
-    @render 'settings.invoicingGeneral',
-      into: 'settings'
-      outlet: 'content'
   
   deactivate: ->
-    settingsInvoicingGeneral = @controller.get 'content'
-    if settingsInvoicingGeneral.get 'isDirty'
-      settingsInvoicingGeneral.get("transaction").rollback()
+    model = @controller.get "content"
+    model.rollback() if model

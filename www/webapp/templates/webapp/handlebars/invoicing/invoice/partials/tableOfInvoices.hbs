@@ -25,24 +25,24 @@
       {{#each invoice in this}}
         <tr>
           <td class="reference">
-            {{#linkTo "invoice.show" controller.session.tenant invoice}}
+            {{#link-to "invoice.show" controller.session.tenant invoice}}
               {{#if invoice.hasTemporaryReference}}
                 {% trans "Undefined" context "reference" %}
               {{else}}
-                {{invoice.ref}}
+                {{invoice.reference}}
               {{/if}}
-            {{/linkTo}}
+            {{/link-to}}
           </td>
           <td class="customer">
             {{#if invoice.organization}}
-              {{#linkTo "organization.show" controller.session.tenant invoice.organization}}
+              {{#link-to "organization.show" controller.session.tenant invoice.organization}}
                 {{invoice.organization.corporateName}}
-              {{/linkTo}}
+              {{/link-to}}
             {{else}}
               {{#if invoice.contanct}}
-                {{#linkTo "contact.show" controller.session.tenant invoice.contact}}
+                {{#link-to "contact.show" controller.session.tenant invoice.contact}}
                   {{invoice.contact.fullName}}
-                {{/linkTo}}
+                {{/link-to}}
               {{/if}}
             {{/if}}
           </td>

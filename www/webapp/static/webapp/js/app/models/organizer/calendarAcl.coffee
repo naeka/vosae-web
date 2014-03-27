@@ -8,9 +8,4 @@
 ###
 
 Vosae.CalendarAcl = Vosae.Model.extend
-  rules: DS.hasMany('Vosae.CalendarAclRule')
-
-
-Vosae.Adapter.map "Vosae.CalendarAcl",
-  rules:
-    embedded: "always"
+  rules: DS.hasMany('calendarAclRule')

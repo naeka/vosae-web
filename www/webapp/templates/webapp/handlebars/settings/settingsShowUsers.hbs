@@ -18,9 +18,9 @@
           {{#each user in controller}}
             <tr>
               <td class="name">
-                {{#linkTo 'settings.editUser' controller.session.tenant user}}
+                {{#link-to 'settings.editUser' controller.session.tenant user}}
                   {{user.getFullName}}
-                {{/linkTo}}
+                {{/link-to}}
               </td>
               <td class="email">{{user.email}}</td>
               <td class="creation-date">-</td>
@@ -31,9 +31,9 @@
         </tbody>
       </table>
       <br/>
-      {{#linkTo 'settings.addUser' controller.session.tenant class="pull-right btn btn-sm btn-rounded btn-success"}}
+      {{#link-to 'settings.addUser' controller.session.tenant class="pull-right btn btn-sm btn-rounded btn-success"}}
         {% trans "Add" %}
-      {{/linkTo}}
+      {{/link-to}}
     </div>
   </section>
 {% endtplhandlebars %}

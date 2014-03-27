@@ -26,11 +26,13 @@ require 'views/partials/bootstrap/textField'
 require 'views/partials/permissionsManager'
 require 'views/partials/specificPermissionsManager'
 
-require 'views/core/application'
+require 'views/application'
+
 require 'views/core/search'
 require 'views/core/panels'
-require 'views/core/dashboardShow'
+require 'views/core/dashboardIndex'
 
+require 'views/tenants/tenant'
 require 'views/tenants/tenantsShow'
 require 'views/tenants/tenantsAdd'
 
@@ -69,7 +71,6 @@ require 'views/invoicing/invoiceEdit'
 require 'views/invoicing/quotationsAdd'
 require 'views/invoicing/invoicesAdd'
 require 'views/invoicing/itemsShow'
-require 'views/invoicing/itemsAdd'
 require 'views/invoicing/itemShow'
 require 'views/invoicing/itemEdit'
 require 'views/invoicing/creditNoteShow'

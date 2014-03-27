@@ -1,195 +1,97 @@
-require 'store/serializer'
-require 'store/adapter'
-
-# This allows ember-data to return all objects 
-# or subclasses of the model Class when calling
-# DS.Model.all()
-
-DS.RecordArrayManager.reopen
-  updateRecordArrays: () ->
-    Ember.EnumerableUtils.forEach @changedReferences, ((reference) =>
-      type = reference.type
-      superclass = type.superclass
-      recordArrays = @filteredRecordArrays.get(type)
-      filter = undefined
-
-      recordArrays.forEach (array) =>
-        filter = Ember.get(array, "filterFunction")
-        @updateRecordArray array, filter, type, reference
-
-      if DS.Model.detect(superclass)
-        recordArrays = @filteredRecordArrays.get(superclass)
-        recordArrays.forEach (array) =>
-          filter = Ember.get(array, 'filterFunction')
-          @updateRecordArray array, filter, superclass, reference
-      
-      # loop through all manyArrays containing an unloaded copy of this
-      # clientId and notify them that the record was loaded.
-      manyArrays = reference.loadingRecordArrays
-      if manyArrays
-        i = 0
-        l = manyArrays.length
-
-        while i < l
-          manyArrays[i].loadedRecord()
-          i++
-        reference.loadingRecordArrays = []
-    ), this
-
-    @changedReferences = []
-
-
-# Main app store
-
 Vosae.Store = DS.Store.extend
-  adapter: Vosae.Adapter.create()
+  ###
+    Set metadata for a type. As long as we needs some computed properties
+    we create an `Ember.Object` instance and set it as metadata for the
+    type
 
-# These register adapter is mainly used to transform
-# the json[`specific_permissions`] returned by the API
-# into something useable by ember-data.
+    @method metaForType
+    @param {String or subclass of DS.Model} type
+    @param {Object} metadata
+    @param {String} requestType (findAll, findQuery, ...)
+    @param {String or Object} query '?offset=40&?limit=5'
+  ###
+  metaForType: (type, metadata, requestType, query) ->
+    type = @modelFor type
 
-Vosae.Store.registerAdapter 'Vosae.User', Vosae.Adapter.extend
-  serializer: Vosae.UserSerializer.create()
+    if requestType is "findQuery" and Em.typeOf query is "string"
+      meta = @typeMapFor(type).metadata.get("queries").findBy('lastQuery', query)
+    else
+      meta = @typeMapFor(type).metadata
 
-# As long as `supportedCurrencies` and `defaultCurrency` are not part of
-# the `<Vosae.Tenant>` model, but are required by the API for creation, 
-# This adapter add thoses properties to the `<Vosae.Tenant>` before POST.
+    # Set the new metadata for the type
+    if meta then for prop of metadata
+      meta.set prop, metadata[prop]
 
-Vosae.Store.registerAdapter 'Vosae.Tenant', Vosae.Adapter.extend
-  createRecord: (store, type, record) ->
-    json = {}
-    root = @rootForType(type)
-    data = record.serialize()
-    adapter = this
+  ###
+    Returns a map of IDs to client IDs for a given type. We overide this method 
+    because we want the metadata propery to return an Ember.Object rather than 
+    an empty dict {}.
 
-    # Dirty but no other solution right now...
-    controller = Vosae.lookup('controller:tenants.add')
+    @method typeMapFor
+    @param type
+    @return {Object} typeMap
+  ###
+  typeMapFor: (type) ->
+    typeMaps = @get "typeMaps"
+    guid = Ember.guidFor(type)
+    typeMap = typeMaps[guid]
+
+    return typeMap if typeMap
+
+    typeMap =
+      idToRecord: {}
+      records: []
+      metadata: Em.Object.createWithMixins(Vosae.MetaMixin, {})
+      type: type
+
+    typeMaps[guid] = typeMap
+    typeMap
+
+  ###
+    Returns the adapter for a given type. If type is polymorphic we return 
+    the adapter of his superclass.
+
+    @method adapterFor
+    @private
+    @param {subclass of DS.Model} type
+    @returns DS.Adapter
+  ###
+  adapterFor: (type) ->
+    superclass = type.superclass
+    switch superclass
+      when Vosae.Notification then type = Vosae.Notification
+      when Vosae.Timeline then type = Vosae.Timeline
     
-    # Add `supportedCurrencies` and `defaultCurrency` to data
-    supportedCurrencies = controller.getSupportedCurrenciesResourceURI()
-    defaultCurrency = controller.getDefaultCurrencyResourceURI()
-    data['supported_currencies'] = supportedCurrencies
-    data['default_currency'] = defaultCurrency
+    @_super type
 
-    @ajax(@buildURL(root), "POST",
-      data: data
-    ).then((pre_json) ->
-      json[root] = pre_json
-      Ember.run @, ->
-        adapter.didCreateRecord store, type, record, json
-    , (xhr) ->
-      adapter.didError store, type, record, xhr
-    ).then null, adapter.rejectionHandler
+  ###
+    Returns an instance of the serializer for a given type. For
+    example, `serializerFor('person')` will return an instance of
+    `App.PersonSerializer`.
 
-# This register adapter is mainly used to fetch the tenantSettings
-# on the API. `api/v1/tenant_settings` is a specific end point that
-# always returns the authenticated tenant 
+    If no `App.PersonSerializer` is found, this method will look
+    for an `App.ApplicationSerializer` (the default serializer for
+    your entire application).
 
-Vosae.Store.registerAdapter 'Vosae.TenantSettings', Vosae.Adapter.extend
-  find: (store, type, id) ->
-    id = 1 # IMPORTANT !!!
-    json = {}
-    root = @rootForType(type)
-    adapter = this
-    @ajax(@buildURL(root), "GET").then((pre_json) ->
-        # Transforms key 'objects' from JSON by type
-        # Example for model Contact json['objects'] -> json['contact']
-      json[root] = pre_json
-      adapter.didFindRecord store, type, json, id
-    ).then null, adapter.rejectionHandler
+    If no `App.ApplicationSerializer` is found, it will fall back
+    to an instance of `DS.JSONSerializer`. 
 
-  updateRecord: (store, type, record) ->
-    json = {}
-    root = @rootForType(type)
-    adapter = this
-    data = @serialize(record)
+    If type is polymorphic we return the serializer of his superclass.
 
-    @ajax(@buildURL(root), "PUT",
-      data: data
-    ).then((pre_json) ->
-      json[root] = pre_json
-      adapter.didUpdateRecord store, type, record, json
-    , (xhr) ->
-      adapter.didError store, type, record, xhr
-      throw xhr
-    ).then null, adapter.rejectionHandler
+    @method serializerFor
+    @private
+    @param {String} type the record to serialize
+    @return {DS.Serializer}
+  ###
+  serializerFor: (type) ->
+    if type in Vosae.Utilities.TIMELINE_MODELS
+      type = "timeline"
+    else if type in Vosae.Utilities.NOTIFICATION_MODELS
+      type = "notification"
+    else if type in Vosae.Utilities.REGISTRATION_INFO_MODELS
+      type = "registrationInfo"
 
-# Theses register adapters are used because we need to
-# keep a track of the query generated by the controller. 
-# This way we can bind meta and query and create pagination
+    @_super type
 
-Vosae.Store.registerAdapter 'Vosae.Invoice', Vosae.Adapter.extend
-  serializer: Vosae.InvoiceBaseSerializer.create()
-
-  findQuery: (store, type, query, recordArray) ->
-    json = {}
-    root = @rootForType(type)
-    plural = @pluralize(root)
-    data = if query.string then query.string else query
-    adapter = this
-    
-    @ajax(@buildURL(root), "GET",
-      data: data
-    ).then((pre_json) ->
-      json['meta'] = pre_json['meta']
-      json[plural] = pre_json['objects']
-      if json.meta and query.name
-        adapter.storeMetaData json.meta, type, query.name
-      adapter.didFindQuery store, type, json, recordArray
-    ).then null, adapter.rejectionHandler
-
-Vosae.Store.registerAdapter 'Vosae.Quotation', Vosae.Adapter.extend
-  serializer: Vosae.InvoiceBaseSerializer.create()
-
-  findQuery: (store, type, query, recordArray) ->
-    json = {}
-    root = @rootForType(type)
-    plural = @pluralize(root)
-    data = if query.string then query.string else query
-    adapter = this
-    
-    @ajax(@buildURL(root), "GET",
-      data: data
-    ).then((pre_json) ->
-      json['meta'] = pre_json['meta']
-      json[plural] = pre_json['objects']
-      if json.meta and query.name
-        adapter.storeMetaData json.meta, type, query.name
-      adapter.didFindQuery store, type, json, recordArray
-    ).then null, adapter.rejectionHandler
-
-# As long as <Vosae.CreditNote> extend the model <Vosae.InvoiceBase>
-# we need to use the InvoiceBaseSerializer
-
-Vosae.Store.registerAdapter 'Vosae.CreditNote', Vosae.Adapter.extend
-  serializer: Vosae.InvoiceBaseSerializer.create()
-
-# <Vosae.Payment> is a polymorphic model, this way, when POST on
-# /payment/ we need to add "type=invoice_payment" to the contentType
-# property in the ajax hash object.
-
-Vosae.Store.registerAdapter 'Vosae.Payment', Vosae.Adapter.extend
-  ajax: (url, type, hash) ->
-    adapter = this
-    new Ember.RSVP.Promise((resolve, reject) ->
-      hash = hash or {}
-      hash.url = url
-      hash.type = type
-      hash.dataType = "json"
-      hash.context = adapter
-
-      if hash.data and type isnt "GET"
-        hash.contentType = "application/json; charset=utf-8; type=invoice_payment;"
-        hash.data = JSON.stringify(hash.data)
-
-      hash.success = (json) ->
-        Ember.run null, resolve, json
-
-      hash.error = (jqXHR, textStatus, errorThrown) ->
-        Ember.run null, reject, jqXHR
-
-      Ember.$.ajax hash
-    )
-
-# Custom adapters have been defined, we can instantiate or main store
+# Create an instance
 Vosae.Store.create()

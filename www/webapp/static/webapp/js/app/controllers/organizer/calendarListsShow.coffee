@@ -8,18 +8,15 @@
 ###
 
 Vosae.CalendarListsShowController = Em.ArrayController.extend
+  needs: ['calendarListsShowSettings', 'quickAddEvent', 'calendarListsShow']
   fc: null
   lastView: null
   lastViewStart: null
 
-  init: ->
-    @_super()
-    @get('needs').addObjects(['calendarListsShowSettings', 'quickAddEvent'])
-
-
   calendarListsLoaded: (->
     !@get('content').findProperty 'isLoaded', false
   ).property "content.@each.isLoaded"
+
 
 ###
   Custom controller for a `Vosae.VosaeEvent` record.
@@ -33,23 +30,19 @@ Vosae.CalendarListsShowController = Em.ArrayController.extend
 Vosae.QuickAddEventController = Em.ObjectController.extend
   actions:
     cancel: (vosaeEvent) ->
-      if vosaeEvent
-        vosaeEvent.get('transaction').rollback()
+      vosaeEvent.rollback()
 
     edit: (vosaeEvent) ->
       @transitionToRoute 'vosaeEvent.edit', @get('session.tenant'), vosaeEvent
 
     save: (vosaeEvent) ->
-      event = if vosaeEvent.get('id') then 'didUpdate' else 'didCreate'
-      vosaeEvent.one event, @, ->
-        Ember.run.next @, ->
-          if event is 'didCreate'
-            message = gettext 'Your event has been successfully created'
-          else
-            message = gettext 'Your event has been successfully updated'
-          Vosae.SuccessPopupComponent.open
-            message: message
-      vosaeEvent.get('transaction').commit()
+      if vosaeEvent.get('isNew')
+        message = gettext 'Your event has been successfully created'
+      else
+        message = gettext 'Your event has been successfully updated'
+      vosaeEvent.save().then ->
+        Vosae.SuccessPopup.open
+          message: message
 
 
 ###
@@ -62,11 +55,8 @@ Vosae.QuickAddEventController = Em.ObjectController.extend
 ###
 
 Vosae.CalendarListsShowSettingsController = Em.ArrayController.extend
+  needs: ['calendarListsShow']
   fcRendered: false
-
-  init: ->
-    @_super()
-    @get('needs').addObject('calendarListsShow')
 
   actions:
     toggleCalendar: (elem, calendarList)->

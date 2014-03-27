@@ -7,16 +7,22 @@ Vosae.ContactShowView = Em.View.extend
       route = controller.get('target.router').getHandler('quotations.add')
       route.get('preFillQuotationWith').contact = controller.get('content')
       if controller.get('content.organization')
-        route.get('preFillQuotationWith').organization = controller.get('content.organization')
-      controller.transitionToRoute 'quotations.add', @get('session.tenant')
+        controller.get('content.organization').then (organization) =>
+          route.get('preFillQuotationWith').organization = organization
+          controller.transitionToRoute 'quotations.add', @get('session.tenant')
+      else
+        controller.transitionToRoute 'quotations.add', @get('session.tenant')
     
     addInvoiceToThis: ->
       controller = @get('controller')
       route = controller.get('target.router').getHandler('invoices.add')
       route.get('preFillInvoiceWith').contact = controller.get('content')
       if controller.get('content.organization')
-        route.get('preFillInvoiceWith').organization = controller.get('content.organization')
-      controller.transitionToRoute 'invoices.add', @get('session.tenant')
+        controller.get('content.organization').then (organization) =>
+          route.get('preFillInvoiceWith').organization = organization
+          controller.transitionToRoute 'invoices.add', @get('session.tenant')
+      else
+        controller.transitionToRoute 'invoices.add', @get('session.tenant')
 
   expandInvoicingTable: ->
     # Append class to selected tr, expand content

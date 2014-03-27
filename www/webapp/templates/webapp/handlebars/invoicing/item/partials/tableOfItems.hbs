@@ -14,9 +14,9 @@
       {{#each item in this}}
         <tr>
           <td class="reference">
-            {{#linkTo "item.show" controller.session.tenant item}}
-              {{item.ref}}
-            {{/linkTo}}
+            {{#link-to "item.show" controller.session.tenant item}}
+              {{item.reference}}
+            {{/link-to}}
           </td>
           <td class="description">{{{item.description}}}</td>
           <td class="unit-price">{{#formatMoneyHack item.unitPrice item.currency.displaySymbol}}{{/formatMoneyHack}}</td>

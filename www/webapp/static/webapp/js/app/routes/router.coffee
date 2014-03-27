@@ -22,9 +22,10 @@ Vosae.Router.map ->
   @resource 'tenant', path: '/:tenant_slug', ->
     @route 'index', path: '/'
 
+    # Routes for app dashboard
     @resource 'dashboard', path: '/timeline', ->  
-      @route 'show', path: '/'
 
+    # Routes for app contacts
     @resource 'contacts', path: '/contacts', ->
       @route 'show', path: '/'
       @route 'add'
@@ -39,6 +40,7 @@ Vosae.Router.map ->
       @route 'edit'
       @route 'addContact', path: '/contact/add'
 
+    # Routes for app organizer
     @resource 'calendarLists', path: '/organizer', ->
       @route 'show', path: '/'
       @route 'add'
@@ -49,6 +51,7 @@ Vosae.Router.map ->
       @route 'show', path: '/'
       @route 'edit'
 
+    # Routes for app invoicing
     @resource 'invoicing', path: '/invoicing', ->
       @route 'dashboard', path: '/'
     @resource 'quotations', path: '/invoicing/quotations', ->
@@ -78,21 +81,22 @@ Vosae.Router.map ->
       @route 'show', path: '/'
       @route 'edit'
 
-    @resource 'settings', path: '/settings', ->
-      @route 'application'
-      @route 'apiKeys', path: '/api_keys'
-      @route 'organization'
-      @route 'showUsers', path: '/users'
-      @route 'addUser', path: '/users/add'
-      @route 'editUser', path: '/users/:user_id'
-      @route 'showGroups', path: '/groups'
-      @route 'addGroup', path: '/groups/add'
-      @route 'editGroup', path: '/groups/:group_id'
-      @route 'showTaxes', path: '/taxes'
-      @route 'addTax', path: '/taxes/add'
-      @route 'editTax', path: '/taxes/:tax_id'
-      @route 'invoicingGeneral', path: '/invoicing/general'
-      @route 'numbering', path: '/numbering'
-      @route 'report', path: '/report'
+  # Routes for app settings
+  @resource 'settings', path: '/:tenant_slug/settings', ->
+    @route 'application'
+    @route 'apiKeys', path: '/api_keys'
+    @route 'organization'
+    @route 'showUsers', path: '/users'
+    @route 'addUser', path: '/users/add'
+    @route 'editUser', path: '/users/:user_id'
+    @route 'showGroups', path: '/groups'
+    @route 'addGroup', path: '/groups/add'
+    @route 'editGroup', path: '/groups/:group_id'
+    @route 'showTaxes', path: '/taxes'
+    @route 'addTax', path: '/taxes/add'
+    @route 'editTax', path: '/taxes/:tax_id'
+    @route 'invoicingGeneral', path: '/invoicing/general'
+    @route 'numbering', path: '/numbering'
+    @route 'report', path: '/report'
   
   @route 'notFound', path: '*:' 

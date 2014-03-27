@@ -1,4 +1,4 @@
-Vosae.TenantsAddView = Vosae.PageTenantView.extend
+Vosae.TenantsAddView = Vosae.ContainerTenantsView.extend
   classNames: ["outlet-tenants", "page-add-tenant"]
   
   inStepIdentity: true
@@ -35,7 +35,7 @@ Vosae.TenantsAddView = Vosae.PageTenantView.extend
 
     # Go to form next step
     nextStep: (tenant) ->
-      tenant.resetErrors()
+      tenant.get('errors').clear()
       currentStep = @getCurrentStep()
       switch currentStep
         when 'stepIdentity'
@@ -156,7 +156,7 @@ Vosae.TenantsAddView = Vosae.PageTenantView.extend
   # Set a field as required
   setFieldAsRequired: (record, field) ->
     error = gettext 'This field is required.'
-    record.pushError(field, error)
+    record.get('errors').add field, error
 
   # Update registration info form depends on country
   registrationInfoView: Ember.ContainerView.extend

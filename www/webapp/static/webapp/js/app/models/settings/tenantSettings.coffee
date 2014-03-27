@@ -8,17 +8,10 @@
 ###
 
 Vosae.TenantSettings = Vosae.Model.extend
-  core: DS.belongsTo('Vosae.CoreSettings')
-  invoicing: DS.belongsTo('Vosae.InvoicingSettings')
+  core: DS.belongsTo('coreSettings')
+  invoicing: DS.belongsTo('invoicingSettings')
 
   didUpdate: ->
     message = gettext "Invoicing settings have been successfully updated"
-    Vosae.SuccessPopupComponent.open
+    Vosae.SuccessPopup.open
       message: message
-
-
-Vosae.Adapter.map "Vosae.TenantSettings",
-  core:
-    embedded: "always"
-  invoicing:
-    embedded: "always"

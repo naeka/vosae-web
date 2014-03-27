@@ -2,140 +2,126 @@
   Custom array controller for a collection of `Vosae.Quotation` records.
 
   @class QuotationsShowController
-  @extends Vosae.InvoicesBaseController
+  @extends Ember.ArrayController
   @namespace Vosae
   @module Vosae
 ###
 
-Vosae.QuotationsShowController = Vosae.InvoicesBaseController.extend
+Vosae.QuotationsShowController = Ember.ArrayController.extend
   sortProperties: ['currentRevision.dueDate']
   sortAscending: false
+  queryLimit: 5
 
-  actions:
-    getNextQuotationsDraft: ->
-      lastQueryDraft = @get('meta.queries').get(@get('paginationDraft.metaQueryName'))
-      if lastQueryDraft 
-        newQueryDraft =
-          name: @get('paginationDraft.metaQueryName')
-          string: @get('paginationDraft.query') + '&offset=' + (lastQueryDraft.get('limit') + lastQueryDraft.get('offset'))
-        @getModel().find(newQueryDraft)
-    
-    getNextQuotationsExpired: ->
-      lastQueryExpired = @get('meta.queries').get(@get('paginationExpired.metaQueryName'))
-      if lastQueryExpired
-        newQueryExpired =
-          name: @get('paginationExpired.metaQueryName')
-          string: @get('paginationExpired.query') + '&offset=' + (lastQueryExpired.get('limit') + lastQueryExpired.get('offset'))
-        @getModel().find(newQueryExpired)
+  metaPending: null
+  metaFailed: null
+  metaSucceeded: null
 
-    getNextQuotationsApproved: ->
-      lastQueryApproved = @get('meta.queries').get(@get('paginationApproved.metaQueryName'))
-      if lastQueryApproved
-        newQueryApproved =
-          name: @get('paginationApproved.metaQueryName')
-          string: @get('paginationApproved.query') + '&offset=' + (lastQueryApproved.get('limit') + lastQueryApproved.get('offset'))
-        @getModel().find(newQueryApproved)
+  checkQueryLimit: (->
+    Ember.Logger.error(@toString() + " needs the `queryLimit` property to be defined.") if Em.isNone @queryLimit
+  ).on "init"
 
-  totalOfSelection: (->
-    total = 0
-    @get('content').forEach (x, idx, i) ->
-      total = total + x.get('total')
-    return accounting.formatMoney(total, "EUR")
-  ).property('content.length')
+  ###
+    Fetch each query once on controller initialization
+  ###
+  fetchQueriesOnce: (->
+    @set "content", @store.all("quotation")
 
-  ##
-  # Queries for grouping quotations by states
-  #
-  paginationDraft: Ember.Object.create
-    metaQueryName: 'stateIsDraftOrAwaitingApproval'
+    # Create meta for queries
+    @createMetadataForQueries()
+
+    # Fetch queries
+    @send "getNextPaginationPending"
+    @send "getNextPaginationFailed"
+    @send "getNextPaginationSucceeded"
+  ).on "init"
+
+  ###
+    Create a metadata object for each queries
+  ###
+  createMetadataForQueries: ->
+    # Create a meta object for each queries
+    @set "metaPending", Em.Object.createWithMixins Vosae.MetaMixin, 
+      name: 'pending'
+    @set "metaFailed", Em.Object.createWithMixins Vosae.MetaMixin, 
+      name: 'failed'
+    @set "metaSucceeded", Em.Object.createWithMixins Vosae.MetaMixin,
+      name: 'succeeded'
+
+    # Push meta to their meta parent queries array
+    queries = @get("store").metadataFor("quotation").get("queries")
+    queries.push @get("metaPending")
+    queries.push @get("metaFailed")
+    queries.push @get("metaSucceeded")
+
+  ###
+    Queries for grouping quotations by states
+  ###
+  queryPending: Ember.Object.create
+    name: 'pending'
     query: 'state__in=DRAFT&state__in=AWAITING_APPROVAL'
-  
-  paginationExpired: Ember.Object.create
-    metaQueryName: 'stateIsExpiredOrRefused'
+
+  queryFailed: Ember.Object.create
+    name: 'failed'
     query: 'state__in=EXPIRED&state__in=REFUSED'
-  
-  paginationApproved: Ember.Object.create
-    metaQueryName: 'stateIsApprovedOrInvoiced'
+
+  querySucceeded: Ember.Object.create
+    name: 'succeeded'
     query: 'state__in=APPROVED&state__in=INVOICED'
 
-  ##
-  # Returns quotations grouped by states
-  #
-  quotationsDraftAwaitingApproval: (->
-    ret = []
-    Vosae.Quotation.all().forEach (quotation) ->
-      if ['DRAFT', 'AWAITING_APPROVAL'].contains(quotation.get('state'))
-        ret.addObject(quotation)
-    ret
+  ###
+    Returns quotations grouped by states
+  ###
+  quotationsPending: (->
+    @get("content").filter (quotation) ->
+      ['DRAFT', 'AWAITING_APPROVAL'].contains quotation.get('state')
   ).property('content.length', 'content.@each.state')
 
-  quotationsExpiredRefused: (->
-    ret = []
-    Vosae.Quotation.all().forEach (quotation) ->
-      if ['EXPIRED', 'REFUSED'].contains(quotation.get('state'))
-        ret.addObject(quotation)
-    ret
+  quotationsFailed: (->
+    @get("content").filter (quotation) ->
+      ['EXPIRED', 'REFUSED'].contains quotation.get('state')
   ).property('content.length', 'content.@each.state')
 
-  quotationsApprovedInvoiced: (->
-    ret = []
-    Vosae.Quotation.all().forEach (quotation) ->
-      if ['APPROVED', 'INVOICED'].contains(quotation.get('state'))
-        ret.addObject(quotation)
-    ret
+  quotationsSucceeded: (->
+    @get("content").filter (quotation) ->
+      ['APPROVED', 'INVOICED'].contains quotation.get('state')
   ).property('content.length', 'content.@each.state')
 
-  ##
-  # Those properties indicates if more quotations can be loaded
-  # 
-  paginationDraftHasNext: (->
-    if @get('meta.queries.stateIsDraftOrAwaitingApproval.next')
-      return true
-    false
-  ).property('meta.queries.stateIsDraftOrAwaitingApproval')
+  ###
+    Main method that will check meta for the specific query and fetch data
 
-  paginationExpiredHasNext: (->
-    if @get('meta.queries.stateIsExpiredOrRefused.next')
-      return true
-    false
-  ).property('meta.queries.stateIsExpiredOrRefused')
+    @query {Object} The query object with the name of the query and the query her self
+  ###
+  getNextPaginationForQuery: (query, meta)  ->
+    # Nothing to do if there's no query object
+    return if !query or !query.hasOwnProperty("name")
 
-  paginationApprovedHasNext: (->
-    if @get('meta.queries.stateIsApprovedOrInvoiced.next')
-      return true
-    false
-  ).property('meta.queries.stateIsApprovedOrInvoiced')
+    if !meta.get('hasBeenFetched')
+      queryString = query.get('query') + '&offset=' + 0 + '&limit=' + @get("queryLimit")
+    else
+      queryString = query.get('query') + '&offset=' + meta.get('since') + '&limit=' + @get("queryLimit")
 
-  getNextPagination: ->
-    if @get('meta') && @getModel()
+    meta.setProperties
+      "lastQuery": queryString
+      "loading": true
 
-      if @get('meta.queries')
-        queryDraftExist = @get('meta.queries')[@get('paginationDraft.metaQueryName')]
-        queryExpiredExist = @get('meta.queries')[@get('paginationDraft.metaQueryName')]
-        queryApprovedExist = @get('meta.queries')[@get('paginationDraft.metaQueryName')]
-    
-      else
-        queryDraftExist = null
-        queryExpiredExist = null
-        queryApprovedExist = null
+    @store.findQuery('quotation', queryString).then () ->
+      meta.set "loading", false
 
-      # First time call 
-      unless queryDraftExist && queryExpiredExist && queryApprovedExist
-        
-        # DRAFT & AWAITING_APPROVAL
-        queryDraft =
-          name: @get('paginationDraft.metaQueryName')
-          string: @get('paginationDraft.query') + '&offset=0'
-        @getModel().find(queryDraft)
+  ###
+    Actions handler for pagination
+  ###
+  actions:
+    getNextPaginationPending: ->
+      query = @get("queryPending")
+      meta = @get("metaPending")
+      @getNextPaginationForQuery query, meta
 
-        # EXPIRED & REFUSED
-        queryExpired =
-          name: @get('paginationExpired.metaQueryName')
-          string: @get('paginationExpired.query') + '&offset=0'
-        @getModel().find(queryExpired)
+    getNextPaginationFailed: ->
+      query = @get("queryFailed")
+      meta = @get("metaFailed")
+      @getNextPaginationForQuery query, meta
 
-        # APPROVED & INVOICED
-        queryApproved =
-          name: @get('paginationApproved.metaQueryName')
-          string: @get('paginationApproved.query') + '&offset=0'
-        @getModel().find(queryApproved)
+    getNextPaginationSucceeded: ->
+      query = @get("querySucceeded")
+      meta = @get("metaSucceeded")
+      @getNextPaginationForQuery query, meta

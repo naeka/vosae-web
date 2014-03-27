@@ -14,10 +14,10 @@ Vosae.ApiKey = Vosae.Model.extend
 
   didCreate: ->
     message = gettext 'Your API key has been successfully created'
-    Vosae.SuccessPopupComponent.open
+    Vosae.SuccessPopup.open
       message: message
 
   didDelete: ->
     message = gettext 'Your API key has been successfully deleted'
-    Vosae.SuccessPopupComponent.open
+    Vosae.SuccessPopup.open
       message: message

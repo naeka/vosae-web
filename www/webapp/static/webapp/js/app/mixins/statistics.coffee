@@ -22,11 +22,9 @@ Vosae.StatisticsMixin = Ember.Mixin.create
   ).property('_results')
 
   fetchResults: ->
-    _this = @
-    adapter = @get('store.adapter')
+    adapter = @get('store').adapterFor('application')
     adapter.ajax(adapter.buildURL('statistics'), 'POST',
-      data:
-        pipeline: _this.pipeline()
-    ).then((json) ->
-      _this.set('_results', json['objects'])
-    )
+      data: 
+        pipeline: @pipeline()
+    ).then (json) =>
+      @set('_results', json['objects'])

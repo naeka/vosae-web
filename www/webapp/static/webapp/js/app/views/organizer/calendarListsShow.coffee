@@ -85,21 +85,21 @@ Vosae.CalendarListsShowView = Em.ContainerView.extend
             .set('lastViewStart', view.start)
 
         eventClick: (calEvent, jsEvent, view) ->
-          _this.get('controller').transitionToRoute 'vosaeEvent.show', _this.get('controller.session.tenant'), Vosae.VosaeEvent.find calEvent.id
+          vosaeEvent = _this.get('controller.store').find('vosaeEvent', calEvent.id)
+          _this.get('controller').transitionToRoute 'vosaeEvent.show', _this.get('controller.session.tenant'), vosaeEvent
 
         select: (startDate, endDate, allDay, jsEvent, view) ->
-          calendarLists = Vosae.CalendarList.all()
+          calendarLists = _this.get('controller.store').all('calendarList')
 
           # create a new record
-          unusedTransaction = _this.get('controller.store').transaction()
-          start = unusedTransaction.createRecord Vosae.EventDateTime
-          end = unusedTransaction.createRecord Vosae.EventDateTime           
-          ev = Vosae.VosaeEvent.createRecord(color: null)
-          ev.setProperties
+          store = _this.get('controller.store')
+          ev = store.createRecord 'vosaeEvent',
+            'color': null
             'calendar': calendarLists.get 'firstObject.calendar'
             'calendarList': calendarLists.get 'firstObject'
-            'start': start
-            'end': end
+            'start': store.createRecord("eventDateTime")
+            'end': store.createRecord("eventDateTime")
+            'reminders': store.createRecord("reminderSettings")
 
           if allDay
             ev.setProperties

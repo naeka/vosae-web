@@ -14,16 +14,16 @@
         <tbody>
           {{#each tax in controller}}
           <tr>
-            <td>{{#linkTo 'settings.editTax' controller.session.tenant tax}}{{tax.name}}{{/linkTo}}</a></td>
+            <td>{{#link-to 'settings.editTax' controller.session.tenant tax}}{{tax.name}}{{/link-to}}</a></td>
             <td>{{tax.displayRate}}</td>
           </tr>
           {{/each}}
         </tbody>
       </table>
       <br/>
-      {{#linkTo 'settings.addTax' controller.session.tenant class="pull-right btn btn-sm btn-success btn-rounded"}}
+      {{#link-to 'settings.addTax' controller.session.tenant class="pull-right btn btn-sm btn-success btn-rounded"}}
         {% trans "Add" %}
-      {{/linkTo}}
+      {{/link-to}}
     </div>
   </section>
 {% endtplhandlebars %}

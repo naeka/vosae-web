@@ -29,3 +29,11 @@ Vosae.Session = Ember.Object.extend
           @preselectedTenant = tenant
           @nextUrl = pathname
   ).on "init"
+
+  ###
+    This computed property returns true if there's a tenant in
+    the current session.
+  ###
+  hasTenant: (->
+    @get("tenant") != null
+  ).property "tenant"

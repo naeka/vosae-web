@@ -120,6 +120,7 @@ module.exports = (grunt) ->
           WEBAPP_JS_VENDOR_DIR + "jquery.fileupload.js",
           WEBAPP_JS_VENDOR_DIR + "jquery.fileupload-process.js",
           WEBAPP_JS_VENDOR_DIR + "jquery.fileupload-validate.js",
+          WEBAPP_JS_VENDOR_DIR + "jquery.fileupload-vosae.js",
           WEBAPP_JS_VENDOR_DIR + "jquery.magicSuggest.js",
           WEBAPP_JS_VENDOR_DIR + "jquery.minicolors.js",
           WEBAPP_JS_VENDOR_DIR + "minispade.js",
@@ -146,7 +147,7 @@ module.exports = (grunt) ->
           WEBAPP_JS_VENDOR_DIR + "ckeditor.lang-all.js",
           WEBAPP_JS_VENDOR_DIR + "handlebars.js",
           WEBAPP_JS_VENDOR_DIR + "ember.js",
-          WEBAPP_JS_VENDOR_DIR + "ember-data.js"
+          WEBAPP_JS_VENDOR_DIR + "ember-data.js",
         ]
         dest: WEBAPP_BUILD_DIR + "vendor.js"
       webapp_js_vendor_prod:
@@ -164,6 +165,7 @@ module.exports = (grunt) ->
           WEBAPP_JS_VENDOR_DIR + "jquery.fileupload.js",
           WEBAPP_JS_VENDOR_DIR + "jquery.fileupload-process.js",
           WEBAPP_JS_VENDOR_DIR + "jquery.fileupload-validate.js",
+          WEBAPP_JS_VENDOR_DIR + "jquery.fileupload-vosae.js",
           WEBAPP_JS_VENDOR_DIR + "jquery.magicSuggest.js",
           WEBAPP_JS_VENDOR_DIR + "jquery.minicolors.js",
           WEBAPP_JS_VENDOR_DIR + "minispade.js",
@@ -255,6 +257,7 @@ module.exports = (grunt) ->
         WEBAPP_CSS_DIR
       ]
       dev: [
+        WEBAPP_BUILD_DIR
         WEBAPP_TMP_DIR
       ]
 

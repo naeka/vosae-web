@@ -17,22 +17,20 @@ Vosae.SearchController = Ember.ArrayController.extend
     Create a search with the passing query
   ###
   createSearchQuery: (string) ->
-    adapter = @get('store.adapter')
-    self = this
-
     if string.length < @get("minSearchTerms")
       @set "insufficientSearchTerms", true
       @set "searchIsActive", true
     else
       @set "insufficientSearchTerms", false
       @set "queryString", string
+
+      adapter = @get('store').adapterFor('application')
       adapter.ajax(adapter.buildURL('search'), "GET",
         data: "q=" + string + "&limit=4"
-      ).then((json) ->
-        self.generateGetters json["objects"] if json["objects"].length > 0
-        self.set "content", json["objects"]
-        self.set "searchIsActive", true
-      ).then null, adapter.rejectionHandler
+      ).then (json) =>
+        @generateGetters json["objects"] if json["objects"].length > 0
+        @set "content", json["objects"]
+        @set "searchIsActive", true
 
   ###
     Generate a get method for each object

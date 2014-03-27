@@ -8,12 +8,12 @@
 ###
 
 Vosae.Item = Vosae.Model.extend
-  ref: DS.attr('string')
+  reference: DS.attr('string')
   description: DS.attr('string')
   unitPrice: DS.attr('number')
   type: DS.attr('string')
-  currency: DS.belongsTo('Vosae.Currency')
-  tax: DS.belongsTo('Vosae.Tax')
+  currency: DS.belongsTo('currency')
+  tax: DS.belongsTo('tax')
 
   displayUnitPrice: (->
     # Returns the unit price formated with a precision of 2
@@ -29,9 +29,9 @@ Vosae.Item = Vosae.Model.extend
     gettext('Service')
   ).property('type')
 
-  isEmpty: ->
+  recordIsEmpty: ->
     # Return true if item is empty
-    if @get 'ref'
+    if @get 'reference'
       return false
     if @get 'description'
       return false
@@ -48,7 +48,7 @@ Vosae.Item = Vosae.Model.extend
   getErrors: (type) ->
     errors = []
 
-    unless @get("ref")
+    unless @get("reference")
       errors.addObject gettext("Item reference must not be blank")
     unless @get("description")
       errors.addObject gettext("Item description must not be blank")
@@ -62,20 +62,15 @@ Vosae.Item = Vosae.Model.extend
 
   didCreate: ->
     message = gettext 'Your item has been successfully created'
-    Vosae.SuccessPopupComponent.open
+    Vosae.SuccessPopup.open
       message: message
 
   didUpdate: ->
     message = gettext 'Your item has been successfully updated'
-    Vosae.SuccessPopupComponent.open
+    Vosae.SuccessPopup.open
       message: message
 
   didDelete: ->
     message = gettext 'Your item has been successfully deleted'
-    Vosae.SuccessPopupComponent.open
+    Vosae.SuccessPopup.open
       message: message
-
-
-Vosae.Adapter.map "Vosae.Item",
-  ref:
-    key: "reference"

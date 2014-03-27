@@ -1,31 +1,17 @@
 Vosae.SettingsAddUserRoute = Ember.Route.extend
-  init: ->
-    @_super()
-    @get('container').register('controller:settings.addUser', Vosae.SettingsEditUserController)
+  controllerName: "settingsEditUser"
+  viewName: "settingsEditUser"
+  templateName: "settings/editUser"
 
   model: ->
-    Vosae.User.createRecord()
+    @store.createRecord("user")
 
   setupController: (controller, model) ->
-    unusedTransaction = @get('store').transaction()
-    userSettings = unusedTransaction.createRecord(Vosae.UserSettings)
-    model.set 'settings', userSettings
+    model.set 'settings', @store.createRecord("userSettings")
     controller.setProperties
       'content': model
-      'unusedTransaction': unusedTransaction
-      'groupsList': Vosae.Group.all()
-
-  renderTemplate: ->
-    @render 'settings.editUser',
-      into: 'settings'
-      outlet: 'content'
-      controller: @controller
+      'groupsList': @store.all("group")
 
   deactivate: ->
-    user = @controller.get 'content'
-    if user.get 'isDirty'
-      user.get("transaction").rollback()
-
-    unusedTransaction = @controller.get 'unusedTransaction'
-    if unusedTransaction
-      unusedTransaction.rollback()
+    model = @controller.get "content"
+    model.rollback() if model

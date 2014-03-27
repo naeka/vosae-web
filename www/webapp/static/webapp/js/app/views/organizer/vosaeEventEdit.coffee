@@ -64,39 +64,37 @@ Vosae.VosaeEventEditView = Em.View.extend
     emailField: Vosae.TypeaheadField.extend(Vosae.AutoGrowMixin,
       minLength: 1
       source: (typeahead, query) ->
-        self = @
-        $.map Vosae.User.all().toArray(), (user) ->
-          if user.get('email') in self.get('parentView.parentView.controller.attendees').getEach('email')
+        $.map @get('targetObject.store').all('user').toArray(), (user) =>
+          if user.get('email') in @get('targetObject.attendees').getEach('email')
             return null
           id: user.get 'id'
           name: user.get 'email'
       onSelect: (obj) ->
-        user = Vosae.User.find(obj.id)
-        isOrganizer = if user is @get('controller.content.organizer') then true else false
-        @get('parentView.content').setProperties
-          displayName: user.get('fullName')
-          photoUri: user.get('photoUri')
-          vosaeUser: user
-          organizer: isOrganizer
-        Em.run.next(@, -> @get('parentView').$('input').change())
+        @get('targetObject.store').find('user', obj.id).then (user) =>
+          isOrganizer = if user is @get('targetObject.content.organizer') then true else false
+          @get('parentView.content').setProperties
+            displayName: user.get('fullName')
+            photoUri: user.get('photoUri')
+            vosaeUser: user
+            organizer: isOrganizer
+          Em.run.next(@, -> @get('parentView').$('input').change())
     )
 
     displayNameField: Vosae.TypeaheadField.extend(Vosae.AutoGrowMixin,
       minLength: 1
       source: (typeahead, query) ->
-        self = @
-        $.map Vosae.User.all().toArray(), (user) ->
-          if user.get('email') in self.get('parentView.parentView.controller.attendees').getEach('email')
+        $.map @get('targetObject.store').all('user').toArray(), (user) =>
+          if user.get('email') in @get('targetObject.attendees').getEach('email')
             return null
           id: user.get 'id'
           name: user.get 'fullName'
       onSelect: (obj) ->
-        user = Vosae.User.find(obj.id)
-        @get('parentView.content').setProperties
-          email: user.get('email')
-          photoUri: user.get('photoUri')
-          vosaeUser: user
-        Em.run.next(@, -> @get('parentView').$('input').change())
+        @get('targetObject.store').find('user', obj.id).then (user) =>
+          @get('parentView.content').setProperties
+            email: user.get('email')
+            photoUri: user.get('photoUri')
+            vosaeUser: user
+          Em.run.next(@, -> @get('parentView').$('input').change())
     )
 
     responseStatutesSelect: Vosae.Select.extend

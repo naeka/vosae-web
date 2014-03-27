@@ -8,25 +8,25 @@
 ###
 
 Vosae.SettingsApiKeysController = Vosae.ArrayController.extend
+  relatedType: "apiKey"
+
   filteredApiKeys: (->
     apiKeys = @get('content').filter (apiKey) ->
       apiKey if apiKey.get("id")
-  ).property('content.@each', 'content.length', 'content.@each.id')
+  ).property('content.length', 'content.@each.id')
 
   # Actions handlers
   actions:
     saveNewApiKey: (apiKey) ->
-      apiKey.get('transaction').commit()
+      apiKey.save()
 
     deleteApiKey: (apiKey) ->
-      Vosae.ConfirmPopupComponent.open
+      Vosae.ConfirmPopup.open
         message: gettext 'Do you really want to revoke this API key?'
         callback: (opts, event) =>
           if opts.primary
-            t = @get('store').transaction()
-            t.adoptRecord apiKey
             apiKey.deleteRecord()
-            apiKey.get('transaction').commit()
+            apiKey.save()
 
     createNewApiKey: ->
-      @set 'newApiKey', Vosae.ApiKey.createRecord()
+      @set 'newApiKey', @get('store').createRecord("apiKey")

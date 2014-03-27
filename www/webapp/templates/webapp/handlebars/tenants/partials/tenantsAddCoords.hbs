@@ -97,7 +97,7 @@
 
   <hr>
 
-  <section {{bindAttr class=":coords useBilingAddressAsPostalAddress:same"}}>
+  <section {{bind-attr class=":coords useBilingAddressAsPostalAddress:same"}}>
     <h4 class="billing-address">{% trans "Billing address" %} {{input type="checkbox" id="id_tenant_same_address" checkedBinding="useBilingAddressAsPostalAddress"}} <label for="id_tenant_same_address">{% trans "Use the same address" %}</label></h4>
     
     {{#unless useBilingAddressAsPostalAddress}}

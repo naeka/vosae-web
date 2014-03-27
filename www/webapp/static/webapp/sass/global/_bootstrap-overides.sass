@@ -128,6 +128,10 @@ input.form-control-settings
   +input-placeholder(#444)
   +textarea-placeholder(#444)
 
+  &[disabled]
+    color: #666
+    background-color: lighten(#1e1e1e, 2%)
+
 .form-group
   &.has-no-error
     > div.errors
@@ -258,3 +262,11 @@ input.form-control-settings
 .popover
   +disable-box-shadow()
   +border-radius(0px)
+
+// Badge
+.badge
+  background-color: #BBB
+  &.success
+    background-color: $brand-success
+  &.primary
+    background-color: $brand-primary

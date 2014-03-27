@@ -118,14 +118,14 @@
 
 {% tplhandlebars "timelineEntry/contactSaved" %}
   {{#with view.content}}
-    {% verbatimblocktrans %}{{issuerName}} has {{#if created}}created{{else}}updated{{/if}} contact {{#if resource}}<a {{action transitionToResource resource target="controller"}}>{{contactName}}</a>{{else}}{{contactName}}{{/if}}{% endverbatimblocktrans %}
+    {% verbatimblocktrans %}{{issuerName}} has {{#if created}}created{{else}}updated{{/if}} contact {{#if resource}}<a {{action 'transitionToResource' resource target="controller"}}>{{contactName}}</a>{{else}}{{contactName}}{{/if}}{% endverbatimblocktrans %}
   {{/with}}
 {% endtplhandlebars %}
 
 
 {% tplhandlebars "timelineEntry/organizationSaved" %}
   {{#with view.content}}
-    {% verbatimblocktrans %}{{issuerName}} has {{#if created}}created{{else}}updated{{/if}} organization {{#if resource}}<a {{action transitionToResource resource target="controller"}}>{{organizationName}}</a>{{else}}{{organizationName}}{{/if}}{% endverbatimblocktrans %}
+    {% verbatimblocktrans %}{{issuerName}} has {{#if created}}created{{else}}updated{{/if}} organization {{#if resource}}<a {{action 'transitionToResource' resource target="controller"}}>{{organizationName}}</a>{{else}}{{organizationName}}{{/if}}{% endverbatimblocktrans %}
   {{/with}}
 {% endtplhandlebars %}
 
@@ -133,7 +133,7 @@
 {# WARNING : FOR THIS NOTIFICATION REMEMBER TO USE quotationResource RATHER THAN resource #}
 {% tplhandlebars "timelineEntry/quotationSaved" %}
   {{#with view.content}}
-    {% verbatimblocktrans %}{{issuerName}} has {{#if created}}created{{else}}updated{{/if}} the quotation {{#if quotationResource}}<a {{action transitionToResource quotationResource target="controller"}}>{{quotationReference}}</a>{{else}}{{quotationReference}}{{/if}} for {{customerDisplay}}{% endverbatimblocktrans %}
+    {% verbatimblocktrans %}{{issuerName}} has {{#if created}}created{{else}}updated{{/if}} the quotation {{#if quotationResource}}<a {{action 'transitionToResource' quotationResource target="controller"}}>{{quotationReference}}</a>{{else}}{{quotationReference}}{{/if}} for {{customerDisplay}}{% endverbatimblocktrans %}
   {{/with}}
 {% endtplhandlebars %}
 
@@ -143,9 +143,9 @@
   {{#with view.content}}
     {% verbatimblocktrans %}{{issuerName}} has {{#if created}}created{{else}}updated{{/if}}
     {{#if invoiceHasTemporaryReference}}
-      {{#if invoiceResource}}<a {{action transitionToResource invoiceResource target="controller"}}>an invoice</a>{{else}}an invoice{{/if}}
+      {{#if invoiceResource}}<a {{action 'transitionToResource' invoiceResource target="controller"}}>an invoice</a>{{else}}an invoice{{/if}}
     {{else}}
-      the invoice {{#if invoiceResource}}<a {{action transitionToResource invoiceResource target="controller"}}>{{invoiceReference}}</a>{{else}}{{invoiceReference}}{{/if}}
+      the invoice {{#if invoiceResource}}<a {{action 'transitionToResource' invoiceResource target="controller"}}>{{invoiceReference}}</a>{{else}}{{invoiceReference}}{{/if}}
     {{/if}} for {{customerDisplay}}{% endverbatimblocktrans %}
   {{/with}}
 {% endtplhandlebars %}
@@ -153,21 +153,21 @@
 
 {% tplhandlebars "timelineEntry/downPaymentInvoiceSaved" %}
   {{#with view.content}}
-    {% verbatimblocktrans %}{{issuerName}} has {{#if created}}created{{else}}updated{{/if}} the down-payment invoice {{#if resource}}<a {{action transitionToResource resource target="controller"}}>{{downPaymentInvoiceReference}}</a>{{else}}{{downPaymentInvoiceReference}}{{/if}} for {{customerDisplay}}{% endverbatimblocktrans %}
+    {% verbatimblocktrans %}{{issuerName}} has {{#if created}}created{{else}}updated{{/if}} the down-payment invoice {{#if resource}}<a {{action 'transitionToResource' resource target="controller"}}>{{downPaymentInvoiceReference}}</a>{{else}}{{downPaymentInvoiceReference}}{{/if}} for {{customerDisplay}}{% endverbatimblocktrans %}
   {{/with}}
 {% endtplhandlebars %}
 
 
 {% tplhandlebars "timelineEntry/creditNoteSaved" %}
   {{#with view.content}}
-    {% verbatimblocktrans %}{{issuerName}} has {{#if created}}created{{else}}updated{{/if}} the credit note {{#if resource}}<a {{action transitionToResource resource target="controller"}}>{{creditNoteReference}}</a>{{else}}{{creditNoteReference}}{{/if}} for {{customerDisplay}}{% endverbatimblocktrans %}
+    {% verbatimblocktrans %}{{issuerName}} has {{#if created}}created{{else}}updated{{/if}} the credit note {{#if resource}}<a {{action 'transitionToResource' resource target="controller"}}>{{creditNoteReference}}</a>{{else}}{{creditNoteReference}}{{/if}} for {{customerDisplay}}{% endverbatimblocktrans %}
   {{/with}}
 {% endtplhandlebars %}
 
 
 {% tplhandlebars "timelineEntry/quotationChangedState" %}
   {{#with view.content}}
-    {% verbatimblocktrans %}{{issuerName}} has changed quotation {{#if quotationResource}}<a {{action transitionToResource quotationResource target="controller"}}>{{quotationReference}}</a>{{else}}{{quotationReference}}{{/if}} state from <i>{{stateLabel Vosae.Config.quotationStatesChoices previousState}}</i> to <i>{{stateLabel Vosae.Config.quotationStatesChoices newState}}</i>{% endverbatimblocktrans %}
+    {% verbatimblocktrans %}{{issuerName}} has changed quotation {{#if quotationResource}}<a {{action 'transitionToResource' quotationResource target="controller"}}>{{quotationReference}}</a>{{else}}{{quotationReference}}{{/if}} state from <i>{{stateLabel Vosae.Config.quotationStatesChoices previousState}}</i> to <i>{{stateLabel Vosae.Config.quotationStatesChoices newState}}</i>{% endverbatimblocktrans %}
   {{/with}}
 {% endtplhandlebars %}
 
@@ -176,9 +176,9 @@
   {{#with view.content}}
     {% verbatimblocktrans %}{{issuerName}} has changed
     {{#if invoiceHasTemporaryReference}}
-      {{#if invoiceResource}}<a {{action transitionToResource invoiceResource target="controller"}}>this invoice</a>{{else}}an invoice{{/if}}
+      {{#if invoiceResource}}<a {{action 'transitionToResource' invoiceResource target="controller"}}>this invoice</a>{{else}}an invoice{{/if}}
     {{else}}
-      invoice {{#if invoiceResource}}<a {{action transitionToResource invoiceResource target="controller"}}>{{invoiceReference}}</a>{{else}}{{invoiceReference}}{{/if}}
+      invoice {{#if invoiceResource}}<a {{action 'transitionToResource' invoiceResource target="controller"}}>{{invoiceReference}}</a>{{else}}{{invoiceReference}}{{/if}}
     {{/if}} state from <i>{{stateLabel Vosae.Config.invoiceStatesChoices previousState}}</i> to <i>{{stateLabel Vosae.Config.invoiceStatesChoices newState}}</i>{% endverbatimblocktrans %}
   {{/with}}
 {% endtplhandlebars %}
@@ -186,14 +186,14 @@
 
 {% tplhandlebars "timelineEntry/downPaymentInvoiceChangedState" %}
   {{#with view.content}}
-    {% verbatimblocktrans %}{{issuerName}} has changed down-payment invoice {{#if resource}}<a {{action transitionToResource resource target="controller"}}>{{downPaymentInvoiceReference}}</a>{{else}}{{downPaymentInvoiceReference}}{{/if}} state from <i>{{stateLabel Vosae.Config.invoiceStatesChoices previousState}}</i> to <i>{{stateLabel Vosae.Config.invoiceStatesChoices newState}}</i>{% endverbatimblocktrans %}
+    {% verbatimblocktrans %}{{issuerName}} has changed down-payment invoice {{#if resource}}<a {{action 'transitionToResource' resource target="controller"}}>{{downPaymentInvoiceReference}}</a>{{else}}{{downPaymentInvoiceReference}}{{/if}} state from <i>{{stateLabel Vosae.Config.invoiceStatesChoices previousState}}</i> to <i>{{stateLabel Vosae.Config.invoiceStatesChoices newState}}</i>{% endverbatimblocktrans %}
   {{/with}}
 {% endtplhandlebars %}
 
 
 {% tplhandlebars "timelineEntry/creditNoteChangedState" %}
   {{#with view.content}}
-    {% verbatimblocktrans %}{{issuerName}} has changed credit note {{#if resource}}<a {{action transitionToResource resource target="controller"}}>{{creditNoteReference}}</a>{{else}}{{creditNoteReference}}{{/if}} state from <i>{{previousState}}</i> to <i>{{newState}}</i>{% endverbatimblocktrans %}
+    {% verbatimblocktrans %}{{issuerName}} has changed credit note {{#if resource}}<a {{action 'transitionToResource' resource target="controller"}}>{{creditNoteReference}}</a>{{else}}{{creditNoteReference}}{{/if}} state from <i>{{previousState}}</i> to <i>{{newState}}</i>{% endverbatimblocktrans %}
   {{/with}}
 {% endtplhandlebars %}
 
@@ -202,10 +202,10 @@
   {{#with view.content}}
     {% verbatimblocktrans %}{{issuerName}} has made
     {{#if invoiceHasTemporaryReference}}
-      {{#if invoiceResource}}<a {{action transitionToResource invoiceResource target="controller"}}>an invoice</a>{{else}}an invoice{{/if}}
+      {{#if invoiceResource}}<a {{action 'transitionToResource' invoiceResource target="controller"}}>an invoice</a>{{else}}an invoice{{/if}}
     {{else}}
-      the invoice {{#if invoiceResource}}<a {{action transitionToResource invoiceResource target="controller"}}>{{invoiceReference}}</a>{{else}}{{invoiceReference}}{{/if}}
-    {{/if}} for {{customerDisplay}} from the quotation {{#if quotationResource}}<a {{action transitionToResource quotationResource target="controller"}}>{{quotationReference}}</a>{{else}}{{quotationReference}}{{/if}}{% endverbatimblocktrans %}
+      the invoice {{#if invoiceResource}}<a {{action 'transitionToResource' invoiceResource target="controller"}}>{{invoiceReference}}</a>{{else}}{{invoiceReference}}{{/if}}
+    {{/if}} for {{customerDisplay}} from the quotation {{#if quotationResource}}<a {{action 'transitionToResource' quotationResource target="controller"}}>{{quotationReference}}</a>{{else}}{{quotationReference}}{{/if}}{% endverbatimblocktrans %}
   {{/with}}
 {% endtplhandlebars %}
 
@@ -217,13 +217,13 @@
 
 {% tplhandlebars "timelineEntry/invoiceCancelled" %}
    {{#with view.content}}
-    {% verbatimblocktrans %}{{issuerName}} has cancelled the invoice {{#if invoiceResource}}<a {{action transitionToResource invoiceResource target="controller"}}>{{invoiceReference}}</a>{{else}}{{invoiceReference}}{{/if}}{% endverbatimblocktrans %}
+    {% verbatimblocktrans %}{{issuerName}} has cancelled the invoice {{#if invoiceResource}}<a {{action 'transitionToResource' invoiceResource target="controller"}}>{{invoiceReference}}</a>{{else}}{{invoiceReference}}{{/if}}{% endverbatimblocktrans %}
   {{/with}}
 {% endtplhandlebars %}
 
 
 {% tplhandlebars "timelineEntry/downPaymentInvoiceCancelled" %}
    {{#with view.content}}
-    {% verbatimblocktrans %}{{issuerName}} has cancelled the down-payment invoice {{#if resource}}<a {{action transitionToResource resource target="controller"}}>{{downPaymentInvoiceReference}}</a>{{else}}{{downPaymentInvoiceReference}}{{/if}} for {{customerDisplay}}{% endverbatimblocktrans %}
+    {% verbatimblocktrans %}{{issuerName}} has cancelled the down-payment invoice {{#if resource}}<a {{action 'transitionToResource' resource target="controller"}}>{{downPaymentInvoiceReference}}</a>{{else}}{{downPaymentInvoiceReference}}{{/if}} for {{customerDisplay}}{% endverbatimblocktrans %}
   {{/with}}
 {% endtplhandlebars %}

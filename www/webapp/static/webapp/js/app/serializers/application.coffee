@@ -79,11 +79,14 @@ Vosae.ApplicationSerializer = DS.RESTSerializer.extend
     @returns {Array} The primary array that was returned in response to the original query.
   ###
   extractArray: (store, primaryType, payload) ->
+    if primaryType in [Vosae.Timeline, Vosae.Notification]
+      return @_super store, primaryType, payload
+    
     # 1) Update the payload root according to the type
     root = @payloadRootForType primaryType, "extractArray"
     payload[root] = payload.objects  
     delete payload.objects
-  
+ 
     # 2) Update payload, adds fake id to embedded relationship and sideload all embedded belongsTo and hasMany
     partials = payload[root]
     forEach partials, ((partial) ->

@@ -23,16 +23,34 @@ Vosae.TimelineSerializer = Vosae.ApplicationSerializer.extend
       # Create root key in payload
       type = @rootTypeForResource te.resource_type
       payload[type] = payload[type] or []
-      
-      # Deurlify issuer belongsTo url
-      te.issuer = @deurlify te.issuer
-
-      # Delete unwanted properties
       delete te.resource_type
-      delete te.resource_uri
 
       payload[type].push(te)
 
-    payload.objects = []
-    
+    payload.timelines = []
+    delete payload.objects
+
+    for root of payload
+      partials = payload[root]
+      secondaryType = store.modelFor(root.singularize())
+      Ember.EnumerableUtils.forEach partials, ((partial) ->
+        updatePayload.call this, store, secondaryType, payload, partial
+        return
+      ), this
+
     return @_super store, primaryType, payload
+
+updatePayload = (store, type, payload, partial) ->
+  type.eachRelationship ((key, relationship) ->
+    updatePayloadWithBelongsTo.call this, store, key, relationship, payload, partial if relationship.kind is "belongsTo"
+    return
+  ), this
+  return
+
+# Handles `belongsTo` relationship, deurlify content
+updatePayloadWithBelongsTo = (store, primaryType, relationship, payload, partial) ->
+  serializer = store.serializerFor(relationship.type.typeKey)
+  attribute = serializer.keyForAttribute(primaryType)
+  url = partial[attribute]
+  partial[attribute] = serializer.deurlify(url) if url
+  return

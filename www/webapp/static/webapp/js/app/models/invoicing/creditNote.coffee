@@ -11,3 +11,6 @@ Vosae.CreditNote = Vosae.InvoiceBase.extend
   state: DS.attr('string')
   relatedDownPaymentInvoice: DS.belongsTo('downPaymentInvoice')
   relatedInvoice: DS.belongsTo('invoice')
+  currentRevision: DS.belongsTo('creditNoteRevision')
+  # revisions: DS.hasMany('creditNoteRevision')
+  isCreditNote: true

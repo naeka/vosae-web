@@ -12,9 +12,9 @@
         {% trans "Purchase order date" %}:        
       {{/if}}
 
-      {{#if isInvoice}}
+      {{#or isInvoice isDownPaymentInvoice}}
         {% trans "Invoicing date" %}:
-      {{/if}}       
+      {{/or}}       
     </label>
     <span class="helptour-datecreated">
       {{#if isQuotation}}
@@ -31,12 +31,12 @@
           classNames="edit" }}
       {{/if}}
 
-      {{#if isInvoice}}
+      {{#or isInvoice isDownPaymentInvoice}}
         {{currentRevision.displayInvoicingDate}}
         {{view view.invoicingDateField
           currentRevisionBinding="currentRevision"
           classNames="edit" }}
-      {{/if}}
+      {{/or}}
     </span>
   </span>
 {% endtplhandlebars %}

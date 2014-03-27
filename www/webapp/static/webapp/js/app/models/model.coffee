@@ -14,3 +14,6 @@ Vosae.Model.reopen
     message = "An error happened on #{@toString()}"
     Vosae.ErrorPopup.open
       message: message
+
+  getEndpoint: ->
+    @constructor.toString().split('.').get('lastObject').decamelize()

@@ -12,9 +12,9 @@
         {% trans "Purchase order date" %}:
       {{/if}}
       
-      {{#if isInvoice}}
+      {{#or isInvoice isDownPaymentInvoice}}
         {% trans "Invoicing date" %}:
-      {{/if}}
+      {{/or}}
       
       {{#if isCreditNote}}
         {% trans "Emission date" %}:         
@@ -29,9 +29,9 @@
         {{unbound currentRevision.displayPurchaseOrderDate}}
       {{/if}}
       
-      {{#if isInvoice}}
+      {{#or isInvoice isDownPaymentInvoice}}
         {{unbound currentRevision.displayInvoicingDate}}
-      {{/if}}
+      {{/or}}
       
       {{#if isCreditNote}}
         {{unbound currentRevision.displayCreditNoteEmissionDate}}          

@@ -1,21 +1,15 @@
 ###
   A data model that represents an invoice revision
 
-  @class InvoiceRevision
+  @class BaseRevision
   @extends Vosae.Model
   @namespace Vosae
   @module Vosae
 ###
 
-Vosae.InvoiceRevision = Vosae.Model.extend
-  issueDate: DS.attr('datetime')  # read-only date de creation de l'invoice revision
-  quotationDate: DS.attr('date')  # date de création du devis
-  quotationValidity: DS.attr('date')  # date validité du devis
-  invoicingDate: DS.attr('date')  # date de création de la facture
-  dueDate: DS.attr('date')  # echeance de paiement
-  purchaseOrderDate: DS.attr('date') # date de création du bon de commande
-  creditNoteEmissionDate: DS.attr('date')  # date d'emission de l'avoir
-  customPaymentConditions: DS.attr('string')  # conditions de réglement, peut remplacer la dueDate, qui fait alors office d'estimation
+Vosae.BaseRevision = Vosae.Model.extend
+  issueDate: DS.attr('datetime')  # read-only creation date of the invoice revision
+  customPaymentConditions: DS.attr('string')  # payment conditions, can replace due date considered in this case as an estimation
   revision: DS.attr('string')
   state: DS.attr('string')
   sender: DS.attr('string')
@@ -140,53 +134,6 @@ Vosae.InvoiceRevision = Vosae.Model.extend
     "billingAddress.state"
     "billingAddress.country")
 
-  # Returns the quotation date formated
-  displayQuotationDate: (->
-    if @get("quotationDate")?
-      return moment(@get("quotationDate")).format "LL"
-    return pgettext("date", "undefined")
-  ).property("quotationDate")
-
-  # Returns the quotation validity formated
-  displayQuotationValidity: (->
-    if @get("quotationValidity")?
-      return moment(@get("quotationValidity")).format "LL"
-    return pgettext("date", "undefined")
-  ).property("quotationValidity")
-
-  # Return the due date formated
-  displayDueDate: (->
-    if @get("customPaymentConditions")?
-      if @get("dueDate")?
-        return "#{pgettext("date", "variable")} (#{moment(@get("dueDate")).format "LL"})"
-      else
-        return pgettext("date", "variable")
-    else if @get("dueDate")?
-      return moment(@get("dueDate")).format "LL"
-    return pgettext("date", "undefined")
-  ).property("dueDate", "customPaymentConditions")
-
-  # Returns the invoice date formated
-  displayInvoicingDate: (->
-    if @get("invoicingDate")?
-      return moment(@get("invoicingDate")).format "LL"
-    return pgettext("date", "undefined")
-  ).property("invoicingDate")
-
-  # Returns the credit note emission date formated
-  displayCreditNoteEmissionDate: (->
-    if @get("creditNoteEmissionDate")?
-      return moment(@get("creditNoteEmissionDate")).format "LL"
-    return pgettext("date", "undefined")
-  ).property("creditNoteEmissionDate")
-
-  # Returns the purchase order creation date formated
-  displayPurchaseOrderDate: (->
-    if @get("purchaseOrderDate")?
-      return moment(@get("purchaseOrderDate")).format "LL"
-    return pgettext("date", "undefined")
-  ).property("purchaseOrderDate")
-
   # Returns quotation total
   total: (->
     total = 0
@@ -267,5 +214,106 @@ Vosae.InvoiceRevision = Vosae.Model.extend
         errors.addObject gettext("Invoice must have a currency")
       else if type is "Quotation"
         errors.addObject gettext("Quotation must have a currency")
-    
+
     return errors
+
+
+###
+  A data model that represents a quotation revision
+
+  @class QuotationRevision
+  @extends Vosae.BaseRevision
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.QuotationRevision = Vosae.BaseRevision.extend
+  quotationDate: DS.attr('date')
+  quotationValidity: DS.attr('date')
+
+  # Returns the quotation date formated
+  displayQuotationDate: (->
+    if @get("quotationDate")?
+      return moment(@get("quotationDate")).format "LL"
+    return pgettext("date", "undefined")
+  ).property("quotationDate")
+
+  # Returns the quotation validity formated
+  displayQuotationValidity: (->
+    if @get("quotationValidity")?
+      return moment(@get("quotationValidity")).format "LL"
+    return pgettext("date", "undefined")
+  ).property("quotationValidity")
+
+
+###
+  A data model that represents a purchase order revision
+
+  @class PurchaseOrderRevision
+  @extends Vosae.BaseRevision
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.PurchaseOrderRevision = Vosae.BaseRevision.extend
+  purchaseOrderDate: DS.attr('date')
+
+  # Returns the purchase order creation date formated
+  displayPurchaseOrderDate: (->
+    if @get("purchaseOrderDate")?
+      return moment(@get("purchaseOrderDate")).format "LL"
+    return pgettext("date", "undefined")
+  ).property("purchaseOrderDate")
+
+
+###
+  A data model that represents an invoice revision
+
+  @class InvoiceRevision
+  @extends Vosae.BaseRevision
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.InvoiceRevision = Vosae.BaseRevision.extend
+  invoicingDate: DS.attr('date')
+  dueDate: DS.attr('date')
+
+  # Return the due date formated
+  displayDueDate: (->
+    if @get("customPaymentConditions")?
+      if @get("dueDate")?
+        return "#{pgettext("date", "variable")} (#{moment(@get("dueDate")).format "LL"})"
+      else
+        return pgettext("date", "variable")
+    else if @get("dueDate")?
+      return moment(@get("dueDate")).format "LL"
+    return pgettext("date", "undefined")
+  ).property("dueDate", "customPaymentConditions")
+
+  # Returns the invoice date formated
+  displayInvoicingDate: (->
+    if @get("invoicingDate")?
+      return moment(@get("invoicingDate")).format "LL"
+    return pgettext("date", "undefined")
+  ).property("invoicingDate")
+
+
+###
+  A data model that represents a credit note revision
+
+  @class CreditNoteRevision
+  @extends Vosae.BaseRevision
+  @namespace Vosae
+  @module Vosae
+###
+
+Vosae.CreditNoteRevision = Vosae.BaseRevision.extend
+  creditNoteEmissionDate: DS.attr('date')
+
+  # Returns the credit note emission date formated
+  displayCreditNoteEmissionDate: (->
+    if @get("creditNoteEmissionDate")?
+      return moment(@get("creditNoteEmissionDate")).format "LL"
+    return pgettext("date", "undefined")
+  ).property("creditNoteEmissionDate")

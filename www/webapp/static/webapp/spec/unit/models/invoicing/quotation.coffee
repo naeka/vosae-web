@@ -178,7 +178,7 @@ describe 'Vosae.Quotation', ->
     organization = store.find Vosae.Organization, 1
 
     unusedTransaction = store.transaction()
-    currentRevision = unusedTransaction.createRecord Vosae.InvoiceRevision
+    currentRevision = unusedTransaction.createRecord Vosae.QuotationRevision
     currency = unusedTransaction.createRecord Vosae.Currency
     billingAddress = unusedTransaction.createRecord Vosae.Address
     deliveryAddress = unusedTransaction.createRecord Vosae.Address
@@ -498,7 +498,7 @@ describe 'Vosae.Quotation', ->
     # Test
     expect(quotation.get('isInvoice')).toBeFalsy()
 
-  it 'isQuotation property should return false', ->
+  it 'isQuotation property should return true', ->
     # Setup
     store.adapterForType(Vosae.Quotation).load store, Vosae.Quotation, {id: 1}
     quotation = store.find Vosae.Quotation, 1
@@ -506,7 +506,7 @@ describe 'Vosae.Quotation', ->
     # Test
     expect(quotation.get('isQuotation')).toBeTruthy()
 
-  it 'isCreditNote property should return true', ->
+  it 'isCreditNote property should return false', ->
     # Setup
     store.adapterForType(Vosae.Quotation).load store, Vosae.Quotation, {id: 1}
     quotation = store.find Vosae.Quotation, 1
@@ -514,7 +514,7 @@ describe 'Vosae.Quotation', ->
     # Test
     expect(quotation.get('isCreditNote')).toBeFalsy()
 
-  it 'isPurchaseOrder property should return true', ->
+  it 'isPurchaseOrder property should return false', ->
     # Setup
     store.adapterForType(Vosae.Quotation).load store, Vosae.Quotation, {id: 1}
     quotation = store.find Vosae.Quotation, 1

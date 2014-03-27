@@ -151,3 +151,35 @@ Ember.Handlebars.registerHelper "isTouchDevice", (options) ->
     options.fn this
   else
     options.inverse this
+
+###
+  And
+  Conditionally render a block if every value is truthy.
+  Usage: {{#and a b c}}a, b and c{{else}}none or any of them{{/or}}
+
+  @method and
+  @for Handlebars
+###
+Ember.Handlebars.registerHelper "and", (values..., options) ->
+  throw new Error('Handlerbars Helper "and" needs 2 parameters') if values.length < 2
+  context = (options.fn.contexts and options.fn.contexts[0]) or this
+  for value in values
+    if not Ember.Handlebars.get context, value, options
+      return options.inverse this
+  return options.fn this
+
+###
+  Or
+  Conditionally render a block if one of the values is truthy.
+  Usage: {{#or a b c}}a, b or c{{else}}none of them{{/or}}
+
+  @method or
+  @for Handlebars
+###
+Ember.Handlebars.registerHelper "or", (values..., options) ->
+  throw new Error('Handlerbars Helper "or" needs 2 parameters') if values.length < 2
+  context = (options.fn.contexts and options.fn.contexts[0]) or this
+  for value in values
+    if Ember.Handlebars.get context, value, options
+      return options.fn this
+  return options.inverse this

@@ -66,7 +66,7 @@ Vosae.LineItem = Vosae.Model.extend
 
   didLoad: ->
     # This hack is used to refresh the `taxes` computed property
-    # on model InvoiceRevision once the current tax is loaded
+    # on model BaseRevision once the current tax is loaded
     tax = @get 'tax'
     if tax? and not tax.get('isLoaded')
       tax.then =>

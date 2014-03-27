@@ -131,15 +131,15 @@ describe 'Vosae.CreditNote', ->
     creditNote = store.find Vosae.CreditNote, 1
 
     # Test
-    expect(creditNote.get('isCreditNote')).toBeTruthy
+    expect(creditNote.get('isCreditNote')).toBeTruthy()
 
-  it 'isPurchaseOrder property should return true', ->
+  it 'isPurchaseOrder property should return false', ->
     # Setup
     store.adapterForType(Vosae.CreditNote).load store, Vosae.CreditNote, {id: 1}
     creditNote = store.find Vosae.CreditNote, 1
 
     # Test
-    expect(creditNote.get('isPurchaseOrder')).toBeTruthy
+    expect(creditNote.get('isPurchaseOrder')).toBeFalsy()
 
   it 'group belongsTo relationship', ->
     # Setup

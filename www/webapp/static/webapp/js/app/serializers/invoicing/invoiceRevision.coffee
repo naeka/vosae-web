@@ -1,13 +1,13 @@
 ###
-  Serializer for model `Vosae.InvoiceRevision`.
+  Serializer for model `Vosae.BaseRevision`.
 
-  @class InvoiceRevisionSerializer
+  @class BaseRevisionSerializer
   @extends Vosae.ApplicationSerializer
   @namespace Vosae
   @module Vosae
 ###
 
-Vosae.InvoiceRevisionSerializer = Vosae.ApplicationSerializer.extend
+Vosae.BaseRevisionSerializer = Vosae.ApplicationSerializer.extend
   attrs:
     senderAddress:
       embedded: "always"
@@ -21,3 +21,8 @@ Vosae.InvoiceRevisionSerializer = Vosae.ApplicationSerializer.extend
       embedded: "always"
     lineItems:
       embedded: "always"
+
+Vosae.CreditNoteRevisionSerializer = Vosae.BaseRevisionSerializer.extend()
+Vosae.InvoiceRevisionSerializer = Vosae.BaseRevisionSerializer.extend()
+Vosae.PurchaseOrderRevisionSerializer = Vosae.BaseRevisionSerializer.extend()
+Vosae.QuotationRevisionSerializer = Vosae.BaseRevisionSerializer.extend()

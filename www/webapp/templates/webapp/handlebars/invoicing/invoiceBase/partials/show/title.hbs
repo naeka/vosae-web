@@ -20,14 +20,14 @@
       {{/if}}
     {{/if}}
 
-    {{#if isInvoice}}
+    {{#or isInvoice isDownPaymentInvoice}}
       <span class="invoice-base-type">{% trans "Invoice" %}</span>
       {{#if hasTemporaryReference}}
         <span class="invoice-base-noref">{% trans "Reference will be generated when registered" %}</span>
       {{else}}
         <span class="invoice-base-ref">{{reference}}</span>
       {{/if}}
-    {{/if}}
+    {{/or}}
 
     {{#if isCreditNote}}
       <span class="invoice-base-type">{% trans "Credit Note" %}</span>

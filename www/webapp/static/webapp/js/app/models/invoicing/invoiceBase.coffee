@@ -24,8 +24,13 @@ Vosae.InvoiceBase = Vosae.Model.extend
   isUploading: false
   isUpdatingState: false
   isGeneratingPdfState: false
+  isQuotation: false
+  isPurchaseOrder: false
+  isInvoice: false
+  isDownPaymentInvoice: false
+  isCreditNote: false
 
-  displayTenant: (->
+  displayReceiver: (->
     # Return organization name or contact name.
     if @get('organization')
       return @get('organization.corporateName')
@@ -41,34 +46,6 @@ Vosae.InvoiceBase = Vosae.Model.extend
       return adapter.buildURL(@constructor.typeKey, @get('id')) + "add_attachment/"
     return
   ).property("id")
-
-  isInvoice: (->
-    # True if `InvoiceBase` is an `Invoice`.
-    if @constructor.toString() is Vosae.Invoice.toString()
-      return true
-    return false
-  ).property()
-
-  isQuotation: (->
-    # True if `InvoiceBase` is an `Quotation`.
-    if @constructor.toString() is Vosae.Quotation.toString()
-      return true
-    return false
-  ).property()
-
-  isCreditNote: (->
-    # True if `InvoiceBase` is a `CreditNote`.
-    if @constructor.toString() is Vosae.CreditNote.toString()
-      return true
-    return false
-  ).property()
-
-  isPurchaseOrder: (->
-    # True if `InvoiceBase` is a `PurchaseOrder`.
-    if @constructor.toString() is Vosae.PurchaseOrder.toString()
-      return true
-    return false
-  ).property()
 
   relatedColor: (->
     # Returns the related color of current instance,

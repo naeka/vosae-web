@@ -413,22 +413,46 @@ Vosae.Config =
       label: pgettext("quotation state", "Draft")
       value: "DRAFT"
     Ember.Object.create
-      label: pgettext("quotation state", "Expired")
-      value: "EXPIRED"
-    Ember.Object.create
       label: pgettext("quotation state", "Awaiting approval")
       markAsLabel: pgettext("quotation", "Mark as awaiting approval")
       value: "AWAITING_APPROVAL"
-    Ember.Object.create
-      label: pgettext("quotation state", "Refused")
-      markAsLabel: pgettext("quotation", "Mark as refused")
-      value: "REFUSED"
     Ember.Object.create
       label: pgettext("quotation state", "Approved")
       markAsLabel: pgettext("quotation", "Mark as approved")
       value: "APPROVED"
     Ember.Object.create
+      label: pgettext("quotation state", "Refused")
+      markAsLabel: pgettext("quotation", "Mark as refused")
+      value: "REFUSED"
+    Ember.Object.create
+      label: pgettext("quotation state", "Expired")
+      value: "EXPIRED"
+    Ember.Object.create
       label: pgettext("quotation state", "Invoiced")
+      value: "INVOICED"
+  ]
+
+  ###
+    Available states for a purchase order
+  ###
+  purchaseOrderStatesChoices: [
+    Ember.Object.create
+      label: pgettext("purchase order state", "Draft")
+      value: "DRAFT"
+    Ember.Object.create
+      label: pgettext("purchase order state", "Awaiting approval")
+      markAsLabel: pgettext("purchase order", "Mark as awaiting approval")
+      value: "AWAITING_APPROVAL"
+    Ember.Object.create
+      label: pgettext("purchase order state", "Refused")
+      markAsLabel: pgettext("purchase order", "Mark as refused")
+      value: "REFUSED"
+    Ember.Object.create
+      label: pgettext("purchase order state", "Approved")
+      markAsLabel: pgettext("purchase order", "Mark as approved")
+      value: "APPROVED"
+    Ember.Object.create
+      label: pgettext("purchase order state", "Invoiced")
       value: "INVOICED"
   ]
 
@@ -444,17 +468,32 @@ Vosae.Config =
       markAsLabel: pgettext("invoice", "Mark as registered")
       value: "REGISTERED"
     Ember.Object.create
-      label: pgettext("invoice state", "Part paid")
-      value: "PART_PAID"
-    Ember.Object.create
       label: pgettext("invoice state", "Overdue")
       value: "OVERDUE"
+    Ember.Object.create
+      label: pgettext("invoice state", "Part paid")
+      value: "PART_PAID"
     Ember.Object.create
       label: pgettext("invoice state", "Paid")
       value: "PAID"
     Ember.Object.create
       label: pgettext("invoice state", "Cancelled")
       value: "CANCELLED"
+  ]
+
+  ###
+    Available states for a credit note
+  ###
+  creditNoteStatesChoices: [
+    Ember.Object.create
+      label: pgettext("credit note state", "Registered")
+      value: "REGISTERED"
+    Ember.Object.create
+      label: pgettext("credit note state", "Sent")
+      value: "SENT"
+    Ember.Object.create
+      label: pgettext("credit note state", "Paid")
+      value: "PAID"
   ]
 
   ###

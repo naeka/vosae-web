@@ -9,10 +9,14 @@
 
 Vosae.Invoice = Vosae.InvoiceBase.extend
   state: DS.attr('string')
+  currentRevision: DS.belongsTo('invoiceRevision')
+  # revisions: DS.hasMany('invoiceRevision')
   paid: DS.attr('number')
   balance: DS.attr('number')
   hasTemporaryReference: DS.attr('boolean', defaultValue: true)
   payments: DS.hasMany('payment', async: true)
+
+  isInvoice: true
 
   displayState: (->
     # Returns the current state readable and translated.

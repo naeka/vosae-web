@@ -12,7 +12,7 @@ Vosae.QuotationsAddRoute = Ember.Route.extend
       contact = if preFill.contact then preFill.contact else null
       organization = if preFill.organization then preFill.organization else null
 
-    currentRevision = @store.createRecord "invoiceRevision"
+    currentRevision = @store.createRecord "quotationRevision"
     currency = @store.createRecord "snapshotCurrency"
     billingAddress = @store.createRecord "vosaeAddress"
     deliveryAddress = @store.createRecord "vosaeAddress"

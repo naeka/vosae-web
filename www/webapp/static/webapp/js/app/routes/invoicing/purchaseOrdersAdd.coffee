@@ -5,7 +5,7 @@ Vosae.PurchaseOrdersAddRoute = Ember.Route.extend
     @store.createRecord "purchaseOrder"
 
   setupController: (controller, model) ->
-    currentRevision = @store.createRecord "invoiceRevision"
+    currentRevision = @store.createRecord "purchaseOrderRevision"
     currency = @store.createRecord "snapshotCurrency"
     billingAddress = @store.createRecord "vosaeAddress"
     deliveryAddress = @store.createRecord "vosaeAddress"

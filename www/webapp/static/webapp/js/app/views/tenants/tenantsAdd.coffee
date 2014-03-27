@@ -1,4 +1,4 @@
-Vosae.TenantsAddView = Vosae.PageTenantView.extend Ember.GoogleAnalyticsTrackingMixin,
+Vosae.TenantsAddView = Vosae.ContainerTenantsView.extend
   classNames: ["outlet-tenants", "page-add-tenant"]
   
   inStepIdentity: true

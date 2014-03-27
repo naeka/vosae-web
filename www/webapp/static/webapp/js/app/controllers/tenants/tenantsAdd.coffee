@@ -90,8 +90,6 @@ Vosae.TenantsAddController = Em.ObjectController.extend
   actions:
     # Post the tenant and get tenantSettings
     save: (tenant) ->
-      @trackEvent('Subscription', 'completed')
-
       Vosae.Utilities.showLoader()
 
       tenant.one 'becameInvalid', @, ->

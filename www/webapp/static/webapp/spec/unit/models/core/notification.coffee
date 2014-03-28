@@ -1,194 +1,127 @@
-# store = null
+env = undefined
+store = undefined
 
-# describe 'Vosae.Notification', ->
-#   hashNotification = 
-#     read: false
-#     sent_at: undefined
+module "DS.Model / Vosae.Notification / Vosae.ContactSavedNE",
+  setup: ->
+    env = setupStore()
 
-#   beforeEach ->
-#     comp = getAdapterForTest(Vosae.Notification)
-#     ajaxUrl = comp[0]
-#     ajaxType = comp[1]
-#     ajaxHash = comp[2]
-#     store = comp[3]
+    # Make the store available for all tests
+    store = env.store
 
-#   afterEach ->
-#     comp = undefined
-#     ajaxUrl = undefined
-#     ajaxType = undefined
-#     ajaxHash = undefined
-#     store.destroy()
+test 'relationship - contact', ->
+  # Setup
+  store.push 'contact', {id: 1, name: 'Thomas Durin'}
+  store.push 'contactSavedNE', {id: 1, contact: 1}
 
-#   it 'finding all notification makes a GET to /notification/', ->
-#     # Setup
-#     notifications = store.find Vosae.Notification
-    
-#     # Test
-#     enabledFlags notifications, ['isLoaded', 'isValid'], recordArrayFlags
-#     expectAjaxURL "/notification/"
-#     expectAjaxType "GET"
-
-#     # Setup
-#     ajaxHash.success(
-#       meta: {}
-#       objects: [
-#         $.extend({}, hashNotification, {
-#           id: 1
-#           read: false
-#         })
-#       ]
-#     )
-#     notification = notifications.objectAt(0)
-
-#     # Test
-#     statesEqual notifications, 'loaded.saved'
-#     stateEquals notification, 'loaded.saved'
-#     enabledFlagsForArray notifications, ['isLoaded', 'isValid']
-#     enabledFlags notification, ['isLoaded', 'isValid']
-#     expect(notification).toEqual store.find(Vosae.Notification, 1)
+  # Test
+  store.find('contactSavedNE', 1).then async (notif) ->
+    equal notif.get('contact') instanceof Vosae.Contact, true, "the contact property should return a user"
+    equal notif.get('contact.name'), "Thomas Durin", "the contact should have a name"
 
 
-#   it 'finding a notification by ID makes a GET to /notification/:id/', ->
-#     # Setup
-#     notification = store.find Vosae.Notification, 1
-#     ajaxHash.success($.extend, {}, hashNotification, {id: 1, read: false})
+module "DS.Model / Vosae.Notification / Vosae.OrganizationSavedNE",
+  setup: ->
+    env = setupStore()
 
-#     # Test
-#     expectAjaxType "GET"
-#     expectAjaxURL "/notification/1/"
-#     expect(notification).toEqual store.find(Vosae.Notification, 1)
+    # Make the store available for all tests
+    store = env.store
 
-#   it 'marking a notification as read makes a PUT to /notification/:id/mark_as_read/', ->
-#     # Setup
-#     store.load Vosae.Notification, {id: 1, read: false}
-#     notification = store.find Vosae.Notification, 1
-#     notification.markAsRead()
+test 'relationship - organization', ->
+  # Setup
+  store.push 'organization', {id: 1, corporateName: 'Naeka'}
+  store.push 'organizationSavedNE', {id: 1, organization: 1}
 
-#     # Test
-#     expectAjaxType "PUT"
-#     expectAjaxURL "/notification/1/mark_as_read/"
-#     expect(notification).toEqual store.find(Vosae.Notification, 1)
-#     expect(notification.get('read')).toEqual true
-
-#   it 'polymorph contact_saved_ne', ->
-#     # Setup
-#     store.load Vosae.Contact, {id: 1}
-#     contact = store.find Vosae.Contact, 1
-#     notification = store.find Vosae.ContactSavedNE, 1
-#     ajaxHash.success $.extend({}, hashNotification, {
-#       id: 1
-#       resource_type: "contact_saved_ne"
-#       contact_name: "Tom Dale"
-#       contact: "/api/v1/contact/1/"
-#     })
-
-#     # Test
-#     expectAjaxType "GET"
-#     expectAjaxURL "/notification/1/"
-#     expect(notification.get('module')).toEqual "contact"
-#     expect(notification.get('contactName')).toEqual "Tom Dale"
-#     expect(notification.get('contact')).toEqual contact
+  # Test
+  store.find('organizationSavedNE', 1).then async (notif) ->
+    equal notif.get('organization') instanceof Vosae.Organization, true, "the organization property should return an organization"
+    equal notif.get('organization.corporateName'), "Naeka", "the organization should have a corporate name"
 
 
-#   it 'polymorph organization_saved_ne', ->
-#     # Setup
-#     store.load Vosae.Organization, {id: 1}
-#     organization = store.find Vosae.Organization, 1
-#     notification = store.find Vosae.OrganizationSavedNE, 1
-#     ajaxHash.success $.extend({}, hashNotification, {
-#       id: 1
-#       resource_type: "organization_saved_ne"
-#       organization_name: "Naeka"
-#       organization: "/api/v1/organization/1/"
-#     })
+module "DS.Model / Vosae.Notification / Vosae.QuotationSavedNE",
+  setup: ->
+    env = setupStore()
 
-#     # Test
-#     expectAjaxType "GET"
-#     expectAjaxURL "/notification/1/"
-#     expect(notification.get('module')).toEqual "contact"
-#     expect(notification.get('organizationName')).toEqual "Naeka"
-#     expect(notification.get('organization')).toEqual organization
+    # Make the store available for all tests
+    store = env.store
 
-#   it 'polymorph quotation_saved_ne', ->
-#     # Setup
-#     store.load Vosae.Quotation, {id: 1}
-#     quotation = store.find Vosae.Quotation, 1
-#     notification = store.find Vosae.QuotationSavedNE, 1
-#     ajaxHash.success $.extend({}, hashNotification, {
-#       id: 1
-#       resource_type: "quotation_saved_ne"
-#       customer_display: "Vosae"
-#       quotation_reference: "QUOTATION 2013_12_04_001"
-#       quotation: "/api/v1/quotation/1/"
-#     })
+test 'relationship - quotation', ->
+  # Setup
+  store.push 'quotation', {id: 1, reference: '001'}
+  store.push 'quotationSavedNE', {id: 1, quotation: 1}
 
-#     # Test
-#     expectAjaxType "GET"
-#     expectAjaxURL "/notification/1/"
-#     expect(notification.get('module')).toEqual "invoicing"
-#     expect(notification.get('customerDisplay')).toEqual "Vosae"
-#     expect(notification.get('quotationReference')).toEqual "QUOTATION 2013_12_04_001"
-#     expect(notification.get('quotation')).toEqual quotation
+  # Test
+  store.find('quotationSavedNE', 1).then async (notif) ->
+    equal notif.get('quotation') instanceof Vosae.Quotation, true, "the quotation property should return a quotation"
+    equal notif.get('quotation.reference'), "001", "the quotation should have a reference"
 
-#   it 'polymorph invoice_saved_ne', ->
-#     # Setup
-#     store.load Vosae.Invoice, {id: 1}
-#     invoice = store.find Vosae.Invoice, 1
-#     notification = store.find Vosae.InvoiceSavedNE, 1
-#     ajaxHash.success $.extend({}, hashNotification, {
-#       id: 1
-#       resource_type: "invoice_saved_ne"
-#       customer_display: "Vosae"
-#       invoice_reference: "INVOICE 2013_12_04_001"
-#       invoice: "/api/v1/invoice/1/"
-#     })
 
-#     # Test
-#     expectAjaxType "GET"
-#     expectAjaxURL "/notification/1/"
-#     expect(notification.get('module')).toEqual "invoicing"
-#     expect(notification.get('customerDisplay')).toEqual "Vosae"
-#     expect(notification.get('invoiceReference')).toEqual "INVOICE 2013_12_04_001"
-#     expect(notification.get('invoice')).toEqual invoice
+module "DS.Model / Vosae.Notification / Vosae.InvoiceSavedNE",
+  setup: ->
+    env = setupStore()
 
-#   it 'polymorph down_payment_invoice_saved_ne', ->
-#     # Setup
-#     store.load Vosae.DownPaymentInvoice, {id: 1}
-#     downPaymentInvoice = store.find Vosae.DownPaymentInvoice, 1
-#     notification = store.find Vosae.DownPaymentInvoiceSavedNE, 1
-#     ajaxHash.success $.extend({}, hashNotification, {
-#       id: 1
-#       resource_type: "down_payment_invoice_saved_ne"
-#       customer_display: "Vosae"
-#       down_payment_invoice_reference: "DOWNPAYMENTINVOICE 2013_12_04_001"
-#       down_payment_invoice: "/api/v1/down_payment_invoice/1/"
-#     })
+    # Make the store available for all tests
+    store = env.store
 
-#     # Test
-#     expectAjaxType "GET"
-#     expectAjaxURL "/notification/1/"
-#     expect(notification.get('module')).toEqual "invoicing"
-#     expect(notification.get('customerDisplay')).toEqual "Vosae"
-#     expect(notification.get('downPaymentInvoiceReference')).toEqual "DOWNPAYMENTINVOICE 2013_12_04_001"
-#     expect(notification.get('downPaymentInvoice')).toEqual downPaymentInvoice
+test 'relationship - invoice', ->
+  # Setup
+  store.push 'invoice', {id: 1, reference: '001'}
+  store.push 'invoiceSavedNE', {id: 1, invoice: 1}
 
-#   it 'polymorph credit_note_saved_ne', ->
-#     # Setup
-#     store.load Vosae.CreditNote, {id: 1}
-#     creditNote = store.find Vosae.CreditNote, 1
-#     notification = store.find Vosae.CreditNoteSavedNE, 1
-#     ajaxHash.success $.extend({}, hashNotification, {
-#       id: 1
-#       resource_type: "credit_note_saved_ne"
-#       customer_display: "Vosae"
-#       credit_note_reference: "CREDITNOTE 2013_12_04_001"
-#       credit_note: "/api/v1/credit_note/1/"
-#     })
+  # Test
+  store.find('invoiceSavedNE', 1).then async (notif) ->
+    equal notif.get('invoice') instanceof Vosae.Invoice, true, "the invoice property should return a invoice"
+    equal notif.get('invoice.reference'), "001", "the invoice should have a reference"
 
-#     # Test
-#     expectAjaxType "GET"
-#     expectAjaxURL "/notification/1/"
-#     expect(notification.get('module')).toEqual "invoicing"
-#     expect(notification.get('customerDisplay')).toEqual "Vosae"
-#     expect(notification.get('creditNoteReference')).toEqual "CREDITNOTE 2013_12_04_001"
-#     expect(notification.get('creditNote')).toEqual creditNote
+
+module "DS.Model / Vosae.Notification / Vosae.DownPaymentInvoiceSavedNE",
+  setup: ->
+    env = setupStore()
+
+    # Make the store available for all tests
+    store = env.store
+
+test 'relationship - downPaymentInvoice', ->
+  # Setup
+  store.push 'downPaymentInvoice', {id: 1, reference: '001'}
+  store.push 'downPaymentInvoiceSavedNE', {id: 1, downPaymentInvoice: 1}
+
+  # Test
+  store.find('downPaymentInvoiceSavedNE', 1).then async (notif) ->
+    equal notif.get('downPaymentInvoice') instanceof Vosae.DownPaymentInvoice, true, "the downPaymentInvoice property should return a down payment invoice"
+    equal notif.get('downPaymentInvoice.reference'), "001", "the down payment invoice should have a reference"
+
+
+module "DS.Model / Vosae.Notification / Vosae.CreditNoteSavedNE",
+  setup: ->
+    env = setupStore()
+
+    # Make the store available for all tests
+    store = env.store
+
+test 'relationship - creditNote', ->
+  # Setup
+  store.push 'creditNote', {id: 1, reference: '001'}
+  store.push 'creditNoteSavedNE', {id: 1, creditNote: 1}
+
+  # Test
+  store.find('creditNoteSavedNE', 1).then async (notif) ->
+    equal notif.get('creditNote') instanceof Vosae.CreditNote, true, "the creditNote property should return a credit note"
+    equal notif.get('creditNote.reference'), "001", "the credit note should have a reference"
+
+
+module "DS.Model / Vosae.Notification / Vosae.EventReminderNE",
+  setup: ->
+    env = setupStore()
+
+    # Make the store available for all tests
+    store = env.store
+
+test 'relationship - vosaeEvent', ->
+  # Setup
+  store.push 'vosaeEvent', {id: 1, summary: 'Birthday'}
+  store.push 'eventReminderNE', {id: 1, vosaeEvent: 1}
+
+  # Test
+  store.find('eventReminderNE', 1).then async (notif) ->
+    equal notif.get('vosaeEvent') instanceof Vosae.VosaeEvent, true, "the eventReminder property should return a vosae event"
+    equal notif.get('vosaeEvent.summary'), "Birthday", "the credit note should have a summary"

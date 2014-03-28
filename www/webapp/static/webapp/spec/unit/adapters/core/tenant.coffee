@@ -18,8 +18,6 @@ module "DS.RESTAdapter / Vosae.TenantAdapter",
     # Register needed adapters & serializers
     env.container.register 'adapter:tenant', Vosae.TenantAdapter
     env.container.register 'serializer:tenant', Vosae.TenantSerializer
-    env.container.register 'adapter:tenant', Vosae.TenantAdapter
-    env.container.register 'adapter:tenant', Vosae.TenantAdapter
 
     # Make the store and the adapter available for all tests
     store = env.store

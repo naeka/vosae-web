@@ -1,97 +1,97 @@
-store = null
+# store = null
 
-describe 'Vosae.Phone', ->
-  beforeEach ->
-    store = Vosae.Store.create()
+# describe 'Vosae.Phone', ->
+#   beforeEach ->
+#     store = Vosae.Store.create()
 
-  afterEach ->
-    store.destroy()
+#   afterEach ->
+#     store.destroy()
 
-  it 'type property should be WORK when creating phone', ->
-    # Setup
-    phone = store.createRecord Vosae.Phone
+#   it 'type property should be WORK when creating phone', ->
+#     # Setup
+#     phone = store.createRecord Vosae.Phone
 
-    # Test
-    expect(phone.get('type')).toEqual "WORK"
+#     # Test
+#     expect(phone.get('type')).toEqual "WORK"
 
-  it 'typeIsWork computed property', ->
-    # Setup
-    phone = store.createRecord Vosae.Phone 
+#   it 'typeIsWork computed property', ->
+#     # Setup
+#     phone = store.createRecord Vosae.Phone 
 
-    # Test
-    expect(phone.get('typeIsWork')).toEqual true
+#     # Test
+#     expect(phone.get('typeIsWork')).toEqual true
 
-    # Setup 
-    phone.set 'type', 'SomethingShity'
+#     # Setup 
+#     phone.set 'type', 'SomethingShity'
 
-    # Test
-    expect(phone.get('typeIsWork')).toEqual false
+#     # Test
+#     expect(phone.get('typeIsWork')).toEqual false
 
-  it 'typeIsHome computed property', ->
-    # Setup
-    phone = store.createRecord Vosae.Phone
-    phone.set 'type', 'SomethingShity'
+#   it 'typeIsHome computed property', ->
+#     # Setup
+#     phone = store.createRecord Vosae.Phone
+#     phone.set 'type', 'SomethingShity'
 
-    # Test
-    expect(phone.get('typeIsHome')).toEqual false
+#     # Test
+#     expect(phone.get('typeIsHome')).toEqual false
 
-    # Setup
-    phone.set 'type', 'HOME'
+#     # Setup
+#     phone.set 'type', 'HOME'
 
-    # Test
-    expect(phone.get('typeIsHome')).toEqual true
+#     # Test
+#     expect(phone.get('typeIsHome')).toEqual true
 
-  it 'combinedType property', ->
-    # Setup
-    phone = store.createRecord Vosae.Phone
-    phone.set 'type', 'WORK'
+#   it 'combinedType property', ->
+#     # Setup
+#     phone = store.createRecord Vosae.Phone
+#     phone.set 'type', 'WORK'
 
-    # Test
-    expect(phone.get('combinedType')).toEqual 'WORK'
+#     # Test
+#     expect(phone.get('combinedType')).toEqual 'WORK'
 
-    # Setup
-    phone.set 'subtype', 'CELL'
+#     # Setup
+#     phone.set 'subtype', 'CELL'
 
-    # Test
-    expect(phone.get('combinedType')).toEqual 'WORK-CELL'
+#     # Test
+#     expect(phone.get('combinedType')).toEqual 'WORK-CELL'
 
-  it 'displayCombinedType', ->
-    # Setup
-    phone = store.createRecord Vosae.Phone
-    phone.set 'type', 'WORK'
+#   it 'displayCombinedType', ->
+#     # Setup
+#     phone = store.createRecord Vosae.Phone
+#     phone.set 'type', 'WORK'
 
-    # Test
-    expect(phone.get('displayCombinedType')).toEqual 'Work'
+#     # Test
+#     expect(phone.get('displayCombinedType')).toEqual 'Work'
 
-    # Setup
-    phone.set 'subtype', 'CELL'
+#     # Setup
+#     phone.set 'subtype', 'CELL'
 
-    # Test
-    expect(phone.get('displayCombinedType')).toEqual 'Work cell'
+#     # Test
+#     expect(phone.get('displayCombinedType')).toEqual 'Work cell'
 
-    # Setup
-    phone.set 'type', null
+#     # Setup
+#     phone.set 'type', null
 
-    # Test
-    expect(phone.get('displayCombinedType')).toEqual ''
+#     # Test
+#     expect(phone.get('displayCombinedType')).toEqual ''
 
-    # Setup
-    phone.set 'subtype', null
+#     # Setup
+#     phone.set 'subtype', null
 
-    # Test
-    expect(phone.get('displayCombinedType')).toEqual ''
+#     # Test
+#     expect(phone.get('displayCombinedType')).toEqual ''
 
-    # Setup
-    phone.set 'type', 'SomethingShity'
+#     # Setup
+#     phone.set 'type', 'SomethingShity'
 
-    # Test
-    expect(phone.get('displayCombinedType')).toEqual ''
+#     # Test
+#     expect(phone.get('displayCombinedType')).toEqual ''
 
-  it 'combined type changed', ->
-    # Setup
-    phone = store.createRecord Vosae.Phone
-    phone.combinedTypeChanged 'HOME-FAX'
+#   it 'combined type changed', ->
+#     # Setup
+#     phone = store.createRecord Vosae.Phone
+#     phone.combinedTypeChanged 'HOME-FAX'
 
-    # Test
-    expect(phone.get('type')).toEqual 'HOME'
-    expect(phone.get('subtype')).toEqual 'FAX'
+#     # Test
+#     expect(phone.get('type')).toEqual 'HOME'
+#     expect(phone.get('subtype')).toEqual 'FAX'

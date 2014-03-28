@@ -4,39 +4,10 @@
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
   <head>
-    <!--<script>
-      // MUST BET SET BEFORE SKELETON-HEAD.HTML
-      window.cachedSearch = window.location.search;
-      window.testMode = true;
-    </script>
-    {% include "webapp/skeleton-head.html" %}
-    <script>
-      minispade.require('vosae');
-      Em.run(function(){
-        Vosae.Utilities.setLanguage(LANGUAGE);
-      });
-    </script>
-    <link rel="stylesheet" href="{% static 'webapp/spec/vendor/jasmine.css' %}">
-    <script src="{% static 'webapp/spec/vendor/sinon.js' %}"></script>
-    <script src="{% static 'webapp/spec/vendor/jasmine.js' %}"></script>
-    <script src="{% static 'webapp/spec/vendor/jasmine-html.js' %}"></script>
-    <script src="{% static 'webapp/spec/test_helper.js' %}"></script>
-    {% if TRAVIS %}
-      <script src="{% static 'webapp/spec/vendor/jasmine-runner.js' %}"></script>
-    {% else %}
-      <script src="{% static 'webapp/spec/vendor/jasmine.console_reporter.js' %}"></script>
-    {% endif %}
-    <script src="{% static 'webapp/spec/specs.js' %}"></script>-->
-
-    <link rel="stylesheet" type="text/css" href="{% static 'webapp/spec/vendor/jasmine.css' %}">
-    <!-- Jasmine -->
-    <script type="text/javascript" src="{% static 'webapp/spec/vendor/jasmine.js' %}"></script>
-    <script type="text/javascript" src="{% static 'webapp/spec/vendor/jasmine-html.js' %}"></script>
-    <script type="text/javascript" src="{% static 'webapp/spec/vendor/boot.js' %}"></script>
-
     <!-- Application -->
     <script type="text/javascript" src="{% static 'webapp/build/vendor.js' %}"></script>
     <script type="text/javascript" src="{% static 'webapp/build/webapp.js' %}"></script>
+    <script type="text/javascript" src="{% static 'webapp/build/locales/locale-'|add:LANGUAGE_CODE|add:'.js' %}"></script>
     <script type="text/javascript">
       var AUTH_USER = '{{ request.user.email }}';
       var LANGUAGE = '{{ LANGUAGE_CODE }}';
@@ -49,11 +20,24 @@
         protocol: window.location.protocol,
         host: window.location.host
       };
-
       window.testMode = true;
+    </script>
+
+    <!-- Qunit -->
+    <link rel="stylesheet" type="text/css" href="{% static 'webapp/spec/vendor/qunit.css' %}">
+    <script type="text/javascript" src="{% static 'webapp/spec/vendor/qunit.js' %}"></script>
+    <script type="text/javascript" src="{% static 'webapp/spec/qunit_configuration.js' %}"></script>
+    <script type="text/javascript" src="{% static 'webapp/spec/ember_configuration.js' %}"></script>
+    <script type="text/javascript" src="{% static 'webapp/spec/ember-data-setup.js' %}"></script>
+    <script type="text/javascript" src="{% static 'webapp/spec/specs.js' %}"></script>
+
+    <script type="text/javascript">
+      minispade.require('vosae');
+      Em.run(function(){ Vosae.Utilities.setLanguage(LANGUAGE); });
     </script>
   </head>
   <body>
-
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
   </body>
 </html>

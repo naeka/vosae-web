@@ -61,7 +61,10 @@ Vosae.Store = DS.Store.extend
     switch superclass
       when Vosae.Notification then type = Vosae.Notification
       when Vosae.Timeline then type = Vosae.Timeline
-    
+
+    if Em.isNone type.typeKey and Em.typeOf(type) is "class"
+      type = @modelFor(type)
+
     @_super type
 
   ###

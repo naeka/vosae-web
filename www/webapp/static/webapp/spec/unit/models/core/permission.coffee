@@ -1,8 +1,8 @@
-store = null
+# store = null
 
-describe 'Vosae.Permission', ->
-  beforeEach ->
-    store = Vosae.Store.create()
+# describe 'Vosae.Permission', ->
+#   beforeEach ->
+#     store = Vosae.Store.create()
 
-  afterEach ->
-    store.destroy()
+#   afterEach ->
+#     store.destroy()

@@ -1,7 +1,7 @@
-@notEmpty = (selector) ->
-  -> $(selector).text().trim() != ''
+# @notEmpty = (selector) ->
+#   -> $(selector).text().trim() != ''
 
-@hasText = (selector, text) ->
-  -> $(selector).text().trim() == text
+# @hasText = (selector, text) ->
+#   -> $(selector).text().trim() == text
 
-@appRendered = -> $('.ember-application').length
+# @appRendered = -> $('.ember-application').length

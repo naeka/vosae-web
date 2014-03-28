@@ -50,7 +50,6 @@ module.exports = (grunt) ->
             "#{WEBAPP_ROOT}/spec/support/**/*.coffee", 
             "#{WEBAPP_ROOT}/spec/unit/**/*.coffee"
           ]
-
     #
     # Minify js files using UglifyJS
     #
@@ -104,6 +103,9 @@ module.exports = (grunt) ->
       webapp_css:
         files: [WEBAPP_CSS_DIR + GLOB_CSS_FILES]
         tasks: ["concat:webapp_css"]
+      webapp_spec:
+        files: [WEBAPP_SPEC_DIR + GLOB_COFFEE_FILES]
+        tasks: ["coffee:webapp_js_spec"]
 
     #
     # Concatenate files
@@ -323,8 +325,9 @@ module.exports = (grunt) ->
   # 
   grunt.registerTask 'default', ['build-dev', 'watch']
   grunt.registerTask 'images', ['imagemin']
-  grunt.registerTask 'spec', ['coffee:webapp_js_spec']
   grunt.registerTask 'handlebars', ['emberTemplates', 'uglify:templates']
+  grunt.registerTask 'build-spec', ['coffee:webapp_js_spec']
+  grunt.registerTask 'spec', ['build-spec', 'watch:webapp_spec']
 
   grunt.registerTask 'process_i18n_lang', (lang, prod) ->
     grunt.option("i18n_lang", lang)
@@ -339,6 +342,8 @@ module.exports = (grunt) ->
     for lang in grunt.file.expand {cwd:WEBAPP_JS_I18N_DIR}, '*'
       tasklist.push('process_i18n_lang:' + lang + ':' + prod)
     grunt.task.run tasklist
+
+
 
   grunt.registerTask 'build-dev', 'Development build', ->
     grunt.config.set 'minispade.options.stringModule', true

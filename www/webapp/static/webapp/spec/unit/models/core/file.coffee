@@ -1,6 +1,3 @@
-get = Ember.get
-set = Ember.set
-
 env = undefined
 store = undefined
 

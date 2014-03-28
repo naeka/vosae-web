@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
   <head>
-    <script>
+    <!--<script>
       // MUST BET SET BEFORE SKELETON-HEAD.HTML
       window.cachedSearch = window.location.search;
       window.testMode = true;
@@ -26,37 +26,34 @@
     {% else %}
       <script src="{% static 'webapp/spec/vendor/jasmine.console_reporter.js' %}"></script>
     {% endif %}
-    <script src="{% static 'webapp/spec/specs.js' %}"></script>
+    <script src="{% static 'webapp/spec/specs.js' %}"></script>-->
+
+    <link rel="stylesheet" type="text/css" href="{% static 'webapp/spec/vendor/jasmine.css' %}">
+    <!-- Jasmine -->
+    <script type="text/javascript" src="{% static 'webapp/spec/vendor/jasmine.js' %}"></script>
+    <script type="text/javascript" src="{% static 'webapp/spec/vendor/jasmine-html.js' %}"></script>
+    <script type="text/javascript" src="{% static 'webapp/spec/vendor/boot.js' %}"></script>
+
+    <!-- Application -->
+    <script type="text/javascript" src="{% static 'webapp/build/vendor.js' %}"></script>
+    <script type="text/javascript" src="{% static 'webapp/build/webapp.js' %}"></script>
+    <script type="text/javascript">
+      var AUTH_USER = '{{ request.user.email }}';
+      var LANGUAGE = '{{ LANGUAGE_CODE }}';
+      var APP_ENDPOINT = '{{ APP_ENDPOINT }}';
+      var PUSHER_KEY = '{{ PUSHER_KEY }}';
+      var PUSHER_CLUSTER = '{{ PUSHER_CLUSTER }}';
+      var PUSHER_AUTH_ENDPOINT = '{{ APP_ENDPOINT }}/rt/auth/';
+      var WINDOW_LOCATION_AT_START = {
+        pathname: window.location.pathname,
+        protocol: window.location.protocol,
+        host: window.location.host
+      };
+
+      window.testMode = true;
+    </script>
   </head>
   <body>
-    <div id="wrapper-loader">
-      <i class="picto-cloud"></i>
-      <i class="picto-loading"></i>
-    </div>
-    <script type="text/javascript">
-      (function() {
-        window.consoleReporter = new jasmine.ConsoleReporter();
 
-        if (navigator.userAgent.indexOf('PhantomJS') != -1) {
-          jasmine.getEnv().addReporter(consoleReporter);
-        } 
-        else {
-          jasmine.getEnv().addReporter(new jasmine.HtmlReporter());
-          jasmine.getEnv().addReporter(consoleReporter);
-        }
-
-        var currentWindowOnload = window.onload;
-
-        window.onload = function() {
-          if (currentWindowOnload) {
-            currentWindowOnload();
-          }
-          execJasmine();
-        };
-        function execJasmine() {
-          jasmine.getEnv().execute();
-        };
-      })();
-    </script>
   </body>
 </html>

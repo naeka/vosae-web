@@ -45,7 +45,11 @@ module.exports = (grunt) ->
         options:
           bare: true
         files:
-          "www/webapp/static/webapp/spec/specs.js": ["#{WEBAPP_ROOT}/spec/*.coffee", "#{WEBAPP_ROOT}/spec/support/**/*.coffee", "#{WEBAPP_ROOT}/spec/unit/**/*.coffee"]
+          "www/webapp/static/webapp/spec/specs.js": [
+            "#{WEBAPP_ROOT}/spec/*.coffee", 
+            "#{WEBAPP_ROOT}/spec/support/**/*.coffee", 
+            "#{WEBAPP_ROOT}/spec/unit/**/*.coffee"
+          ]
 
     #
     # Minify js files using UglifyJS

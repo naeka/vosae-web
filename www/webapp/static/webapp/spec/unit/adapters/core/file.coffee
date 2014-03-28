@@ -7,12 +7,7 @@ passedHash = undefined
 
 module "DS.RESTAdapter / Vosae.FileAdapter",
   setup: ->
-    env = setupStore
-      file: Vosae.File
-      user: Vosae.User
-      group: Vosae.Group
-      userSettings: Vosae.UserSettings
-      specificPermission: Vosae.SpecificPermission
+    env = setupStore()
 
     # Register transforms
     env.container.register 'transform:date', Vosae.DateTransform

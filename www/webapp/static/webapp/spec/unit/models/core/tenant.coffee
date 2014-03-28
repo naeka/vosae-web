@@ -3,13 +3,7 @@ store = undefined
 
 module "DS.Model / Vosae.Tenant",
   setup: ->
-    env = setupStore
-      tenant: Vosae.Tenant
-      reportSettings: Vosae.ReportSettings
-      registrationInfo: Vosae.RegistrationInfo
-      vosaeAddress: Vosae.VosaeAddress
-      file: Vosae.File
-      user: Vosae.User
+    env = setupStore()
     
     # Make the store available for all tests
     store = env.store

@@ -7,11 +7,7 @@ passedHash = undefined
 
 module "DS.RESTAdapter / Vosae.GroupAdapter",
   setup: ->
-    env = setupStore
-      group: Vosae.Group
-      user: Vosae.User
-      userSettings: Vosae.UserSettings
-      specificPermission: Vosae.SpecificPermission
+    env = setupStore()
 
     # Register transforms
     env.container.register 'transform:array', Vosae.ArrayTransform

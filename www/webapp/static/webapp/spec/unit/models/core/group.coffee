@@ -3,11 +3,7 @@ store = undefined
 
 module "DS.Model / Vosae.Group",
   setup: ->
-    env = setupStore
-      group: Vosae.Group
-      user: Vosae.User
-      userSettings: Vosae.UserSettings
-      specificPermission: Vosae.SpecificPermission
+    env = setupStore()
 
     # Make the store available for all tests
     store = env.store

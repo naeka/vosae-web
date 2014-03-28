@@ -7,13 +7,7 @@ passedHash = undefined
 
 module "DS.RESTAdapter / Vosae.TenantAdapter",
   setup: ->
-    env = setupStore
-      tenant: Vosae.Tenant
-      reportSettings: Vosae.ReportSettings
-      registrationInfo: Vosae.RegistrationInfo
-      vosaeAddress: Vosae.VosaeAddress
-      file: Vosae.File
-      user: Vosae.User
+    env = setupStore()
 
     # Register needed adapters & serializers
     env.container.register 'adapter:tenant', Vosae.TenantAdapter

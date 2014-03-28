@@ -19,8 +19,8 @@ Vosae.TenantAdapter = Vosae.ApplicationAdapter.extend
     serializer = store.serializerFor type.typeKey
 
     # Dirty but no other solution right now...
-    controller = Vosae.lookup('controller:tenants.add')
-    
+    controller = store.container.lookup('controller:tenantsAdd')
+
     # Add `supportedCurrencies` and `defaultCurrency` to data
     supportedCurrencies = controller.getSupportedCurrenciesResourceURI()
     defaultCurrency = controller.getDefaultCurrencyResourceURI()

@@ -1,7 +1,14 @@
-@expectAjaxURL = (url, expected) ->
-  a = document.createElement 'a'
-  a.href = url
-  equal a.pathname, "/#{Vosae.Config.API_NAMESPACE}#{expected}"
+ajaxResponse = (value) ->
+  adapter.ajax = (url, verb, hash) ->
+    a = document.createElement 'a'
+    a.href = url
+    url = a.pathname.replace "/#{Vosae.Config.API_NAMESPACE}", ""
+
+    window.passedUrl = url
+    window.passedVerb = verb
+    window.passedHash = hash
+
+    return Ember.RSVP.resolve value
 
 # get = Ember.get
 # set = Ember.set

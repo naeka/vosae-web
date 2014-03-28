@@ -63,6 +63,7 @@
     container.register('serializer:-default', Vosae.ApplicationSerializer);
     container.register('serializer:-rest', Vosae.ApplicationSerializer);
     container.register('adapter:-rest', Vosae.ApplicationAdapter);
+    container.register('controller:application', Vosae.ApplicationController);
 
     container.injection('serializer', 'store', 'store:main');
 

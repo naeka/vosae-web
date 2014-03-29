@@ -1,126 +1,105 @@
-# store = null
+env = undefined
+store = undefined
 
-# describe 'Vosae.Entity', ->
-#   beforeEach ->
-#     store = Vosae.Store.create()
+module "DS.Model / Vosae.Entity",
+  setup: ->
+    env = setupStore()
 
-#   afterEach ->
-#     store.destroy()
+    # Make the store available for all tests
+    store = env.store
 
-#   it 'can add emails', ->
-#     # Setup
-#     store.load Vosae.Entity, {id: 1}
-#     entity = store.find Vosae.Entity, 1
-#     email = entity.get('emails').createRecord Vosae.Email
-#     email2 = entity.get('emails').createRecord Vosae.Email
+test 'relationship - addresses', ->
+  # Setup
+  store.push 'vosaeAddress', {id: 1, country: 'France'}
+  store.push 'entity', {id: 1, addresses: [1]}
 
-#     # Test
-#     expect(entity.get('emails.length')).toEqual 2
-#     expect(entity.get('emails').objectAt(0)).toEqual email
-#     expect(entity.get('emails').objectAt(1)).toEqual email2
+  # Test
+  store.find('entity', 1).then async (entity) ->
+    entity.get('addresses').then async (addresses) ->
+      equal addresses.objectAt(0) instanceof Vosae.VosaeAddress, true, "the addresses array's first object should be a vosae address"
+      equal addresses.objectAt(0).get('country'), "France", "the address should have a country"
 
-#   it 'can add phones', ->
-#     # Setup
-#     store.load Vosae.Entity, {id: 1}
-#     entity = store.find Vosae.Entity, 1
-#     phone = entity.get('phones').createRecord Vosae.Phone
-#     phone2 = entity.get('phones').createRecord Vosae.Phone
+      address = addresses.createRecord()
+      equal addresses.get('length'), 2
+      deepEqual addresses.objectAt(1), address, "it should be possibile to create a new address"
 
-#     # Test
-#     expect(entity.get('phones.length')).toEqual 2
-#     expect(entity.get('phones').objectAt(0)).toEqual phone
-#     expect(entity.get('phones').objectAt(1)).toEqual phone2
+      addresses.removeObject address
+      equal addresses.get('length'), 1, "it should be possibile to remove an address"
 
-#   it 'can add addresses', ->
-#     # Setup
-#     store.load Vosae.Entity, {id: 1}
-#     entity = store.find Vosae.Entity, 1
-#     address = entity.get('addresses').createRecord Vosae.Address
-#     address2 = entity.get('addresses').createRecord Vosae.Address
+test 'relationship - emails', ->
+  # Setup
+  store.push 'vosaeEmail', {id: 1, email: 'thomas@email.com'}
+  store.push 'entity', {id: 1, emails: [1]}
 
-#     # Test
-#     expect(entity.get('addresses.length')).toEqual 2
-#     expect(entity.get('addresses').objectAt(0)).toEqual address
-#     expect(entity.get('addresses').objectAt(1)).toEqual address2
+  # Test
+  store.find('entity', 1).then async (entity) ->
+    entity.get('emails').then async (emails) ->
+      equal emails.objectAt(0) instanceof Vosae.VosaeEmail, true, "the emails array's first object should be a vosae email"
+      equal emails.objectAt(0).get('email'), "thomas@email.com", "the email should have an email"
 
-#   it 'can delete emails', ->
-#     # Setup
-#     store.load Vosae.Entity, {id: 1}
-#     entity = store.find Vosae.Entity, 1
-#     email = entity.get('emails').createRecord Vosae.Email
-#     email2 = entity.get('emails').createRecord Vosae.Email
+      email = emails.createRecord()
+      equal emails.get('length'), 2
+      deepEqual emails.objectAt(1), email, "it should be possibile to create a new email"
 
-#     # Test
-#     expect(entity.get('emails.length')).toEqual 2
+      emails.removeObject email
+      equal emails.get('length'), 1, "it should be possibile to remove an email"
 
-#     # Setup
-#     entity.get('emails').removeObject email
-#     entity.get('emails').removeObject email2
+test 'relationship - phones', ->
+  # Setup
+  store.push 'vosaePhone', {id: 1, phone: '+33034344'}
+  store.push 'entity', {id: 1, phones: [1]}
 
-#     # Test
-#     expect(entity.get('emails.length')).toEqual 0
+  # Test
+  store.find('entity', 1).then async (entity) ->
+    entity.get('phones').then async (phones) ->
+      equal phones.objectAt(0) instanceof Vosae.VosaePhone, true, "the phones array's first object should be a vosae phone"
+      equal phones.objectAt(0).get('phone'), "+33034344", "the phone should have an phone"
 
-#   it 'can delete phones', ->
-#     # Setup
-#     store.load Vosae.Entity, {id: 1}
-#     entity = store.find Vosae.Entity, 1
-#     phone = entity.get('phones').createRecord Vosae.Phone
-#     phone2 = entity.get('phones').createRecord Vosae.Phone
+      phone = phones.createRecord()
+      equal phones.get('length'), 2
+      deepEqual phones.objectAt(1), phone, "it should be possibile to create a new phone"
 
-#     # Test
-#     expect(entity.get('phones.length')).toEqual 2
+      phones.removeObject phone
+      equal phones.get('length'), 1, "it should be possibile to remove a phone"
 
-#     # Setup
-#     entity.get('phones').removeObject phone
-#     entity.get('phones').removeObject phone2
+test 'relationship - creator', ->
+  # Setup
+  store.push 'user', {id: 1, fullName: 'Thomas Durin'}
+  store.push 'entity', {id: 1, creator: 1}
 
-#     # Test
-#     expect(entity.get('phones.length')).toEqual 0
+  # Test
+  store.find('entity', 1).then async (entity) ->
+    entity.get('creator').then async (creator) ->
+      equal creator instanceof Vosae.User, true, "the creator property should return a user"
+      equal creator.get('fullName'), "Thomas Durin", "the creator should have a name"
 
-#   it 'can delete addresses', ->
-#     # Setup
-#     store.load Vosae.Entity, {id: 1}
-#     entity = store.find Vosae.Entity, 1
-#     address = entity.get('addresses').createRecord Vosae.Address
-#     address2 = entity.get('addresses').createRecord Vosae.Address
+test 'relationship - photo', ->
+  # Setup
+  store.push 'file', {id: 1, name: 'photo.jpg'}
+  store.push 'entity', {id: 1, photo: 1}
 
-#     # Test
-#     expect(entity.get('addresses.length')).toEqual 2
+  # Test
+  store.find('entity', 1).then async (entity) ->
+    entity.get('photo').then async (photo) ->
+      equal photo instanceof Vosae.File, true, "the photo property should return a file"
+      equal photo.get('name'), "photo.jpg", "the photo should have a name"
 
-#     # Setup
-#     entity.get('addresses').removeObject address
-#     entity.get('addresses').removeObject address2
+test: 'computedProperty - isOwned', ->
+  # Setup
+  env.register 'session:current', Vosae.Session, {singleton: true}
+  env.inject 'store', 'session', 'session:current'
 
-#     # Test
-#     expect(entity.get('addresses.length')).toEqual 0
+  tenant1 = store.createRecord 'tenant'
+  tenant2 = store.createRecord 'tenant'
 
-#   # it 'isOwned computed property', ->
-#   #   # Setup
-#   #   store.load Vosae.Entity, {id: 1}
-#   #   store.load Vosae.User, {id: 1}
-#   #   store.load Vosae.User, {id: 2}
-#   #   entity = store.find Vosae.Entity, 1
-#   #   Vosae.user = store.find Vosae.User, 1
-#   #   fakeUser = store.find Vosae.User, 2
+  store.get('session').set 'tenant', tenant1
+  entity = store.createRecord 'entity', {creator: tenant1}
 
-#   #   # Test    
-#   #   expect(entity.get('isOwned')).toEqual false # No creator, should return false
+  # Test
+  equal entity.get('isOwned'), true, "the session's tenant and the entity creator should be the same"
 
-#   #   # Setup
-#   #   entity.set 'creator', fakeUser # Creator isn't current VosaeUser, should return false
-    
-#   #   # Test
-#   #   expect(entity.get('isOwned')).toEqual false
+  # Setup
+  entity.set 'creator', tenant2
 
-#   #   # Setup
-#   #   entity.set 'creator', Vosae.get('user')
-
-#   #   # Test
-#   #   expect(entity.get('isOwned')).toEqual true
-
-#   it 'private property should be true when creating entity', ->
-#     # Setup
-#     entity = store.createRecord Vosae.Entity
-
-#     # Test
-#     expect(entity.get('private')).toEqual false
+  # Test
+  equal entity.get('isOwned'), false, "the session's tenant and the entity creator should not be the same"

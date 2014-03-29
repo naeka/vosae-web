@@ -1,309 +1,115 @@
-# store = null
+env = undefined
+store = undefined
 
-# describe 'Vosae.User', ->
-#   hashUser =
-#     email: null
-#     full_name: null
-#     groups: []
-#     permissions: []
-#     photo_uri: null
-#     settings: null
-#     specific_permissions: {}
-#     status: null
+module "DS.Model / Vosae.User",
+  setup: ->
+    env = setupStore()
 
-#   beforeEach ->
-#     comp = getAdapterForTest(Vosae.User)
-#     ajaxUrl = comp[0]
-#     ajaxType = comp[1]
-#     ajaxHash = comp[2]
-#     store = comp[3]
+    # Register transforms
+    env.container.register 'transform:array', Vosae.ArrayTransform
 
-#   afterEach ->
-#     comp = undefined
-#     ajaxUrl = undefined
-#     ajaxType = undefined
-#     ajaxHash = undefined
-#     store.destroy()
+    # Make the store available for all tests
+    store = env.store
 
-#   it 'finding all user makes a GET to /user/', ->
-#     # Setup
-#     users = store.find Vosae.User
+test 'relationship - group', ->
+  # Setup
+  store.push 'group', {id: 1, name: 'Admin'}
+  store.push 'user', {id: 1, groups: [1]}
 
-#     # Test
-#     enabledFlags users, ['isLoaded', 'isValid'], recordArrayFlags
-#     expectAjaxURL "/user/"
-#     expectAjaxType "GET"
+  # Test
+  store.find('user', 1).then async (user) ->
+    equal user.get('groups').objectAt(0) instanceof Vosae.Group, true, "the first object in the groups property should return group"
+    equal user.get('groups').objectAt(0).get('name'), "Admin", "the first group in groups should have a name"
 
-#     # Setup
-#     ajaxHash.success(
-#       meta: {}
-#       objects: [$.extend({}, hashUser, {id: 1, full_name: "Tom Dale", email: "tom.dale@vosae.com"})]
-#     )
-#     user = users.objectAt(0)
+test 'relationship - specificPermissions', ->
+  # Setup
+  store.push 'specificPermission', {id: 1, name: "can_edit_contact", value: true}
+  store.push 'user', {id: 1, specificPermissions:[1]}
 
-#     # Test
-#     statesEqual users, 'loaded.saved'
-#     stateEquals user, 'loaded.saved'
-#     enabledFlagsForArray users, ['isLoaded', 'isValid']
-#     enabledFlags user, ['isLoaded', 'isValid']
-#     expect(user).toEqual store.find(Vosae.User, 1)
+  # Test
+  store.find('user', 1).then async (user) ->
+    equal user.get('specificPermissions').objectAt(0) instanceof Vosae.SpecificPermission, true, "the first object in the specificPermissions property should return specific permission"
+    equal user.get('specificPermissions').objectAt(0).get('name'), "can_edit_contact", "the specific permission should have a name"
+    equal user.get('specificPermissions').objectAt(0).get('value'), true, "the specific permission should have a value"
 
-#   it 'finding a user by ID makes a GET to /user/:id/', ->
-#     # Setup
-#     user = store.find Vosae.User, 1
+test 'relationship - settings', ->
+  # Setup
+  store.push 'userSettings', {id: 1, languageCode: 'fr'}
+  store.push 'user', {id: 1, settings: 1}
 
-#     # Test
-#     stateEquals user, 'loading'
-#     enabledFlags user, ['isLoading', 'isValid']
-#     expectAjaxType "GET"
-#     expectAjaxURL "/user/1/"
+  # Test
+  store.find('user', 1).then async (user) ->
+    equal user.get('settings') instanceof Vosae.UserSettings, true, "the settings property should return a user settings"
+    equal user.get('settings.languageCode'), "fr", "the user settings should have a language code"
 
-#     # Setup
-#     ajaxHash.success($.extend {}, hashUser,
-#       id: 1
-#       full_name: "Tom Dale"
-#       email: "tom.dale@vosae.com"
-#       resource_uri: "/api/v1/user/1/"
-#     )
+test 'method - permissionsContains', ->
+  # Setup
+  store.push 'user', {id: 1, permissions:['can_edit_contact']}
 
-#     # Test
-#     stateEquals user, 'loaded.saved'
-#     enabledFlags user, ['isLoaded', 'isValid']
-#     expect(user).toEqual store.find(Vosae.User, 1)
+  # Test
+  store.find('user', 1).then async (user) ->
+    equal user.permissionsContains('can_edit_contact'), true, "permissionsContains should return true if user has the permission"
+    equal user.permissionsContains('can_edit_organization'), false, "permissionsContains should return false if user hasnt the permission"
 
-#   it 'finding users by query makes a GET to /user/:query/', ->
-#     # Setup
-#     users = store.find Vosae.User, {page: 1}
+test 'method - specificPermissionsContains', ->
+  # Setup
+  store.push 'specificPermission', {id: 1, name: "can_edit_contact", value: true}
+  store.push 'user', {id: 1, specificPermissions:[1]}
 
-#     # Test
-#     expect(users.get('length')).toEqual 0
-#     enabledFlags users, ['isLoading'], recordArrayFlags
-#     expectAjaxURL "/user/"
-#     expectAjaxType "GET"
-#     expectAjaxData({page: 1 })
+  # Test
+  store.find('user', 1).then async (user) ->
+    equal user.specificPermissionsContains('can_edit_contact'), true, "specificPermissionsContains should return true if user has the permission"
+    equal user.specificPermissionsContains('can_edit_organization'), false, "specificPermissionsContains should return false if user hasnt the permission"
 
-#     # Setup
-#     ajaxHash.success(
-#       meta: {}
-#       objects: [
-#         $.extend({}, hashUser, {id: 1, full_name: "Tom Dale", email: "tom.dale@vosae.com"})
-#         $.extend({}, hashUser, {id: 2, full_name: "Yehuda Katz", email: "yehuda.katz@vosae.com"})
-#       ]
-#     )
-#     tom = users.objectAt 0
-#     yehuda = users.objectAt 1
+test 'method - mergeGroupsPermissions', ->
+  # Setup
+  store.push 'group', {id: 1, permissions:['can_edit_contact', 'can_add_quotation']}
+  store.push 'group', {id: 2, permissions:['can_edit_organization', 'can_edit_contact']}
+  store.push 'user', {id: 1,  groups: [1, 2]}
 
-#     # Test
-#     statesEqual [tom, yehuda], 'loaded.saved'
-#     enabledFlags users, ['isLoaded'], recordArrayFlags
-#     enabledFlagsForArray [tom, yehuda], ['isLoaded'], recordArrayFlags
-#     expect(users.get('length')).toEqual 2
-#     expect(tom.get('fullName')).toEqual "Tom Dale"
-#     expect(yehuda.get('fullName')).toEqual "Yehuda Katz"
-#     expect(tom.get('id')).toEqual "1"
-#     expect(yehuda.get('id')).toEqual "2"
+  # Test
+  store.find('user', 1).then async (user) ->
+    Em.RSVP.all([store.find('group', 1), store.find('group', 2)]).then async (groups) ->
+      user.mergeGroupsPermissions()
+      equal user.get('permissions').get('length'), 3, "user permissions array's length should be 3"
+      equal user.permissionsContains('can_edit_contact'), true, "user should have the permission can_edit_contact"
+      equal user.permissionsContains('can_edit_organization'), true, "user should have the permission can_edit_organization"
+      equal user.permissionsContains('can_add_quotation'), true, "user should have the permission can_add_quotation"
 
-#   it 'creating a user makes a POST to /user/', ->
-#     # Setup
-#     user = store.createRecord Vosae.User, {fullName: "Tom Dale", email: "tom.dale@vosae.com"}
+test 'property - permissions', ->
+  # Setup
+  store.push 'user', {id: 1}
 
-#     # Test
-#     stateEquals user, 'loaded.created.uncommitted'
-#     enabledFlags user, ['isLoaded', 'isDirty', 'isNew', 'isValid']
+  # Test
+  store.find('user', 1).then async (user) ->
+    deepEqual user.get('permissions'), [], "the default value for the permissions property should be an empty array"
 
-#     # Setup
-#     user.get('transaction').commit()
+test 'computedProperty - getStatus', ->
+  # Setup
+  store.push 'user', {id: 1, status: 'ACTIVE'}
 
-#     # Test
-#     stateEquals user, 'loaded.created.inFlight'
-#     enabledFlags user, ['isLoaded', 'isDirty', 'isNew', 'isValid', 'isSaving']
-#     expectAjaxURL "/user/"
-#     expectAjaxType "POST"
-#     expectAjaxData($.extend {}, hashUser, {full_name: "Tom Dale", email: "tom.dale@vosae.com"})
+  # Test
+  store.find('user', 1).then async (user) ->
+    equal user.get('getStatus'), "Active", "the getStatus property should return the user's status"
+    user.set 'status', 'SOMETHINGWRONG'
+    equal user.get('getStatus'), 'Unknown', "the getStatus property should return 'Unknown' if the user's status doesn't exist"
 
-#     # Setup
-#     ajaxHash.success($.extend {}, hashUser,
-#       id: 1
-#       full_name: "Tom Dale"
-#       email: "tom.dale@vosae.com"
-#       resource_uri: "/api/v1/user/1/"
-#     )
+test 'computedProperty - getFullName', ->
+  # Setup
+  store.push 'user', {id: 1, fullName: 'Thomas Durin'}
 
-#     # Test
-#     stateEquals user, 'loaded.saved'
-#     enabledFlags user, ['isLoaded', 'isValid']
-#     expect(user).toEqual store.find(Vosae.User, 1)
+  # Test
+  store.find('user', 1).then async (user) ->
+    equal user.get('getFullName'), "Thomas Durin", "the getFullName property should return the user's full name"
+    user.set 'fullName', ''
+    equal user.get('getFullName'), "To define", "the getFullName property should return 'To define' if the user's full name doesn't exist"
 
-#   it 'updating a user makes a PUT to /user/:id/', ->
-#     # Setup
-#     # store.load Vosae.Group, {id: 1, name: "Administrators"}
-#     store.adapterForType(Vosae.User).load store, Vosae.User, {id: 1, fullName: "Tom Dale", email: "tom.dale@vosae.com"}
-#     user = store.find Vosae.User, 1
+test 'computedProperty - isDeleteable', ->
+  # Setup
+  store.push 'user', {id: 1, status: 'DELETED'}
 
-#     # Test
-#     stateEquals user, 'loaded.saved' 
-#     enabledFlags user, ['isLoaded', 'isValid']
-
-#     # Setup
-#     user.setProperties {fullName: "Yehuda Katz", email: "yehuda.katz@vosae.com"}
-
-#     # Test
-#     stateEquals user, 'loaded.updated.uncommitted'
-#     enabledFlags user, ['isLoaded', 'isDirty', 'isValid']
-
-#     # Setup
-#     user.get('transaction').commit()
-
-#     # Test
-#     stateEquals user, 'loaded.updated.inFlight'
-#     enabledFlags user, ['isLoaded', 'isDirty', 'isSaving', 'isValid']
-#     expectAjaxURL "/user/1/"
-#     expectAjaxType "PUT"
-#     expectAjaxData($.extend {}, hashUser,
-#       full_name: "Yehuda Katz"
-#       email: "yehuda.katz@vosae.com"
-#     )
-
-#     # Setup
-#     ajaxHash.success($.extend {}, hashUser,
-#       id: 1
-#       full_name: "Yehuda Katz", 
-#       email: "yehuda.katz@vosae.com"
-#     )
-
-#     # Test
-#     stateEquals user, 'loaded.saved'
-#     enabledFlags user, ['isLoaded', 'isValid']
-#     expect(user).toEqual store.find(Vosae.User, 1)
-#     expect(user.get('fullName')).toEqual 'Yehuda Katz'
-
-#   it 'deleting a user makes a DELETE to /user/:id/', ->
-#     # Setup
-#     store.adapterForType(Vosae.User).load store, Vosae.User, {id: 1, fullName: "Tom Dale"}
-#     user = store.find Vosae.User, 1
-
-#     # Test
-#     stateEquals user, 'loaded.saved' 
-#     enabledFlags user, ['isLoaded', 'isValid']
-
-#     # Setup
-#     user.deleteRecord()
-
-#     # Test
-#     stateEquals user, 'deleted.uncommitted'
-#     enabledFlags user, ['isLoaded', 'isDirty', 'isDeleted', 'isValid']
-
-#     # Setup
-#     user.get('transaction').commit()
-
-#     # Test
-#     stateEquals user, 'deleted.inFlight'
-#     enabledFlags user, ['isLoaded', 'isDirty', 'isSaving', 'isDeleted', 'isValid']
-#     expectAjaxURL "/user/1/"
-#     expectAjaxType "DELETE"
-
-#     # Setup
-#     ajaxHash.success()
-
-#     # Test
-#     stateEquals user, 'deleted.saved'
-#     enabledFlags user, ['isLoaded', 'isDeleted', 'isValid']
-
-#   it 'groups hasMany relationship', ->
-#     # Setup
-#     store.adapterForType(Vosae.Group).load store, Vosae.Group, {id: 1, name: 'Administrators'}
-#     group = store.find Vosae.Group, 1
-#     store.adapterForType(Vosae.User).load store, Vosae.User, {id: 1, groups:['/api/v1/group/1/']}
-#     user = store.find Vosae.User, 1
-
-#     # Test
-#     expect(user.get('groups').objectAt(0)).toEqual group
-
-#   it 'specificPermissions hasMany relationship', ->
-#     # Setup
-#     store.adapterForType(Vosae.User).load store, Vosae.User, {id: 1, specific_permissions:{'can_edit_contact': true}}
-#     user = store.find Vosae.User, 1
-
-#     # Test
-#     expect(user.get('specificPermissions').objectAt(0).get('name')).toEqual 'can_edit_contact'
-#     expect(user.get('specificPermissions').objectAt(0).get('value')).toEqual true
-
-#   it 'settings belongsTo relationship', ->
-#     # Setup
-#     store.adapterForType(Vosae.User).load store, Vosae.User, {id: 1, settings:{language_code: "fr"}}
-#     user = store.find Vosae.User, 1
-
-#     # Test
-#     expect(user.get('settings.languageCode')).toEqual 'fr'
-
-#   it 'permissions property should be empty when creating user', ->
-#     # Setup
-#     user = store.createRecord Vosae.User
-
-#     # Test
-#     expect(user.get('permissions')).toEqual []
-
-#   it 'permissionsContains() method should return false if user hasnt perm', ->
-#     # Setup
-#     store.adapterForType(Vosae.User).load store, Vosae.User, {id: 1, permissions:['can_edit_contact']}
-#     user = store.find Vosae.User, 1
-
-#     # Test
-#     expect(user.permissionsContains('can_edit_contact')).toEqual true
-#     expect(user.permissionsContains('can_edit_organization')).toEqual false
-
-#   it 'specificPermissionsContains() method should return false if user hasnt perm', ->
-#     # Setup
-#     store.adapterForType(Vosae.User).load store, Vosae.User, {id: 1, specific_permissions:{'can_edit_contact': true}}
-#     user = store.find Vosae.User, 1
-#     specificPerm = user.specificPermissionsContains('can_edit_contact')
-#     specificPerm2 = user.specificPermissionsContains('can_edit_organization')
-
-#     # Test
-#     expect(specificPerm.get('name')).toEqual 'can_edit_contact'
-#     expect(specificPerm.get('value')).toEqual true
-#     expect(specificPerm2).toEqual false
-
-#   it 'mergeGroupsPermissions() should merge groups permissions into user permissions', ->
-#     # Setup
-#     store.adapterForType(Vosae.Group).load store, Vosae.Group, {id: 1, permissions:['can_edit_contact', 'can_add_quotation']}
-#     store.adapterForType(Vosae.Group).load store, Vosae.Group, {id: 2, permissions:['can_edit_organization', 'can_edit_contact']}
-#     group1 = store.find Vosae.Group, 1
-#     group2 = store.find Vosae.Group, 2
-#     store.adapterForType(Vosae.User).load store, Vosae.User, {id: 1, groups:['/api/v1/group/1/', '/api/v1/group/2/']}
-#     user = store.find Vosae.User, 1
-#     user.mergeGroupsPermissions()
-
-#     # Test
-#     expect(user.get('permissions').get('length')).toEqual 3
-#     expect(user.permissionsContains('can_edit_contact')).toEqual true
-#     expect(user.permissionsContains('can_edit_organization')).toEqual true
-#     expect(user.permissionsContains('can_add_quotation')).toEqual true
-
-#   it 'getStatus computed property should return user\'s status', ->
-#     # Setup
-#     store.adapterForType(Vosae.User).load store, Vosae.User, {id: 1, status: 'ACTIVE'}
-#     user = store.find Vosae.User, 1
-
-#     # Test
-#     expect(user.get('getStatus')).toEqual 'Active'
-
-#     # Setup
-#     user.set 'status', 'SOMETHINGWRONG'
-
-#     # Test
-#     expect(user.get('getStatus')).toEqual 'Unknown'
-
-#   it 'getFullName computed property should return user\'s full name', ->
-#     # Setup
-#     store.adapterForType(Vosae.User).load store, Vosae.User, {id: 1, full_name: 'Tom Dale'}
-#     user = store.find Vosae.User, 1
-
-#     # Test
-#     expect(user.get('getFullName')).toEqual 'Tom Dale'
-
-#     # Setup
-#     user.set 'fullName', ''
-
-#     # Test
-#     expect(user.get('getFullName')).toEqual 'To define'
+  # Test
+  store.find('user', 1).then async (user) ->
+    equal user.get('isDeleteable'), false, "the isDeleteable property should false if the user already has the deleted status"
+    user.set 'status', ''
+    equal user.get('isDeleteable'), true, "the isDeleteable property should true if the user hasn't the deleted status"

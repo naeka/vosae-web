@@ -378,8 +378,9 @@ updatePayloadWithHasMany = (store, primaryType, relationship, payload, partial) 
   serializer = store.serializerFor(relationship.type.typeKey)
   attribute = serializer.keyForAttribute(primaryType)
 
-  forEach partial[attribute], (url, i) ->
-    partial[attribute][i] = serializer.deurlify(url)
+  unless Em.isEmpty partial[attribute]
+    forEach partial[attribute], (url, i) ->
+      partial[attribute][i] = serializer.deurlify(url)
 
   return
 

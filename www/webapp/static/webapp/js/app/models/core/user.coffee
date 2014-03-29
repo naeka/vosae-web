@@ -48,7 +48,7 @@ Vosae.User = Vosae.Model.extend
   specificPermissionsContains: (perm) ->
     if @get('specificPermissions') and @get('specificPermissions.length')
       permObj = @get('specificPermissions').findProperty('name', perm)
-      return permObj if permObj
+      return permObj.get('value') if permObj
     false
 
   # This method merged all `groups` permissions 

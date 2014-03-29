@@ -286,6 +286,11 @@ module.exports = (grunt) ->
       all:
         options:
           urls: ['http://localhost:8001/spec/']
+          page: {
+            customHeaders: {
+              'Accept-Language': 'en'
+            }
+          },
 
   #
   # Events

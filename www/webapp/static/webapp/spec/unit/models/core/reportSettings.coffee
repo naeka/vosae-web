@@ -1,34 +1,37 @@
-# store = null
+env = undefined
+store = undefined
 
-# describe 'Vosae.ReportSettings', ->
-#   beforeEach ->
-#     store = Vosae.Store.create()
+module "DS.Model / Vosae.ReportSettings",
+  setup: ->
+    env = setupStore()
 
-#   afterEach ->
-#     store.destroy()
+    # Make the store available for all tests
+    store = env.store
 
-#   it 'fontName property default value should exist in the supported font families list', ->
-#     # Setup
-#     reportSettings = store.createRecord Vosae.ReportSettings, {}
+test 'property - fontName', ->
+  # Setup
+  store.push 'reportSettings', {id: 1}
 
-#     # Test
-#     expect(Vosae.Config.reportFontFamilies.findProperty('value', reportSettings.get('fontName'))).not.toBeUndefined()
+  # Test
+  store.find('reportSettings', 1).then async (reportSettings) ->
+    fontFamily = Vosae.Config.reportFontFamilies.findProperty 'value', reportSettings.get('fontName')
+    notEqual fontFamily, undefined, "fontName default value should exist in the supported font families"
 
-#   it 'defaultLanguage computed property should return the language object according to the country code', ->
-#     # Setup
-#     store.adapterForType(Vosae.ReportSettings).load store, Vosae.ReportSettings, {id: 1, language: "fr"}
-#     reportSettings = store.find Vosae.ReportSettings, 1
+test 'computedProperty - defaultLanguage', ->
+  # Setup
+  store.push 'reportSettings', {id: 1, language: "fr"}
 
-#     # Test
-#     expect(reportSettings.get('defaultLanguage')).toEqual Vosae.Config.languages.findProperty('code', 'fr')
+  # Test
+  store.find('reportSettings', 1).then async (reportSettings) ->
+    equal reportSettings.get('defaultLanguage'), Vosae.Config.languages.findProperty('code', 'fr'), "defaultLanguage should return the language object according to the country code"
 
-#   it 'otherLanguages computed property should return an array of language object different than the default language ', ->
-#     # Setup
-#     store.adapterForType(Vosae.ReportSettings).load store, Vosae.ReportSettings, {id: 1, language: "fr"}
-#     reportSettings = store.find Vosae.ReportSettings, 1
-#     otherLanguages = Vosae.Config.languages.filter (language)->
-#       if language.get('code') != "fr"
-#         return language
+test 'computedProperty - otherLanguages', ->
+  # Setup
+  store.push 'reportSettings', {id: 1, language: "fr"}
 
-#     # Test
-#     expect(reportSettings.get('otherLanguages')).toEqual otherLanguages
+  # Test
+  store.find('reportSettings', 1).then async (reportSettings) ->
+    otherLanguages = Vosae.Config.languages.filter (language)->
+      if language.get('code') != "fr"
+        return language
+    deepEqual reportSettings.get('otherLanguages'), otherLanguages, "otherLanguages should return an array of language without the default language"

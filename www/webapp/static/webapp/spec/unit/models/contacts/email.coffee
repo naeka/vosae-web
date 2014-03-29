@@ -13,7 +13,7 @@ test 'method - getErrors', ->
   email = store.createRecord 'vosaeEmail'
   
   # Test
-  equal email.getErrors().length => 1, true, "the getErrors method should return an array with at least 1 error"
+  equal email.getErrors().length, 1, "the getErrors method should return an array with 1 error"
   
   # Setup
   email.set 'email', 'thomas@email.com'

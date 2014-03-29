@@ -13,10 +13,9 @@ Vosae.VosaeEmail = Vosae.Model.extend
 
   displayType: (->
     obj = Vosae.Config.emailTypeChoice.findProperty('value', @get('type'))
-    if obj
-      return obj.get('name')
+    return obj.get('name') if obj
     ''
-  ).property()
+  ).property('type')
 
   getErrors: ->
     errors = []

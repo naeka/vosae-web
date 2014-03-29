@@ -14,12 +14,12 @@ Vosae.VosaePhone = Vosae.Model.extend
 
   typeIsWork: (->
     # Return true if phone type is WORK
-    if @get("type") is "WORK" then true else false
+    @get("type") is "WORK"
   ).property("type")
 
   typeIsHome: (->
     # Return true if phone type is HOME
-    if @get("type") is "HOME" then true else false
+    @get("type") is "HOME"
   ).property("type")
   
   displayPhone: (->

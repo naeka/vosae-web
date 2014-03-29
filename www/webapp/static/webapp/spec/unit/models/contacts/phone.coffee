@@ -1,97 +1,108 @@
-# store = null
+env = undefined
+store = undefined
 
-# describe 'Vosae.Phone', ->
-#   beforeEach ->
-#     store = Vosae.Store.create()
+module "DS.Model / Vosae.VosaePhone",
+  setup: ->
+    env = setupStore()
 
-#   afterEach ->
-#     store.destroy()
+    # Make the store available for all tests
+    store = env.store
 
-#   it 'type property should be WORK when creating phone', ->
-#     # Setup
-#     phone = store.createRecord Vosae.Phone
+test 'method - combinedTypeChanged', ->
+  # Setup
+  phone = store.createRecord 'vosaePhone'
+  phone.combinedTypeChanged 'HOME-FAX'
 
-#     # Test
-#     expect(phone.get('type')).toEqual "WORK"
+  # Test
+  equal phone.get('type'), 'HOME', "the type should be HOME"
+  equal phone.get('subtype'), 'FAX', "the subtype should be FAX"
 
-#   it 'typeIsWork computed property', ->
-#     # Setup
-#     phone = store.createRecord Vosae.Phone 
+test 'method - getErrors', ->
+  # Setup
+  phone = store.createRecord 'vosaePhone'
+  
+  # Test
+  equal phone.getErrors().length, 1, "the getErrors method should return an array with 1 error"
+  
+  # Setup
+  phone.set 'phone', '304343043'
 
-#     # Test
-#     expect(phone.get('typeIsWork')).toEqual true
+  # Test
+  equal phone.getErrors().length, 0, "the getErrors method should return an empty array"
 
-#     # Setup 
-#     phone.set 'type', 'SomethingShity'
+test 'computedProperty - typeIsWork', ->
+  # Setup
+  phone = store.createRecord 'vosaePhone', {type: 'WORK'}
 
-#     # Test
-#     expect(phone.get('typeIsWork')).toEqual false
+  # Test
+  equal phone.get('typeIsWork'), true, "the typeIsWork property should return true"
 
-#   it 'typeIsHome computed property', ->
-#     # Setup
-#     phone = store.createRecord Vosae.Phone
-#     phone.set 'type', 'SomethingShity'
+  # Setup
+  phone.set 'type', 'HOME'
 
-#     # Test
-#     expect(phone.get('typeIsHome')).toEqual false
+  # Test
+  equal phone.get('typeIsWork'), false, "the typeIsWork property should return false"
 
-#     # Setup
-#     phone.set 'type', 'HOME'
+test 'computedProperty - typeIsHome', ->
+  # Setup
+  phone = store.createRecord 'vosaePhone', {type: 'HOME'}
 
-#     # Test
-#     expect(phone.get('typeIsHome')).toEqual true
+  # Test
+  equal phone.get('typeIsHome'), true, "the typeIsHome property should return true"
 
-#   it 'combinedType property', ->
-#     # Setup
-#     phone = store.createRecord Vosae.Phone
-#     phone.set 'type', 'WORK'
+  # Setup
+  phone.set 'type', 'WORK'
 
-#     # Test
-#     expect(phone.get('combinedType')).toEqual 'WORK'
+  # Test
+  equal phone.get('typeIsHome'), false, "the typeIsHome property should return false"
 
-#     # Setup
-#     phone.set 'subtype', 'CELL'
+test 'computedProperty - combinedType', ->
+  # Setup
+  phone = store.createRecord 'vosaePhone', {type: 'WORK'}
 
-#     # Test
-#     expect(phone.get('combinedType')).toEqual 'WORK-CELL'
+  # Test
+  equal phone.get('combinedType'), 'WORK', "the combinedType should return WORK"
 
-#   it 'displayCombinedType', ->
-#     # Setup
-#     phone = store.createRecord Vosae.Phone
-#     phone.set 'type', 'WORK'
+  # Setup
+  phone.set 'subtype', 'CELL'
 
-#     # Test
-#     expect(phone.get('displayCombinedType')).toEqual 'Work'
+  # Test
+  equal phone.get('combinedType'), 'WORK-CELL', "the combinedType should return WORK-CELL"
 
-#     # Setup
-#     phone.set 'subtype', 'CELL'
+test 'computedProperty - displayCombinedType', ->
+  # Setup
+  phone = store.createRecord 'vosaePhone', {type: 'WORK'}
 
-#     # Test
-#     expect(phone.get('displayCombinedType')).toEqual 'Work cell'
+  # Test
+  equal phone.get('displayCombinedType'), 'Work', "the displayCombinedType should return Work"
 
-#     # Setup
-#     phone.set 'type', null
+  # Setup
+  phone.set 'subtype', 'CELL'
 
-#     # Test
-#     expect(phone.get('displayCombinedType')).toEqual ''
+  # Test
+  equal phone.get('displayCombinedType'), 'Work cell', "the displayCombinedType should return Work cell"
 
-#     # Setup
-#     phone.set 'subtype', null
+  # Setup
+  phone.set 'type', null
 
-#     # Test
-#     expect(phone.get('displayCombinedType')).toEqual ''
+  # Test
+  equal phone.get('displayCombinedType'), '', "the displayCombinedType should return an empty string"
 
-#     # Setup
-#     phone.set 'type', 'SomethingShity'
+  # Setup
+  phone.set 'subtype', null
 
-#     # Test
-#     expect(phone.get('displayCombinedType')).toEqual ''
+  # Test
+  equal phone.get('displayCombinedType'), '', "the displayCombinedType should return an empty string"
 
-#   it 'combined type changed', ->
-#     # Setup
-#     phone = store.createRecord Vosae.Phone
-#     phone.combinedTypeChanged 'HOME-FAX'
+  # Setup
+  phone.set 'type', 'SomethingShity'
 
-#     # Test
-#     expect(phone.get('type')).toEqual 'HOME'
-#     expect(phone.get('subtype')).toEqual 'FAX'
+  # Test
+  equal phone.get('displayCombinedType'), '', "the displayCombinedType should return an empty string"
+
+test 'property - type', ->
+  # Setup
+  email = store.createRecord 'vosaeEmail', {id: 1}
+
+  # Test
+  equal email.get('type'), 'WORK', "type default value should be 'WORK'"

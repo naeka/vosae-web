@@ -1,53 +1,55 @@
-# store = null
+env = undefined
+store = undefined
 
-# describe 'Vosae.Address', ->
-#   beforeEach ->
-#     store = Vosae.Store.create()
+module "DS.Model / Vosae.VosadAddress",
+  setup: ->
+    env = setupStore()
 
-#   afterEach ->
-#     store.destroy()
+    # Make the store available for all tests
+    store = env.store
 
-#   it 'type property should be WORK when creating address', ->
-#     # Setup
-#     address = store.createRecord Vosae.Address
+test 'method - recordIsEmpty', ->
+  # Setup
+  address = store.createRecord 'vosaeAddress'
+  
+  # Test
+  equal address.recordIsEmpty(), true, "the recordIsEmpty method should return true is address is empty"
+  
+  # Setup
+  address.set 'country', 'France'
 
-#     # Test
-#     expect(address.get('type')).toEqual "WORK"
+  # Test
+  equal address.recordIsEmpty(), false, "the recordIsEmpty method should return false is address isn't empty"
 
-#   it 'isEmpty computed property', ->
-#     # Setup
-#     address = store.createRecord Vosae.Address
-    
-#     # Test
-#     expect(address.isEmpty()).toEqual true
-    
-#     # Setup
-#     address.set 'streetAddress', 'SomeContent'
+test 'method - dumpDatafrom', ->
+  # Setup
+  address = store.createRecord 'vosaeAddress'
+  address.setProperties
+    type: 'HOME'
+    postofficeBox: 'postofficeBox'
+    streetAddress: 'streetAddress'
+    extendedAddress: 'extendedAddress'
+    postalCode: 'postalCode'
+    city: 'city'
+    state: 'state'
+    country: 'country'
+  newAddress = store.createRecord 'vosaeAddress'
+  newAddress.dumpDataFrom address
 
-#     # Test
-#     expect(address.isEmpty()).toEqual false
+  # Test
+  equal newAddress.get('type'), 'HOME', "address and newAddress type should be the same"
+  equal newAddress.get('postofficeBox'), 'postofficeBox', "address and newAddress postofficeBox should be the same"
+  equal newAddress.get('streetAddress'), 'streetAddress', "address and newAddress streetAddress should be the same"
+  equal newAddress.get('extendedAddress'), 'extendedAddress', "address and newAddress extendedAddress should be the same"
+  equal newAddress.get('postalCode'), 'postalCode', "address and newAddress postalCode should be the same"
+  equal newAddress.get('city'), 'city', "address and newAddress city should be the same"
+  equal newAddress.get('state'), 'state', "address and newAddress state should be the same"
+  equal newAddress.get('country'), 'country', "address and newAddress country should be the same"
 
-#   it 'dumpDatafrom method', ->
-#     # Setup
-#     address = store.createRecord Vosae.Address
-#     address.setProperties
-#       type: 'HOME'
-#       postofficeBox: 'postofficeBox'
-#       streetAddress: 'streetAddress'
-#       extendedAddress: 'extendedAddress'
-#       postalCode: 'postalCode'
-#       city: 'city'
-#       state: 'state'
-#       country: 'country'
-#     newAddress = store.createRecord Vosae.Address
-#     newAddress.dumpDataFrom address
+test 'property - type', ->
+  # Setup
+  store.push 'vosaeAddress', {id: 1}
 
-#     # Test
-#     expect(newAddress.get('type')).toEqual 'HOME'
-#     expect(newAddress.get('postofficeBox')).toEqual 'postofficeBox'
-#     expect(newAddress.get('streetAddress')).toEqual 'streetAddress'
-#     expect(newAddress.get('extendedAddress')).toEqual 'extendedAddress'
-#     expect(newAddress.get('postalCode')).toEqual 'postalCode'
-#     expect(newAddress.get('city')).toEqual 'city'
-#     expect(newAddress.get('state')).toEqual 'state'
-#     expect(newAddress.get('country')).toEqual 'country'
+  # Test
+  store.find('vosaeAddress', 1).then async (vosaeAddress) ->
+    equal vosaeAddress.get('type'), 'WORK', "type default value should be 'WORK'"

@@ -279,6 +279,14 @@ module.exports = (grunt) ->
           dest: WEBAPP_IMG_DIR
         ]
 
+    #
+    # Qunit
+    #
+    qunit:
+      all:
+        options:
+          urls: ['http://localhost:8001/spec/']
+
   #
   # Events
   #
@@ -319,6 +327,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-ember-templates'
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-contrib-imagemin'
+  grunt.loadNpmTasks 'grunt-contrib-qunit'
 
   #
   # Register tasks

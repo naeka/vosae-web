@@ -286,11 +286,9 @@ module.exports = (grunt) ->
       all:
         options:
           urls: ['http://localhost:8001/spec/']
-          page: {
-            customHeaders: {
+          page:
+            customHeaders:
               'Accept-Language': 'en'
-            }
-          },
 
   #
   # Events
@@ -341,6 +339,7 @@ module.exports = (grunt) ->
   grunt.registerTask 'images', ['imagemin']
   grunt.registerTask 'handlebars', ['emberTemplates', 'uglify:templates']
   grunt.registerTask 'build-spec', ['coffee:webapp_js_spec']
+  grunt.registerTask 'run-spec', ['qunit:all']
   grunt.registerTask 'spec', ['build-spec', 'watch:webapp_spec']
 
   grunt.registerTask 'process_i18n_lang', (lang, prod) ->

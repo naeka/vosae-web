@@ -66,23 +66,11 @@ $ gem install compass --minimal-deps
 $ gem install sass-rails
 $ gem install bootstrap-sass --version 3.1.0.1
 $ gem install --pre sass-css-importer
-```
 
-#### Install Grunt:
-
-```bash
 $ npm install -g grunt-cli
-```
-    
-#### Finally, on the root of vosae-web:
-
-```bash
 $ npm install
 ```
-    
-> If it doesn't work (on MacOS), add `/usr/local/share/npm/bin` to `/etc/paths`
-    
-    
+
 #### Now you can generate static files
     
 Build files for dev and watch directories for changes
@@ -90,13 +78,6 @@ Build files for dev and watch directories for changes
 ```bash
 $ grunt
 ```
-    
-**Only** build files for development
-
-```bash
-$ grunt build-dev
-```
-
 
 
 ## Launch the dev server
@@ -162,6 +143,21 @@ This is achieved with this command from the `webapp` app:
 ```bash
 (vosae-web)$ python ../manage.py makemessages -a -d djangojs -i "*djangojs.js" -i "*locale-*.js"
 ```
+
+
+
+
+## How to Run Unit Tests
+All the tests are written with Qunit.  
+
+#### Setup
+Build all tests with `grunt build-spec`
+
+#### In your browser
+Launch the dev server and open the url `http://localhost:8001/spec/`
+
+#### From the CLI
+Run all tests with `grunt run-spec`
 
 
 

@@ -52,7 +52,6 @@ test 'findAll', ->
     equal notifs.get('length'), 1, "the contactSavedNE array's length should be 1"
     equal notifs.objectAt(0).get('read'), false, "the first notification in the record array is not read"
 
-
 test 'updateRecord', ->
   # Setup
   store.push 'notification', {id: 1, read: false}

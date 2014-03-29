@@ -65,7 +65,6 @@
     container.register('model:eventReminderNE', Vosae.EventReminderNE);
     container.register('model:specificPermission', Vosae.SpecificPermission);
     container.register('model:registrationInfo', Vosae.RegistrationInfo);
-    container.register('model:euRegistrationInfo', Vosae.EuRegistrationInfo);
     container.register('model:beRegistrationInfo', Vosae.BeRegistrationInfo);
     container.register('model:chRegistrationInfo', Vosae.ChRegistrationInfo);
     container.register('model:frRegistrationInfo', Vosae.FrRegistrationInfo);

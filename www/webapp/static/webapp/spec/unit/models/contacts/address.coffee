@@ -1,7 +1,7 @@
 env = undefined
 store = undefined
 
-module "DS.Model / Vosae.VosadAddress",
+module "DS.Model / Vosae.VosaeAddress",
   setup: ->
     env = setupStore()
 
@@ -48,8 +48,7 @@ test 'method - dumpDatafrom', ->
 
 test 'property - type', ->
   # Setup
-  store.push 'vosaeAddress', {id: 1}
+  address = store.push 'vosaeAddress', {id: 1}
 
   # Test
-  store.find('vosaeAddress', 1).then async (vosaeAddress) ->
-    equal vosaeAddress.get('type'), 'WORK', "type default value should be 'WORK'"
+  equal address.get('type'), 'WORK', "type default value should be 'WORK'"

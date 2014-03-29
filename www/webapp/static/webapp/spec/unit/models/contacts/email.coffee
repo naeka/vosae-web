@@ -1,22 +1,42 @@
-# store = null
+env = undefined
+store = undefined
 
-# describe 'Vosae.Email', ->
-#   beforeEach ->
-#     store = Vosae.Store.create()
+module "DS.Model / Vosae.VosaeEmail",
+  setup: ->
+    env = setupStore()
 
-#   afterEach ->
-#     store.destroy()
+    # Make the store available for all tests
+    store = env.store
 
-#   it 'type property should be WORK when creating email', ->
-#     # Setup
-#     email = store.createRecord Vosae.Email
+test 'method - getErrors', ->
+  # Setup
+  email = store.createRecord 'vosaeEmail'
+  
+  # Test
+  equal email.getErrors().length => 1, true, "the getErrors method should return an array with at least 1 error"
+  
+  # Setup
+  email.set 'email', 'thomas@email.com'
 
-#     # Test
-#     expect(email.get('type')).toEqual 'WORK'
+  # Test
+  equal email.getErrors().length, 0, "the getErrors method should return an empty array"
 
-#   it 'displayType computed property', ->
-#     # Setup
-#     email = store.createRecord Vosae.Email
+test 'property - type', ->
+  # Setup
+  email = store.createRecord 'vosaeEmail', {id: 1}
 
-#     # Test
-#     expect(email.get('displayType')).toEqual 'Work'
+  # Test
+  equal email.get('type'), 'WORK', "type default value should be 'WORK'"
+
+test 'computedProperty - displayType', ->
+  # Setup
+  email = store.createRecord 'vosaeEmail', {id: 1}
+
+  # Test
+  equal email.get('displayType'), 'Work', "the displayType property should return 'Work'"
+
+  # Setup
+  email.set 'type', 'fakeValue'
+
+  # Test
+  equal email.get('displayType'), '', "the displayType property should return an empty string"

@@ -69,9 +69,8 @@ test 'relationship - creator', ->
 
   # Test
   store.find('entity', 1).then async (entity) ->
-    entity.get('creator').then async (creator) ->
-      equal creator instanceof Vosae.User, true, "the creator property should return a user"
-      equal creator.get('fullName'), "Thomas Durin", "the creator should have a name"
+    equal entity.get('creator') instanceof Vosae.User, true, "the creator property should return a user"
+    equal entity.get('creator.fullName'), "Thomas Durin", "the creator should have a name"
 
 test 'relationship - photo', ->
   # Setup
@@ -84,22 +83,19 @@ test 'relationship - photo', ->
       equal photo instanceof Vosae.File, true, "the photo property should return a file"
       equal photo.get('name'), "photo.jpg", "the photo should have a name"
 
-test: 'computedProperty - isOwned', ->
+test 'computedProperty - isOwned', ->
   # Setup
-  env.register 'session:current', Vosae.Session, {singleton: true}
-  env.inject 'store', 'session', 'session:current'
+  user1 = store.createRecord 'user'
+  user2 = store.createRecord 'user'
 
-  tenant1 = store.createRecord 'tenant'
-  tenant2 = store.createRecord 'tenant'
-
-  store.get('session').set 'tenant', tenant1
-  entity = store.createRecord 'entity', {creator: tenant1}
+  store.get('session').set 'user', user1
+  entity = store.createRecord 'entity', {creator: user1}
 
   # Test
-  equal entity.get('isOwned'), true, "the session's tenant and the entity creator should be the same"
+  equal entity.get('isOwned'), true, "the session's user and the entity creator should be the same"
 
   # Setup
-  entity.set 'creator', tenant2
+  entity.set 'creator', user2
 
   # Test
-  equal entity.get('isOwned'), false, "the session's tenant and the entity creator should not be the same"
+  equal entity.get('isOwned'), false, "the session's user and the entity creator should not be the same"

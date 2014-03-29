@@ -17,7 +17,7 @@ Vosae.Entity = Vosae.Model.extend
   addresses: DS.hasMany("vosaeAddress", async: true)
   emails: DS.hasMany("vosaeEmail", async: true)
   phones: DS.hasMany("vosaePhone", async: true)
-  creator: DS.belongsTo("user", async: true)
+  creator: DS.belongsTo("user")
   photo: DS.belongsTo("file", async: true)
 
   isUploading: false

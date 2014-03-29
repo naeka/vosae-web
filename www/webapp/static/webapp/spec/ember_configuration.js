@@ -138,6 +138,9 @@
     container.register('model:reminderSettings', Vosae.ReminderSettings);
     container.register('model:reminderEntry', Vosae.ReminderEntry);
 
+    container.register('session:current', Vosae.Session, {singleton: true});
+    container.injection('store', 'session', 'session:current');
+    
     container.register('store:main', Vosae.Store.extend({
       adapter: adapter
     }));

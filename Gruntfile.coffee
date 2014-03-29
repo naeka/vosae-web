@@ -283,13 +283,18 @@ module.exports = (grunt) ->
     # Qunit
     #
     qunit:
-      all:
+      dev:
         options:
           urls: ['http://localhost:8001/spec/']
           page:
             customHeaders:
               'Accept-Language': 'en'
-
+      travis:
+        options:
+          urls: ['http://localhost:9999/spec/']
+          page:
+            customHeaders:
+              'Accept-Language': 'en'
   #
   # Events
   #
@@ -339,7 +344,8 @@ module.exports = (grunt) ->
   grunt.registerTask 'images', ['imagemin']
   grunt.registerTask 'handlebars', ['emberTemplates', 'uglify:templates']
   grunt.registerTask 'build-spec', ['coffee:webapp_js_spec']
-  grunt.registerTask 'run-spec', ['qunit:all']
+  grunt.registerTask 'run-spec', ['qunit:dev']
+  grunt.registerTask 'run-spec-travis', ['qunit:travis']
   grunt.registerTask 'spec', ['build-spec', 'watch:webapp_spec']
 
   grunt.registerTask 'process_i18n_lang', (lang, prod) ->

@@ -64,7 +64,7 @@ test 'updateRecord', ->
     ajaxResponse()
     group.save()
   ).then async (group) ->
-    equal passedUrl, "/group/1/", "updating a group makes a PUT to /group/1/"
+    equal passedUrl, "/group/1/", "updating a group makes a PUT to /group/:id/"
     equal passedVerb, "PUT"
 
 test 'deleteRecord', ->
@@ -76,5 +76,5 @@ test 'deleteRecord', ->
     ajaxResponse()
     group.destroyRecord()
   ).then async (group) ->
-    equal passedUrl, "/group/1/", "deleting a group makes a DELETE to /group/1/"
+    equal passedUrl, "/group/1/", "deleting a group makes a DELETE to /group/:id/"
     equal passedVerb, "DELETE"

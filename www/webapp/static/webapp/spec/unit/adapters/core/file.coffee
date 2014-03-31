@@ -64,7 +64,7 @@ test 'updateRecord', ->
     ajaxResponse()
     file.save()
   ).then async (file) ->
-    equal passedUrl, "/file/1/", "updating a file makes a PUT to /file/1/"
+    equal passedUrl, "/file/1/", "updating a file makes a PUT to /file/:id/"
     equal passedVerb, "PUT"
 
 test 'deleteRecord', ->
@@ -76,5 +76,5 @@ test 'deleteRecord', ->
     ajaxResponse()
     file.destroyRecord()
   ).then async (file) ->
-    equal passedUrl, "/file/1/", "deleting a file makes a DELETE to /file/1/"
+    equal passedUrl, "/file/1/", "deleting a file makes a DELETE to /file/:id/"
     equal passedVerb, "DELETE"

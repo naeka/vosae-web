@@ -81,5 +81,5 @@ test 'updateRecord', ->
     ajaxResponse()
     tenant.save()
   ).then async (tenant) ->
-    equal passedUrl, "/tenant/1/", "updating a tenant makes a PUT to /tenant/1/"
+    equal passedUrl, "/tenant/1/", "updating a tenant makes a PUT to /tenant/:id/"
     equal passedVerb, "PUT"

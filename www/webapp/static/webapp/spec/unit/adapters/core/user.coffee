@@ -66,7 +66,7 @@ test 'updateRecord', ->
     ajaxResponse()
     user.save()
   ).then async (user) ->
-    equal passedUrl, "/user/1/", "updating a user makes a PUT to /user/1/"
+    equal passedUrl, "/user/1/", "updating a user makes a PUT to /user/:id/"
     equal passedVerb, "PUT"
 
 test 'deleteRecord', ->
@@ -78,5 +78,5 @@ test 'deleteRecord', ->
     ajaxResponse()
     user.destroyRecord()
   ).then async (user) ->
-    equal passedUrl, "/user/1/", "deleting a user makes a DELETE to /user/1/"
+    equal passedUrl, "/user/1/", "deleting a user makes a DELETE to /user/:id/"
     equal passedVerb, "DELETE"

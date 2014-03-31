@@ -61,5 +61,5 @@ test 'updateRecord', ->
     ajaxResponse()
     notification.save()
   ).then async (notification) ->
-    equal passedUrl, "/notification/1/mark_as_read/", "updating a notification makes a PUT to /notification/1/mark_as_read/"
+    equal passedUrl, "/notification/1/mark_as_read/", "updating a notification makes a PUT to /notification/:id/mark_as_read/"
     equal passedVerb, "PUT"
